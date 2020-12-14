@@ -25,28 +25,57 @@ C = ColecticaObject(hostname, username, password)
 
 # Instrument 
 agency = "uk.cls.nextsteps"
-Id_instrument = "a6f96245-5c00-4ad3-89e9-79afaefa0c28"
-df_instrument, instrument_info = C.instrument_info_set(agency, Id_instrument)
-print(df_instrument.head(2))
-pp.pprint(instrument_info) 
+#Id_instrument = "a6f96245-5c00-4ad3-89e9-79afaefa0c28"
+#df, info = C.item_info_set(agency, Id_instrument)
+
+#print(df_instrument.head(2))
+#pp.pprint(instrument_info) 
 
 # Question Item
 # codelist
-Id_question = '0260e016-9610-4bea-9527-002107d642bf'
-question_info = C.get_question_info(agency, Id_question)
-pp.pprint(question_info) 
+#Id_question = '0260e016-9610-4bea-9527-002107d642bf'
+#question_info = C.get_question_info(agency, Id_question)
+#pp.pprint(question_info) 
     
-df_question, df_codelist = C.get_question_all(agency, Id_question)
-print(df_question.transpose())
-print(df_codelist.head(2))
+#df_question, df_codelist = C.get_question_all(agency, Id_question)
+#print(df_question.transpose())
+#print(df_codelist.head(2))
 
 # text response
-Id_question_text = '981c5dd5-6f88-4f44-b94f-135341f78938'
-df_question, df_text = C.get_question_all(agency, Id_question_text) 
-print(df_text)
+#Id_question_text = '981c5dd5-6f88-4f44-b94f-135341f78938'
+#df_question, df_text = C.get_question_all(agency, Id_question_text) 
+#print(df_text)
 
 # numeric response
-Id_question_numeric = 'f4417dc3-46a4-432a-87db-7ad95d04e5f4'
-df_question, df_numeric = C.get_question_all(agency, Id_question_numeric) 
-print(df_numeric)
+#Id_question_numeric = 'f4417dc3-46a4-432a-87db-7ad95d04e5f4'
+#df_question, df_numeric = C.get_question_all(agency, Id_question_numeric) 
+#print(df_numeric)
 
+Id_sequence = '6b89e69c-cb04-4d07-a1a0-dea4a2d29284'
+df, info = C.item_info_set(agency, Id_sequence)
+
+#print(df_sequence.head(2))
+#pp.pprint(sequence_info) 
+
+#Id_statement = '79bb5136-ba5f-4422-951c-f03058520bac'
+#r = C.get_statement_info(agency, Id_statement)
+#pp.pprint(r)
+
+#Id_questiongroup = 'a6f96245-5c00-4ad3-89e9-79afaefa0c28'
+#temp = C.get_an_item('uk.closer', Id_questiongroup)
+
+# question group
+#Id_qg = '75465b39-e1c6-416c-ab42-345af36ef889'
+#Agency_qg = 'uk.closer'
+#pp.pprint(C.get_an_item(Agency_qg, Id_qg))
+
+#Id_concept = '8e610654-dd7c-4516-9d43-1935fb38a3f9'
+#pp.pprint(C.get_an_item(Agency_qg, Id_concept))
+
+# all question group
+#r  = C.general_search('5cc915a1-23c9-4487-9613-779c62f8c205', '') 
+#print(r['TotalResults'])
+#pp.pprint(r['Results'][0])
+
+#ID = 'f026f9ab-91c7-410c-a4a4-b389e3f72078'
+#r = C.item_to_dict('uk.closer', ID)

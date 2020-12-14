@@ -5,12 +5,13 @@
 from io import StringIO
 import xml.etree.ElementTree as ET
 import pandas as pd
+import json
 import api
 
 
 def remove_xml_ns(xml):
     """
-        Read xml from string, remove namespaces, return root
+    Read xml from string, remove namespaces, return root
     """
     it = ET.iterparse(StringIO(xml))
     for _, el in it:
@@ -21,89 +22,316 @@ def remove_xml_ns(xml):
     return root
 
 
+def root_to_dict_study(root):
+    """
+    Part of parse xml, item_type = Study
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    # Sweep Description
+    sweep = {}
+    sweep['title'] = root.find('.//Citation/Title/String').text
+    sweep['principal_investigator'] = root.find('.//Citation/Creator/CreatorName/String').text
+    sweep['publisher'] = root.find('.//Citation/Publisher/PublisherName/String').text
+    sweep['abstract'] = root.find('.//Abstract/Content').text
+    pop = {}
+    pop['Agency'] = root.find('.//UniverseReference/Agency').text
+    pop['ID'] = root.find('.//UniverseReference/ID').text
+    pop['Version'] = root.find('.//UniverseReference/Version').text
+    pop['Type'] = root.find('.//UniverseReference/TypeOfObject').text
+    sweep['population'] = pop
+    # custom filed
+    CustomFields = root.findall('.//UserAttributePair/AttributeValue')
+    custom_list = []
+    for x, cus in enumerate(CustomFields):
+        # Convert a string representation of a dictionary to a dictionary
+        custom_list.append(json.loads(cus.text))
+    sweep['custom_field'] = custom_list
+    info['sweep'] = sweep
+        
+    # Funding
+    funding = {}
+    organization = {}
+    organization['Agency'] = root.find('.//FundingInformation/AgencyOrganizationReference/Agency').text
+    organization['ID'] = root.find('.//FundingInformation/AgencyOrganizationReference/ID').text
+    organization['Version'] = root.find('.//FundingInformation/AgencyOrganizationReference/Version').text
+    organization['Type'] = root.find('.//FundingInformation/AgencyOrganizationReference/TypeOfObject').text
+    funding['organization'] = organization
+    info['funding'] = funding
+    # TODO: Coverage
+    coverages = root.findall('.//Coverage')
+    # Data
+    data = {}
+    k = root.find('.//KindOfData')
+    data['KindOfData'] = '-'.join(item.text for item in k)
+    data['Analysis Unit'] = root.find('.//AnalysisUnit').text
+    # data files
+    datafile = {}
+    datafile['Agency'] = root.find('.//PhysicalInstanceReference/Agency').text
+    datafile['ID'] = root.find('.//PhysicalInstanceReference/ID').text
+    datafile['Version'] = root.find('.//PhysicalInstanceReference/Version').text
+    datafile['Type'] = root.find('.//PhysicalInstanceReference/TypeOfObject').text
+    data['Data File'] = datafile
+    info['data'] = data
+    # data collection
+    datacol = {}
+    datacol['Agency'] = root.find('.//DataCollectionReference/Agency').text
+    datacol['ID'] = root.find('.//DataCollectionReference/ID').text
+    datacol['Version'] = root.find('.//DataCollectionReference/Version').text
+    datacol['Type'] = root.find('.//DataCollectionReference/TypeOfObject').text
+    info['Data Collection'] = datacol
+    # Extra
+    metadata = {}
+    metadata['Agency'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/Agency').text
+    metadata['ID'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/ID').text
+    metadata['Version'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/Version').text
+    metadata['Type'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/TypeOfObject').text
+    info['Metadata Packages'] = metadata
+    return info
+
+
+def root_to_dict_series(root):
+    """
+    Part of parse xml, item_type = Series
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    # Study Description
+    study = {}
+    study['title'] = root.find('.//Citation/Title/String').text
+    study['principal_investigator'] = root.find('.//Citation/Creator/CreatorName/String').text
+    study['publisher'] = root.find('.//Citation/Publisher/PublisherName/String').text
+    study['rights'] = root.find('.//Citation/Copyright/String').text
+    study['abstract'] = root.find('.//Abstract/Content').text
+    pop = {}
+    pop['Agency'] = root.find('.//UniverseReference/Agency').text
+    pop['ID'] = root.find('.//UniverseReference/ID').text
+    pop['Version'] = root.find('.//UniverseReference/Version').text
+    pop['Type'] = root.find('.//UniverseReference/TypeOfObject').text
+    study['population'] = pop
+    info['study'] = study
+    # Funding
+    funding = {}
+    funding['GrantNumber'] = root.find('.//FundingInformation/GrantNumber').text
+    organization = {}
+    organization['Agency'] = root.find('.//FundingInformation/AgencyOrganizationReference/Agency').text
+    organization['ID'] = root.find('.//FundingInformation/AgencyOrganizationReference/ID').text
+    organization['Version'] = root.find('.//FundingInformation/AgencyOrganizationReference/Version').text
+    organization['Type'] = root.find('.//FundingInformation/AgencyOrganizationReference/TypeOfObject').text
+    funding['organization'] = organization
+    info['funding'] = funding
+    # Studies
+    studies = root.findall('.//StudyUnitReference')
+    study_list = []
+    for x, study in enumerate(studies):  
+        study_dict={}
+        study_dict['position'] = x + 1
+        study_dict['Agency'] = study.find(".//Agency").text
+        study_dict['ID'] = study.find(".//ID").text
+        study_dict['Version'] = study.find(".//Version").text
+        study_dict['Type'] = study.find(".//TypeOfObject").text
+        study_list.append(study_dict)
+    info['study'] = study_list        
+    return info
+
+
+def root_to_dict_data_collection(root):
+    """
+    Part of parse xml, item_type = Data Collection
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['Name'] = root.find('.//DataCollectionModuleName').text
+    info['Label'] = root.find('.//Label/Content').text
+    # InstrumentRef
+    cus_dict = {}
+    cus = root.findall('.//UserAttributePair')
+    for item in cus:
+        k = item.find('.//AttributeKey').text.split(':')[-1]
+        v = item.find('.//AttributeValue').text
+        cus_dict[k] = v
+    info['Ref'] = cus_dict
+    # CollectionEvent
+    event = {}
+    event['URN'] = root.find('.//CollectionEvent/URN').text
+    event['Agency'] = root.find('.//CollectionEvent/Agency').text
+    event['ID'] = root.find('.//CollectionEvent/ID').text
+    event['Version'] = root.find('.//CollectionEvent/Version').text
+    # Organization Reference
+    OrganizationRef = {}
+    OrganizationRef['Agency'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/Agency').text
+    OrganizationRef['ID'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/ID').text
+    OrganizationRef['Version'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/Version').text
+    OrganizationRef['Type'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/TypeOfObject').text
+    event['OrganizationRef'] = OrganizationRef
+    # Data Collection Date
+    DCDate = {}
+    DCDate['StartDate'] = root.find('.//CollectionEvent/DataCollectionDate/StartDate').text
+    DCDate['EndDate'] = root.find('.//CollectionEvent/DataCollectionDate/EndDate').text
+    event['Date'] = DCDate
+    # Mode Of Collection
+    mode = {}
+    mode['URN'] = root.find('.//CollectionEvent/ModeOfCollection/URN').text
+    mode['Agency'] = root.find('.//CollectionEvent/ModeOfCollection/Agency').text
+    mode['ID'] = root.find('.//CollectionEvent/ModeOfCollection/ID').text
+    mode['Version'] = root.find('.//CollectionEvent/ModeOfCollection/Version').text
+    mode['TypeOfMode'] = root.find('.//CollectionEvent/ModeOfCollection/TypeOfModeOfCollection').text
+    mode['Description'] = root.find('.//CollectionEvent/ModeOfCollection/Description/Content').text
+    event['Mode'] = mode
+    info['CollectionEvent'] = event
+    # Question Scheme Reference
+    QSR = {}
+    QSR['Agency'] = root.find('.//QuestionSchemeReference/Agency').text
+    QSR['ID'] = root.find('.//QuestionSchemeReference/ID').text
+    QSR['Version'] = root.find('.//QuestionSchemeReference/Version').text
+    QSR['TypeOfObject'] = root.find('.//QuestionSchemeReference/TypeOfObject').text
+    info['reference'] = QSR
+    return info
+
+
+def root_to_dict_sequence(root):
+    """
+    Part of parse xml, item_type = Sequence
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['SourceId'] = root.find('.//UserID').text
+    info['ConstructName'] = root.find('.//ConstructName/String').text
+    info['Label'] = root.find('.//Label/Content').text
+    references = root.findall(".//ControlConstructReference")
+    ref_list = []
+    for x, ref in enumerate(references):  
+        ref_dict={}
+        ref_dict['position'] = x + 1
+        ref_dict['Agency'] = ref.find(".//Agency").text
+        ref_dict['ID'] = ref.find(".//ID").text
+        ref_dict['Version'] = ref.find(".//Version").text
+        ref_dict['Type'] = ref.find(".//TypeOfObject").text
+        ref_list.append(ref_dict)
+    info['references'] = ref_list
+    return info
+
+
+def root_to_dict_statement(root):
+    """
+    Part of parse xml, item_type = Statement
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['SourceId'] = root.find('.//UserID').text
+    instruction = root.find(".//UserAttributePair/AttributeValue").text
+    if instruction == '{}':
+        info['Instruction'] = ''
+    else:
+        info['Instruction'] = instruction
+    info['Label'] = root.find(".//ConstructName/String").text
+    info['Literal'] = root.find(".//DisplayText/LiteralText/Text").text
+    return info
+
+
+def root_to_dict_organization(root):
+    """
+    Part of parse xml, item_type = Organization
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    # Nickname
+    cus_dict = {}
+    cus = root.findall('.//UserAttributePair')
+    for item in cus:
+        k = item.find('.//AttributeKey').text.split(':')[-1]
+        v = item.find('.//AttributeValue').text
+        cus_dict[k] = v
+    info['cust'] = cus_dict
+    info['Name'] = root.find('.//OrganizationIdentification/OrganizationName/String').text
+    info['Image'] = root.find('.//OrganizationIdentification/OrganizationImage/ImageLocation').text
+    info['Description'] = root.find('.//Description/Content').text
+    return info
+
+
+def root_to_dict_instrument(root):
+    """
+    Part of parse xml, item_type = Instrument
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    if root.findall(".//*[@typeOfUserID='colectica:sourceId']") != []:
+        info['InstrumentSourceID'] = root.findall(".//*[@typeOfUserID='colectica:sourceId']")[0].text 
+    if root.findall(".//*[@typeOfUserID='closer:sourceFileName']") != []:
+        info['InstrumentLabel'] = root.findall(".//*[@typeOfUserID='closer:sourceFileName']")[0].text
+    info['InstrumentName'] = root.find(".//InstrumentName/String").text
+    info['ExternalInstrumentLocation'] = root.find(".//ExternalInstrumentLocation").text
+    references = root.findall(".//ControlConstructReference")
+    ref_list = []
+    for x, ref in enumerate(references):  
+        ref_dict={}
+        ref_dict['position'] = x + 1
+        ref_dict['Agency'] = ref.find(".//Agency").text
+        ref_dict['ID'] = ref.find(".//ID").text
+        ref_dict['Version'] = ref.find(".//Version").text
+        ref_dict['Type'] = ref.find(".//TypeOfObject").text
+        ref_list.append(ref_dict)
+    info['references'] = ref_list
+    return info
+
+def parse_xml(xml, item_type):
+    """
+    Used for parsing Item value
+    item_type in:
+        - Series
+        - Study
+        - Data Collection
+        - Sequence
+        - Statement
+        - Organization
+    """
+    root = remove_xml_ns(xml)
+
+    if item_type == 'Series':
+        info = root_to_dict_series(root)
+    elif item_type == 'Study':
+        info = root_to_dict_study(root)
+    elif item_type == 'Data Collection':
+        info = root_to_dict_data_collection(root)
+    elif item_type == 'Sequence':
+        info = root_to_dict_sequence(root)
+    elif item_type == 'Statement':
+        info = root_to_dict_statement(root)
+    elif item_type == 'Organization':
+        info = root_to_dict_organization(root)
+    elif item_type == 'Instrument':
+        info = root_to_dict_instrument(root)
+    else:
+        info = {}
+    return info
+    
+
+
 class ColecticaObject(api.ColecticaLowLevelAPI):
     """Ask practical questions to Colectica."""
 
-    def from_id_get_study(self, AgencyId, Identifier):
+    def item_to_dict(self, AgencyId, Identifier):
         """
-        From an agency ID and an identifier, get information about a study
-
-        example, AgencyId = 'uk.cls.nextsteps', Identifier='78572059-2541-4ce6-813f-10250a53c91b'
-
-        Returns:
-            dict: TODO words
+        From an agency ID and an identifier, get information using get_an_item
+        Return a dictionary
         """
-        study_result = self.get_an_item(AgencyId, Identifier)
+        result = self.get_an_item(AgencyId, Identifier)
 
-        root = remove_xml_ns(study_result["Item"])
-
-        study = {}
-        study['version'] = study_result["Version"]
-        item_type = study_result["ItemType"]
-        # Sweep Description
-        study['title'] = root.find(".//Citation/Title/String").text
-        study['principal_investigator'] = root.find(".//Creator/CreatorName/String").text
-        study['publisher'] = root.find(".//Publisher/PublisherName/String").text
-        study['abstract'] = root.find(".//Abstract/Content").text
-        population = {}
-        population['agency'] = root.find(".//UniverseReference/Agency").text
-        population['ID'] = root.find(".//UniverseReference/ID").text 
-        study['population'] = population
-
-        return study
-
-
-    def from_id_get_sequence(self, AgencyId, Identifier):
-        """
-        From Idenfifier and ItemType Sequence, get info
-        """
-        sequence_result = self.get_an_item(AgencyId, Identifier)
-        root = remove_xml_ns(sequence_result["Item"])
-        
-        seq = {}
-        for k, v in sequence_result.items():
+        info = {}
+        for k, v in result.items():
             if k == 'ItemType':
-                seq[k] = self.item_code_inv(v)
+                info[k] = self.item_code_inv(v)
             elif k == 'Item':
-                seq['Sequence_Agency'] = root.find(".//ControlConstructReference/Version").text
-                seq['Sequence_ID'] = root.find(".//ControlConstructReference/ID").text
-                seq['Sequence_Version'] = root.find(".//ControlConstructReference/Version").text
+                item_info = parse_xml(v, self.item_code_inv(result['ItemType']))
             else:
-                seq[k] = v
-        return seq
-        
+                info[k] = v
 
-    def get_instrument_info(self, AgencyId, Identifier):
-        """
-        From an instrument identifier, get information about this instrument
-        """
-        instrument_result = self.get_an_item(AgencyId, Identifier)
-        root = remove_xml_ns(instrument_result["Item"])
-        
-        instrument = {}
-        for k, v in instrument_result.items():
-            if k == 'ItemType':
-                instrument[k] = self.item_code_inv(v)
-            elif k == 'Item':
-                if root.findall(".//*[@typeOfUserID='colectica:sourceId']") != []:
-                    instrument['InstrumentSourceID'] = root.findall(".//*[@typeOfUserID='colectica:sourceId']")[0].text 
-                if root.findall(".//*[@typeOfUserID='closer:sourceFileName']") != []:
-                    instrument['InstrumentLabel'] = root.findall(".//*[@typeOfUserID='closer:sourceFileName']")[0].text
-                instrument['InstrumentName'] = root.find(".//InstrumentName/String").text
-                instrument['ExternalInstrumentLocation'] = root.find(".//ExternalInstrumentLocation").text
-                instrument['ref_agency'] = root.find(".//ControlConstructReference/Agency").text
-                instrument['ref_agency'] = root.find(".//ControlConstructReference/Agency").text
-                instrument['ref_ID'] = root.find(".//ControlConstructReference/ID").text
-                instrument['ref_version'] = root.find(".//ControlConstructReference/Version").text
-                instrument['ref_type'] = root.find(".//ControlConstructReference/TypeOfObject").text
-            else:
-                instrument[k] = v
-        return instrument
+        return {**info, **item_info} 
 
 
-    def get_instrument_set(self, AgencyId, Identifier, Version):
+    def get_a_set_to_df(self, AgencyId, Identifier, Version):
         """
-        Fcloser:sourceFileNamerom a study, find all questions
+        From a study, find all questions
         Example: 
             'ItemType': 'f196cc07-9c99-4725-ad55-5b34f479cf7d', (Instrument)
             'AgencyId': 'uk.cls.nextsteps',
@@ -121,14 +349,14 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         return df
 
 
-    def instrument_info_set(self, AgencyId, Identifier):
+    def item_info_set(self, AgencyId, Identifier):
         """
-        From an instrument ID, find it's name and set
+        From an ID, find it's name and set
         """
-        info = self.get_instrument_info(AgencyId, Identifier)
-        df = self.get_instrument_set(AgencyId, Identifier, str(info['Version']))
+        info = self.item_to_dict(AgencyId, Identifier)
+        df = self.get_a_set_to_df(AgencyId, Identifier, str(info['Version']))
         return df, info
-   
+
 
     def get_question_info(self, AgencyId, Identifier):
         """
