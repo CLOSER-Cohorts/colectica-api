@@ -274,6 +274,142 @@ def root_to_dict_instrument(root):
     info['references'] = ref_list
     return info
 
+
+def root_to_dict_question_group(root):
+    """
+    Part of parse xml, item_type = Question Group
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['Name'] = root.find('.//QuestionGroupName/String').text
+    info['Label'] = root.find('.//Label/Content').text
+    # Concept Reference
+    ConceptRef = {}
+    ConceptRef['Agency'] = root.find('.//ConceptReference/Agency').text
+    ConceptRef['ID'] = root.find('.//ConceptReference/ID').text
+    ConceptRef['Version'] = root.find('.//ConceptReference/Version').text
+    ConceptRef['Type'] = root.find('.//ConceptReference/TypeOfObject').text
+    info['ConceptRef'] = ConceptRef
+    # Question Item Reference
+    QuestionItemRef = root.findall(".//QuestionItemReference")
+    QIref_list = []
+    for x, ref in enumerate(QuestionItemRef):  
+        ref_dict={}
+        ref_dict['position'] = x + 1
+        ref_dict['Agency'] = ref.find(".//Agency").text
+        ref_dict['ID'] = ref.find(".//ID").text
+        ref_dict['Version'] = ref.find(".//Version").text
+        ref_dict['Type'] = ref.find(".//TypeOfObject").text
+        QIref_list.append(ref_dict)
+    info['QuestionItemRef'] = QIref_list
+    # Question Group Reference
+    QuestionGroupRef = root.findall(".//QuestionGroupReference")
+    QGref_list = []
+    for x, ref in enumerate(QuestionGroupRef):  
+        ref_dict={}
+        ref_dict['position'] = x + 1
+        ref_dict['Agency'] = ref.find(".//Agency").text
+        ref_dict['ID'] = ref.find(".//ID").text
+        ref_dict['Version'] = ref.find(".//Version").text
+        ref_dict['Type'] = ref.find(".//TypeOfObject").text
+        QGref_list.append(ref_dict)
+    info['QuestionGroupRef'] = QGref_list
+    return info
+
+
+def root_to_dict_concept(root):
+    """
+    Part of parse xml, item_type = Concept
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['VersionResponsibility'] = root.find('.//VersionResponsibility').text
+    info['VersionRationale'] = root.find('.//VersionRationale/RationaleDescription/String').text
+    info['Name'] = root.find('.//ConceptName/String').text
+    info['Label'] = root.find('.//Label/Content').text
+    return info
+
+
+def root_to_dict_question(root):
+    """
+    Part of parse xml, item_type = Question
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['sourceId'] = root.find('.//UserID').text
+    info['QuestionLabel'] = root.find(".//UserAttributePair/AttributeValue").text
+    info['QuestionItemName'] = root.find(".//QuestionItemName/String").text
+    info['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
+    # ResponseCardinality
+    cardinality = root.find('.//ResponseCardinality')
+    car_dict = {}
+    car_dict['minimumResponses'] = cardinality.attrib['minimumResponses']
+    car_dict['maximumResponses'] = cardinality.attrib['maximumResponses']
+    info['ResponseCardinality'] = car_dict
+    # response
+    response = {}
+    CodeDomain = root.find(".//CodeDomain")
+    TextDomain = root.find(".//TextDomain")
+    NumericDomain = root.find(".//NumericDomain")
+    DateTimeDomain = root.find(".//DateTimeDomain")
+    if CodeDomain is not None:
+        response['response_type'] = 'CodeList'
+        response['CodeList_ID'] = CodeDomain.find(".//CodeListReference/ID").text
+        response['CodeList_version'] = CodeDomain.find(".//CodeListReference/Version").text
+    elif TextDomain is not None:
+        response['response_type'] = 'Text'
+        response['response_label'] = TextDomain.find(".//Label/Content").text
+    elif NumericDomain is not None:
+        response['response_type'] = 'Numeric'
+        response['response_label'] = root.find(".//Label").text
+        response['response_NumericType'] = root.find(".//NumericTypeCode").text
+        if root.find(".//NumberRange/Low") is not None:
+            response['response_RangeLow'] = root.find(".//NumberRange/Low").text        
+        else:
+            response['response_RangeLow'] = None
+        if root.find(".//NumberRange/High") is not None:
+            response['response_RangeHigh'] = root.find(".//NumberRange/High").text
+        else:
+            response['response_RangeHigh'] = None
+    elif DateTimeDomain is not None:
+        response['response_type'] = 'DateTime'
+        response['DateTypeCode'] = DateTimeDomain.find(".//DateTypeCode").text
+        response['Label'] = DateTimeDomain.find(".//Label/Content").text
+         
+    info['Response'] = response
+
+    # InterviewerInstructionReference
+    inst_dict = {}
+    InstructionRef = root.find(".//InterviewerInstructionReference")
+    inst_dict['Agency'] = InstructionRef.find(".//Agency").text
+    inst_dict['ID'] = InstructionRef.find(".//ID").text
+    inst_dict['Version'] = InstructionRef.find(".//Version").text
+    inst_dict['Type'] = InstructionRef.find(".//TypeOfObject").text
+    info['Instruction'] = inst_dict
+    return info
+
+
+def root_to_dict_code_set(root):
+    """
+    Part of parse xml, item_type = Code Set
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    return info
+
+
+def root_to_dict_code(root):
+    """
+    Part of parse xml, item_type = Code
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['SourceId'] = root.find('.//UserID').text
+    info['Label'] = root.find('.//Label/Content').text
+    # Code
+    Code = root.findall('//Code')
+    return info
+
 def parse_xml(xml, item_type):
     """
     Used for parsing Item value
@@ -284,6 +420,8 @@ def parse_xml(xml, item_type):
         - Sequence
         - Statement
         - Organization
+        - Question Group
+        - Concept
     """
     root = remove_xml_ns(xml)
 
@@ -301,6 +439,15 @@ def parse_xml(xml, item_type):
         info = root_to_dict_organization(root)
     elif item_type == 'Instrument':
         info = root_to_dict_instrument(root)
+    elif item_type == 'Question Group':
+        info = root_to_dict_question_group(root)
+    elif item_type == 'Concept':
+        info = root_to_dict_concept(root)
+    elif item_type == 'Question':
+        info = root_to_dict_question(root)
+    elif item_type == 'Code Set':
+        info = root_to_dict_code_set(root)
+
     else:
         info = {}
     return info
@@ -358,6 +505,29 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         return df, info
 
 
+    def get_question_group_info(self, AgencyId, Identifier):
+        """
+        From a question identifier, get information about it
+        """
+        question_group = self.get_an_item(AgencyId, Identifier)
+        root = remove_xml_ns(question_group["Item"])
+        
+        question = {}
+        for k, v in question_result.items():
+            if k == 'ItemType':
+                question[k] = self.item_code_inv(v)
+            elif k == 'Item':
+                question['UserID'] = root.find(".//UserID").text
+                question['QuestionLabel'] = root.find(".//UserAttributePair/AttributeValue").text
+                question['QuestionItemName'] = root.find(".//QuestionItemName/String").text
+                question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
+
+
+            else:
+                question[k] = v
+        return question
+
+
     def get_question_info(self, AgencyId, Identifier):
         """
         From a question identifier, get information about it
@@ -375,26 +545,6 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 question['QuestionItemName'] = root.find(".//QuestionItemName/String").text
                 question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
 
-                if root.find(".//CodeDomain") is not None:
-                    question['response_type'] = 'CodeList'
-                    question['CodeList_ID'] = root.find(".//CodeDomain/CodeListReference/ID").text
-                    question['CodeList_version'] = root.find(".//CodeDomain/CodeListReference/Version").text
-                elif root.find(".//TextDomain") is not None:
-                    question['response_type'] = 'Text'
-                    question['response_label'] = root.find(".//TextDomain/Label/Content").text
-                elif root.find(".//NumericDomain") is not None:
-                    question['response_type'] = 'Numeric'
-                    question['response_label'] = root.find(".//Label").text
-                    question['response_NumericType'] = root.find(".//NumericTypeCode").text
-                    if root.find(".//NumberRange/Low") is not None:
-                        question['response_RangeLow'] = root.find(".//NumberRange/Low").text
-                    else:
-                        question['response_RangeLow'] = None
-                    if root.find(".//NumberRange/High") is not None:
-                        question['response_RangeHigh'] = root.find(".//NumberRange/High").text
-                    else:
-                        question['response_RangeHigh'] = None
-                         
 
             else:
                 question[k] = v

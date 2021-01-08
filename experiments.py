@@ -25,8 +25,8 @@ C = ColecticaObject(hostname, username, password)
 
 # Instrument 
 agency = "uk.cls.nextsteps"
-#Id_instrument = "a6f96245-5c00-4ad3-89e9-79afaefa0c28"
-#df, info = C.item_info_set(agency, Id_instrument)
+Id_instrument = "a6f96245-5c00-4ad3-89e9-79afaefa0c28"
+df, info = C.item_info_set(agency, Id_instrument)
 
 #print(df_instrument.head(2))
 #pp.pprint(instrument_info) 
@@ -51,8 +51,8 @@ agency = "uk.cls.nextsteps"
 #df_question, df_numeric = C.get_question_all(agency, Id_question_numeric) 
 #print(df_numeric)
 
-Id_sequence = '6b89e69c-cb04-4d07-a1a0-dea4a2d29284'
-df, info = C.item_info_set(agency, Id_sequence)
+#Id_sequence = '6b89e69c-cb04-4d07-a1a0-dea4a2d29284'
+#df, info = C.item_info_set(agency, Id_sequence)
 
 #print(df_sequence.head(2))
 #pp.pprint(sequence_info) 
@@ -79,3 +79,18 @@ df, info = C.item_info_set(agency, Id_sequence)
 
 #ID = 'f026f9ab-91c7-410c-a4a4-b389e3f72078'
 #r = C.item_to_dict('uk.closer', ID)
+
+# question group
+agency = 'uk.closer'
+Id = '9b6a88e1-2cd2-47a2-a71d-69c8a10949ad'
+df, info = C.item_info_set(agency, Id)
+
+# concept
+#df, info = C.item_info_set('uk.closer', '09263728-048e-48c5-b735-32d3d70f4533') 
+
+# question item
+#df, info = C.item_info_set('uk.iser', 'ca2992f6-e049-478a-9e05-c1ff81aff9aa')
+
+# datetime response
+#df, info = C.item_info_set('uk.iser', '34ed32b0-7176-4c43-b114-d51f8d8bdee8')
+

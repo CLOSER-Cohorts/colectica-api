@@ -124,7 +124,7 @@ def get_jwtToken(hostname, username, password):
         quit()
 
     jsonResponse = response.json()
-    jwtToken = jsonResponse["access_token"]
+    jwtToken = jsonResponse["AccessToken"]
     tokenHeader = {'Authorization': 'Bearer ' + jwtToken}
 
     # get Repository information
@@ -163,13 +163,13 @@ class ColecticaLowLevelAPI():
                 return response.json()
 
 
-    def general_search(self, item_type, search_term, RankResults=True, SearchDepricatedItems=False, SearchLatestVersion=True):
+    def general_search(self, item_type, search_term, MaxResults=1, RankResults=True, SearchDepricatedItems=False, SearchLatestVersion=True):
         """
             Perform a general search: https://docs.colectica.com/portal/api/examples/search/
             Request Type: POST
             URL: /api/v1/_query
         """
-
+        # MaxResults=0 returns all results
         jsonquery =  {
              "Cultures": [
                  "en-US"
@@ -180,7 +180,7 @@ class ColecticaLowLevelAPI():
              "LanguageSortOrder": [
                  "en-US"
              ],
-             "MaxResults": 0,
+             "MaxResults": MaxResults,
              "RankResults": RankResults,
              "ResultOffset": 0,
              "ResultOrdering": "None",
@@ -442,7 +442,7 @@ class ColecticaLowLevelAPI():
                 return(response.json())
 
 
-    def  get_a_set(self, AgencyId, Identifier, Version):
+    def get_a_set(self, AgencyId, Identifier, Version):
         """Gets the set of all items under the specified root.
 
         Frontend to Colectica GET: /api/v1/set/{agency}/{id}/{version}
