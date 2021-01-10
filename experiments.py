@@ -12,7 +12,6 @@ import pandas as pd
 
 pp = pprint.PrettyPrinter(depth=4)
 
-
 hostname = "discovery-pp.closer.ac.uk"
 username = None
 password = None
@@ -25,8 +24,9 @@ C = ColecticaObject(hostname, username, password)
 
 # Instrument 
 agency = "uk.cls.nextsteps"
-Id_instrument = "a6f96245-5c00-4ad3-89e9-79afaefa0c28"
-df, info = C.item_info_set(agency, Id_instrument)
+
+#Id_instrument = "a6f96245-5c00-4ad3-89e9-79afaefa0c28"
+#df, info = C.item_info_set(agency, Id_instrument)
 
 #print(df_instrument.head(2))
 #pp.pprint(instrument_info) 
@@ -47,9 +47,9 @@ df, info = C.item_info_set(agency, Id_instrument)
 #print(df_text)
 
 # numeric response
-#Id_question_numeric = 'f4417dc3-46a4-432a-87db-7ad95d04e5f4'
-#df_question, df_numeric = C.get_question_all(agency, Id_question_numeric) 
-#print(df_numeric)
+Id_question_numeric = 'f4417dc3-46a4-432a-87db-7ad95d04e5f4'
+df_question, df_numeric = C.get_question_all(agency, Id_question_numeric) 
+print(df_numeric)
 
 #Id_sequence = '6b89e69c-cb04-4d07-a1a0-dea4a2d29284'
 #df, info = C.item_info_set(agency, Id_sequence)
@@ -81,9 +81,9 @@ df, info = C.item_info_set(agency, Id_instrument)
 #r = C.item_to_dict('uk.closer', ID)
 
 # question group
-agency = 'uk.closer'
-Id = '9b6a88e1-2cd2-47a2-a71d-69c8a10949ad'
-df, info = C.item_info_set(agency, Id)
+#agency = 'uk.closer'
+#Id = '9b6a88e1-2cd2-47a2-a71d-69c8a10949ad'
+#df, info = C.item_info_set(agency, Id)
 
 # concept
 #df, info = C.item_info_set('uk.closer', '09263728-048e-48c5-b735-32d3d70f4533') 

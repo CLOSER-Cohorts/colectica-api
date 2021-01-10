@@ -534,17 +534,38 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         """
         question_result = self.get_an_item(AgencyId, Identifier)
         root = remove_xml_ns(question_result["Item"])
-        
+
         question = {}
         for k, v in question_result.items():
             if k == 'ItemType':
                 question[k] = self.item_code_inv(v)
             elif k == 'Item':
+
                 question['UserID'] = root.find(".//UserID").text
                 question['QuestionLabel'] = root.find(".//UserAttributePair/AttributeValue").text
                 question['QuestionItemName'] = root.find(".//QuestionItemName/String").text
                 question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
 
+
+                if root.find(".//CodeDomain") is not None:
+                    question['response_type'] = 'CodeList'
+                    question['CodeList_ID'] = root.find(".//CodeDomain/CodeListReference/ID").text
+                    question['CodeList_version'] = root.find(".//CodeDomain/CodeListReference/Version").text
+                elif root.find(".//TextDomain") is not None:
+                    question['response_type'] = 'Text'
+                    question['response_label'] = root.find(".//TextDomain/Label/Content").text
+                elif root.find(".//NumericDomain") is not None:
+                    question['response_type'] = 'Numeric'
+                    question['response_label'] = root.find(".//NumericDomain/Label/Content").text
+                    question['response_NumericType'] = root.find(".//NumericTypeCode").text
+                    if root.find(".//NumberRange/Low") is not None:
+                        question['response_RangeLow'] = root.find(".//NumberRange/Low").text
+                    else:
+                        question['response_RangeLow'] = None
+                    if root.find(".//NumberRange/High") is not None:
+                        question['response_RangeHigh'] = root.find(".//NumberRange/High").text
+                    else:
+                        question['response_RangeHigh'] = None
 
             else:
                 question[k] = v
@@ -576,7 +597,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
 
             category = [i.text for i in root.findall(".//Code/CategoryReference/ID")]
 
-            df = pd.DataFrame(columns=["Name", "ID", "Label"])
+            df = pd.DataFrame(columns=["response_type", "Name", "ID", "Label"])
 
             for c in category:
                 item_result = self.get_an_item(AgencyId, c)
@@ -585,9 +606,10 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 CategoryName = root.find(".//CategoryName/String").text 
                 UserID = root.find(".//UserID").text
                 Label = root.find(".//Label/Content").text
-                df = df.append({"Name": CategoryName,
-                                  "ID": UserID,
-                               "Label": Label
+                df = df.append({"response_type": "CodeList",
+                                         "Name": CategoryName,
+                                           "ID": UserID,
+                                        "Label": Label
                                }, ignore_index=True)
             
             df['code_list_sourceId'] = code_list_sourceId
