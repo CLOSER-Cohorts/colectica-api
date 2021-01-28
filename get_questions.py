@@ -16,9 +16,11 @@ def main():
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
-    hostname = "discovery-pp.closer.ac.uk"
+    hostname = None 
     username = None
     password = None
+    if not hostname:
+        hostname = input ("enter the url of the site: ")
     if not username:
         username = input("enter your username: ")
     if not password:
