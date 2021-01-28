@@ -2,9 +2,12 @@
 
 ## Dependencies
 
-Pandas (also requires lzma)
+Non-standard libraries are required for these:
+
+- Pandas
+- Requests
 
 To add these:
 
 - pip install pandas
-- pip install pylzma
+- pip install requests
