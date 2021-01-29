@@ -1,4 +1,4 @@
-""" 
+"""
     Pull information using python ColecticaPortal api
 """
 
@@ -48,7 +48,7 @@ def root_to_dict_study(root):
         custom_list.append(json.loads(cus.text))
     sweep['custom_field'] = custom_list
     info['sweep'] = sweep
-        
+
     # Funding
     funding = {}
     organization = {}
@@ -451,7 +451,6 @@ def parse_xml(xml, item_type):
     else:
         info = {}
     return info
-    
 
 
 class ColecticaObject(api.ColecticaLowLevelAPI):
@@ -473,26 +472,25 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             else:
                 info[k] = v
 
-        return {**info, **item_info} 
-
+        return {**info, **item_info}
 
     def get_a_set_to_df(self, AgencyId, Identifier, Version):
         """
         From a study, find all questions
-        Example: 
+        Example:
             'ItemType': 'f196cc07-9c99-4725-ad55-5b34f479cf7d', (Instrument)
             'AgencyId': 'uk.cls.nextsteps',
             'Version': 1,
             'Identifier': 'a6f96245-5c00-4ad3-89e9-79afaefa0c28'
-        """  
+        """
 
         l = self.get_a_set_typed(AgencyId, Identifier, Version)
         # print(l)
-        df = pd.DataFrame( 
+        df = pd.DataFrame(
              [self.item_code_inv(l[i]["Item2"]), l[i]["Item1"]["Item1"]] for i in range(len(l))
          )
         df.columns = ["ItemType", "Identifier"]
-        
+
         return df
 
 
@@ -511,7 +509,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         """
         question_group = self.get_an_item(AgencyId, Identifier)
         root = remove_xml_ns(question_group["Item"])
-        
+
         question = {}
         for k, v in question_result.items():
             if k == 'ItemType':
@@ -542,7 +540,8 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             elif k == 'Item':
 
                 question['UserID'] = root.find(".//UserID").text
-                question['QuestionLabel'] = root.find(".//UserAttributePair/AttributeValue").text
+                QLabel = root.find(".//UserAttributePair/AttributeValue").text
+                question['QuestionLabel'] = list(eval(QLabel).values())[0] 
                 question['QuestionItemName'] = root.find(".//QuestionItemName/String").text
                 question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
 
@@ -577,16 +576,15 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         From a question ID, return question info and it's response
         """
         question_info = self.get_question_info(AgencyId, Identifier)
-        
-        question_data = [ [ question_info['UserID'], 
-                            question_info['QuestionLabel'], 
+
+        question_data = [ [ question_info['UserID'],
+                            question_info['QuestionLabel'],
                             question_info['QuestionItemName'],
                             question_info['QuestionLiteral'],
                             question_info['response_type'] ] ]
-            
-        df_question = pd.DataFrame(question_data, 
+
+        df_question = pd.DataFrame(question_data,
                                    columns=['UserID', 'QuestionLabel', 'QuestionItemName', 'QuestionLiteral', 'response_type'])
-                
 
         if question_info['response_type'] == 'CodeList':
             code_result = self.get_an_item(AgencyId, question_info['CodeList_ID'])
@@ -602,7 +600,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             for c in category:
                 item_result = self.get_an_item(AgencyId, c)
                 root = remove_xml_ns(item_result["Item"])
-        
+
                 CategoryName = root.find(".//CategoryName/String").text 
                 UserID = root.find(".//UserID").text
                 Label = root.find(".//Label/Content").text
@@ -611,11 +609,11 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                                            "ID": UserID,
                                         "Label": Label
                                }, ignore_index=True)
-            
+
             df['code_list_sourceId'] = code_list_sourceId
             df['code_list_label'] = code_list_label
-            df['Order'] = df.index + 1 
-            df['QuestionItemName'] = question_info['QuestionItemName'] 
+            df['Order'] = df.index + 1
+            df['QuestionItemName'] = question_info['QuestionItemName']
 
             df_question['response'] = code_list_label
 
@@ -635,7 +633,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                        question_info['response_RangeLow'],
                        question_info['response_RangeHigh'] ] ]
             df = pd.DataFrame(data, columns=['QuestionItemName', 'response_type', 'Label', 'response_NumericType', 'response_RangeLow', 'response_RangeHigh'])
-                         
+
             df_question['response'] = question_info['response_label']
 
         else:
