@@ -547,9 +547,12 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
 
                 if root.find(".//CodeDomain") is not None:
+                   # print(question_result)
                     question['response_type'] = 'CodeList'
+                    question['CodeList_Agency'] = root.find(".//CodeDomain/CodeListReference/Agency").text
                     question['CodeList_ID'] = root.find(".//CodeDomain/CodeListReference/ID").text
                     question['CodeList_version'] = root.find(".//CodeDomain/CodeListReference/Version").text
+                    question['code_list_URN'] = (':').join(['urn:ddi', question['CodeList_Agency'], question['CodeList_ID'], question['CodeList_version']])
                 elif root.find(".//TextDomain") is not None:
                     question['response_type'] = 'Text'
                     question['response_label'] = root.find(".//TextDomain/Label/Content").text
@@ -611,9 +614,12 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                                         "Label": Label
                                }, ignore_index=True)
 
+
+            df['code_list_URN'] = question_info['code_list_URN']
             df['code_list_sourceId'] = code_list_sourceId
             df['code_list_label'] = code_list_label
             df['Order'] = df.index + 1
+            df['QuestionURN'] = question_info['QuestionURN']
             df['QuestionItemName'] = question_info['QuestionItemName']
 
             df_question['response'] = code_list_label
