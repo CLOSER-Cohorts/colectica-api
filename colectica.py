@@ -375,7 +375,7 @@ def root_to_dict_question(root):
         response['response_type'] = 'DateTime'
         response['DateTypeCode'] = DateTimeDomain.find(".//DateTypeCode").text
         response['Label'] = DateTimeDomain.find(".//Label/Content").text
-         
+
     info['Response'] = response
 
     # InterviewerInstructionReference
@@ -539,12 +539,12 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 question[k] = self.item_code_inv(v)
             elif k == 'Item':
 
-                question['UserID'] = root.find(".//UserID").text
+                question['QuestionURN'] = root.find(".//URN").text
+                question['QuestionUserID'] = root.find(".//UserID").text
                 QLabel = root.find(".//UserAttributePair/AttributeValue").text
                 question['QuestionLabel'] = list(eval(QLabel).values())[0] 
                 question['QuestionItemName'] = root.find(".//QuestionItemName/String").text
                 question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
-
 
                 if root.find(".//CodeDomain") is not None:
                     question['response_type'] = 'CodeList'
@@ -577,14 +577,15 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         """
         question_info = self.get_question_info(AgencyId, Identifier)
 
-        question_data = [ [ question_info['UserID'],
+        question_data = [ [ question_info['QuestionURN'],
+                            question_info['QuestionUserID'],
                             question_info['QuestionLabel'],
                             question_info['QuestionItemName'],
                             question_info['QuestionLiteral'],
                             question_info['response_type'] ] ]
 
         df_question = pd.DataFrame(question_data,
-                                   columns=['UserID', 'QuestionLabel', 'QuestionItemName', 'QuestionLiteral', 'response_type'])
+                                   columns=['QuestionURN', 'QuestionUserID', 'QuestionLabel', 'QuestionItemName', 'QuestionLiteral', 'response_type'])
 
         if question_info['response_type'] == 'CodeList':
             code_result = self.get_an_item(AgencyId, question_info['CodeList_ID'])
@@ -641,6 +642,6 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df = pd.DataFrame()
         return df_question, df
 
+
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
-
