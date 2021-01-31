@@ -619,21 +619,23 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df_question['response'] = code_list_label
 
         elif question_info['response_type'] == 'Text':
-            data = [ [ question_info['QuestionItemName'], 
-                       question_info['response_type'], 
+            data = [ [ question_info['QuestionURN'],
+                       question_info['QuestionItemName'],
+                       question_info['response_type'],
                        question_info['response_label'] ] ]
-            df = pd.DataFrame(data, columns=['QuestionItemName', 'response_type', 'Label'])
+            df = pd.DataFrame(data, columns=['QuestionURN', 'QuestionItemName', 'response_type', 'Label'])
 
             df_question['response'] = question_info['response_label']
 
         elif question_info['response_type'] == 'Numeric':
-            data = [ [ question_info['QuestionItemName'], 
+            data = [ [ question_info['QuestionURN'],
+                       question_info['QuestionItemName'], 
                        question_info['response_type'], 
                        question_info['response_label'],
                        question_info['response_NumericType'],
                        question_info['response_RangeLow'],
                        question_info['response_RangeHigh'] ] ]
-            df = pd.DataFrame(data, columns=['QuestionItemName', 'response_type', 'Label', 'response_NumericType', 'response_RangeLow', 'response_RangeHigh'])
+            df = pd.DataFrame(data, columns=['QuestionURN', 'QuestionItemName', 'response_type', 'Label', 'response_NumericType', 'response_RangeLow', 'response_RangeHigh'])
 
             df_question['response'] = question_info['response_label']
 
