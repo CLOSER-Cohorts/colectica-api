@@ -547,7 +547,6 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
 
                 if root.find(".//CodeDomain") is not None:
-                   # print(question_result)
                     question['response_type'] = 'CodeList'
                     question['CodeList_Agency'] = root.find(".//CodeDomain/CodeListReference/Agency").text
                     question['CodeList_ID'] = root.find(".//CodeDomain/CodeListReference/ID").text
@@ -588,7 +587,8 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                             question_info['response_type'] ] ]
 
         df_question = pd.DataFrame(question_data,
-                                   columns=['QuestionURN', 'QuestionUserID', 'QuestionLabel', 'QuestionItemName', 'QuestionLiteral', 'response_type'])
+                                   columns=['QuestionURN', 'QuestionUserID', 'QuestionLabel', 'QuestionItemName', 
+                                            'QuestionLiteral', 'response_type'])
 
         if question_info['response_type'] == 'CodeList':
             code_result = self.get_an_item(AgencyId, question_info['CodeList_ID'])
@@ -623,6 +623,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df['QuestionItemName'] = question_info['QuestionItemName']
 
             df_question['response'] = code_list_label
+            df_question['response_domain'] = question_info['code_list_URN']
 
         elif question_info['response_type'] == 'Text':
             data = [ [ question_info['QuestionURN'],
