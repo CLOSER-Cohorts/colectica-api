@@ -170,14 +170,19 @@ def root_to_dict_data_collection(root):
     DCDate['EndDate'] = root.find('.//CollectionEvent/DataCollectionDate/EndDate').text
     event['Date'] = DCDate
     # Mode Of Collection
-    mode = {}
-    mode['URN'] = root.find('.//CollectionEvent/ModeOfCollection/URN').text
-    mode['Agency'] = root.find('.//CollectionEvent/ModeOfCollection/Agency').text
-    mode['ID'] = root.find('.//CollectionEvent/ModeOfCollection/ID').text
-    mode['Version'] = root.find('.//CollectionEvent/ModeOfCollection/Version').text
-    mode['TypeOfMode'] = root.find('.//CollectionEvent/ModeOfCollection/TypeOfModeOfCollection').text
-    mode['Description'] = root.find('.//CollectionEvent/ModeOfCollection/Description/Content').text
-    event['Mode'] = mode
+    mode_list = []
+    mode_all = root.findall('.//CollectionEvent/ModeOfCollection')
+    # list 3 types
+    for type_mode in mode_all:
+        mode_dict = {}
+        mode_dict['URN'] = type_mode.find('./URN').text
+        mode_dict['Agency'] = type_mode.find('./Agency').text
+        mode_dict['ID'] = type_mode.find('./ID').text
+        mode_dict['Version'] = type_mode.find('./Version').text
+        mode_dict['TypeOfMode'] = type_mode.find('./TypeOfModeOfCollection').text
+        mode_dict['Description'] = type_mode.find('./Description/Content').text
+        mode_list.append(mode_dict)
+    event['ModeOfCollection'] = mode_list
     info['CollectionEvent'] = event
     # Question Scheme Reference
     QSR = {}
