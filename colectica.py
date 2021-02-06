@@ -32,13 +32,17 @@ def root_to_dict_study(root):
     sweep = {}
     sweep['title'] = root.find('.//Citation/Title/String').text
     sweep['principal_investigator'] = root.find('.//Citation/Creator/CreatorName/String').text
-    sweep['publisher'] = root.find('.//Citation/Publisher/PublisherName/String').text
+    if root.find('.//Citation/Publisher') is not None:
+        sweep['publisher'] = root.find('.//Citation/Publisher/PublisherName/String').text
+    else:
+        sweep['publisher'] = None
     sweep['abstract'] = root.find('.//Abstract/Content').text
     pop = {}
-    pop['Agency'] = root.find('.//UniverseReference/Agency').text
-    pop['ID'] = root.find('.//UniverseReference/ID').text
-    pop['Version'] = root.find('.//UniverseReference/Version').text
-    pop['Type'] = root.find('.//UniverseReference/TypeOfObject').text
+    if root.find('.//UniverseReference') is not None:
+        pop['Agency'] = root.find('.//UniverseReference/Agency').text
+        pop['ID'] = root.find('.//UniverseReference/ID').text
+        pop['Version'] = root.find('.//UniverseReference/Version').text
+        pop['Type'] = root.find('.//UniverseReference/TypeOfObject').text
     sweep['population'] = pop
     # custom filed
     CustomFields = root.findall('.//UserAttributePair/AttributeValue')
@@ -67,10 +71,11 @@ def root_to_dict_study(root):
     data['Analysis Unit'] = root.find('.//AnalysisUnit').text
     # data files
     datafile = {}
-    datafile['Agency'] = root.find('.//PhysicalInstanceReference/Agency').text
-    datafile['ID'] = root.find('.//PhysicalInstanceReference/ID').text
-    datafile['Version'] = root.find('.//PhysicalInstanceReference/Version').text
-    datafile['Type'] = root.find('.//PhysicalInstanceReference/TypeOfObject').text
+    if root.find('.//PhysicalInstanceReference') is not None:
+        datafile['Agency'] = root.find('.//PhysicalInstanceReference/Agency').text
+        datafile['ID'] = root.find('.//PhysicalInstanceReference/ID').text
+        datafile['Version'] = root.find('.//PhysicalInstanceReference/Version').text
+        datafile['Type'] = root.find('.//PhysicalInstanceReference/TypeOfObject').text
     data['Data File'] = datafile
     info['data'] = data
     # data collection
@@ -82,10 +87,11 @@ def root_to_dict_study(root):
     info['Data Collection'] = datacol
     # Extra
     metadata = {}
-    metadata['Agency'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/Agency').text
-    metadata['ID'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/ID').text
-    metadata['Version'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/Version').text
-    metadata['Type'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/TypeOfObject').text
+    if root.find('.//RequiredResourcePackages/ResourcePackageReference') is not None:
+        metadata['Agency'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/Agency').text
+        metadata['ID'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/ID').text
+        metadata['Version'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/Version').text
+        metadata['Type'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/TypeOfObject').text
     info['Metadata Packages'] = metadata
     return info
 
@@ -112,7 +118,8 @@ def root_to_dict_series(root):
     info['study'] = study
     # Funding
     funding = {}
-    funding['GrantNumber'] = root.find('.//FundingInformation/GrantNumber').text
+    if not root.find('.//FundingInformation/GrantNumber') is None:
+        funding['GrantNumber'] = root.find('.//FundingInformation/GrantNumber').text
     organization = {}
     organization['Agency'] = root.find('.//FundingInformation/AgencyOrganizationReference/Agency').text
     organization['ID'] = root.find('.//FundingInformation/AgencyOrganizationReference/ID').text
@@ -123,7 +130,7 @@ def root_to_dict_series(root):
     # Studies
     studies = root.findall('.//StudyUnitReference')
     study_list = []
-    for x, study in enumerate(studies):  
+    for x, study in enumerate(studies):
         study_dict={}
         study_dict['position'] = x + 1
         study_dict['Agency'] = study.find(".//Agency").text
@@ -131,7 +138,7 @@ def root_to_dict_series(root):
         study_dict['Version'] = study.find(".//Version").text
         study_dict['Type'] = study.find(".//TypeOfObject").text
         study_list.append(study_dict)
-    info['study'] = study_list        
+    info['study'] = study_list
     return info
 
 
@@ -141,16 +148,17 @@ def root_to_dict_data_collection(root):
     """
     info = {}
     info['URN'] = root.find('.//URN').text
-    info['Name'] = root.find('.//DataCollectionModuleName').text
+    info['Name'] = root.find('.//DataCollectionModuleName/String').text
     info['Label'] = root.find('.//Label/Content').text
     # InstrumentRef
     cus_dict = {}
     cus = root.findall('.//UserAttributePair')
     for item in cus:
         k = item.find('.//AttributeKey').text.split(':')[-1]
-        v = item.find('.//AttributeValue').text
+        v = item.find('.//AttributeValue').text.replace('[','').replace(']','').replace('"', '').replace("'","")
         cus_dict[k] = v
     info['Ref'] = cus_dict
+
     # CollectionEvent
     event = {}
     event['URN'] = root.find('.//CollectionEvent/URN').text
@@ -158,21 +166,30 @@ def root_to_dict_data_collection(root):
     event['ID'] = root.find('.//CollectionEvent/ID').text
     event['Version'] = root.find('.//CollectionEvent/Version').text
     # Organization Reference
-    OrganizationRef = {}
-    OrganizationRef['Agency'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/Agency').text
-    OrganizationRef['ID'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/ID').text
-    OrganizationRef['Version'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/Version').text
-    OrganizationRef['Type'] = root.find('.//CollectionEvent/DataCollectorOrganizationReference/TypeOfObject').text
-    event['OrganizationRef'] = OrganizationRef
+    organization_list = []
+    organization_all = root.findall('.//CollectionEvent/DataCollectorOrganizationReference')
+    for organization in organization_all:
+        OrganizationRef = {}
+        OrganizationRef['Agency'] = organization.find('.//Agency').text
+        OrganizationRef['ID'] = organization.find('.//ID').text
+        OrganizationRef['Version'] = organization.find('.//Version').text
+        OrganizationRef['Type'] = organization.find('.//TypeOfObject').text
+    event['OrganizationRef'] = organization_list
+
     # Data Collection Date
     DCDate = {}
-    DCDate['StartDate'] = root.find('.//CollectionEvent/DataCollectionDate/StartDate').text
-    DCDate['EndDate'] = root.find('.//CollectionEvent/DataCollectionDate/EndDate').text
+    date = root.find('.//CollectionEvent/DataCollectionDate')
+    if date.find('.//StartDate') is not None:
+        DCDate['StartDate'] = date.find('.//StartDate').text
+    elif date.find('.//EndDate') is not None:
+        DCDate['EndDate'] = date.find('.//EndDate').text
+    elif date.find('.//SimpleDate') is not None:
+        DCDate['SimpleDate'] = date.find('.//SimpleDate').text
     event['Date'] = DCDate
     # Mode Of Collection
     mode_list = []
     mode_all = root.findall('.//CollectionEvent/ModeOfCollection')
-    # list 3 types
+    # list multiple types
     for type_mode in mode_all:
         mode_dict = {}
         mode_dict['URN'] = type_mode.find('./URN').text
@@ -186,10 +203,11 @@ def root_to_dict_data_collection(root):
     info['CollectionEvent'] = event
     # Question Scheme Reference
     QSR = {}
-    QSR['Agency'] = root.find('.//QuestionSchemeReference/Agency').text
-    QSR['ID'] = root.find('.//QuestionSchemeReference/ID').text
-    QSR['Version'] = root.find('.//QuestionSchemeReference/Version').text
-    QSR['TypeOfObject'] = root.find('.//QuestionSchemeReference/TypeOfObject').text
+    if root.find('.//QuestionSchemeReference') is not None:
+        QSR['Agency'] = root.find('.//QuestionSchemeReference/Agency').text
+        QSR['ID'] = root.find('.//QuestionSchemeReference/ID').text
+        QSR['Version'] = root.find('.//QuestionSchemeReference/Version').text
+        QSR['TypeOfObject'] = root.find('.//QuestionSchemeReference/TypeOfObject').text
     info['reference'] = QSR
     return info
 
@@ -205,7 +223,7 @@ def root_to_dict_sequence(root):
     info['Label'] = root.find('.//Label/Content').text
     references = root.findall(".//ControlConstructReference")
     ref_list = []
-    for x, ref in enumerate(references):  
+    for x, ref in enumerate(references):
         ref_dict={}
         ref_dict['position'] = x + 1
         ref_dict['Agency'] = ref.find(".//Agency").text
@@ -268,7 +286,7 @@ def root_to_dict_instrument(root):
     info['ExternalInstrumentLocation'] = root.find(".//ExternalInstrumentLocation").text
     references = root.findall(".//ControlConstructReference")
     ref_list = []
-    for x, ref in enumerate(references):  
+    for x, ref in enumerate(references):
         ref_dict={}
         ref_dict['position'] = x + 1
         ref_dict['Agency'] = ref.find(".//Agency").text
@@ -298,7 +316,7 @@ def root_to_dict_question_group(root):
     # Question Item Reference
     QuestionItemRef = root.findall(".//QuestionItemReference")
     QIref_list = []
-    for x, ref in enumerate(QuestionItemRef):  
+    for x, ref in enumerate(QuestionItemRef):
         ref_dict={}
         ref_dict['position'] = x + 1
         ref_dict['Agency'] = ref.find(".//Agency").text
@@ -310,7 +328,7 @@ def root_to_dict_question_group(root):
     # Question Group Reference
     QuestionGroupRef = root.findall(".//QuestionGroupReference")
     QGref_list = []
-    for x, ref in enumerate(QuestionGroupRef):  
+    for x, ref in enumerate(QuestionGroupRef):
         ref_dict={}
         ref_dict['position'] = x + 1
         ref_dict['Agency'] = ref.find(".//Agency").text
@@ -479,6 +497,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
 
         return {**info, **item_info}
 
+
     def get_a_set_to_df(self, AgencyId, Identifier, Version):
         """
         From a study, find all questions
@@ -524,8 +543,6 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 question['QuestionLabel'] = root.find(".//UserAttributePair/AttributeValue").text
                 question['QuestionItemName'] = root.find(".//QuestionItemName/String").text
                 question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
-
-
             else:
                 question[k] = v
         return question
@@ -544,35 +561,38 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 question[k] = self.item_code_inv(v)
             elif k == 'Item':
 
-                question['QuestionURN'] = root.find(".//URN").text
-                question['QuestionUserID'] = root.find(".//UserID").text
-                QLabel = root.find(".//UserAttributePair/AttributeValue").text
+                question['QuestionURN'] = root.find('.//URN').text
+                question['QuestionUserID'] = root.find('.//UserID').text
+                QLabel = root.find('.//UserAttributePair/AttributeValue').text
                 question['QuestionLabel'] = list(eval(QLabel).values())[0] 
-                question['QuestionItemName'] = root.find(".//QuestionItemName/String").text
-                question['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
+                question['QuestionItemName'] = root.find('.//QuestionItemName/String').text
+                question['QuestionLiteral'] = root.find('.//QuestionText/LiteralText/Text').text
 
-                if root.find(".//CodeDomain") is not None:
+                if root.find('.//CodeDomain') is not None:
                     question['response_type'] = 'CodeList'
-                    question['CodeList_Agency'] = root.find(".//CodeDomain/CodeListReference/Agency").text
-                    question['CodeList_ID'] = root.find(".//CodeDomain/CodeListReference/ID").text
-                    question['CodeList_version'] = root.find(".//CodeDomain/CodeListReference/Version").text
+                    question['CodeList_Agency'] = root.find('.//CodeDomain/CodeListReference/Agency').text
+                    question['CodeList_ID'] = root.find('.//CodeDomain/CodeListReference/ID').text
+                    question['CodeList_version'] = root.find('.//CodeDomain/CodeListReference/Version').text
                     question['code_list_URN'] = (':').join(['urn:ddi', question['CodeList_Agency'], question['CodeList_ID'], question['CodeList_version']])
                 elif root.find(".//TextDomain") is not None:
                     question['response_type'] = 'Text'
-                    question['response_label'] = root.find(".//TextDomain/Label/Content").text
-                elif root.find(".//NumericDomain") is not None:
+                    question['response_label'] = root.find('.//TextDomain/Label/Content').text
+                elif root.find('.//NumericDomain') is not None:
                     question['response_type'] = 'Numeric'
-                    question['response_label'] = root.find(".//NumericDomain/Label/Content").text
-                    question['response_NumericType'] = root.find(".//NumericTypeCode").text
-                    if root.find(".//NumberRange/Low") is not None:
-                        question['response_RangeLow'] = root.find(".//NumberRange/Low").text
+                    question['response_label'] = root.find('.//NumericDomain/Label/Content').text
+                    question['response_NumericType'] = root.find('.//NumericTypeCode').text
+                    if root.find('.//NumberRange/Low') is not None:
+                        question['response_RangeLow'] = root.find('.//NumberRange/Low').text
                     else:
                         question['response_RangeLow'] = None
-                    if root.find(".//NumberRange/High") is not None:
-                        question['response_RangeHigh'] = root.find(".//NumberRange/High").text
+                    if root.find('.//NumberRange/High') is not None:
+                        question['response_RangeHigh'] = root.find('.//NumberRange/High').text
                     else:
                         question['response_RangeHigh'] = None
-
+                elif root.find('.//DateTimeDomain') is not None:
+                    question['response_type'] = 'DateTime'
+                    question['DateTypeCode'] = root.find('.//DateTimeDomain/DateTypeCode').text
+                    question['response_label'] = root.find('.//DateTimeDomain/Label/Content').text
             else:
                 question[k] = v
         return question
@@ -582,6 +602,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         """
         From a question ID, return question info and it's response
         """
+        # print(AgencyId, Identifier)
         question_info = self.get_question_info(AgencyId, Identifier)
 
         question_data = [ [ question_info['QuestionURN'],

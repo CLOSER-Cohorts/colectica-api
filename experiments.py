@@ -15,6 +15,8 @@ pp = pprint.PrettyPrinter(depth=4)
 hostname = None
 username = None
 password = None
+if not hostname:
+    hostname = input ("enter the url of the site: ")
 if not username:
     username = input("enter your username: ")
 if not password:
@@ -95,5 +97,12 @@ C = ColecticaObject(hostname, username, password)
 #df, info = C.item_info_set('uk.iser', '34ed32b0-7176-4c43-b114-d51f8d8bdee8')
 
 # Mode of Data Collection for a study
-d = C.item_to_dict('uk.cls.bcs70', 'f3a09755-23db-45df-bab3-387f1fa66790') 
-print(d['CollectionEvent']['ModeOfCollection'])
+#d = C.item_to_dict('uk.cls.bcs70', 'f3a09755-23db-45df-bab3-387f1fa66790')
+#print(d['CollectionEvent']['ModeOfCollection'])
+
+# Series
+#d = C.item_to_dict('uk.cls.bcs70', '75fe4705-0c94-4f75-b1e6-ad9c61ffde26')
+#print(d)
+
+d = C.item_to_dict('uk.cls.bcs70', 'e9e9853d-639c-4c9b-bab1-94b22b84f506')
+print(d)
