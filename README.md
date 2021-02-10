@@ -9,8 +9,9 @@ and the API documentation is avaiable at https://discovery.closer.ac.uk/swagger/
 
 ## File Description
 
-get_questions.py - outputs the different item types
-get_question_groups.py - outputs the concepts and a link to the question items
+- get_questions.py - outputs the different item types
+- get_question_groups.py - outputs the concepts and a link to the question items
+- xxx - creates question-concept dataset for input into question-concept model
 
 
 ## Dependencies
