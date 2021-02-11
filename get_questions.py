@@ -25,7 +25,7 @@ def from_series_get_study(C, Agency, ID):
     From a series, get list of studies
     """
     d = C.item_to_dict(Agency, ID)
-    return d['study'] 
+    return d['study']
 
 
 def from_study_get_instrument(C, Agency, ID):
@@ -65,7 +65,7 @@ def get_instruments_df(C):
             # print(st['Agency'], st['ID'])
             name, instrument_urn, mode_list = from_study_get_instrument(C, st['Agency'], st['ID'])
             df = df.append({'study_name': study_name,
-                            'instrument_name': name, 
+                            'instrument_name': name,
                             'instrument_urn': instrument_urn,
                             'data_collection_mode': mode_list},
                            ignore_index=True)
@@ -103,6 +103,24 @@ def from_instrument_get_question_response(C, Agency, ID):
     df_codelist_all = pd.concat(codelist_df_list)
     df_response_all = pd.concat(response_df_list)
     return instrument_info, df_question_all, df_codelist_all, df_response_all
+
+
+def from_instrument_get_statement(C, Agency, ID):
+    """
+    From an instrument get all Statement
+    """
+    df_instrument_set, instrument_info = C.item_info_set(Agency, ID)
+
+    df_statement = df_instrument_set.loc[(df_instrument_set.ItemType == 'Statement') , :]
+
+    statement_df_list = []
+    for statement_id in df_statement['Identifier']:
+        dict_statement = C.item_to_dict(Agency, statement_id)
+        df_statement = pd.DataFrame([dict_statement], columns=dict_statement.keys()) 
+        statement_df_list.append(df_statement)
+
+    df_statement_all = pd.concat(statement_df_list)
+    return df_statement_all
 
 
 def main():
@@ -150,6 +168,11 @@ def main():
         df_question_all.to_csv(os.path.join(instrument_dir, 'question.csv'), index=False, sep=';')
         df_codelist_all.to_csv(os.path.join(instrument_dir, 'codelist.csv'), index=False, sep=';')
         df_response_all.to_csv(os.path.join(instrument_dir, 'response.csv'), index=False, sep=';')
+
+        # From an instrument get all statements
+        df_statement_all = from_instrument_get_statement(C, Agency, ID)
+        df_statement_out = df_statement_all.loc[:, ['AgencyId', 'Version', 'Identifier', 'URN', 'SourceId', 'Instruction', 'Label', 'Literal']]
+        df_statement_out.to_csv(os.path.join(instrument_dir, 'statement.csv'), index=False, sep=';')
 
 
 if __name__ == '__main__':

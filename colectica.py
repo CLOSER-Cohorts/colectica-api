@@ -304,8 +304,15 @@ def root_to_dict_question_group(root):
     """
     info = {}
     info['URN'] = root.find('.//URN').text
-    info['Name'] = root.find('.//QuestionGroupName/String').text
-    info['Label'] = root.find('.//Label/Content').text
+    if root.find('.//QuestionGroupName/String').text is not None:
+        info['Name'] = root.find('.//QuestionGroupName/String').text
+    else:
+        info['Name'] = None
+    if root.find('.//Label/Content').text is not None:
+        info['Label'] = root.find('.//Label/Content').text
+    else:
+        info['Label'] = None
+
     # Concept Reference
     ConceptRef = {}
     ConceptRef['Agency'] = root.find('.//ConceptReference/Agency').text
