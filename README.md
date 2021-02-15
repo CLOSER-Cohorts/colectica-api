@@ -8,7 +8,7 @@ and the API documentation is avaiable at https://discovery.closer.ac.uk/swagger/
 ## File Description
 
 - get_mode_collection.py - outputs study, instrument_urn and data collection mome
-  - 
+  - instrument_mode_data_collection.csv (questionnaire and mode list)
 - get_questions.py - outputs the different item types
   - question.csv (question text and link to responses)
   - codelist.csv (code list response type_
