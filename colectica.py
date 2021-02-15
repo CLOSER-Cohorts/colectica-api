@@ -304,7 +304,7 @@ def root_to_dict_question_group(root):
     """
     info = {}
     info['URN'] = root.find('.//URN').text
-    if root.find('.//QuestionGroupName/String').text is not None:
+    if root.find('.//QuestionGroupName/String') is not None:
         info['Name'] = root.find('.//QuestionGroupName/String').text
     else:
         info['Name'] = None
@@ -315,10 +315,11 @@ def root_to_dict_question_group(root):
 
     # Concept Reference
     ConceptRef = {}
-    ConceptRef['Agency'] = root.find('.//ConceptReference/Agency').text
-    ConceptRef['ID'] = root.find('.//ConceptReference/ID').text
-    ConceptRef['Version'] = root.find('.//ConceptReference/Version').text
-    ConceptRef['Type'] = root.find('.//ConceptReference/TypeOfObject').text
+    if root.find('.//ConceptReference') is not None:
+        ConceptRef['Agency'] = root.find('.//ConceptReference/Agency').text
+        ConceptRef['ID'] = root.find('.//ConceptReference/ID').text
+        ConceptRef['Version'] = root.find('.//ConceptReference/Version').text
+        ConceptRef['Type'] = root.find('.//ConceptReference/TypeOfObject').text
     info['ConceptRef'] = ConceptRef
     # Question Item Reference
     QuestionItemRef = root.findall(".//QuestionItemReference")
@@ -360,16 +361,31 @@ def root_to_dict_concept(root):
     return info
 
 
+def root_to_dict_interviewer_instruction(root):
+    """
+    Part of parse xml, item_type = Interviewer Instruction
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['UserID'] = root.find('.//UserID').text
+    info['InstructionText'] = root.find('.//InstructionText/LiteralText/Text').text
+    return info   
+
+
 def root_to_dict_question(root):
     """
     Part of parse xml, item_type = Question
     """
     info = {}
-    info['URN'] = root.find('.//URN').text
-    info['sourceId'] = root.find('.//UserID').text
-    info['QuestionLabel'] = root.find(".//UserAttributePair/AttributeValue").text
+    info['QuestionURN'] = root.find('.//URN').text
+    info['QuestionUserID'] = root.find('.//UserID').text
+    QLabel = root.find('.//UserAttributePair/AttributeValue').text
+    info['QuestionLabel'] = list(eval(QLabel).values())[0]
     info['QuestionItemName'] = root.find(".//QuestionItemName/String").text
-    info['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
+    if root.find(".//QuestionText/LiteralText/Text") is not None:
+        info['QuestionLiteral'] = root.find(".//QuestionText/LiteralText/Text").text
+    else:
+        info['QuestionLiteral'] = None
     # ResponseCardinality
     cardinality = root.find('.//ResponseCardinality')
     car_dict = {}
@@ -384,8 +400,10 @@ def root_to_dict_question(root):
     DateTimeDomain = root.find(".//DateTimeDomain")
     if CodeDomain is not None:
         response['response_type'] = 'CodeList'
+        response['CodeList_Agency'] = root.find('.//CodeListReference/Agency').text         
         response['CodeList_ID'] = CodeDomain.find(".//CodeListReference/ID").text
         response['CodeList_version'] = CodeDomain.find(".//CodeListReference/Version").text
+        response['code_list_URN'] = (':').join(['urn:ddi', response['CodeList_Agency'], response['CodeList_ID'], response['CodeList_version']])      
     elif TextDomain is not None:
         response['response_type'] = 'Text'
         response['response_label'] = TextDomain.find(".//Label/Content").text
@@ -411,10 +429,11 @@ def root_to_dict_question(root):
     # InterviewerInstructionReference
     inst_dict = {}
     InstructionRef = root.find(".//InterviewerInstructionReference")
-    inst_dict['Agency'] = InstructionRef.find(".//Agency").text
-    inst_dict['ID'] = InstructionRef.find(".//ID").text
-    inst_dict['Version'] = InstructionRef.find(".//Version").text
-    inst_dict['Type'] = InstructionRef.find(".//TypeOfObject").text
+    if InstructionRef is not None:
+        inst_dict['Agency'] = InstructionRef.find(".//Agency").text
+        inst_dict['ID'] = InstructionRef.find(".//ID").text
+        inst_dict['Version'] = InstructionRef.find(".//Version").text
+        inst_dict['Type'] = InstructionRef.find(".//TypeOfObject").text
     info['Instruction'] = inst_dict
     return info
 
@@ -440,6 +459,7 @@ def root_to_dict_code(root):
     Code = root.findall('//Code')
     return info
 
+
 def parse_xml(xml, item_type):
     """
     Used for parsing Item value
@@ -450,8 +470,12 @@ def parse_xml(xml, item_type):
         - Sequence
         - Statement
         - Organization
+        - Instrument
         - Question Group
         - Concept
+        - Question
+        - Code Set
+        - Interviewer Instruction
     """
     root = remove_xml_ns(xml)
 
@@ -477,7 +501,8 @@ def parse_xml(xml, item_type):
         info = root_to_dict_question(root)
     elif item_type == 'Code Set':
         info = root_to_dict_code_set(root)
-
+    elif item_type == 'Interviewer Instruction':
+        info = root_to_dict_interviewer_instruction(root)
     else:
         info = {}
     return info
@@ -555,76 +580,34 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         return question
 
 
-    def get_question_info(self, AgencyId, Identifier):
-        """
-        From a question identifier, get information about it
-        """
-        question_result = self.get_an_item(AgencyId, Identifier)
-        root = remove_xml_ns(question_result["Item"])
-
-        question = {}
-        for k, v in question_result.items():
-            if k == 'ItemType':
-                question[k] = self.item_code_inv(v)
-            elif k == 'Item':
-
-                question['QuestionURN'] = root.find('.//URN').text
-                question['QuestionUserID'] = root.find('.//UserID').text
-                QLabel = root.find('.//UserAttributePair/AttributeValue').text
-                question['QuestionLabel'] = list(eval(QLabel).values())[0] 
-                question['QuestionItemName'] = root.find('.//QuestionItemName/String').text
-                question['QuestionLiteral'] = root.find('.//QuestionText/LiteralText/Text').text
-
-                if root.find('.//CodeDomain') is not None:
-                    question['response_type'] = 'CodeList'
-                    question['CodeList_Agency'] = root.find('.//CodeDomain/CodeListReference/Agency').text
-                    question['CodeList_ID'] = root.find('.//CodeDomain/CodeListReference/ID').text
-                    question['CodeList_version'] = root.find('.//CodeDomain/CodeListReference/Version').text
-                    question['code_list_URN'] = (':').join(['urn:ddi', question['CodeList_Agency'], question['CodeList_ID'], question['CodeList_version']])
-                elif root.find(".//TextDomain") is not None:
-                    question['response_type'] = 'Text'
-                    question['response_label'] = root.find('.//TextDomain/Label/Content').text
-                elif root.find('.//NumericDomain') is not None:
-                    question['response_type'] = 'Numeric'
-                    question['response_label'] = root.find('.//NumericDomain/Label/Content').text
-                    question['response_NumericType'] = root.find('.//NumericTypeCode').text
-                    if root.find('.//NumberRange/Low') is not None:
-                        question['response_RangeLow'] = root.find('.//NumberRange/Low').text
-                    else:
-                        question['response_RangeLow'] = None
-                    if root.find('.//NumberRange/High') is not None:
-                        question['response_RangeHigh'] = root.find('.//NumberRange/High').text
-                    else:
-                        question['response_RangeHigh'] = None
-                elif root.find('.//DateTimeDomain') is not None:
-                    question['response_type'] = 'DateTime'
-                    question['DateTypeCode'] = root.find('.//DateTimeDomain/DateTypeCode').text
-                    question['response_label'] = root.find('.//DateTimeDomain/Label/Content').text
-            else:
-                question[k] = v
-        return question
-
-
     def get_question_all(self, AgencyId, Identifier):
         """
         From a question ID, return question info and it's response
         """
         # print(AgencyId, Identifier)
-        question_info = self.get_question_info(AgencyId, Identifier)
-
+        question_info = self.item_to_dict(AgencyId, Identifier)
         question_data = [ [ question_info['QuestionURN'],
                             question_info['QuestionUserID'],
                             question_info['QuestionLabel'],
                             question_info['QuestionItemName'],
                             question_info['QuestionLiteral'],
-                            question_info['response_type'] ] ]
+                            question_info['Response']['response_type'] ] ]
 
         df_question = pd.DataFrame(question_data,
                                    columns=['QuestionURN', 'QuestionUserID', 'QuestionLabel', 'QuestionItemName', 
                                             'QuestionLiteral', 'response_type'])
 
-        if question_info['response_type'] == 'CodeList':
-            code_result = self.get_an_item(AgencyId, question_info['CodeList_ID'])
+        # instruction
+        if question_info['Instruction'] != {}:
+            instruction_dict = self.item_to_dict(question_info['Instruction']['Agency'], question_info['Instruction']['ID'])
+            df_question['Instruction_URN'] = instruction_dict['URN']
+            df_question['Instruction'] = instruction_dict['InstructionText']
+        else:
+            df_question['Instruction_URN'] = None
+            df_question['Instruction'] = None
+
+        if question_info['Response']['response_type'] == 'CodeList':
+            code_result = self.get_an_item(AgencyId, question_info['Response']['CodeList_ID'])
             root = remove_xml_ns(code_result["Item"])
 
             code_list_sourceId = root.find(".//UserID").text
@@ -638,7 +621,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                 item_result = self.get_an_item(AgencyId, c)
                 root = remove_xml_ns(item_result["Item"])
 
-                CategoryName = root.find(".//CategoryName/String").text 
+                CategoryName = root.find(".//CategoryName/String").text
                 UserID = root.find(".//UserID").text
                 Label = root.find(".//Label/Content").text
                 df = df.append({"response_type": "CodeList",
@@ -647,8 +630,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                                         "Label": Label
                                }, ignore_index=True)
 
-
-            df['code_list_URN'] = question_info['code_list_URN']
+            df['code_list_URN'] = question_info['Response']['code_list_URN']
             df['code_list_sourceId'] = code_list_sourceId
             df['code_list_label'] = code_list_label
             df['Order'] = df.index + 1
@@ -656,34 +638,36 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df['QuestionItemName'] = question_info['QuestionItemName']
 
             df_question['response'] = code_list_label
-            df_question['response_domain'] = question_info['code_list_URN']
+            df_question['response_domain'] = question_info['Response']['code_list_URN']
 
-        elif question_info['response_type'] == 'Text':
+        elif question_info['Response']['response_type'] == 'Text':
             data = [ [ question_info['QuestionURN'],
                        question_info['QuestionItemName'],
-                       question_info['response_type'],
-                       question_info['response_label'] ] ]
+                       question_info['Response']['response_type'],
+                       question_info['Response']['response_label'] ] ]
             df = pd.DataFrame(data, columns=['QuestionURN', 'QuestionItemName', 'response_type', 'Label'])
 
-            df_question['response'] = question_info['response_label']
+            df_question['response'] = question_info['Response']['response_label']
 
-        elif question_info['response_type'] == 'Numeric':
+        elif question_info['Response']['response_type'] == 'Numeric':
             data = [ [ question_info['QuestionURN'],
                        question_info['QuestionItemName'], 
-                       question_info['response_type'], 
-                       question_info['response_label'],
-                       question_info['response_NumericType'],
-                       question_info['response_RangeLow'],
-                       question_info['response_RangeHigh'] ] ]
+                       question_info['Response']['response_type'], 
+                       question_info['Response']['response_label'],
+                       question_info['Response']['response_NumericType'],
+                       question_info['Response']['response_RangeLow'],
+                       question_info['Response']['response_RangeHigh'] ] ]
             df = pd.DataFrame(data, columns=['QuestionURN', 'QuestionItemName', 'response_type', 'Label', 'response_NumericType', 'response_RangeLow', 'response_RangeHigh'])
 
-            df_question['response'] = question_info['response_label']
+            df_question['response'] = question_info['Response']['response_label']
 
         else:
-            print(question_info['response_type'])
+            print(question_info['Response']['response_type'])
             df = pd.DataFrame()
+
         return df_question, df
 
 
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
+
