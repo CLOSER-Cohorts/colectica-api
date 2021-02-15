@@ -2,7 +2,7 @@
 
 """
 Python 3
-    Try to get all questions from an instrument
+    Get all study, instrument and Mode of Data Collection
 """
 import colectica
 from colectica import ColecticaObject
