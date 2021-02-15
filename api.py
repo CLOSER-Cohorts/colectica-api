@@ -124,7 +124,7 @@ def get_jwtToken(hostname, username, password):
         quit()
 
     jsonResponse = response.json()
-    jwtToken = jsonResponse["AccessToken"]
+    jwtToken = jsonResponse["access_token"]
     tokenHeader = {'Authorization': 'Bearer ' + jwtToken}
 
     # get Repository information
