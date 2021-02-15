@@ -369,7 +369,7 @@ def root_to_dict_interviewer_instruction(root):
     info['URN'] = root.find('.//URN').text
     info['UserID'] = root.find('.//UserID').text
     info['InstructionText'] = root.find('.//InstructionText/LiteralText/Text').text
-    return info   
+    return info
 
 
 def root_to_dict_question(root):
@@ -444,19 +444,43 @@ def root_to_dict_code_set(root):
     """
     info = {}
     info['URN'] = root.find('.//URN').text
+    info['UserID'] = root.find('.//UserID').text
+    info['Label'] = root.find('.//Label/Content').text
+
+    # Codes
+    codes = root.findall('.//Code')
+    code_list = []
+    for x, code in enumerate(codes):
+        code_dict={}
+        code_dict['URN'] = code.find('.//URN').text
+        code_dict['Agency'] = code.find('.//Agency').text
+        code_dict['ID'] = code.find('.//ID').text
+        code_dict['Version'] = code.find('.//Version').text
+        code_dict['Value'] = code.find('.//Value').text
+
+        cat_ref_dict = {}
+        cat = code.find('CategoryReference')
+        if not cat is None:
+            cat_ref_dict['Agency'] = cat.find('.//Agency').text
+            cat_ref_dict['ID'] = cat.find('.//ID').text
+            cat_ref_dict['Version'] = cat.find('.//Version').text
+            cat_ref_dict['TypeOfObject'] = cat.find('.//TypeOfObject').text
+        code_dict['CategoryReference'] = cat_ref_dict
+        code_list.append(code_dict)
+    info['Code'] = code_list
+
     return info
 
 
-def root_to_dict_code(root):
+def root_to_dict_category(root):
     """
-    Part of parse xml, item_type = Code
+    Part of parse xml, item_type = Category
     """
     info = {}
     info['URN'] = root.find('.//URN').text
-    info['SourceId'] = root.find('.//UserID').text
+    info['UserID'] = root.find('.//UserID').text
+    info['Name'] = root.find('.//CategoryName/String').text
     info['Label'] = root.find('.//Label/Content').text
-    # Code
-    Code = root.findall('//Code')
     return info
 
 
@@ -476,6 +500,7 @@ def parse_xml(xml, item_type):
         - Question
         - Code Set
         - Interviewer Instruction
+        - Category
     """
     root = remove_xml_ns(xml)
 
@@ -503,6 +528,8 @@ def parse_xml(xml, item_type):
         info = root_to_dict_code_set(root)
     elif item_type == 'Interviewer Instruction':
         info = root_to_dict_interviewer_instruction(root)
+    elif item_type == 'Category':
+        info = root_to_dict_category(root)
     else:
         info = {}
     return info
@@ -607,27 +634,19 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df_question['Instruction'] = None
 
         if question_info['Response']['response_type'] == 'CodeList':
-            code_result = self.get_an_item(AgencyId, question_info['Response']['CodeList_ID'])
-            root = remove_xml_ns(code_result["Item"])
+            code_result = self.item_to_dict(AgencyId, question_info['Response']['CodeList_ID'])
+            code_list_sourceId = code_result['UserID']
+            code_list_label = code_result['Label']
 
-            code_list_sourceId = root.find(".//UserID").text
-            code_list_label = root.find(".//Label/Content").text
-
-            category = [i.text for i in root.findall(".//Code/CategoryReference/ID")]
-
-            df = pd.DataFrame(columns=["response_type", "Name", "ID", "Label"])
-
-            for c in category:
-                item_result = self.get_an_item(AgencyId, c)
-                root = remove_xml_ns(item_result["Item"])
-
-                CategoryName = root.find(".//CategoryName/String").text
-                UserID = root.find(".//UserID").text
-                Label = root.find(".//Label/Content").text
-                df = df.append({"response_type": "CodeList",
-                                         "Name": CategoryName,
-                                           "ID": UserID,
-                                        "Label": Label
+            code_list = code_result['Code']
+            df = pd.DataFrame(columns=['response_type', 'Value', 'Name', 'ID', 'Label'])
+            for c in code_list:
+                category_dict = self.item_to_dict(c['CategoryReference']['Agency'], c['CategoryReference']['ID'])
+                df = df.append({'response_type': 'CodeList',
+                                        'Value': c['Value'],
+                                         'Name': category_dict['Name'],
+                                           'ID': category_dict['UserID'],
+                                        'Label': category_dict['Label']
                                }, ignore_index=True)
 
             df['code_list_URN'] = question_info['Response']['code_list_URN']
