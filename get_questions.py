@@ -81,7 +81,7 @@ def main():
 
     # using instrument_mode_data_collection file to filter
     # df_face = df.loc[(df.data_collection_mode == 'Interview.FaceToFace.PAPI') & (df.study_name == '1970 British Cohort Study'), :]
-    df_face = df.loc[(df.instrument_name == 'bcs_covid_q1'), :]
+    df_face = df.loc[(df['instrument_name'].isin(['bcs_covid_q1', 'nshd_covid_q1'])), :]
     # loop over all instruments here
     for index, row in df_face.iterrows():
         instrument_name = row['instrument_name']
@@ -100,14 +100,14 @@ def main():
         with open(os.path.join(instrument_dir, 'instrument.txt'), 'w') as f:
             print(instrument_info, file=f)
 
-        df_question_all.to_csv(os.path.join(instrument_dir, 'question.csv'), index=False, sep=';')
-        df_codelist_all.to_csv(os.path.join(instrument_dir, 'codelist.csv'), index=False, sep=';')
-        df_response_all.to_csv(os.path.join(instrument_dir, 'response.csv'), index=False, sep=';')
+        df_question_all.to_csv(os.path.join(instrument_dir, 'question.csv'), index=False, sep='\t')
+        df_codelist_all.to_csv(os.path.join(instrument_dir, 'codelist.csv'), index=False, sep='\t')
+        df_response_all.to_csv(os.path.join(instrument_dir, 'response.csv'), index=False, sep='\t')
 
         # From an instrument get all statements
         df_statement_all = from_instrument_get_statement(C, Agency, ID)
         df_statement_out = df_statement_all.loc[:, ['AgencyId', 'Version', 'Identifier', 'URN', 'SourceId', 'Instruction', 'Label', 'Literal']]
-        df_statement_out.to_csv(os.path.join(instrument_dir, 'statement.csv'), index=False, sep=';')
+        df_statement_out.to_csv(os.path.join(instrument_dir, 'statement.csv'), index=False, sep='\t')
 
 
 if __name__ == '__main__':
