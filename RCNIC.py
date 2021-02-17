@@ -37,14 +37,21 @@ def one_study(study_dir, df_qg):
     df = df_q_c.merge(df_qg.loc[:, ['QI_URN', 'QG_URN', 'QG_Label']], how='left', left_on='QuestionURN', right_on='QI_URN')
     df = df.drop('QI_URN', 1)
 
+    # combine response
+    df['response_new'] = df.apply(lambda row: row['codelist_response'] if row['response_type'] == 'CodeList' else row['response'], axis=1)
+    df = df.drop(['codelist_response', 'response', 'code_list_URN'], 1)
+    df.rename(columns={'response_new': 'Response',
+                       'response_type': 'ResponseType',
+                       'QG_URN': 'QuestionGroupURN',
+                       'QG_Label': 'QuestionGroupLabel'}, inplace=True)
+
     # add instrument label
     d = eval(open(os.path.join(study_dir, 'instrument.txt'), 'r').read())
     df['Instrument'] = d['InstrumentLabel']
     df['InstrumentURN'] = d['URN']
 
     # re order columns
-    df = df[['InstrumentURN', 'Instrument', 'QuestionURN', 'QuestionLiteral', 'response_type', 'response',
-             'code_list_URN', 'codelist_response', 'QG_URN', 'QG_Label']]
+    df = df[['InstrumentURN', 'Instrument', 'QuestionGroupURN', 'QuestionGroupLabel', 'QuestionURN', 'QuestionLiteral', 'ResponseType', 'Response']]
 
     return df
 
