@@ -34,7 +34,7 @@ def one_study(study_dir, df_qg):
     df_q_c = df_q_c.drop('response_domain', 1)
 
     # merge with question group
-    df = df_q_c.merge(df_qg.loc[:, ['QI_URN', 'QG_URN', 'QG_Label']], how='left', left_on='QuestionURN', right_on='QI_URN')
+    df = df_q_c.merge(df_qg.loc[:, ['QI_URN', 'QG_URN', 'QG_Name', 'QG_Label']], how='left', left_on='QuestionURN', right_on='QI_URN')
     df = df.drop('QI_URN', 1)
 
     # combine response
@@ -43,6 +43,7 @@ def one_study(study_dir, df_qg):
     df.rename(columns={'response_new': 'Response',
                        'response_type': 'ResponseType',
                        'QG_URN': 'QuestionGroupURN',
+                       'QG_Name': 'QuestionGroupName',
                        'QG_Label': 'QuestionGroupLabel'}, inplace=True)
 
     # add instrument label
@@ -51,7 +52,8 @@ def one_study(study_dir, df_qg):
     df['InstrumentURN'] = d['URN']
 
     # re order columns
-    df = df[['InstrumentURN', 'Instrument', 'QuestionGroupURN', 'QuestionGroupLabel', 'QuestionURN', 'QuestionLiteral', 'ResponseType', 'Response']]
+    df = df[['InstrumentURN', 'Instrument', 'QuestionGroupURN', 'QuestionGroupName', 'QuestionGroupLabel',
+             'QuestionURN', 'QuestionLiteral', 'ResponseType', 'Response']]
 
     return df
 
