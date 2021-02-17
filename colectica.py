@@ -142,6 +142,83 @@ def root_to_dict_series(root):
     return info
 
 
+def root_to_dict_metadata_package(root):
+    """
+    Part of parse xml, item_type = Data Collection
+    """
+    info = dict([[i.attrib['typeOfUserID'].split(':')[-1], i.text] for i in root.findall('.//UserID')])
+    info['URN'] = root.find('.//URN').text
+    info['VersionResponsibility'] = root.find('.//VersionResponsibility').text
+    if not root.find('.//VersionRationale') is None:
+        info['VersionRationale'] = root.find('.//VersionRationale/RationaleDescription/String').text
+    info['Citation'] = root.find('.//Citation/Title/String').text
+    info['Purpose'] = root.find('.//Purpose/Content').text
+
+    # InterviewerInstructionSchemeReference
+    instruction_dict = {}
+    instruction_ref = root.find('.//InterviewerInstructionSchemeReference')
+    if not instruction_ref is None:
+        instruction_dict['Agency'] = instruction_ref.find(".//Agency").text
+        instruction_dict['ID'] = instruction_ref.find(".//ID").text
+        instruction_dict['Version'] = instruction_ref.find(".//Version").text
+        instruction_dict['Type'] = instruction_ref.find(".//TypeOfObject").text
+    info['InterviewerInstructionSchemeReference'] = instruction_dict
+
+    # ControlConstructSchemeReference
+    cc_dict = {}
+    cc_ref = root.find('.//ControlConstructSchemeReference')
+    if not instruction_ref is None:
+        cc_dict['Agency'] = cc_ref.find(".//Agency").text
+        cc_dict['ID'] = cc_ref.find(".//ID").text
+        cc_dict['Version'] = cc_ref.find(".//Version").text
+        cc_dict['Type'] = cc_ref.find(".//TypeOfObject").text
+    info['ControlConstructSchemeReference'] = cc_dict
+
+    # QuestionSchemeReference
+    question_all = root.findall('.//QuestionSchemeReference')
+    question_list = []
+    for question in question_all:
+        question_dict = {}
+        question_dict['Agency'] = question.find('.//Agency').text
+        question_dict['ID'] = question.find('.//ID').text
+        question_dict['Version'] = question.find('.//Version').text
+        question_dict['Type'] = question.find('.//TypeOfObject').text
+        question_list.append(question_dict)
+    info['QuestionSchemeReference'] = question_list
+
+    # CategorySchemeReference
+    category_dict = {}
+    category_ref = root.find('.//CategorySchemeReference')
+    if not instruction_ref is None:
+        category_dict['Agency'] = category_ref.find(".//Agency").text
+        category_dict['ID'] = category_ref.find(".//ID").text
+        category_dict['Version'] = category_ref.find(".//Version").text
+        category_dict['Type'] = category_ref.find(".//TypeOfObject").text
+    info['CategorySchemeReference'] = category_dict
+
+    # CodeListSchemeReference
+    code_dict = {}
+    code_ref = root.find('.//CodeListSchemeReference')
+    if not instruction_ref is None:
+        code_dict['Agency'] = code_ref.find(".//Agency").text
+        code_dict['ID'] = code_ref.find(".//ID").text
+        code_dict['Version'] = code_ref.find(".//Version").text
+        code_dict['Type'] = code_ref.find(".//TypeOfObject").text
+    info['CodeListSchemeReference'] = code_dict
+
+    # InstrumentSchemeReference
+    instrument_dict = {}
+    instrument_ref = root.find('.//InstrumentSchemeReference')
+    if not instruction_ref is None:
+        instrument_dict['Agency'] = instrument_ref.find(".//Agency").text
+        instrument_dict['ID'] = instrument_ref.find(".//ID").text
+        instrument_dict['Version'] = instrument_ref.find(".//Version").text
+        instrument_dict['Type'] = instrument_ref.find(".//TypeOfObject").text
+    info['InstrumentSchemeReference'] = instrument_dict
+
+    return info
+
+
 def root_to_dict_data_collection(root):
     """
     Part of parse xml, item_type = Data Collection
@@ -484,12 +561,75 @@ def root_to_dict_category(root):
     return info
 
 
+def root_to_dict_question_activity(root):
+    """
+    Part of parse xml, item_type = Question Activity
+    """
+    info = {}
+    info['URN'] = root.find('.//QuestionConstruct/URN').text
+    info['UserID'] = root.find('.//QuestionConstruct/UserID').text
+    info['ConstructName'] = root.find('.//QuestionConstruct/ConstructName/String').text
+    info['Label'] = root.find('.//QuestionConstruct/Label/Content').text
+    info['ResponseUnit'] = root.find('.//QuestionConstruct/ResponseUnit').text
+
+    # QuestionReference
+    QuestionReference = root.find('.//QuestionConstruct/QuestionReference')
+    question_ref_dict = {}
+    if not QuestionReference is None:
+        question_ref_dict['Agency'] = QuestionReference.find('.//Agency').text
+        question_ref_dict['ID'] = QuestionReference.find('.//ID').text
+        question_ref_dict['Version'] = QuestionReference.find('.//Version').text
+        question_ref_dict['TypeOfObject'] = QuestionReference.find('.//TypeOfObject').text
+        info['QuestionReference'] = question_ref_dict
+
+    return info
+
+
+def root_to_dict_variable(root):
+    """
+    Part of parse xml, item_type = Variable
+    """
+    info = {}
+    info['URN'] = root.find('.//Variable/URN').text
+    info['UserID'] = root.find('.//Variable/UserID').text
+    info['VariableName'] = root.find('.//Variable/VariableName/String').text
+    info['Label'] = root.find('.//Variable/Label/Content').text
+
+    # QuestionReference
+    QuestionReference = root.find('.//Variable/QuestionReference')
+    question_ref_dict = {}
+    if not QuestionReference is None:
+        question_ref_dict['Agency'] = QuestionReference.find('.//Agency').text
+        question_ref_dict['ID'] = QuestionReference.find('.//ID').text
+        question_ref_dict['Version'] = QuestionReference.find('.//Version').text
+        question_ref_dict['TypeOfObject'] = QuestionReference.find('.//TypeOfObject').text
+        info['QuestionReference'] = question_ref_dict
+
+    # VariableRepresentation/CodeRepresentation
+    CodeRepresentation = root.find('.//Variable/VariableRepresentation/CodeRepresentation')
+    code_rep_dict = {}
+    if not CodeRepresentation is None:
+        code_rep_dict['RecommendedDataType'] = CodeRepresentation.find('.//RecommendedDataType').text
+        # CodeListReference
+        code_ref = {}
+        CodeListReference = CodeRepresentation.find('.//CodeListReference')
+        if not CodeListReference is None:
+            code_ref['ID'] = CodeListReference.find('.//ID').text
+            code_ref['Version'] = CodeListReference.find('.//Version').text
+            code_ref['TypeOfObject'] = CodeListReference.find('.//TypeOfObject').text
+        code_rep_dict['CodeListReference'] = code_ref
+    info['CodeRepresentation'] = code_rep_dict
+
+    return info
+
+
 def parse_xml(xml, item_type):
     """
     Used for parsing Item value
     item_type in:
         - Series
         - Study
+        - Metadata Package
         - Data Collection
         - Sequence
         - Statement
@@ -501,6 +641,8 @@ def parse_xml(xml, item_type):
         - Code Set
         - Interviewer Instruction
         - Category
+        - Question Activity
+        - Variable
     """
     root = remove_xml_ns(xml)
 
@@ -508,6 +650,8 @@ def parse_xml(xml, item_type):
         info = root_to_dict_series(root)
     elif item_type == 'Study':
         info = root_to_dict_study(root)
+    elif item_type == 'Metadata Package':
+        info = root_to_dict_metadata_package(root)
     elif item_type == 'Data Collection':
         info = root_to_dict_data_collection(root)
     elif item_type == 'Sequence':
@@ -530,6 +674,10 @@ def parse_xml(xml, item_type):
         info = root_to_dict_interviewer_instruction(root)
     elif item_type == 'Category':
         info = root_to_dict_category(root)
+    elif item_type == 'Question Activity':
+        info = root_to_dict_question_activity(root)
+    elif item_type == 'Variable':
+        info = root_to_dict_variable(root)
     else:
         info = {}
     return info
