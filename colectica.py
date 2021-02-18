@@ -224,6 +224,7 @@ def root_to_dict_data_collection(root):
     Part of parse xml, item_type = Data Collection
     """
     info = {}
+    print(info)
     info['URN'] = root.find('.//URN').text
     info['Name'] = root.find('.//DataCollectionModuleName/String').text
     info['Label'] = root.find('.//Label/Content').text
@@ -499,7 +500,7 @@ def root_to_dict_question(root):
     elif DateTimeDomain is not None:
         response['response_type'] = 'DateTime'
         response['DateTypeCode'] = DateTimeDomain.find(".//DateTypeCode").text
-        response['Label'] = DateTimeDomain.find(".//Label/Content").text
+        response['response_label'] = DateTimeDomain.find(".//Label/Content").text
 
     info['Response'] = response
 
@@ -557,7 +558,10 @@ def root_to_dict_category(root):
     info['URN'] = root.find('.//URN').text
     info['UserID'] = root.find('.//UserID').text
     info['Name'] = root.find('.//CategoryName/String').text
-    info['Label'] = root.find('.//Label/Content').text
+    if not root.find('.//Label/Content') is None:
+        info['Label'] = root.find('.//Label/Content').text
+    else:
+        info['Label'] = None
     return info
 
 
@@ -761,12 +765,18 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         """
         # print(AgencyId, Identifier)
         question_info = self.item_to_dict(AgencyId, Identifier)
+        # print(question_info)
+
+        if question_info['Response']== {}:
+            QI_response_type = None
+        else:
+            QI_response_type = question_info['Response']['response_type']
         question_data = [ [ question_info['QuestionURN'],
                             question_info['QuestionUserID'],
                             question_info['QuestionLabel'],
                             question_info['QuestionItemName'],
                             question_info['QuestionLiteral'],
-                            question_info['Response']['response_type'] ] ]
+                            QI_response_type ] ]
 
         df_question = pd.DataFrame(question_data,
                                    columns=['QuestionURN', 'QuestionUserID', 'QuestionLabel', 'QuestionItemName', 
@@ -781,7 +791,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df_question['Instruction_URN'] = None
             df_question['Instruction'] = None
 
-        if question_info['Response']['response_type'] == 'CodeList':
+        if QI_response_type == 'CodeList':
             code_result = self.item_to_dict(AgencyId, question_info['Response']['CodeList_ID'])
             code_list_sourceId = code_result['UserID']
             code_list_label = code_result['Label']
@@ -807,7 +817,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df_question['response'] = code_list_label
             df_question['response_domain'] = question_info['Response']['code_list_URN']
 
-        elif question_info['Response']['response_type'] == 'Text':
+        elif QI_response_type == 'Text':
             data = [ [ question_info['QuestionURN'],
                        question_info['QuestionItemName'],
                        question_info['Response']['response_type'],
@@ -816,7 +826,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
 
             df_question['response'] = question_info['Response']['response_label']
 
-        elif question_info['Response']['response_type'] == 'Numeric':
+        elif QI_response_type == 'Numeric':
             data = [ [ question_info['QuestionURN'],
                        question_info['QuestionItemName'], 
                        question_info['Response']['response_type'], 
@@ -828,8 +838,19 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
 
             df_question['response'] = question_info['Response']['response_label']
 
+        elif QI_response_type == 'DateTime':
+            data = [ [ question_info['QuestionURN'],
+                       question_info['QuestionItemName'],
+                       question_info['Response']['response_type'],
+                       question_info['Response']['response_label'],
+                       question_info['Response']['DateTypeCode'] ] ]
+            df = pd.DataFrame(data, columns=['QuestionURN', 'QuestionItemName', 'response_type', 'Label', 'DateTypeCode'])
+
+            df_question['response'] = question_info['Response']['response_label']
+
         else:
-            print(question_info['Response']['response_type'])
+            # print(QI_response_type)
+            # print(question_info['Response'])
             df = pd.DataFrame()
 
         return df_question, df
