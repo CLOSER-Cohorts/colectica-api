@@ -361,7 +361,10 @@ def root_to_dict_instrument(root):
     if root.findall(".//*[@typeOfUserID='closer:sourceFileName']") != []:
         info['InstrumentLabel'] = root.findall(".//*[@typeOfUserID='closer:sourceFileName']")[0].text
     info['InstrumentName'] = root.find(".//InstrumentName/String").text
-    info['ExternalInstrumentLocation'] = root.find(".//ExternalInstrumentLocation").text
+    if not root.find(".//ExternalInstrumentLocation") is None:
+        info['ExternalInstrumentLocation'] = root.find(".//ExternalInstrumentLocation").text
+    else:
+        info['ExternalInstrumentLocation'] = None
     references = root.findall(".//ControlConstructReference")
     ref_list = []
     for x, ref in enumerate(references):
@@ -478,10 +481,10 @@ def root_to_dict_question(root):
     DateTimeDomain = root.find(".//DateTimeDomain")
     if CodeDomain is not None:
         response['response_type'] = 'CodeList'
-        response['CodeList_Agency'] = root.find('.//CodeListReference/Agency').text         
+        response['CodeList_Agency'] = root.find('.//CodeListReference/Agency').text
         response['CodeList_ID'] = CodeDomain.find(".//CodeListReference/ID").text
         response['CodeList_version'] = CodeDomain.find(".//CodeListReference/Version").text
-        response['code_list_URN'] = (':').join(['urn:ddi', response['CodeList_Agency'], response['CodeList_ID'], response['CodeList_version']])      
+        response['code_list_URN'] = (':').join(['urn:ddi', response['CodeList_Agency'], response['CodeList_ID'], response['CodeList_version']])
     elif TextDomain is not None:
         response['response_type'] = 'Text'
         response['response_label'] = TextDomain.find(".//Label/Content").text
@@ -490,7 +493,7 @@ def root_to_dict_question(root):
         response['response_label'] = root.find(".//Label").text
         response['response_NumericType'] = root.find(".//NumericTypeCode").text
         if root.find(".//NumberRange/Low") is not None:
-            response['response_RangeLow'] = root.find(".//NumberRange/Low").text        
+            response['response_RangeLow'] = root.find(".//NumberRange/Low").text
         else:
             response['response_RangeLow'] = None
         if root.find(".//NumberRange/High") is not None:
@@ -627,6 +630,78 @@ def root_to_dict_variable(root):
     return info
 
 
+def root_to_dict_conditional(root):
+    """
+    Part of parse xml, item_type = Conditional
+    """
+    info = {}
+    info['URN'] = root.find('.//IfThenElse/URN').text
+    info['UserID'] = root.find('.//IfThenElse/UserID').text
+    info['ConstructName'] = root.find('.//IfThenElse/ConstructName/String').text
+
+    IfCondition = root.find('.//IfThenElse/IfCondition')
+    ifcondition_dict = {}
+    if not IfCondition is None:
+        ifcondition_dict['Description'] = IfCondition.find('.//Description/Content').text
+        ifcondition_dict['ProgramLanguage'] = IfCondition.find('.//Command/ProgramLanguage').text
+        ifcondition_dict['CommandContent'] = IfCondition.find('.//Command/CommandContent').text
+    info['IfCondition'] = ifcondition_dict
+
+    # ThenConstructReference
+    IfThenElseReference = root.find('.//IfThenElse/ThenConstructReference')
+    IfThenElse_ref_dict = {}
+    if not IfThenElseReference is None:
+        IfThenElse_ref_dict['Agency'] = IfThenElseReference.find('.//Agency').text
+        IfThenElse_ref_dict['ID'] = IfThenElseReference.find('.//ID').text
+        IfThenElse_ref_dict['Version'] = IfThenElseReference.find('.//Version').text
+        IfThenElse_ref_dict['TypeOfObject'] = IfThenElseReference.find('.//TypeOfObject').text
+    info['IfThenElseReference'] = IfThenElse_ref_dict
+
+    return info
+
+
+def root_to_dict_loop(root):
+    """
+    Part of parse xml, item_type = Loop
+    """
+    info = {}
+    info['URN'] = root.find('.//Loop/URN').text
+    info['UserID'] = root.find('.//Loop/UserID').text
+    info['ConstructName'] = root.find('.//Loop/ConstructName/String').text
+
+    InitialValue = root.find('.//Loop/InitialValue')
+    InitialValue_dict = {}
+    if not InitialValue is None:
+        InitialValue_dict['ProgramLanguage'] = InitialValue.find('.//Command/ProgramLanguage').text
+        InitialValue_dict['CommandContent'] = InitialValue.find('.//Command/CommandContent').text
+    info['InitialValue'] = InitialValue_dict
+
+    LoopWhile = root.find('.//Loop/LoopWhile')
+    LoopWhile_dict = {}
+    if not LoopWhile is None:
+        LoopWhile_dict['ProgramLanguage'] = LoopWhile.find('.//Command/ProgramLanguage').text
+        LoopWhile_dict['CommandContent'] = LoopWhile.find('.//Command/CommandContent').text
+    info['LoopWhile'] = LoopWhile_dict
+
+    #TODO StepValue
+    StepValue = root.find('.//Loop/StepValue')
+    StepValue_dict = {}
+    if not StepValue is None:
+        print('TODO StepValue')
+
+    # ControlConstructReference
+    CCReference = root.find('.//Loop/ControlConstructReference')
+    cc_ref_dict = {}
+    if not CCReference is None:
+        cc_ref_dict['Agency'] = CCReference.find('.//Agency').text
+        cc_ref_dict['ID'] = CCReference.find('.//ID').text
+        cc_ref_dict['Version'] = CCReference.find('.//Version').text
+        cc_ref_dict['TypeOfObject'] = CCReference.find('.//TypeOfObject').text
+    info['ControlConstructReference'] = cc_ref_dict
+
+    return info
+
+
 def parse_xml(xml, item_type):
     """
     Used for parsing Item value
@@ -647,6 +722,8 @@ def parse_xml(xml, item_type):
         - Category
         - Question Activity
         - Variable
+        - Conditional
+        - Loop
     """
     root = remove_xml_ns(xml)
 
@@ -682,6 +759,10 @@ def parse_xml(xml, item_type):
         info = root_to_dict_question_activity(root)
     elif item_type == 'Variable':
         info = root_to_dict_variable(root)
+    elif item_type == 'Conditional':
+        info = root_to_dict_conditional(root)
+    elif item_type == 'Loop':
+        info = root_to_dict_loop(root)
     else:
         info = {}
     return info
@@ -698,13 +779,15 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         result = self.get_an_item(AgencyId, Identifier)
 
         info = {}
-        for k, v in result.items():
-            if k == 'ItemType':
-                info[k] = self.item_code_inv(v)
-            elif k == 'Item':
-                item_info = parse_xml(v, self.item_code_inv(result['ItemType']))
-            else:
-                info[k] = v
+        item_info = None
+        if not result is None:
+            for k, v in result.items():
+                if k == 'ItemType':
+                    info[k] = self.item_code_inv(v)
+                elif k == 'Item':
+                    item_info = parse_xml(v, self.item_code_inv(result['ItemType']))
+                else:
+                    info[k] = v
 
         return {**info, **item_info}
 
@@ -849,8 +932,8 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             df_question['response'] = question_info['Response']['response_label']
 
         else:
-            # print(QI_response_type)
-            # print(question_info['Response'])
+            print(QI_response_type)
+            print(question_info['Response'])
             df = pd.DataFrame()
 
         return df_question, df
