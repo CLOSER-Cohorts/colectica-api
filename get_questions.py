@@ -10,6 +10,7 @@ import api
 import pandas as pd
 import os
 import numpy as np
+import json
 
 
 def from_instrument_get_question_response(C, Agency, ID):
@@ -36,8 +37,17 @@ def from_instrument_get_question_response(C, Agency, ID):
             response_df_list.append(df_response)
 
     df_question_all = pd.concat(question_df_list)
-    df_codelist_all = pd.concat(codelist_df_list)
-    df_response_all = pd.concat(response_df_list)
+
+    if codelist_df_list == []:
+        df_codelist_all = pd.DataFrame()
+    else:
+        df_codelist_all = pd.concat(codelist_df_list)
+
+    if response_df_list == []:
+        df_response_all = pd.DataFrame()
+    else:
+        df_response_all = pd.concat(response_df_list)
+
     return instrument_info, df_question_all, df_codelist_all, df_response_all
 
 
@@ -54,13 +64,15 @@ def from_instrument_get_statement(C, Agency, ID):
         dict_statement = C.item_to_dict(Agency, statement_id)
         df_statement = pd.DataFrame([dict_statement], columns=dict_statement.keys()) 
         statement_df_list.append(df_statement)
-
-    df_statement_all = pd.concat(statement_df_list)
+    if not statement_df_list == []:
+        df_statement_all = pd.concat(statement_df_list)
+    else:
+        df_statement_all = pd.DataFrame(columns=['AgencyId', 'Version', 'Identifier', 'URN', 'SourceId', 'Instruction', 'Label', 'Literal'])
     return df_statement_all
 
 
 def main():
-    outdir = 'output'
+    outdir = 'instrument'
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
@@ -76,23 +88,32 @@ def main():
 
     C = ColecticaObject(hostname, username, password)
 
-    # read the output of get_mode_collection.py
-    df = pd.read_csv(os.path.join(outdir, 'instrument_mode_data_collection.csv'), sep=';')
 
-    # using instrument_mode_data_collection file to filter
-    # df_face = df.loc[(df.data_collection_mode == 'Interview.FaceToFace.PAPI') & (df.study_name == '1970 British Cohort Study'), :]
-    df_face = df.loc[(df['instrument_name'].isin(['bcs_covid_q1', 'nshd_covid_q1'])), :]
-    # loop over all instruments here
-    for index, row in df_face.iterrows():
-        instrument_name = row['instrument_name']
+    # get all instruments
+#    L = C.general_search('f196cc07-9c99-4725-ad55-5b34f479cf7d', '', 0)
+#    print(L['TotalResults']) # 313
+
+#    json.dump(L, open(os.path.join(outdir, 'all_instrument.txt'),'w'))
+
+    L = json.load(open(os.path.join(outdir, 'all_instrument.txt')))
+#    print(L)
+
+    all_idx = np.array(range(L['TotalResults']))
+    # split into 10 chunks
+    chunks = np.array_split(all_idx, 10)
+
+    this_chunk = 9
+
+    for i in chunks[this_chunk]:
+        print(i)
+        Agency = L['Results'][i]['AgencyId']
+        ID = L['Results'][i]['Identifier']
+        Version = L['Results'][i]['Version']
+
+        instrument_name = '_'.join(' '.join(L['Results'][i]['ItemName'].values()).split(' '))
         instrument_dir = os.path.join(outdir, instrument_name)
         if not os.path.exists(instrument_dir):
             os.makedirs(instrument_dir)
-
-        urn = row['instrument_urn'].split(':')
-        Agency = urn[2]
-        ID = urn[3]
-        Version = urn[4]
 
         # From an instrument get all questions, all response, print to file
         instrument_info, df_question_all, df_codelist_all, df_response_all = from_instrument_get_question_response(C, Agency, ID)
