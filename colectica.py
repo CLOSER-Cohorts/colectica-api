@@ -297,8 +297,14 @@ def root_to_dict_sequence(root):
     info = {}
     info['URN'] = root.find('.//URN').text
     info['SourceId'] = root.find('.//UserID').text
-    info['ConstructName'] = root.find('.//ConstructName/String').text
-    info['Label'] = root.find('.//Label/Content').text
+    if root.find('.//ConstructName/String') is not None:
+        info['ConstructName'] = root.find('.//ConstructName/String').text
+    else:
+        info['ConstructName'] = None
+    if root.find('.//Label/Content') is not None:
+        info['Label'] = root.find('.//Label/Content').text
+    else:
+        info['Label'] = None
     references = root.findall(".//ControlConstructReference")
     ref_list = []
     for x, ref in enumerate(references):
@@ -318,7 +324,7 @@ def root_to_dict_statement(root):
     Part of parse xml, item_type = Statement
     """
     info = {}
-    info['URN'] = root.find('.//URN').text
+    info['StatementURN'] = root.find('.//URN').text
     info['SourceId'] = root.find('.//UserID').text
     instruction = root.find(".//UserAttributePair/AttributeValue").text
     if instruction == '{}':
@@ -355,7 +361,7 @@ def root_to_dict_instrument(root):
     Part of parse xml, item_type = Instrument
     """
     info = {}
-    info['URN'] = root.find('.//URN').text
+    info['InstrumentURN'] = root.find('.//URN').text
     if root.findall(".//*[@typeOfUserID='colectica:sourceId']") != []:
         info['InstrumentSourceID'] = root.findall(".//*[@typeOfUserID='colectica:sourceId']")[0].text 
     if root.findall(".//*[@typeOfUserID='closer:sourceFileName']") != []:
@@ -447,7 +453,7 @@ def root_to_dict_interviewer_instruction(root):
     Part of parse xml, item_type = Interviewer Instruction
     """
     info = {}
-    info['URN'] = root.find('.//URN').text
+    info['InstructionURN'] = root.find('.//URN').text
     info['UserID'] = root.find('.//UserID').text
     info['InstructionText'] = root.find('.//InstructionText/LiteralText/Text').text
     return info
@@ -516,6 +522,60 @@ def root_to_dict_question(root):
         inst_dict['Version'] = InstructionRef.find(".//Version").text
         inst_dict['Type'] = InstructionRef.find(".//TypeOfObject").text
     info['Instruction'] = inst_dict
+    return info
+
+
+def root_to_dict_question_grid(root):
+    """
+    Part of parse xml, item_type = Question Grid
+    """
+    info = {}
+    info['QuestionGridURN'] = root.find('.//URN').text
+    info['QuestionGridUserID'] = root.find('.//UserID').text
+    info['QuestionGridLabel'] = root.find(".//UserAttributePair/AttributeValue").text
+    info['QuestionGridName'] = root.find('.//QuestionGridName/String').text
+    info['QuestionGridLiteral'] = root.find('.//QuestionText/LiteralText/Text').text
+
+    # GridDimension
+    GridDimension = root.findall('.//GridDimension')
+    grid_dimension_list = []
+    for x, dim in enumerate(GridDimension):
+        dim_dict={}
+        dim_dict['rank'] = dim.attrib['rank']
+        ResponseCardinality = dim.find('.//CodeDomain/ResponseCardinality')
+        dim_dict['minimumResponses'] = ResponseCardinality.attrib['minimumResponses']
+        dim_dict['maximumResponses'] = ResponseCardinality.attrib['maximumResponses']
+
+        code_ref_dict = {}
+        code_ref = dim.find('.//CodeDomain/CodeListReference')
+        if not code_ref is None:
+            code_ref_dict['Agency'] = code_ref.find('.//Agency').text
+            code_ref_dict['ID'] = code_ref.find('.//ID').text
+            code_ref_dict['Version'] = code_ref.find('.//Version').text
+            code_ref_dict['TypeOfObject'] = code_ref.find('.//TypeOfObject').text
+
+        dim_dict['CodeListReference'] = code_ref_dict
+        grid_dimension_list.append(dim_dict)
+
+    info['GridDimension'] = grid_dimension_list
+
+    num_domain_dict = {}
+    NumericDomain = root.find('.//NumericDomain')
+    if not NumericDomain is None:
+        num_domain_dict['NumericTypeCode'] = root.find(".//NumericTypeCode").text
+        num_domain_dict['Content'] = root.find(".//Label/Content").text
+
+        if NumericDomain.find(".//NumberRange/Low") is not None:
+            num_domain_dict['NumberRangeLow'] = NumericDomain.find(".//NumberRange/Low").text
+        else:
+            num_domain_dict['NumberRangeLow'] = None
+        if NumericDomain.find(".//NumberRange/High") is not None:
+            num_domain_dict['NumberRangeHigh'] = NumericDomain.find(".//NumberRange/High").text
+        else:
+            num_domain_dict['NumberRangeHigh'] = None
+
+    info['NumericDomain'] = num_domain_dict
+
     return info
 
 
@@ -717,6 +777,7 @@ def parse_xml(xml, item_type):
         - Question Group
         - Concept
         - Question
+        - Question Grid
         - Code Set
         - Interviewer Instruction
         - Category
@@ -749,6 +810,8 @@ def parse_xml(xml, item_type):
         info = root_to_dict_concept(root)
     elif item_type == 'Question':
         info = root_to_dict_question(root)
+    elif item_type == 'Question Grid':
+        info = root_to_dict_question_grid(root)
     elif item_type == 'Code Set':
         info = root_to_dict_code_set(root)
     elif item_type == 'Interviewer Instruction':
@@ -777,7 +840,6 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         Return a dictionary
         """
         result = self.get_an_item(AgencyId, Identifier)
-
         info = {}
         item_info = None
         if not result is None:
@@ -788,8 +850,10 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
                     item_info = parse_xml(v, self.item_code_inv(result['ItemType']))
                 else:
                     info[k] = v
-
-        return {**info, **item_info}
+            d = {**info, **item_info}
+        else:
+            d = {}
+        return d
 
 
     def get_a_set_to_df(self, AgencyId, Identifier, Version):
@@ -868,7 +932,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         # instruction
         if question_info['Instruction'] != {}:
             instruction_dict = self.item_to_dict(question_info['Instruction']['Agency'], question_info['Instruction']['ID'])
-            df_question['Instruction_URN'] = instruction_dict['URN']
+            df_question['Instruction_URN'] = instruction_dict['InstructionURN']
             df_question['Instruction'] = instruction_dict['InstructionText']
         else:
             df_question['Instruction_URN'] = None
