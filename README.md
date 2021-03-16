@@ -7,6 +7,7 @@ and the API documentation is avaiable at https://discovery.closer.ac.uk/swagger/
 
 ## File Description
 
+- instrument_to_dict.py - output dictionary of each item for all items in an instrument
 - get_mode_collection.py - outputs study, instrument_urn and data collection mome
   - instrument_mode_data_collection.csv (questionnaire and mode list)
 - get_questions.py - outputs the different item types
@@ -15,7 +16,7 @@ and the API documentation is avaiable at https://discovery.closer.ac.uk/swagger/
   - response.csv (other response types)
 - get_question_groups.py - outputs the concepts and a link to the question items
 - RCNIC.py - creates question-concept dataset for input into a question-concept model
-- xxx - creates questionnaire and associated items dataset for input into a question extraction model
+- ESRC.py - creates questionnaire and associated items dataset for input into a question extraction model
 
 ## Dependencies
 
