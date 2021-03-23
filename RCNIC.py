@@ -1,69 +1,133 @@
 #!/usr/bin/env python3
 
 """
-Gather data for RCNIC project
+Python 3
+    Using output from instrument_to_dict.py
+    Combine to RCNIC format
 """
-
+import api
+import colectica
 import pandas as pd
 import os
+import numpy as np
+from pandas.io.json import json_normalize
+import json
 
-def combine_codelist(codelist_file):
+
+def item_to_dict(dict_item):
     """
-    Combine multiple rows into one for codelist
+    Flat out item in dict_item
     """
-    if os.stat(codelist_file).st_size == 1 :
-        df_out = pd.DataFrame(columns=['code_list_URN', 'codelist_response'])
+    info = {}
+    item_info = None
+
+    for k, v in dict_item.items():
+        if k == 'ItemType':
+            info[k] = api.item_dict_inv[dict_item['ItemType']]
+        elif k == 'Item':
+            item_info = colectica.parse_xml(v, api.item_dict_inv[dict_item['ItemType']])
+        else:
+            info[k] = v
+    d = {**info, **item_info}
+    return d
+
+
+def generate_category_dict(category_file):
+    """
+    Generate a dictionary for code category
+    """
+    L = json.load(open(category_file))
+    d = {}
+    for dict_item in L:
+        item = item_to_dict(dict_item)
+        if not item['Label'] is None:
+            d[item['URN']] = item['Label']
+        else:
+            d[item['URN']] = ''
+    return d
+
+
+def generate_code_dict(code_file, category_dict):
+    """
+    Generate a dictionary for code
+    """
+    L = json.load(open(code_file))
+    d = {}
+    for dict_item in L:
+        item = item_to_dict(dict_item)
+        a = []
+        for code in item['Code']:
+            cat_urn = 'urn:ddi:' + code['CategoryReference']['Agency'] + ':' + code['CategoryReference']['ID'] + ':' + code['CategoryReference']['Version']
+            if not code['Value'] is None:
+                category = code['Value'] + ', ' + category_dict[cat_urn]
+            else:
+                category = category_dict[cat_urn]
+            a.append(category)
+        d[item['URN']] = ' | '.join(a)
+
+    return d
+
+
+def get_one_study(study_dir, df_qg):
+    """
+    Questions from one study
+    """
+    list_files = os.listdir(study_dir)
+
+    df_columns = ['InstrumentURN', 'Instrument', 'QuestionURN', 'QuestionLiteral', 'ResponseType', 'Response']
+    df_q = pd.DataFrame(columns=df_columns)
+
+    instrument_dict = {}
+    if 'Instrument.txt' in list_files:
+        L = json.load(open(os.path.join(study_dir, 'Instrument.txt')))
+        item = item_to_dict(L[0])
+        instrument_dict['instrument_urn'] = item['InstrumentURN']
+        instrument_dict['instrument_name'] = item['InstrumentName']
+
+    if 'Category.txt' in list_files:
+        category_dict = generate_category_dict(os.path.join(study_dir, 'Category.txt'))
     else:
-        df = pd.read_csv(codelist_file, sep='\t')
-        df['codelist_response'] = df['Value'].astype('str') + ', ' + df['Label']
+        category_dict = []
 
-        # combine multiple rows
-        df_c = df[df['codelist_response'].notna()].groupby(['QuestionURN', 'QuestionItemName', 'response_type', 'code_list_URN', 'code_list_label'])['codelist_response'].apply(' | '.join).reset_index()
-        df_out = df_c.loc[:, ['code_list_URN', 'codelist_response']].drop_duplicates(keep='first')
-
-    return df_out
-
-
-def one_study(study_dir, df_qg):
-    """
-    Get right format for one study
-    """
-
-    df_question = pd.read_csv(os.path.join(study_dir, 'question.csv'), sep='\t')
-    df_c = combine_codelist(os.path.join(study_dir, 'codelist.csv'))
-
-    # merge question and codelist
-    if 'response_domain' in df_question.columns:
-        df_q = df_question.loc[:, ['QuestionURN', 'QuestionLiteral', 'response_type' ,'response', 'response_domain']]
-        df_q_c = df_q.merge(df_c, how='left', left_on='response_domain', right_on='code_list_URN')
-        df_q_c = df_q_c.drop('response_domain', 1)
+    if 'Code Set.txt' in list_files:
+        code_dict = generate_code_dict(os.path.join(study_dir, 'Code Set.txt'), category_dict)
     else:
-        df_q_c = df_question
-        df_q_c['codelist_response'] = None
-        df_q_c['code_list_URN'] = None
+        code_dict = []
+
+    if 'Question.txt' in list_files:
+        L = json.load(open(os.path.join(study_dir, 'Question.txt')))
+
+        for dict_item in L:
+            item = item_to_dict(dict_item)
+            if not item['QuestionLiteral'] is None:
+                literal = item['QuestionLiteral'].replace('\n', '')
+            else:
+                literal = None
+
+            if item['Response'] == {}:
+                response_type = None
+                response = None
+            elif item['Response']['response_type'] != 'CodeList':
+                response_type = item['Response']['response_type']
+                response = None
+            elif item['Response']['response_type'] == 'CodeList':
+                response_type = item['Response']['response_type']
+                response = code_dict[item['Response']['code_list_URN']]
+
+            df_q.loc[len(df_q)] = [instrument_dict['instrument_urn'],
+                                   instrument_dict['instrument_name'],
+                                   item['QuestionURN'],
+                                   literal,
+                                   response_type,
+                                   response]
 
     # merge with question group
-    df = df_q_c.merge(df_qg.loc[:, ['QI_URN', 'QG_URN', 'QG_Name', 'QG_Label']], how='left', left_on='QuestionURN', right_on='QI_URN')
+    df = df_q.merge(df_qg.loc[:, ['QI_URN', 'QG_URN', 'QG_Name', 'QG_Label']], how='left', left_on='QuestionURN', right_on='QI_URN')
     df = df.drop('QI_URN', 1)
 
-    # combine response
-    if 'response' in df.columns:
-        df['response_new'] = df.apply(lambda row: row['codelist_response'] if row['response_type'] == 'CodeList' else row['response'], axis=1)
-        df = df.drop(['codelist_response', 'response', 'code_list_URN'], 1)
-    else:
-        df['response_new'] = df.apply(lambda row: row['codelist_response'] if row['response_type'] == 'CodeList' else None, axis=1)
-        df = df.drop(['codelist_response', 'code_list_URN'], 1)
-
-    df.rename(columns={'response_new': 'Response',
-                       'response_type': 'ResponseType',
-                       'QG_URN': 'QuestionGroupURN',
+    df.rename(columns={'QG_URN': 'QuestionGroupURN',
                        'QG_Name': 'QuestionGroupName',
                        'QG_Label': 'QuestionGroupLabel'}, inplace=True)
-
-    # add instrument label
-    d = eval(open(os.path.join(study_dir, 'instrument.txt'), 'r').read())
-    df['Instrument'] = d['InstrumentLabel']
-    df['InstrumentURN'] = d['URN']
 
     # re order columns
     df = df[['InstrumentURN', 'Instrument', 'QuestionGroupURN', 'QuestionGroupName', 'QuestionGroupLabel',
@@ -72,38 +136,21 @@ def one_study(study_dir, df_qg):
     return df
 
 
-def fast_scandir(dirname):
-    """
-    List all subfolder recursively
-    """
-    subfolders= [f.path for f in os.scandir(dirname) if f.is_dir()]
-    for dirname in list(subfolders):
-        subfolders.extend(fast_scandir(dirname))
-    return subfolders
-
-
 def main():
-
-    outdir= 'RCNIC'
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
-
+    # question group
     df_qg = pd.read_csv('question_group/question_group_all.csv', sep='\t')
-    indir = 'instrument'
-    # all_studies = [ f.path for f in os.scandir(indir) if f.is_dir() ]
-    all_studies = fast_scandir(indir)
 
-    # all_studies = ['instrument/NCDS_Age_33_Cohort_Member_Interview']
-    appended_df = []
-    for study in all_studies:
-        if len(os.listdir(study)) == 5:
-            print(study)
-            df = one_study(study, df_qg)
-            appended_df.append(df)
-    appended_data = pd.concat(appended_df)
-    appended_data.to_csv(os.path.join(outdir, 'RCNIC.csv'), sep='\t', index=False)
+    top_dir = 'instrument_dict_original'
+    dir_list = [os.path.join(top_dir, o) for o in os.listdir(top_dir) if os.path.isdir(os.path.join(top_dir,o))]
 
+    appended_data = []
+    for study_dir in dir_list:
+        print(study_dir)
+        df = get_one_study(study_dir, df_qg)
+        appended_data.append(df)
+
+    df_all = pd.concat(appended_data)
+    df_all.to_csv('RCNIC.csv', sep='\t', index=False)
 
 if __name__ == '__main__':
     main()
-
