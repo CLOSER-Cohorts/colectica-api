@@ -708,23 +708,16 @@ def root_to_dict_conditional(root):
     info['IfCondition'] = ifcondition_dict
 
     # ThenConstructReference
-    IfThenElseReference = root.find('.//IfThenElse/ThenConstructReference')
-    If_ref_dict = {}
-    if not IfThenElseReference is None:
-        If_ref_dict['Agency'] = IfThenElseReference.find('.//Agency').text
-        If_ref_dict['ID'] = IfThenElseReference.find('.//ID').text
-        If_ref_dict['Version'] = IfThenElseReference.find('.//Version').text
-        If_ref_dict['TypeOfObject'] = IfThenElseReference.find('.//TypeOfObject').text
-    info['IfReference'] = If_ref_dict
-
-    ElseReference = root.find('.//IfThenElse/ElseIf/ThenConstructReference')
-    Else_ref_dict = {}
-    if not ElseReference is None:
-        Else_ref_dict['Agency'] = ElseReference.find('.//Agency').text
-        Else_ref_dict['ID'] = ElseReference.find('.//ID').text
-        Else_ref_dict['Version'] = ElseReference.find('.//Version').text
-        Else_ref_dict['TypeOfObject'] = ElseReference.find('.//TypeOfObject').text
-    info['ElseReference'] = Else_ref_dict
+    ThenReference = root.findall('.//ThenConstructReference')
+    then_list = []
+    for x, ThenRef in enumerate(ThenReference):
+        then_ref_dict = {}
+        then_ref_dict['Agency'] = ThenRef.find('.//Agency').text
+        then_ref_dict['ID'] = ThenRef.find('.//ID').text
+        then_ref_dict['Version'] = ThenRef.find('.//Version').text
+        then_ref_dict['TypeOfObject'] = ThenRef.find('.//TypeOfObject').text
+        then_list.append(then_ref_dict)
+    info['IfThenReference'] = then_list
 
     return info
 
