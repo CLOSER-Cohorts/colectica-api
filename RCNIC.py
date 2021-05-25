@@ -89,7 +89,7 @@ def generate_sequence_d(sequence_file):
 
             d_seq[ref_urn] = d_item
 
-    # pd.DataFrame.from_dict(d_seq, orient='index').to_csv('tmp.csv', sep='\t')
+    pd.DataFrame.from_dict(d_seq, orient='index').to_csv('tmp_seq.csv', sep='\t')
     return d_seq
 
 
@@ -195,6 +195,8 @@ def get_question_nearest_section(sequence_file, condition_file, loop_file, quest
                     seq_name = d_section[k]['SequenceCCName']
 
     df_seq_nearest = pd.DataFrame.from_dict(d_section, orient='index')
+    # replace tab with space in Sequence Label
+    df_seq_nearest['SequenceLabel'] = df_seq_nearest['SequenceLabel'].replace('\t', ' ', regex=True)
 
     df_qa = generate_question_activity(question_activity_file)
     df = df_qa.merge(df_seq_nearest, how='left', left_on='QCURN', right_index=True)
@@ -214,13 +216,23 @@ def get_one_study(study_dir, df_qg):
     if 'Instrument.txt' in list_files:
         L = json.load(open(os.path.join(study_dir, 'Instrument.txt')))
         item = item_to_dict(L[0])
+
         instrument_dict['instrument_urn'] = item['InstrumentURN']
         instrument_dict['instrument_name'] = item['InstrumentName']
+        instrument_label = item['InstrumentLabel']
 
     df_seq = get_question_nearest_section(os.path.join(study_dir, 'Sequence.txt'),
                                           os.path.join(study_dir, 'Conditional.txt'),
                                           os.path.join(study_dir, 'Loop.txt'),
                                           os.path.join(study_dir, 'Question Activity.txt'))
+
+    # if the nearest section is the instrument, then make it None
+    def remove_instrument_id(row, instrument_label): #row is the value of row.
+        if row['SequenceLabel'] == instrument_label:
+            row['SequenceLabel'] = None
+            row['SequenceURN'] = None
+        return row
+    df_seq = df_seq.apply(lambda row: remove_instrument_id(row, instrument_label), axis=1)
 
     if 'Category.txt' in list_files:
         category_dict = generate_category_dict(os.path.join(study_dir, 'Category.txt'))
@@ -316,6 +328,7 @@ def main():
     dir_list = [os.path.join(top_dir, o) for o in os.listdir(top_dir) if os.path.isdir(os.path.join(top_dir,o))]
 
     appended_data = []
+    #dir_list = ['instrument_dict_20210421/nshd_52_iwm-in-001211']
     for study_dir in dir_list:
         print(study_dir)
         df = get_one_study(study_dir, df_qg)
