@@ -94,7 +94,7 @@ def get_one_study(study_dir):
                 else:
                     literal = None
                 df.loc[len(df)] = ['question',  item['QuestionURN'], literal]
-                df.loc[len(df)] = ['question name', None, item['QuestionItemName']]
+                df.loc[len(df)] = ['question name', None, item['QuestionLabel']]
 
                 if item['Response'] != {} and item['Response']['response_type'] != 'CodeList':
                     df.loc[len(df)] = [item['Response']['response_type'], None, item['Response']['response_label']]
@@ -149,7 +149,10 @@ def main():
         appended_data.append(df)
 
     df_all = pd.concat(appended_data)
-    df_all.to_csv('ESRC.csv', sep='\t', index=False)
+
+    # remove response domain: Test, Numeric, DateTime
+    df_sub = df_all[~df_all['item_type'].isin(['Text', 'Numeric', 'DateTime'])]
+    df_sub.to_csv('ESRC_no_response.csv', sep='\t', index=False)
 
 if __name__ == '__main__':
     main()
