@@ -28,47 +28,109 @@ def root_to_dict_study(root):
     """
     info = {}
     info['URN'] = root.find('.//URN').text
-    # Sweep Description
-    sweep = {}
-    sweep['title'] = root.find('.//Citation/Title/String').text
-    sweep['principal_investigator'] = root.find('.//Citation/Creator/CreatorName/String').text
-    if root.find('.//Citation/Publisher') is not None:
-        sweep['publisher'] = root.find('.//Citation/Publisher/PublisherName/String').text
-    else:
-        sweep['publisher'] = None
-    sweep['abstract'] = root.find('.//Abstract/Content').text
-    pop = {}
-    if root.find('.//UniverseReference') is not None:
-        pop['Agency'] = root.find('.//UniverseReference/Agency').text
-        pop['ID'] = root.find('.//UniverseReference/ID').text
-        pop['Version'] = root.find('.//UniverseReference/Version').text
-        pop['Type'] = root.find('.//UniverseReference/TypeOfObject').text
-    sweep['population'] = pop
+
     # custom filed
     CustomFields = root.findall('.//UserAttributePair/AttributeValue')
     custom_list = []
     for x, cus in enumerate(CustomFields):
         # Convert a string representation of a dictionary to a dictionary
         custom_list.append(json.loads(cus.text))
-    sweep['custom_field'] = custom_list
-    info['sweep'] = sweep
+    info['custom_field'] = custom_list
+
+    # Citation
+    citation = {}
+    citation['title'] = root.find('.//Citation/Title/String').text
+    if root.find('.//Citation/AlternateTitle/String') is not None:
+        citation['alternate_title'] = root.find('.//Citation/AlternateTitle/String').text
+    citation['creator'] = root.find('.//Citation/Creator/CreatorName/String').text
+    if root.find('.//Citation/Publisher') is not None:
+        citation['publisher'] = root.find('.//Citation/Publisher/PublisherName/String').text
+    else:
+        citation['publisher'] = None
+    info['Citation'] = citation
+
+    # Abstract
+    abstract = {}
+    abstract['content'] = root.find('.//Abstract/Content').text
+    info['Abstract'] = abstract
+
+    # UniverseReference
+    universe_reference = {}
+    if root.find('.//UniverseReference') is not None:
+        universe_reference['Agency'] = root.find('.//UniverseReference/Agency').text
+        universe_reference['ID'] = root.find('.//UniverseReference/ID').text
+        universe_reference['Version'] = root.find('.//UniverseReference/Version').text
+        universe_reference['Type'] = root.find('.//UniverseReference/TypeOfObject').text
+    info['UniverseReference'] = universe_reference
 
     # Funding
-    funding = {}
-    organization = {}
-    organization['Agency'] = root.find('.//FundingInformation/AgencyOrganizationReference/Agency').text
-    organization['ID'] = root.find('.//FundingInformation/AgencyOrganizationReference/ID').text
-    organization['Version'] = root.find('.//FundingInformation/AgencyOrganizationReference/Version').text
-    organization['Type'] = root.find('.//FundingInformation/AgencyOrganizationReference/TypeOfObject').text
-    funding['organization'] = organization
-    info['funding'] = funding
-    # TODO: Coverage
-    coverages = root.findall('.//Coverage')
+    funding_all = root.findall('.//FundingInformation')
+    funding_list = []
+    for funding in funding_all:
+        organization = {}
+        if not funding.find('.//AgencyOrganizationReference/Agency') is None:
+            organization['Agency'] = funding.find('.//AgencyOrganizationReference/Agency').text
+        if not funding.find('.//AgencyOrganizationReference/ID') is None:
+            organization['ID'] = funding.find('.//AgencyOrganizationReference/ID').text
+        if not funding.find('.//AgencyOrganizationReference/Version') is None:
+            organization['Version'] = funding.find('.//AgencyOrganizationReference/Version').text
+        if not funding.find('.//AgencyOrganizationReference/TypeOfObject') is None:
+            organization['Type'] = funding.find('.//AgencyOrganizationReference/TypeOfObject').text
+        funding_list.append(organization)
+    info['FundingInformation'] = funding_list
+
+    # Coverage
+    coverage = {}
+    spatial_coverage = {}
+    temporal_coverage = {}
+
+    if not root.find('.//Coverage') is None:
+        if not root.find('.//Coverage/SpatialCoverage') is None:
+            spatial_coverage['URN'] = root.find('.//Coverage/SpatialCoverage/URN').text
+            spatial_coverage['Agency'] = root.find('.//Coverage/SpatialCoverage/Agency').text
+            spatial_coverage['ID'] = root.find('.//Coverage/SpatialCoverage/ID').text
+            spatial_coverage['Version'] = root.find('.//Coverage/SpatialCoverage/Version').text
+            if not root.find('.//Coverage/SpatialCoverage/BoundingBox') is None:
+                bouding_box = {}
+                bouding_box['WestLongitude'] = root.find('.//Coverage/SpatialCoverage/BoundingBox/WestLongitude').text
+                bouding_box['EastLongitude'] = root.find('.//Coverage/SpatialCoverage/BoundingBox/EastLongitude').text
+                bouding_box['SouthLatitude'] = root.find('.//Coverage/SpatialCoverage/BoundingBox/SouthLatitude').text
+                bouding_box['NorthLatitude'] = root.find('.//Coverage/SpatialCoverage/BoundingBox/NorthLatitude').text
+                spatial_coverage['BoundingBox'] = bouding_box
+            country_all = root.findall('.//Coverage/SpatialCoverage/Country')
+            spatial_coverage['Country'] = [item.text for item in country_all]
+            if not root.find('.//Coverage/SpatialCoverage/TopLevelReference') is None:
+                top_ref = {}
+                top_ref['LevelName'] = root.find('.//Coverage/SpatialCoverage/TopLevelReference/LevelName').text
+                spatial_coverage['TopLevelReference'] = top_ref
+            if not root.find('.//Coverage/SpatialCoverage/LowestLevelReference') is None:
+                low_ref = {}
+                low_ref['LevelName'] = root.find('.//Coverage/SpatialCoverage/LowestLevelReference/LevelName').text
+                spatial_coverage['LowestLevelReference'] = low_ref
+
+        if not root.find('.//Coverage/TemporalCoverage') is None:
+            temporal_coverage['URN'] = root.find('.//Coverage/TemporalCoverage/URN').text
+            temporal_coverage['Agency'] = root.find('.//Coverage/TemporalCoverage/Agency').text
+            temporal_coverage['ID'] = root.find('.//Coverage/TemporalCoverage/ID').text
+            temporal_coverage['Version'] = root.find('.//Coverage/TemporalCoverage/Version').text
+            if not root.find('.//Coverage/TemporalCoverage/ReferenceDate') is None:
+                ref_date = {}
+                if not root.find('.//Coverage/TemporalCoverage/ReferenceDate/SimpleDate') is None:
+                    ref_date['SimpleDate'] = root.find('.//Coverage/TemporalCoverage/ReferenceDate/SimpleDate').text
+                if not root.find('.//Coverage/TemporalCoverage/ReferenceDate/StartDate') is None:
+                    ref_date['StartDate'] = root.find('.//Coverage/TemporalCoverage/ReferenceDate/StartDate').text
+                if not root.find('.//Coverage/TemporalCoverage/ReferenceDate/EndDate') is None:
+                    ref_date['EndDate'] = root.find('.//Coverage/TemporalCoverage/ReferenceDate/EndDate').text
+                temporal_coverage['ReferenceDate'] = ref_date
+    coverage['SpatialCoverage'] = spatial_coverage
+    coverage['TemporalCoverage'] = temporal_coverage
+    info['Coverage'] = coverage
+
     # Data
-    data = {}
-    k = root.find('.//KindOfData')
-    data['KindOfData'] = '-'.join(item.text for item in k)
-    data['Analysis Unit'] = root.find('.//AnalysisUnit').text
+    k = root.findall('.//KindOfData')
+    info['KindOfData'] = [item.text for item in k]
+    info['Analysis Unit'] = root.find('.//AnalysisUnit').text
+
     # data files
     datafile = {}
     if root.find('.//PhysicalInstanceReference') is not None:
@@ -76,8 +138,8 @@ def root_to_dict_study(root):
         datafile['ID'] = root.find('.//PhysicalInstanceReference/ID').text
         datafile['Version'] = root.find('.//PhysicalInstanceReference/Version').text
         datafile['Type'] = root.find('.//PhysicalInstanceReference/TypeOfObject').text
-    data['Data File'] = datafile
-    info['data'] = data
+    info['PhysicalInstanceReference'] = datafile
+
     # data collection
     datacol = {}
     datacol['Agency'] = root.find('.//DataCollectionReference/Agency').text
@@ -85,6 +147,7 @@ def root_to_dict_study(root):
     datacol['Version'] = root.find('.//DataCollectionReference/Version').text
     datacol['Type'] = root.find('.//DataCollectionReference/TypeOfObject').text
     info['Data Collection'] = datacol
+
     # Extra
     metadata = {}
     if root.find('.//RequiredResourcePackages/ResourcePackageReference') is not None:
@@ -92,7 +155,7 @@ def root_to_dict_study(root):
         metadata['ID'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/ID').text
         metadata['Version'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/Version').text
         metadata['Type'] = root.find('.//RequiredResourcePackages/ResourcePackageReference/TypeOfObject').text
-    info['Metadata Packages'] = metadata
+    info['ResourcePackageReference'] = metadata
     return info
 
 
