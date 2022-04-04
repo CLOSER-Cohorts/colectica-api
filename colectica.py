@@ -359,7 +359,10 @@ def root_to_dict_sequence(root):
     """
     info = {}
     info['URN'] = root.find('.//URN').text
-    info['SourceId'] = root.find('.//UserID').text
+    if root.find('.//UserID') is not None:
+        info['SourceId'] = root.find('.//UserID').text
+    else:
+        info['SourceId'] = None
     if root.find('.//ConstructName/String') is not None:
         info['ConstructName'] = root.find('.//ConstructName/String').text
     else:
@@ -426,7 +429,7 @@ def root_to_dict_instrument(root):
     info = {}
     info['InstrumentURN'] = root.find('.//URN').text
     if root.findall(".//*[@typeOfUserID='colectica:sourceId']") != []:
-        info['InstrumentSourceID'] = root.findall(".//*[@typeOfUserID='colectica:sourceId']")[0].text 
+        info['InstrumentSourceID'] = root.findall(".//*[@typeOfUserID='colectica:sourceId']")[0].text
     if root.findall(".//*[@typeOfUserID='closer:sourceFileName']") != []:
         info['InstrumentLabel'] = root.findall(".//*[@typeOfUserID='closer:sourceFileName']")[0].text
     info['InstrumentName'] = root.find(".//InstrumentName/String").text
@@ -504,10 +507,45 @@ def root_to_dict_concept(root):
     """
     info = {}
     info['URN'] = root.find('.//URN').text
+    info['UserID'] = root.find('.//UserID').text
+    info['ConceptName'] = root.find('.//ConceptName/String').text
+    info['Label'] = root.find('.//Label/Content').text
+    SubclassOfReference = {}
+    if root.find('.//SubclassOfReference') is not None:
+        SubclassOfReference['Agency'] = root.find('.//SubclassOfReference/Agency').text
+        SubclassOfReference['ID'] = root.find('.//SubclassOfReference/ID').text
+        SubclassOfReference['Version'] = root.find('.//SubclassOfReference/Version').text
+        SubclassOfReference['Type'] = root.find('.//SubclassOfReference/TypeOfObject').text
+    info['SubclassOfReference'] = SubclassOfReference
+    return info
+
+
+def root_to_dict_concept_set(root):
+    """
+    Part of parse xml, item_type = Concept Set
+    """
+    info = {}
+    info['URN'] = root.find('.//URN').text
+    info['UserID'] = root.find('.//UserID').text
+    info['CustomField'] = root.find(".//UserAttributePair/AttributeValue").text #TODO
     info['VersionResponsibility'] = root.find('.//VersionResponsibility').text
     info['VersionRationale'] = root.find('.//VersionRationale/RationaleDescription/String').text
-    info['Name'] = root.find('.//ConceptName/String').text
+
+    info['ConceptSchemeName'] = root.find('.//ConceptSchemeName/String').text
     info['Label'] = root.find('.//Label/Content').text
+    info['Description'] = root.find('.//Description/Content').text
+    # Concept Reference
+    ConceptReference = root.findall(".//ConceptReference")
+    conceptref_list = []
+    for x, ref in enumerate(ConceptReference):
+        ref_dict={}
+        ref_dict['position'] = x + 1
+        ref_dict['Agency'] = ref.find(".//Agency").text
+        ref_dict['ID'] = ref.find(".//ID").text
+        ref_dict['Version'] = ref.find(".//Version").text
+        ref_dict['Type'] = ref.find(".//TypeOfObject").text
+        conceptref_list.append(ref_dict)
+    info['ConceptReference'] = conceptref_list
     return info
 
 
@@ -603,11 +641,15 @@ def root_to_dict_question_grid(root):
     GridDimension = root.findall('.//GridDimension')
     grid_dimension_list = []
     for x, dim in enumerate(GridDimension):
-        dim_dict={}
+        dim_dict =  {}
         dim_dict['rank'] = dim.attrib['rank']
         ResponseCardinality = dim.find('.//CodeDomain/ResponseCardinality')
-        dim_dict['minimumResponses'] = ResponseCardinality.attrib['minimumResponses']
-        dim_dict['maximumResponses'] = ResponseCardinality.attrib['maximumResponses']
+        if not ResponseCardinality is None:
+            dim_dict['minimumResponses'] = ResponseCardinality.attrib['minimumResponses']
+            dim_dict['maximumResponses'] = ResponseCardinality.attrib['maximumResponses']
+        else:
+            dim_dict['minimumResponses'] = None
+            dim_dict['maximumResponses'] = None
 
         code_ref_dict = {}
         code_ref = dim.find('.//CodeDomain/CodeListReference')
@@ -616,8 +658,20 @@ def root_to_dict_question_grid(root):
             code_ref_dict['ID'] = code_ref.find('.//ID').text
             code_ref_dict['Version'] = code_ref.find('.//Version').text
             code_ref_dict['TypeOfObject'] = code_ref.find('.//TypeOfObject').text
-
         dim_dict['CodeListReference'] = code_ref_dict
+
+        Roster_dict = {}
+        Roster = dim.find('.//Roster')
+        if not Roster is None:
+            Roster_dict['baseCodeValue'] = Roster.attrib['baseCodeValue']
+            Roster_dict['codeIterationValue'] = Roster.attrib['codeIterationValue']
+            Roster_dict['minimumRequired'] = Roster.attrib['minimumRequired']
+            if not Roster.find('.//Label/Content') is None:
+                Roster_dict['Label'] = Roster.find('.//Label/Content').text
+            else:
+                Roster_dict['Label'] = None
+        dim_dict['Roster'] = Roster_dict
+
         grid_dimension_list.append(dim_dict)
 
     info['GridDimension'] = grid_dimension_list
@@ -873,6 +927,8 @@ def parse_xml(xml, item_type):
         info = root_to_dict_question_group(root)
     elif item_type == 'Concept':
         info = root_to_dict_concept(root)
+    elif item_type == 'Concept Set':
+        info = root_to_dict_concept_set(root)
     elif item_type == 'Question':
         info = root_to_dict_question(root)
     elif item_type == 'Question Grid':
