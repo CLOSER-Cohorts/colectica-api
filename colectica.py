@@ -881,6 +881,78 @@ def root_to_dict_loop(root):
     return info
 
 
+def root_to_dict_data_file(root):
+    """
+    Part of parse xml, item_type = Data File
+    """
+    info = {}
+    info['URN'] = root.find('.//PhysicalInstance/URN').text
+
+    citation_dict = {}
+    citation = root.find('.//PhysicalInstance/Citation')
+    if not citation.find('.//Title/String') is None:
+        citation_dict['Title'] = citation.find('.//Title/String').text
+    else:
+        citation_dict['Title'] = None
+    if not citation.find('.//AlternateTitle/String').text is None:
+        citation_dict['AlternateTitle'] = citation.find('.//AlternateTitle/String').text
+    else:
+        citation_dict['AlternateTitle'] = None
+    info['Citation'] = citation_dict
+
+    # Data Relationship Reference
+    DataRelationshipRef = root.find('.//PhysicalInstance/DataRelationshipReference')
+    DataRelationshipRef_dict = {}
+    if not DataRelationshipRef is None:
+        DataRelationshipRef_dict['Agency'] = DataRelationshipRef.find('.//Agency').text
+        DataRelationshipRef_dict['ID'] = DataRelationshipRef.find('.//ID').text
+        DataRelationshipRef_dict['Version'] = DataRelationshipRef.find('.//Version').text
+        DataRelationshipRef_dict['Type'] = DataRelationshipRef.find('.//TypeOfObject').text
+    info['DataRelationshipReference'] = DataRelationshipRef_dict
+
+    # DataFileURI
+    DataFileURI = root.find('.//PhysicalInstance/DataFileIdentification/DataFileURI')
+    if not DataFileURI is None:
+        info['DataFileURI'] = DataFileURI.text
+    else:
+        info['DataFileURI'] = None
+
+    # GrossFileStructure
+    GrossFileStructure_dict = {}
+    GrossFileStructure = root.find('.//PhysicalInstance/GrossFileStructure')
+
+    if not GrossFileStructure is None:
+        GrossFileStructure_dict['URN'] = GrossFileStructure.find('.//URN').text
+        GrossFileStructure_dict['Agency'] = GrossFileStructure.find('.//Agency').text
+        GrossFileStructure_dict['ID'] = GrossFileStructure.find('.//ID').text
+        GrossFileStructure_dict['Version'] = GrossFileStructure.find('.//Version').text
+        GrossFileStructure_dict['UserID'] = GrossFileStructure.find('.//UserID').text
+        CreationSoftware = GrossFileStructure.find('.//CreationSoftware')
+        CreationSoftware_dict = {}
+        if not CreationSoftware is None:
+            CreationSoftware_dict['SoftwareName'] = CreationSoftware.find('.//SoftwareName/String').text
+            CreationSoftware_dict['Description'] = CreationSoftware.find('.//Description/Content').text
+        GrossFileStructure_dict['CreationSoftware'] = CreationSoftware_dict
+        GrossFileStructure_dict['CaseQuantity'] = GrossFileStructure.find('.//CaseQuantity').text
+    info['GrossFileStructure'] = GrossFileStructure_dict
+
+    # Variable Statistics Reference
+    VariableStatisticsRef = root.findall(".//PhysicalInstance/StatisticalSummary/VariableStatisticsReference")
+
+    statistical_list = []
+    for x, ref in enumerate(VariableStatisticsRef):
+        ref_dict={}
+        ref_dict['position'] = x + 1
+        ref_dict['Agency'] = ref.find(".//Agency").text
+        ref_dict['ID'] = ref.find(".//ID").text
+        ref_dict['Version'] = ref.find(".//Version").text
+        ref_dict['Type'] = ref.find(".//TypeOfObject").text
+        statistical_list.append(ref_dict)
+    info['VariableStatisticsReference'] = statistical_list
+
+    return info
+
+
 def parse_xml(xml, item_type):
     """
     Used for parsing Item value
@@ -904,6 +976,7 @@ def parse_xml(xml, item_type):
         - Variable
         - Conditional
         - Loop
+        - Data File
     """
     root = remove_xml_ns(xml)
 
@@ -947,6 +1020,8 @@ def parse_xml(xml, item_type):
         info = root_to_dict_conditional(root)
     elif item_type == 'Loop':
         info = root_to_dict_loop(root)
+    elif item_type == 'Data File':
+        info = root_to_dict_data_file(root)
     else:
         info = {}
     return info
