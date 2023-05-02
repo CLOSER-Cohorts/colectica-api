@@ -287,7 +287,6 @@ def root_to_dict_data_collection(root):
     Part of parse xml, item_type = Data Collection
     """
     info = {}
-    print(info)
     info['URN'] = root.find('.//URN').text
     info['Name'] = root.find('.//DataCollectionModuleName/String').text
     info['Label'] = root.find('.//Label/Content').text
@@ -467,13 +466,18 @@ def root_to_dict_question_group(root):
         info['Label'] = None
 
     # Concept Reference
-    ConceptRef = {}
-    if not root.find('.//ConceptReference') is None:
-        ConceptRef['Agency'] = root.find('.//ConceptReference/Agency').text
-        ConceptRef['ID'] = root.find('.//ConceptReference/ID').text
-        ConceptRef['Version'] = root.find('.//ConceptReference/Version').text
-        ConceptRef['Type'] = root.find('.//ConceptReference/TypeOfObject').text
-    info['ConceptRef'] = ConceptRef
+    ConceptRef = root.findall('.//ConceptReference')
+
+    ConceptRef_list = []
+    for x, ref in enumerate(ConceptRef):
+        ref_dict = {}
+        ref_dict['position'] = x + 1
+        ref_dict['Agency'] = ref.find('.//Agency').text
+        ref_dict['ID'] = ref.find('.//ID').text
+        ref_dict['Version'] = ref.find('.//Version').text
+        ref_dict['Type'] = ref.find('.//TypeOfObject').text
+        ConceptRef_list.append(ref_dict)
+    info['ConceptRef'] = ConceptRef_list
     # Question Item Reference
     QuestionItemRef = root.findall(".//QuestionItemReference")
     QIref_list = []
@@ -510,7 +514,7 @@ def root_to_dict_concept(root):
     if not root.find('.//UserID') is None:
         info['UserID'] = root.find('.//UserID').text
     else:
-        info['UserID'] = None    
+        info['UserID'] = None
     info['ConceptName'] = root.find('.//ConceptName/String').text
     info['Label'] = root.find('.//Label/Content').text
     SubclassOfReference = {}
@@ -709,7 +713,7 @@ def root_to_dict_code_set(root):
     if not root.find('.//Label/Content') is None:
         info['Label'] = root.find('.//Label/Content').text
     else:
-        info['Label'] = None    
+        info['Label'] = None
     # Codes
     codes = root.findall('.//Code')
     code_list = []
@@ -745,7 +749,7 @@ def root_to_dict_category(root):
     if not root.find('.//CategoryName/String') is None:
         info['Name'] = root.find('.//CategoryName/String').text
     else:
-        info['Name'] = None    
+        info['Name'] = None
     if not root.find('.//Label/Content') is None:
         info['Label'] = root.find('.//Label/Content').text
     else:
@@ -777,6 +781,62 @@ def root_to_dict_question_activity(root):
     return info
 
 
+def root_to_dict_variable_group(root):
+    """
+    Part of parse xml, item_type = Variable Group
+    """
+    info = {}
+    info['URN'] = root.find('.//VariableGroup/URN').text
+
+    if not root.find('.//VariableGroupName/String') is None:
+        info['VariableGroupName'] = root.find('.//VariableGroupName/String').text
+    else:
+        info['VariableGroupName'] = None
+
+    if not root.find('.//VariableGroup/Label/Content') is None:
+        info['Label'] = root.find('.//VariableGroup/Label/Content').text
+    else:
+        info['Label'] = None
+
+    # VariableGroupReference
+    VariableGroupReference = root.findall('.//VariableGroup/VariableGroupReference')
+    VG_ref_list = []
+    for x, VG_Ref in enumerate(VariableGroupReference):
+        VG_ref_dict = {}
+        VG_ref_dict['Agency'] = VG_Ref.find('.//Agency').text
+        VG_ref_dict['ID'] = VG_Ref.find('.//ID').text
+        VG_ref_dict['Version'] = VG_Ref.find('.//Version').text
+        VG_ref_dict['TypeOfObject'] = VG_Ref.find('.//TypeOfObject').text
+        VG_ref_list.append(VG_ref_dict)
+    info['VariableGroupReference'] = VG_ref_list
+
+    # ConceptReference
+    ConceptReference = root.findall('.//VariableGroup/ConceptReference')
+    concept_ref_list = []
+    for x, concept_Ref in enumerate(ConceptReference):
+        concept_ref_dict = {}
+        concept_ref_dict['Agency'] = concept_Ref.find('.//Agency').text
+        concept_ref_dict['ID'] = concept_Ref.find('.//ID').text
+        concept_ref_dict['Version'] = concept_Ref.find('.//Version').text
+        concept_ref_dict['TypeOfObject'] = concept_Ref.find('.//TypeOfObject').text
+        concept_ref_list.append(concept_ref_dict)
+    info['ConceptReference'] = concept_ref_list
+
+    # VariableReference
+    VariableReference = root.findall('.//VariableGroup/VariableReference')
+    variable_ref_list = []
+    for x, variable_Ref in enumerate(VariableReference):
+        variable_ref_dict = {}
+        variable_ref_dict['Agency'] = variable_Ref.find('.//Agency').text
+        variable_ref_dict['ID'] = variable_Ref.find('.//ID').text
+        variable_ref_dict['Version'] = variable_Ref.find('.//Version').text
+        variable_ref_dict['TypeOfObject'] = variable_Ref.find('.//TypeOfObject').text
+        variable_ref_list.append(variable_ref_dict)
+    info['VariableReference'] = variable_ref_list
+
+    return info
+
+
 def root_to_dict_variable(root):
     """
     Part of parse xml, item_type = Variable
@@ -788,8 +848,8 @@ def root_to_dict_variable(root):
     if not root.find('.//Variable/Label/Content') is None:
         info['Label'] = root.find('.//Variable/Label/Content').text
     else:
-        info['Label'] = None    
-    
+        info['Label'] = None
+
     # QuestionReference
     QuestionReference = root.find('.//Variable/QuestionReference')
     question_ref_dict = {}
@@ -984,6 +1044,7 @@ def parse_xml(xml, item_type):
         - Interviewer Instruction
         - Category
         - Question Activity
+        - Variable Group
         - Variable
         - Conditional
         - Loop
@@ -1025,6 +1086,8 @@ def parse_xml(xml, item_type):
         info = root_to_dict_category(root)
     elif item_type == 'Question Activity':
         info = root_to_dict_question_activity(root)
+    elif item_type == 'Variable Group':
+        info = root_to_dict_variable_group(root)
     elif item_type == 'Variable':
         info = root_to_dict_variable(root)
     elif item_type == 'Conditional':
@@ -1050,7 +1113,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
             result = self.get_an_item(AgencyId, Identifier)
         else:
             result = self.get_an_item_version(AgencyId, Identifier, Version)
-        
+
         info = {}
         item_info = None
         if not result is None:
@@ -1080,9 +1143,9 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         l = self.get_a_set_typed(AgencyId, Identifier, Version)
         # print(l)
         df = pd.DataFrame(
-             [self.item_code_inv(l[i]["Item2"]), l[i]["Item1"]["Item1"]] for i in range(len(l))
+             [self.item_code_inv(l[i]["Item2"]), l[i]["Item1"]["Item3"], l[i]["Item1"]["Item1"], l[i]["Item1"]["Item2"]] for i in range(len(l))
          )
-        df.columns = ["ItemType", "Identifier"]
+        df.columns = ["ItemType", "Agency", "Identifier", "Version"]
 
         return df
 
@@ -1096,15 +1159,24 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         return df, info
 
 
-    def get_question_group_info(self, AgencyId, Identifier):
+    def item_info_set_json(self, AgencyId, Identifier):
+        """
+        From an ID, find it's name and set
+        """
+        info = self.get_an_item_json(AgencyId, Identifier)
+        df = self.get_a_set_to_df(AgencyId, Identifier, str(info['Version']))
+        return df, info
+
+
+    def get_question_info(self, AgencyId, Identifier):
         """
         From a question identifier, get information about it
         """
-        question_group = self.get_an_item(AgencyId, Identifier)
-        root = remove_xml_ns(question_group["Item"])
+        question_info = self.get_an_item(AgencyId, Identifier)
+        root = remove_xml_ns(question_info["Item"])
 
         question = {}
-        for k, v in question_result.items():
+        for k, v in question_info.items():
             if k == 'ItemType':
                 question[k] = self.item_code_inv(v)
             elif k == 'Item':
@@ -1187,7 +1259,7 @@ class ColecticaObject(api.ColecticaLowLevelAPI):
         elif QI_response_type == 'Numeric':
             data = [ [ question_info['QuestionURN'],
                        question_info['QuestionItemName'], 
-                       question_info['Response']['response_type'], 
+                       question_info['Response']['response_type'],
                        question_info['Response']['response_label'],
                        question_info['Response']['response_NumericType'],
                        question_info['Response']['response_RangeLow'],

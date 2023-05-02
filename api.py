@@ -149,7 +149,7 @@ class ColecticaLowLevelAPI():
     def item_code_inv(self, item_type_id):
         return item_dict_inv[item_type_id]
 
-        
+
     def get_an_item(self, AgencyId, Identifier):
         """
         This request retrieves the lastest version of an item based on known identification information.
@@ -158,6 +158,32 @@ class ColecticaLowLevelAPI():
         URL: /api/v1/item/agenct/Id
         """
         response = requests.get("https://"+self.host+"/api/v1/item/"+AgencyId+"/"+Identifier, headers=self.token, verify=False)
+        if response.ok:
+            if response.json() != []:
+                return response.json()
+
+
+    def get_an_item_json(self, AgencyId, Identifier):
+        """
+        This request retrieves the lastest version of an item based on known identification information.
+        https://docs.colectica.com/portal/api/examples/get-item/
+        Request Type: GET
+        URL: /api/v1/item/agenct/Id
+        """
+        response = requests.get("https://"+self.host+"/api/v1/json/"+AgencyId+"/"+Identifier, headers=self.token, verify=False)
+        if response.ok:
+            if response.json() != []:
+                return response.json()
+
+
+    def get_an_item_jsonset(self, AgencyId, Identifier):
+        """
+        This request retrieves the lastest version of an item based on known identification information.
+        https://docs.colectica.com/portal/api/examples/get-item/
+        Request Type: GET
+        URL: /api/v1/item/agenct/Id
+        """
+        response = requests.get("https://"+self.host+"/api/v1/jsonset/"+AgencyId+"/"+Identifier, headers=self.token, verify=False)
         if response.ok:
             if response.json() != []:
                 return response.json()
@@ -194,8 +220,6 @@ class ColecticaLowLevelAPI():
         response = requests.post("https://"+self.host+"/api/v1/_query/", headers=self.token, json=jsonquery, verify=False)
         if response.ok:
             return response.json()
-
-
 
 
     def relationship_search(self, item_type, AgencyId, Identifier, UseDistinctResultItem=True, UseDistinctTargetItem=True):
@@ -250,6 +274,7 @@ class ColecticaLowLevelAPI():
             if response.json() != []:
                 return response.json()
 
+
     def colectica_get_api(self, url, hostname, tokenHeader):
         """
             Gets the version history of an item.
@@ -261,6 +286,7 @@ class ColecticaLowLevelAPI():
         if response.ok:
             if response.json() != []:
                 return response.json()
+
 
     def get_item_description(self, AgencyId, Identifier, Version):
         """
@@ -278,7 +304,7 @@ class ColecticaLowLevelAPI():
 
     def relationship_bysubject_descriptions(self, item_type, AgencyId, Identifier, Version, UseDistinctResultItem=True, UseDistinctTargetItem=True):
         """
-            Gets the repository item descriptions for items that match the specified relationship search parameters. 
+            Gets the repository item descriptions for items that match the specified relationship search parameters.
             The search will query for items referenced by the target item specified in the search facet.
             https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1_queryRelationshipBysubjectDescriptionsPost
             Request Type: POST
@@ -306,7 +332,7 @@ class ColecticaLowLevelAPI():
 
     def relationship_byobject_descriptions(self, item_type, AgencyId, Identifier, Version, UseDistinctResultItem=True, UseDistinctTargetItem=True):
         """
-            Gets the repository item descriptions for items that match the specified relationship search parameters. 
+            Gets the repository item descriptions for items that match the specified relationship search parameters.
             The search will query for items that reference the target item specified in the search facet.
             https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1_queryRelationshipByobjectDescriptionsPost
             Request Type: POST
@@ -326,7 +352,7 @@ class ColecticaLowLevelAPI():
              "UseDistinctTargetItem": UseDistinctTargetItem
         }
 
-        response = requests.post("https://"+self.host+"/api/v1/_query/relationship/bysubject/descriptions", headers=self.token, json=jsonquery, verify=False)
+        response = requests.post("https://"+self.host+"/api/v1/_query/relationship/byobject/descriptions", headers=self.token, json=jsonquery, verify=False)
         if response.ok:
             if response.json() != []:
                 return(response.json())
@@ -380,7 +406,7 @@ class ColecticaLowLevelAPI():
              "UseDistinctTargetItem": UseDistinctTargetItem
         }
 
-        response = requests.post("https://"+self.host+"/api/v1/_query/relationship/bysubject", headers=self.token, json=jsonquery, verify=False)
+        response = requests.post("https://"+self.host+"/api/v1/_query/relationship/byobject", headers=self.token, json=jsonquery, verify=False)
         if response.ok:
             if response.json() != []:
                 return(response.json())
