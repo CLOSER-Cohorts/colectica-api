@@ -6,7 +6,7 @@ from io import StringIO
 import xml.etree.ElementTree as ET
 import pandas as pd
 import json
-import api
+from .api import ColecticaLowLevelAPI
 
 
 def remove_xml_ns(xml):
@@ -1101,8 +1101,18 @@ def parse_xml(xml, item_type):
     return info
 
 
-class ColecticaObject(api.ColecticaLowLevelAPI):
-    """Ask practical questions to Colectica."""
+class ColecticaObject(ColecticaLowLevelAPI):
+    """Ask practical questions to Colectica.
+
+    This object communicates with a Colectica server.  In most cases, it can
+    use the newer JSON-based api but still has a deprecated implementation of
+    the older XML-based api.  The latter involves a lot of manual parsing of
+    data.
+
+    You make a new ColecticaObject by using:
+
+    >>> C = ColecticaObject(hostname, username, password)
+    """
 
     def item_to_dict(self, AgencyId, Identifier, Version = None):
         """
