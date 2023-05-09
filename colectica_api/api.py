@@ -150,30 +150,68 @@ class ColecticaLowLevelAPI():
         return item_dict_inv[item_type_id]
 
 
-    def get_an_item(self, AgencyId, Identifier):
+    def get_item_xml(self, AgencyId, Identifier, *, version=None):
         """
-        This request retrieves the lastest version of an item based on known identification information.
-        https://docs.colectica.com/portal/api/examples/get-item/
+        This request retrieves an item based on known identification information.
+        https://docs.colectica.com/repository/functionality/rest-api/examples/get-item/
         Request Type: GET
         URL: /api/v1/item/agenct/Id
+
+        Args:
+            AgencyId (str):
+            Identifier (str):
+
+        Keyword Args:
+            version (None/int): If omitted we get latest item or you can specify
+                a particular version.
+
+        Exceptions:
+            ValueError: the request did not succeed.
         """
-        response = requests.get("https://"+self.host+"/api/v1/item/"+AgencyId+"/"+Identifier, headers=self.token, verify=False)
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+        uri = "https://"+self.host+"/api/v1/item/"+AgencyId+"/"+Identifier
+        # use explicit None check so that zero treated
+        if version is not None:
+            uri += f"/{version}"
+        response = requests.get(uri, headers=self.token, verify=False)
+        if not response.ok:
+            raise ValueError(response.text)
+        return response.json()
 
 
-    def get_an_item_json(self, AgencyId, Identifier):
+    def get_item_json(self, AgencyId, Identifier, *, version=None):
         """
-        This request retrieves the lastest version of an item based on known identification information.
-        https://docs.colectica.com/portal/api/examples/get-item/
+        This request retrieves an item based on known identification information.
+        https://docs.colectica.com/repository/functionality/rest-api/examples/get-item/
         Request Type: GET
         URL: /api/v1/item/agenct/Id
+
+        Args:
+            AgencyId (str):
+            Identifier (str):
+
+        Keyword Args:
+            version (None/int): If omitted we get latest item or you can specify
+                a particular version.
+
+        Exceptions:
+            ValueError: the request did not succeed.
         """
-        response = requests.get("https://"+self.host+"/api/v1/json/"+AgencyId+"/"+Identifier, headers=self.token, verify=False)
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+        uri = "https://"+self.host+"/api/v1/json/"+AgencyId+"/"+Identifier
+        # use explicit None check so that zero treated
+        if version is not None:
+            uri += f"/{version}"
+        response = requests.get(uri, headers=self.token, verify=False)
+        if not response.ok:
+            raise ValueError(response.text)
+        return response.json()
+
+
+    # backwards compatibility for old calls without a warning
+    # get_an_item = get_item_xml
+
+    def get_an_item(self, *args, **kwargs):
+        print("Warning: this is a deprecated function: use get_item_json or get_item_xml instead")
+        return self.get_item_xml(*args, **kwargs)
 
 
     def get_an_item_jsonset(self, AgencyId, Identifier):
