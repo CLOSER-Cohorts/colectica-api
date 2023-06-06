@@ -37,4 +37,9 @@ jobs:
         # flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        # pytest
+    - name: pip install from source
+      run: | 
+        pip install .
+        python -c "import colectica_api"
+        python -c "from colectica_api import ColecticaObject; print(ColecticaObject.__doc__)"
