@@ -141,14 +141,13 @@ class ColecticaLowLevelAPI():
         self.host = hostname
         self.token = get_jwtToken(hostname, username, password)
 
-
+    @classmethod
     def item_code(self, item):
         return item_dict[item]
 
-
+    @classmethod
     def item_code_inv(self, item_type_id):
         return item_dict_inv[item_type_id]
-
 
     def get_item_xml(self, AgencyId, Identifier, *, version=None):
         """

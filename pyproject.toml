@@ -27,5 +27,3 @@ dependencies = [
 
 [tool.setuptools]
 packages = ["colectica_api"]
-
-

@@ -1,0 +1,3 @@
+# minimum requirements
+pandas>=1.5.3
+requests
