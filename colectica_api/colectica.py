@@ -1298,4 +1298,3 @@ class ColecticaObject(ColecticaLowLevelAPI):
 
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
-
