@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Colectica_API"
-version = "0.0.2"
+version = "0.0.3.dev0"
 authors = [
   { name="Jenny Li", email="jenny.li@ucl.ac.uk" },
 ]
