@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Colectica_API"
-version = "0.0.3.dev0"
 authors = [
   { name="Jenny Li", email="jenny.li@ucl.ac.uk" },
 ]
 description = "Python interface to the Colectica API"
+dynamic = ['version']
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -27,3 +27,6 @@ dependencies = [
 
 [tool.setuptools]
 packages = ["colectica_api"]
+
+[tool.setuptools.dynamic]
+version = {attr = 'colectica_api.__version__'}
