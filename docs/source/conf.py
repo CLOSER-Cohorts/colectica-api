@@ -3,13 +3,20 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import os
+import sys
+
+# some hacks to find the code in the parent dir (project root)
+sys.path.insert(0, os.path.abspath(".."))
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Colectica-API'
-copyright = '2023, Jenny Li'
+copyright = '2023 Jenny Li'
 author = 'Jenny Li'
-release = '0.0.2'
+from colectica_api import __version__
+release = __version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
