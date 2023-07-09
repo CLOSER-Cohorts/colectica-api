@@ -12,6 +12,8 @@ Welcome to Colectica-API's documentation!
 
    install.rst
 
+   module.rst
+
 
 Indices and tables
 ==================
