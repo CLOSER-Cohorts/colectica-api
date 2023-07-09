@@ -2,7 +2,7 @@
 
 """
 The collectica_api module exposes a ColecticaObject which
-handles communication with a Colectica servers (using its
+handles communication with a Colectica server (using its
 REST api).
 """
 
