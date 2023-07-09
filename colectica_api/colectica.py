@@ -1114,12 +1114,20 @@ class ColecticaObject(ColecticaLowLevelAPI):
     >>> C = ColecticaObject(hostname, username, password)
     """
 
-    def item_to_dict(self, AgencyId, Identifier, Version = None):
+    def item_to_dict(self, AgencyId, Identifier, Version=None):
+        """From an agency ID and an identifier, get information using ``get_an_item``.
+
+        Args:
+            AgencyId (str): For example, ``"uk.cls.nextsteps"``.
+            Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+
+        Keyword Args:
+            Version (int/None): if omitted, get the latest version.
+
+        Return:
+            dict: a dictionary of the item contents.
         """
-        From an agency ID and an identifier, get information using get_an_item
-        Return a dictionary
-        """
-        if Version == None:
+        if Version is None:
             result = self.get_an_item(AgencyId, Identifier)
         else:
             result = self.get_an_item_version(AgencyId, Identifier, Version)
@@ -1140,10 +1148,11 @@ class ColecticaObject(ColecticaLowLevelAPI):
         return d
 
 
-    def get_a_set_to_df(self, AgencyId, Identifier, Version):
-        """
-        From a study, find all questions
-        Example:
+    def get_a_set_to_df(self, AgencyId: str, Identifier: str, Version: int):
+        """From a study, find all questions.
+
+        Example::
+
             'ItemType': 'f196cc07-9c99-4725-ad55-5b34f479cf7d', (Instrument)
             'AgencyId': 'uk.cls.nextsteps',
             'Version': 1,
