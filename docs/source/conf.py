@@ -24,7 +24,7 @@ release = __version__
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
-#    "sphinx.ext.viewcode",
+    "sphinx.ext.viewcode",
 #    "sphinx.ext.doctest",
 #    "myst_parser",
 ]
