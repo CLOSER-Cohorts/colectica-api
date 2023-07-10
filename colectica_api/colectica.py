@@ -1170,8 +1170,9 @@ class ColecticaObject(ColecticaLowLevelAPI):
 
 
     def item_info_set(self, AgencyId, Identifier):
-        """
-        From an ID, find it's name and set
+        """From an ID, find it's name and set.
+
+        This is deprecated: you probably want :meth:`item_info_set_json`.
         """
         info = self.item_to_dict(AgencyId, Identifier)
         df = self.get_a_set_to_df(AgencyId, Identifier, str(info['Version']))
@@ -1179,8 +1180,15 @@ class ColecticaObject(ColecticaLowLevelAPI):
 
 
     def item_info_set_json(self, AgencyId, Identifier):
-        """
-        From an ID, find it's name and set
+        """From an ID, find it's name and set.
+
+        Args:
+            AgencyId (str): For example, ``"uk.cls.nextsteps"``.
+            Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+
+        Returns:
+            tuple: A 2-tuple `(df, info)` consisting of a Pandas dataframe
+            and a dict with info about the item..
         """
         info = self.get_an_item_json(AgencyId, Identifier)
         df = self.get_a_set_to_df(AgencyId, Identifier, str(info['Version']))
