@@ -3,9 +3,12 @@
 """
 
 from io import StringIO
-import xml.etree.ElementTree as ET
-import pandas as pd
 import json
+import os
+import xml.etree.ElementTree as ET
+
+import pandas as pd
+
 from .api import ColecticaLowLevelAPI
 
 
@@ -1112,7 +1115,21 @@ class ColecticaObject(ColecticaLowLevelAPI):
     You make a new ColecticaObject by using:
 
     >>> C = ColecticaObject(hostname, username, password)
+
+    If `hostname`, `username` or `password` are omitted, environment
+    variables `COLECTICA_HOSTNAME`, `COLECTICA_USERNAME` and `COLECTICA_PASSWORD`
+    will be used, if they are defined.
     """
+
+    def __init__(self, hostname=None, username=None, password=None):
+        if hostname is None:
+            hostname = os.environ.get("COLECTICA_HOSTNAME")
+        if username is None:
+            username = os.environ.get("COLECTICA_USERNAME")
+        if password is None:
+            password = os.environ.get("COLECTICA_PASSWORD")
+        print(f"Connecting to {hostname} as user {username}")
+        super().__init__(hostname, username, password)
 
     def item_to_dict(self, AgencyId, Identifier, Version=None):
         """From an agency ID and an identifier, get information using ``get_an_item``.
