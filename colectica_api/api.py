@@ -228,39 +228,114 @@ class ColecticaLowLevelAPI():
                 return response.json()
 
 
-    def general_search(self, item_type, search_term, MaxResults=1, RankResults=True, SearchDepricatedItems=False, SearchLatestVersion=True):
+    def general_search_BACKUP(self, item_type, search_term, MaxResults=1, RankResults=True, SearchDepricatedItems=False, SearchLatestVersion=True):
         """
             Perform a general search: https://docs.colectica.com/portal/api/examples/search/
             Request Type: POST
             URL: /api/v1/_query
+            
+        Returns:
+            dict: 
         """
         # MaxResults=0 returns all results
         jsonquery =  {
              "Cultures": [
-                 "en-US"
+                 "en-GB"
              ],
+             "tags": [],
              "ItemTypes": [
                  item_type
              ],
              "LanguageSortOrder": [
-                 "en-US"
+                 "en-GB"
              ],
              "MaxResults": MaxResults,
              "RankResults": RankResults,
              "ResultOffset": 0,
-             "ResultOrdering": "None",
+             "ResultOrdering": 0,
+             "nextResult": 0,
              "SearchDepricatedItems": SearchDepricatedItems,
-             "SearchTerms": [
+             #"searchSetPredicate": item_type,  # TODO
+             "searchSets": [{
+                 "agencyId": "uk.iser",                
+                 "identifier": "44a7a09e-4703-498c-96f7-0131b296c917",
+                 "version": 0
+             }],
+             "searchTerms": [
                  search_term
              ],
-             "SearchLatestVersion": SearchLatestVersion
+             # "searchTargets": [0],     # <-- 500 on "" search 
+             "SearchLatestVersion": SearchLatestVersion,
+             "usePrefixSearch": False,
+             "returnIdentifiersOnly": True
          }
-
+        jsonquery =  {
+             #"ItemTypes": [
+             #    item_type
+             #],
+             #"searchTerms": [
+             #    search_term
+             #],
+             "searchSets": [{
+                 "agencyId": "uk.iser",                
+                 "identifier": "f8a05405-2ab0-4dd4-82de-c7984e6616de",
+                 "version": 0
+             }],
+             "MaxResults": MaxResults,
+         }
+        #print(jsonquery)
         response = requests.post("https://"+self.host+"/api/v1/_query/", headers=self.token, json=jsonquery, verify=False)
         if response.ok:
             return response.json()
+        raise ValueError(f"Server returned {response.status_code} error: {response.content}")
 
+    def general_search(self, item_type, search_term, MaxResults=1, *, RankResults=None, SearchDepricatedItems=None, SearchLatestVersion=None):
+        """Perform a general search.
+        
+        Args:
+            item_type (str): 
+            search_term (str):
+            MaxResults (int): 0 returns all results.
 
+        Keyword Args:
+            RankResults (bool/None): todo explain.  If omitted or None use the
+                server default.
+            SearchDepricatedItems (bool/None): todo explain.  If omitted or None
+                use the server default.
+            SearchLatestVersion (bool/None): todo exaplin.  If omitted or None
+                use the server default.
+
+        Returns:
+            dict: todo explain.
+
+        This uses the ``/api/v1/_query`` API call.
+        Documented here: https://docs.colectica.com/portal/api/examples/search/
+        TODO: link may be broken?
+        More references:
+          - https://docs.colectica.com/repository/functionality/rest-api/examples/search/
+          - https://clsr-ppcolw01n.addev.ucl.ac.uk/swagger/index.html
+        """
+        query =  {
+             "ItemTypes": [
+                 item_type
+             ],
+             "searchTerms": [
+                 search_term
+             ],
+             "MaxResults": MaxResults
+        };
+        if RankResults is not None:
+             query.update({"RankResults": RankResults})
+        if SearchDepricatedItems is not None:
+             query.update({"SearchDepricatedItems": SearchDepricatedItems})
+        if SearchLatestVersion is not None:
+             query.update({"SearchLatestVersion": SearchLatestVersion})
+
+        response = requests.post("https://"+self.host+"/api/v1/_query/", headers=self.token, json=query, verify=False)
+        if response.ok:
+            return response.json()
+        raise ValueError(f"Server returned {response.status_code} error: {response.content}")
+        
     def relationship_search(self, item_type, AgencyId, Identifier, UseDistinctResultItem=True, UseDistinctTargetItem=True):
         """
             Option 1: retrieve identifiers only
