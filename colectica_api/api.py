@@ -1,5 +1,7 @@
 """
-    Colectica API
+Colectica API implementation details.
+
+In most cases you'll want to work with :class:`ColecticaObject` instead.
 """
 
 import requests
