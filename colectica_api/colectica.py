@@ -8,6 +8,7 @@ import os
 import xml.etree.ElementTree as ET
 
 import pandas as pd
+import requests
 
 from .api import ColecticaLowLevelAPI
 
