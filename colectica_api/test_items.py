@@ -7,9 +7,11 @@ def test_no_such_item_code():
     with raises(KeyError):
         ColecticaObject.item_code("ThereIsNoSuchKey")
 
+
 def test_no_such_item_code_inv():
     with raises(KeyError):
         ColecticaObject.item_code_inv("ThereIsNoSuchKey")
+
 
 def test_item_code():
     x = ColecticaObject.item_code("Question")
