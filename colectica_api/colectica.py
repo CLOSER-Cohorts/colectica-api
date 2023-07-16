@@ -1238,6 +1238,8 @@ class ColecticaObject(ColecticaLowLevelAPI):
         item_type,
         AgencyId,
         Identifier,
+        *,
+        version=None,
         UseDistinctResultItem=True,
         UseDistinctTargetItem=True,
     ):
@@ -1246,12 +1248,12 @@ class ColecticaObject(ColecticaLowLevelAPI):
         Args:
             item_type (str): for example `C.item_type("Question")` or
                 `C.item_type("Variable")`.
-            search_term (list/str): for example "home" or a list
-                `["work", "home"]`.
-            MaxResults (int): how many results to return or 0 to return
-                all results.
+            AgencyId (str): For example, ``"uk.cls.nextsteps"``.
+            Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
 
         Keyword Args:
+            Version (int/None): if omitted, first make a call to
+                retrieve the latest version.
             UseDistinctResultItem (bool/None): ???
             UseDistinctTargetItem (bool/None): ???
 
@@ -1259,11 +1261,11 @@ class ColecticaObject(ColecticaLowLevelAPI):
             dict: The resulting dict is a bit tricky to work with.
             There are two top-level keys and other 2nd-level keys::
 
-                #   Item1 (outer property)
-                #     - Item1: the UUID of the result
-                #     - Item2: the version number of the result
-                #     - Item3: the agency identifier of the result
-                #   Item2: an identifier that indicates the item type of the result.
+                Item1 (outer property)
+                  - Item1: the UUID of the result
+                  - Item2: the version number of the result
+                  - Item3: the agency identifier of the result
+                Item2: an identifier that indicates the item type of the result.
 
             This format is
             `documented here <https://docs.colectica.com/repository/functionality/rest-api/examples/relationship-search/>`_.
@@ -1276,12 +1278,16 @@ class ColecticaObject(ColecticaLowLevelAPI):
 
         Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
         """
+        if version is None:
+            print("getting the version...")
+            version = self.get_item_json(AgencyId, Identifier)["version"]
+            print(f"the version is {version}")
         jsonquery = {
             "ItemTypes": [item_type],
             "TargetItem": {
                 "AgencyId": AgencyId,
                 "Identifier": Identifier,
-                "Version": 1,
+                "Version": version,
             },
         }
         if UseDistinctResultItem is not None:
