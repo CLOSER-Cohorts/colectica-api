@@ -1276,7 +1276,6 @@ class ColecticaObject(ColecticaLowLevelAPI):
 
         Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
         """
-        # TODO: some kwarg still commented out
         jsonquery = {
             "ItemTypes": [item_type],
             "TargetItem": {
@@ -1284,9 +1283,11 @@ class ColecticaObject(ColecticaLowLevelAPI):
                 "Identifier": Identifier,
                 "Version": 1,
             },
-            # "UseDistinctResultItem": UseDistinctResultItem,
-            # "UseDistinctTargetItem": UseDistinctTargetItem,
         }
+        if UseDistinctResultItem is not None:
+            query["UseDistinctResultItem"] = UseDistinctResultItem
+        if UseDistinctTargetItem is not None:
+            query["UseDistinctTargetItem"] = UseDistinctTargetItem
 
         response = requests.post(
             "https://" + self.host + "/api/v1/_query/relationship/bysubject/",
