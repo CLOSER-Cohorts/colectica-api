@@ -1240,7 +1240,7 @@ class ColecticaObject(ColecticaLowLevelAPI):
         AgencyId,
         Identifier,
         *,
-        version=None,
+        Version=None,
         UseDistinctResultItem=True,
         UseDistinctTargetItem=True,
     ):
@@ -1279,16 +1279,16 @@ class ColecticaObject(ColecticaLowLevelAPI):
 
         Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
         """
-        if version is None:
-            print("getting the version...")
-            version = self.get_item_json(AgencyId, Identifier)["version"]
-            print(f"the version is {version}")
-        jsonquery = {
+        if Version is None:
+            # print("getting the version...")
+            Version = self.get_item_json(AgencyId, Identifier)["Version"]
+            # print(f"the version is {Version}")
+        query = {
             "ItemTypes": [item_type],
             "TargetItem": {
                 "AgencyId": AgencyId,
                 "Identifier": Identifier,
-                "Version": version,
+                "Version": Version,
             },
         }
         if UseDistinctResultItem is not None:
@@ -1299,7 +1299,7 @@ class ColecticaObject(ColecticaLowLevelAPI):
         response = requests.post(
             "https://" + self.host + "/api/v1/_query/relationship/bysubject/",
             headers=self.token,
-            json=jsonquery,
+            json=query,
             verify=False,
         )
         if response.ok:
