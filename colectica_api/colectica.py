@@ -1241,13 +1241,41 @@ class ColecticaObject(ColecticaLowLevelAPI):
         UseDistinctResultItem=True,
         UseDistinctTargetItem=True,
     ):
-        """
-        Option 1: retrieve identifiers only
-        https://docs.colectica.com/portal/api/examples/relationship-search/
-        Request Type: POST
-        URL: /api/v1/_query/relationship/bysubject
-        """
+        """Search for items that are related to a particular item.
 
+        Args:
+            item_type (str): for example `C.item_type("Question")` or
+                `C.item_type("Variable")`.
+            search_term (list/str): for example "home" or a list
+                `["work", "home"]`.
+            MaxResults (int): how many results to return or 0 to return
+                all results.
+
+        Keyword Args:
+            UseDistinctResultItem (bool/None): ???
+            UseDistinctTargetItem (bool/None): ???
+
+        Returns:
+            dict: The resulting dict is a bit tricky to work with.
+            There are two top-level keys and other 2nd-level keys::
+
+                #   Item1 (outer property)
+                #     - Item1: the UUID of the result
+                #     - Item2: the version number of the result
+                #     - Item3: the agency identifier of the result
+                #   Item2: an identifier that indicates the item type of the result.
+
+            This format is
+            `documented here <https://docs.colectica.com/repository/functionality/rest-api/examples/relationship-search/>`_.
+
+        For the keyword arguments, if they are omitted (or set to None),
+        then the server chooses a default value.  This might be documented
+        elsewhere.
+
+        This uses the ``/api/v1/_query/relationship/bysubject/`` API call.
+
+        Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
+        """
         # TODO: some kwarg still commented out
         jsonquery = {
             "ItemTypes": [item_type],
