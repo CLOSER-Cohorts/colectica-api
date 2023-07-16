@@ -1259,7 +1259,7 @@ class ColecticaObject(ColecticaLowLevelAPI):
             UseDistinctTargetItem (bool/None): ???
 
         Returns:
-            dict: The resulting dict is a bit tricky to work with.
+            list: A list of dicts, each dict is a bit tricky to work with.
             There are two top-level keys and other 2nd-level keys::
 
                 Item1 (outer property)
