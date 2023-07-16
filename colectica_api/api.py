@@ -425,8 +425,9 @@ class ColecticaLowLevelAPI:
         """Find all items that are somehow connected to a given item.
 
         Args:
-            item_types (list[str]): the item types to search for.
-                or all types if empty.
+            item_types (str/list[str]): the item types to search for.
+                or all types if empty.  You can omit the list if
+                searching for just one item type.
             AgencyId (str):
             Identifier (str):
             MaxResults (int): how many results to return or 0 to return
@@ -444,8 +445,8 @@ class ColecticaLowLevelAPI:
 
         Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
         """
-        # if not isinstance(search_term, list):
-        #    search_term = [search_term]
+        if not isinstance(item_types, list):
+            item_types = [item_types]
         query = {
             "ItemTypes": item_types,
             "MaxResults": MaxResults,
