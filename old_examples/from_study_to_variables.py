@@ -22,9 +22,9 @@ pp = pprint.PrettyPrinter(depth=4)
 
 def get_all_Series(C):
     """
-    return result from general search on Series
+    return result from item search on Series
     """
-    r  = C.general_search("4bd6eef6-99df-40e6-9b11-5b8f64e5cb23", '', 0)
+    r  = C.item_search("4bd6eef6-99df-40e6-9b11-5b8f64e5cb23", '', 0)
     return r
     
     
