@@ -30,3 +30,7 @@ packages = ["colectica_api"]
 
 [tool.setuptools.dynamic]
 version = {attr = 'colectica_api.__version__'}
+
+[tool.black]
+line-length = 88
+target-version = ['py38']

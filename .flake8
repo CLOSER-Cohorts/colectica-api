@@ -1,0 +1,13 @@
+# configuration for flake8 linter
+
+[flake8]
+max-line-length = 127
+# E203 = conflicts with black?
+# F401 = imported but not used
+# E402 = module import must be at top of file
+# E501 = would ignore long lines: black tries to format to 88, but not always possible
+# W503 = conflicts with black?
+extend-ignore = E203, W503
+per-file-ignores =
+    */__init__.py: E402, F401
+

@@ -29,7 +29,7 @@ def get_all_Variable_Group(C, VG_text_file):
     """
     return a text file contains all studies
     """
-    r  = C.general_search("91da6c62-c2c2-4173-8958-22c518d1d40d", '', 0)
+    r  = C.item_search("91da6c62-c2c2-4173-8958-22c518d1d40d", '', 0)
     # print(r['TotalResults'])
     json.dump(r, open(VG_text_file, 'w'))
     
@@ -56,7 +56,7 @@ def get_all_studies(C, study_text_file):
     return a text file contains all studies
     """
     study = "30ea0200-7121-4f01-8d21-a931a182b86d"
-    r  = C.general_search(study, '', 0)
+    r  = C.item_search(study, '', 0)
     # print(r['TotalResults'])
     json.dump(r, open(study_text_file, 'w'))
 

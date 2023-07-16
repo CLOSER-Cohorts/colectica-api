@@ -16,7 +16,7 @@ def get_all_series(C):
     """
     Get a list of all series
     """
-    all_series = C.general_search(C.item_code('Series'),'',MaxResults=0)['Results']
+    all_series = C.item_search(C.item_code('Series'),'',MaxResults=0)['Results']
     return all_series
 
 
