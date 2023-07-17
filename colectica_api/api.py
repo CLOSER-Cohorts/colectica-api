@@ -420,7 +420,7 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )
 
-    def search_relationship(
+    def search_relationship_bysubject(
         self,
         item_type,
         AgencyId,
