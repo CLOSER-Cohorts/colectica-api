@@ -181,7 +181,7 @@ class ColecticaBasicAPI:
         Frontend to Colectica GET: /api/v1/item/{agency}/{id}
 
         https://docs.colectica.com/portal/technical/api/v1/#tag/Item
-        
+
         Args:
             AgencyId (str):
             Identifier (str):
@@ -192,7 +192,7 @@ class ColecticaBasicAPI:
 
         Returns:
             dict: with "Item" itself is in xml format
-         
+
         Exceptions:
             ValueError: the request did not succeed.
         """
@@ -223,11 +223,11 @@ class ColecticaBasicAPI:
         Returns:
             dict:
 
-        
+
         Exceptions:
             ValueError: the request did not succeed.
         """
-        
+
         uri = "https://" + self.host + "/api/v1/json/" + AgencyId + "/" + Identifier
         # use explicit None check so that zero treated
         if version is not None:
@@ -252,7 +252,7 @@ class ColecticaBasicAPI:
         Frontend to Colectica GET: /api/v1/jsonset/{agency}/{id}
 
         https://docs.colectica.com/portal/technical/api/v1/#tag/Item
-        
+
         Args:
             AgencyId (str):
             Identifier (str):
@@ -262,12 +262,12 @@ class ColecticaBasicAPI:
                 a particular version.
 
         Returns:
-            dict: with set infomation     
-            
+            dict: with set infomation
+
         Exceptions:
             ValueError: the request did not succeed.
         """
-        
+
         uri = "https://" + self.host + "/api/v1/jsonset/" + AgencyId + "/" + Identifier
         # use explicit None check so that zero treated
         if version is not None:
@@ -283,7 +283,7 @@ class ColecticaBasicAPI:
         Frontend to Colectica GET: /api/v1/item/{agency}/{id}/history
 
         https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdHistoryGet
-        
+
         Args:
             AgencyId (str):
             Identifier (str):
@@ -315,23 +315,23 @@ class ColecticaBasicAPI:
         """Gets a description of a repository item. 
         The description contains identification, naming, and summary information, 
         but not the entire contents of the item.
-        
+
         Frontend to Colectica GET: /api/v1/item/{agency}/{id}/{version}/description
 
         https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdByVersionDescriptionGet
-        
+
         Args:
             AgencyId (str):
             Identifier (str):
             Version (int):
 
         Returns:
-            dict: 
+            dict:
 
         Exceptions:
             ValueError: the request did not succeed.
         """
-        
+
         response = requests.get(
             "https://"
             + self.host
@@ -348,9 +348,6 @@ class ColecticaBasicAPI:
         if not response.ok:
             raise ValueError(response.text)
         return response.json()
-
-
-
 
     def search_item(
         self,
@@ -724,7 +721,7 @@ class ColecticaBasicAPI:
         Frontend to Colectica GET: /api/v1/set/{agency}/{id}/{version}
 
         https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1SetByAgencyByIdByVersionGet
-        
+
         Args:
             AgencyId (str):
             Identifier (str):
