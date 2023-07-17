@@ -294,8 +294,7 @@ class ColecticaBasicAPI:
         Exceptions:
             ValueError: the request did not succeed.
         """
-        
-        uri = "https://" + self.host + "/api/v1/item/" + AgencyId + "/" + Identifier + "/history"
+        uri = f"https://{self.host}/api/v1/item/{AgencyId}/{Identifier}/history"
         response = requests.get(uri, headers=self.token, verify=False)
         if not response.ok:
             raise ValueError(response.text)
