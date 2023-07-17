@@ -180,8 +180,10 @@ class ColecticaBasicAPI:
 
         Frontend to Colectica GET: /api/v1/item/{agency}/{id}
 
+        https://docs.colectica.com/portal/technical/api/v1/#tag/Item
+        
         Args:
-            AgencyId (str):  foo foo foo
+            AgencyId (str):
             Identifier (str):
 
         Keyword Args:
@@ -189,10 +191,8 @@ class ColecticaBasicAPI:
                 a particular version.
 
         Returns:
-            dict: with "Item" itself is in xml format, as documented at [1].
-
-        [1] https://docs.colectica.com/portal/technical/api/v1/#tag/Item
-        
+            dict: with "Item" itself is in xml format
+         
         Exceptions:
             ValueError: the request did not succeed.
         """
@@ -210,8 +210,10 @@ class ColecticaBasicAPI:
 
         Frontend to Colectica GET: /api/v1/json/{agency}/{id}
 
+        https://docs.colectica.com/portal/technical/api/v1/#tag/Item
+
         Args:
-            AgencyId (str):  foo foo foo
+            AgencyId (str):
             Identifier (str):
 
         Keyword Args:
@@ -219,9 +221,8 @@ class ColecticaBasicAPI:
                 a particular version.
 
         Returns:
-            dict: as documented at [1].
+            dict:
 
-        [1] https://docs.colectica.com/portal/technical/api/v1/#tag/Item
         
         Exceptions:
             ValueError: the request did not succeed.
@@ -250,8 +251,10 @@ class ColecticaBasicAPI:
 
         Frontend to Colectica GET: /api/v1/jsonset/{agency}/{id}
 
+        https://docs.colectica.com/portal/technical/api/v1/#tag/Item
+        
         Args:
-            AgencyId (str):  foo foo foo
+            AgencyId (str):
             Identifier (str):
 
         Keyword Args:
@@ -259,10 +262,8 @@ class ColecticaBasicAPI:
                 a particular version.
 
         Returns:
-            dict: with set infomation, as documented at [1].
-
-        [1] https://docs.colectica.com/portal/technical/api/v1/#tag/Item
-        
+            dict: with set infomation     
+            
         Exceptions:
             ValueError: the request did not succeed.
         """
@@ -281,15 +282,15 @@ class ColecticaBasicAPI:
 
         Frontend to Colectica GET: /api/v1/item/{agency}/{id}/history
 
+        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdHistoryGet
+        
         Args:
-            AgencyId (str):  foo foo foo
+            AgencyId (str):
             Identifier (str):
 
         Returns:
-            dict: as documented at [1].
+            dict:
 
-        [1] https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdHistoryGet
-        
         Exceptions:
             ValueError: the request did not succeed.
         """
@@ -317,16 +318,16 @@ class ColecticaBasicAPI:
         
         Frontend to Colectica GET: /api/v1/item/{agency}/{id}/{version}/description
 
+        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdByVersionDescriptionGet
+        
         Args:
-            AgencyId (str):  foo foo foo
+            AgencyId (str):
             Identifier (str):
             Version (int):
 
         Returns:
-            dict: as documented at [1].
+            dict: 
 
-        [1] https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdByVersionDescriptionGet
-        
         Exceptions:
             ValueError: the request did not succeed.
         """
@@ -759,17 +760,17 @@ class ColecticaBasicAPI:
 
         Frontend to Colectica GET: /api/v1/set/{agency}/{id}/{version}
 
+        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1SetByAgencyByIdByVersionGet
+        
         Args:
-            AgencyId (str):  foo foo foo
+            AgencyId (str):
             Identifier (str):
             Version (str):
             hostname (str):
             tokenHeader (str):
 
         Returns:
-            dict: as documented at [1].
-
-        [1] https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1SetByAgencyByIdByVersionGet
+            dict:
         """
 
         response = requests.get(
