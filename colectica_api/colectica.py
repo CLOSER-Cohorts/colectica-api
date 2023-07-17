@@ -1360,14 +1360,16 @@ class ColecticaObject(ColecticaLowLevelAPI):
         )
 
     def get_a_set_to_df(self, AgencyId: str, Identifier: str, Version: int):
-        """From a study, find all questions.
+        """Find all items that are somehow connected to a given item, using ``get_a_set_typed``
 
-        Example::
+        Args:
+            AgencyId (str):
+            Identifier (str):
+            Version (int):
 
-            'ItemType': 'f196cc07-9c99-4725-ad55-5b34f479cf7d', (Instrument)
-            'AgencyId': 'uk.cls.nextsteps',
-            'Version': 1,
-            'Identifier': 'a6f96245-5c00-4ad3-89e9-79afaefa0c28'
+        Returns:
+            pandas dataframe: with columns ["ItemType", "Agency", "Identifier", "Version"]
+        
         """
 
         l = self.get_a_set_typed(AgencyId, Identifier, Version)
@@ -1381,36 +1383,32 @@ class ColecticaObject(ColecticaLowLevelAPI):
 
 
     def item_info_set(self, AgencyId, Identifier):
-        """From an ID, find it's name and set.
-
-        This is deprecated: you probably want :meth:`item_info_set_json`.
-        """
-        info = self.item_to_dict(AgencyId, Identifier)
-        df = self.get_a_set_to_df(AgencyId, Identifier, str(info['Version']))
-        return df, info
-
-
-    def item_info_set_json(self, AgencyId, Identifier):
-        """From an ID, find it's name and set.
+        """Find latest version of an item and it's set
 
         Args:
-            AgencyId (str): For example, ``"uk.cls.nextsteps"``.
-            Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+            AgencyId (str):
+            Identifier (str):
 
         Returns:
-            tuple: A 2-tuple `(df, info)` consisting of a Pandas dataframe
-            and a dict with info about the item..
+            tuple: A 2-tuple `(df, info)` consisting of a Pandas dataframe of a set
+            and a dict with info about the item.
         """
-        info = self.get_an_item_json(AgencyId, Identifier)
+        info = self.get_item_json(AgencyId, Identifier)
         df = self.get_a_set_to_df(AgencyId, Identifier, str(info['Version']))
         return df, info
-
 
     def get_question_info(self, AgencyId, Identifier):
         """
-        From a question identifier, get information about it
+        From a question identifier, get information about 
+        
+        Args:
+            AgencyId (str):
+            Identifier (str):
+
+        Returns:
+            dict: 
         """
-        question_info = self.get_an_item(AgencyId, Identifier)
+        question_info = self.get_item_xml(AgencyId, Identifier)
         root = remove_xml_ns(question_info["Item"])
 
         question = {}
@@ -1430,6 +1428,13 @@ class ColecticaObject(ColecticaLowLevelAPI):
     def get_question_all(self, AgencyId, Identifier):
         """
         From a question ID, return question info and it's response
+        
+        Args:
+            AgencyId (str):
+            Identifier (str):
+
+        Returns:
+            pandas dataframe: with column name ['QuestionURN', 'QuestionItemName', 'response_type', 'Label', 'DateTypeCode']
         """
         # print(AgencyId, Identifier)
         question_info = self.item_to_dict(AgencyId, Identifier)

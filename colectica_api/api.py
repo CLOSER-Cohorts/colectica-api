@@ -158,20 +158,23 @@ class ColecticaLowLevelAPI:
         return item_dict_inv[item_type_id]
 
     def get_item_xml(self, AgencyId, Identifier, *, version=None):
-        """
-        This request retrieves an item based on known identification information.
-        https://docs.colectica.com/repository/functionality/rest-api/examples/get-item/
-        Request Type: GET
-        URL: /api/v1/item/agenct/Id
+        """Gets an item
+
+        Frontend to Colectica GET: /api/v1/item/{agency}/{id}
 
         Args:
-            AgencyId (str):
+            AgencyId (str):  foo foo foo
             Identifier (str):
 
         Keyword Args:
             version (None/int): If omitted we get latest item or you can specify
                 a particular version.
 
+        Returns:
+            dict: with "Item" itself is in xml format, as documented at [1].
+
+        [1] https://docs.colectica.com/portal/technical/api/v1/#tag/Item
+        
         Exceptions:
             ValueError: the request did not succeed.
         """
@@ -185,23 +188,27 @@ class ColecticaLowLevelAPI:
         return response.json()
 
     def get_item_json(self, AgencyId, Identifier, *, version=None):
-        """
-        This request retrieves an item based on known identification information.
-        https://docs.colectica.com/repository/functionality/rest-api/examples/get-item/
-        Request Type: GET
-        URL: /api/v1/item/agenct/Id
+        """Gets an item
+
+        Frontend to Colectica GET: /api/v1/json/{agency}/{id}
 
         Args:
-            AgencyId (str):
+            AgencyId (str):  foo foo foo
             Identifier (str):
 
         Keyword Args:
             version (None/int): If omitted we get latest item or you can specify
                 a particular version.
 
+        Returns:
+            dict: as documented at [1].
+
+        [1] https://docs.colectica.com/portal/technical/api/v1/#tag/Item
+        
         Exceptions:
             ValueError: the request did not succeed.
         """
+        
         uri = "https://" + self.host + "/api/v1/json/" + AgencyId + "/" + Identifier
         # use explicit None check so that zero treated
         if version is not None:
@@ -220,89 +227,92 @@ class ColecticaLowLevelAPI:
         )
         return self.get_item_xml(*args, **kwargs)
 
-    def get_an_item_jsonset(self, AgencyId, Identifier):
-        """
-        This request retrieves the lastest version of an item based on known identification information.
-        https://docs.colectica.com/portal/api/examples/get-item/
-        Request Type: GET
-        URL: /api/v1/item/agenct/Id
-        """
-        response = requests.get(
-            "https://" + self.host + "/api/v1/jsonset/" + AgencyId + "/" + Identifier,
-            headers=self.token,
-            verify=False,
-        )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+    def get_item_jsonset(self, AgencyId, Identifier):
+        """Gets an item
 
-    def get_an_item_version(self, AgencyId, Identifier, Version):
+        Frontend to Colectica GET: /api/v1/jsonset/{agency}/{id}
+
+        Args:
+            AgencyId (str):  foo foo foo
+            Identifier (str):
+
+        Keyword Args:
+            version (None/int): If omitted we get latest item or you can specify
+                a particular version.
+
+        Returns:
+            dict: with set infomation, as documented at [1].
+
+        [1] https://docs.colectica.com/portal/technical/api/v1/#tag/Item
+        
+        Exceptions:
+            ValueError: the request did not succeed.
         """
-        This request an item based on known identification information.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdByVersionGet
-        Request Type: GET
-        URL: /api/v1/item/{agency}/{id}/{version}
-        """
-        response = requests.get(
-            "https://"
-            + self.host
-            + "/api/v1/item/"
-            + AgencyId
-            + "/"
-            + Identifier
-            + "/"
-            + Version,
-            headers=self.token,
-            verify=False,
-        )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+        
+        uri = "https://" + self.host + "/api/v1/jsonset/" + AgencyId + "/" + Identifier
+        # use explicit None check so that zero treated
+        if version is not None:
+            uri += f"/{version}"
+        response = requests.get(uri, headers=self.token, verify=False)
+        if not response.ok:
+            raise ValueError(response.text)
+        return response.json()
 
     def get_item_version_history(self, AgencyId, Identifier):
+        """Gets the version history of an item.
+
+        Frontend to Colectica GET: /api/v1/item/{agency}/{id}/history
+
+        Args:
+            AgencyId (str):  foo foo foo
+            Identifier (str):
+
+        Returns:
+            dict: as documented at [1].
+
+        [1] https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdHistoryGet
+        
+        Exceptions:
+            ValueError: the request did not succeed.
         """
-        Gets the version history of an item.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdHistoryGet
-        Request Type: GET
-        URL: /api/v1/item/{agency}/{id}/history
-        """
-        response = requests.get(
-            "https://"
-            + self.host
-            + "/api/v1/item/"
-            + AgencyId
-            + "/"
-            + Identifier
-            + "/history",
-            headers=self.token,
-            verify=False,
-        )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+        
+        uri = "https://" + self.host + "/api/v1/item/" + AgencyId + "/" + Identifier + "/history"
+        response = requests.get(uri, headers=self.token, verify=False)
+        if not response.ok:
+            raise ValueError(response.text)
+        return response.json()
 
     def colectica_get_api(self, url, hostname, tokenHeader):
         """
-        Gets the version history of an item.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdHistoryGet
-        Request Type: GET
-        URL: /api/v1/item/{agency}/{id}/history
         """
         response = requests.get(
             "https://" + self.host + "/api/v1/" + url, headers=self.token, verify=False
         )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+        if not response.ok:
+            raise ValueError(response.text)
+        return response.json()
 
     def get_item_description(self, AgencyId, Identifier, Version):
+        """Gets a description of a repository item. 
+        The description contains identification, naming, and summary information, 
+        but not the entire contents of the item.
+        
+        Frontend to Colectica GET: /api/v1/item/{agency}/{id}/{version}/description
+
+        Args:
+            AgencyId (str):  foo foo foo
+            Identifier (str):
+            Version (int):
+
+        Returns:
+            dict: as documented at [1].
+
+        [1] https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdByVersionDescriptionGet
+        
+        Exceptions:
+            ValueError: the request did not succeed.
         """
-        Gets a description of a repository item. The description contains identification, naming,
-        and summary information, but not the entire contents of the item.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1ItemByAgencyByIdByVersionDescriptionGet
-        Request Type: GET
-        URL: /api/v1/item/{agency}/{id}/{version}/description
-        """
+        
         response = requests.get(
             "https://"
             + self.host
@@ -311,14 +321,14 @@ class ColecticaLowLevelAPI:
             + "/"
             + Identifier
             + "/"
-            + Version
+            + str(Version)
             + "/description",
             headers=self.token,
             verify=False,
         )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+        if not response.ok:
+            raise ValueError(response.text)
+        return response.json()
 
     def relationship_bysubject_descriptions(
         self,
@@ -356,9 +366,9 @@ class ColecticaLowLevelAPI:
             json=jsonquery,
             verify=False,
         )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
+        if not response.ok:
+            raise ValueError(response.text)
+        return response.json()
 
     def relationship_byobject_descriptions(
         self,
