@@ -4,8 +4,10 @@ Colectica API implementation details.
 In most cases you'll want to work with :class:`ColecticaObject` instead.
 """
 
-import requests
 import json
+import os
+
+import requests
 
 
 # item type dictionary
@@ -246,7 +248,7 @@ class ColecticaBasicAPI:
         )
         return self.get_item_xml(*args, **kwargs)
 
-    def get_item_jsonset(self, AgencyId, Identifier):
+    def get_item_jsonset(self, AgencyId, Identifier, *, version=None):
         """Gets an item
 
         Frontend to Colectica GET: /api/v1/jsonset/{agency}/{id}
@@ -473,7 +475,7 @@ class ColecticaBasicAPI:
             query["UseDistinctTargetItem"] = UseDistinctTargetItem
 
         url = f"https://{self.host}/api/v1/_query/relationship/bysubject/"
-        if Description:
+        if Descriptions:
             url += "descriptions"
         response = requests.post(url, headers=self.token, json=query, verify=False)
         if response.ok:
@@ -548,7 +550,7 @@ class ColecticaBasicAPI:
             query["UseDistinctTargetItem"] = UseDistinctTargetItem
 
         url = f"https://{self.host}/api/v1/_query/relationship/byobject/"
-        if Description:
+        if Descriptions:
             url += "descriptions"
         response = requests.post(url, headers=self.token, json=query, verify=False)
         if response.ok:
