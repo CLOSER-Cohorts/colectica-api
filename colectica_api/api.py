@@ -300,16 +300,6 @@ class ColecticaBasicAPI:
             raise ValueError(response.text)
         return response.json()
 
-    def colectica_get_api(self, url, hostname, tokenHeader):
-        """
-        """
-        response = requests.get(
-            "https://" + self.host + "/api/v1/" + url, headers=self.token, verify=False
-        )
-        if not response.ok:
-            raise ValueError(response.text)
-        return response.json()
-
     def get_item_description(self, AgencyId, Identifier, Version):
         """Gets a description of a repository item.
 
