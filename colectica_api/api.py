@@ -492,6 +492,81 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )
 
+    def search_relationship_byobject(
+        self,
+        item_type,
+        AgencyId,
+        Identifier,
+        *,
+        Version=None,
+        Descriptions=False,
+        UseDistinctResultItem=True,
+        UseDistinctTargetItem=True,
+    ):
+        """Search for items that are related to a particular item by object.
+
+        Args:
+            item_type (str): for example `C.item_type("Question")` or
+                `C.item_type("Variable")`.
+            AgencyId (str): For example, ``"uk.cls.nextsteps"``.
+            Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+
+        Keyword Args:
+            Version (int/None): if omitted, first make a call to
+                retrieve the latest version.
+            Descriptions (bool): if True, return less detail.
+                Default: False, so return full detail.
+            UseDistinctResultItem (bool/None): ???
+            UseDistinctTargetItem (bool/None): ???
+
+        Returns:
+            list: A list of dicts, each dict is a bit tricky to work with.
+            There are two top-level keys and other 2nd-level keys::
+
+                Item1 (outer property)
+                  - Item1: the UUID of the result
+                  - Item2: the version number of the result
+                  - Item3: the agency identifier of the result
+                Item2: an identifier that indicates the item type of the result.
+
+            This format is
+            `documented here <https://docs.colectica.com/repository/functionality/rest-api/examples/relationship-search/>`_.
+
+        For the keyword arguments, if they are omitted (or set to None),
+        then the server chooses a default value.  This might be documented
+        elsewhere.
+
+        This uses the ``/api/v1/_query/relationship/bysubject/`` API call.
+
+        Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
+        """
+        if Version is None:
+            # print("getting the version...")
+            Version = self.get_item_json(AgencyId, Identifier)["Version"]
+            # print(f"the version is {Version}")
+        query = {
+            "ItemTypes": [item_type],
+            "TargetItem": {
+                "AgencyId": AgencyId,
+                "Identifier": Identifier,
+                "Version": Version,
+            },
+        }
+        if UseDistinctResultItem is not None:
+            query["UseDistinctResultItem"] = UseDistinctResultItem
+        if UseDistinctTargetItem is not None:
+            query["UseDistinctTargetItem"] = UseDistinctTargetItem
+
+        url = f"https://{self.host}/api/v1/_query/relationship/byobject/"
+        if Description:
+            url += "descriptions"
+        response = requests.post(url, headers=self.token, json=query, verify=False)
+        if response.ok:
+            return response.json()
+        raise ValueError(
+            f"Server returned {response.status_code} error: {response.content}"
+        )
+
     def search_set(
         self,
         item_types,
@@ -544,83 +619,6 @@ class ColecticaBasicAPI:
         )
 
     # ----------------------------------------
-
-    def relationship_byobject_descriptions(
-        self,
-        item_type,
-        AgencyId,
-        Identifier,
-        Version,
-        UseDistinctResultItem=True,
-        UseDistinctTargetItem=True,
-    ):
-        """
-        Gets the repository item descriptions for items that match the specified relationship search parameters.
-        The search will query for items that reference the target item specified in the search facet.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1_queryRelationshipByobjectDescriptionsPost
-        Request Type: POST
-        URL: /api/v1/_query/relationship/byobject/descriptions
-        """
-
-        jsonquery = {
-            "ItemTypes": [item_type],
-            "TargetItem": {
-                "AgencyId": AgencyId,
-                "Identifier": Identifier,
-                "Version": Version,
-            },
-            "UseDistinctResultItem": UseDistinctResultItem,
-            "UseDistinctTargetItem": UseDistinctTargetItem,
-        }
-
-        response = requests.post(
-            "https://"
-            + self.host
-            + "/api/v1/_query/relationship/byobject/descriptions",
-            headers=self.token,
-            json=jsonquery,
-            verify=False,
-        )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
-
-    def relationship_byobject(
-        self,
-        item_type,
-        AgencyId,
-        Identifier,
-        Version,
-        UseDistinctResultItem=True,
-        UseDistinctTargetItem=True,
-    ):
-        """
-        Gets a list of items that reference the specified item, according to the provided search options.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1_queryRelationshipByobjectPost
-        Request Type: POST
-        URL: /api/v1/_query/relationship/byobject
-        """
-
-        jsonquery = {
-            "ItemTypes": [item_type],
-            "TargetItem": {
-                "AgencyId": AgencyId,
-                "Identifier": Identifier,
-                "Version": Version,
-            },
-            "UseDistinctResultItem": UseDistinctResultItem,
-            "UseDistinctTargetItem": UseDistinctTargetItem,
-        }
-
-        response = requests.post(
-            "https://" + self.host + "/api/v1/_query/relationship/byobject",
-            headers=self.token,
-            json=jsonquery,
-            verify=False,
-        )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
 
     def relationship_matrix(
         self, AgencyId, Identifier, Version, Predicate, ReverseTraversal=True
