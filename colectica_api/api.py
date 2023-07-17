@@ -139,13 +139,31 @@ def get_jwtToken(hostname, username, password):
     return tokenHeader
 
 
-class ColecticaLowLevelAPI:
+class ColecticaBasicAPI:
     """Acts as a frontend to a Colectica portal.
 
-    You can then make API calls to this.  It caches authentication credentials, etc.
+    This object communicates with a Colectica server.  In most cases, it can
+    use the newer JSON-based api but still has a deprecated implementation of
+    the older XML-based api.  The latter involves a lot of manual parsing of
+    data.
+
+    You make a new ColecticaBasicAPI by using:
+
+    >>> C = ColecticaBasicAPI(hostname, username, password)
+
+    If `hostname`, `username` or `password` are omitted, environment
+    variables `COLECTICA_HOSTNAME`, `COLECTICA_USERNAME` and `COLECTICA_PASSWORD`
+    will be used, if they are defined.
     """
 
-    def __init__(self, hostname, username, password):
+    def __init__(self, hostname=None, username=None, password=None):
+        if hostname is None:
+            hostname = os.environ.get("COLECTICA_HOSTNAME")
+        if username is None:
+            username = os.environ.get("COLECTICA_USERNAME")
+        if password is None:
+            password = os.environ.get("COLECTICA_PASSWORD")
+        print(f"Connecting to {hostname} as user {username}")
         self.host = hostname
         self.token = get_jwtToken(hostname, username, password)
 

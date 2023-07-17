@@ -8,7 +8,7 @@ REST api).
 
 __version__ = "0.0.3.dev0"
 
-from .colectica import ColecticaObject
+from .colectica import ColecticaObject, ColecticaBasicAPI
 
 # what happens on `from colectica_api import *`, also controls docs
-__all__ = ["ColecticaObject"]
+__all__ = ["ColecticaObject", "ColecticaBasicAPI"]

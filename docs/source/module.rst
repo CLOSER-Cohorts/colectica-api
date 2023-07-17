@@ -6,9 +6,3 @@
 
 .. automodule:: colectica_api
        :members:
-
-Low-level code
---------------
-
-.. automodule:: colectica_api.api
-       :members:
