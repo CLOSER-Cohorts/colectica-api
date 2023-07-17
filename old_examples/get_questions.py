@@ -90,7 +90,7 @@ def main():
 
 
     # get all instruments
-#    L = C.item_search('f196cc07-9c99-4725-ad55-5b34f479cf7d', '', 0)
+#    L = C.search_item('f196cc07-9c99-4725-ad55-5b34f479cf7d', '', 0)
 #    print(L['TotalResults']) # 313
 
 #    json.dump(L, open(os.path.join(outdir, 'all_instrument.txt'),'w'))

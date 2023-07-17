@@ -351,7 +351,7 @@ class ColecticaBasicAPI:
 
 
 
-    def item_search(
+    def search_item(
         self,
         item_type,
         search_term,
@@ -419,7 +419,7 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )
 
-    def relationship_search(
+    def search_relationship(
         self,
         item_type,
         AgencyId,
@@ -493,7 +493,7 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )
 
-    def set_search(
+    def search_set(
         self,
         item_types,
         AgencyId,

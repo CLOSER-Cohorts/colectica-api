@@ -24,7 +24,7 @@ def get_all_Series(C):
     """
     return result from item search on Series
     """
-    r  = C.item_search("4bd6eef6-99df-40e6-9b11-5b8f64e5cb23", '', 0)
+    r  = C.search_item("4bd6eef6-99df-40e6-9b11-5b8f64e5cb23", '', 0)
     return r
     
     
