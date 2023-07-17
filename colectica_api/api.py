@@ -424,6 +424,7 @@ class ColecticaBasicAPI:
         Identifier,
         *,
         Version=None,
+        Descriptions=False,
         UseDistinctResultItem=True,
         UseDistinctTargetItem=True,
     ):
@@ -438,6 +439,8 @@ class ColecticaBasicAPI:
         Keyword Args:
             Version (int/None): if omitted, first make a call to
                 retrieve the latest version.
+            Descriptions (bool): if True, return less detail.
+                Default: False, so return full detail.
             UseDistinctResultItem (bool/None): ???
             UseDistinctTargetItem (bool/None): ???
 
@@ -479,12 +482,10 @@ class ColecticaBasicAPI:
         if UseDistinctTargetItem is not None:
             query["UseDistinctTargetItem"] = UseDistinctTargetItem
 
-        response = requests.post(
-            "https://" + self.host + "/api/v1/_query/relationship/bysubject/",
-            headers=self.token,
-            json=query,
-            verify=False,
-        )
+        url = f"https://{self.host}/api/v1/_query/relationship/bysubject/"
+        if Description:
+            url += "descriptions"
+        response = requests.post(url, headers=self.token, json=query, verify=False)
         if response.ok:
             return response.json()
         raise ValueError(
@@ -542,47 +543,7 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )
 
-    # ---------------------------------------
-
-    def relationship_bysubject_descriptions(
-        self,
-        item_type,
-        AgencyId,
-        Identifier,
-        Version,
-        UseDistinctResultItem=True,
-        UseDistinctTargetItem=True,
-    ):
-        """
-        Gets the repository item descriptions for items that match the specified relationship search parameters.
-        The search will query for items referenced by the target item specified in the search facet.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1_queryRelationshipBysubjectDescriptionsPost
-        Request Type: POST
-        URL: /api/v1/_query/relationship/bysubject/descriptions
-        """
-
-        jsonquery = {
-            "ItemTypes": [item_type],
-            "TargetItem": {
-                "AgencyId": AgencyId,
-                "Identifier": Identifier,
-                "Version": Version,
-            },
-            "UseDistinctResultItem": UseDistinctResultItem,
-            "UseDistinctTargetItem": UseDistinctTargetItem,
-        }
-
-        response = requests.post(
-            "https://"
-            + self.host
-            + "/api/v1/_query/relationship/bysubject/descriptions",
-            headers=self.token,
-            json=jsonquery,
-            verify=False,
-        )
-        if not response.ok:
-            raise ValueError(response.text)
-        return response.json()
+    # ----------------------------------------
 
     def relationship_byobject_descriptions(
         self,
