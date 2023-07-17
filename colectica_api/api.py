@@ -312,8 +312,9 @@ class ColecticaBasicAPI:
         return response.json()
 
     def get_item_description(self, AgencyId, Identifier, Version):
-        """Gets a description of a repository item. 
-        The description contains identification, naming, and summary information, 
+        """Gets a description of a repository item.
+
+        The description contains identification, naming, and summary information,
         but not the entire contents of the item.
 
         Frontend to Colectica GET: /api/v1/item/{agency}/{id}/{version}/description
