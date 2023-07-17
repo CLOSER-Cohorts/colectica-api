@@ -627,43 +627,6 @@ class ColecticaBasicAPI:
             if response.json() != []:
                 return response.json()
 
-    def relationship_bysubject(
-        self,
-        item_type,
-        AgencyId,
-        Identifier,
-        Version,
-        UseDistinctResultItem=True,
-        UseDistinctTargetItem=True,
-    ):
-        """
-        Gets a list of items referenced by the specified item, according to the provided search options.
-        https://docs.colectica.com/portal/technical/api/v1/#operation/ApiV1_queryRelationshipBysubjectPost
-        Request Type: POST
-        URL: /api/v1/_query/relationship/bysubject
-        """
-
-        jsonquery = {
-            "ItemTypes": [item_type],
-            "TargetItem": {
-                "AgencyId": AgencyId,
-                "Identifier": Identifier,
-                "Version": Version,
-            },
-            "UseDistinctResultItem": UseDistinctResultItem,
-            "UseDistinctTargetItem": UseDistinctTargetItem,
-        }
-
-        response = requests.post(
-            "https://" + self.host + "/api/v1/_query/relationship/bysubject",
-            headers=self.token,
-            json=jsonquery,
-            verify=False,
-        )
-        if response.ok:
-            if response.json() != []:
-                return response.json()
-
     def relationship_byobject(
         self,
         item_type,
