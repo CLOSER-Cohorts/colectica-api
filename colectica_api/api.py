@@ -8,6 +8,7 @@ import json
 import os
 
 import requests
+import urllib3
 
 
 # item type dictionary
@@ -160,7 +161,7 @@ class ColecticaBasicAPI:
     will be used, if they are defined.
     """
 
-    def __init__(self, hostname=None, username=None, password=None):
+    def __init__(self, hostname=None, username=None, password=None, *, verify_ssl=True):
         if hostname is None:
             hostname = os.environ.get("COLECTICA_HOSTNAME")
         if username is None:
@@ -169,7 +170,15 @@ class ColecticaBasicAPI:
             password = os.environ.get("COLECTICA_PASSWORD")
         print(f"Connecting to {hostname} as user {username}")
         self.host = hostname
+        self.verify = verify_ssl
+        if not self.verify:
+            print("Disabled SSL verification")
+            _be_quiet_urllib3()
         self.token = get_jwtToken(hostname, username, password)
+
+    def _be_quiet_urllib3(self):
+        if not self.verify:
+            urllib3.disable_warnings(urllib3.exceptions.InsecureReuqestWarning)
 
     @classmethod
     def item_code(self, item):
@@ -204,7 +213,7 @@ class ColecticaBasicAPI:
         # use explicit None check so that zero treated
         if version is not None:
             uri += f"/{version}"
-        response = requests.get(uri, headers=self.token, verify=False)
+        response = requests.get(uri, headers=self.token, verify=self.verify)
         if not response.ok:
             raise ValueError(response.text)
         return response.json()
@@ -236,7 +245,7 @@ class ColecticaBasicAPI:
         # use explicit None check so that zero treated
         if version is not None:
             uri += f"/{version}"
-        response = requests.get(uri, headers=self.token, verify=False)
+        response = requests.get(uri, headers=self.token, verify=self.verify)
         if not response.ok:
             raise ValueError(response.text)
         return response.json()
@@ -403,7 +412,7 @@ class ColecticaBasicAPI:
             "https://" + self.host + "/api/v1/_query/",
             headers=self.token,
             json=query,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             return response.json()
