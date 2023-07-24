@@ -15,7 +15,7 @@ pip install colectica_api
 
 ```
 from colectica_api import ColecticaObject
-C = ColecticaObject(colectica.example.com, <username>, <password>)
+C = ColecticaObject("colectica.example.com", <username>, <password>)
 C.search_item(...)
 ```
 
