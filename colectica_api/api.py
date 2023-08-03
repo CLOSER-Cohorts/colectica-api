@@ -8,6 +8,7 @@ import json
 import os
 
 import requests
+import urllib3
 
 
 # item type dictionary
@@ -115,7 +116,7 @@ item_dict = {
 item_dict_inv = {v: k for k, v in item_dict.items()}
 
 
-def get_jwtToken(hostname, username, password):
+def get_jwtToken(hostname, username, password, verify_ssl=True):
     """
     First obtain a JWT access token
     documented at https://docs.colectica.com/portal/technical/deployment/local-jwt-provider/#usage
@@ -128,7 +129,7 @@ def get_jwtToken(hostname, username, password):
         tokenEndpoint,
         json={"username": username, "password": password},
         allow_redirects=True,
-        verify=False,
+        verify=verify_ssl,
     )
 
     if not response.ok:
@@ -160,7 +161,7 @@ class ColecticaBasicAPI:
     will be used, if they are defined.
     """
 
-    def __init__(self, hostname=None, username=None, password=None):
+    def __init__(self, hostname=None, username=None, password=None, *, verify_ssl=True):
         if hostname is None:
             hostname = os.environ.get("COLECTICA_HOSTNAME")
         if username is None:
@@ -169,7 +170,22 @@ class ColecticaBasicAPI:
             password = os.environ.get("COLECTICA_PASSWORD")
         print(f"Connecting to {hostname} as user {username}")
         self.host = hostname
-        self.token = get_jwtToken(hostname, username, password)
+        self.verify = verify_ssl
+        if not self.verify:
+            print("Disabled SSL verification")
+            self._be_quiet_urllib3()
+        self.token = get_jwtToken(hostname, username, password, verify_ssl=self.verify)
+
+    def _be_quiet_urllib3(self):
+        """Disable a warning when user has explicitly disabled SSL verification.
+        
+        If the server does not have a valid ssl certificate, users can
+        disable SSL verification, but they will still get a warning coming
+        from urllib3 library.  This silences the warning, but only when
+        SSL verification is off.
+        """
+        if not self.verify:
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     @classmethod
     def item_code(self, item):
@@ -204,7 +220,7 @@ class ColecticaBasicAPI:
         # use explicit None check so that zero treated
         if version is not None:
             uri += f"/{version}"
-        response = requests.get(uri, headers=self.token, verify=False)
+        response = requests.get(uri, headers=self.token, verify=self.verify)
         if not response.ok:
             raise ValueError(response.text)
         return response.json()
@@ -236,7 +252,7 @@ class ColecticaBasicAPI:
         # use explicit None check so that zero treated
         if version is not None:
             uri += f"/{version}"
-        response = requests.get(uri, headers=self.token, verify=False)
+        response = requests.get(uri, headers=self.token, verify=self.verify)
         if not response.ok:
             raise ValueError(response.text)
         return response.json()
@@ -276,7 +292,7 @@ class ColecticaBasicAPI:
         # use explicit None check so that zero treated
         if version is not None:
             uri += f"/{version}"
-        response = requests.get(uri, headers=self.token, verify=False)
+        response = requests.get(uri, headers=self.token, verify=self.verify)
         if not response.ok:
             raise ValueError(response.text)
         return response.json()
@@ -299,7 +315,7 @@ class ColecticaBasicAPI:
             ValueError: the request did not succeed.
         """
         uri = f"https://{self.host}/api/v1/item/{AgencyId}/{Identifier}/history"
-        response = requests.get(uri, headers=self.token, verify=False)
+        response = requests.get(uri, headers=self.token, verify=self.verify)
         if not response.ok:
             raise ValueError(response.text)
         return response.json()
@@ -337,7 +353,7 @@ class ColecticaBasicAPI:
             + str(Version)
             + "/description",
             headers=self.token,
-            verify=False,
+            verify=self.verify,
         )
         if not response.ok:
             raise ValueError(response.text)
@@ -403,7 +419,7 @@ class ColecticaBasicAPI:
             "https://" + self.host + "/api/v1/_query/",
             headers=self.token,
             json=query,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             return response.json()
@@ -479,7 +495,7 @@ class ColecticaBasicAPI:
         url = f"https://{self.host}/api/v1/_query/relationship/bysubject/"
         if Descriptions:
             url += "descriptions"
-        response = requests.post(url, headers=self.token, json=query, verify=False)
+        response = requests.post(url, headers=self.token, json=query, verify=self.verify)
         if response.ok:
             return response.json()
         raise ValueError(
@@ -554,7 +570,7 @@ class ColecticaBasicAPI:
         url = f"https://{self.host}/api/v1/_query/relationship/byobject/"
         if Descriptions:
             url += "descriptions"
-        response = requests.post(url, headers=self.token, json=query, verify=False)
+        response = requests.post(url, headers=self.token, json=query, verify=self.verify)
         if response.ok:
             return response.json()
         raise ValueError(
@@ -604,7 +620,7 @@ class ColecticaBasicAPI:
             "https://" + self.host + "/api/v1/_query/",
             headers=self.token,
             json=query,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             return response.json()
@@ -635,7 +651,7 @@ class ColecticaBasicAPI:
             "https://" + self.host + "/api/v1/_query/relationship/matrix",
             headers=self.token,
             json=jsonquery,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             if response.json() != []:
@@ -662,7 +678,7 @@ class ColecticaBasicAPI:
             "https://" + self.host + "/api/v1/_query/relationship/matrix/typed",
             headers=self.token,
             json=jsonquery,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             if response.json() != []:
@@ -696,7 +712,7 @@ class ColecticaBasicAPI:
             + "/"
             + Version,
             headers=self.token,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             if response.json() != []:
@@ -721,7 +737,7 @@ class ColecticaBasicAPI:
             + Version
             + "/typed",
             headers=self.token,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             if response.json() != []:
@@ -738,7 +754,7 @@ class ColecticaBasicAPI:
         response = requests.get(
             "https://" + self.host + "/api/v1/set/" + AgencyId + "/" + Identifier,
             headers=self.token,
-            verify=False,
+            verify=self.verify,
         )
         if response.ok:
             if response.json() != []:
