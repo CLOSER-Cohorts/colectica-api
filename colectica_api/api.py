@@ -119,6 +119,9 @@ def get_jwtToken(hostname, username, password):
     """
     First obtain a JWT access token
     documented at https://docs.colectica.com/portal/technical/deployment/local-jwt-provider/#usage
+    
+    Raises:
+        RuntimeError: if cannot get a token, such as invalid login.
     """
     tokenEndpoint = "https://" + hostname + "/token/createtoken"
     response = requests.post(
@@ -128,9 +131,8 @@ def get_jwtToken(hostname, username, password):
         verify=False,
     )
 
-    if response.ok is not True:
-        print("Could not get token. Status code: ", response.status_code)
-        quit()
+    if not response.ok:
+        raise RuntimeError("Could not get token. Status code: ", response.status_code)
 
     jsonResponse = response.json()
     jwtToken = jsonResponse["access_token"]
