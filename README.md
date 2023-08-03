@@ -8,7 +8,7 @@ and the API documentation is available at https://discovery.closer.ac.uk/swagger
 ## Installation
 
 ```
-pip install colectica_api
+pip install colectica-api
 ```
 
 ## Basic usage
@@ -63,6 +63,7 @@ graph LR
   QG[Question Grid] --> CoS[Code Set]
   QG[Question Grid] --> II[Interviewer Instruction]
   Question --> CoS[Code Set]
+  Question --> II[Interviewer Instruction]
   CLS[Code List Set] --> CoS[Code Set]
   CoS --> Category
   CaS[Category Set] --> Category
