@@ -1,8 +1,8 @@
 .. Colectica-API documentation
       Copyright 2023 Jenny Li
 
-``colectica_api`` module
+``colectica-api`` module
 ========================
 
-.. automodule:: colectica_api
+.. automodule:: colectica-api
        :members:
