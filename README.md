@@ -1,9 +1,12 @@
 ## Overview
 
-Colectica Portal can be accessed using the Rest API. 
+This repository provides some utility classes to use the Rest APIs on a Colectica Portal. 
+Developed as an in-house resource for CLOSER, we are making it publicly avaliable for others using the Colectica Portal.
+If you have any requests or find any bugs, please log it under *Issues*.
 
-Other examples are available on the Colectica Docs at https://docs.colectica.com/portal/api/examples/ 
-and the API documentation is available at https://discovery.closer.ac.uk/swagger/index.html
+If you want further advice or support plase contact us at: closer@ucl.ac.uk 
+
+Colectica provide examples at https://docs.colectica.com/portal/api/examples/ and the Colectica Documentation for the API is available at https://discovery.closer.ac.uk/swagger/index.html
 
 ## Installation
 
@@ -21,10 +24,8 @@ C.search_item(...)
 
 See `example.ipynb` for a more complete example.
 
-
-## Closer Discovery relationship graph
-
-Work-in-progress!
+## API relationship graph
+Colectica Portal supports DDI LIfecycle, the graph below, represents the relationship between the many DDI ELements to enable retrieval of related elements, e.g. variables linked to a specific quesiton
 
 ```mermaid
 graph LR
