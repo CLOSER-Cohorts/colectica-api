@@ -4,7 +4,7 @@ This repository provides some utility classes to use the Rest APIs on a Colectic
 Developed as an in-house resource for CLOSER, we are making it publicly avaliable for others using the Colectica Portal.
 If you have any requests or find any bugs, please log it under *Issues*.
 
-If you want further advice or support plase contact us at: closer@ucl.ac.uk 
+If you want further advice or support please contact us at: closer@ucl.ac.uk
 
 Colectica provide examples at https://docs.colectica.com/portal/api/examples/ and the Colectica Documentation for the API is available at https://discovery.closer.ac.uk/swagger/index.html
 
