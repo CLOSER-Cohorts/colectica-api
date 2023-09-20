@@ -32,9 +32,7 @@ graph LR
   QGr[Question Group] --> Concept
   QGr[Question Group] --> Question
   QGr[Question Group] --> QG[Question Grid]
-  QGr[Question Group] --> QGr[Question Group]
   VG[Variable Group] --> Variable
-  VG[Variable Group] --> VG[Variable Group]
   VG[Variable Group] --> Concept
   UnG[Universe Group] --> Universe
   Series --> Organization
@@ -48,7 +46,6 @@ graph LR
   DaC[Data Collection] ==> Instrument
   UnG[Universe Group] --> Universe
   Instrument --> Sequence
-  Sequence --> Sequence
   Sequence --> Statement
   Sequence --> QA[Question Activity]
   QA[Question Activity] --> Question
