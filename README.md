@@ -54,6 +54,7 @@ graph LR
   Study --> DaC[Data Collection]
   Study --> DaF[Data File]
   DaC[Data Collection] --> Organization
+  DaC[Data Collection] ==> Instrument
   UnG[Universe Group] --> Universe
   InS[Instrument Set] --> Instrument
   Instrument --> Sequence
@@ -76,6 +77,11 @@ graph LR
   DaF[Data file] --> DL[Data Layout]
   DaF[Data file] --> VaS[Variable Statistic]
   VaS[Variable Statistic] --> Variable
+  Variable --> VariableRepresentation
+  VariableRepresentation ==> CoS[Code Set]
+  VariableRepresentation ==> Numeric
+  VariableRepresentation ==> Text
+  VariableRepresentation ==> DateTime
   IIS[Interviewer Instruction Set] --> II[Interviewer Instruction]
   loop --> Sequence
 ```
