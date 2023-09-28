@@ -68,5 +68,5 @@ graph LR
   VariableRepresentation ==> Numeric
   VariableRepresentation ==> Text
   VariableRepresentation ==> DateTime
-  loop --> Sequence
+  Loop --> Sequence
 ```
