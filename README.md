@@ -25,7 +25,7 @@ C.search_item(...)
 See `example.ipynb` for a more complete example.
 
 ## API relationship graph
-Colectica Portal supports DDI LIfecycle, the graph below, represents the relationship between the various DDI Elements to enable retrieval of related elements, e.g. variables linked to a specific quesiton
+Colectica Portal supports DDI LIfecycle, the graph below, represents the relationship between the various DDI Elements to enable retrieval of related elements, e.g. variables linked to a specific question
 
 ```mermaid
 graph LR
