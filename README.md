@@ -35,6 +35,7 @@ graph LR
   VG[Variable Group] --> Variable
   VG[Variable Group] --> Concept
   UnG[Universe Group] --> Universe
+  Variable --> Question
   Group --> Organization
   Group --> Universe
   Group --> Study
