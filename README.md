@@ -35,9 +35,9 @@ graph LR
   VG[Variable Group] --> Variable
   VG[Variable Group] --> Concept
   UnG[Universe Group] --> Universe
-  Series --> Organization
-  Series --> Universe
-  Series --> Study
+  Group --> Organization
+  Group --> Universe
+  Group --> Study
   Study --> Organization
   Study --> Universe
   Study --> DaC[Data Collection]
