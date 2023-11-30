@@ -6,7 +6,8 @@ If you have any requests or find any bugs, please log it under *Issues*.
 
 If you want further advice or support please contact us at: closer@ucl.ac.uk
 
-Colectica provide examples at https://docs.colectica.com/portal/api/examples/ and the Colectica Documentation for the API is available at https://discovery.closer.ac.uk/swagger/index.html
+Colectica provide examples at https://docs.colectica.com/repository/functionality/rest-api/examples/
+and the Colectica Documentation for the API is available at https://discovery.closer.ac.uk/swagger/index.html
 
 ## Installation
 
