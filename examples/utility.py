@@ -259,3 +259,36 @@ for x in allDataSets.json()['Results']:
     if (not x['AgencyId'] in agencies):
         print (x['AgencyId'])
     count = count + 1
+
+REMOVE QUESTION REFERENCE FROM Variable
+
+
+transactionResponse=createTransaction()
+transactionId = transactionResponse.json()['TransactionId']
+print(transactionId)
+count=0
+for x in uniqueVariables:
+    print(count)
+    agencyId=x.split(":")[2]
+    variableId=x.split(":")[3]
+    version=x.split(":")[4]
+    fragmentXML = C.get_item_xml(agencyId, variableId, version=version)['Item']
+    xmlTree=defusedxml.ElementTree.fromstring(fragmentXML)
+    removeElement=xmlTree.findall(".//{ddi:logicalproduct:3_2}Variable/{ddi:reusable:3_2}QuestionReference")
+    updateItem=False
+    count=count+1
+    for y in removeElement:
+        agency = y.findall(".//{ddi:reusable:3_2}Agency")[0].text    
+        id = y.findall(".//{ddi:reusable:3_2}ID")[0].text
+        version = y.findall(".//{ddi:reusable:3_2}Version")[0].text
+        urn = "urn:ddi:" + agency + ":" + id + ":" + version
+        if urn in orphanQuestionItemsList:
+            print(urn + " is orphaned")
+            xmlTree.findall("./{ddi:logicalproduct:3_2}Variable")[0].remove(y)
+            updateItem=True
+        else:
+            print(urn + " is not orphaned")
+    if updateItem:        
+        fragmentString = defusedxml.ElementTree.tostring(xmlTree, encoding='unicode')    
+        response2=addItemToTransaction(agencyId, variableId, version, transactionId, fragmentString)
+        print(response2)
