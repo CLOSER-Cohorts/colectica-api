@@ -50,15 +50,18 @@ def followRelationship(agencyId, identifier, version, referencingItemType):
     dataRelationships=getRelatedItemsByObject(agencyId, identifier, version, [referencingItemType])
     if (len(dataRelationships.json()) > 0):
         firstMatchingItem=dataRelationships.json()[0] 
-        d= {'AgencyId': firstMatchingItem['Item1']['Item3'], 'Identifier': firstMatchingItem['Item1']['Item1'], 'Version': firstMatchingItem['Item1']['Item2'] }
+        d= {'AgencyId': firstMatchingItem['Item1']['Item3'], 'Identifier': firstMatchingItem['Item1']['Item1'], 'Version': firstMatchingItem['Item1']['Item2'], 'ItemType': firstMatchingItem['Item2'] }
     return d
 
 CHECK FOR ORPHANS IN LIST OF VARIABLES (CONTAINED IN ITEMS VAR)
 
-orphanedItems=[]
 items=['urn:ddi:uk.cls.bcs70:53da65fa-e82e-452b-8a91-f8f05003f9e6:3', 'urn:ddi:uk.alspac:7c0b8846-7161-4a12-aa1c-dbcd90801ef4:5']
+orphanedItems=[]
+count=0
 referencingItemTypes=["f39ff278-8500-45fe-a850-3906da2d242b", "a51e85bb-6259-4488-8df2-f08cb43485f8"]
 for x in items:
+    print(count)
+    count=count+1
     currentItemInChain={'AgencyId': x.split(":")[2], 'Identifier': x.split(":")[3], 'Version': x.split(":")[4], 'ItemType': '683889c6-f74b-4d5e-92ed-908c0a42bb2d' }
     for referencingItemType in referencingItemTypes:
         nextItemInChain = followRelationship(currentItemInChain['AgencyId'], currentItemInChain['Identifier'], currentItemInChain['Version'], referencingItemType)
@@ -71,10 +74,16 @@ for x in items:
 
 CHECK FOR ORPHANS IN LIST OF QUESTIONS (CONTAINED IN ITEMS VAR)
 
-orphanedItems=[]
+questionItemIdentifier = 'a1bb19bd-a24a-4443-8728-a6ad80eb42b8'
+allQuestionItemsMetadata=C.search_item(questionItemIdentifier, '', 0)
+
 items=['urn:ddi:uk.alspac:d9f3fd06-161c-42f8-9dfb-5755fb159c08:1', 'urn:ddi:uk.iser.ukhls:f46f6542-cf63-4599-9bdf-17fba2af8bbf:2', 'urn:ddi:uk.lha:bc19fa2e-bb53-4d73-a015-ff93ef0b40ba:1']
+count=0
+orphanedItems=[]
 referencingItemTypes=['f433e43d-29a4-4c25-9610-9dd9819a0519']
 for x in items:
+    print(count)
+    count=count+1    
     currentItemInChain={'AgencyId': x.split(":")[2], 'Identifier': x.split(":")[3], 'Version': x.split(":")[4], 'ItemType': '683889c6-f74b-4d5e-92ed-908c0a42bb2d' }
     for referencingItemType in referencingItemTypes:
         nextItemInChain = followRelationship(currentItemInChain['AgencyId'], currentItemInChain['Identifier'], currentItemInChain['Version'], referencingItemType)
@@ -231,6 +240,9 @@ for x in allDataSets.json()['Results']:
 CONVERT XML FRAGMENT TO fragmentString
 fragmentString = defusedxml.ElementTree.tostring(xmlTree, encoding='unicode')
 
+def elemToString(xmlTree):
+    return defusedxml.ElementTree.tostring(xmlTree, encoding='unicode')
+
 GET RELATED ITEMS
 
 def getRelatedItemsByObject(agency_id, item_id, version, typeOfItem):
@@ -266,6 +278,10 @@ with open('questionItemsUrns.txt', encoding="utf-8") as f:
     orphanQuestionItems = f.read()
 orphanQuestionItemsList=orphanQuestionItems.split("\n")
 
+f = open('orphanVariables.txt', 'w', encoding="utf-8")
+f.write('\n'.join(orphanedItems))
+f.close()
+
 
 EXAMPLE DEPRECATING ITEMS
 
@@ -282,10 +298,29 @@ def getDeprecateBody(agency_id, item_id, version):
         "applyToAllVersions": True
         }
 
-
-def deprecateItem(agency_id, item_id, version):
-    query=getDeprecateBody(agency_id, item_id, version)
+def getDeprecateBodyFromList(itemList):
+    listOfIds=[]
+    for x in itemList:
+        listOfIds.append({"agencyId": x.split(":")[2], "identifier": x.split(":")[3], "version": x.split(":")[4]})
     
+    return {
+        "ids": listOfIds,
+        "state": True,
+        "applyToAllVersions": True
+        }
+
+def deprecateListOfItems(items):
+    query=getDeprecateBodyFromList(items)
+    response = requests.post(
+            "https://" + C.host + "/api/v1/item/_updateState",
+            headers=C.token,
+            json=query,
+            verify=False
+        )
+    return response
+
+def deprecateItem(agency_id, item_id, version):    
+    query=getDeprecateBody(agency_id, item_id, version)
     response = requests.post(
             "https://" + C.host + "/api/v1/item/_updateState",
             headers=C.token,
@@ -369,8 +404,8 @@ count=0
 for x in updatedRefs:
     print(count)
     count = count +1
-    fragmentString = defusedxml.ElementTree.tostring(x[3], encoding='unicode')
-    addItemToTransaction(x[2], x[0], x[1], transactionId, fragmentString, x[4])
+    fragmentString = defusedxml.ElementTree.tostring(x[4], encoding='unicode')
+    addItemToTransaction(x[1], x[0], x[2], transactionId, fragmentString, x[3])
 
         
 GET NAMESPACE FOR AN ELEMENT
@@ -408,29 +443,35 @@ def getElement(xmlTree, elementName, agency, identifier, version):
 def getCurrentStateOfReferencingItem(storedStateofReferencingItem):
     updatedReferencingItem = [x for x in updatedRefs if x[0]==storedStateofReferencingItem['Item1']['Item1']]
     if (len(updatedReferencingItem)>0):
-        referencingItem = updatedReferencingItem[0][3]
+        referencingItem = updatedReferencingItem[0][4]
     else:
         fragmentXML = C.get_item_xml(storedStateofReferencingItem['Item1']['Item3'], storedStateofReferencingItem['Item1']['Item1'], version=storedStateofReferencingItem['Item1']['Item2'])['Item']
         referencingItem = defusedxml.ElementTree.fromstring(fragmentXML)
     return referencingItem
 
-def updateListofReferencingItems(itemWithoutReference, agency, identifier, version, updatedRefsCopy):
+def updateListofReferencingItems(itemWithoutReference, agency, identifier, version, itemType, updatedRefsCopy):
     if ([x[0] for x in updatedRefsCopy].count(identifier) > 0):
         indexOfUpdatedRef = [x[0] for x in updatedRefsCopy].index(identifier)
-        updatedRefsCopy[indexOfUpdatedRef] = (identifier, agency, version, itemWithoutReference)
+        updatedRefsCopy[indexOfUpdatedRef] = (identifier, agency, version, itemType, itemWithoutReference)
     else:
-        updatedRefsCopy.append((identifier, agency, version, itemWithoutReference))            
+        updatedRefsCopy.append((identifier, agency, version, itemType, itemWithoutReference))            
 
+referencingElementNames = {
+    "a1bb19bd-a24a-4443-8728-a6ad80eb42b8":  {
+      "5cc915a1-23c9-4487-9613-779c62f8c205": "QuestionItemReference",
+      "683889c6-f74b-4d5e-92ed-908c0a42bb2d": "QuestionReference",
+      "91da6c62-c2c2-4173-8958-22c518d1d40d": "VariableReference"
+    }
+}
 
-#referenceElementName='QuestionItemReference'
-referenceElementName='QuestionReference'
-elementInReferencingItemName='QuestionGroup'
-#referencingItemTypes= ['5cc915a1-23c9-4487-9613-779c62f8c205']
-referencingItemTypes= ['683889c6-f74b-4d5e-92ed-908c0a42bb2d']
+GET VARIABLE STATISTICS THAT REFERENCE VARIABLES
+
+referencingItemTypes= ['91da6c62-c2c2-4173-8958-22c518d1d40d']
+referencedItemType = "a1bb19bd-a24a-4443-8728-a6ad80eb42b8"
 updatedRefs=[]
-orphanQuestionItemsList=['urn:ddi:uk.cls.nextsteps:3ffa2680-1b67-40f7-a059-fbd787ce68fd:1']
 count=0
-for x in orphanQuestionItems:
+totalItemReferences=0
+for x in orphanVariableItems:
     print(count)
     count = count + 1
     agencyId=x.split(":")[2]
@@ -438,9 +479,100 @@ for x in orphanQuestionItems:
     version=x.split(":")[4]
     referencingItems=getRelatedItemsByObject(agencyId, identifier, version, referencingItemTypes).json()
     for y in referencingItems:
+            totalItemReferences=totalItemReferences+1
+            updatedRefs.append(x)
+
+
+#QUESTION
+#referencingItemTypes= ['5cc915a1-23c9-4487-9613-779c62f8c205', '683889c6-f74b-4d5e-92ed-908c0a42bb2d']
+#referencedItemType = "a1bb19bd-a24a-4443-8728-a6ad80eb42b8"
+#VARIABLE
+referencingItemTypes= ['3b438f9f-e039-4eac-a06d-3fa1aedf48bb']
+referencedItemType = "a1bb19bd-a24a-4443-8728-a6ad80eb42b8"
+updatedRefs=[]
+count=0
+totalItemReferences=0
+for x in orphanVariableItems:
+    print(count)
+    count = count + 1
+    agencyId=x.split(":")[2]
+    identifier=x.split(":")[3]
+    version=x.split(":")[4]
+    referencingItems=getRelatedItemsByObject(agencyId, identifier, version, referencingItemTypes).json()
+    for y in referencingItems:
+            totalItemReferences=totalItemReferences+1
             fragmentXML=C.get_item_xml(y['Item1']['Item3'], y['Item1']['Item1'], version=y['Item1']['Item2'])['Item']
             referencingItem = getCurrentStateOfReferencingItem(y)
+            referenceElementName=referencingElementNames[referencedItemType][y['Item2']]
             referenceToRemove = getElement(referencingItem, referenceElementName, agencyId, identifier, version)
             referencingItem[0].remove(referenceToRemove)
-            updatedRefsCopy=updatedRefs
-            updateListofReferencingItems(referencingItem, y['Item1']['Item3'], y['Item1']['Item1'], y['Item1']['Item2'], updatedRefs)
+            updateListofReferencingItems(referencingItem, y['Item1']['Item3'], y['Item1']['Item1'], y['Item1']['Item2'], y['Item2'], updatedRefs)
+
+
+# VALIDATE THE REMOVAL OF REFERENCES
+
+allReferencesToOrphansBefore = []
+allReferencesToOrphansAfter = []
+changedVarGroups=[]
+differenceInNumberOfReferences=0
+totalNumOrphanRefs=0
+count=0
+numberOfGroupsAltered=0
+numberOfOrphanIdsBefore=0
+numberOfOrphanIdsAfter=0
+allOrphanRefs=[]
+
+totalReferences=0
+totalNumberOfOrphanIdsBefore=0
+for x in updatedRefs:
+    count = count + 1
+    print(count)
+    referenceElementName=referencingElementNames[referencedItemType][x[3]]
+    agencyId=x[1]
+    identifier=x[0]
+    version=x[2]
+    # GET THE VERSION OF THE ITEM FROM BEFORE THE TRANSACTION THAT REMOVED ORPHAN REFS
+    fragmentXML=C.get_item_xml(agencyId, identifier, version=version)['Item']
+    xmlTree=defusedxml.ElementTree.fromstring(fragmentXML)
+    referencesBefore=getReferences(xmlTree, referenceElementName)
+    totalReferences=totalReferences+len(referencesBefore)
+    
+    orphanRefsBefore = getOrphans(referencesBefore)
+    totalNumberOfOrphanIdsBefore = totalNumberOfOrphanIdsBefore + len(orphanRefsBefore)
+    allReferencesToOrphansBefore = allReferencesToOrphansBefore + orphanRefsBefore
+    
+    # NOW GET LATEST VERSION OF ITEM
+    fragmentXML=C.get_item_xml(agencyId, identifier)['Item']
+    xmlTree=defusedxml.ElementTree.fromstring(fragmentXML)
+    
+    referencesAfter=getReferences(xmlTree, referenceElementName)
+    orphanRefsAfter = getOrphans(referencesAfter)        
+    numberOfOrphanIdsAfter = numberOfOrphanIdsAfter + len(orphanRefsAfter)
+     
+    print("BEFORE: " + str(len(referencesBefore)) + ", AFTER: " + str(len(referencesAfter)))    
+    if (len(referencesBefore)!=len(referencesAfter)):
+        changedVarGroups.append(x)
+        differenceInNumberOfReferences=differenceInNumberOfReferences+(len(orphanRefsBefore)-len(orphanRefsAfter))
+        totalNumOrphanRefs=totalNumOrphanRefs+len(orphanRefsBefore)
+
+def getElementName(element):
+    startOfTagName = element.tag.index("}")+1
+    return element.tag[startOfTagName:]
+    
+def getOrphans(referencesBefore):
+    allOrphans=[]
+    for y2 in referencesBefore: 
+        triple=getTriple(y2)
+        referenceUri= ("urn:ddi:" + triple['Agency'] + ":" + triple['ID'] + ":" + triple['Version'])    
+        if (orphanVariableItems.count(referenceUri)>0):
+            allOrphans.append(referenceUri)
+    return(allOrphans)
+                
+
+def getReferences(xmlTree, referenceElementName):
+    references=[]
+    for y2 in xmlTree.findall(".//"):
+        if getElementName(y2)==referenceElementName:
+            references.append(y2)
+    return(references)            
+
