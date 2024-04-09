@@ -154,21 +154,30 @@ NEED TO REPLACE GETALLITEMSOFATYPE WITH SEARCH_ITEM
 
 DASHBOARD 1
 count=1
+orphanCount=0
 allDataSets=getAllItemsOfAType("a51e85bb-6259-4488-8df2-f08cb43485f8")
 for x in allDataSets.json()['Results']:
-    y = getRelatedItemsByObject(x['AgencyId'], x['Identifier'], x['Version'], "30ea0200-7121-4f01-8d21-a931a182b86d")    
+    y = getRelatedItemsByObject(x['AgencyId'], x['Identifier'], x['Version'], ["30ea0200-7121-4f01-8d21-a931a182b86d"])    
     print(str(count) + ": " + str(len(y.json())))
+    if len(y.json())<1:
+        orphanCount=orphanCount+1
     count=count+1
 
 NEED TO REPLACE GETRELATEDITEMSBYOBJECT WITH search_relationship_byobject. W
 
 DASHBOARD 2
 count=1
+orphanCount=0
 for x in allDataSets.json()['Results']:
+    print(count)
     fragmentXML=C.get_item_xml(x['AgencyId'], x['Identifier'])['Item']
     xmlTree=defusedxml.ElementTree.fromstring(fragmentXML)
-    z=str(len(xmlTree.findall(".//{ddi:physicalinstance:3_2}DataFileURI[@isPublic='true']")))
+    z=len(xmlTree.findall(".//{ddi:physicalinstance:3_2}DataFileURI[@isPublic='true']"))
+    if z<1:
+       orphanCount=orphanCount+1
     count=count+1
+
+    FOUND 2 ORPHANS HERE
 
  DASHBOARD 3
 
@@ -179,7 +188,7 @@ for x in allDataSets.json()['Results']:
 count=1
 allVariables=getAllItemsOfAType("683889c6-f74b-4d5e-92ed-908c0a42bb2d")
 for x in allVariables.json()['Results']: 
-    y = getRelatedItemsByObject(x['AgencyId'], x['Identifier'], x['Version'], ["a51e85bb-6259-4488-8df2-f08cb43485f8", "f39ff278-8500-45fe-a850-3906da2d242b"])    
+    y = getRelatedItemsByObject(x['AgencyId'], x['Identifier'], x['Version'], ["    88-8df2-f08cb43485f8", "f39ff278-8500-45fe-a850-3906da2d242b"])    
     print(str(count) + ": " + str(len(y.json())))
     count=count+1
 
@@ -271,7 +280,7 @@ FILE INPUT/OUTPUT
 
 with open('orphanedVariablesUrns.txt', encoding="utf-8") as f:
     orphanVariableItems = f.read()
-orphanVariablesUrnValuesList=orphanVariableItems.split("\n")   
+orphanVariablesList=orphanVariableItems.split("\n")   
 
 
 with open('questionItemsUrns.txt', encoding="utf-8") as f:
