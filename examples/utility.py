@@ -163,11 +163,10 @@ for x in allDataSets.json()['Results']:
         orphanCount=orphanCount+1
     count=count+1
 
-NEED TO REPLACE GETRELATEDITEMSBYOBJECT WITH search_relationship_byobject. W
-
 DASHBOARD 2
 count=1
 orphanCount=0
+orphans=[]
 for x in allDataSets.json()['Results']:
     print(count)
     fragmentXML=C.get_item_xml(x['AgencyId'], x['Identifier'])['Item']
@@ -175,6 +174,7 @@ for x in allDataSets.json()['Results']:
     z=len(xmlTree.findall(".//{ddi:physicalinstance:3_2}DataFileURI[@isPublic='true']"))
     if z<1:
        orphanCount=orphanCount+1
+       orphans.append(x)
     count=count+1
 
     FOUND 2 ORPHANS HERE
