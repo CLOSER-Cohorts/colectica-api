@@ -599,7 +599,7 @@ C = ColecticaObject(hostname, username, password)
 # item type. The UUIDs for different item types are at 
 # https://docs.colectica.com/repository/technical/item-type-identifiers/
  
-weightVariables=C.search_item('683889c6-f74b-4d5e-92ed-908c0a42bb2d', 'weight', 10)
+weightVariables=C.search_item(C.item_code('Variable'), 'weight', 10)
  
 # Print the labels for the variables...
 print([x['Label'] for x in weightVariables['Results']])
