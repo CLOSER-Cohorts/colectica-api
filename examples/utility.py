@@ -583,5 +583,25 @@ def getReferences(xmlTree, referenceElementName):
     for y2 in xmlTree.findall(".//"):
         if getElementName(y2)==referenceElementName:
             references.append(y2)
-    return(references)            
+    return(references)
+
+
+# Code for searching for variables with a certain word ('weight') and printing the labels
+# of those variables
+
+from colectica_api import ColecticaObject
+hostname="discovery.closer.ac.uk"
+username=YOUR USERNAME HERE
+password=YOUR PASSWORD HERE
+C = ColecticaObject(hostname, username, password)
+ 
+# Note that 683889c6-f74b-4d5e-92ed-908c0a42bb2d is a UUID identifying the Variable
+# item type. The UUIDs for different item types are at 
+# https://docs.colectica.com/repository/technical/item-type-identifiers/
+ 
+weightVariables=C.search_item('683889c6-f74b-4d5e-92ed-908c0a42bb2d', 'weight', 10)
+ 
+# Print the labels for the variables...
+print([x['Label'] for x in weightVariables['Results']])
+            
 
