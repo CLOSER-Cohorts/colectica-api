@@ -582,7 +582,8 @@ class ColecticaBasicAPI:
         item_types,
         AgencyId,
         Identifier,
-        MaxResults=1,
+        MaxResults=0,
+        Version=1,
     ):
         """Find all items that are somehow connected to a given item.
 
@@ -592,8 +593,11 @@ class ColecticaBasicAPI:
                 searching for just one item type.
             AgencyId (str):
             Identifier (str):
-            MaxResults (int): how many results to return or 0 to return
-                all results.
+
+        Keyword Args:
+            MaxResults (int): how many results to return or 0 (default)
+                to return all results.
+            Version (int): which version to get, defaults to 1.
 
         Returns:
             dict: the results of the search, including list of matches,
@@ -613,7 +617,7 @@ class ColecticaBasicAPI:
             "ItemTypes": item_types,
             "MaxResults": MaxResults,
             "searchSets": [
-                {"agencyId": AgencyId, "identifier": Identifier, "version": 1}
+                {"agencyId": AgencyId, "identifier": Identifier, "version": Version}
             ],
         }
         response = requests.post(
