@@ -764,6 +764,53 @@ class ColecticaBasicAPI:
             if response.json() != []:
                 return response.json()
 
+    def update_state(
+        self,
+        AgencyId,
+        Identifier,
+        *,
+        Version=None,
+        State=False,
+        ApplyToAllVersions=True
+    ):
+        """Updates the Deprecated State of a set of items
+        Args:
+            AgencyId (str): For example, ``"uk.cls.nextsteps"``.
+            Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+          
+        Keyword Args:
+            Version (int/None): if omitted, first make a call to
+                retrieve the latest version.
+            State: (boolean/None): if omitted, item's deprecated state is
+                set to 'false'.
+            ApplyToAllVersions: if omitted, all versions of item have their
+                deprecation status updated.    
+        
+        Returns:
+            HTTP status code indicating success or failure of operation, e.g.
+            success=200
+        """
+        if Version is None:
+            Version = self.get_item_json(AgencyId, Identifier)["Version"]
+        query = {
+            "ids": [
+                {
+                "agencyId": AgencyId,
+                "identifier": Identifier,
+                "version": Version
+                }
+            ],
+            "state": State,
+            "applyToAllVersions": ApplyToAllVersions
+        }
+        
+        url = f"https://{self.host}/api/v1/item/_updateState"
+        response = requests.post(url, headers=self.token, json=query, verify=self.verify)
+        if response.ok:
+            return response
+        raise ValueError(
+            f"Server returned {response.status_code} error: {response.content}"
+        )
 
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
