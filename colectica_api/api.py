@@ -793,6 +793,10 @@ class ColecticaBasicAPI:
         Returns:
             HTTP status code indicating success or failure of operation, e.g.
             success=200
+    
+        This uses the ``/api/v1/item/_updateState`` API call.
+
+        Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Item/paths/~1api~1v1~1item~1_updateState/post
         """
         query = {
             "ids": items,
