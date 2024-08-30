@@ -783,6 +783,7 @@ class ColecticaBasicAPI:
             ]``. All three of agencyId, identifier and version must be
             specified in order for the deprecation status of an item to be
             updated.
+
         Keyword Args:
             State: (boolean/None): if omitted, item's deprecated state is
                 set to 'false'.
