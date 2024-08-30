@@ -766,8 +766,7 @@ class ColecticaBasicAPI:
 
     def update_state(
         self,
-        AgencyId,
-        Identifier,
+        items,
         *,
         Version=None,
         State=False,
@@ -775,12 +774,16 @@ class ColecticaBasicAPI:
     ):
         """Updates the Deprecated State of a set of items
         Args:
-            AgencyId (str): For example, ``"uk.cls.nextsteps"``.
-            Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
-          
+            items: For example, ``[
+                {
+                    "agencyId": "uk.closer",
+                    "identifier": "9da68988-f9e4-48b3-996b-fbcbd3c5d1f6",
+                    "version": 2
+                }
+            ]``. All three of agencyId, identifier and version must be
+            specified in order for the deprecation status of an item to be
+            updated.
         Keyword Args:
-            Version (int/None): if omitted, first make a call to
-                retrieve the latest version.
             State: (boolean/None): if omitted, item's deprecated state is
                 set to 'false'.
             ApplyToAllVersions: if omitted, all versions of item have their
@@ -790,16 +793,8 @@ class ColecticaBasicAPI:
             HTTP status code indicating success or failure of operation, e.g.
             success=200
         """
-        if Version is None:
-            Version = self.get_item_json(AgencyId, Identifier)["Version"]
         query = {
-            "ids": [
-                {
-                "agencyId": AgencyId,
-                "identifier": Identifier,
-                "version": Version
-                }
-            ],
+            "ids": items,
             "state": State,
             "applyToAllVersions": ApplyToAllVersions
         }
