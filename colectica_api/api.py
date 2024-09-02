@@ -768,7 +768,6 @@ class ColecticaBasicAPI:
         self,
         items,
         *,
-        Version=None,
         State=False,
         ApplyToAllVersions=True
     ):
@@ -798,6 +797,30 @@ class ColecticaBasicAPI:
 
         Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Item/paths/~1api~1v1~1item~1_updateState/post
         """
+
+        items_lower_case_fields = [{key.lower(): value for key, value in dictionary.items()} for dictionary in items]
+        itemsWithNoAgencyId=[i for i, e in enumerate(['agencyid' in x for x in items_lower_case_fields]) if e == False]
+        
+        itemsWithNoIdentifier=[i for i, e in enumerate(['identifier' in x for x in items_lower_case_fields]) if e == False]
+        
+        itemsWithNoVersion=[i for i, e in enumerate(['version' in x for x in items_lower_case_fields]) if e == False]
+        
+        if (len(itemsWithNoAgencyId)>0):
+            print("\nThe following item(s) did not have an agency id specified: ")
+            print([items[i] for i in itemsWithNoAgencyId])
+
+        if (len(itemsWithNoIdentifier)>0):
+            print("\nThe following item(s) did not have an identifier specified: ")
+            print([items[i] for i in itemsWithNoIdentifier])
+                
+        if (len(itemsWithNoVersion)>0):
+            print("\nThe following item(s) did not have a version specified: ")
+            print([items[i] for i in itemsWithNoVersion])
+            
+        if (len(itemsWithNoAgencyId)>0 or len(itemsWithNoIdentifier)>0 or len(itemsWithNoVersion)>0):
+            print("\nPlease ensure that all elements in the items array contain agencyId, identifier, and version fields.")
+            return    
+
         query = {
             "ids": items,
             "state": State,
