@@ -771,7 +771,8 @@ class ColecticaBasicAPI:
         State=False,
         ApplyToAllVersions=True
     ):
-        """Updates the Deprecated State of a set of items
+        """Updates the Deprecated State of a set of items.
+        
         Args:
             items: For example, ``[
                 {
