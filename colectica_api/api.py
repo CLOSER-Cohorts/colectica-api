@@ -772,7 +772,7 @@ class ColecticaBasicAPI:
         ApplyToAllVersions=True
     ):
         """Updates the Deprecated State of a set of items.
-        
+
         Args:
             items: For example, ``[
                 {
@@ -806,21 +806,22 @@ class ColecticaBasicAPI:
         
         itemsWithNoVersion=[i for i, e in enumerate(['version' in x for x in items_lower_case_fields]) if e == False]
         
+        errorDetails = ""
+
         if (len(itemsWithNoAgencyId)>0):
-            print("\nThe following item(s) did not have an agency id specified: ")
-            print([items[i] for i in itemsWithNoAgencyId])
+            errorDetails+=("The following item(s) did not have an agency id specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoAgencyId]) + ". "
 
         if (len(itemsWithNoIdentifier)>0):
-            print("\nThe following item(s) did not have an identifier specified: ")
-            print([items[i] for i in itemsWithNoIdentifier])
+            errorDetails+=("The following item(s) did not have an identifier specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoIdentifier]) + ". "
                 
         if (len(itemsWithNoVersion)>0):
-            print("\nThe following item(s) did not have a version specified: ")
-            print([items[i] for i in itemsWithNoVersion])
+            errorDetails+=("The following item(s) did not have a version specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoVersion]) + ". "
             
         if (len(itemsWithNoAgencyId)>0 or len(itemsWithNoIdentifier)>0 or len(itemsWithNoVersion)>0):
-            print("\nPlease ensure that all elements in the items array contain agencyId, identifier, and version fields.")
-            return    
+            raise KeyError(errorDetails + "Please ensure that all elements in the items array contain agencyId, identifier, and version fields.")
 
         query = {
             "ids": items,
