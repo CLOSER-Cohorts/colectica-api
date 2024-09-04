@@ -764,6 +764,78 @@ class ColecticaBasicAPI:
             if response.json() != []:
                 return response.json()
 
+    def update_state(
+        self,
+        items,
+        *,
+        State=False,
+        ApplyToAllVersions=True
+    ):
+        """Updates the Deprecated State of a set of items.
+
+        Args:
+            items: For example, ``[
+                {
+                    "agencyId": "uk.closer",
+                    "identifier": "9da68988-f9e4-48b3-996b-fbcbd3c5d1f6",
+                    "version": 2
+                }
+            ]``. All three of agencyId, identifier and version must be
+            specified in order for the deprecation status of an item to be
+            updated.
+
+        Keyword Args:
+            State: (boolean/None): if omitted, item's deprecated state is
+                set to 'false'.
+            ApplyToAllVersions: if omitted, all versions of item have their
+                deprecation status updated.    
+        
+        Returns:
+            HTTP status code indicating success or failure of operation, e.g.
+            success=200
+    
+        This uses the ``/api/v1/item/_updateState`` API call.
+
+        Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Item/paths/~1api~1v1~1item~1_updateState/post
+        """
+
+        items_lower_case_fields = [{key.lower(): value for key, value in dictionary.items()} for dictionary in items]
+        itemsWithNoAgencyId=[i for i, e in enumerate(['agencyid' in x for x in items_lower_case_fields]) if e == False]
+        
+        itemsWithNoIdentifier=[i for i, e in enumerate(['identifier' in x for x in items_lower_case_fields]) if e == False]
+        
+        itemsWithNoVersion=[i for i, e in enumerate(['version' in x for x in items_lower_case_fields]) if e == False]
+        
+        errorDetails = ""
+
+        if (len(itemsWithNoAgencyId)>0):
+            errorDetails+=("The following item(s) did not have an agency id specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoAgencyId]) + ". "
+
+        if (len(itemsWithNoIdentifier)>0):
+            errorDetails+=("The following item(s) did not have an identifier specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoIdentifier]) + ". "
+                
+        if (len(itemsWithNoVersion)>0):
+            errorDetails+=("The following item(s) did not have a version specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoVersion]) + ". "
+            
+        if (len(itemsWithNoAgencyId)>0 or len(itemsWithNoIdentifier)>0 or len(itemsWithNoVersion)>0):
+            raise KeyError(errorDetails + "Please ensure that all elements in the items array contain agencyId, identifier, and version fields.")
+
+        query = {
+            "ids": items,
+            "state": State,
+            "applyToAllVersions": ApplyToAllVersions
+        }
+        
+        url = f"https://{self.host}/api/v1/item/_updateState"
+        response = requests.post(url, headers=self.token, json=query, verify=self.verify)
+        if response.ok:
+            return response
+        raise ValueError(
+            f"Server returned {response.status_code} error: {response.content}"
+        )
 
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
