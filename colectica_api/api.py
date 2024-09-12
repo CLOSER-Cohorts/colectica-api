@@ -837,5 +837,29 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )
 
+    def create_transaction(
+        self
+        ):
+        """Create a new Repository transaction.
+
+        Args:
+            None
+        
+        Returns:
+            dict: containing transaction ID and other information. 
+    
+        This uses the ``/api/v1/transaction`` API call.
+
+        Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Transaction/paths/~1api~1v1~1transaction/post
+        """
+
+        url = f"https://{self.host}/api/v1/transaction"
+        response = requests.post(url, headers=self.token, verify=self.verify)
+        if response.ok:
+            return response.json()
+        raise RuntimeError(
+            f"Server returned {response.status_code} error: {response.content}"
+        )        
+
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
