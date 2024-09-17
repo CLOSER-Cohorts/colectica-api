@@ -896,7 +896,7 @@ class ColecticaBasicAPI:
                 {
                 "itemType": item_type,
                 "agencyId": AgencyId,
-                "version": version,
+                "version": Version,
                 "identifier": Identifier,
                 "item": fragment,
                 "transactionId": transactionId,
