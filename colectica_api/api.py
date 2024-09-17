@@ -876,7 +876,7 @@ class ColecticaBasicAPI:
             AgencyId (str):
             Identifier (str): 
             Version (int):
-            fragment (str): DDI fragment for item being added to transaction 
+            fragment (str): DDI fragment for item being added to transaction. 
             item_type (str): for example `C.item_type("Question")` or `C.item_type("Variable")`. 
             transactionId (int): 
             
