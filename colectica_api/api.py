@@ -865,21 +865,21 @@ class ColecticaBasicAPI:
         self,
         AgencyId, 
         Identifier, 
-        Version, 
-        transactionId, 
+        Version,
         fragment, 
-        item_type
+        item_type,
+        transactionId
         ):
         """Add items to a transaction to be registered.
 
         Args:
             AgencyId (str):
             Identifier (str): 
-            Version (int): 
-            transactionId (int): 
+            Version (int):
             fragment (str): DDI fragment for item being added to transaction 
-            item_type (str): for example `C.item_type("Question")` or `C.item_type("Variable")`.
-        
+            item_type (str): for example `C.item_type("Question")` or `C.item_type("Variable")`. 
+            transactionId (int): 
+            
         Returns:
             dict: containing transaction ID and other information. 
 
