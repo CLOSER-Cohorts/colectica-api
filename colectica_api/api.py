@@ -863,9 +863,9 @@ class ColecticaBasicAPI:
 
     def add_items_to_transaction(
         self,
-        agencyId, 
+        AgencyId, 
         Identifier, 
-        version, 
+        Version, 
         transactionId, 
         fragment, 
         item_type
@@ -873,8 +873,12 @@ class ColecticaBasicAPI:
         """Add items to a transaction to be registered.
 
         Args:
-            agency_id:
-
+            AgencyId (str):
+            Identifier (str): 
+            Version (int): 
+            transactionId (int): 
+            fragment (str): DDI fragment for item being added to transaction 
+            item_type (str): for example `C.item_type("Question")` or `C.item_type("Variable")`.
         
         Returns:
             dict: containing transaction ID and other information. 
@@ -891,7 +895,7 @@ class ColecticaBasicAPI:
             "items": [
                 {
                 "itemType": item_type,
-                "agencyId": agencyId,
+                "agencyId": AgencyId,
                 "version": version,
                 "identifier": Identifier,
                 "item": fragment,
