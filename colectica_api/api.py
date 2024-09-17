@@ -823,14 +823,14 @@ class ColecticaBasicAPI:
         if (len(itemsWithNoAgencyId)>0 or len(itemsWithNoIdentifier)>0 or len(itemsWithNoVersion)>0):
             raise KeyError(errorDetails + "Please ensure that all elements in the items array contain agencyId, identifier, and version fields.")
 
-        query = {
+        requestBody = {
             "ids": items,
             "state": State,
             "applyToAllVersions": ApplyToAllVersions
         }
         
         url = f"https://{self.host}/api/v1/item/_updateState"
-        response = requests.post(url, headers=self.token, json=query, verify=self.verify)
+        response = requests.post(url, headers=self.token, json=requestBody, verify=self.verify)
         if response.ok:
             return response
         raise ValueError(
@@ -859,7 +859,56 @@ class ColecticaBasicAPI:
             return response.json()
         raise RuntimeError(
             f"Server returned {response.status_code} error: {response.content}"
-        )        
+        )
+
+    def add_items_to_transaction(
+        self,
+        agency_id, 
+        item_id, 
+        version, 
+        transactionId, 
+        fragment, 
+        item_type
+        ):
+        """Add items to a transaction to be registered.
+
+        Args:
+            None
+        
+        Returns:
+            dict: containing transaction ID and other information. 
+
+        This uses the ``/api/v1/transaction/_addItemsToTransaction`` API call.
+
+        Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Transaction/paths/~1api~1v1~1transaction~1_addItemsToTransaction/post
+        """
+
+        url = f"https://{self.host}/api/v1/transaction/_addItemsToTransaction"
+
+        requestBody = {
+            "transactionId": transactionId,
+            "items": [
+                {
+                "itemType": item_type,
+                "agencyId": agency_id,
+                "version": version,
+                "identifier": item_id,
+                "item": fragment,
+                "transactionId": transactionId,
+                "isPublished": True,
+                },
+            ],
+        }
+
+        response = requests.post(url, 
+                headers=self.token,
+                json=requestBody, 
+                verify=self.verify)
+        if response.ok:
+            return response.json()
+        raise RuntimeError(
+            f"Server returned {response.status_code} error: {response.content}"
+        )                
 
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
