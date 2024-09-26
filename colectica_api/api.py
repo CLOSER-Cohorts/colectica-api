@@ -926,8 +926,8 @@ class ColecticaBasicAPI:
 
         Args:
             transactionId (int): 
-            transactionType (int): set to CommitAsLatestAndPropagateVersions (3) by default. Transaction
-                types are defined at https://docs.colectica.com/sdk7/api/Algenta.Colectica.Model/Algenta.Colectica.Model.Repository.RepositoryTransactionType.html
+            transactionType (int): set to CommitAsLatestAndPropagateVersions (3) by default. 
+            Transaction types are defined at https://docs.colectica.com/sdk7/api/Algenta.Colectica.Model/Algenta.Colectica.Model.Repository.RepositoryTransactionType.html
             versionRationale (str):  Message explaining the contents of the transaction. 
 
         Keyword Args:
