@@ -913,7 +913,54 @@ class ColecticaBasicAPI:
             return response.json()
         raise RuntimeError(
             f"Server returned {response.status_code} error: {response.content}"
-        )                
+        )
+
+    def commit_transaction(
+        self,
+        transactionId,
+        versionRationale,
+        transactionType=3,
+        versionRationaleLanguage="en"
+    ):
+        """Register the items in the transaction.
+
+        Args:
+            transactionId (int): 
+            transactionType (int): set to CommitAsLatestAndPropagateVersions (3) by default. Transaction
+                types are defined at https://docs.colectica.com/sdk7/api/Algenta.Colectica.Model/Algenta.Colectica.Model.Repository.RepositoryTransactionType.html
+            versionRationale (str):  Message explaining the contents of the transaction. 
+
+        Keyword Args:
+            versionRationaleLanguage (str/None): if omitted, version rationale is
+                set to 'en'.
+            
+        Returns:
+            dict: containing transaction ID and other information about items that
+                have been committed in the transaction.
+    
+        This uses the ``/api/v1/transaction/_commitTransaction`` API call.
+
+        Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Transaction/paths/~1api~1v1~1transaction~1_commitTransaction/post
+        """
+        url = f"https://{self.host}/api/v1/transaction/_commitTransaction"
+
+        requestBody = {
+            "versionRationale": {
+                versionRationaleLanguage: versionRationale
+            },
+            "transactionType": transactionType,
+            "transactionId": transactionId
+        }
+        
+        response = requests.post(url, 
+                headers=self.token,
+                json=requestBody, 
+                verify=self.verify)
+        if response.ok:
+            return response.json()
+        raise RuntimeError(
+            f"Server returned {response.status_code} error: {response.content}"
+        )
 
 if __name__ == "__main__":
     raise RuntimeError("don't run this directly")
