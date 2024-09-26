@@ -931,12 +931,12 @@ class ColecticaBasicAPI:
             versionRationale (str):  Message explaining the contents of the transaction. 
 
         Keyword Args:
-            versionRationaleLanguage (str/None): if omitted, version rationale is
+            versionRationaleLanguage (str/None): if omitted, version rationale language is
                 set to 'en'.
             
         Returns:
-            dict: containing transaction ID and other information about items that
-                have been committed in the transaction.
+            dict: containing transaction ID and other information about items that have been 
+                committed in the transaction.
     
         This uses the ``/api/v1/transaction/_commitTransaction`` API call.
 
