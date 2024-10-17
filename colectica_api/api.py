@@ -581,7 +581,7 @@ class ColecticaBasicAPI:
         self,
         agency_id, 
         item_id, 
-        version, 
+        version=None, 
         item_types=[], 
         leaf_item_types=[], 
         predicate=None, 
@@ -598,13 +598,14 @@ class ColecticaBasicAPI:
             item_types (str/list[str]): the item types to search for.
                 or all types if empty. Defaults to return all item types.
             leaf_item_types (str/list[str]): ???
-            predicate (str): which type of relationship you are searching.
+            predicate (str/None): which type of relationship you are searching.
                 see https://docs.colectica.com/repository/technical/item-type-identifiers/#relationship-predicate-identifiers
                 for details of relationship types. 
             reverseTraversal (boolean/None): if set to True, the search
-                traverses up the object hierarchy, i.e. it searches
-                in the parent items referencing the root object, the grandparent items 
-                referencing the parent items, etc.
+                traverses up the object hierarchy, i.e. it searches in the parent 
+                items referencing the root object, the grandparent items 
+                referencing the parent items, etc. Otherwise the search 
+                goes down through the child items referenced by the root object.
 
         Returns:
             list: A list of dicts, each dict is a bit tricky to work with.
@@ -627,7 +628,10 @@ class ColecticaBasicAPI:
             item_types = [item_types]
         if not isinstance(leaf_item_types, list):
             leaf_item_types = [leaf_item_types]
-        
+
+        if version is None:
+            version = self.get_item_json(agency_id, item_id)["Version"]
+            
         query = {
             "rootItem": {
                 "agencyId": agency_id,
@@ -644,8 +648,6 @@ class ColecticaBasicAPI:
         if predicate is not None:
             query['facet']['predicate'] = predicate
 
-        print(query)
-    
         response = requests.post("https://" + self.host + "/api/v1/_query/set",
             headers=self.token,
             json=query,
