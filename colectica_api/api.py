@@ -577,6 +577,88 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )
 
+    def query_set(
+        self,
+        agency_id, 
+        item_id, 
+        version=None, 
+        item_types=[], 
+        leaf_item_types=[], 
+        predicate=None, 
+        reverseTraversal=False
+    ):
+        """Searches the specified set of items according to the provided search options.
+
+        Args:
+            AgencyId (str):
+            Identifier (str):
+            Version (int):
+
+        Keyword Args:
+            item_types (str/list[str]): the item types to search for.
+                or all types if empty. Defaults to return all item types.
+            leaf_item_types (str/list[str]): ???
+            predicate (str/None): which type of relationship you are searching.
+                see https://docs.colectica.com/repository/technical/item-type-identifiers/#relationship-predicate-identifiers
+                for details of relationship types. 
+            reverseTraversal (boolean/None): if set to True, the search
+                traverses up the object hierarchy, i.e. it searches in the parent 
+                items referencing the root object, the grandparent items 
+                referencing the parent items, etc. Otherwise the search 
+                goes down through the child items referenced by the root object.
+
+        Returns:
+            list: A list of dicts, each dict is a bit tricky to work with.
+            There are two top-level keys and other 2nd-level keys::
+
+                Item1 (outer property)
+                  - Item1: the UUID of the result
+                  - Item2: the version number of the result
+                  - Item3: the agency identifier of the result
+                Item2: an identifier that indicates the item type of the result.
+
+        For the keyword arguments, if they are omitted (or set to None),
+        then the server chooses a default value. 
+
+        This uses the ``/api/v1/_query/set`` API call.
+
+        Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Query/paths/~1api~1v1~1_query~1set/post
+        """
+        if not isinstance(item_types, list):
+            item_types = [item_types]
+        if not isinstance(leaf_item_types, list):
+            leaf_item_types = [leaf_item_types]
+
+        if version is None:
+            version = self.get_item_json(agency_id, item_id)["Version"]
+            
+        query = {
+            "rootItem": {
+                "agencyId": agency_id,
+                "identifier": item_id,
+                "version": version
+            },
+            "facet": {
+                "itemTypes": item_types,
+                "leafItemTypes": leaf_item_types,
+                "reverseTraversal": reverseTraversal
+            }
+        }
+
+        if predicate is not None:
+            query['facet']['predicate'] = predicate
+
+        response = requests.post("https://" + self.host + "/api/v1/_query/set",
+            headers=self.token,
+            json=query,
+            verify=False
+        )
+        if response.ok:
+            return response.json()
+        raise ValueError(
+            f"Server returned {response.status_code} error: {response.content}"
+        )        
+
     def search_set(
         self,
         item_types,
