@@ -750,12 +750,13 @@ https://docs.colectica.com/sdk7/api/Algenta.Colectica.Model/Algenta.Colectica.Mo
             "searchLatestVersion": SearchLatestVersion,
             "searchSets": SearchSets,
             "searchTerms": SearchTerms,
-            "SearchTargets": SearchTargets,
-            "UsePrefixSearch": UsePrefixSearch,
+            "usePrefixSearch": UsePrefixSearch,
             "returnIdentifiersOnly": ReturnIdentifiersOnly
         }
         if SearchSetPredicate is not None:
             query['searchSetPredicate'] = SearchSetPredicate
+        if len(SearchTerms) != 0:
+            query['searchTargets'] = SearchTargets
         
         response = requests.post(
             "https://" + self.host + "/api/v1/_query/",
