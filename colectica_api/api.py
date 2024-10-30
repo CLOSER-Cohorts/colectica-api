@@ -659,13 +659,25 @@ class ColecticaBasicAPI:
             f"Server returned {response.status_code} error: {response.content}"
         )        
 
-    def search_set(
+    def search_items(
         self,
         item_types,
-        AgencyId,
-        Identifier,
-        MaxResults=0,
-        Version=1,
+        Cultures=[],
+        Tags=[],
+        LanguageSortOrder=[],
+        RankResults=True,
+        ResultOffset=0,
+        NextResult=0,
+        ResultOrdering=0,
+        SearchDepricatedItems=True,
+        SearchLatestVersion=True,
+        SearchSetPredicate=None,
+        SearchSets=[],
+        SearchTargets=[],
+        SearchTerms=[],
+        UsePrefixSearch=False,
+        ReturnIdentifiersOnly=True,
+        MaxResults=0
     ):
         """Find all items that are somehow connected to a given item.
 
@@ -673,13 +685,27 @@ class ColecticaBasicAPI:
             item_types (str/list[str]): the item types to search for.
                 or all types if empty.  You can omit the list if
                 searching for just one item type.
-            AgencyId (str):
-            Identifier (str):
-
         Keyword Args:
+            Cultures (array of str):
+            Tags (array of str):
+            LanguageSortOrder (array of str):
+            RankResults (boolean): 
+            ResultOffset (int): Offset to retrieve results from
+            NextResult (int):
+            ResultOrdering (int):
+            SearchDepricatedItems (boolean): if true, deprecated items are included in results 
+            SearchLatestVersion (boolean):
+            SearchSetPredicate (str):
+            SearchSets (array of obects): the objects contain agency id/identifier/version values
+               representing the items within which we wish to search
+            SearchTargets (array of str): the specific DDI elements we wish to search in. For example,
+                "Name". The fields we can search in are listed at:
+https://docs.colectica.com/sdk7/api/Algenta.Colectica.Model/Algenta.Colectica.Model.Repository.DdiStringType.html
+            SearchTerms (array of str): the terms being searched for
+            UsePrefixSearch (boolean):
+            ReturnIdentifiersOnly (boolean): if true only identifiers are returned
             MaxResults (int): how many results to return or 0 (default)
                 to return all results.
-            Version (int): which version to get, defaults to 1.
 
         Returns:
             dict: the results of the search, including list of matches,
@@ -693,15 +719,45 @@ class ColecticaBasicAPI:
 
         Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
         """
+        
+        if not isinstance(Cultures, list):
+            Cultures = [Cultures]
+        if not isinstance(Tags, list):
+            Tags = [Tags]
         if not isinstance(item_types, list):
             item_types = [item_types]
+        if not isinstance(LanguageSortOrder, list):
+            LanguageSortOrder = [LanguageSortOrder]
+        if not isinstance(SearchSets, list):
+            SearchSets = [SearchSets]
+        if not isinstance(SearchTerms, list):
+            SearchTerms = [SearchTerms]    
+        if not isinstance(SearchTargets, list):
+            SearchTargets = [SearchTargets]
+   
+        self.check_items(SearchSets)
+
         query = {
+            "cultures": Cultures,
+            "tags": Tags,
             "ItemTypes": item_types,
+            "languageSortOrder": LanguageSortOrder,
             "MaxResults": MaxResults,
-            "searchSets": [
-                {"agencyId": AgencyId, "identifier": Identifier, "version": Version}
-            ],
+            "rankResults": RankResults,
+            "resultOffset": ResultOffset,
+            "resultOrdering": ResultOrdering,
+            "searchDepricatedItems": SearchDepricatedItems,
+            "searchLatestVersion": SearchLatestVersion,
+            "searchSets": SearchSets,
+            "searchTerms": SearchTerms,
+            "usePrefixSearch": UsePrefixSearch,
+            "returnIdentifiersOnly": ReturnIdentifiersOnly
         }
+        if SearchSetPredicate is not None:
+            query['searchSetPredicate'] = SearchSetPredicate
+        if len(SearchTerms) != 0:
+            query['searchTargets'] = SearchTargets
+        
         response = requests.post(
             "https://" + self.host + "/api/v1/_query/",
             headers=self.token,
@@ -846,6 +902,31 @@ class ColecticaBasicAPI:
             if response.json() != []:
                 return response.json()
 
+    def check_items(self, items):
+        items_lower_case_fields = [{key.lower(): value for key, value in dictionary.items()} for dictionary in items]
+        itemsWithNoAgencyId=[i for i, e in enumerate(['agencyid' in x for x in items_lower_case_fields]) if e == False]
+        
+        itemsWithNoIdentifier=[i for i, e in enumerate(['identifier' in x for x in items_lower_case_fields]) if e == False]
+        
+        itemsWithNoVersion=[i for i, e in enumerate(['version' in x for x in items_lower_case_fields]) if e == False]
+        
+        errorDetails = ""
+
+        if (len(itemsWithNoAgencyId)>0):
+            errorDetails+=("The following item(s) did not have an agency id specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoAgencyId]) + ". "
+
+        if (len(itemsWithNoIdentifier)>0):
+            errorDetails+=("The following item(s) did not have an identifier specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoIdentifier]) + ". "
+                
+        if (len(itemsWithNoVersion)>0):
+            errorDetails+=("The following item(s) did not have a version specified: ")
+            errorDetails+=str([items[i] for i in itemsWithNoVersion]) + ". "
+              
+        if (len(itemsWithNoAgencyId)>0 or len(itemsWithNoIdentifier)>0 or len(itemsWithNoVersion)>0):
+            raise KeyError(errorDetails + "Please ensure that all elements in the items array contain agencyId, identifier, and version fields.")
+
     def update_state(
         self,
         items,
@@ -881,29 +962,10 @@ class ColecticaBasicAPI:
         Documented here: https://docs.colectica.com/portal/technical/api/v1/#tag/Item/paths/~1api~1v1~1item~1_updateState/post
         """
 
-        items_lower_case_fields = [{key.lower(): value for key, value in dictionary.items()} for dictionary in items]
-        itemsWithNoAgencyId=[i for i, e in enumerate(['agencyid' in x for x in items_lower_case_fields]) if e == False]
-        
-        itemsWithNoIdentifier=[i for i, e in enumerate(['identifier' in x for x in items_lower_case_fields]) if e == False]
-        
-        itemsWithNoVersion=[i for i, e in enumerate(['version' in x for x in items_lower_case_fields]) if e == False]
-        
-        errorDetails = ""
-
-        if (len(itemsWithNoAgencyId)>0):
-            errorDetails+=("The following item(s) did not have an agency id specified: ")
-            errorDetails+=str([items[i] for i in itemsWithNoAgencyId]) + ". "
-
-        if (len(itemsWithNoIdentifier)>0):
-            errorDetails+=("The following item(s) did not have an identifier specified: ")
-            errorDetails+=str([items[i] for i in itemsWithNoIdentifier]) + ". "
-                
-        if (len(itemsWithNoVersion)>0):
-            errorDetails+=("The following item(s) did not have a version specified: ")
-            errorDetails+=str([items[i] for i in itemsWithNoVersion]) + ". "
-            
-        if (len(itemsWithNoAgencyId)>0 or len(itemsWithNoIdentifier)>0 or len(itemsWithNoVersion)>0):
-            raise KeyError(errorDetails + "Please ensure that all elements in the items array contain agencyId, identifier, and version fields.")
+        if not isinstance(items, list):
+            items = [items]
+               
+        self.check_items(items)
 
         requestBody = {
             "ids": items,
