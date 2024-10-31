@@ -93,4 +93,4 @@ C.add_items_to_transaction('uk.cls.ncds',
                            fragmentXMLSecondPhysicalInstance, 
                            physicalInstanceItemTypeUuid, 
                            transactionId)                           
-commitTransaction(transactionId, "Update userAttributePair", 3)
+C.commit_transaction(transactionId, "Update userAttributePair", 3)
