@@ -2,6 +2,7 @@
 # It updates/adds variable group references to Physical Instances.
 
 # Create connection...
+
 from colectica_api import ColecticaObject
 hostname="INSERT HOSTNAME HERE"
 username="INSERT USERNAME HERE"
@@ -9,6 +10,7 @@ password="INSERT PASSWORD HERE"
 C = ColecticaObject(hostname, username, password,verify_ssl=False)
 
 # Import libraries for processing XML/JSON...
+
 import defusedxml
 from defusedxml.ElementTree import parse
 from xml.etree import ElementTree as ET
@@ -36,7 +38,8 @@ def getAttributeValue(physicalInstanceFragmentXML):
 fragmentString = C.get_item_xml('uk.wchads', '158e3ae8-5437-4c5f-afb2-3fdfecb59999')['Item']
 fragmentXMLFirstPhysicalInstance = defusedxml.ElementTree.fromstring(fragmentString)
 
-# Get userAttributePair element from within the fragmentXML element, and update the URN in it...
+# Get userAttributePair element from within the fragmentXMLFirstPhysicalInstance element, and update 
+# the URN in it...
 
 attributeValue = getAttributeValue(fragmentXMLFirstPhysicalInstance)
 attributeValueJson = json.loads(attributeValue.text)
@@ -54,7 +57,8 @@ attributeValue.text = json.dumps(attributeValueJson)
 fragmentString = C.get_item_xml('uk.cls.ncds', '3d55f967-5ea9-407b-811f-850fe1629944')['Item']
 fragmentXMLSecondPhysicalInstance = defusedxml.ElementTree.fromstring(fragmentString)
 
-# Get userAttributePair element from within the fragmentXML element, and update the URN in it...
+# Get userAttributePair element from within the fragmentXML element, and add a 'RelatedItemIdValue' 
+# object to it containing the URN for a Variable Group...
 
 attributeValue = getAttributeValue(fragmentXMLSecondPhysicalInstance)
 attributeValueJson = json.loads(attributeValue.text)
