@@ -57,7 +57,7 @@ attributeValue.text = json.dumps(attributeValueJson)
 fragmentString = C.get_item_xml('uk.cls.ncds', '3d55f967-5ea9-407b-811f-850fe1629944')['Item']
 fragmentXMLSecondPhysicalInstance = defusedxml.ElementTree.fromstring(fragmentString)
 
-# Get userAttributePair element from within the fragmentXML element, and add a 'RelatedItemIdValue' 
+# Get userAttributePair element from within the fragmentXMLSecondPhysicalInstance element, and add a 'RelatedItemIdValue' 
 # object to it containing the URN for a Variable Group...
 
 attributeValue = getAttributeValue(fragmentXMLSecondPhysicalInstance)
