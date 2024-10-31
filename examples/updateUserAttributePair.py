@@ -13,9 +13,10 @@ import defusedxml
 from defusedxml.ElementTree import parse
 from xml.etree import ElementTree as ET
 import json
+import re
 
 # Declare a utility function for getting the namespace of an element from an XML tag
-import re
+
 def getNamespace(tag):
     m = re.search('{(.+?)}', tag)
     if m:
