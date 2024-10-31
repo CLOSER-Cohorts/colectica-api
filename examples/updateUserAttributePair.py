@@ -45,8 +45,8 @@ attributeValue = getAttributeValue(fragmentXMLFirstPhysicalInstance)
 attributeValueJson = json.loads(attributeValue.text)
 attributeValueJson['RelatedItemIdValue']['URN'] = 'urn:ddi:uk.closer:585be12c-724f-491d-a73b-1b246d60fadd:2'
 
-# This update of the text value will update the fragmentXMLFirstPhysicalInstance object from
-# which attributeValue was obtained, as attributeValue is a reference to an element contained
+# This update of the text value for attributeValue will update the fragmentXMLFirstPhysicalInstance
+# object from which attributeValue was obtained, as attributeValue is a reference to an element contained
 # within fragmentXMLFirstPhysicalInstance
 
 attributeValue.text = json.dumps(attributeValueJson)
@@ -67,8 +67,8 @@ attributeValueJson['RelatedItemIdValue']={
         "ItemType": "VariableGroup"
     }
 
-# This update of the text value will update the fragmentXMLSecondPhysicalInstance object from
-# which attributeValue was obtained, as attributeValue is a reference to an element contained
+# This update of the text value for attributeValue will update the fragmentXMLSecondPhysicalInstance
+# object from which attributeValue was obtained, as attributeValue is a reference to an element contained
 # within fragmentXMLSecondPhysicalInstance
 
 attributeValue.text = json.dumps(attributeValueJson)
