@@ -78,7 +78,7 @@ attributeValue.text = json.dumps(attributeValueJson)
 
 transactionResponse = C.create_transaction()
 transactionId = transactionResponse['TransactionId']
-version=fragmentXMLSecondPhysicalInstance[0].find(f'{{{getNamespace(fragmentXML[0][0].tag)}}}Version').text
+version=fragmentXMLFirstPhysicalInstance[0].find(f'{{{getNamespace(fragmentXMLFirstPhysicalInstance[0][0].tag)}}}Version').text
 physicalInstanceItemTypeUuid='a51e85bb-6259-4488-8df2-f08cb43485f8'
 C.add_items_to_transaction('uk.wchads', 
                            '158e3ae8-5437-4c5f-afb2-3fdfecb59999', 
@@ -86,6 +86,7 @@ C.add_items_to_transaction('uk.wchads',
                            fragmentXMLFirstPhysicalInstance, 
                            physicalInstanceItemTypeUuid, 
                            transactionId)
+version=fragmentXMLSecondPhysicalInstance[0].find(f'{{{getNamespace(fragmentXMLSecondPhysicalInstance[0][0].tag)}}}Version').text
 C.add_items_to_transaction('uk.cls.ncds',
                            '3d55f967-5ea9-407b-811f-850fe1629944', 
                            version, 
