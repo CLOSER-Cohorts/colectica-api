@@ -24,8 +24,8 @@ def getNamespace(tag):
     if m:
         return m.group(1)
 
-# Declare a utility function for updating the UserAttributePair element in an XML object
-# representing a Physical instance
+# Declare a utility function for finding the AttributeValue within a UserAttributePair element in an 
+# XML object representing a Physical instance
 
 def getAttributeValue(physicalInstanceFragmentXML):
     userAttributePair = physicalInstanceFragmentXML[0].find(f'{{{getNamespace(physicalInstanceFragmentXML[0][0].tag)}}}UserAttributePair')
