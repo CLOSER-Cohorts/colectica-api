@@ -43,7 +43,10 @@ fragmentXMLFirstPhysicalInstance = defusedxml.ElementTree.fromstring(fragmentStr
 
 attributeValue = getAttributeValue(fragmentXMLFirstPhysicalInstance)
 attributeValueJson = json.loads(attributeValue.text)
-attributeValueJson['RelatedItemIdValue']['URN'] = 'urn:ddi:uk.closer:585be12c-724f-491d-a73b-1b246d60fadd:2'
+attributeValueJson['RelatedItemIdValue']={
+        "URN": "urn:ddi:uk.closer:0b239724-f531-4362-afd1-927ce41a2aa7:2",
+        "ItemType": "VariableGroup"
+    }
 
 # This update of the text value for attributeValue will update the fragmentXMLFirstPhysicalInstance
 # object from which attributeValue was obtained, as attributeValue is a reference to an element contained
@@ -83,14 +86,14 @@ physicalInstanceItemTypeUuid='a51e85bb-6259-4488-8df2-f08cb43485f8'
 C.add_items_to_transaction('uk.wchads', 
                            '158e3ae8-5437-4c5f-afb2-3fdfecb59999', 
                            version, 
-                           fragmentXMLFirstPhysicalInstance, 
+                           defusedxml.ElementTree.tostring(fragmentXMLFirstPhysicalInstance, encoding='unicode'),
                            physicalInstanceItemTypeUuid, 
                            transactionId)
 version=fragmentXMLSecondPhysicalInstance[0].find(f'{{{getNamespace(fragmentXMLSecondPhysicalInstance[0][0].tag)}}}Version').text
 C.add_items_to_transaction('uk.cls.ncds',
                            '3d55f967-5ea9-407b-811f-850fe1629944', 
-                           version, 
-                           fragmentXMLSecondPhysicalInstance, 
+                           version,
+                           defusedxml.ElementTree.tostring(fragmentXMLSecondPhysicalInstance, encoding='unicode'),
                            physicalInstanceItemTypeUuid, 
                            transactionId)                           
 C.commit_transaction(transactionId, "Update userAttributePair", 3)
