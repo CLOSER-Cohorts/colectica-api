@@ -429,10 +429,10 @@ class ColecticaBasicAPI:
 
     def search_relationship_bysubject(
         self,
-        item_type,
         AgencyId,
         Identifier,
         *,
+        item_types=[],
         Version=None,
         Descriptions=False,
         UseDistinctResultItem=True,
@@ -441,8 +441,6 @@ class ColecticaBasicAPI:
         """Search for items that are related to a particular item.
 
         Args:
-            item_type (str): for example `C.item_type("Question")` or
-                `C.item_type("Variable")`.
             AgencyId (str): For example, ``"uk.cls.nextsteps"``.
             Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
 
@@ -451,8 +449,16 @@ class ColecticaBasicAPI:
                 retrieve the latest version.
             Descriptions (bool): if True, return less detail.
                 Default: False, so return full detail.
-            UseDistinctResultItem (bool/None): ???
-            UseDistinctTargetItem (bool/None): ???
+            UseDistinctResultItem (bool/None): Whether only one version of each 
+               matching item will be returned, or if all matching versions of items 
+               should be returned.
+            UseDistinctTargetItem (bool/None): Whether only the explicit version 
+               of the target item will be searched, or if all versions of the target 
+               item will be searched.
+            item_types (str/list[str]): the item types to search for.
+                or all types if empty.  You can omit the list if
+                searching for just one item type, for example 
+                `C.item_type("Question")` or `C.item_type("Variable")`   
 
         Returns:
             list: A list of dicts, each dict is a bit tricky to work with.
@@ -473,14 +479,18 @@ class ColecticaBasicAPI:
 
         This uses the ``/api/v1/_query/relationship/bysubject/`` API call.
 
-        Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
+        Documented here: https://docs.colectica.com/repository/functionality/repository/search-capabilities/#relationship-search
+                   and:  https://docs.colectica.com/portal/technical/api/v1/#tag/Query/paths/~1api~1v1~1_query~1relationship~1bysubject/post
         """
+        if not isinstance(item_types, list):
+            item_types = [item_types]
+
         if Version is None:
             # print("getting the version...")
             Version = self.get_item_json(AgencyId, Identifier)["Version"]
             # print(f"the version is {Version}")
         query = {
-            "ItemTypes": [item_type],
+            "ItemTypes": item_types,
             "TargetItem": {
                 "AgencyId": AgencyId,
                 "Identifier": Identifier,
@@ -504,10 +514,10 @@ class ColecticaBasicAPI:
 
     def search_relationship_byobject(
         self,
-        item_type,
         AgencyId,
         Identifier,
         *,
+        item_types=[],
         Version=None,
         Descriptions=False,
         UseDistinctResultItem=True,
@@ -516,8 +526,6 @@ class ColecticaBasicAPI:
         """Search for items that are related to a particular item by object.
 
         Args:
-            item_type (str): for example `C.item_type("Question")` or
-                `C.item_type("Variable")`.
             AgencyId (str): For example, ``"uk.cls.nextsteps"``.
             Identifier (str): e.g., ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
 
@@ -526,9 +534,17 @@ class ColecticaBasicAPI:
                 retrieve the latest version.
             Descriptions (bool): if True, return less detail.
                 Default: False, so return full detail.
-            UseDistinctResultItem (bool/None): ???
-            UseDistinctTargetItem (bool/None): ???
-
+            UseDistinctResultItem (bool/None): Whether only one version of each 
+               matching item will be returned, or if all matching versions of items 
+               should be returned.
+            UseDistinctTargetItem (bool/None): Whether only the explicit version 
+               of the target item will be searched, or if all versions of the target 
+               item will be searched.
+            item_types (str/list[str]): the item types to search for.
+                or all types if empty.  You can omit the list if
+                searching for just one item type, for example 
+                `C.item_type("Question")` or `C.item_type("Variable")`
+            
         Returns:
             list: A list of dicts, each dict is a bit tricky to work with.
             There are two top-level keys and other 2nd-level keys::
@@ -546,16 +562,21 @@ class ColecticaBasicAPI:
         then the server chooses a default value.  This might be documented
         elsewhere.
 
-        This uses the ``/api/v1/_query/relationship/bysubject/`` API call.
+        This uses the ``/api/v1/_query/relationship/byobject/`` API call.
 
-        Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
+        Documented here: https://docs.colectica.com/repository/functionality/repository/search-capabilities/#relationship-search
+                   and:  https://docs.colectica.com/portal/technical/api/v1/#tag/Query/paths/~1api~1v1~1_query~1relationship~1byobject/post
+        
         """
+        if not isinstance(item_types, list):
+            item_types = [item_types]
+
         if Version is None:
             # print("getting the version...")
             Version = self.get_item_json(AgencyId, Identifier)["Version"]
             # print(f"the version is {Version}")
         query = {
-            "ItemTypes": [item_type],
+            "ItemTypes": item_types,
             "TargetItem": {
                 "AgencyId": AgencyId,
                 "Identifier": Identifier,
