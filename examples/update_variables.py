@@ -1,5 +1,5 @@
-"""A set of functions that reassign variables to new topics. The usage for changing variable
-topics is:
+"""A set of functions that reassign variables to new topics. The set of commands for changing
+variable topics is:
 
 import examples.update_variables
 updatedVariableGroups = examples.update_variables.update_topics()
@@ -17,15 +17,15 @@ from .lib.utility import get_namespace, find_reference, create_variable_referenc
 USERNAME = "USERNAME"
 PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
-C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD,verify_ssl=False)
+C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 
 def get_current_state_of_topic_group(agency_id, identifier, updated_groups, version=None):
-    """We will be performing multiple updates to the topic variable groups, so instead of 
+    """We may be performing multiple updates to the topic variable groups, so instead of 
     retrieving/updating/writing data using the Colectica REST API every time we need to update 
-    a variable, the first time we have to modify that variable group we will retrieve the most 
-    recent version of it from the Colectica repository using the Colectica REST API, and on
-    subsequent occasions we will modify the in-memory version of the variable group which is
-    stored in the updated_groups array."""
+    a variable group, the first time we have to modify that variable group we will retrieve the
+    most recent version of it from the Colectica repository using the Colectica REST API, and on
+    subsequent occasions we will modify the in-memory version which is stored in the
+    updated_groups array."""
     updated_referencing_item = [x for x in updated_groups if x[0] == identifier]
     if len(updated_referencing_item) > 0:
         referencing_item = updated_referencing_item[0][4]
@@ -34,7 +34,6 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, vers
             agency_id, identifier, version=version)['Item']
         referencing_item = defusedxml.ElementTree.fromstring(fragment_xml)
     return referencing_item
-
 
 def update_list_of_topic_groups(updated_group, agency, identifier, version, 
                                       item_type, updated_groups_list):
@@ -48,12 +47,11 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
         updated_groups_list.append(
             (identifier, agency, version, item_type, updated_group))
 
-# Declare an array which will contain instances of the variable groups that represent topics that
-# variables can be assigned to.
+# Declare an array which will contain instances of the variable groups/topics.
 updated_topic_groups = []
 
 def update_topics():
-    """Main method for reassigning variables to new topics. The code iterates through a spreadsheet
+    """Method for reassigning variables to new topics. The code iterates through a spreadsheet
     containing details of new variable topic assignments and performs the reassignments. 
     """
     data = pd.read_excel("Topics_to_be_changed-4-2024.xlsx")
