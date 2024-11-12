@@ -19,10 +19,13 @@ PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD,verify_ssl=False)
 
-def get_current_state_of_item(agency_id, identifier, updated_groups, version=None):
-    """Checks to see if an item has already been read into memory. If it has, the
-    in-memory value is returned. Otherwise a request is made to the REST API
-    for the most recent version of that item."""
+def get_current_state_of_topic_group(agency_id, identifier, updated_groups, version=None):
+    """We will be performing multiple updates to the topic variable groups, so instead of 
+    retrieving/updating/writing data using the Colectica REST API every time we need to update 
+    a variable, the first time we have to modify that variable group we will retrieve the most 
+    recent version of it from the Colectica repository using the Colectica REST API, and on
+    subsequent occasions we will modify the in-memory version of the variable group which is
+    stored in the updated_groups array."""
     updated_referencing_item = [x for x in updated_groups if x[0] == identifier]
     if len(updated_referencing_item) > 0:
         referencing_item = updated_referencing_item[0][4]
@@ -32,11 +35,11 @@ def get_current_state_of_item(agency_id, identifier, updated_groups, version=Non
         referencing_item = defusedxml.ElementTree.fromstring(fragment_xml)
     return referencing_item
 
+
 def update_list_of_topic_groups(updated_group, agency, identifier, version, 
                                       item_type, updated_groups_list):
-    """Update the in-memory list of variable groups representing topics. If the item being updated
-    is already in the list, we update that item with the new version. If not, we append the item
-    to the list."""
+    """Update the in-memory list of variable groups representing topics. If the topic group we have
+    updated is not in already in the list, we append it to the list."""
     if ([x[0] for x in updated_groups_list].count(identifier) > 0):
         index_of_updated_ref = [x[0] for x in updated_groups_list].index(identifier)
         updated_groups_list[index_of_updated_ref] = (
@@ -46,15 +49,7 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             (identifier, agency, version, item_type, updated_group))
 
 # Declare an array which will contain instances of the variable groups that represent topics that
-# variables can be assigned to. We will be performing multiple updates to the groups, so instead of
-# retrieving/updating/writing data using the Colectica REST API every time we update a variable
-# group, the first time we need to update a variable group we will retrieve it from the Colectica
-# repository using the Colectica REST API, store it in this array, and perform subsequent updates to
-# the variable group (e.g. adding/removing references to variables) on the item stored in the array.
-# Once we have made all the updates to the variable groups described in the input file
-# Topics_to_be_changed-4-2024.xlsx, we will create a commit transaction using the Colectica REST
-# API, add all the variable groups in this array to that transaction, and commit the transaction.
-
+# variables can be assigned to.
 updated_topic_groups = []
 
 def update_topics():
@@ -73,42 +68,42 @@ def update_topics():
             'a51e85bb-6259-4488-8df2-f08cb43485f8', topic_reassignment_details.iloc[0].strip(), 0, 
                SearchLatestVersion=True)['Results']
         if len(physical_instance_containing_variable) == 1:
-            # We need to search within the physical instance/dataset for the variable in the current
-            # row. We create a JSON object representing the physical instance/dataset.
+            # We need to search within the physical instance/dataset for the variable named in the
+            # current row. We create a JSON object representing the physical instance/dataset.
             search_sets = [{
                 "agencyId": physical_instance_containing_variable[0]['AgencyId'],
                 "identifier": physical_instance_containing_variable[0]['Identifier'],
                 "version": physical_instance_containing_variable[0]['Version']
             }]
-            # The 'SearchTerms' keyword argument represents the name of the variable. The 
+            # The 'SearchTerms' keyword argument represents the name of the variable. The
             # 'SearchSets' keyword argument represents the physical instance/dataset we are
             # searching in.
-            variables_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets, 
+            variables_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets,
                SearchTerms=[topic_reassignment_details.iloc[1].strip()])['Results']
             if len(variables_metadata) > 0:
                 variable_agency_id = variables_metadata[0]['AgencyId']
                 variable_identifier = variables_metadata[0]['Identifier']
                 variable_version = variables_metadata[0]['Version']
-                # Search for a variable group that references the variable we found, i.e. the 
-                # variable group representing the topic that the variable has been assigned to
-                all_source_group_identifiers = C.search_items(C.item_code('Variable Group'), 
+                # Search for a variable group that references the variable we found, i.e. the
+                # variable group representing the topic that the variable has been assigned to.
+                all_source_group_identifiers = C.search_items(C.item_code('Variable Group'),
                      SearchSets=search_sets, 
                      SearchTerms=[str(topic_reassignment_details.iloc[3])])['Results']
                 # Each variable should only belong to one topic, so it should only be referenced by
                 # one variable group. However we may find that a variable is referenced by more than
                 # one variable group. This can happen if a variable has been mapped to multiple
-                # topics in error, but it can also happen if a variable is referenced by a 
+                # topics in error, but it can also happen if a variable is referenced by a
                 # deprecated variable group.
                 if len([x for x in all_source_group_identifiers if x['IsDeprecated']
                         is False]) == 1:
                     source_group_identifiers = all_source_group_identifiers[0]
                     # We need to search for the variable group representing the topic to which we
-                    # want to assign the variable. Again, the 'SearchTerms' keyword argument
-                    # represents the name of the variable group (note that it's a different column
-                    # in the spreadsheet data than the name of the variable group that the variable 
+                    # want to assign the variable. The 'SearchTerms' keyword argument represents
+                    # the name of the variable group (note that it's a different column in the
+                    # spreadsheet data than the name of the variable group that the variable 
                     # is currently in). The 'SearchSets' keyword argument represents the physical
-                    # instance/dataset we are searching in, it's the same dataset we were searching
-                    # in before.
+                    # instance/dataset we are searching in; it's the same dataset we were searching
+                    # for the variable in previously.
                     destination_group_search_results = C.search_items(C.item_code('Variable Group'),
                         SearchSets=search_sets,
                         SearchTerms=[str(topic_reassignment_details.iloc[4])])['Results']
@@ -119,7 +114,8 @@ def update_topics():
                     # We get the current state of the variable group currently containing a
                     # reference to the variable. This variable group represents the topic the
                     # variable is currently assigned to.
-                    source_item = get_current_state_of_item(source_group_identifiers['AgencyId'],
+                    source_item = get_current_state_of_topic_group(
+                                                       source_group_identifiers['AgencyId'],
                                                        source_group_identifiers['Identifier'],
                                                        updated_topic_groups,
                                                        version=source_group_identifiers['Version']
@@ -127,7 +123,8 @@ def update_topics():
                     # We get the current state of the variable group that we will be adding a
                     # reference to the variable to. This variable group represents the topic the
                     # variable will be reassigned to.
-                    destination_item = get_current_state_of_item(destination_group['AgencyId'],
+                    destination_item = get_current_state_of_topic_group(
+                                                            destination_group['AgencyId'],
                                                             destination_group['Identifier'],
                                                             updated_topic_groups,
                                                             version=destination_group['Version']
@@ -135,11 +132,10 @@ def update_topics():
                     # Find and remove the reference to the variable in the source group/topic.
                     reference_to_move = find_reference(
                         source_item, variable_agency_id, variable_identifier)
-                    # variable reference from the variable group/topic.
                     if reference_to_move is not None:
                         source_item[0].remove(reference_to_move)
                         # We need to get the namespace for the variable reference and the variable
-                        # group representing the topic we are re-assigning thevariable to. This
+                        # group representing the topic we are re-assigning the variable to. This
                         # namespace begins with the text 'ddi:reusable:' and is followed by a
                         # version number for DDI, e.g. ddi:reusable:3_2, ddi:reusable:3_3. The DDI
                         # versions for the variable group/topic currently referencing a variable
@@ -170,16 +166,15 @@ def update_topics():
                         # is being reassigned to.
                         destination_item[0].append(new_reference)
                         # Finally we update the array containing the most current versions of the
-                        # variable group/topics.
-                        # Update the entry for the topic/variable group we removed a reference
-                        # from...
+                        # variable group/topics. First we update the entry for the topic/variable
+                        # group we removed a reference from...
                         update_list_of_topic_groups(source_item,
                            source_group_identifiers['AgencyId'],
                            source_group_identifiers['Identifier'],
                            source_group_identifiers['Version'],
                            C.item_code('Variable Group'),
                            updated_topic_groups)
-                        # ...and update the entry for the topic/variable group we added a reference
+                        # ...and then we update the entry for the topic/variable group we added a reference
                         # to.
                         update_list_of_topic_groups(destination_item, 
                            destination_group['AgencyId'],
@@ -194,6 +189,11 @@ def update_topics():
             else:
                 print(f"No dataset with alternate title {topic_reassignment_details[0]} found")
     return updated_topic_groups
+
+# Once we have made all the updates to the variable groups described in the input file
+# Topics_to_be_changed-4-2024.xlsx, we can use the update_repository function to create a
+# transaction using the Colectica REST API, add all the variable groups in this array to that
+# transaction, and finally commit the transaction.
 
 def update_repository(updated_items, transaction_message):
     """Update a set of Variable Group items in the repository."""
