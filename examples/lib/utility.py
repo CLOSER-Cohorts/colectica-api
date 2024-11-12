@@ -9,8 +9,7 @@ def get_namespace(tag):
         return m.group(1)
 
 def find_reference(xml_tree, agency, identifier):
-    """Find a reference to an item in an XML tree/element (e.g. a 'VariableGroup' 
-    element)"""
+    """Find a reference to an item in an XML tree/element (e.g. a 'VariableGroup' element)"""
     ret_elem = None
     for elem in xml_tree.findall(".//"):
         element_namespace = get_namespace(elem.tag)
