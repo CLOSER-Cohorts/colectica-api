@@ -94,7 +94,7 @@ def update_topics():
                 # deprecated variable group.
                 if len([x for x in all_source_group_identifiers if x['IsDeprecated']
                         is False]) == 1:
-                    source_group_identifiers = all_source_group_identifiers[0]
+                    source_group = all_source_group_identifiers[0]
                     # We need to search for the variable group representing the new topic to which
                     # we want to assign the variable. The 'SearchTerms' keyword argument represents
                     # the name of the variable group (note that it's a different column in the
@@ -113,10 +113,10 @@ def update_topics():
                     # This variable group represents the topic the variable is currently assigned
                     # to.
                     source_item = get_current_state_of_topic_group(
-                                                       source_group_identifiers['AgencyId'],
-                                                       source_group_identifiers['Identifier'],
+                                                       source_group['AgencyId'],
+                                                       source_group['Identifier'],
                                                        updated_topic_groups,
-                                                       version=source_group_identifiers['Version']
+                                                       version=source_group['Version']
                                                        )
                     # We get the current state of the variable group that we will be adding a
                     # reference to the variable to. This variable group represents the topic the
@@ -165,9 +165,9 @@ def update_topics():
                         # variable group/topics. First we update the entry for the topic/variable
                         # group we removed a reference from...
                         update_list_of_topic_groups(source_item,
-                           source_group_identifiers['AgencyId'],
-                           source_group_identifiers['Identifier'],
-                           source_group_identifiers['Version'],
+                           source_group['AgencyId'],
+                           source_group['Identifier'],
+                           source_group['Version'],
                            C.item_code('Variable Group'),
                            updated_topic_groups)
                         # ...and then we update the entry for the topic/variable group we added a
