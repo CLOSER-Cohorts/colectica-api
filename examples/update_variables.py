@@ -78,7 +78,7 @@ def update_topics():
             # represents the physical instance/dataset we are searching for that variable in.
             variables_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets,
                SearchTerms=[topic_reassignment_details.iloc[1].strip()])['Results']
-            if len(variables_metadata) > 0:
+            if len(variables_metadata) == 1:
                 variable_agency_id = variables_metadata[0]['AgencyId']
                 variable_identifier = variables_metadata[0]['Identifier']
                 variable_version = variables_metadata[0]['Version']
@@ -158,8 +158,8 @@ def update_topics():
                                                                    )
                         else:
                             new_reference = reference_to_move
-                        # Add the variable reference to the variable group representing the topic it
-                        # is being reassigned to.
+                        # Add the variable reference to the variable group representing the topic 
+                        # it is being reassigned to.
                         destination_item[0].append(new_reference)
                         # Finally we update the array containing the most current versions of the
                         # variable group/topics. First we update the entry for the topic/variable
@@ -170,8 +170,8 @@ def update_topics():
                            source_group_identifiers['Version'],
                            C.item_code('Variable Group'),
                            updated_topic_groups)
-                        # ...and then we update the entry for the topic/variable group we added a reference
-                        # to.
+                        # ...and then we update the entry for the topic/variable group we added a
+                        # reference to.
                         update_list_of_topic_groups(destination_item, 
                            destination_group['AgencyId'],
                            destination_group['Identifier'],
@@ -182,6 +182,9 @@ def update_topics():
                         print(f"Variable {topic_reassignment_details.iloc[3]} in dataset "
                               f"{topic_reassignment_details.iloc[0]} is not assigned to a single "
                               "topic")
+                else:
+                    print(f"Multiple instances of variable {topic_reassignment_details.iloc[1]}"
+                          f"found in dataset {topic_reassignment_details.iloc[0]}")
             else:
                 print(f"No dataset with alternate title {topic_reassignment_details[0]} found")
     return updated_topic_groups
