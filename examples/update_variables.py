@@ -178,8 +178,8 @@ def update_topics():
                         # adding a new variable reference to a topic, they both have the same
                         # namespace, otherwise the variable group update will not work.
                         reference_from_source_ddi_version = reference_to_move.tag
-                        destination_ddi_version = f'ddi:reusable:{
-                            get_namespace(destination_item.tag).split(":")[2]}'
+                        destination_ddi_version = ("ddi:reusable:"
+                            f"{get_namespace(destination_item.tag).split(":")[2]}")
                         # If the namespace for the variable reference from the variable group/topic
                         # that the variable currently belongs to has a different DDI version than
                         # the variable group/topic that we want to add the reference to, we need
