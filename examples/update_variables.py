@@ -68,10 +68,10 @@ updated_topic_groups = []
 # variable_not_present_in_source_topic array, and no variables should be present in the
 # variable_present_in_destination_topic array. These arrays can be used to confirm that
 # the topic reassignments described in a spreadsheet have been successful. After successfully
-# running the update_topics method and performing the variable topic reassignments described in a
-# particular input file, subsequent invocations of the update_topics method using that same file
-# should produce a message indicating that the topic reassignments described in the worksheet have
-# all been successfully executed.
+# running the update_topics and update_repository methods and performing the variable topic
+# reassignments described in a particular input file, subsequent invocations of the update_topics
+# method using that same file should produce a message indicating that the topic reassignments
+# described in the worksheet have all been successfully executed.
 
 variable_not_present_in_source_topic = []
 variable_present_in_destination_topic = []
