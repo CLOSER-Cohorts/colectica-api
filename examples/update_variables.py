@@ -216,8 +216,8 @@ def update_topics():
                       f"has not been found. Either none or multiple instances were found.")
         else:
             print(f"No dataset with alternate title {topic_reassignment_details[0]} found")
-    if len(variable_not_present_in_source_topic) == 0 and
-       len(variable_present_in_destination_topic) == len(data):
+    if (len(variable_not_present_in_source_topic) == 0 and
+       len(variable_present_in_destination_topic) == len(data)):
        print("The variable topic reassignments in the input data file have already been"
              "successfully executed.")  
     return updated_topic_groups
