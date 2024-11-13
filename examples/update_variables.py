@@ -61,16 +61,17 @@ updated_topic_groups = []
 # reassignments described in the worksheet have all been successfully executed.
 variable_not_present_in_source_topic = []
 variable_present_in_destination_topic = []
-
+# Name of spreadsheet file containing details of variables and topics
+input_file_name = "Topics_to_be_changed.xlsx"
 
 def update_topics():
     """Method for reassigning variables to new topics. The code iterates through a spreadsheet
     containing details of new variable topic assignments and performs the reassignments. 
     """
-    data = pd.read_excel("Topics_to_be_changed.xlsx")
+    data = pd.read_excel(input_file_name)
     # Iterate through the rows in the spreadsheet. Each row contains details of a topic
     # reassignment for a variable...
-    for topic_reassignment_details in [data.iloc[0,]]:
+    for topic_reassignment_details in data.iloc:
         print("Performing the following topic reassignment...")
         print(topic_reassignment_details)
         # Search for the physical instance/dataset item which contains the variable in the current
@@ -216,6 +217,10 @@ def update_topics():
                       f"has not been found. Either none or multiple instances were found.")
         else:
             print(f"No dataset with alternate title {topic_reassignment_details[0]} found")
+    number_of_successful_topic_reassignments = len([x for x in variable_not_present_in_source_topic
+                                           if x in variable_present_in_destination_topic])
+    print(f"{number_of_successful_topic_reassignments} of {len(data)} variables in the input file "
+          f"{input_file_name} were successfully assigned to new topics.")
     if (len(variable_not_present_in_source_topic) == len(data) and
        len(variable_present_in_destination_topic) == len(data)):
        print("The variable topic reassignments in the input data file have already all been "
