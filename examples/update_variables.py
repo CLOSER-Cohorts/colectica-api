@@ -6,6 +6,15 @@ import examples.update_variables
 updatedVariableGroups = examples.update_variables.update_topics()
 examples.update_variables.update_repository(updatedVariableGroups, 'Repository commit message')
 
+In order to verify that all the topic reassignments in the file 'Topics_to_be_changed.xlsx' have
+been successfully executed, run examples.update_variables.update_topics() again after initially
+running it. If all the topic reassignments have been successful, after the function has iterated
+through the entire input file a message similar to the following should be displayed:
+
+362 of 362 variables in the input file Topics_to_be_changed.xlsx were successfully assigned to new
+topics. The variable topic reassignments in the input data file have already all been successfully
+executed.
+
 """
 import pandas as pd
 import defusedxml
@@ -48,7 +57,9 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             (identifier, agency, version, item_type, updated_group))
 
 # Declare an array which will contain instances of the variable groups/topics.
+
 updated_topic_groups = []
+
 # Declare a pair of arrays which store variables which are not present in the source topic/
 # variable group, and which are already present in the destination topic/variable group. If
 # the topic associations described in the input spreadsheet are correct, after the update_topics
@@ -59,16 +70,19 @@ updated_topic_groups = []
 # running the update_topics method and performing the variable topic reassignments, subsequent
 # invocations of the update_topics method should produce a message indicating that the topic
 # reassignments described in the worksheet have all been successfully executed.
+
 variable_not_present_in_source_topic = []
 variable_present_in_destination_topic = []
+
 # Name of spreadsheet file containing details of variables and topics
-input_file_name = "Topics_to_be_changed.xlsx"
+
+INPUT_FILE_NAME = "Topics_to_be_changed.xlsx"
 
 def update_topics():
     """Method for reassigning variables to new topics. The code iterates through a spreadsheet
     containing details of new variable topic assignments and performs the reassignments. 
     """
-    data = pd.read_excel(input_file_name)
+    data = pd.read_excel(INPUT_FILE_NAME)
     # Iterate through the rows in the spreadsheet. Each row contains details of a topic
     # reassignment for a variable...
     for topic_reassignment_details in data.iloc:
@@ -174,7 +188,7 @@ def update_topics():
                                                                    )
                         else:
                             new_reference = reference_to_move
-                        # Add the variable reference to the variable group representing the topic 
+                        # Add the variable reference to the variable group representing the topic
                         # it is being reassigned to.
                         destination_item[0].append(new_reference)
                         # Finally we update the array containing the most current versions of the
@@ -196,11 +210,11 @@ def update_topics():
                            updated_topic_groups)
                     else:
                         if reference_to_move is None:
-                           print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
+                            print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
                               f"{topic_reassignment_details.iloc[0]
                                  } is not present in topic "
                               f"{topic_reassignment_details.iloc[3]}")
-                           variable_not_present_in_source_topic.append(topic_reassignment_details.iloc[1])
+                            variable_not_present_in_source_topic.append(topic_reassignment_details.iloc[1])
                         if reference_in_destination_topic is not None:
                            print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
                               f"{topic_reassignment_details.iloc[0]
@@ -220,7 +234,7 @@ def update_topics():
     number_of_successful_topic_reassignments = len([x for x in variable_not_present_in_source_topic
                                            if x in variable_present_in_destination_topic])
     print(f"{number_of_successful_topic_reassignments} of {len(data)} variables in the input file "
-          f"{input_file_name} were successfully assigned to new topics.")
+          f"{INPUT_FILE_NAME} were successfully assigned to new topics.")
     if (len(variable_not_present_in_source_topic) == len(data) and
        len(variable_present_in_destination_topic) == len(data)):
        print("The variable topic reassignments in the input data file have already all been "
