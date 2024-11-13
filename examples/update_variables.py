@@ -6,13 +6,14 @@ import examples.update_variables
 updatedVariableGroups = examples.update_variables.update_topics()
 examples.update_variables.update_repository(updatedVariableGroups, 'Repository commit message')
 
-In order to verify that all the topic reassignments in the file 'Topics_to_be_changed.xlsx' have
-been successfully executed, run examples.update_variables.update_topics() again after initially
-running it. If all the topic reassignments have been successful, after the function has iterated
-through the entire input file a message similar to the following should be displayed:
+You can verify that the above commands have successfully executed the topic reassignments by
+running examples.update_variables.update_topics() again. If all the topic reassignments have been
+successful, after the function has iterated through the entire input file a message similar to the
+following should be displayed:
 
 362 of 362 variables in the input file Topics_to_be_changed.xlsx were successfully assigned to new
-topics. The variable topic reassignments in the input data file have already all been successfully
+topics.
+The variable topic reassignments in the input data file have already all been successfully
 executed.
 
 """
@@ -67,9 +68,10 @@ updated_topic_groups = []
 # variable_not_present_in_source_topic array, and no variables should be present in the
 # variable_present_in_destination_topic array. These arrays can be used to confirm that
 # the topic reassignments described in a spreadsheet have been successful. After successfully
-# running the update_topics method and performing the variable topic reassignments, subsequent
-# invocations of the update_topics method should produce a message indicating that the topic
-# reassignments described in the worksheet have all been successfully executed.
+# running the update_topics method and performing the variable topic reassignments described in a
+# particular input file, subsequent invocations of the update_topics method using that same file
+# should produce a message indicating that the topic reassignments described in the worksheet have
+# all been successfully executed.
 
 variable_not_present_in_source_topic = []
 variable_present_in_destination_topic = []
@@ -89,7 +91,7 @@ def update_topics():
         print("Performing the following topic reassignment...")
         print(topic_reassignment_details)
         # Search for the physical instance/dataset item which contains the variable in the current
-        # row....
+        # input file row....
         physical_instance_containing_variable = C.search_item(
             'a51e85bb-6259-4488-8df2-f08cb43485f8', topic_reassignment_details.iloc[0].strip(), 0, 
                SearchLatestVersion=True)['Results']
@@ -158,6 +160,10 @@ def update_topics():
                     # Find and remove the reference to the variable in the source group/topic.
                     reference_to_move = find_reference(
                         source_item, variable_agency_id, variable_identifier)
+                    # We check to see if a reference to the variable is already present in the
+                    # destination group/topic. This information can be used to determine if the
+                    # topic reassignments described in the input file have already been
+                    # successfully performed.
                     reference_in_destination_topic = find_reference(destination_item, 
                         variable_agency_id, variable_identifier)
                     if reference_to_move is not None and reference_in_destination_topic is None:
