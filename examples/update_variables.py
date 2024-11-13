@@ -49,6 +49,19 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
 
 # Declare an array which will contain instances of the variable groups/topics.
 updated_topic_groups = []
+# Declare a pair of arrays which store variables which are not present in the source topic/
+# variable group, and which are already present in the destination topic/variable group. If
+# the topic associations described in the input spreadsheet are correct, after the update_topics
+# method finishes running, all the variables should be present in the
+# variable_not_present_in_source_topic array, and no variables should be present in the
+# variable_present_in_destination_topic array. These arrays can be used to confirm that
+# the topic reassignments described in a spreadsheet have been successful. After successfully
+# running the update_topics method and performing the variable topic reassignments, subsequent
+# invocations of the update_topics method should produce a message indicating that the topic
+# reassignments described in the worksheet have all been successfully executed.
+variable_not_present_in_source_topic = []
+variable_present_in_destination_topic = []
+
 
 def update_topics():
     """Method for reassigning variables to new topics. The code iterates through a spreadsheet
@@ -57,7 +70,7 @@ def update_topics():
     data = pd.read_excel("Topics_to_be_changed.xlsx")
     # Iterate through the rows in the spreadsheet. Each row contains details of a topic
     # reassignment for a variable...
-    for topic_reassignment_details in data.iloc:
+    for topic_reassignment_details in [data.iloc[0,]]:
         print("Performing the following topic reassignment...")
         print(topic_reassignment_details)
         # Search for the physical instance/dataset item which contains the variable in the current
@@ -85,7 +98,7 @@ def update_topics():
                 # Search for a variable group that references the variable we found, i.e. the
                 # variable group representing the topic that the variable is currently assigned to.
                 all_source_group_identifiers = C.search_items(C.item_code('Variable Group'),
-                     SearchSets=search_sets, 
+                     SearchSets=search_sets,
                      SearchTerms=[str(topic_reassignment_details.iloc[3])])['Results']
                 # Each variable should only belong to one topic, so it should only be referenced by
                 # one variable group. However we may find that a variable is referenced by more than
@@ -130,7 +143,9 @@ def update_topics():
                     # Find and remove the reference to the variable in the source group/topic.
                     reference_to_move = find_reference(
                         source_item, variable_agency_id, variable_identifier)
-                    if reference_to_move is not None:
+                    reference_in_destination_topic = find_reference(destination_item, 
+                        variable_agency_id, variable_identifier)
+                    if reference_to_move is not None and reference_in_destination_topic is None:
                         source_item[0].remove(reference_to_move)
                         # We need to get the namespaces for the variable reference and the variable
                         # group representing the topic we are re-assigning the variable to. These
@@ -179,14 +194,32 @@ def update_topics():
                            C.item_code('Variable Group'),
                            updated_topic_groups)
                     else:
-                        print(f"Variable {topic_reassignment_details.iloc[3]} in dataset "
-                              f"{topic_reassignment_details.iloc[0]} is not assigned to a single "
-                              "topic")
+                        if reference_to_move is None:
+                           print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
+                              f"{topic_reassignment_details.iloc[0]
+                                 } is not present in topic "
+                              f"{topic_reassignment_details.iloc[3]}")
+                           variable_not_present_in_source_topic.append(topic_reassignment_details.iloc[1])
+                        if reference_to_move is not None:
+                           print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
+                              f"{topic_reassignment_details.iloc[0]
+                                 } is already present in topic "
+                              f"{topic_reassignment_details.iloc[4]}")
+                           variable_present_in_destination_topic.append(topic_reassignment_details.iloc[1])
                 else:
-                    print(f"Multiple instances of variable {topic_reassignment_details.iloc[1]}"
-                          f"found in dataset {topic_reassignment_details.iloc[0]}")
+                    print(f"A single instance of the variable group "
+                          f"{topic_reassignment_details.iloc[3]} has not been found in dataset "
+                          f"{topic_reassignment_details.iloc[0]}. Either none or multiple "
+                          "instances were found.")
             else:
-                print(f"No dataset with alternate title {topic_reassignment_details[0]} found")
+                print(f"A single instance of the variable {topic_reassignment_details.iloc[1]} "
+                      f"has not been found. Either none or multiple instances were found.")
+        else:
+            print(f"No dataset with alternate title {topic_reassignment_details[0]} found")
+    if len(variable_not_present_in_source_topic) == 0 and
+       len(variable_present_in_destination_topic) == len(data):
+       print("The variable topic reassignments in the input data file have already been"
+             "successfully executed.")  
     return updated_topic_groups
 
 # Once we have made all the updates to the variable groups described in the input file
