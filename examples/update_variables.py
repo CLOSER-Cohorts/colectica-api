@@ -179,7 +179,7 @@ def update_topics():
                         # namespace, otherwise the variable group update will not work.
                         reference_from_source_ddi_version = reference_to_move.tag
                         destination_ddi_version = ("ddi:reusable:"
-                            f"{get_namespace(destination_item.tag).split(":")[2]}")
+                            f"{get_namespace(destination_item.tag).split(':')[2]}")
                         # If the namespace for the variable reference from the variable group/topic
                         # that the variable currently belongs to has a different DDI version than
                         # the variable group/topic that we want to add the reference to, we need
@@ -216,17 +216,17 @@ def update_topics():
                            updated_topic_groups)
                     else:
                         if reference_to_move is None:
-                            print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
-                              f"{topic_reassignment_details.iloc[0]
-                                 } is not present in topic "
-                              f"{topic_reassignment_details.iloc[3]}")
-                            variable_not_present_in_source_topic.append(topic_reassignment_details.iloc[1])
+                            print((f"Variable {topic_reassignment_details.iloc[1]} in dataset "
+                                   f"{topic_reassignment_details.iloc[0]} is not in topic "
+                                   f"{topic_reassignment_details.iloc[3]}"))
+                            variable_not_present_in_source_topic.append(
+                                topic_reassignment_details.iloc[1])
                         if reference_in_destination_topic is not None:
-                           print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
-                              f"{topic_reassignment_details.iloc[0]
-                                 } is already present in topic "
-                              f"{topic_reassignment_details.iloc[4]}")
-                           variable_present_in_destination_topic.append(topic_reassignment_details.iloc[1])
+                            print((f"Variable {topic_reassignment_details.iloc[1]} in dataset "
+                                   f"{topic_reassignment_details.iloc[0]} is already in topic "
+                                   f"{topic_reassignment_details.iloc[4]}"))
+                            variable_present_in_destination_topic.append(
+                                topic_reassignment_details.iloc[1])
                 else:
                     print(f"A single instance of the variable group "
                           f"{topic_reassignment_details.iloc[3]} has not been found in dataset "
