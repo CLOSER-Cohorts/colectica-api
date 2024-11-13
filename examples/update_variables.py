@@ -200,7 +200,7 @@ def update_topics():
                                  } is not present in topic "
                               f"{topic_reassignment_details.iloc[3]}")
                            variable_not_present_in_source_topic.append(topic_reassignment_details.iloc[1])
-                        if reference_to_move is not None:
+                        if reference_in_destination_topic is not None:
                            print(f"Variable {topic_reassignment_details.iloc[1]} in dataset "
                               f"{topic_reassignment_details.iloc[0]
                                  } is already present in topic "
@@ -216,9 +216,9 @@ def update_topics():
                       f"has not been found. Either none or multiple instances were found.")
         else:
             print(f"No dataset with alternate title {topic_reassignment_details[0]} found")
-    if (len(variable_not_present_in_source_topic) == 0 and
+    if (len(variable_not_present_in_source_topic) == len(data) and
        len(variable_present_in_destination_topic) == len(data)):
-       print("The variable topic reassignments in the input data file have already been"
+       print("The variable topic reassignments in the input data file have already all been "
              "successfully executed.")  
     return updated_topic_groups
 
