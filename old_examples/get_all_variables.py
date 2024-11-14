@@ -32,7 +32,7 @@ def main():
     C = ColecticaObject(hostname, username, password)
 
     # get list of variables
-    L_variable = C.search_item('683889c6-f74b-4d5e-92ed-908c0a42bb2d', '', 0)
+    L_variable = C.search_items(C.item_code('Variable'))
 
     # convert to data frame
     df_variable = pd.DataFrame(L_variable['Results'])

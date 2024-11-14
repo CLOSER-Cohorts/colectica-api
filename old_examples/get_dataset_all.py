@@ -30,8 +30,8 @@ def main():
     C = ColecticaObject(hostname, username, password)
 
     # get all data file
-    L = C.search_item("a51e85bb-6259-4488-8df2-f08cb43485f8", '', 0)
-    print(L['TotalResults']) # 490
+    L = C.search_items("a51e85bb-6259-4488-8df2-f08cb43485f8")
+    print(L['TotalResults'])
     
     appended_df = []
     for item in L['Results']:

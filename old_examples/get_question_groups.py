@@ -50,9 +50,9 @@ def main():
     C = ColecticaObject(hostname, username, password)
 
     # get all question groups
-    # C.search_item("5cc915a1-23c9-4487-9613-779c62f8c205", '', 10) will fetch 10 records
-#    L = C.search_item("5cc915a1-23c9-4487-9613-779c62f8c205", '', 0)
-#    print(L['TotalResults']) # 35952
+    # C.search_items(C.item_code('Question Group'), MaxResults=10) will fetch 10 records
+#    L = C.search_items(C.item_code('Question Group'))
+#    print(L['TotalResults'])
 
 #    json.dump(L, open(os.path.join(outdir, 'all.txt'),'w'))
 

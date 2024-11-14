@@ -27,9 +27,9 @@ pp = pprint.PrettyPrinter(depth=4)
 
 def get_all_Variable_Group(C, VG_text_file):
     """
-    return a text file contains all studies
+    return a text file contains all variable groups
     """
-    r  = C.search_item("91da6c62-c2c2-4173-8958-22c518d1d40d", '', 0)
+    r  = C.search_items(C.item_code('Variable Group'))
     # print(r['TotalResults'])
     json.dump(r, open(VG_text_file, 'w'))
     
@@ -55,8 +55,7 @@ def get_all_studies(C, study_text_file):
     """
     return a text file contains all studies
     """
-    study = "30ea0200-7121-4f01-8d21-a931a182b86d"
-    r  = C.search_item(study, '', 0)
+    r  = C.search_items(C.item_code('Study'))
     # print(r['TotalResults'])
     json.dump(r, open(study_text_file, 'w'))
 

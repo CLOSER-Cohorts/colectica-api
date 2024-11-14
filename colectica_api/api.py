@@ -623,13 +623,13 @@ class ColecticaBasicAPI:
         NextResult=0,
         ResultOrdering=0,
         SearchDepricatedItems=True,
-        SearchLatestVersion=True,
+        SearchLatestVersion=False,
         SearchSetPredicate=None,
         SearchSets=[],
         SearchTargets=[],
         SearchTerms=[],
         UsePrefixSearch=False,
-        ReturnIdentifiersOnly=True,
+        ReturnIdentifiersOnly=False,
         MaxResults=0
     ):
         """Find all items that match certain criteria.
