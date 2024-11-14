@@ -359,74 +359,6 @@ class ColecticaBasicAPI:
             raise ValueError(response.text)
         return response.json()
 
-    def search_item(
-        self,
-        item_type,
-        search_term,
-        MaxResults=1,
-        *,
-        RankResults=None,
-        SearchDepricatedItems=None,
-        SearchLatestVersion=None,
-        UsePrefixSearch=None,
-    ):
-        """Find all items that match certain criteria.
-
-        Args:
-            item_type (str): for example `C.item_type("Question")` or
-                `C.item_type("Variable")`.
-            search_term (list/str): for example "home" or a list
-                `["work", "home"]`.
-            MaxResults (int): how many results to return or 0 to return
-                all results.
-
-        Keyword Args:
-            RankResults (bool/None):
-            SearchDepricatedItems (bool/None):
-            SearchLatestVersion (bool/None): Whether to search only the
-                latest version.
-            UsePrefixSearch (bool/None): ???
-
-        Returns:
-            dict: the results of the search, including list of matches,
-            how many matches, etc.
-
-        For the keyword arguments, if they are omitted (or set to None),
-        then the server chooses a default value.  This might be documented
-        elsewhere.
-
-        This uses the ``/api/v1/_query`` API call.
-
-        Documented here: https://docs.colectica.com/repository/functionality/rest-api/examples/search/
-        """
-        if not isinstance(search_term, list):
-            search_term = [search_term]
-        query = {
-            "ItemTypes": [item_type],
-            "searchTerms": [*search_term],
-            "MaxResults": MaxResults,
-        }
-        if RankResults is not None:
-            query.update({"RankResults": RankResults})
-        if SearchDepricatedItems is not None:
-            query.update({"SearchDepricatedItems": SearchDepricatedItems})
-        if SearchLatestVersion is not None:
-            query.update({"SearchLatestVersion": SearchLatestVersion})
-        if UsePrefixSearch is not None:
-            query["UsePrefixSearch"] = UsePrefixSearch
-
-        response = requests.post(
-            "https://" + self.host + "/api/v1/_query/",
-            headers=self.token,
-            json=query,
-            verify=self.verify,
-        )
-        if response.ok:
-            return response.json()
-        raise ValueError(
-            f"Server returned {response.status_code} error: {response.content}"
-        )
-
     def search_relationship_bysubject(
         self,
         AgencyId,
@@ -700,7 +632,7 @@ class ColecticaBasicAPI:
         ReturnIdentifiersOnly=True,
         MaxResults=0
     ):
-        """Find all items that are somehow connected to a given item.
+        """Find all items that match certain criteria.
 
         Args:
             item_types (str/list[str]): the item types to search for.
