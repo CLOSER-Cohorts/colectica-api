@@ -4,7 +4,7 @@ function. An example of this spreadsheet ('Topics_to_be_changed.xlsx') is provid
 'examples' directory of this repository. The set of commands for changing variable topics is:
 
 import examples.update_variables
-updatedVariableGroups = examples.update_variables.update_topics('Topics_to_be_changed.xlsx')
+updatedVariableGroups = examples.update_variables.update_topics('examples/Topics_to_be_changed.xlsx')
 examples.update_variables.update_repository(updatedVariableGroups, 'Repository commit message')
 
 You can verify that the above commands have successfully executed the topic reassignments by
