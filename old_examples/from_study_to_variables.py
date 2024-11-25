@@ -24,7 +24,7 @@ def get_all_Series(C):
     """
     return result from item search on Series
     """
-    r  = C.search_item("4bd6eef6-99df-40e6-9b11-5b8f64e5cb23", '', 0)
+    r = C.search_items(C.item_code('Series'))
     return r
     
     
@@ -53,7 +53,6 @@ def main():
 
     C = ColecticaObject(hostname, username, password)
  
-
     list_df_s = []
     # find all series
     series = get_all_Series(C)
