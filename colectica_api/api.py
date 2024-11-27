@@ -113,6 +113,8 @@ item_dict = {
     "While": "0681e606-ba3f-453c-9fdd-10670e8e045c",
 }
 
+# use lower case for all values
+item_dict = {k: v.casefold() for k, v in item_dict.items()}
 item_dict_inv = {v: k for k, v in item_dict.items()}
 
 
