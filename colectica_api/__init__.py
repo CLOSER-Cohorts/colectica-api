@@ -6,7 +6,7 @@ handles communication with a Colectica server (using its
 REST api).
 """
 
-__version__ = "0.0.8.dev0"
+__version__ = "0.0.8"
 
 from .colectica import ColecticaObject, ColecticaBasicAPI
 
