@@ -21,7 +21,8 @@ executed.
 import pandas as pd
 import defusedxml
 from colectica_api import ColecticaObject
-from .lib.utility import get_namespace, find_reference, create_variable_reference
+from .lib.utility import get_namespace, find_reference, create_variable_reference, 
+get_current_state_of_topic_group, update_list_of_topic_groups
 # pip install openpyxl
 # The above install is needed for the pd.read-excel command, it doesn't have to be executed every
 # time, perhaps only the first time this script is run on a machine
@@ -30,33 +31,6 @@ USERNAME = "USERNAME"
 PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
-
-def get_current_state_of_topic_group(agency_id, identifier, updated_groups, version=None):
-    """We may be performing multiple updates to the topic variable groups, so instead of 
-    retrieving/updating/writing data using the Colectica REST API every time we need to update 
-    a variable group, we will retrieve the most recent version of it from the Colectica repository
-    using the Colectica REST API for the first update, and on subsequent updates we will modify the
-    in-memory version which is stored in the updated_groups array."""
-    updated_referencing_item = [x for x in updated_groups if x[0] == identifier]
-    if len(updated_referencing_item) > 0:
-        referencing_item = updated_referencing_item[0][4]
-    else:
-        fragment_xml = C.get_item_xml(
-            agency_id, identifier, version=version)['Item']
-        referencing_item = defusedxml.ElementTree.fromstring(fragment_xml)
-    return referencing_item
-
-def update_list_of_topic_groups(updated_group, agency, identifier, version,
-                                      item_type, updated_groups_list):
-    """Update the in-memory list of variable groups representing topics. If the topic group we have
-    updated is not in already in the list, we append it to the list."""
-    if ([x[0] for x in updated_groups_list].count(identifier) > 0):
-        index_of_updated_ref = [x[0] for x in updated_groups_list].index(identifier)
-        updated_groups_list[index_of_updated_ref] = (
-            identifier, agency, version, item_type, updated_group)
-    else:
-        updated_groups_list.append(
-            (identifier, agency, version, item_type, updated_group))
 
 # Declare an array which will contain instances of the variable groups/topics.
 

@@ -37,6 +37,22 @@ def create_variable_reference(agency_id, item_id, version, item_type, namespace)
     new_element.append(type_of_object_element)
     return new_element
 
+def create_question_reference(agency_id, item_id, version, item_type, namespace, namespace2, tagName):
+    newElement = ET.Element(f"{{{namespace2}}}{tagName}")
+    agencyElement=ET.Element(f"{{{namespace}}}Agency")
+    idElement=ET.Element(f"{{{namespace}}}ID")
+    versionElement= ET.Element(f"{{{namespace}}}Version")
+    typeOfObjectElement = ET.Element(f"{{{namespace}}}TypeOfObject")
+    idElement.text=item_id
+    agencyElement.text=agency_id
+    versionElement.text=str(version)
+    typeOfObjectElement.text=item_type
+    newElement.append(agencyElement)
+    newElement.append(idElement)
+    newElement.append(versionElement)
+    newElement.append(typeOfObjectElement)
+    return newElement    
+
 def convert_xml_element_to_json(xml_element):
     """Convert an XML element to a JSON representation."""
     json_object = {}
@@ -44,3 +60,59 @@ def convert_xml_element_to_json(xml_element):
         start_of_tag_name = elem.tag.index("}")+1
         json_object[elem.tag[start_of_tag_name:]] = elem.text
     return json_object
+
+def getUrnFromItem(item):
+   return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
+
+def get_current_state_of_topic_group(agency_id, identifier, updated_groups, version=None):
+    """We may be performing multiple updates to the topic variable groups, so instead of 
+    retrieving/updating/writing data using the Colectica REST API every time we need to update 
+    a variable group, we will retrieve the most recent version of it from the Colectica repository
+    using the Colectica REST API for the first update, and on subsequent updates we will modify the
+    in-memory version which is stored in the updated_groups array."""
+    updated_referencing_item = [x for x in updated_groups if x[0] == identifier]
+    if len(updated_referencing_item) > 0:
+        referencing_item = updated_referencing_item[0][4]
+    else:
+        fragment_xml = C.get_item_xml(
+            agency_id, identifier, version=version)['Item']
+        referencing_item = defusedxml.ElementTree.fromstring(fragment_xml)
+    return referencing_item
+
+def update_list_of_topic_groups(updated_group, agency, identifier, version,
+                                      item_type, updated_groups_list):
+    """Update the in-memory list of variable groups representing topics. If the topic group we have
+    updated is not in already in the list, we append it to the list."""
+    if ([x[0] for x in updated_groups_list].count(identifier) > 0):
+        index_of_updated_ref = [x[0] for x in updated_groups_list].index(identifier)
+        updated_groups_list[index_of_updated_ref] = (
+            identifier, agency, version, item_type, updated_group)
+    else:
+        updated_groups_list.append(
+            (identifier, agency, version, item_type, updated_group))
+
+def get_topic_of_item(topic_name, topic_type, containing_item_name, containing_item_type):
+    "Method for getting the topic that an item is assigned to."
+    containing_item = C.search_items(
+            [containing_item_type],
+            SearchTerms=containing_item_name,
+            SearchLatestVersion=True)['Results']
+    if len(containing_item) == 1:
+            # We create a JSON object representing the containing item.
+            search_sets = [{
+                "agencyId": containing_item[0]['AgencyId'],
+                "identifier": containing_item[0]['Identifier'],
+                "version": containing_item[0]['Version']
+            }]
+            topic_group_identifiers = C.search_items(topic_type,
+                     SearchSets=search_sets,
+                     SearchTerms=[str(topic_name)])['Results']
+    else:
+            topic_group_identifiers = []
+    return topic_group_identifiers
+
+def get_url_from_item(item, hostname):
+   return f"http://{hostname}/item/" + item['AgencyId'] + "/" + item['Identifier'] + "/" + str(item['Version'])
+
+def get_urn_from_item(item):
+   return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
