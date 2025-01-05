@@ -297,6 +297,9 @@ class ColecticaBasicAPI:
         response = requests.get(uri, headers=self.token, verify=self.verify)
         if not response.ok:
             raise ValueError(response.text)
+        # special case if result is ok but empty we would get a JSON decode error
+        if not response.text:
+            return {}
         return response.json()
 
     def get_item_version_history(self, AgencyId, Identifier):
