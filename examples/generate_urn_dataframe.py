@@ -1,6 +1,8 @@
-from .lib.utility import get_urn_from_item, get_topic_of_item
+from lib.utility import get_urn_from_item, get_topic_of_item
+#pip install openpyxl #might need to install openpyxl, a dependency for read-excel
+import pandas as pd
    
-def generate_urn_dataframe(input_file_name):
+def generate_urn_dataframe(input_file_name, C):
     """Method for reassigning items to new topics. The code iterates through a spreadsheet
     containing details of new variable topic assignments and generates a dataframe of URNs that
     can be used as input to a method defined in changeItemTopics.py that reassigns items to new
@@ -27,7 +29,7 @@ def generate_urn_dataframe(input_file_name):
             item = C.get_item_json(agency_id, identifier)
         version = item['Version']
         itemUrn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
-        itemType = item['ItemType']
+        item_type = item['ItemType']
         topicName = item['ItemName']['en-GB']  
         if item_type==C.item_code('Question'):
             topic_type=C.item_code('Question Group')
@@ -36,15 +38,11 @@ def generate_urn_dataframe(input_file_name):
             topic_type=C.item_code('Variable Group')
             containing_item_type=C.item_code('Data File')
         itemUrn = get_urn_from_item(item)    
-        sourceTopic = get_topic_of_item(topic_reassignment_details[4], topic_type, instrumentName, containing_item_type)
-        destinationTopic = get_topic_of_item(topic_reassignment_details[5], topic_type, instrumentName, containing_item_type)
+        sourceTopic = get_topic_of_item(topic_reassignment_details[4], topic_type, instrumentName, containing_item_type, C)
+        destinationTopic = get_topic_of_item(topic_reassignment_details[5], topic_type, instrumentName, containing_item_type, C)
         urnDataFrame['itemUrns'].append(itemUrn)
         if len(sourceTopic)>0:
             urnDataFrame['sourceTopicGroups'].append(get_urn_from_item(sourceTopic[0]))
         if len(destinationTopic)>0:
             urnDataFrame['destinationTopicGroups'].append(get_urn_from_item(destinationTopic[0])) 
-    return urnDataFrame  
-
-
-topicUpdates=update_topics("twoRows.xlsx")           
-df2 = pd.DataFrame(topicUpdates)
+    return pd.DataFrame(urnDataFrame)

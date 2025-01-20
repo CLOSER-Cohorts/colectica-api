@@ -1,6 +1,8 @@
 """Utility functions for processing XML and DDI data."""
 import re
 from xml.etree import ElementTree as ET
+from colectica_api import ColecticaObject
+import defusedxml
 
 def get_namespace(tag):
     """Get the namespace for an XML element."""
@@ -8,17 +10,31 @@ def get_namespace(tag):
     if m:
         return m.group(1)
 
+def referencesAreEquivalent(reference1, reference2):
+    ref1Elems=[]
+    ref2Elems=[]
+    for elem in reference1.findall(".//"):
+        ref1Elems.append(elem.tag + ": " + elem.text)
+    print(sorted(ref1Elems))
+    for elem in reference2.findall(".//"):
+        ref2Elems.append(elem.tag + ": " + elem.text)
+    print(sorted(ref2Elems))
+    return sorted(ref1Elems) == sorted(ref2Elems)             
+
 def find_reference(xml_tree, agency, identifier):
     """Find a reference to an item in an XML tree/element (e.g. a 'VariableGroup' element)"""
-    ret_elem = None
+    matching_references = []
     for elem in xml_tree.findall(".//"):
-        element_namespace = get_namespace(elem.tag)
+        if (len(elem)>0):
+            element_namespace = get_namespace(elem[0].tag)
+        else:
+            element_namespace = get_namespace(elem.tag)
         if (elem.find(f".//{{{element_namespace}}}Agency") is not None and
            elem.find(f".//{{{element_namespace}}}Agency").text == agency and
            elem.find(f".//{{{element_namespace}}}ID") is not None and
            elem.find(f".//{{{element_namespace}}}ID").text == identifier):
-            ret_elem = elem
-    return ret_elem
+            matching_references.append(elem)
+    return matching_references
 
 def create_variable_reference(agency_id, item_id, version, item_type, namespace):
     """Create an XML element representing a VariableReference"""
@@ -37,8 +53,8 @@ def create_variable_reference(agency_id, item_id, version, item_type, namespace)
     new_element.append(type_of_object_element)
     return new_element
 
-def create_question_reference(agency_id, item_id, version, item_type, namespace, namespace2, tagName):
-    newElement = ET.Element(f"{{{namespace2}}}{tagName}")
+def create_question_reference(agency_id, item_id, version, item_type, namespace, namespace2):
+    newElement = ET.Element(f"{{{namespace2}}}QuestionItemReference")
     agencyElement=ET.Element(f"{{{namespace}}}Agency")
     idElement=ET.Element(f"{{{namespace}}}ID")
     versionElement= ET.Element(f"{{{namespace}}}Version")
@@ -61,10 +77,10 @@ def convert_xml_element_to_json(xml_element):
         json_object[elem.tag[start_of_tag_name:]] = elem.text
     return json_object
 
-def getUrnFromItem(item):
+def get_urn_from_item(item):
    return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
 
-def get_current_state_of_topic_group(agency_id, identifier, updated_groups, version=None):
+def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, version=None):
     """We may be performing multiple updates to the topic variable groups, so instead of 
     retrieving/updating/writing data using the Colectica REST API every time we need to update 
     a variable group, we will retrieve the most recent version of it from the Colectica repository
@@ -90,8 +106,8 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
     else:
         updated_groups_list.append(
             (identifier, agency, version, item_type, updated_group))
-
-def get_topic_of_item(topic_name, topic_type, containing_item_name, containing_item_type):
+ 
+def get_topic_of_item(topic_name, topic_type, containing_item_name, containing_item_type, C):
     "Method for getting the topic that an item is assigned to."
     containing_item = C.search_items(
             [containing_item_type],
@@ -111,8 +127,43 @@ def get_topic_of_item(topic_name, topic_type, containing_item_name, containing_i
             topic_group_identifiers = []
     return topic_group_identifiers
 
+def get_topic_for_item(agency_id, identifier, version, topic_name):
+    related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[C.item_code("Question Group")])
+    for related_group in related_groups:
+        relatedQuestionGroupMostRecentVersion=C.get_item_xml(relatedQuestionGroup['AgencyId'], relatedQuestionGroup['Identifier'])
+        questionGroupName=getElementByName(defusedxml.ElementTree.fromstring(relatedQuestionGroupMostRecentVersion['Item']), 'QuestionGroupName')['String']
+        if identifier in relatedQuestionGroupMostRecentVersion['Item'] and topic_name == questionGroupName:
+            return relatedQuestionGroupMostRecentVersion
+
 def get_url_from_item(item, hostname):
    return f"http://{hostname}/item/" + item['AgencyId'] + "/" + item['Identifier'] + "/" + str(item['Version'])
 
 def get_urn_from_item(item):
    return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
+
+def createColecticaRepositoryConnection(hostname, username, password, verify_ssl=False):
+    return ColecticaObject(hostname, username, password,verify_ssl=False)
+
+def map_between_questions_and_variables(items, C):
+    """Method for mapping between questions and variables.
+    """
+    related_items=[]
+    # Iterate through the items...
+    for item in items:
+        agency_id = item.split(":")[2]
+        identifier = item.split(":")[3]
+        version = item.split(":")[4]
+        itemJson = C.get_item_json(agency_id, identifier, version=version)
+        item_type = C.item_code_inv(itemJson['ItemType'])
+        if item_type == 'Variable':
+            all_related_items= C.search_relationship_bysubject(agency_id, identifier, Version=version, item_types=[C.item_code("Question")])
+        elif item_type == 'Question':
+            all_related_items= C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[C.item_code("Variable")])
+        for related_item in all_related_items:
+            related_item_json=C.get_item_json(related_item['Item1']['Item3'], related_item['Item1']['Item1'], version=related_item['Item1']['Item2'])
+            agency_id = related_item_json['AgencyId']
+            identifier = related_item_json['Identifier']
+            version = related_item_json['Version']
+            item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
+            related_items.append(item_urn)
+    return related_items

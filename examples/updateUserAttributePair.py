@@ -76,7 +76,7 @@ attributeValueJson['RelatedItemIdValue']={
 
 attributeValue.text = json.dumps(attributeValueJson)
 
-# Create a transation, add the modified PhysicalInstance elements from above to the transaction,
+# Create a transaction, add the modified PhysicalInstance elements from above to the transaction,
 # and commit the transaction
 
 transactionResponse = C.create_transaction()
