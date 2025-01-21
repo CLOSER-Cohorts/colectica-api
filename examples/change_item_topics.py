@@ -3,7 +3,7 @@ A set of functions that reassign variables to new topics. The variable topic rea
 are defined in an Excel spreadsheet, the name of which is passed as an input argument to a
 function. An example of this spreadsheet ('topic_reassignments.xlsx') is provided in the
 'examples' directory of this repository. The set of commands that need to be executed from
-within a Python shell for changing variable topics is:
+within a Python shell for changing item topics is:
 
 from colectica_api import ColecticaObject
 from examples.lib.utility import update_repository
