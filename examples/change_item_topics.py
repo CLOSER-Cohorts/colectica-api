@@ -141,12 +141,12 @@ def update_topics(input_file_name, C):
                         # reassigned to...
                         if len(find_reference(destination_item, reference_to_move[0].text, reference_to_move[1].text))==0:
                                 destination_item[0].append(new_reference)
-                                # ...and we update the entry for the deistination topic in our array.
+                                # ...and we update the entry for the destination topic in our array.
                                 update_list_of_topic_groups(destination_item, 
                                    destination_group['AgencyId'],
                                    destination_group['Identifier'],
                                    destination_group['Version'],
-                                   source_group['ItemType'],
+                                   destination_group['ItemType'],
                                    updated_topic_groups)
         else:
                 if len(references_to_move)==0:
