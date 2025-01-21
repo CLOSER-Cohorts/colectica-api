@@ -26,7 +26,6 @@ from .lib.utility import (
 )
 from .generate_urn_dataframe import generate_urn_dataframe 
 import defusedxml
-import pandas as pd
 
 def update_topics(input_file_name, C):
     """Method for reassigning items to new topics. The code iterates through a data frame
