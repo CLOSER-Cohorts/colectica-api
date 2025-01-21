@@ -28,7 +28,13 @@ executed.
 import pandas as pd
 import defusedxml
 from colectica_api import ColecticaObject
-from .lib.utility import get_namespace, find_reference, create_variable_reference, get_current_state_of_topic_group, update_list_of_topic_groups
+from .lib.utility import (
+    get_namespace,
+    find_reference,
+    create_variable_reference,
+    get_current_state_of_topic_group,
+    update_list_of_topic_groups
+)
 # pip install openpyxl
 # The above install is needed for the pd.read-excel command, it doesn't have to be executed every
 # time, perhaps only the first time this script is run on a machine
