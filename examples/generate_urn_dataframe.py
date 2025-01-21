@@ -10,7 +10,7 @@ def generate_urn_dataframe(input_file_name, C):
     """
     print(f"Reading topic reassignments from {input_file_name}")
     data = pd.read_excel(input_file_name)
-    urnDataFrame={
+    urn_data_frame={
         "itemUrns": [],
         "sourceTopicGroups": [],
         "destinationTopicGroups": []
@@ -18,7 +18,7 @@ def generate_urn_dataframe(input_file_name, C):
     # Iterate through the rows in the spreadsheet. Each row contains details of a topic
     # reassignment for an item...
     for topic_reassignment_details in data.iloc:
-        instrumentName = topic_reassignment_details.iloc[0]
+        instrument_name = topic_reassignment_details.iloc[0]
         url = topic_reassignment_details.iloc[2]
         agency_id = url.split("/")[4]
         identifier = url.split("/")[5]
@@ -30,7 +30,6 @@ def generate_urn_dataframe(input_file_name, C):
         version = item['Version']
         item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
         item_type = item['ItemType']
-        topicName = item['ItemName']['en-GB']  
         if item_type==C.item_code('Question'):
             topic_type=C.item_code('Question Group')
             containing_item_type=C.item_code('Data Collection')
@@ -38,11 +37,11 @@ def generate_urn_dataframe(input_file_name, C):
             topic_type=C.item_code('Variable Group')
             containing_item_type=C.item_code('Data File')
         item_urn = get_urn_from_item(item)    
-        sourceTopic = get_topic_of_item(topic_reassignment_details.iloc[4], topic_type, instrumentName, containing_item_type, C)
-        destinationTopic = get_topic_of_item(topic_reassignment_details.iloc[5], topic_type, instrumentName, containing_item_type, C)
-        urnDataFrame['itemUrns'].append(item_urn)
-        if len(sourceTopic)>0:
-            urnDataFrame['sourceTopicGroups'].append(get_urn_from_item(sourceTopic[0]))
-        if len(destinationTopic)>0:
-            urnDataFrame['destinationTopicGroups'].append(get_urn_from_item(destinationTopic[0])) 
-    return pd.DataFrame(urnDataFrame)
+        source_topic = get_topic_of_item(topic_reassignment_details.iloc[4], topic_type, instrument_name, containing_item_type, C)
+        destination_topic = get_topic_of_item(topic_reassignment_details.iloc[5], topic_type, instrument_name, containing_item_type, C)
+        urn_data_frame['itemUrns'].append(item_urn)
+        if len(source_topic)>0:
+            urn_data_frame['sourceTopicGroups'].append(get_urn_from_item(source_topic[0]))
+        if len(destination_topic)>0:
+            urn_data_frame['destinationTopicGroups'].append(get_urn_from_item(destination_topic[0])) 
+    return pd.DataFrame(urn_data_frame)
