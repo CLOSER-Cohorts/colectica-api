@@ -10,16 +10,16 @@ def get_namespace(tag):
     if m:
         return m.group(1)
 
-def referencesAreEquivalent(reference1, reference2):
-    ref1Elems=[]
-    ref2Elems=[]
+def references_are_equivalent(reference1, reference2):
+    ref_1_elems=[]
+    ref_2_elems=[]
     for elem in reference1.findall(".//"):
-        ref1Elems.append(elem.tag + ": " + elem.text)
-    print(sorted(ref1Elems))
+        ref_1_elems.append(elem.tag + ": " + elem.text)
+    print(sorted(ref_1_elems))
     for elem in reference2.findall(".//"):
-        ref2Elems.append(elem.tag + ": " + elem.text)
-    print(sorted(ref2Elems))
-    return sorted(ref1Elems) == sorted(ref2Elems)             
+        ref_2_elems.append(elem.tag + ": " + elem.text)
+    print(sorted(ref_2_elems))
+    return sorted(ref_1_elems) == sorted(ref_2_elems)
 
 def find_reference(xml_tree, agency, identifier):
     """Find a reference to an item in an XML tree/element (e.g. a 'VariableGroup' element)"""
@@ -54,20 +54,20 @@ def create_variable_reference(agency_id, item_id, version, item_type, namespace)
     return new_element
 
 def create_question_reference(agency_id, item_id, version, item_type, namespace, namespace2):
-    newElement = ET.Element(f"{{{namespace2}}}QuestionItemReference")
-    agencyElement=ET.Element(f"{{{namespace}}}Agency")
-    idElement=ET.Element(f"{{{namespace}}}ID")
-    versionElement= ET.Element(f"{{{namespace}}}Version")
-    typeOfObjectElement = ET.Element(f"{{{namespace}}}TypeOfObject")
-    idElement.text=item_id
-    agencyElement.text=agency_id
-    versionElement.text=str(version)
-    typeOfObjectElement.text=item_type
-    newElement.append(agencyElement)
-    newElement.append(idElement)
-    newElement.append(versionElement)
-    newElement.append(typeOfObjectElement)
-    return newElement    
+    new_element = ET.Element(f"{{{namespace2}}}QuestionItemReference")
+    agency_element=ET.Element(f"{{{namespace}}}Agency")
+    id_element=ET.Element(f"{{{namespace}}}ID")
+    version_element= ET.Element(f"{{{namespace}}}Version")
+    type_of_object_element = ET.Element(f"{{{namespace}}}TypeOfObject")
+    id_element.text=item_id
+    agency_element.text=agency_id
+    version_element.text=str(version)
+    type_of_object_element.text=item_type
+    new_element.append(agency_element)
+    new_element.append(id_element)
+    new_element.append(version_element)
+    new_element.append(type_of_object_element)
+    return new_element
 
 def convert_xml_element_to_json(xml_element):
     """Convert an XML element to a JSON representation."""
@@ -81,9 +81,9 @@ def get_urn_from_item(item):
    return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
 
 def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, version=None):
-    """We may be performing multiple updates to the topic variable groups, so instead of 
+    """We may be performing multiple updates to the topic groups, so instead of 
     retrieving/updating/writing data using the Colectica REST API every time we need to update 
-    a variable group, we will retrieve the most recent version of it from the Colectica repository
+    a group, we will retrieve the most recent version of it from the Colectica repository
     using the Colectica REST API for the first update, and on subsequent updates we will modify the
     in-memory version which is stored in the updated_groups array."""
     updated_referencing_item = [x for x in updated_groups if x[0] == identifier]
@@ -97,7 +97,7 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
 
 def update_list_of_topic_groups(updated_group, agency, identifier, version,
                                       item_type, updated_groups_list):
-    """Update the in-memory list of variable groups representing topics. If the topic group we have
+    """Update the in-memory list of groups representing topics. If the topic group we have
     updated is not in already in the list, we append it to the list."""
     if ([x[0] for x in updated_groups_list].count(identifier) > 0):
         index_of_updated_ref = [x[0] for x in updated_groups_list].index(identifier)
@@ -141,11 +141,11 @@ def get_url_from_item(item, hostname):
 def get_urn_from_item(item):
    return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
 
-def createColecticaRepositoryConnection(hostname, username, password, verify_ssl=False):
-    return ColecticaObject(hostname, username, password,verify_ssl=False)
-
 def map_between_questions_and_variables(items, C):
-    """Method for mapping between questions and variables.
+    """Method for mapping between lists of questions and variables. The 'items' input parameter
+    contains a list of urns for questions/variables, this function returns a list containing the 
+    urns for variables associated with the questions in the list, or urns for the questions 
+    associated with the variables in the list.
     """
     related_items=[]
     # Iterate through the items...
@@ -153,8 +153,8 @@ def map_between_questions_and_variables(items, C):
         agency_id = item.split(":")[2]
         identifier = item.split(":")[3]
         version = item.split(":")[4]
-        itemJson = C.get_item_json(agency_id, identifier, version=version)
-        item_type = C.item_code_inv(itemJson['ItemType'])
+        item_json = C.get_item_json(agency_id, identifier, version=version)
+        item_type = C.item_code_inv(item_json['ItemType'])
         if item_type == 'Variable':
             all_related_items= C.search_relationship_bysubject(agency_id, identifier, Version=version, item_types=[C.item_code("Question")])
         elif item_type == 'Question':
