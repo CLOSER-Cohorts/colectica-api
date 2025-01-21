@@ -3,20 +3,20 @@ from .lib.utility import get_urn_from_item, get_topic_of_item
 import pandas as pd
    
 def generate_urn_dataframe(input_file_name, C):
-    """Method for reassigning items to new topics. The code iterates through a spreadsheet
-    containing details of new variable topic assignments and generates a dataframe of URNs that
-    can be used as input to a method defined in changeItemTopics.py that reassigns items to new
-    topics. 
+    """Method for generating input for change_item_topics.update_topics. The code iterates through 
+    a spreadsheet containing details of new item topic assignments and generates a dataframe
+    of URNs that can be used as input to a method defined in change_item_topics.py that reassigns 
+    items to new topics. 
     """
     print(f"Reading topic reassignments from {input_file_name}")
     data = pd.read_excel(input_file_name)
-    # Iterate through the rows in the spreadsheet. Each row contains details of a topic
-    # reassignment for a variable...
     urnDataFrame={
         "itemUrns": [],
         "sourceTopicGroups": [],
         "destinationTopicGroups": []
     }
+    # Iterate through the rows in the spreadsheet. Each row contains details of a topic
+    # reassignment for an item...
     for topic_reassignment_details in data.iloc:
         instrumentName = topic_reassignment_details.iloc[0]
         url = topic_reassignment_details.iloc[2]
@@ -28,7 +28,7 @@ def generate_urn_dataframe(input_file_name, C):
         else:
             item = C.get_item_json(agency_id, identifier)
         version = item['Version']
-        itemUrn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
+        item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
         item_type = item['ItemType']
         topicName = item['ItemName']['en-GB']  
         if item_type==C.item_code('Question'):
@@ -37,10 +37,10 @@ def generate_urn_dataframe(input_file_name, C):
         elif item_type==C.item_code('Variable'):
             topic_type=C.item_code('Variable Group')
             containing_item_type=C.item_code('Data File')
-        itemUrn = get_urn_from_item(item)    
+        item_urn = get_urn_from_item(item)    
         sourceTopic = get_topic_of_item(topic_reassignment_details.iloc[4], topic_type, instrumentName, containing_item_type, C)
         destinationTopic = get_topic_of_item(topic_reassignment_details.iloc[5], topic_type, instrumentName, containing_item_type, C)
-        urnDataFrame['itemUrns'].append(itemUrn)
+        urnDataFrame['itemUrns'].append(item_urn)
         if len(sourceTopic)>0:
             urnDataFrame['sourceTopicGroups'].append(get_urn_from_item(sourceTopic[0]))
         if len(destinationTopic)>0:
