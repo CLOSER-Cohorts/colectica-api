@@ -1,4 +1,10 @@
 """
+A set of functions that reassign variables to new topics. The variable topic reassignments
+are defined in an Excel spreadsheet, the name of which is passed as an input argument to a
+function. An example of this spreadsheet ('topic_reassignments.xlsx') is provided in the
+'examples' directory of this repository. The set of commands that need to be executed from
+within a Python shell for changing variable topics is:
+
 from colectica_api import ColecticaObject
 from examples.lib.utility import update_repository
 USERNAME = "USERNAME"
@@ -6,7 +12,7 @@ PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
-updated_groups = examples.change_item_topics.update_topics('examples/topicReassignments.xlsx', C)
+updated_groups = examples.change_item_topics.update_topics('examples/topic_reassignments.xlsx', C)
 examples.lib.utility.update_repository(updated_groups, 'Repository commit message - update topics', C)
 """
 
