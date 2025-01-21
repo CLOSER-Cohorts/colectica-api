@@ -1,5 +1,5 @@
 """
-A set of functions that reassign variables to new topics. The variable topic reassignments
+A set of functions that reassign items to new topics. The item topic reassignments
 are defined in an Excel spreadsheet, the name of which is passed as an input argument to a
 function. An example of this spreadsheet ('topic_reassignments.xlsx') is provided in the
 'examples' directory of this repository. The set of commands that need to be executed from
@@ -33,7 +33,7 @@ def update_topics(input_file_name, C):
     containing details of new item topic assignments and performs the reassignments. 
     """
     topic_reassignments_data_frame=generate_urn_dataframe(input_file_name, C)
-    # Initialise variables...
+    # Initialise lists...
     item_not_present_in_source_topic = []
     item_present_in_destination_topic = []
     updated_topic_groups = []
