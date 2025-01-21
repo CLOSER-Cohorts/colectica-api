@@ -1,5 +1,8 @@
 def map_between_questions_and_variables(items, C):
-    """Method for mapping between questions and variables.
+    """Method for mapping between lists of questions and variables. The 'items' input parameter
+    contains a list of urns for questions/variables, this function returns a list containing the 
+    urns for variables associated with the questions in the list, or urns for the questions 
+    associated with the variables in the list.
     """
     related_items=[]
     # Iterate through the items...
@@ -7,8 +10,8 @@ def map_between_questions_and_variables(items, C):
         agency_id = item.split(":")[2]
         identifier = item.split(":")[3]
         version = item.split(":")[4]
-        itemJson = C.get_item_json(agency_id, identifier, version=version)
-        item_type = C.item_code_inv(itemJson['ItemType'])
+        item_json = C.get_item_json(agency_id, identifier, version=version)
+        item_type = C.item_code_inv(item_json['ItemType'])
         if item_type == 'Variable':
             all_related_items= C.search_relationship_bysubject(agency_id, identifier, Version=version, item_types=[C.item_code("Question")])
         elif item_type == 'Question':
