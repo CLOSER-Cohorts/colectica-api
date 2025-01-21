@@ -1,10 +1,25 @@
-from lib.utility import get_namespace, find_reference, create_variable_reference, create_question_reference, get_current_state_of_topic_group, update_list_of_topic_groups
-import defusedxml
+"""
+from colectica_api import ColecticaObject
+from examples.lib.utility import update_repository
+USERNAME = "USERNAME"
+PASSWORD = "PASSWORD"
+HOSTNAME = "HOSTNAME"
+C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
+import examples.change_item_topics
+updated_groups = examples.change_item_topics.update_topics('examples/topicReassignments.xlsx', C)
+examples.lib.utility.update_repository(updated_groups, 'Repository commit message - update topics', C)
+"""
 
-def update_topics(topic_reassignments_data_frame, C):
+from .lib.utility import get_namespace, find_reference, create_variable_reference, create_question_reference, get_current_state_of_topic_group, update_list_of_topic_groups, map_between_questions_and_variables
+from .generate_urn_dataframe import generate_urn_dataframe 
+import defusedxml
+import pandas as pd
+
+def update_topics(input_file_name, C):
     """Method for reassigning items to new topics. The code iterates through a data frame
     containing details of new item topic assignments and performs the reassignments. 
     """
+    topic_reassignments_data_frame=generate_urn_dataframe(input_file_name, C)
     # Initialise variables...
     item_not_present_in_source_topic = []
     item_present_in_destination_topic = []
@@ -13,6 +28,7 @@ def update_topics(topic_reassignments_data_frame, C):
     # reassignment for a item...
     for topic_reassignment_details in topic_reassignments_data_frame.iloc:
         print("Performing the following topic reassignment...")
+        print(f"Item {topic_reassignment_details.iloc[0]} to {topic_reassignment_details.iloc[1]}")
         topic_reassignment_details.iloc[0]
         item_agency_id = topic_reassignment_details.iloc[0].split(":")[2]
         item_identifier = topic_reassignment_details.iloc[0].split(":")[3]

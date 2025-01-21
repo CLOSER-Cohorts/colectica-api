@@ -1,4 +1,11 @@
-"""A set of functions that reassign variables to new topics. The variable topic reassignments
+"""
+***************************************************************************************************
+IMPORTANT: This is deprecated code that no longer works, but it is being left in the repository as
+it provides examples of how to query the Colectica API and process the results returned from it.
+This code has been superceded by change_item_topics.py
+***************************************************************************************************
+
+A set of functions that reassign variables to new topics. The variable topic reassignments
 are defined in an Excel spreadsheet, the name of which is passed as an input argument to a
 function. An example of this spreadsheet ('Topics_to_be_changed.xlsx') is provided in the
 'examples' directory of this repository. The set of commands for changing variable topics is:
@@ -214,7 +221,7 @@ def update_topics(input_file_name):
             print(f"No dataset with alternate title {topic_reassignment_details.iloc[0]} found")
     number_of_successful_topic_reassignments = len([x for x in variable_not_present_in_source_topic
                                            if x in variable_present_in_destination_topic])
-    print(f"{number_of_successful_topic_reassignments} of {len(data)} variable topic reassigments"
+    print(f"{number_of_successful_topic_reassignments} of {len(data)} variable topic reassignments"
           f"in the input file {input_file_name} have already been performed.")
     if (len(variable_not_present_in_source_topic) == len(data) and
        len(variable_present_in_destination_topic) == len(data)):

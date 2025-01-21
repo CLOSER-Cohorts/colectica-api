@@ -167,3 +167,19 @@ def map_between_questions_and_variables(items, C):
             item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
             related_items.append(item_urn)
     return related_items
+
+# Once we have made all the updates to the variable groups described in an input file
+# we can use the update_repository function to create a transaction using the Colectica 
+# REST API, add all the items in this array to that transaction, and finally
+# commit the transaction.
+
+def update_repository(updated_items, transaction_message, C):
+    """Update a set of items in the repository."""
+    transaction_response = C.create_transaction()
+    transaction_id = transaction_response['TransactionId']
+    for item in updated_items:
+        fragment_string = defusedxml.ElementTree.tostring(item[4], encoding='unicode')
+        C.add_items_to_transaction(item[1], item[0], item[2], fragment_string, 
+                                   item[3], transaction_id)
+        commit_response = C.commit_transaction(transaction_id, transaction_message, 3)
+    return commit_response
