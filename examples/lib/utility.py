@@ -134,7 +134,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item_name, conta
             topic_group_identifiers = []
     return topic_group_identifiers
 
-def get_topic_for_item(agency_id, identifier, version, item_type):
+def get_topic_for_item(agency_id, identifier, version, item_type, C):
     """This function gets the topic item(s) for an item (i.e. question/variable), given the
     question/variable's agency id, identifier, version, and the UUID code representing the topic's
     type (e.g. C.item_code("Variable Group")).
