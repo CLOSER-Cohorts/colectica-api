@@ -107,8 +107,17 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
         updated_groups_list.append(
             (identifier, agency, version, item_type, updated_group))
  
-def get_topic_of_item(topic_name, topic_type, containing_item_name, containing_item_type, C):
-    "Method for getting the topic that an item is assigned to."
+def get_item_for_topic_name(topic_name, topic_type, containing_item_name, containing_item_type, C):
+    """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
+    type (e.g. Question Group, Variable Group), and the name and type of the item within which that 
+    topic is contained (e.g. the name and type of a Physical Instance/Data File or a Data Collection 
+    object).
+
+    Note that the item type input arguments must be provided as UUIDs (as specified at
+    https://docs.colectica.com/repository/technical/item-type-identifiers/). Item names can be mapped
+    to their identifiers using the C.item_code function, e.g. C.item_code('Question Group'),
+    C.item_code('Data Collection').
+    """
     containing_item = C.search_items(
             [containing_item_type],
             SearchTerms=containing_item_name,
@@ -127,13 +136,17 @@ def get_topic_of_item(topic_name, topic_type, containing_item_name, containing_i
             topic_group_identifiers = []
     return topic_group_identifiers
 
-def get_topic_for_item(agency_id, identifier, version, topic_name):
-    related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[C.item_code("Question Group")])
+def get_topic_for_item(agency_id, identifier, version):
+    """This function gets the topic item(s) for an item, given the item's agency id, identifier
+    and version.
+    """
+    topics_assigned_to_item=[]
+    related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[C.item_code("Variable Group")])
     for related_group in related_groups:
-        relatedQuestionGroupMostRecentVersion=C.get_item_xml(relatedQuestionGroup['AgencyId'], relatedQuestionGroup['Identifier'])
-        questionGroupName=getElementByName(defusedxml.ElementTree.fromstring(relatedQuestionGroupMostRecentVersion['Item']), 'QuestionGroupName')['String']
-        if identifier in relatedQuestionGroupMostRecentVersion['Item'] and topic_name == questionGroupName:
-            return relatedQuestionGroupMostRecentVersion
+        relatedQuestionGroupMostRecentVersion=C.get_item_xml(related_group['Item1']['Item3'], related_group['Item1']['Item1'])
+        if identifier in relatedQuestionGroupMostRecentVersion['Item']:
+            topics_assigned_to_item.append(relatedQuestionGroupMostRecentVersion)
+    return topics_assigned_to_item
 
 def get_url_from_item(item, hostname):
    return f"http://{hostname}/item/" + item['AgencyId'] + "/" + item['Identifier'] + "/" + str(item['Version'])
