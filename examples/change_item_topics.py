@@ -205,7 +205,7 @@ def update_topics(input_file_name, C):
                             f" is already in topic "
                             f"{topic_reassignment_details.iloc[2]}"))
                     item_present_in_destination_topic.append(
-                    topic_reassignment_details.iloc[1])
+                            topic_reassignment_details.iloc[1])
     number_of_topic_reassignments_already_performed = len([x for x in item_not_present_in_source_topic
                                            if x in item_present_in_destination_topic])
     number_of_topic_reassignments_to_be_performed = len(topic_reassignments_data_frame) - number_of_topic_reassignments_already_performed

@@ -113,8 +113,8 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item_name, conta
 
     Note that the item type input arguments must be provided as UUIDs (as specified at
     https://docs.colectica.com/repository/technical/item-type-identifiers/). Item types can be 
-    mapped to their identifiers using the C.item_code function, e.g. C.item_code('Question Group'),
-    C.item_code('Data Collection').
+    mapped to their identifiers using the C.item_code function, e.g. C.item_code("Question Group"),
+    C.item_code("Data Collection").
     """
     containing_item = C.search_items(
             [containing_item_type],
@@ -137,7 +137,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item_name, conta
 def get_topic_for_item(agency_id, identifier, version, item_type):
     """This function gets the topic item(s) for an item (i.e. question/variable), given the
     question/variable's agency id, identifier, version, and the UUID code representing the item's
-    type (e.g. C.item_code('Variable Group").
+    type (e.g. C.item_code("Variable Group").
     """
     topics_assigned_to_item=[]
     related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[item_type])
