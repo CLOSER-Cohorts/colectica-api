@@ -10,7 +10,7 @@ def get_namespace(tag):
     if m:
         return m.group(1)
 
-def references_are_equivalent(reference1, reference2):
+def references_are_equal(reference1, reference2):
     ref_1_elems=[]
     ref_2_elems=[]
     for elem in reference1.findall(".//"):
