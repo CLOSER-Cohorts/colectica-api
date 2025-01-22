@@ -21,8 +21,8 @@ def references_are_equivalent(reference1, reference2):
     print(sorted(ref_2_elems))
     return sorted(ref_1_elems) == sorted(ref_2_elems)
 
-def find_reference(xml_tree, agency, identifier):
-    """Find a reference to an item in an XML tree/element (e.g. a 'VariableGroup' element)"""
+def find_all_references(xml_tree, agency, identifier):
+    """Find all references to an item in an XML tree/element (e.g. a 'VariableGroup' element)"""
     matching_references = []
     for elem in xml_tree.findall(".//"):
         if (len(elem)>0):
@@ -107,15 +107,15 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
         updated_groups_list.append(
             (identifier, agency, version, item_type, updated_group))
  
-def get_item_for_topic_name(topic_name, topic_type, containing_item_name, containing_item_type, C):
+def get_item_from_topic_name(topic_name, topic_type, containing_item_name, containing_item_type, C):
     """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
     type (e.g. Question Group, Variable Group), and the name and type of the item within which that 
     topic is contained (e.g. the name and type of a Physical Instance/Data File or a Data Collection 
     object).
 
     Note that the item type input arguments must be provided as UUIDs (as specified at
-    https://docs.colectica.com/repository/technical/item-type-identifiers/). Item names can be mapped
-    to their identifiers using the C.item_code function, e.g. C.item_code('Question Group'),
+    https://docs.colectica.com/repository/technical/item-type-identifiers/). Item types can be 
+    mapped to their identifiers using the C.item_code function, e.g. C.item_code('Question Group'),
     C.item_code('Data Collection').
     """
     containing_item = C.search_items(
@@ -136,12 +136,13 @@ def get_item_for_topic_name(topic_name, topic_type, containing_item_name, contai
             topic_group_identifiers = []
     return topic_group_identifiers
 
-def get_topic_for_item(agency_id, identifier, version):
-    """This function gets the topic item(s) for an item, given the item's agency id, identifier
-    and version.
+def get_topic_for_item(agency_id, identifier, version, item_type):
+    """This function gets the topic item(s) for an item (i.e. question/variable), given the
+    question/variable's agency id, identifier, version, and the UUID code representing the item's
+    type (e.g. C.item_code('Variable Group").
     """
     topics_assigned_to_item=[]
-    related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[C.item_code("Variable Group")])
+    related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[item_type])
     for related_group in related_groups:
         relatedQuestionGroupMostRecentVersion=C.get_item_xml(related_group['Item1']['Item3'], related_group['Item1']['Item1'])
         if identifier in relatedQuestionGroupMostRecentVersion['Item']:
@@ -181,13 +182,12 @@ def map_between_questions_and_variables(items, C):
             related_items.append(item_urn)
     return related_items
 
-# Once we have made all the updates to the variable groups described in an input file
-# we can use the update_repository function to create a transaction using the Colectica 
-# REST API, add all the items in this array to that transaction, and finally
-# commit the transaction.
-
 def update_repository(updated_items, transaction_message, C):
-    """Update a set of items in the repository."""
+    """Update a set of items in the repository. For example, once we have made updates to 
+    question/variable groups we can use this function to create a transaction using the Colectica 
+    REST API, add all the items in this array to that transaction, and finally commit the 
+    transaction.
+    """
     transaction_response = C.create_transaction()
     transaction_id = transaction_response['TransactionId']
     for item in updated_items:

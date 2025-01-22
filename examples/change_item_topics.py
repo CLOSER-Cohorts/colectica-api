@@ -18,14 +18,61 @@ examples.lib.utility.update_repository(updated_groups, 'Repository commit messag
 
 from .lib.utility import (
     get_namespace,
-    find_reference,
+    find_all_references,
     create_variable_reference,
     create_question_reference,
     get_current_state_of_topic_group,
-    update_list_of_topic_groups
+    update_list_of_topic_groups,
+    get_urn_from_item,
+    get_item_from_topic_name
 )
-from .generate_urn_dataframe import generate_urn_dataframe 
 import defusedxml
+#pip install openpyxl #might need to install openpyxl, a dependency for read-excel
+import pandas as pd
+
+def generate_urn_dataframe(input_file_name, C):
+    """Method for generating input for code that updates topics. The code iterates through 
+    a spreadsheet containing details of new item topic assignments and generates a dataframe
+    of URNs that can be used as input to a method that reassigns items to new topics. 
+    """
+    print(f"Reading topic reassignments from {input_file_name}")
+    data = pd.read_excel(input_file_name)
+    urn_data_frame={
+        "itemUrns": [],
+        "sourceTopicGroups": [],
+        "destinationTopicGroups": []
+    }
+    # Iterate through the rows in the spreadsheet. Each row contains details of a topic
+    # reassignment for an item...
+    for topic_reassignment_details in data.iloc:
+        containing_item_name = topic_reassignment_details.iloc[0]
+        url = topic_reassignment_details.iloc[2]
+        agency_id = url.split("/")[4]
+        identifier = url.split("/")[5]
+        if len(url.split("/")) == 7:
+            version = url.split("/")[6]
+            item = C.get_item_json(agency_id, identifier, version=version)
+        else:
+            item = C.get_item_json(agency_id, identifier)
+        version = item['Version']
+        item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
+        item_type = item['ItemType']
+        if item_type==C.item_code('Question'):
+            topic_type=C.item_code('Question Group')
+            containing_item_type=C.item_code('Data Collection')
+        elif item_type==C.item_code('Variable'):
+            topic_type=C.item_code('Variable Group')
+            containing_item_type=C.item_code('Data File')
+        item_urn = get_urn_from_item(item)
+        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, containing_item_name, containing_item_type, C)
+        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, containing_item_name, containing_item_type, C)
+        urn_data_frame['itemUrns'].append(item_urn)
+        if len(source_topic)>0:
+            urn_data_frame['sourceTopicGroups'].append(get_urn_from_item(source_topic[0]))
+        if len(destination_topic)>0:
+            urn_data_frame['destinationTopicGroups'].append(get_urn_from_item(destination_topic[0])) 
+    return pd.DataFrame(urn_data_frame)
+
 
 def update_topics(input_file_name, C):
     """Method for reassigning items to new topics. The code iterates through a data frame
@@ -58,7 +105,7 @@ def update_topics(input_file_name, C):
         destination_group = C.get_item_json(destination_group_item_agency_id,
             destination_group_item_identifier,
             version = destination_group_item_version)
-        # We get the state of the group containing a reference to the item.
+        # We get the current state of the group containing a reference to the item.
         # This group represents the topic the item is currently assigned
         # to.
         source_item = get_current_state_of_topic_group(
@@ -79,13 +126,13 @@ def update_topics(input_file_name, C):
                                                             version=destination_group['Version']
                                                             )
         # Find and remove the reference to the item in the source group/topic.
-        references_to_move = find_reference(
+        references_to_move = find_all_references(
                         source_item, item['AgencyId'], item['Identifier'])
         # We check to see if a reference to the item is already present in the
         # destination group/topic. This information can be used to determine if the
         # topic reassignments described in the input file have already been
         # successfully performed.
-        reference_in_destination_topic = find_reference(destination_item, 
+        reference_in_destination_topic = find_all_references(destination_item, 
                         item['AgencyId'], item['Identifier'])
         if len(references_to_move) > 0 and len(reference_in_destination_topic)==0:
                 for reference_to_move in references_to_move:
@@ -139,7 +186,7 @@ def update_topics(input_file_name, C):
                         # ...and then if the reference isn't already in the topic/group we are adding a
                         # reference to, we add the reference to the group representing the topic it is being 
                         # reassigned to...
-                        if len(find_reference(destination_item, reference_to_move[0].text, reference_to_move[1].text))==0:
+                        if len(find_all_references(destination_item, reference_to_move[0].text, reference_to_move[1].text))==0:
                                 destination_item[0].append(new_reference)
                                 # ...and we update the entry for the destination topic in our array.
                                 update_list_of_topic_groups(destination_item, 
