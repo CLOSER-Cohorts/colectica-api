@@ -15,7 +15,6 @@ import examples.change_item_topics
 updated_groups = examples.change_item_topics.update_topics('examples/topic_reassignments.xlsx', C)
 examples.lib.utility.update_repository(updated_groups, 'Repository commit message - update topics', C)
 """
-
 from .lib.utility import (
     get_namespace,
     find_all_references,
@@ -72,7 +71,6 @@ def generate_urn_dataframe(input_file_name, C):
         if len(destination_topic)>0:
             urn_data_frame['destinationTopicGroups'].append(get_urn_from_item(destination_topic[0])) 
     return pd.DataFrame(urn_data_frame)
-
 
 def update_topics(input_file_name, C):
     """Method for reassigning items to new topics. The code iterates through a data frame
