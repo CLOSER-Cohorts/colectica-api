@@ -15,10 +15,8 @@ def references_are_equivalent(reference1, reference2):
     ref_2_elems=[]
     for elem in reference1.findall(".//"):
         ref_1_elems.append(elem.tag + ": " + elem.text)
-    print(sorted(ref_1_elems))
     for elem in reference2.findall(".//"):
         ref_2_elems.append(elem.tag + ": " + elem.text)
-    print(sorted(ref_2_elems))
     return sorted(ref_1_elems) == sorted(ref_2_elems)
 
 def find_all_references(xml_tree, agency, identifier):
@@ -144,9 +142,9 @@ def get_topic_for_item(agency_id, identifier, version, item_type):
     topics_assigned_to_item=[]
     related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[item_type])
     for related_group in related_groups:
-        relatedQuestionGroupMostRecentVersion=C.get_item_xml(related_group['Item1']['Item3'], related_group['Item1']['Item1'])
-        if identifier in relatedQuestionGroupMostRecentVersion['Item']:
-            topics_assigned_to_item.append(relatedQuestionGroupMostRecentVersion)
+        related_question_group_most_recent_version=C.get_item_xml(related_group['Item1']['Item3'], related_group['Item1']['Item1'])
+        if identifier in related_question_group_most_recent_version['Item']:
+            topics_assigned_to_item.append(related_question_group_most_recent_version)
     return topics_assigned_to_item
 
 def get_url_from_item(item, hostname):
