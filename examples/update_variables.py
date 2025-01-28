@@ -1,4 +1,11 @@
-"""A set of functions that reassign variables to new topics. The variable topic reassignments
+"""
+***************************************************************************************************
+IMPORTANT: This is deprecated code that no longer works, but it is being left in the repository as
+it provides examples of how to query the Colectica API and process the results returned from it.
+This code has been superceded by change_item_topics.py
+***************************************************************************************************
+
+A set of functions that reassign variables to new topics. The variable topic reassignments
 are defined in an Excel spreadsheet, the name of which is passed as an input argument to a
 function. An example of this spreadsheet ('Topics_to_be_changed.xlsx') is provided in the
 'examples' directory of this repository. The set of commands for changing variable topics is:
@@ -21,7 +28,13 @@ executed.
 import pandas as pd
 import defusedxml
 from colectica_api import ColecticaObject
-from .lib.utility import get_namespace, find_reference, create_variable_reference
+from .lib.utility import (
+    get_namespace,
+    find_reference,
+    create_variable_reference,
+    get_current_state_of_topic_group,
+    update_list_of_topic_groups
+)
 # pip install openpyxl
 # The above install is needed for the pd.read-excel command, it doesn't have to be executed every
 # time, perhaps only the first time this script is run on a machine
@@ -30,33 +43,6 @@ USERNAME = "USERNAME"
 PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
-
-def get_current_state_of_topic_group(agency_id, identifier, updated_groups, version=None):
-    """We may be performing multiple updates to the topic variable groups, so instead of 
-    retrieving/updating/writing data using the Colectica REST API every time we need to update 
-    a variable group, we will retrieve the most recent version of it from the Colectica repository
-    using the Colectica REST API for the first update, and on subsequent updates we will modify the
-    in-memory version which is stored in the updated_groups array."""
-    updated_referencing_item = [x for x in updated_groups if x[0] == identifier]
-    if len(updated_referencing_item) > 0:
-        referencing_item = updated_referencing_item[0][4]
-    else:
-        fragment_xml = C.get_item_xml(
-            agency_id, identifier, version=version)['Item']
-        referencing_item = defusedxml.ElementTree.fromstring(fragment_xml)
-    return referencing_item
-
-def update_list_of_topic_groups(updated_group, agency, identifier, version,
-                                      item_type, updated_groups_list):
-    """Update the in-memory list of variable groups representing topics. If the topic group we have
-    updated is not in already in the list, we append it to the list."""
-    if ([x[0] for x in updated_groups_list].count(identifier) > 0):
-        index_of_updated_ref = [x[0] for x in updated_groups_list].index(identifier)
-        updated_groups_list[index_of_updated_ref] = (
-            identifier, agency, version, item_type, updated_group)
-    else:
-        updated_groups_list.append(
-            (identifier, agency, version, item_type, updated_group))
 
 # Declare an array which will contain instances of the variable groups/topics.
 
@@ -188,10 +174,10 @@ def update_topics(input_file_name):
                         # to create a new version of the reference which has the same namespace as
                         # the variable group/topic we will be adding it to.
                         if reference_from_source_ddi_version != destination_ddi_version:
-                            new_reference = create_variable_reference(reference_to_move[0].text,
-                                                                   reference_to_move[1].text,
-                                                                   reference_to_move[2].text,
-                                                                   reference_to_move[3].text,
+                            new_reference = create_variable_reference(variable_agency_id,
+                                                                   variable_identifier,
+                                                                   variable_version,
+                                                                   'Variable',
                                                                    destination_ddi_version
                                                                    )
                         else:
@@ -241,8 +227,8 @@ def update_topics(input_file_name):
             print(f"No dataset with alternate title {topic_reassignment_details.iloc[0]} found")
     number_of_successful_topic_reassignments = len([x for x in variable_not_present_in_source_topic
                                            if x in variable_present_in_destination_topic])
-    print(f"{number_of_successful_topic_reassignments} of {len(data)} variables in the input file "
-          f"{input_file_name} were successfully assigned to new topics.")
+    print(f"{number_of_successful_topic_reassignments} of {len(data)} variable topic reassignments"
+          f"in the input file {input_file_name} have already been performed.")
     if (len(variable_not_present_in_source_topic) == len(data) and
        len(variable_present_in_destination_topic) == len(data)):
        print("The variable topic reassignments in the input data file have already all been "
