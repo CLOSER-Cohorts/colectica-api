@@ -1,0 +1,1152 @@
+qc_hhgrid_w4_pergrid	PLEASE CODE THE PERSON YOU ARE SPEAKING TO
+qc_hhgrid_w4_pname	"Please tell me your first, or given, name?"
+qc_hhgrid_w4_psname	"And please tell me your surname, or family name?"
+qc_hhgrid_w4_ptitle	What title do you use?
+qc_hhgrid_w4_ptitlex	What title do you use?
+qc_hhgrid_w4_addrchck	"There may have been some changes in your household. {if ff_all_moved = 1 | ff_suspsplit = 1 | ff_all_moved = 2} Are you normally resident at this address? READ OUT  [ff_address1] [ff_address2] [ff_address3] [ff_address4], [ff_address5] [ff_postcode]"
+qc_hhgrid_w4_coreswho	"Of the following list of people, please indicate whether you are still currently living with each of them. Please include students who may be away at boarding school or those currently in institutions but have this address as their main residence."
+qc_hhgrid_w4_absun	"Last time, [ff_forname] was away at university and living in halls of residence. Is [ff_forname] still living in halls of residence?"
+qc_hhgrid_w4_unihome	Does [ff_forname] live with you as their main residence?
+qc_hhgrid_w4_mores	"You have indicated that you live with these people. {if PERGRID greater than 0 & CORESWHO not equal to 96} / You seem to no longer live with anyone that you were living with the last time we interviewed you. {if PERGRID greater than 0 & CORESWHO = 96} Is there anyone else who has this address as their main residence, for example new babies, lodgers or students moving home from University? [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] [ff_forname] [ff_surname] [ff_sex] [ff_dobd] [ff_dobm] [ff_doby] {if PERGRID greater than 0 & CORESWHO not equal to 96}"
+qc_hhgrid_w4_name	"What is the first name, or given name, of this other person?"
+qc_hhgrid_w4_sname	"What is [NAME]'s surname, or family name?"
+qc_hhgrid_w4_title	What title does [NAME] use?
+qc_hhgrid_w4_titlex	What title does [NAME] use?
+qc_hhgrid_w4_ynew	Why [[are you] / [is NAME]] now in this household?
+qc_hhgrid_w4_joiner	[[Have you] / [Has NAME]] ever taken part in this study in the past? This could either be as part of this household or in a different household.
+qc_hhgrid_w4_rejoiner	[[Are you] / [Is NAME]] any of these people?
+qc_hhgrid_w4_rejoinero	[[Are you] / [Is NAME]] any of these people?
+qc_hhgrid_w4_jnmnth	In what month and year did you start living with the other people in this household {if PERGRID = 0} / [NAME] start living with you {if PERGRID greater than 0}?
+qc_hhgrid_w4_jnyear	In what month and year did you start living with the other people in this household {if PERGRID = 0} / [NAME] start living with you {if PERGRID greater than 0}?
+qc_hhgrid_w4_sex	[[Are you] / [Is NAME]]…
+qc_hhgrid_w4_birthd	What is [[your]/[NAME]'s/[ff_forname]'s] date of birth?
+qc_hhgrid_w4_birthm	(What is [[your]/[NAME]'s/[ff_forname]'s] date of birth?)
+qc_hhgrid_w4_birthy	(What is [[your]/[NAME]'s/[ff_forname]'s] date of birth?)
+qc_hhgrid_w4_ageif	What was [[your]/[NAME]'s/[ff_forname]'s] age at [[your]/[their]] last birthday? If you don't know please give your best estimate.
+qc_hhgrid_w4_more	"Is there anyone else who has this address as their main residence, for example new babies, lodgers, or students moving home from university?"
+qc_hhgrid_w4_clstat	Where is [ff_forname {leaver's name}] living now?
+qc_hhgrid_w4_dieprismth	In what month and year did [leaver's name] go to prison? {if CLSTAT = 5} / We are sorry to hear about [leaver's name]. In which month and year did that happen? {if CLSTAT = 0} ENTER MONTH
+qc_hhgrid_w4_dieprisyr	In what month and year did [leaver's name] go to prison? {if CLSTAT = 5} / We are sorry to hear about [leaver's name]. In which month and year did that happen? {if CLSTAT = 0} ENTER YEAR
+qc_hhgrid_w4_prison	Will [ff_forname {leaver's name}] be returning to this address after this period of time in prison?
+qc_hhgrid_w4_includ	"In Understanding Society, we would normally include someone away at boarding school {if CLSTAT = 4} / working away from home {if CLSTAT = 2} as part of this household if it is their main residence. Is this the main residence for [leaver's name{ff_forname}], even if they are now somewhere else?"
+qc_hhgrid_w4_stillres	Is [ff_forname {leaver's name}] still resident at  [ff_address1] [ff_address2]  [ff_address3] [ff_address4] [address5] [ff_pcode]?
+qc_hhgrid_w4_staywith	Who else is [ff_forname {leaver's name}] still resident with?
+qc_hhgrid_w4_mothr	Did [ff_forname {leaver's name}] move to the same address with any other household members?
+qc_hhgrid_w4_movewith	Who else did [ff_forname {leaver's name}] move with?
+qc_hhgrid_w4_lvwhy	Why did [ff_forname {leaver's name}] move or is no longer living with you {if ADDRCHCK = 1}?
+qc_hhgrid_w4_movemth	In what month and year did [ff_forname {leaver's name}] move or stop living with you? ENTER MONTH
+qc_hhgrid_w4_moveyr	In what month and year did [ff_forname {leaver's name}] move or stop living with you? ENTER YEAR
+qc_hhgrid_w4_movadd1	"To what address did [ff_forname] move? ENTER FIRST LINE OF ADDRESS - HOUSE NUMBER OR NAME AND DETAILS OF ROAD(S). IF NOT KNOWN, ENTER CTRL + K"
+qc_hhgrid_w4_movtown	(To what address did [ff_forname] move?) ENTER POSTAL TOWN - THIS IS THE TOWN THAT IMMEDIATELY PRECEDES THE POST CODE (OR COUNTRY WHERE THIS IS SHOWN). 
+qc_hhgrid_w4_movpcod	"(To what address did [ff_forname] move?) ENTER POSTAL CODE. IF COMPLETE POSTAL CODE IS NOT KNOWN, ENTER CTRL + K."
+qc_hhgrid_w4_movarea	"(To what address did [ff_forname] move?) PROBE FOR AREA TO WHICH [ff_forname] MOVED. IF HOUSE AND ROAD NOT KNOWN, PROBE FOR VILLAGE, TOWN, COUNTY, REGION."
+qc_hhgrid_w4_movetel	What is [ff_forname {leaver's name}]'s contact telephone number?
+qc_hhgrid_w4_cordet	"We just need to check that we have correct names and details of all current household members. Please confirm, for each person, if the following information is all correct."
+qc_hhgrid_w4_cname	"What is the correct first name, or given name? (Details collected previously: [NAME] [SURNAME], [SEX], [DOB])"
+qc_hhgrid_w4_csname	"What is [NAME/CNAME]'s correct surname, or family name? (Details collected previously: [NAME] [SURNAME], [SEX], [DOB])"
+qc_hhgrid_w4_csex	"What is [Name]’s sex? (Details collected previously: [NAME] [SURNAME], [SEX], [DOB])"
+qc_hhgrid_w4_cdobd	"What is [NAME]/[ff_forname]'s date of birth? (Details collected previously: [NAME] [SURNAME], [SEX], [DOB])"
+qc_hhgrid_w4_cdobm	"(What is [NAME]/[ff_forname]'s date of birth?) (Details collected previously: [NAME] [SURNAME], [SEX], [DOB])"
+qc_hhgrid_w4_cdoby	"(What is [NAME]/[ff_forname]'s date of birth?) (Details collected previously: [NAME] [SURNAME], [SEX], [DOB])"
+qc_hhgrid_w4_cageif	"What was [NAME]/[ff_forname]’s age at their last birthday? If you don't know, please give your best estimate."
+qc_hhgrid_w4_marstat	"Since personal circumstances can change over time, we would just like to check some important information.  What is [[NAME]’s / [CNAME]’s / [ff_forname]’s / [your]] legal marital status?"
+qc_hhgrid_w4_livesp	"May I just check, does [[NAME]’s / [CNAME]’s / [ff_forname]’s / [your]] [spouse/civil partner] live with [[NAME]/ [CNAME] / [you]] in this household?"
+qc_hhgrid_w4_livewith	"And, [are you / is [NAME] / is [CNAME] / is [ff_forname]] living with someone in this household as a couple?"
+qc_hhgrid_w4_employ	[Are you] / [Is [NAME]/[ff_forname]] in paid employment?
+qc_hhgrid_w4_relconf1	We just need to confirm the relationships amongst the household members. Please indicate the relationships that are still correct.
+qc_hhgrid_w4_relconf2	We just need to confirm the relationships amongst the household members. Please indicate the relationships that are still correct.
+qc_hhgrid_w4_r	I just need to confirm the relationships amongst the household members. We have that [NAME] is [NAME]'s [ff_ro] {if NewPer = 4} / [NAME] is [NAME]'s ... {if NewPer NOT EQUAL TO 4}
+qc_hhgrid_w4_hhlang	"DOES ANYONE AGED 10 OR OVER IN HHOLD REQUIRE AN INTERVIEW IN ONE OF THE TRANSLATED LANGUAGES?  TRANSLATED LANGUAGES ARE: ARABIC, BENGALI, CANTONESE, GUJARATI, PUNJABI (GURMUKHI), PUNJABI (URDU), SOMALI, URDU AND WELSH"
+qc_hhgrid_w4_lingua	In which language would you/[NAME] like to be interviewed?
+qc_hhgrid_w4_utinfo	"The last time we interviewed at this household, we learned that [ff_forname ff_surname (list each ff_potrejoiner)] had left. We have been unable to locate them but would still like to speak to them. Do you have any information about how to contact them?"
+qc_hhgrid_w4_uttype	"Do you have an address, telephone number, e-mail address or some other type of information for [ff_forname ff_surname and/or ff_forname ff_surname and/or ff_forname ff_surname]?"
+qc_hhgrid_w4_utadd1	Please tell me the first line of their address.
+qc_hhgrid_w4_uttown	And in which town is that?
+qc_hhgrid_w4_utpcode	And the postcode please if you know it.
+qc_hhgrid_w4_utarea	"Could you tell us either the village, town county or region they moved to, if they moved abroad could you tell us what country they went to?"
+qc_hhgrid_w4_uttel1	What is their telephone number?
+qc_hhgrid_w4_uttel2	"Would you have a second telephone number, for example a work, mobile or landline number?"
+qc_hhgrid_w4_utemail	What is their e-mail address?
+qc_hhgrid_w4_utother	Please tell us is there any other information which you think might be useful?
+qc_hhgrid_w4_alladd1	"Earlier you said that you are not currently living at this address. [ff_address1] [ff_address2] [ff_address3] [ff_address4], [ff_address5] [ff_postcode] What is your current address? ENTER FIRST LINE OF ADDRESS"
+qc_hhgrid_w4_alladd2	"Earlier you said that you are not currently living at this address. [ff_address1] [ff_address2] [ff_address3] [ff_address4], [ff_address5] [ff_postcode] What is your current address? ENTER SECOND LINE OF ADDRESS"
+qc_hhgrid_w4_alladd3	"Earlier you said that you are not currently living at this address. [ff_address1] [ff_address2] [ff_address3] [ff_address4], [ff_address5] [ff_postcode] What is your current address? ENTER THIRD LINE OF ADDRESS"
+qc_hhgrid_w4_alladd4	"Earlier you said that you are not currently living at this address. [ff_address1] [ff_address2] [ff_address3] [ff_address4], [ff_address5] [ff_postcode] What is your current address? ENTER FOURTH LINE OF ADDRESS"
+qc_hhgrid_w4_allpcode	"Earlier you said that you are not currently living at this address. [ff_address1] [ff_address2] [ff_address3] [ff_address4], [ff_address5] [ff_postcode] What is your current address? ENTER POSTCODE"
+qc_hhgrid_w4_conadd1	Is this now your current address?  [alladd1]  [alladd2]  [alladd3]  [alladd4] [AllPCode] 
+qc_hhgrid_w4_regionchk	CODE COUNTRY INTERVIEW IS BEING CARRIED OUT IN.
+qc_household_w4_inthhold	"This interview is completely voluntary, if we should come to any question that you don't want to answer, just let me know and we'll go onto the next question."
+qc_household_w4_ivh	RECORD WHO IS ANSWERING HOUSEHOLD QUESTIONNAIRE RECORD PERSON NUMBERS FROM HOUSEHOLD GRID
+qc_household_w4_hsroomchk	"When we interviewed you on [ff_Idate], you said you had [ff_HsBeds] bedroom(s), excluding any you may sublet and [ff_HsRooms] other rooms, excluding kitchens and bathrooms. Is that still the case?"
+qc_household_w4_hsbeds	I would like to ask you a few questions about your household's accommodation. {if (HHGRID.OrigAdd = 2|DK|REF) | (ff_HsBeds = DK|REF|MIS) | (ff_HsRooms = DK|REF|MIS)} How many bedrooms are there here excluding any bedrooms you may let or sublet?
+qc_household_w4_hsrooms	"And how many other rooms do you have in your accommodation, excluding kitchens and bathrooms?"
+qc_household_w4_hsowndchk	And is this accommodation still [ff_HsOwnd]?
+qc_household_w4_hsownd	"Does your household own this accommodation outright, is it being bought with a mortgage, is it rented or does it come rent-free?"
+qc_household_w4_hsowr1	In whose name is this (house/flat/room) owned?
+qc_household_w4_hsval	About how much would you expect to get for your home if you sold it today?
+qc_household_w4_mgynot	How did you come to own this property outright? Have you...
+qc_household_w4_hsyrbuy	In what year did you buy or first become the owner of this property?
+qc_household_w4_hscost	How much did you pay for the property?
+qc_household_w4_hsyr04	In what year did you first start paying a mortgage on this house/flat?
+qc_household_w4_mgold	"How much did you borrow originally when you bought the property or took out your mortgage, that is excluding any later additions to the mortgage?"
+qc_household_w4_mglife	How many years has the mortgage still to run?
+qc_household_w4_mgtype	Is your mortgage or loan ...
+qc_household_w4_mgextra	Have you taken out any additional mortgage on this house/flat since [[ff_Idate]] {IF HHGRID.OrigAdd = 1} / [becoming the owner of the property] {IF HHGRID.OrigAdd = 2}?
+qc_household_w4_mgnew	How much in total is this additional mortgage or loan?
+qc_household_w4_mgxty	"What was this additional mortgage, loan or drawdown used for?"
+qc_household_w4_xpmg	How much was your last total monthly instalment on all mortgages or loans for this property?
+qc_household_w4_hsjb	Does the accommodation go with the present job of anyone in the household?
+qc_household_w4_rentp	In whose name is this (house/flat/room) rented?
+qc_household_w4_rentll	Who is the accommodation rented from or provided by?
+qc_household_w4_rentf	Do you rent your accommodation...
+qc_household_w4_rent	"How much was the last rent payment, including any services or water charges but after any rebates?"
+qc_household_w4_rentwc	What period did this cover?
+qc_household_w4_rentinc	Did your last rent include any payment for any of the following things?
+qc_household_w4_renthb	Was any Housing Benefit such as rent rebate or rent allowance deducted from the last rent payment?
+qc_household_w4_rentg	So what would the last rent payment have been if Housing Benefit had not been deducted from it?
+qc_household_w4_fuelhave	Which of the following types of domestic fuel do you have in your accommodation...
+qc_household_w4_fuelduel	Do you pay your gas and electric as one bill or separately?
+qc_household_w4_xpduely	"In the last year, since 1st [interview month] [interview year - 1], how much has your household spent on gas and electricity combined?"
+qc_household_w4_duelpay	How do you pay for your gas and electricity?
+qc_household_w4_xpelecy	"In the last year, since 1st [interview month] [interview year - 1], how much has your household spent on electricity?"
+qc_household_w4_elecpay	How do you pay for your electricity?
+qc_household_w4_xpgasy	"In the last year, since 1st [interview month] [interview year - 1], how much has your household spent on gas including calor gas?"
+qc_household_w4_gaspay	How do you pay for your gas?
+qc_household_w4_xpoily	"In the last year, since 1st [interview month] [interview year - 1], how much has your household spent on oil?"
+qc_household_w4_xpsfly	"In the last year, since 1st [interview month] [interview year - 1], how much has your household spent on other fuel, including solid fuel?"
+qc_household_w4_heatch	"Do you have any form of central heating, including any electric storage heaters, in your (part of the) accommodation?"
+qc_household_w4_solar1	Have you installed or are you seriously considering any of the following... solar panels for electricity?
+qc_household_w4_solar2	Have you installed or are you seriously considering any of the following... Solar water heating?
+qc_household_w4_solar3	Have you installed or are you seriously considering any of the following... A wind turbine to generate electricity?
+qc_household_w4_etariff	"Does your household buy, or is your household seriously considering buying its electricity on a Green Tariff? By Green Tariff we mean a payment scheme where your electricity supplier provides electricity from renewable sources such as wind power to the National Grid for the amount you use."
+qc_household_w4_rubrec	"Do you separate your rubbish into items that can be recycled through your normal rubbish collection always, usually, sometimes or never?"
+qc_household_w4_othrec1	And how often does your household use bottle banks in your area?
+qc_household_w4_othrec2	Paper or cardboard recycling points?
+qc_household_w4_othrec3	"Plastic bag recycling point, including at a supermarket?"
+qc_household_w4_othrec4	Garden waste recycling facilities?
+qc_household_w4_hsctax	Could you please tell me which Council Tax band this accommodation is in? The bands run from Band A to Band H.
+qc_household_w4_xphsdb	"Many people find it hard to keep up with their housing payments. In the last twelve months, have you ever found yourself behind with your rent/mortgage?"
+qc_household_w4_xphsdct	"In the last twelve months, have you ever found yourself behind with paying your Council Tax?"
+qc_household_w4_xphsdba	"Sometimes people are not able to pay every household bill when it falls due. May I ask, are you up to date with all your household bills such as electricity, gas, water rates, telephone and other bills or are you behind with any of them?"
+qc_household_w4_cduse	Could you please tell me which of the following items you have in your (part of the) accommodation. Just tell me the numbers that apply.
+qc_household_w4_pchas	Do you have in your (part of the) accommodation a home computer/PC?
+qc_household_w4_pcnet	Does your household have access to the internet from home?
+qc_household_w4_pcbroad	Do you have a broadband connection from your home computer?
+qc_household_w4_conintro	The next questions are about how much your household has spent in the last four weeks on food eaten at home and food bought outside the home. Please include expenditure for all household members even if you are not sure of the exact amounts other people spend.
+qc_household_w4_xpfood1_g3	"About how much has your household spent in total on food and groceries in the last four weeks from a supermarket or other food shop or market? Please do not include alcohol but do include non-food items such as paper products, home cleaning supplies and pet foods."
+qc_household_w4_xpfdout_g3	"And about how much have you and other members of your household {if HHGRID.hhsize > 1} spent in total on meals or snacks purchased outside the home in the last four weeks? Please include food bought from takeaways, restaurants, sandwich shops, work or school canteens but do not include alcohol."
+qc_household_w4_xpaltob_g3	"About how much have you and other members of your household {if HHGRID.hhsize > 1} spent in total on alcohol in the last four weeks? Please include alcohol purchased from a supermarket or off licence and from pubs, restaurants or other venues."
+qc_household_w4_matdepa	"For each of the following things please tell me the number from the showcard which best explains whether you (and your family/partner) have it or not. Do you (and your family/partner) have... A holiday away from home for at least one week a year, whilst not staying with relatives at their home?"
+qc_household_w4_matdepi	Do you have a small amount of money to spend each week on yourself (not on your family)?
+qc_household_w4_matdepj	Do you and your family/partner keep up with bills and regular debt repayments?
+qc_household_w4_matdepd	(Do you and your family/partner have...) Enough money to keep your house in a decent state of repair?
+qc_household_w4_matdepe	(Do you and your family/partner have...) Household contents insurance?
+qc_household_w4_matdepf	(Do you and your family/partner have...) Enough money to make regular savings of £10 a month or more for rainy days or retirement?
+qc_household_w4_matdepg	(Do you and your family/partner have...) Enough money to replace any worn out furniture?
+qc_household_w4_matdeph	"(Do you and your family/partner have...) Enough money to replace or repair major electrical goods such as a refrigerator or a washing machine, when broken?"
+qc_household_w4_hheat	"For the next question please just answer yes or no. In winter, are you able to keep this accommodation warm enough?"
+qc_household_w4_cdephave1	The next questions are about any children normally resident in this household. Does the child {if GRIDVARIABLES.NKIDS015 = 1} / Do the childen {if GRIDVARIABLES.NKIDS015 greater than 1} have... A family holiday away from home for at least one week a year?
+qc_household_w4_cdephave2	And are there enough bedrooms for every child of 10 or over of a different sex to have their own bedroom?
+qc_household_w4_cdephave3	(Does the child have/do the children have...) Leisure equipment such as sports equipment or a bicycle?
+qc_household_w4_cdephave4	"(Does the child have/do the children have...) Celebrations on special occassions such as birthdays, Christmas or other religious festivals?"
+qc_household_w4_cdepdo4	"I now want to ask some questions about whether or not the children can afford to do a number of different activities. Please choose the answer from this card. Does the child/do the children... Attend at least one regular organized activity a week outside school, such as sport or a youth group?"
+qc_household_w4_cdepdo2	(Does the child/do the children...) Do a hobby or leisure activity?
+qc_household_w4_cdepdo3	(Does the child/do the children...) Have friends around for tea or a snack once a fortnight?
+qc_household_w4_cdepdo5	(Does the child/do the children...) East fresh fruit and/or vegetables every day?
+qc_household_w4_cdepdo6	(Does the child/do the children...) Have a warm winter coat?
+qc_household_w4_cplay	"Does the child/do the children go to a toddler group, nursery or playgroup at least once a week?"
+qc_household_w4_cdeptrp	Does the child/do the children go on school trips?
+qc_household_w4_cdelply	For the next question just answer yes or no. Does the child/do the children have an outdoor space or facilities where they can play safely?
+qc_household_w4_pdepa	Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} eat at least one filling meal a day?
+qc_household_w4_pdepb	"(Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} ) go out socially, either alone or with other people, at least once a month?"
+qc_household_w4_pdepc	(Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} ) See friends or family ar least once a month?
+qc_household_w4_pdepd	(Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} ) take a holiday away from home for a week or more at least once a year?
+qc_household_w4_pdepe	Would the cooker be able to be replaced if it broke down?
+qc_household_w4_pdepf	Is your home kept in a good state of repair?
+qc_household_w4_pdepg	"Are your heating, electrics, plumbing and drains kept in good working order?"
+qc_household_w4_pdeph	Do you have a damp-free home?
+qc_household_w4_pdepi	Is your home kept adequately warm?
+qc_household_w4_pdepk	"(Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} ) have a telephone to use, whenever one is needed?"
+qc_household_w4_pdepl	(Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} ) have access to a car or taxi whenever one is needed?
+qc_household_w4_pdepm	(Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} ) have your hair done or cut regularly?
+qc_household_w4_pdepn	(Do all the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Do you {if HHGRID.hhsize = 1} ) have a warm waterproof coat?
+qc_household_w4_pdepo	Would all of the people living here of pensionable age {if HHGRID.hhsize greater than 1} / Would you {if HHGRID.hhsize = 1} be able to pay an unexpected expense of £ 200?
+qc_household_w4_pdepoh	How would you pay for this unexpected expense of £ 200?
+qc_household_w4_nvestintro	"Learning more about how people get by financially these days is a very important part of this study. This year we are interested in learning more about the investments held by you or anyone in your household. They can be in one name only, in joint names among household members or held with people outside the household."
+qc_household_w4_nvestrt	"Which, if any, of these types of investments are held by you or anyone in your household?"
+qc_household_w4_nonvesty	What is the main reason you do not have any investments?
+qc_household_w4_nvestamtrt	How much in total is the current balance of the [INVESTRTCODE]?
+qc_household_w4_nvestb1rt	"Would it amount to £ 1,000 or more?"
+qc_household_w4_nvestb2rt	"Would it amount to £ 5,000 or more?"
+qc_household_w4_nvestb3rt	"Would it amount to £ 25,000 or more?"
+qc_household_w4_nvestb5rt	"Would it amount to £ 100,000 or more?"
+qc_household_w4_nvestb4rt	Would it amount to £ 500 or more?
+qc_household_w4_nvestljrt	Is/are these investment(s) held jointly with anyone outside this household?
+qc_household_w4_nvestlskrt	About how much of the amount in investments is held by members of this household?
+qc_household_w4_invdocs	PLEASE RECORD WHETHER RESPONDENT CHECKED ANY RELEVANT DOCUMENTS/PAPERWORK WHEN GIVING YOU INFORMATION ABOUT INVESTMENTS HELD.
+qc_household_w4_ncars	How many cars or vans in total does your household own or have continuous use of?
+qc_household_w4_carval	If you sold your vehicle(s) approximately how much would you expect to get at current prices minus anything you still owe on it/them?
+qc_household_w4_ensze	What is the engine size of your [first/second/third] car/van?
+qc_household_w4_whodrive	Who drives this car most often?
+qc_household_w4_carn2h	Was this car/van bought or obtained new or second hand?
+qc_household_w4_carfuel	What fuel does the engine use?
+qc_household_w4_carage	What is the approximate age of the car/van?
+qc_demographics_w4_chkresp	"I need to make sure I'm interviewing the correct person, you are [NAME], born on [DOB] and you are [SEX]?"
+qc_demographics_w4_mvever	Have you personally lived at this address your whole life?
+qc_demographics_w4_mvmnth	When did you personally move to this address?
+qc_demographics_w4_mvyr	PLEASE ENTER THE YEAR THIS RESPONDENT MOVED TO THE CURRENT ADDRESS.
+qc_demographics_w4_lkmove	"If you could choose, would you stay here in your present home or would you prefer to move somewhere else?"
+qc_demographics_w4_xpmove	"Even though you may not want to move, do you expect you will move in the coming year? {if LkMove=1} / Do you expect you will move in the coming year? {if LkMove=2}"
+qc_demographics_w4_xpmvwhn	Do you know when you might be likely to move?
+qc_demographics_w4_xpmvmnth	When might you be likely to move?
+qc_demographics_w4_xpmvyr	(When might you be likely to move?)
+qc_demographics_w4_xpmvwhr	Do you know where you might be moving to?
+qc_demographics_w4_xpmvadd1	"Where might you move to? ENTER FIRST LINE OF ADDRESS - HOUSE NUMBER OR NAME AND DETAILS OF ROAD(S). IF NOT KNOWN, ENTER CTRL + K."
+qc_demographics_w4_xpmvtown	"(Where might you move to?) ENTER POSTAL TOWN. IF POSTAL TOWN IS NOT KNOWN, ENTER CTRL + K."
+qc_demographics_w4_xpmvpcode	"(Where might you move to?) ENTER POSTAL CODE. IF COMPLETE POSTAL CODE IS NOT KNOWN, ENTER CTRL + K."
+qc_demographics_w4_xpmvarea	"(Where might you move to?) PROBE FOR AREA LIKELY TO MOVE TO. IF HOUSE AND ROAD NOT KNOWN, PROBE FOR VILLAGE, TOWN, COUNTY, REGION. IF LIKELY TO MOVE ABROAD, RECORD COUNTRY."
+qc_demographics_w4_jbstat	Which of these best describes your current employment situation?
+qc_demographics_w4_mlstatchk	We have your legal marital status as [MARSTAT]. Is this correct?
+qc_demographics_w4_mlstat	What is your current legal marital status?
+qc_demographics_w4_drive	Do you have a full UK driving licence?
+qc_demographics_w4_caruse	Do you normally have access to a car or van that you can use whenever you want to?
+qc_demographics_w4_mobuse	Do you personally have a mobile phone?
+qc_demographics_w4_netpuse	How often do you use the internet for your personal use?
+qc_initialconditions_w4_ukborn	"Were you born in the UK, that is in England, Scotland, Wales or Northern Ireland?"
+qc_initialconditions_w4_plbornc	In which country were you born?
+qc_initialconditions_w4_plboth	PLEASE WRITE IN COUNTRY
+qc_initialconditions_w4_plbornuk	In which UK county were you born?
+qc_initialconditions_w4_plbornuko	WRITE IN NAME OF OTHER COUNTY
+qc_initialconditions_w4_yr2uk4	"In what year did you first come to this country to live, even if you have spent time abroad since?"
+qc_initialconditions_w4_citzn	"Are you a UK citizen, a citizen of your country of birth or a citizen of another country? If you have citizenship of more than one country please tell me all of them."
+qc_initialconditions_w4_citzno	What is your present citizenship? If you have dual citizenship please tell me both.
+qc_initialconditions_w4_qfhigh	Can you tell me the highest educational or school qualification you have obtained?
+qc_initialconditions_w4_qualoc	"Can I just check, did you gain this qualification in the UK?"
+qc_initialconditions_w4_qfvoc	"And which of the following vocational or other qualifications do you have, if any?"
+qc_initialconditions_w4_school	How old were you when you left school?
+qc_initialconditions_w4_scend	WRITE IN AGE RESPONDENT LEFT SCHOOL
+qc_initialconditions_w4_schlloc	And where was your school...
+qc_initialconditions_w4_schcode	What is/was the name of your school?
+qc_initialconditions_w4_schok	Are the details reported below correct? [SCHNAME]
+qc_initialconditions_w4_schname	What is/was the name of your school?
+qc_initialconditions_w4_fenow	"And how old were you when you left college or university, or when you finished or stopped your course?"
+qc_initialconditions_w4_feend	WRITE IN AGE RESPONDENT LEFT COLLEGE/UNIVERSITY
+qc_educationalaspirations_w4_edtype	Are you...
+qc_educationalaspirations_w4_edasp	What are the highest level exams you would like to gain before you leave school {if edtype = 1} / college {if edtype == 2|3}?
+qc_educationalaspirations_w4_lvschdo	What would you most like to do when you have completed this exam or qualification?
+qc_educationalaspirations_w4_ahvwell	How important do you think it is for you to do well in these exams or other qualifications?
+qc_educationalaspirations_w4_hedlik	"How likely is it that you will seek higher education at a college or university, even if you take a gap year? Is it..."
+qc_educationalaspirations_w4_hednt	What is the main reason you might not go to college or university?
+qc_educationalaspirations_w4_hednto	What reason is that?
+qc_ownfirstjob_w4_j1none	"Since leaving full-time education, have you ever had a paid job?"
+qc_ownfirstjob_w4_j1soc00	What was your own first job after leaving full-time education? Please tell me the exact job title and describe the work you did.
+qc_ownfirstjob_w4_j1semp	Were you working as an employee or were you self-employed?
+qc_ownfirstjob_w4_j1boss	Did you have employees?
+qc_ownfirstjob_w4_j1mngr	Did you have any managerial duties or were you supervising any other employees?
+qc_youngadults_w4_ypamar	At what age do you want to get married?
+qc_youngadults_w4_ypapar	At what age would you like to start a family?
+qc_youngadults_w4_yafuta	"Thinking of your own future, what would you like to be doing with your life in about ten year's time from now?"
+qc_youngadults_w4_lvhm	At what age would you like to leave home?
+qc_youngadults_w4_yasoc00	"What job would you like to do once you leave school, finish your training or finish full-time education?"
+qc_familybackground_w4_paju	"Thinking back to when you were 14 years old, was your father working at that time?"
+qc_familybackground_w4_pasoc00	What job was your father doing at that time?
+qc_familybackground_w4_maju	And was your mother working when you were 14?
+qc_familybackground_w4_masoc00	What job was your mother doing at that time?
+qc_familybackground_w4_pacob	In which country was your father born?
+qc_familybackground_w4_pacobo	WRITE IN OTHER COUNTRY
+qc_familybackground_w4_payruk	Has your father ever lived in the UK?
+qc_familybackground_w4_macob	In which country was your mother born?
+qc_familybackground_w4_macobo	WRITE IN OTHER COUNTRY
+qc_familybackground_w4_mayruk	Has your mother ever lived in the UK?
+qc_ethnicityandnationalidentity_w4_natid	"Looking at this card, what do you consider your national identity to be? You may choose as many or as few as apply."
+qc_ethnicityandnationalidentity_w4_natido	What other national identity is that?
+qc_ethnicityandnationalidentity_w4_racel	What is your ethnic group?
+qc_ethnicityandnationalidentity_w4_racelo	What other ethnic group is that?
+qc_ethnicityandnationalidentity_w4_racelt	And to which of these ethnic groups do you consider you belong...
+qc_ethnicityandnationalidentity_w4_racelwt	Do you consider yourself to be...
+qc_ethnicityandnationalidentity_w4_racelmt	Do you consider yourself to be...
+qc_ethnicityandnationalidentity_w4_racelat	Do you consider yourself to be...
+qc_ethnicityandnationalidentity_w4_racelbt	Do you consider yourself to be...
+qc_ethnicityandnationalidentity_w4_racelot	What ethnic group is that?
+qc_religion_w4_oprlg	Do you regard yourself as belonging to any particular religion?
+qc_religion_w4_oprlg0	Which religion were you brought up in?
+qc_religion_w4_oprlg1	Which religion do you regard yourself as belonging to?
+qc_religion_w4_oprlg0ni	Which religion were you brought up in?
+qc_religion_w4_nirel	"What is your religion, even if you are not practising?"
+qc_religion_w4_nireloth	Please describe this other religion
+qc_religion_w4_niact	Do you consider that you are actively practising your religion?
+qc_religion_w4_oprlg2	"How often, if at all, do you attend religious services or meetings?"
+qc_religion_w4_prayfreq	"Apart from when you are at religious services, how often, if at all, do you pray?"
+qc_religion_w4_oprlg3	How much difference would you say religious beliefs make to your life? Would you say they make...
+qc_religiouspractice_w4_rleat	"For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you... My religious beliefs affect what I eat."
+qc_religiouspractice_w4_rldrnk	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect what I drink, such as alcohol."
+qc_religiouspractice_w4_rlwear	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect what I wear"
+qc_religiouspractice_w4_rlmarg	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect my decisions related to marriage and dating."
+qc_religiouspractice_w4_rlschl	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect what school I would send my children to."
+qc_religiouspractice_w4_rlcharity	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect my decisions for charitable giving and helping others."
+qc_religiouspractice_w4_rlsave	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect my decisions related to investment and savings."
+qc_religiouspractice_w4_rlfriends	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect the friends I choose"
+qc_religiouspractice_w4_rljob	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) My religious beliefs affect the sort of job I would do"
+qc_religiouspractice_w4_rljoby	"(For many people their religious beliefs affect the way they live their lives, such as what they eat, the work they do, or their family life even if they do not practice any formal religion. Which of the following statements apply to you...) How do your religious beliefs affect the sort of job you would do?"
+qc_serviceuse_w4_servuse	Which of these services have you used over the last 12 months?
+qc_serviceuse_w4_opserv	"You said you had used the {if SERVUSE=5} [SERVUSE] in the last 12 months. On a scale of 1 to 7 where 1 means completely dissatisfied and 7 means completely satisfied, how satisfied were you with the service? Please think of your typical experience using this service."
+qc_serviceuse_w4_srvynot	"You said you had not used the {if SERVUSE=5} [SERVUSE] in the last 12 months, what was the main reason for not using this service?"
+qc_generalhealth_w4_inthealth	"Next, we have some questions about your health."
+qc_generalhealth_w4_sf1	"In general, would you say your health is..."
+qc_disability_w4_health	"Do you have any long-standing physical or mental impairment, illness or disability? By 'long-standing' I mean anything that has troubled you over a period of at least 12 months or that is likely to trouble you over a period of at least 12 months."
+qc_disability_w4_disdif	Does this/Do these health problem(s) or disability(ies) mean that you have substantial difficulties with any of the following areas of your life?
+qc_sleep_w4_hrs_slph	The following questions relate to your usual sleep habits during the last month. Please indicate the most accurate reply for the majority of days and nights in the past month. How many hours of actual sleep did you usually get per night during the last month? This may be different than the actual number of hours you spent in bed. ENTER HOURS
+qc_sleep_w4_hrs_slpm	The following questions relate to your usual sleep habits during the last month. Please indicate the most accurate reply for the majority of days and nights in the past month. How many hours of actual sleep did you usually get per night during the last month? This may be different than the actual number of hours you spent in bed. ENTER MINUTES.
+qc_sleep_w4_tslp_30m	"During the past month, how often have you had trouble sleeping because you... cannot get to sleep within 30 minutes?"
+qc_sleep_w4_tslp_wak	"(During the past month, how often have you had trouble sleeping because you...) wake up in the middle of the night or early in the morning?"
+qc_sleep_w4_tslp_cgh	"(During the past month, how often have you had trouble sleeping because you...) cough or snore loudly?"
+qc_sleep_w4_med_slp	"During the past month, how often have you taken medicine (prescribed or ""over the counter"") to help you sleep?"
+qc_sleep_w4_tsta_awk	"During the past month, how often have you had trouble staying awake while driving, eating meals, or engaging in social activity?"
+qc_sleep_w4_slp_qual	"During the past month, how would you rate your sleep quality overall?"
+qc_healthconditions_w4_hcond	Has a doctor or other health professional ever told you that you have any of these conditions? Please just tell me the numbers that apply.
+qc_healthconditions_w4_hconds	Do you still have [HCond]?
+qc_healthconditions_w4_hconda	What age were you when you were first told you had a {if HCond=6|7} [HCond]?
+qc_twins_w4_twinconf	"Can I just confirm, are [CHILD1] and [CHILD2] twins?"
+qc_twins_w4_twinzyg	Are [CHILD1] and [CHILD2] identical twins?
+qc_caring_w4_aidhh	"Is there anyone living with you who is sick, disabled or elderly whom you look after or give special help to (for example, a sick, disabled or elderly relative/husband/wife/friend etc)?"
+qc_caring_w4_aidhua	Who do you look after?
+qc_caring_w4_aidxhh	"Do you provide some regular service or help for any sick, disabled or elderly person not living with you?"
+qc_caring_w4_naidxhh	How many people do you care for?
+qc_caring_w4_aidhu1	Who is the first person that you look after or help? (What is their relationship to you?)
+qc_caring_w4_aidhu2	Who is the second person that you look after or help? (What is their relationship to you?)
+qc_caring_w4_aidhrs	"Now thinking about everyone who you look after or provide help for both those living with you and not living with you - in total, how many hours do you spend each week looking after or helping (him/her/them)?"
+qc_caring_w4_aideft	Thinking about everyone who lives with you that you look after or provide help for - does this extra work looking after [NAME(S)] prevent you from doing a paid job or as much paid work as you might like to do? Would you say you are...
+qc_partnershiphistory_w4_partint	"We are interested in some important events that there may have been in your life, such as marriage and the birth of children."
+qc_partnershiphistory_w4_lcohnpi	"As you know, some couples choose to live together without actually ever getting married. Apart from your current husband/wife/partner, have {if HHGRID.LIVESP = 1 | HHGRID.LIVEWITH = 1|3} / Have you ever lived with someone as a couple without being married?"
+qc_partnershiphistory_w4_coh1bm	In what month and year did you first live with someone as a couple?
+qc_partnershiphistory_w4_coh1by	In what month and year did you first live with someone as a couple? TYPE IN YEAR
+qc_partnershiphistory_w4_coh1mr	Did you go on to marry the person you lived with at the time?
+qc_partnershiphistory_w4_coh1em	In what month and year did you stop living as a couple with this partner?
+qc_partnershiphistory_w4_coh1ey	In what month and year did you stop living as a couple with this partner? TYPE IN YEAR
+qc_partnershiphistory_w4_nmar	"Altogether, how many times have you been married or in a civil partnership?"
+qc_partnershiphistory_w4_lmar1m	In what month and year did you marry for the first time {if NMAR greater than 1}?
+qc_partnershiphistory_w4_lmar1y	In what month and year did you marry for the first time {if NMAR greater than 1}? TYPE IN YEAR
+qc_fertilityhistory_w4_fertintro	"The next questions are about any children you may have had, including step or adopted children and biological children."
+qc_fertilityhistory_w4_ladopt	Have you ever had any adopted or step children living with you?
+qc_fertilityhistory_w4_lnadopt	How many step/adopted children have you had in all?
+qc_fertilityhistory_w4_lprnt	Have you ever [fathered/had] any biological children?
+qc_fertilityhistory_w4_lnprnt	"Can I just check, how many biological children have you [fathered/had]?"
+qc_fertilityhistory_w4_ch1bd	Can you please tell me the date of birth of your eldest (first born) child? ENTER DAY
+qc_fertilityhistory_w4_ch1bm	Can you please tell me the date of birth of your eldest (first born) child? ENTER MONTH
+qc_fertilityhistory_w4_ch1by4	Can you please tell me the date of birth of your eldest (first born) child? ENTER YEAR
+qc_annualeventhistory_w4_calintro	The next questions ask about changes that may have happened to you since we last interviewed you on [ff_intdate].
+qc_annualeventhistory_w4_adcts	"Can I just check, have you yourself lived at this address continuously since the last time we interviewed you, that is since [ff_IntDate]?"
+qc_annualeventhistory_w4_movy1	"Thinking about the reasons why you haven't lived continuously at this address since we last interviewed you, did you move from this address for {if HHGRID.NewPer = 4 & AdCts = 2} / Last time we interviewed you, you were living at a different address. Did you move from that address for..."
+qc_annualeventhistory_w4_family	What family related reason was that?
+qc_annualeventhistory_w4_education	What education related reason was that?
+qc_annualeventhistory_w4_memploy	What employment related reason was that?
+qc_annualeventhistory_w4_housing	What housing related reason was that?
+qc_annualeventhistory_w4_area	What area related reason was that?
+qc_annualeventhistory_w4_moveoth	What other reason was that?
+qc_annualeventhistory_w4_movdir	Did you move directly from that address into this address or did you live somewhere else in between?
+qc_annualeventhistory_w4_plnowm	Please tell me the month and year you moved into this address? ENTER MONTH
+qc_annualeventhistory_w4_plnowy4	Please tell me the month and year you moved into this address? ENTER YEAR
+qc_annualeventhistory_w4_mstatsam	"When we last interviewed you, your legal marital status was [ff_marstat]. Has your legal marital status changed at all since [ff_intdate]?"
+qc_annualeventhistory_w4_lwwrong	Can you tell me what your legal marital status was last time we interviewed you on [ff_IntDate]?
+qc_annualeventhistory_w4_mstatsamn	Has your legal marital status changed at all since [ff_IntDate]?
+qc_annualeventhistory_w4_mstatch	What did your legal marital status become with this change? Were you...
+qc_annualeventhistory_w4_statcm	Can you tell me the month and year of that change to your legal marital status? ENTER MONTH
+qc_annualeventhistory_w4_statcy4	Can you tell me the month and year of that change to your legal marital status? ENTER YEAR
+qc_annualeventhistory_w4_divchk	You say you became divorced {if MStatCh = 5} / your civil partnership was dissolved {if MStatCh = 8}. Is the date you have given me the date your divorce {if MStatCh = 5} / dissolved partnership {if MStatCh = 8} became final or the date you separated and stopped living with your husband/wife/partner?
+qc_annualeventhistory_w4_divfin	Is your divorce {if MStatCh = 5} / dissolved civil partnership {if MStatCh = 8} legally final?
+qc_annualeventhistory_w4_dvm	In what month and year did your divorce or annulment {if MStatCh = 5} / dissolved civil partnership {if MStatCh = 8} become final? ENTER MONTH
+qc_annualeventhistory_w4_dvy4	In what month and year did your divorce or annulment {if MStatCh = 5} / dissolved civil partnership {if MStatCh = 8} become final? ENTER YEAR
+qc_annualeventhistory_w4_cmlstat	And has your legal marital status changed again since then?
+qc_annualeventhistory_w4_cohab	Since we interviewed you on [ff_IntDate] have you had any periods of cohabitation lasting three months or more? Please include your current husband/wife/partner. {if currently married or cohabiting and spouse/partner is resident}
+qc_annualeventhistory_w4_cohabn	"How many periods of cohabitation lasting three months or more have you had since [ff_IntDate], including periods of cohabitation with your current husband/wife/partner {if currently married or cohabiting and spouse/partner is resident}?"
+qc_annualeventhistory_w4_lmcbm	Can you tell me the month and year you started [this/your first/your next] period of cohabitation? ENTER MONTH
+qc_annualeventhistory_w4_lmcby4	Can you tell me the month and year you started [this/your first/your next] period of cohabitation? ENTER YEAR
+qc_annualeventhistory_w4_currpart	"Can I just check, is this your current husband/wife {if HHGRID.MARSTAT = 2} / partner {if HHGRID.MARSTAT = 3 | HHGRID.LiveWith = 1}?"
+qc_annualeventhistory_w4_lmspm	In what month and year did you stop living with that partner? ENTER MONTH
+qc_annualeventhistory_w4_lmspy4	In what month and year did you stop living with that partner? ENTER YEAR
+qc_annualeventhistory_w4_father	"Since we last interviewed you on [ff_IntDate] have you fathered any children, including any children who are not living with you here?"
+qc_annualeventhistory_w4_nchild	How many children have you had since [ff_IntDate]?
+qc_annualeventhistory_w4_preg	"Since [ff_IntDate] have you been pregnant at all, even if this did not result in a live birth?"
+qc_annualeventhistory_w4_pregm	In what month and year did you become pregnant? PLEASE ENTER THE MONTH
+qc_annualeventhistory_w4_pregy4	In what month and year did you become pregnant? PLEASE ENTER THE YEAR
+qc_annualeventhistory_w4_pregfert	Did you receive any form of fertility treatment before becoming pregnant?
+qc_annualeventhistory_w4_invitro	Did you receive invitro fertilisation treatment?
+qc_annualeventhistory_w4_pregout	"Last time we interviewed you, you were pregnant. {if PREG = 1} Did this/your next pregnancy result in a live birth with a normal delivery or by caesarean section?"
+qc_annualeventhistory_w4_pregend	How did this pregnancy end? Please just tell me the number from the card.
+qc_annualeventhistory_w4_endmnth	"How many months pregnant were you when this pregnancy ended. Was it less than 3 months, between 3 and 6 months, or 6 months or more?"
+qc_annualeventhistory_w4_pregsmoke	"Did you smoke at all during this pregnancy, including before you were aware that you were pregnant?"
+qc_annualeventhistory_w4_smkmnth	During which months of this pregnancy did you smoke? Did you smoke in...
+qc_annualeventhistory_w4_pregsmk1	"On average, how many cigarettes did you smoke per day during months one to three of this pregnancy?"
+qc_annualeventhistory_w4_pregsmk2	"On average, how many cigarettes did you smoke per day during months four to six of this pregnancy?"
+qc_annualeventhistory_w4_pregsmk3	"On average, how many cigarettes did you smoke per day during months seven to nine of this pregnancy?"
+qc_annualeventhistory_w4_aedrof	Which of these best describes how often you usually drank alcohol during this pregnancy?
+qc_annualeventhistory_w4_aepuwk	"And in an average week, how many units did you drink?"
+qc_annualeventhistory_w4_aepuda	"And on the days when you did drink alcohol, on average how many units did you drink in a day?"
+qc_annualeventhistory_w4_lchmulti	Did you have a multiple birth such as twins or triplets with this pregnancy?
+qc_annualeventhistory_w4_morpreg	Have you had any more pregnancies since we interviewed you on [ff_IntDate]?
+qc_annualeventhistory_w4_lchlv	Is your first/second/third/fourth child still living with you?
+qc_annualeventhistory_w4_lchyd4	In which year did that happen?
+qc_annualeventhistory_w4_lchsx	Are/were they a boy or a girl?
+qc_annualeventhistory_w4_lchbm	Can you tell me his/her month and year of birth? ENTER MONTH
+qc_annualeventhistory_w4_lchby4	Can you tell me his/her month and year of birth? ENTER YEAR
+qc_annualeventhistory_w4_lchal	How old was he/she when he/she last lived with you?
+qc_annualeventhistory_w4_lchno	WHICH NEWBORN BIOLOGICAL CHILD OF THE RESPONDENT IS THIS?
+qc_annualeventhistory_w4_lchchk	"Can I check, [CHILD'S NAME] is a [boy/girl] and their date of birth is [DOB]?"
+qc_annualeventhistory_w4_bwtxp	Was [CHILD'S NAME] born within one week of the expected due date?
+qc_annualeventhistory_w4_bwtel	Was [CHILD'S NAME] born early or late?
+qc_annualeventhistory_w4_bwtwk	How many weeks [early/late] was [CHILD'S NAME]?
+qc_annualeventhistory_w4_bwt	How much did [CHILD'S NAME] weigh when they were born?
+qc_annualeventhistory_w4_bwtlb	RECORD BIRTHWEIGHT IN LBS
+qc_annualeventhistory_w4_bwtoz	RECORD BIRTHWEIGHT IN OUNCES
+qc_annualeventhistory_w4_bwtk	RECORD BIRTHWEIGHT IN KILOGRAMS
+qc_annualeventhistory_w4_bwtg5	Did [CHILD'S NAME] weigh more than 5.5lbs (2.5kg)?
+qc_annualeventhistory_w4_nbclmprb	How easy or difficult is it for you to calm or soothe [CHILD'S NAME] when s/he is upset?
+qc_annualeventhistory_w4_nbfuss	How often does [CHILD'S NAME] usually fuss and cry during a typical 24 hour period (e.g. yesterday)?
+qc_annualeventhistory_w4_nbsleep	How long does it usually take you to settle [CHILD'S NAME] for his or her night time sleep once you have started the process?
+qc_annualeventhistory_w4_nbwakes	How many times does [CHILD'S NAME] usually wake him/herself up at night?
+qc_annualeventhistory_w4_nbrefeat	How true are the following statements about [CHILD'S NAME]? [CHILD'S NAME] refuses to eat.
+qc_annualeventhistory_w4_nbnoapp	How true are the following statements about [CHILD'S NAME]? [CHILD'S NAME] seems to have no appetite.
+qc_annualeventhistory_w4_brfed	"Did you breastfeed [CHILD'S NAME], even if only for a short time?"
+qc_annualeventhistory_w4_brfedend	And how old was [CHILD'S NAME] when you stopped breastfeeding him/her altogether?
+qc_annualeventhistory_w4_brfedend2	And how old was [CHILD'S NAME] when you stopped breastfeeding him/her altogether? CODE UNIT
+qc_annualeventhistory_w4_brfedstill	"Last time we interviewed you (on [ff_IntDate]), you were breastfeeding [CHILD'S NAME]. Are you still breastfeeding [CHILD'S NAME]?"
+qc_annualeventhistory_w4_brfdlwe	And how old was [CHILD'S NAME] when you stopped breastfeeding altogether?
+qc_annualeventhistory_w4_brfdlwe2	And how old was [CHILD'S NAME] when you stopped breastfeeding altogether? CODE UNIT
+qc_annualeventhistory_w4_hcondn	"Since [ff_IntDate] has a doctor or other health professional newly diagnosed you as having any of the following conditions? If so, which ones?"
+qc_annualeventhistory_w4_hospc	"Thinking of your [HCondN], have you been in hospital or clinic as an in-patient overnight or longer since [ff_IntDate] because of this health condition?"
+qc_annualeventhistory_w4_hospdc	How many days have you spent in hospital or clinic as an in-patient since [ff_IntDate] because of your [HCondN]?
+qc_annualeventhistory_w4_hcondns	Do you still have [HCondN]?
+qc_annualeventhistory_w4_contft	"Last time we interviewed you, you were in full-time education. Have you been in continuous full-time education since [ff_IntDate]? Being on holiday from school or between school and University counts as being in full-time education even if you had a job at that time."
+qc_annualeventhistory_w4_ftendm	Can you tell me the month and year you finished that period of full-time education? ENTER MONTH
+qc_annualeventhistory_w4_ftendy4	Can you tell me the month and year you finished that period of full-time education? ENTER YEAR
+qc_annualeventhistory_w4_ftedany	Have you had any periods of full-time education since [ff_IntDate]? {if ff_JBSTAT not equal to 7} / Have you had any other periods of full-time education since then? {if ContFT = 2}
+qc_annualeventhistory_w4_ftedstartm	Can you tell me the month and year you started that/your next period of full-time education? ENTER MONTH
+qc_annualeventhistory_w4_ftedstarty4	Can you tell me the month and year you started that/your next period of full-time education? ENTER YEAR
+qc_annualeventhistory_w4_ftedend	Has that period of full-time education ended?
+qc_annualeventhistory_w4_ft2endm	Can you tell me the month and year you finished that period of full-time education? ENTER MONTH
+qc_annualeventhistory_w4_ft2endy4	Can you tell me the month and year you finished that period of full-time education? ENTER YEAR
+qc_annualeventhistory_w4_ftedmor	Have you had any other periods of full-time education since then?
+qc_annualeventhistory_w4_ftquals	Have you gained any formal qualifications from your full-time education since [ff_IntDate]?
+qc_annualeventhistory_w4_qualnew	What qualifications have you gained?
+qc_annualeventhistory_w4_trainany	"In the last 12 months, that is since [interview month] [interview year - 1], have you done any [other] training schemes or courses, even if they are not finished yet? Please include any part-time or evening courses, training provided by an employer, day release schemes, apprenticeships and government training schemes."
+qc_annualeventhistory_w4_trainn	How many training schemes or courses have you been on?
+qc_annualeventhistory_w4_trwho	"Thinking about your [first/second/third] training scheme or course, was this provided by your employer either on or off the job, was it a government training scheme, a college or university degree or diploma, or was it some other type of training scheme or course? Please tell me about the three longest training schemes or courses you have been on including any that are not finished yet {if TrainN greater than 3}"
+qc_annualeventhistory_w4_traindays	"During the last 12 months, on how many days did you attend that training course?"
+qc_annualeventhistory_w4_trainhrs	"On average and not including breaks, lunch or travel time, how many hours each/that day did you spend on that course?"
+qc_annualeventhistory_w4_trainend	Has that training scheme or course ended?
+qc_annualeventhistory_w4_trainpurp	"For which, if any, of these reasons have you done this training?"
+qc_annualeventhistory_w4_trainqual	Did you gain any qualifications from that training scheme or course?
+qc_annualeventhistory_w4_trqual	What qualifications did you gain from any of your training schemes or courses?
+qc_annualeventhistory_w4_notempchk	"Last time we interviewed you, you were [ff_JBSTAT]. Have you been continuously [ff_JBSTAT] since [ff_IntDate]?"
+qc_annualeventhistory_w4_empchk	"Last time we interviewed you, you were [ff_JBSTAT]. Have you been continuously [ff_JBSTAT] since [ff_IntDate]? {if ff_empLW = 1 & ff_JBSTAT less than 3} / Last time we interviewed you, you were doing some paid work. Have you been continuously in paid work since [ff_IntDate]? {if (ff_empLW = 1 & ff_JBSTAT greater than 3) OR (ff_empLW = 2 & ff_JBSTAT less than 3)}"
+qc_annualeventhistory_w4_empstendd	On what date did you stop being [ff_JBSTAT] {if NotEmpChk = 2} / working in the job you were doing on [ff_IntDate] {if EmpChk = 2}? ENTER DAY
+qc_annualeventhistory_w4_empstendm	On what date did you stop being [ff_JBSTAT] {if NotEmpChk = 2} / working in the job you were doing on [ff_IntDate] {if EmpChk = 2}? ENTER MONTH
+qc_annualeventhistory_w4_empstendy4	On what date did you stop being [ff_JBSTAT] {if NotEmpChk = 2} / working in the job you were doing on [ff_IntDate] {if EmpChk = 2}? ENTER YEAR
+qc_annualeventhistory_w4_stendreas	Can you tell me why you stopped doing that job?
+qc_annualeventhistory_w4_nxtst	"Immediately following that period of [ff_JBSTAT] {if NotEmpChk = 2} / job {if EmpChk = 2}, did you have a period of paid work or did you do something else?"
+qc_annualeventhistory_w4_nxtstelse	What were you doing? Were you...
+qc_annualeventhistory_w4_cstat	Has this period of being [NxtStElse] ended or is this what you are doing now?
+qc_annualeventhistory_w4_nxtstendd	On what date did you stop being [NxtStElse]? ENTER DAY
+qc_annualeventhistory_w4_nxtstendm	On what date did you stop being [NxtStElse]? ENTER MONTH
+qc_annualeventhistory_w4_nxtstendy4	On what date did you stop being [NxtStElse]? ENTER YEAR
+qc_annualeventhistory_w4_jbsamr	And have you worked continuously for the same employer since [ff_IntDate]?
+qc_annualeventhistory_w4_wkplsam	Are you still working at the same workplace as the job you had on [ff_IntDate]?
+qc_annualeventhistory_w4_samejob	Have you been working continuously in the same job since [ff_IntDate]?
+qc_annualeventhistory_w4_matlv	Have you had any periods of maternity or paternity leave since [ff_IntDate]?
+qc_annualeventhistory_w4_matlvstd	"What was the day, month and year you started your period of maternity or paternity leave? ENTER DAY"
+qc_annualeventhistory_w4_matlvstm	"What was the day, month and year you started your period of maternity or paternity leave? ENTER MONTH"
+qc_annualeventhistory_w4_matlvsty4	"What was the day, month and year you started your period of maternity or paternity leave? ENTER YEAR"
+qc_annualeventhistory_w4_matlvendd	"And on what day, month and year did you end your period of maternity or paternity leave? ENTER DAY"
+qc_annualeventhistory_w4_matlvendm	"And on what day, month and year did you end your period of maternity or paternity leave? ENTER MONTH"
+qc_annualeventhistory_w4_matlvendy4	"And on what day, month and year did you end your period of maternity or paternity leave? ENTER YEAR"
+qc_annualeventhistory_w4_jbendd	On what date did you stop working in the job you were doing on [ff_IntDate]? ENTER DAY
+qc_annualeventhistory_w4_jbendm	On what date did you stop working in the job you were doing on [ff_IntDate]? ENTER MONTH
+qc_annualeventhistory_w4_jbendy4	On what date did you stop working in the job you were doing on [ff_IntDate]? ENTER YEAR
+qc_annualeventhistory_w4_jbendreas	Can you tell me why you stopped doing that job?
+qc_annualeventhistory_w4_cjob	Was that {if NxtSt = 1} / your {if JbSamR = 2 | SameJob = 2} next job your current job?
+qc_annualeventhistory_w4_nxtjbhrs	"Was that job full-time or part-time, where part-time is working less than 30 hours a week?"
+qc_annualeventhistory_w4_nxtjbes	In that job were you employed or self-employed?
+qc_annualeventhistory_w4_nxtjbendd	On what date did you end that job? ENTER DAY
+qc_annualeventhistory_w4_nxtjbendm	On what date did you end that job? ENTER MONTH
+qc_annualeventhistory_w4_nxtjbendy4	On what date did you end that job? ENTER YEAR
+qc_annualeventhistory_w4_cjbatt	What was the main thing about your current job that attracted you to it?
+qc_annualeventhistory_w4_nextstat	"Immediately following that period of [NxtStElse]] {if NxtSt = 2} / period of [NextStat(i-1)] {if NxtSt = 2 and 2nd or subsequent loop} / job {if NxtSt = 1}, did you have a period of paid employment or did you do something else?"
+qc_annualeventhistory_w4_nextelse	What were you doing? Were you...
+qc_annualeventhistory_w4_currstat	Has this period of being [NextElse] ended or is this what you are doing now?
+qc_annualeventhistory_w4_nextjob	Was this next period of employment...
+qc_annualeventhistory_w4_currjob	Is this your current job?
+qc_annualeventhistory_w4_jobhours	"Was this job full-time or part-time, where part-time is working less than 30 hours a week?"
+qc_annualeventhistory_w4_reasend	Can you tell me why you stopped doing that job?
+qc_annualeventhistory_w4_jbatt	What was the main thing about your current job that attracted you to it?
+qc_annualeventhistory_w4_statendd	On what date did you stop doing that and start your next job or other activity? ENTER DAY
+qc_annualeventhistory_w4_statendm	On what date did you stop doing that and start your next job or other activity? ENTER MONTH
+qc_annualeventhistory_w4_statendy4	On what date did you stop doing that and start your next job or other activity? ENTER YEAR
+qc_currentemployment_w4_jbhas	"Can I just check, did you do any paid work last week - that is in the seven days ending last Sunday - either as an employee or self-employed?"
+qc_currentemployment_w4_jboff	Even though you weren't working did you have a job that you were away from last week?
+qc_currentemployment_w4_jboffy	What was the main reason you were away from work last week?
+qc_currentemployment_w4_jbterm1	"Leaving aside your own personal intentions and circumstances, is your job..."
+qc_currentemployment_w4_jbterm2	"In what way is the job not permanent, is it..."
+qc_currentemployment_w4_jbsic07chk	Is [ff_JBSIC07] still an accurate description of what the firm or organisation where you work makes or does?
+qc_currentemployment_w4_jbsic07	What does the firm/organisation you work for mainly make or do at the place where you work?
+qc_currentemployment_w4_jbsoc00chk	Is [ff_JBSOC00] still an accurate description of your occupation in your main job?
+qc_currentemployment_w4_jbsoc00	What was your main job last week? Please tell me the exact job title and describe fully the sort of work you do.
+qc_currentemployment_w4_jbsempchk	And are you still an {if ff_JBSEMP = 1} [ff_JBSEMP]?
+qc_currentemployment_w4_jbsemp	Are you an employee or self-employed?
+qc_currentemployment_w4_jbbgdat	"And on what date did you start working in your present job? If you have been promoted or changed grades, please give me the date of that change. Otherwise please give me the date when you started doing the job you are doing now for your present employer or working self-employed."
+qc_currentemployment_w4_jbbgd	PLEASE ENTER THE DAY
+qc_currentemployment_w4_jbbgm	PLEASE ENTER THE MONTH
+qc_currentemployment_w4_jbbgy	PLEASE ENTER THE YEAR
+qc_employees_w4_jbmngrchk	"Last time we interviewed you, you said you were [ff_jbmngr] {if ff_jbmngr = 1|2} / had no managerial or supervisory responsibilities {if ff_jbmngr = 3}. Is that still the case?"
+qc_employees_w4_jbmngr	Do you have any managerial duties or do you supervise any other employees?
+qc_employees_w4_jbsizechk	And is the number of people employed at the place you work still [ff_jbsize] people?
+qc_employees_w4_jbsize	How many people are employed at the place where you work?
+qc_employees_w4_jbsect	Do you work for a private firm or business or other limited company or do you work for some other type of organisation?
+qc_employees_w4_jbsectpub	What kind of non-private organisation do you work for?
+qc_employees_w4_jbhrs	"Thinking about your (main) job, how many hours, excluding overtime and meal breaks, are you expected to work in a normal week?"
+qc_employees_w4_jbot	And how many hours overtime do you usually work in a normal week?
+qc_employees_w4_jbotpd	How much of that overtime is usually paid overtime?
+qc_employees_w4_jbpl	Do you work mainly...
+qc_employees_w4_paygl	"The last time you were paid, what was your gross pay - that is including any overtime, bonuses, commission, tips or tax refund but before any deductions for tax, National Insurance or pension contributions, union dues and so on?"
+qc_employees_w4_paygwc	How long a period did that cover?
+qc_employees_w4_paynl	"And what was your take home pay last time, that is after any deductions were made for tax, National Insurance, pensions, union dues etc?"
+qc_employees_w4_paynwc	How long a period did that cover?P
+qc_employees_w4_payusl	"Your take home pay last time was £ PAYNL(PAYNL greater than 0) PAYGL(PAYNL = 0). Is this the amount you usually receive (before any statutory sick pay or statutory maternity, paternity or adoption pay)?"
+qc_employees_w4_payu	How much are you usually paid?
+qc_employees_w4_payuwc	How long a period did that cover?
+qc_employees_w4_payug	"And is that before or after any deductions for tax, National Insurance, union dues and so on or are there usually no deductions at all made from your salary?"
+qc_employees_w4_paytyp	"How is your pay calculated, in particular are you salaried or paid by the hour?"
+qc_employees_w4_pvtpay	"If you were to work more hours than usual during some week, would you receive additional pay for these extra hours of work?"
+qc_employees_w4_extnsa	About how much would you be paid per hour for those extra hours?
+qc_employees_w4_extrate	CODE AMOUNT PAID PER HOUR FOR EXTRA HOURS ENTER POUNDS AND PENCE
+qc_employees_w4_extrest	CODE WHETHER EXACT OR ESTIMATED AMOUNT ENTERED
+qc_employees_w4_basnsa	What is your hourly rate of pay for your basic hours of work?
+qc_employees_w4_basrate	CODE AMOUNT PAID PER HOUR FOR BASIC HOURS ENTER POUNDS AND PENCE
+qc_employees_w4_basrest	CODE WHETHER EXACT OR ESTIMATED AMOUNT ENTERED FOR BASIC HOURS
+qc_employees_w4_ovtnsa	What is your hourly rate of pay for overtime?
+qc_employees_w4_ovtrate	CODE AMOUNT PAID PER HOUR FOR OVERTIME ENTER POUNDS AND PENCE
+qc_employees_w4_ovtrest	CODE WHETHER EXACT OR ESTIMATED AMOUNT ENTERED FOR OVERTIME
+qc_employees_w4_jbttwt	"About how much time does it usually take for you to get to work each day, door to door (in minutes)?"
+qc_employees_w4_worktrav	And how do you usually get to your place of work?
+qc_selfemployment_w4_jsboss	Do you have any employees?
+qc_selfemployment_w4_jssize	How many people do you employ?
+qc_selfemployment_w4_jshrs	How many hours in total do you usually work in a week in your job?
+qc_selfemployment_w4_jstypeb	Which of these best describes your employment situation...
+qc_selfemployment_w4_jsaccs	In this job/business are annual business accounts prepared for the Inland Revenue for tax purposes?
+qc_selfemployment_w4_jspart	Are you working on your own account or are you in partnership with someone else?
+qc_selfemployment_w4_jsprbm	What is the most recent period for which accounts have been prepared for the Inland Revenue? PLEASE ENTER THE BEGINNING MONTH
+qc_selfemployment_w4_jsprby4	What is the most recent period for which accounts have been prepared for the Inland Revenue? PLEASE ENTER THE BEGINNING YEAR
+qc_selfemployment_w4_jsprem	What is the most recent period for which accounts have been prepared for the Inland Revenue? PLEASE ENTER THE ENDING MONTH
+qc_selfemployment_w4_jsprey4	What is the most recent period for which accounts have been prepared for the Inland Revenue? PLEASE ENTER THE ENDING YEAR
+qc_selfemployment_w4_jsprf	What was the amount of (your share of) the profit or loss figure shown on these accounts for this period?
+qc_selfemployment_w4_jsprls	Does this figure relate to profit or loss?
+qc_selfemployment_w4_jsprtx	"Can I just check, is that figure before deduction of income tax?"
+qc_selfemployment_w4_jsprni	And is that figure before deduction of National Insurance?
+qc_selfemployment_w4_jspayu	"After paying for any materials, equipment or goods that you use(d) in your work, what was your weekly or monthly income, on average, from this job/business over the last 12 months?"
+qc_selfemployment_w4_jspayw	Was that weekly or monthly income?
+qc_selfemployment_w4_jspytx	"Can I just check, is that figure before deduction of income tax?"
+qc_selfemployment_w4_jspyni	And is that figure before deduction of National Insurance?
+qc_selfemployment_w4_jspl	Where do you mainly work? Is it...
+qc_selfemployment_w4_jsttwt	"About how much time does it usually take for you to get to work each day, door to door?"
+qc_selfemployment_w4_jsttwtb	IF NO USUAL GIVE AVERAGE WRITE IN NUMBER OF MINUTES
+qc_selfemployment_w4_jsworktrav	And how do you usually get to your place of work?
+qc_commutingbehaviour_w4_workdis	"About how far, in miles, do you live from your usual place of work?"
+qc_commutingbehaviour_w4_twkdiff	Do you usually experience any of these difficulties when travelling to or from work by car or van?
+qc_commutingbehaviour_w4_twkdiffm	Which one creates the most difficulty for you?
+qc_commutingbehaviour_w4_twkcar	How easy or difficult would you find it to get to work if you could not travel by car or van?
+qc_jobsatisfaction_w4_jbsat	"On a scale of 1 to 7 where 1 means 'Completely dissatisfied' and 7 means 'Completely satisfied', how dissatisfied or satisfied are you with your present job overall?"
+qc_workconditions_w4_jbperfp	Does your pay include performance related pay?
+qc_workconditions_w4_jbonus	"In the last 12 months have you received any bonuses such as Christmas or quarterly bonus, profit-related pay or profit sharing bonus, or an occasional commission?"
+qc_workconditions_w4_jbrise	"Some people can normally expect their pay to rise every year by moving to the next point on the scale, as well as receiving negotiated pay rises. Are you paid on this type of incremental scale?"
+qc_workconditions_w4_tujbpl	"Is there a trade union, or a similar body such as a staff association, recognised by your management for negotiating pay or conditions for the people doing your sort of job in your workplace?"
+qc_workconditions_w4_tuin1	Are you a member of this trade union or association?
+qc_workconditions_w4_jbpen	Does your present employer run a pension scheme or superannuation scheme for which you are eligible?
+qc_workconditions_w4_jbpenm	Do you belong to your employer's pension scheme?
+qc_workconditions_w4_jbpeny4	When did you first join this scheme?
+qc_workconditions_w4_penmcn	Which of these statements best describes the contributions made by you to this employers scheme?
+qc_workconditions_w4_penmpy	What percentage of your pay or salary do you contribute to this scheme?
+qc_workconditions_w4_penmtp	There are two main ways in which your pension entitlement can be worked out in an employers pension scheme. Which of these statements best describes how your pension will be calculated?
+qc_workconditions_w4_penspb	"Can I check, will your husband/wife/partner receive benefits under this occupational pension scheme if they outlive you?"
+qc_workconditions_w4_wktime	Which times of day do you usually work?
+qc_workconditions_w4_wkends	Do you ever work at weekends?
+qc_workconditions_w4_jbflex	"I would like to ask about working arrangements at the place where you work. If you personally needed any, which of the following arrangements are available at your workplace?"
+qc_workconditions_w4_jbfxuse	Do you currently work in any of these ways?
+qc_workconditions_w4_jbfxinf	"Aside from any formal arrangements for flexible working you have, are {if JBFlex less than 9} / Are {if JBFlex = none} you able to vary your working hours on an informal basis, for example by re-arranging your start or finish times if you need to?"
+qc_workconditions_w4_wkaut1	"In your current job, how much influence do you have over... What tasks you do in your job?"
+qc_workconditions_w4_wkaut2	"(In general, how much influence do you have over...) The pace at which you work?"
+qc_workconditions_w4_wkaut3	"(In general, how much influence do you have over...) How you do your work?"
+qc_workconditions_w4_wkaut4	"(In general, how much influence do you have over...) The order in which you carry out tasks?"
+qc_workconditions_w4_wkaut5	"(In general, how much influence do you have over...) The time you start or finish your working day?"
+qc_workconditions_w4_depenth1	"Thinking of the past few weeks, how much of the time has your job made you feel tense?"
+qc_workconditions_w4_depenth2	"(Thinking of the past few weeks, how much of the time has your job made you feel...) Uneasy?"
+qc_workconditions_w4_depenth3	"(Thinking of the past few weeks, how much of the time has your job made you feel...) Worried?"
+qc_workconditions_w4_depenth4	"(Thinking of the past few weeks, how much of the time has your job made you feel...) Depressed?"
+qc_workconditions_w4_depenth5	"(Thinking of the past few weeks, how much of the time has your job made you feel...) Gloomy?"
+qc_workconditions_w4_depenth6	"(Thinking of the past few weeks, how much of the time has your job made you feel...) Miserable?"
+qc_workconditions_w4_jblkcha	I am going to read out a list of things which you may or may not want to happen to your current employment situation. For each one can you please tell me whether you would like this to happen to you in the next twelve months. Would you like to get a better job with your current employer?
+qc_workconditions_w4_jbxpcha	"Even though you would not like this to happen, do {if JBLKCHA = 2} / Do you think this actually will happen in the coming twelve months? (Get a better job with your current employer)"
+qc_workconditions_w4_jblkchb	I am going to read out a list of things which you may or may not want to happen to your current employment situation. For each one can you please tell me whether you would like this to happen to you in the next twelve months. Would you like to take up work related training?
+qc_workconditions_w4_jbxpchb	"Even though you would not like this to happen, do {if JBLKCHB = 2} / Do you think this actually will happen in the coming twelve months? (Take up work related training)"
+qc_workconditions_w4_jblkchc	I am going to read out a list of things which you may or may not want to happen to your current employment situation. For each one can you please tell me whether you would like this to happen to you in the next twelve months. Would you like to start a new job with a new employer?
+qc_workconditions_w4_jbxpchc	"Even though you would not like this to happen, do {if JBLKCHC = 2} / Do you think this actually will happen in the coming twelve months? (Start a new job with a new employer)"
+qc_workconditions_w4_jblkchd	I am going to read out a list of things which you may or may not want to happen to your current employment situation. For each one can you please tell me whether you would like this to happen to you in the next twelve months. Would you like to start up your own business? {if JBSEMP = 1} / start up a new business? {if JBSEMP = 2}
+qc_workconditions_w4_jbxpchd	"Even though you would not like this to happen, do {if JBLKCHD = 2} / Do you think this actually will happen in the coming twelve months? (Start up your own business/a new business)"
+qc_workconditions_w4_jblkche	I am going to read out a list of things which you may or may not want to happen to your current employment situation. For each one can you please tell me whether you would like this to happen to you in the next twelve months. Would you like to give up paid work?
+qc_workconditions_w4_jbxpche	"Even though you would not like this to happen, do {if JBLKCHE = 2} / Do you think this actually will happen in the coming twelve months? (Give up paid work)"
+qc_workconditions_w4_jbsec	"I would like you to think about your employment prospects over the next 12 months. Thinking about losing your job by being sacked, laid-off, made redundant or not having your contract renewed, how likely do you think it is that you will lose your job during the next 12 months? Is it..."
+qc_nonemployment_w4_julk4wk	Have you looked for any kind of paid work or government training scheme in the last four weeks?
+qc_nonemployment_w4_julkjb	"Although you are not looking for paid work at the moment, would you like to have a regular paid job even if only for a few hours a week?"
+qc_nonemployment_w4_jubgn	"If a job or a place on a government training scheme had been available in the week ending last Sunday, would you have been able to start within two weeks?"
+qc_nonemployment_w4_julk4x	In the past four weeks what active steps have you taken to find work? Have you...
+qc_nonemployment_w4_jlendm	In what month and year did you leave your last paid job? WRITE IN MONTH
+qc_nonemployment_w4_jlendy	In what month and year did you leave your last paid job? WRITE IN YEAR
+qc_nonemployment_w4_jlsic07	What did the firm/organisation you worked for mainly make or do (at the place where you worked)?
+qc_nonemployment_w4_jlsoc00	What was your job?
+qc_nonemployment_w4_jlsemp	Were you working as an employee or were you self-employed?
+qc_nonemployment_w4_jlboss	Did you have any employees?
+qc_nonemployment_w4_jlmngr	Did you have any managerial duties or were you supervising any other employees?
+qc_nonemployment_w4_jlsize	How many people did you employ {if JLBOSS = 1} / were employed at the place where you worked {if JLSEMP = 1}?
+qc_nonemployment_w4_eprosh	How likely do you think it is that you will begin paid work in the next twelve months? Do you think it is...
+qc_mothersreturntowork_w4_mlfutr	"You have recently had a new baby, do you plan to return to work at any time in the future?"
+qc_mothersreturntowork_w4_mlrnot	Why is that?
+qc_mothersreturntowork_w4_mlagst	How old will [CHILD NAME] and [CHILD NAME] {if multiple birth} be at the time you would hope to start working?
+qc_mothersreturntowork_w4_mlagstu	ENTER UNIT
+qc_mothersreturntowork_w4_mlwkfpt	And would you prefer to return to work full-time or part-time?
+qc_secondjobs_w4_j2has	"Do you currently earn any money from a second job, odd jobs, or from work that you might do from time to time, apart from any main job you have?"
+qc_secondjobs_w4_j2soc00	What is it that you do (and what does the firm or person you work for make or do)?
+qc_secondjobs_w4_j2semp	Are you an employee or self-employed?
+qc_secondjobs_w4_j2hrs	"How many hours do you usually work in a month in your second/odd job(s), excluding meal breaks but including any overtime you might do?"
+qc_secondjobs_w4_j2pay	"Before tax and other deductions, how much do you earn from your second and all other occasional jobs in a usual month?"
+qc_voluntarywork_w4_volun	"In the last 12 months, have you given any unpaid help or worked as a volunteer for any type of local, national or international organisation or charity?"
+qc_voluntarywork_w4_volfreq	"Including any time spent at home or elsewhere, about how often over the last 12 months have you generally done something to help any of these organisations?"
+qc_voluntarywork_w4_volhrs	And in the last 4 weeks approximately how many hours have you spent doing unpaid or voluntary work for any organisation?
+qc_charitablegiving_w4_chargv	"In the last 12 months, have you donated any money to charities or other organisations?"
+qc_charitablegiving_w4_charfreq	How often would you say you give money. Is it...
+qc_charitablegiving_w4_charam	Approximately how much money in total have you given to charities or other organisations in the last 12 months?
+qc_transportbehaviour_w4_trcarfq	How frequently do you travel by private car or van - whether as a driver or passenger? Please count a single trip as one journey and each return trip as two.
+qc_transportbehaviour_w4_trbusfq	How frequently do you use an ordinary bus? Please count a single trip as one journey and each return trip as two.
+qc_transportbehaviour_w4_trtrnfq	"How frequently do you use a train, not including underground, tram or light rail? Please count a single trip as one journey and each return trip as two."
+qc_transportbehaviour_w4_trbikefq	How frequently do you use a bicycle? Please count a single trip as one journey and each return trip as two.
+qc_transportbehaviour_w4_ynotbike	Which of these statements apply to you?
+qc_transportbehaviour_w4_carsrv	Are you a member of any of the following services?
+qc_transportbehaviour_w4_pncars	How many cars or vans in total does your household own or have continuous use of?
+qc_transportbehaviour_w4_hucar	"Generally speaking, which one of these statements best describes your role when it comes to buying a car or van for your household?"
+qc_transportbehaviour_w4_carbuy	Which of these things are important to you when buying a car or van?
+qc_childcare_w4_ccare	Do you ever use any type of childcare for your child/children? By 'childcare' I mean care carried out by anyone other than yourself (or your partner).
+qc_childcare_w4_ccwork	Can I just check what arrangements you use to look after your child/children when you are working?
+qc_childcare_w4_wrkch1a	Are the childcare arrangements for looking after [CHILD NAME] during school term-time the same as during school holidays?
+qc_childcare_w4_wrkch1c	Are the number of hours per week used to look after [CHILD NAME] the same during school term-time and in school holidays?
+qc_childcare_w4_wrkch2a	"First, thinking about during school term-time. What are your usual arrangements for looking after [CHILD NAME]? {if Wrkch1a = 2 | Wrkch1c = 1 | Wrkch1c = 2} / What are your usual arrangements for looking after [CHILD NAME]? {if (Wrkch1a = 1 & Wrkch1c = 3) | (Wrkch1a = DK|REF)}"
+qc_childcare_w4_wrkch2	"And of these childcare arrangements, which three have you used the most?"
+qc_childcare_w4_wrkch3	How many hours per week does [CHILD NAME] usually spend being looked after by [wrkch3code] during school term-time?
+qc_childcare_w4_wrkch7	What are your usual arrangements for looking after [CHILD NAME] during the school holidays?
+qc_childcare_w4_mostuse	"And of these childcare arrangements, which three do you use the most?"
+qc_childcare_w4_wrkch8	How many hours per week does [CHILD NAME] usually spend being looked after by [MostUse/Wrkch7] during school holidays?
+qc_remittances_w4_remit	Many people make gifts or send money to people in another country. Did you send or give money to anyone in a country outside the UK in the past 12 months for any of the following reasons?
+qc_remittances_w4_remitfreq	"How often did you send, transfer or give money for repayment of a loan {if Remit = 1} / to support family members or friends {if Remit = 2} / to support a local community {if Remit = 3} / for personal investment or savings {if Remit = 4} in the last 12 months?"
+qc_remittances_w4_remitreg	Is this a regular payment you make?
+qc_remittances_w4_remitamt	What was the last amount you sent or gave?
+qc_remittances_w4_remcntry	To which country did you send or make this last payment?
+qc_remittances_w4_remcntryo	TYPE IN OTHER COUNTRY
+qc_remittances_w4_remitusual	"And, was this last payment the usual amount you send or give?"
+qc_remittances_w4_remusamt	What is the usual amount?
+qc_remittances_w4_remhow	How did you make the payment?
+qc_benefits_w4_intbenefit	"One of the most important parts of our research is how people are getting by financially these days. We have found that we need to ask about a number of different types of income, otherwise our results could be misleading. Please think about ALL of the extra sources of income you receive, as well as any benefits or tax credits. If you are at all unsure about whether something would count, you can check with me. I'd like to remind you that anything you tell me is completely confidential."
+qc_benefits_w4_btype	"Which, if any, of these types of payments are you currently receiving, either just yourself or jointly {if hhsize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_benunemp	"Can I just check, are {if JBSTAT = 3 & BTYPE <> 1} / Are {if BType = 1} you currently receiving any of these types of payments, either just yourself or jointly {if hhsize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_bendis	"Can I just check, are {if (JBSTAT=8 | Health = 1) & BTYPE <> 3} / Are {if BType = 3} you currently receiving any of these types of payments, either just yourself or jointly {if hhsize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_benpen	"Can I just check, are {if BTYPE <> 4 & (GRIDVARIABLES.Pensioner = 1)} / Are {if BTYPE = 4} you currently receiving any of these types of payments, either just yourself or jointly {if hhsize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_niserps	"You say you receive the State Retirement Pension. Does this include any income from the State Earnings Related Pension Scheme, also known as SERPS?"
+qc_benefits_w4_bencb	Do you receive Child Benefit?
+qc_benefits_w4_benctc	"Are you receiving the Child Tax Credit, either just yourself or jointly {if hhsize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_benfam	"Are you currently receiving any of these types of payments, either just yourself or jointly {if hhsize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_bentax	"Are you currently receiving [,either just yourself or jointly] {if hhsize greater than 1 & (livesp = 1 or livewith = 1)} ... {if BTYPE = 6 & (TFTax = 1 | PenCredTxt = 1 | ChTaxCred = 1 | RetWCred = 1 | UniCredTxt = 1)} / And do you currently receive the Working Tax Credit, including Disabled Person's Tax Credit [ {if {BTYPE = 6 & (TFTax = 0 & PenCredTxt = 0 & ChTaxCred = 0 & RetWCred = 0 & UniCredTxt <> 1)} / either just yourself or jointly] {if hhsize greater than 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_benhou	"And can I just check, do you currently receive [,either just yourself or jointly] {if hhsize greater than 1 & (livesp = 1 or livewith = 1) ... {if BType not equal to 8 & (BType = 2 | BenUnemp = 1 | BenUnemp = 2 | BenDis = 1 | BenDis = 2 | BenPen = 4 | BenTax = 3)} / Are you currently receiving [,either just yourself or jointly] {if hhsize greater than 1 & (livesp = 1 or livewith = 1)}... {if BType = 8} / Do you receive housing benefit [,either just yourself or jointly] {if hhsize greater than 1 & (livesp = 1 or livewith = 1)}? {if TFHou = 1 & TFRen = 1 & TFRat = 1 & BenTax = RESPONSE & Istrtdat before 30/09/2013}"
+qc_benefits_w4_bensta	"And aside from the types of income we've just been discussing, are you currently receiving any of these types of payments either just yourself or jointly {if hhsize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_nfh	"Can I just check, according to our records, you have in the past received [ff_bentype01 - ff_bentype41]. Are you currently receiving [ff_bentype01 - ff_bentype41] either just yourself or jointly {if HHSize > 1 & (livesp = 1 or livewith = 1)}?"
+qc_benefits_w4_frval	How much was the last payment of [FICODE] you received (to nearest £)?
+qc_benefits_w4_frwc	What period did that cover?
+qc_benefits_w4_frjt	Do you receive that solely in your name or jointly with someone else?
+qc_benefits_w4_frjtpn	With whom do you receive [FICODE]?
+qc_benefits_w4_fraddl	And are you currently receiving any other payments of [FICODE]?
+qc_householdfinances_w4_fiyrdia	In the past 12 months how much have you personally received in the way of dividends or interest from any savings and investments you may have?
+qc_householdfinances_w4_fiyrdb1	Would it amount to £ 500 or more?
+qc_householdfinances_w4_fiyrdb2	Would it amount to £ 1000 or more?
+qc_householdfinances_w4_fiyrdb3	to £ 5000 or more?
+qc_householdfinances_w4_fiyrdb5	to £ 10000 or more?
+qc_householdfinances_w4_fiyrdb4	to £ 2500 or more?
+qc_householdfinances_w4_fiyrdb6	Would it amount to £ 100 or more?
+qc_householdfinances_w4_finnow	How well would you say you yourself are managing financially these days? Would you say you are...
+qc_householdfinances_w4_finfut	"Looking ahead, how do you think you will be financially a year from now, will you be..."
+qc_savings_w4_save	"Do you save any amount of your income, for example by putting something away now and then in a bank, building society, or Post Office account, other than to meet regular bills? Please include share purchase schemes and ISA's."
+qc_savings_w4_saved	About how much on average do you personally manage to save a month?
+qc_savings_w4_savreg	Do you save on a regular basis or just from time to time when you can?
+qc_savings_w4_savlt	Would you say your savings are mainly long term savings for the future or mainly short term savings for things you need now and for unexpected events?
+qc_personalpensions_w4_ppen	"Other than your main employer or occupational pension scheme, are {if WORKCONDITIONS.JBPENM = 1} / Are you currently a member of any personal pension scheme or do you currently contribute to any personal pension scheme? Please include any Additional Voluntary Contribution scheme you may belong to."
+qc_personalpensions_w4_ppent	Is this a personal pension or a stakeholder pension?
+qc_personalpensions_w4_ppyrs	In which year did you join this pension scheme?
+qc_personalpensions_w4_ppreg	"Not including any National Insurance Contributions paid into this personal pension, do you contribute to your pension..."
+qc_personalpensions_w4_ppram	How much do you usually contribute?
+qc_personalpensions_w4_pprampc	What period does this cover?
+qc_wealthassetsanddebt_w4_hascurr	Do you have any current accounts in the UK? This could be in your name only or held jointly with someone else.
+qc_wealthassetsanddebt_w4_currynot	And why don't you have a current account in the UK?
+qc_wealthassetsanddebt_w4_refbank	"Thinking about all types of bank accounts, have you ever tried to open an account in the UK and been refused?"
+qc_wealthassetsanddebt_w4_refbnky	How long ago was this?
+qc_wealthassetsanddebt_w4_svacts	"I'd like to ask about any savings or investments you may have. They can be in your name only, or held jointly with someone else. Which of these savings accounts do you have, if any?"
+qc_wealthassetsanddebt_w4_nosvy	What is the main reason you do not have any saving accounts?
+qc_wealthassetsanddebt_w4_svamt	How much in total is the current balance in your [SVCODE]?
+qc_wealthassetsanddebt_w4_svb1	Would that amount to £ [AMOUNT] or more?
+qc_wealthassetsanddebt_w4_svb2	Would that amount to £ [AMOUNT] or more?
+qc_wealthassetsanddebt_w4_svb3	Would that amount to £ [AMOUNT] or more?
+qc_wealthassetsanddebt_w4_svb5	Would that amount to £ [AMOUNT] or more?
+qc_wealthassetsanddebt_w4_svb4	Would that amount to £ [AMOUNT] or more?
+qc_wealthassetsanddebt_w4_svsj	"And is/are the [SVCODE](s) held in your sole name only, held in joint names with your husband/wife/partner or someone else, or do you have both sole and jointly held savings?"
+qc_wealthassetsanddebt_w4_svpn	With whom are you a joint holder of [SVCODE]?
+qc_wealthassetsanddebt_w4_svsk	About how much of the amount you have in savings is held solely in your name?
+qc_wealthassetsanddebt_w4_savdocs	PLEASE RECORD WHETHER RESPONDENT CHECKED ANY RELEVANT DOCUMENTS/PAPERWORK WHEN GIVING YOU INFORMATION ABOUT THEIR SAVINGS ACCOUNTS.
+qc_wealthassetsanddebt_w4_infsave	Do you currently save money in any of these ways?
+qc_wealthassetsanddebt_w4_ccsole	"Do you have any store cards or credit cards such as Visa, or Mastercard in your sole name? Please do not include direct debit cards such as Switch or Delta or store loyalty cards such as Tesco Clubcard or Nectar."
+qc_wealthassetsanddebt_w4_nccsole	How many store and credit cards do you have in your sole name?
+qc_wealthassetsanddebt_w4_credsole	What is the maximum borrowing limit in total on all the cards {if NCCSOLE greater than 1} / on the card {if NCCSOLE = 1} just in your name?
+qc_wealthassetsanddebt_w4_ccbillsole	How do you pay the bill for this card {if NCCSOLE = 1} / bills for these cards {if NCCSOLE greater than 1}? You can just tell me the number that applies. {if CAPI}
+qc_wealthassetsanddebt_w4_ccamtsole	"After you made your most recent payments, how much in total was still owed on all of the cards {if NCCSOLE greater than 1} / on the card {if NCCSOLE = 1} that you hold in your name solely?"
+qc_wealthassetsanddebt_w4_ccjt	"Do you have any store cards or credit cards such as Visa, or Mastercard, which you hold jointly with someone else? Please do not include direct debit cards such as Switch or Delta or store loyalty cards such as Tesco Clubdcard or Nectar."
+qc_wealthassetsanddebt_w4_nccjt	How many store and credit cards do you have jointly with someone else?
+qc_wealthassetsanddebt_w4_ccjtp	Who is the person (who are the people) you hold these joint credit cards with?
+qc_wealthassetsanddebt_w4_credjt	What is the maximum borrowing limit in total on all the cards {if NCCJT greater than 1} / on the card {if NCCJT = 1} you hold jointly?
+qc_wealthassetsanddebt_w4_ccbilljt	How do you pay the bill for this card {if NCCJT = 1} / bills for these cards {if NCCJT greater than 1} each month? Just tell me the number that applies. {if CAPI}
+qc_wealthassetsanddebt_w4_ccamtjt	"After the most recent payments were made, how much in total was still owed on all of the cards {if NCCJT greater than 1} / the card {if NCCJT = 1} that you hold jointly?"
+qc_wealthassetsanddebt_w4_debt	"I would now like to ask you about any other financial commitments you may have apart from mortgages. For which, if any, of these items do you currently owe any money? Please do not include credit card and other bills being fully paid off in the current month."
+qc_wealthassetsanddebt_w4_debtinfo	"Thinking of all the debts that you've just mentioned, how {if more than one mention at DEBT} / How did you find out about the lender(s) you used?"
+qc_wealthassetsanddebt_w4_debty	About how much in total is owed on this commitment {if one mention at DEBT} / these commitments {if more than one mention at DEBT}?
+qc_wealthassetsanddebt_w4_debtc1	Would it amount to £ 500 or more?
+qc_wealthassetsanddebt_w4_debtc2	"Would it amount to £ 1,500 or more?"
+qc_wealthassetsanddebt_w4_debtc3	"Would it amount to £ 5,000 or more?"
+qc_wealthassetsanddebt_w4_debtc5	"Would it amount to £ 10,000 or more?"
+qc_wealthassetsanddebt_w4_debtc4	Would it amount to £ 100 or more?
+qc_wealthassetsanddebt_w4_debtsj	"Are these financial commitments in your sole name only, in joint names with your husband/wife/partner or someone else or do you have both sole and joint commitments?"
+qc_wealthassetsanddebt_w4_debtpn	Who is the person you have these joint financial commitments with?
+qc_wealthassetsanddebt_w4_debtsk	About how much of the total amount outstanding is your sole commitment?
+qc_wealthassetsanddebt_w4_debtwho	"You mentioned that you owe money to a private individual, is that to..."
+qc_wealthassetsanddebt_w4_debtoth	"Which, if any, of these other types of debts do you have?"
+qc_wealthassetsanddebt_w4_creditor	"And does anyone owe money to you, for example a family member, friend, acquaintance or community member you have loaned money to?"
+qc_wealthassetsanddebt_w4_credamt	And how much are you owed in total?
+qc_wealthassetsanddebt_w4_unusexp	"In the next 12 months, do you expect to have higher expenses than usual, say for a celebration, essential travel or a holiday?"
+qc_wealthassetsanddebt_w4_expmanage	How do you expect to manage the extra expenses?
+qc_wealthassetsanddebt_w4_huruns	People organise their finances in different ways. Which of these comes closest to the way you organise yours? It doesn't have to fit exactly - just choose the nearest one. You can just tell me the number that applies. {if CAPI}
+qc_retirementplanning_w4_retchk	"Do you consider yourself to be currently retired, even if you do some paid work or have some other main activity?"
+qc_retirementplanning_w4_ageret	There is a lot of policy interest in how people are planning for their long term future and retirement. At what age do you expect you will retire or will consider yourself to be retired?
+qc_retirementplanning_w4_rtpro1	"I'm going to read out a list of things that some people say are good about retirement. For each one tell me if, for you, they would be very important, moderately important, somewhat important, or not important at all. First, ""Being your own boss""?"
+qc_retirementplanning_w4_rtpro2	"(Thinking about retirement, how important is...) Being able to take it easy?"
+qc_retirementplanning_w4_rtpro3	"(Thinking about retirement, how important is...) Having the chance to travel?"
+qc_retirementplanning_w4_rtpro4	"(Thinking about retirement, how important is...) Having more time for family and friends?"
+qc_retirementplanning_w4_rtpro5	"(Thinking about retirement, how important is...) Having more time for leisure activities?"
+qc_retirementplanning_w4_rtpro6	"(Thinking about retirement, how important is...) Having time to take part in community/voluntary work?"
+qc_retirementplanning_w4_rtcon1	"Now for things that some people say are bad about retirement. For each one tell me if, for you, they would worry you a lot, somewhat, a little or not at all. First, ""Not doing anything productive or useful""?"
+qc_retirementplanning_w4_rtcon2	"(Thinking about retirement, how big of a worry is...) Illness or disability?"
+qc_retirementplanning_w4_rtcon3	"(Thinking about retirement, how big of a worry is...) Not having enough income to get by?"
+qc_retirementplanning_w4_rtcon4	"(Thinking about retirement, how big of a worry is...) Feeling lonely or isolated?"
+qc_retirementplanning_w4_penmex	Do you currently expect to receive any income or benefit from an employers occupational pension scheme when you retire?
+qc_retirementplanning_w4_pppex	Do you currently expect to receive any income or benefit from a private pension scheme when you retire?
+qc_retirementplanning_w4_pppexm	(Apart from the pensions already mentioned) Do you currently expect to receive any income or benefit from (other) savings and investments when you retire?
+qc_retirementplanning_w4_sppen	"Does your husband/wife/partner belong to any pension scheme, either an occupational or private scheme under which you would receive benefits if you outlive them?"
+qc_retirementplanning_w4_rtexpjb	"How likely is it that you will do any paid employment either full or part-time after you retire or reach the compulsory age of retirement in your current job? Is it very likely, likely, unlikely or very unlikely that you will do any paid work after you retire?"
+qc_retirementplanning_w4_rtfnd	Which of these things do you expect to use to provide for your retirement?
+qc_retirementplanning_w4_retamt	Can you tell me what you expect your retirement income to be compared with your pre-retirement income?
+qc_retirementplanning_w4_retsuf	"Looking to the future, do you expect your income during retirement to be..."
+qc_domesticlabour_w4_hubuys	"I am going to read out some household jobs. Could you please say who mostly does this work here? Is it mostly yourself, or mostly your spouse/partner, or is the work shared equally? First, grocery shopping."
+qc_domesticlabour_w4_hufrys	(Who mostly does the...) Cooking?
+qc_domesticlabour_w4_humops	(Who mostly does the...) Cleaning/hoovering?
+qc_domesticlabour_w4_huiron	(Who mostly does the...) Washing and ironing?
+qc_domesticlabour_w4_hupots	(Who mostly does the...) Gardening?
+qc_domesticlabour_w4_hudiy	(Who mostly does the...) DIY jobs?
+qc_domesticlabour_w4_husits	Who is mainly responsible for looking after the children? Is it...
+qc_domesticlabour_w4_huboss	"In your household, who has the final say in big financial decisions?"
+qc_domesticlabour_w4_howlng	"About how many hours do you spend on housework in an average week, such as time spent cooking, cleaning and doing the laundry?"
+qc_politics_w4_vote1	Now I have a few questions about your views on politics. Generally speaking do you think of yourself as a supporter of any one political party?
+qc_politics_w4_vote2	Do you think of yourself as a little closer to one political party than to the others?
+qc_politics_w4_vote3	"If there were to be a general election tomorrow, which political party do you think you would be most likely to support?"
+qc_politics_w4_vote3o	WRITE IN OTHER PARTY
+qc_politics_w4_vote4	Which one?
+qc_politics_w4_vote4o	WRITE IN OTHER PARTY
+qc_politics_w4_vote5	"Would you call yourself a very strong supporter of [VOTE4], fairly strong or not very strong?"
+qc_politics_w4_vote6	How interested would you say you are in politics? Would you say you are...
+qc_olympics_w4_olympas1	Do you intend to follow the London 2012 Olympic or Paralympic Games in any of the following ways?
+qc_olympics_w4_olymact1	"In what other ways, if any, do you intend to follow or get involved in the London 2012 Olympic or Paralympic Games? This may include activities you are already doing."
+qc_olympics_w4_olympas2	Are you following the London 2012 Olympic or Paralympic Games in any of the following ways?
+qc_olympics_w4_olymact2	"In what other ways, if any, are you following or getting involved in the London 2012 Olympic or Paralympic Games?"
+qc_olympics_w4_olympas3	Did you follow the London 2012 Olympic or Paralympic Games in any of the following ways?
+qc_olympics_w4_olymact3	"In what other ways, if any, did you follow or get involved in the London 2012 Olympic or Paralympic Games?"
+qc_environmentalbehaviour_w4_envhabit1	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Leave your TV on standby for the night
+qc_environmentalbehaviour_w4_envhabit2	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Switch off lights in rooms that aren't being used
+qc_environmentalbehaviour_w4_envhabit3	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Keep the tap running while you brush your teeth
+qc_environmentalbehaviour_w4_envhabit4	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Put more clothes on when you feel cold rather than putting the heating on or turning it up
+qc_environmentalbehaviour_w4_envhabit5	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Decide not to buy something because you feel it has too much packaging
+qc_environmentalbehaviour_w4_envhabit6	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Buy recycled paper products such as toilet paper or tissues
+qc_environmentalbehaviour_w4_envhabit7	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Take your own shopping bag when shopping
+qc_environmentalbehaviour_w4_envhabit8	"Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Use public transport (e.g. bus, train) rather than travel by car"
+qc_environmentalbehaviour_w4_envhabit9	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Walk or cycle for short journeys less than 2 or 3 miles
+qc_environmentalbehaviour_w4_envhabit10	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Car share with others who need to make a similar journey
+qc_environmentalbehaviour_w4_envhabit11	Now a few questions about the environment. Could you tell me how often you personally do each of the following things. Take fewer flights when possible
+qc_environmentalbehaviour_w4_carmiles	About how many miles would you say you personally have driven in the last twelve months? If you drive more than one car owned by or available to your household please give the milage for the car you drive most often.
+qc_environmentalbehaviour_w4_flyes	"Did you take any flights within the UK, to other European countries or to countries outside Europe in the last twelve months for leisure, holidays or visiting friends or family? Please do not include air travel for work or business purposes."
+qc_environmentalbehaviour_w4_nflyin	How many flights within the UK did you take in the last twelve months?
+qc_environmentalbehaviour_w4_nflyeu	How many flights to other European countries did you take in the last twelve months?
+qc_environmentalbehaviour_w4_nflyos	How many flights to countries outside Europe did you take in the last twelve months?
+qc_casistart_w4_scac	I now have some questions for you to answer yourself on the computer.
+qc_casistart_w4_scrf	CODE REASON(S) WHY RESPONDENT REFUSED
+qc_casistart_w4_scrx	WRITE IN OTHER REASON R REFUSED SELF-COMPLETION
+qc_casistart_w4_scun	CODE REASON(S) WHY RESPONDENT UNABLE TO COMPLETE SELF-COMPLETION
+qc_casistart_w4_scux	WRITE IN OTHER REASON RESPONDENT UNABLE TO COMPLETE SELF-COMPLETION
+qc_scasf12_w4_scsf1	"In general, would you say your health is..."
+qc_scasf12_w4_scsf2a	"The following questions are about activities you might do during a typical day. Does your health now limit you in these activities? If so, how much? Moderate activities, such as moving a table, pushing a vacuum cleaner, bowling or playing golf"
+qc_scasf12_w4_scsf2b	"(The following questions are about activities you might do during a typical day. Does your health now limit you in these activities? If so, how much?) Climbing several flights of stairs"
+qc_scasf12_w4_scsf3a	"During the past 4 weeks, how much of the time have you had any of the following problems with your work or other regular daily activities as a result of your physical health? Accomplished less than you would like"
+qc_scasf12_w4_scsf3b	"(During the past 4 weeks, how much of the time have you had any of the following problems with your work or other regular daily activities as a result of your physical health?) Were limited in the kind of work or other activities"
+qc_scasf12_w4_scsf4a	"During the past 4 weeks, how much of the time have you had any of the following problems with your work or other regular daily activities as a result of any emotional problems (such as feeling depressed or anxious)? Accomplished less than you would like"
+qc_scasf12_w4_scsf4b	"(During the past 4 weeks, how much of the time have you had any of the following problems with your work or other regular daily activities as a result of any emotional problems (such as feeling depressed or anxious)?) Did work or other activities less carefully than usual"
+qc_scasf12_w4_scsf5	"During the past 4 weeks, how much did pain interfere with your normal work (including both work outside the home and housework)?"
+qc_scasf12_w4_scsf6a	"These questions are about how you feel and how things have been with you during the past 4 weeks. For each question, please give the one answer that comes closest to the way you have been feeling. How much of the time during the past 4 weeks... Have you felt calm and peaceful?"
+qc_scasf12_w4_scsf6b	"(These questions are about how you feel and how things have been with you during the past 4 weeks. For each question, please give the one answer that comes closest to the way you have been feeling. How much of the time during the past 4 weeks...) Did you have a lot of energy?"
+qc_scasf12_w4_scsf6c	"(These questions are about how you feel and how things have been with you during the past 4 weeks. For each question, please give the one answer that comes closest to the way you have been feeling. How much of the time during the past 4 weeks...) Have you felt downhearted and depressed?"
+qc_scasf12_w4_scsf7	"During the past 4 weeks, how much of the time has your physical health or emotional problems interfered with your social activities (like visiting friends or relatives)?"
+qc_scaghq_w4_scghqa	Have you recently been able to concentrate on whatever you're doing?
+qc_scaghq_w4_scghqb	Have you recently lost much sleep over worry?
+qc_scaghq_w4_scghqc	Have you recently felt that you were playing a useful part in things?
+qc_scaghq_w4_scghqd	Have you recently felt capable of making decisions about things?
+qc_scaghq_w4_scghqe	Have you recently felt constantly under strain?
+qc_scaghq_w4_scghqf	Have you recently felt you couldn't overcome your difficulties?
+qc_scaghq_w4_scghqg	Have you recently been able to enjoy your normal day-to-day activities?
+qc_scaghq_w4_scghqh	Have you recently been able to face up to problems?
+qc_scaghq_w4_scghqi	Have you recently been feeling unhappy or depressed?
+qc_scaghq_w4_scghqj	Have you recently been losing confidence in yourself?
+qc_scaghq_w4_scghqk	Have you recently been thinking of yourself as a worthless person?
+qc_scaghq_w4_scghql	"Have you recently been feeling reasonably happy, all things considered?"
+qc_scasatisfaction_w4_sclfsat1	Please choose the number which you feel best describes how dissatisfied or satisfied you are with the following aspects of your current situation. Your health.
+qc_scasatisfaction_w4_sclfsat2	(Please choose the number which you feel best describes how dissatisfied or satisfied you are with the following aspects of your current situation.) The income of your household.
+qc_scasatisfaction_w4_sclfsat7	(Please choose the number which you feel best describes how dissatisfied or satisfied you are with the following aspects of your current situation.) The amount of leisure time you have.
+qc_scasatisfaction_w4_sclfsato	(Please choose the number which you feel best describes how dissatisfied or satisfied you are with the following aspects of your current situation.) Your life overall.
+qc_scaworkconditions_w4_scwkimp	"Thinking about work in general, how much do you agree with the following statement? I would enjoy having a paid job even if I did not need the money."
+qc_scaworkconditions_w4_scwkor1	"There are various things people may look for in a job. For each statement, please answer how important you feel each is for you. Good promotion prospects"
+qc_scaworkconditions_w4_scwkor2	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Good pay."
+qc_scaworkconditions_w4_scwkor3	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Good relations with a supervisor or manager."
+qc_scaworkconditions_w4_scwkor4	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) A secure job."
+qc_scaworkconditions_w4_scwkor5	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) A job where you can use your initiative."
+qc_scaworkconditions_w4_scwkor6	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Work you like doing."
+qc_scaworkconditions_w4_scwkor7	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Convenient hours of work."
+qc_scaworkconditions_w4_scwkor8	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Choice in your hours of work."
+qc_scaworkconditions_w4_scwkor9	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) The opportunity to use your abilities."
+qc_scaworkconditions_w4_scwkor10	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Good fringe benefits."
+qc_scaworkconditions_w4_scwkor11	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) An easy work load."
+qc_scaworkconditions_w4_scwkor12	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Good training provision."
+qc_scaworkconditions_w4_scwkor13	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Good physical working conditions."
+qc_scaworkconditions_w4_scwkor14	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) A lot of variety in the type of work."
+qc_scaworkconditions_w4_scwkor15	"(There are various things people may look for in a job. For each statement, please answer how important you feel each is for you.) Friendly people to work with."
+qc_scagenderattitudes_w4_scopfama	Here are some questions about family life. Do you personally agree or disagree... A pre-school child is likely to suffer if his or her mother works
+qc_scagenderattitudes_w4_scopfamb	"(Do you personally agree or disagree...) All in all, family life suffers when the woman has a full-time job"
+qc_scagenderattitudes_w4_scopfamd	(Do you personally agree or disagree...) Both the husband and wife should contribute to the household income
+qc_scagenderattitudes_w4_scopfamf	"(Do you personally agree or disagree...) A husband's job is to earn money, a wife's job is to look after the home and family"
+qc_scagenderattitudes_w4_scopfamh	(Do you personally agree or disagree...) Employers should make special arrangements to help mothers combine jobs and childcare
+qc_scaenvironment_w4_scenv_ftst	Which of these best describes how you feel about your current lifestyle and the environment?
+qc_scaenvironment_w4_scenv_crlf	And which of these would you say best describes your current lifestyle?
+qc_scaenvironment_w4_scenv_grn	"Do you agree or disagree that being green is an alternative lifestyle, it's not for the majority?"
+qc_scaenvironment_w4_scenv_bccc	Please select the extent to which you agree or disagree with the following statements. My behaviour and everyday lifestyle contribute to climate change.
+qc_scaenvironment_w4_scenv_pmep	Please select the extent to which you agree or disagree with the following statements. I would be prepared to pay more for environmentally-friendly products.
+qc_scaenvironment_w4_scenv_meds	"Please select the extent to which you agree or disagree with the following statements. If things continue on their current course, we will soon experience a major environmental disaster."
+qc_scaenvironment_w4_scenv_crex	Please select the extent to which you agree or disagree with the following statements. The so-called 'environmental crisis' facing humanity has been greatly exaggerated.
+qc_scaenvironment_w4_scenv_tlat	Please select the extent to which you agree or disagree with the following statements. Climate change is beyond control - it's too late to do anything about it.
+qc_scaenvironment_w4_scenv_nowo	Please select the extent to which you agree or disagree with the following statements. The effects of climate change are too far in the future to really worry me.
+qc_scaenvironment_w4_scenv_fitl	Please select the extent to which you agree or disagree with the following statements. Any changes I make to help the environment need to fit in with my lifestyle.
+qc_scaenvironment_w4_scenv_noot	Please select the extent to which you agree or disagree with the following statements. It's not worth me doing things to help the environment if others don't do the same.
+qc_scaenvironment_w4_scenv_canc	"Please select the extent to which you agree or disagree with the following statements. It's not worth the UK trying to combat climate change, because other countries will just cancel out what we do."
+qc_scaenvironment_w4_scopecl30	"Please select whether, on the whole, you personally believe or do not believe each of the following statements. People in the UK will be affected by climate change in the next 30 years."
+qc_scaenvironment_w4_scopecl200	"Please select whether, on the whole, you personally believe or do not believe each of the following statements. People in the UK will be affected by climate change in the next 200 years."
+qc_scawemwbs_w4_scwemwba	Here are some statements about feelings and thoughts. Please select the answer that best describes your experience of each over the last 2 weeks. I've been feeling optimistic about the future.
+qc_scawemwbs_w4_scwemwbb	(Please select the answer that best describes your experience over the last 2 weeks.) I've been feeling useful.
+qc_scawemwbs_w4_scwemwbc	(Please select the answer that best describes your experience over the last 2 weeks.) I've been feeling relaxed.
+qc_scawemwbs_w4_scwemwbd	(Please select the answer that best describes your experience over the last 2 weeks.) I've been dealing with problems well.
+qc_scawemwbs_w4_scwemwbe	(Please select the answer that best describes your experience over the last 2 weeks.) I've been thinking clearly.
+qc_scawemwbs_w4_scwemwbf	(Please select the answer that best describes your experience over the last 2 weeks.) I've been feeling close to other people.
+qc_scawemwbs_w4_scwemwbg	(Please select the answer that best describes your experience over the last 2 weeks.) I've been able to make up my own mind about things.
+qc_scyoungadults_w4_whorupro	"We'd like to know how important various things are to your sense of who you are. Please think about each of the following and select the answer that indicates whether you think it is important, not very important or not at all important to your sense of who you are. Your occupation?"
+qc_scyoungadults_w4_whoruedu	How important is your level of education to your sense of who you are?
+qc_scyoungadults_w4_whorurac	How important is your ethnic or racial background to your sense of who you are?
+qc_scyoungadults_w4_whorupol	How important are your political beliefs to your sense of who you are?
+qc_scyoungadults_w4_whorufam	How important is your family to your sense of who you are?
+qc_scyoungadults_w4_whorusex	How important is your gender to your sense of who you are?
+qc_scyoungadults_w4_whoruage	How important is your age and life stage to your sense of who you are?
+qc_scyoungadults_w4_ypnpal	How many close friends would you say you have? Please enter the number.
+qc_scyoungadults_w4_ypsocweb	Do you belong to any social networking web-sites?
+qc_scyoungadults_w4_ypnetcht	"How many hours do you spend chatting or interacting with friends through social web-sites on a normal week day, that is Monday to Friday?"
+qc_scyoungadults_w4_eatlivu	In the past 7 days how many times have you eaten an evening meal together with the rest of your family who live with you?
+qc_scyoungadults_w4_famsup	"Do you feel supported by your family, that is the people who live with you?"
+qc_scyoungadults_w4_upset	Suppose you felt upset or worried about something and you wanted to talk about it. Who would you turn to first within your family? Please select one answer only.
+qc_scyoungadults_w4_late	"Some young people who still live at home keep their parents informed about where they are. In the past month, how many times have you stayed out after 9.00pm at night without your parents knowing where you were?"
+qc_scyoungadults_w4_ypesta	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. I feel I have a number of good qualities."
+qc_scyoungadults_w4_ypesti	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. I feel that I do not have much to be proud of."
+qc_scyoungadults_w4_ypestb	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. I certainly feel useless at times."
+qc_scyoungadults_w4_ypestj	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. I am able to do things as well as most other people."
+qc_scyoungadults_w4_ypestc	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. I am a likeable person."
+qc_scyoungadults_w4_ypestk	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. I can usually solve my own problems."
+qc_scyoungadults_w4_ypeste	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. All in all, I am inclined to feel I am a failure."
+qc_scyoungadults_w4_ypestf	"Please say whether you strongly agree, agree, disagree, or strongly disagree, that the following statements apply to yourself. At times I feel I am no good at all."
+qc_scyoungadults_w4_yajbsrv	"Thinking about any information, advice or guidance which you may have received over the past 12 months about making decisions for your future job or career, have you used or spoken to any of the following..."
+qc_scyoungadults_w4_evrsmo	Do you ever smoke cigarettes at all?
+qc_scyoungadults_w4_smofrq	Please read the statements below and select the statement that describes you best.
+qc_scyoungadults_w4_evralc	"Have you ever had an alcoholic drink? That is a whole drink, not just a sip."
+qc_scyoungadults_w4_dklm	How many times in the last four weeks have you had an alcoholic drink?
+qc_scyoungadults_w4_fivealcdr	"Thinking back over the last four weeks, how many times (if any) have you had five or more drinks on one occasion? (A 'drink' is one pint/bottle/can of beer or cider, 2 alcopops, one small glass of wine, a single measure of spirits)."
+qc_scyoungadults_w4_drnk4w	"On how many occasions during the last 4 weeks (if any) have you been intoxicated or drunk from drinking alcohol, for example staggered when walking, not being able to speak properly, throwing up or not remembering what happened?"
+qc_scyoungadults_w4_drgsol	"In the last 12 months, that is since 1/ [interview month] / [interview year - 1], have you tried any of the following...? Glue/solvent sniffing?"
+qc_scyoungadults_w4_drgmj	"(Since 1/ [interview month] / [interview year - 1], have you tried...) Cannabis (also known as marijuana, dope, hash or skunk)?"
+qc_scyoungadults_w4_drgoth	"(Since 1/ [interview month] / [interview year - 1], have you tried...) Any other illegal drug (including ecstasy, cocaine, speed)?"
+qc_scyoungadults_w4_frdrg	"Since 1/ [interview month] / [interview year - 1], how many times have you used or taken any illegal drugs?"
+qc_scalat_w4_ncrr1	"Do you have a steady relationship with someone you are not living with here, whom you think of as your 'partner'? Please include your spouse or partner if you are not currently living with them. {if HHGRID.MarStat = 2|3 & (HHGRID.LiveSp = 2 | HHGRID.LiveWith = 2)}"
+qc_scalat_w4_ncrrm	"In what month and year did this relationship start? Please enter the month at this question and the year at the next. If you do not know the month, just enter the year."
+qc_scalat_w4_ncrry4	Please enter the year this relationship started.
+qc_scalat_w4_ncrr3	Have you and/or your partner made a definite decision not to live together (at least for the time being)?
+qc_scalat_w4_ncrr4	"Whose decision was it to live apart? Yours, your partner's or was it a joint decision?"
+qc_scalat_w4_ncrr5	Is your partner male or female?
+qc_scalat_w4_ncrr6	Which category best describes what your partner is mainly doing at present?
+qc_scalat_w4_ncrr8	About how long would it take you to get to where your partner lives? Think about the time it usually takes door to door.
+qc_scalat_w4_ncrr9	How often do you see him/her?
+qc_scalat_w4_ncrr11	Do you intend to start living with your current partner during the next three years?
+qc_scalat_w4_ncrr12	How likely is it that you and your partner will ever marry (or form a civil partnership) in the future?
+qc_scachilddevelopment_w4_cdpreamble	"Next, we are interested in knowing a little more about any of your children aged 3, 5 or 8."
+qc_scachilddevelopment_w4_cdcond	"Thinking now about [CHILD NAME], in general, would you say [CHILD NAME]'S health is..."
+qc_scachilddevelopment_w4_cddis	Does [CHILD NAME] have long-term conditions that have been diagnosed by a health professional? By long-term I mean anything that [CHILD NAME] has had for at least 3 months or is expected to continue for at least the next three months.
+qc_scachilddevelopment_w4_cdlmt	Does this limit [him/her] at play or from joining in any other activity normal for a child [his/her] age?
+qc_scachilddevelopment_w4_cd3pera	To what extent do you agree with the following statements about [CHILD NAME]? [CHILD NAME] is usually happy and content
+qc_scachilddevelopment_w4_cd3perb	To what extent do you agree with the following statements about [CHILD NAME]? [CHILD NAME] is easily irritated and cries frequently
+qc_scachilddevelopment_w4_cd3perc	To what extent do you agree with the following statements about [CHILD NAME]? [CHILD NAME] is difficult to comfort when crying
+qc_scachilddevelopment_w4_cd3perd	To what extent do you agree with the following statements about [CHILD NAME]? [CHILD NAME] is curious and active
+qc_scachilddevelopment_w4_cd3pere	To what extent do you agree with the following statements about [CHILD NAME]? [CHILD NAME] is communicative and likes to talk
+qc_scachilddevelopment_w4_cd3perf	To what extent do you agree with the following statements about [CHILD NAME]? [CHILD NAME] shows empathy when others are sad
+qc_scachilddevelopment_w4_cd3perg	To what extent do you agree with the following statements about [CHILD NAME]? I am worried about [CHILD NAME]'s health
+qc_scachilddevelopment_w4_cdvla	"For parents, it is always a big event when their child learns something new. Here is a list of things that children learn to do. Please indicate whether [CHILD NAME] can now do these things using the responses below. Understands brief instructions such as ""go get your shoes"""
+qc_scachilddevelopment_w4_cdvlb	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Forms sentences with at least two words
+qc_scachilddevelopment_w4_cdvlc	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Speaks in full sentences (with four or more words)
+qc_scachilddevelopment_w4_cdvld	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Listens attentively to a story for five minutes or longer
+qc_scachilddevelopment_w4_cdvle	"(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Passes on simple messages such as ""dinner is ready"""
+qc_scachilddevelopment_w4_cdvlf	"(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Uses a spoon to eat, without assistance and without dripping"
+qc_scachilddevelopment_w4_cdvlg	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Blows his/her nose without assistance
+qc_scachilddevelopment_w4_cdvlh	"(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Uses the toilet to do ""number two"""
+qc_scachilddevelopment_w4_cdvli	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Puts on pants and underpants the right way around
+qc_scachilddevelopment_w4_cdvlj	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Brushes his/her teeth without assistance
+qc_scachilddevelopment_w4_cdvlk	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Walks forward down the stairs
+qc_scachilddevelopment_w4_cdvll	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Opens doors with the door handle
+qc_scachilddevelopment_w4_cdvlm	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Climbs up playground climbing equipment and other high playground structures
+qc_scachilddevelopment_w4_cdvln	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Cuts paper with scissors
+qc_scachilddevelopment_w4_cdvlo	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Paints/draws recognizable shapes on paper
+qc_scachilddevelopment_w4_cdvlp	"(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Calls familiar people by name, for example, says ""Mummy"" and ""Daddy"" or uses the father's first name"
+qc_scachilddevelopment_w4_cdvlq	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Participates in games with other children
+qc_scachilddevelopment_w4_cdvlr	"(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Gets involved in role-playing games (""playing pretend"")"
+qc_scachilddevelopment_w4_cdvls	(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Shows a special liking for particular playmates or friends
+qc_scachilddevelopment_w4_cdvlt	"(Please indicate whether [CHILD NAME] can now do these things using the responses below.) Calls his/her own feelings by name, e.g. ""sad"", ""happy"", ""scared"""
+qc_scachilddevelopment_w4_chsdpf	We next have some questions about what [CHILD NAME] is like. To what extent do you think the following set of statements are true about [CHILD NAME]? Please give your answers on the basis of [CHILD NAME]'s behaviour over the last six months. [CHILD NAME] is considerate of other people's feelings
+qc_scachilddevelopment_w4_chsdro	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is restless, overactive, cannot stay still for long"
+qc_scachilddevelopment_w4_chsdhs	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] often complains of headaches, stomach-aches or sickness"
+qc_scachilddevelopment_w4_chsdsr	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] shares readily with other children (treats, toys, pencils etc.)"
+qc_scachilddevelopment_w4_chsdtt	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] often has temper tantrums or hot tempers
+qc_scachilddevelopment_w4_chsdsp	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is rather solitary, tends to play alone"
+qc_scachilddevelopment_w4_chsdor	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is generally obedient, usually does what adults request"
+qc_scachilddevelopment_w4_chsdmw	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] has many worries, often seems worried"
+qc_scachilddevelopment_w4_chsdhu	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is helpful if someone is hurt, upset or feeling ill"
+qc_scachilddevelopment_w4_chsdfs	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is constantly fidgeting or squirming
+qc_scachilddevelopment_w4_chsdgf	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] has at least one good friend
+qc_scachilddevelopment_w4_chsdfb	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] often fights with other children or bullies them
+qc_scachilddevelopment_w4_chsdud	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is often unhappy, down-hearted or tearful"
+qc_scachilddevelopment_w4_chsdlc	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is generally liked by other children
+qc_scachilddevelopment_w4_chsddc	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is easily distracted, concentration wanders"
+qc_scachilddevelopment_w4_chsdnc	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is nervous or clingy in new situations, easily loses confidence"
+qc_scachilddevelopment_w4_cdsdky	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is kind to younger children
+qc_scachilddevelopment_w4_chsdoa	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] often lies or cheats
+qc_scachilddevelopment_w4_chsdpb	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] is picked on or bullied by other children
+qc_scachilddevelopment_w4_chsdvh	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] often volunteers to help others (parents, teachers, other children)"
+qc_scachilddevelopment_w4_chsdst	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] thinks things out before acting
+qc_scachilddevelopment_w4_chsdcs	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] steals from home, school or elsewhere"
+qc_scachilddevelopment_w4_chsdgb	(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] gets on better with adults than with other children
+qc_scachilddevelopment_w4_chsdfe	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] has many fears, easily scared"
+qc_scachilddevelopment_w4_chsdte	"(To what extent is this true about [CHILD NAME]? Please give your answer on the basis of [CHILD NAME]'s behaviour over the last six months.) [CHILD NAME] sees tasks through to the end, good attention span"
+qc_scachilddevelopment_w4_cdcread	How often do you read to [CHILD NAME]?
+qc_scachilddevelopment_w4_cdoread	Does anyone else at home ever read to [CHILD NAME]?
+qc_scachilddevelopment_w4_cdwread	Who else at home reads to [CHILD NAME]? Please select all that apply.
+qc_scachilddevelopment_w4_cderead	How often does anyone else at home read to [CHILD NAME]?
+qc_scachilddevelopment_w4_mealsreg	Does [CHILD NAME] have meals at regular times?
+qc_scachilddevelopment_w4_bedreg	"Does [CHILD NAME] go to bed at a regular time? {if child is 3} / On weekdays during term-time, does [CHILD NAME] go to bed at a regular time? {if child is 5 or 8}"
+qc_scachilddevelopment_w4_cdtvvidhrs	"How many hours does [CHILD NAME] spend watching TV, including video and DVDs, on a normal school day?"
+qc_scachilddevelopment_w4_cdtvvidhrw	"How many hours does [CHILD NAME] spend watching TV, including video and DVDs, on a weekend, that is on a Saturday or Sunday?"
+qc_scachilddevelopment_w4_cdcomp	Does [CHILD NAME] use a computer at home? This includes computers for playing games but not games consoles.
+qc_scachilddevelopment_w4_cdpchrs	How many hours does [CHILD NAME] spend [per day] using the computer at home for any reason? Please do not include any use of a games console.
+qc_scachilddevelopment_w4_cdconsol	"Does [CHILD NAME] or anyone else in your house have a games console such as Playstation, Xbox, Wii or something like that?"
+qc_scachilddevelopment_w4_cdconstm	How many hours does [CHILD NAME] spend playing games on a games console on a normal school day?
+qc_scachilddevelopment_w4_cdphsc	"On a scale from 1 to 7 where 1 means ""Completely Happy"" and 7 means ""Not at all happy"", how happy is [CHILD NAME] in the school [he/she] goes to?"
+qc_scachilddevelopment_w4_cdphscy	Does [CHILD NAME] have any of the following problems at school? Please select all that apply.
+qc_scachilddevelopment_w4_chrisk	"Using a scale from 1 to 7 where 1 means ""Completely unwilling to take risks"" and 7 means ""Completely willing to take risks"", how willing is [CHILD NAME] to take risks?"
+qc_scachilddevelopment_w4_chpat	"Is [CHILD NAME] generally an impatient child, or a child with a lot of patience?"
+qc_scachilddevelopment_w4_chdelay	"Is [CHILD NAME] generally a child who takes a long time to reflect on things and thinks before acting, in other words, not at all impulsive, or is [CHILD NAME] a child who acts without much reflection, in other words, is very impulsive?"
+qc_scaparentingstyles_w4_ps1	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I am responsive to [CHILD NAME]'s feelings and needs."
+qc_scaparentingstyles_w4_ps2	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I use physical punishment as a way of disciplining [CHILD NAME]."
+qc_scaparentingstyles_w4_ps3	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I take [CHILD NAME]'s desires into account before asking [him/her] to do something."
+qc_scaparentingstyles_w4_ps4	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. When [CHILD NAME] asks why [he/she] has to do something, I say 'because I say so' or 'I am your parent and I want you to'."
+qc_scaparentingstyles_w4_ps5	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I explain to [CHILD NAME] about how I feel about [his/her] good and bad behaviour."
+qc_scaparentingstyles_w4_ps6	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I spank [CHILD NAME] when [he/she] is disobedient."
+qc_scaparentingstyles_w4_ps7	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I encourage [CHILD NAME] to talk about [his/her] troubles and/or feelings."
+qc_scaparentingstyles_w4_ps8	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I find it difficult to discipline [CHILD NAME]."
+qc_scaparentingstyles_w4_ps9	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I encourage [CHILD NAME] to freely express [him/herself] even when disagreeing with parents."
+qc_scaparentingstyles_w4_ps10	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I punish by taking privileges away from [CHILD NAME] without telling [him/her] why."
+qc_scaparentingstyles_w4_ps11	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I emphasise the reasons for rules to [CHILD NAME]"
+qc_scaparentingstyles_w4_ps12	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I give comfort and understanding when [CHILD NAME] is upset."
+qc_scaparentingstyles_w4_ps13	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I yell or shout when [CHILD NAME] misbehaves."
+qc_scaparentingstyles_w4_ps14	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I give praise when [CHILD NAME] is good."
+qc_scaparentingstyles_w4_ps15	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I give in to [CHILD NAME] when [he/she] causes a commotion or creates a fuss about something."
+qc_scaparentingstyles_w4_ps16	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I explode in anger towards [CHILD NAME]."
+qc_scaparentingstyles_w4_ps17	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I threaten [CHILD NAME] with punishment more often than actually giving it."
+qc_scaparentingstyles_w4_ps18	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I take into account [CHILD NAME]'s likes and dislikes when making plans for the family."
+qc_scaparentingstyles_w4_ps19	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I grab [CHILD NAME] when [he/she] is being disobedient."
+qc_scaparentingstyles_w4_ps20	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I state punishments to [CHILD NAME] and do not actually do them."
+qc_scaparentingstyles_w4_ps21	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I show respect for [CHILD NAME]'s opinions by encouraging [him/her] to express them."
+qc_scaparentingstyles_w4_ps22	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I allow [CHILD NAME] to give input into family rules."
+qc_scaparentingstyles_w4_ps23	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I scold and criticise to make [CHILD NAME] improve."
+qc_scaparentingstyles_w4_ps24	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I spoil [CHILD NAME]."
+qc_scaparentingstyles_w4_ps25	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I give [CHILD NAME] reasons why rules should be obeyed or followed."
+qc_scaparentingstyles_w4_ps26	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I use threats as punishment with little or no justification or explanation."
+qc_scaparentingstyles_w4_ps27	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I have warm, happy and comforting times together with [CHILD NAME]."
+qc_scaparentingstyles_w4_ps28	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I punish [CHILD NAME] by putting [him/her] somewhere alone with little or no explanation."
+qc_scaparentingstyles_w4_ps29	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I help [CHILD NAME] to understand the effect of behaviour by encouraging [CHILD NAME] to talk about the consequences of [his/her] own actions."
+qc_scaparentingstyles_w4_ps30	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I scold or criticise when [CHILD NAME]'s behaviour doesn't meet my expectations."
+qc_scaparentingstyles_w4_ps31	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I explain the consequences of [CHILD NAME]'s behaviour."
+qc_scaparentingstyles_w4_ps32	"Next, we are interested in knowing a little about any of your children aged 10. Here is a list of ways you could interact with your child. Please mark the answer that best indicates how often you usually do each. I slap [CHILD NAME] when [he/she] misbehaves."
+qc_casiend_w4_casiend	Thank you. Please now return the laptop to the Interviewer
+qc_casiend_w4_casiintno	ENTER YOUR INTERVIEWER NUMBER TO CONTINUE
+qc_educationconsents_w4_schoolcntry	Did you attend school or college in the UK?
+qc_educationconsents_w4_edlink	"Information about your education is held by The Department for Education {if SCHOOLCNTRY = 1} / the Education Analytical Services {if SCHOOLCNTRY = 2} / The Department for Education and Skills {if SCHOOLCNTRY = 3} / The Department of Education and the Education and Skills Authority {if SCHOOLCNTRY = 4}. This information includes details such as the schools or colleges you've attended, the courses you've studied and the qualifications you've gained as well as other characteristics such as attendance, suspensions or exclusions, whether you have/had a special educational need, or have ever been eligible for free school meals. We would like to add this information to your survey answers. This will create a more accurate picture of your life and experiences, and will be used for research and statistical purposes only. It will be kept confidential and names and addresses are never included in the results. No individual can be identified in reports. We would like to link in information about your education to your survey responses on a yearly basis. To do this we need your permission to pass the minimum amount of your personal details (your full name, gender, date of birth and full address) to The Department for Education {if SCHOOLCNTRY = 1} / the Education Analytical Services {if SCHOOLCNTRY = 2} / The Department for Education and Skills {if SCHOOLCNTRY = 3} / The Department of Education and the Education and Skills Authority {if SCHOOLCNTRY = 4} so they can identify your individual education record. They will then create a link between this record and your survey responses before making your records anonymous. The education record will be placed on a secure website so that researchers can use it for research and statistical purposes. Further information about what will happen to your data can be found in this leaflet and can also be found on the Understanding Society website. You may withdraw your permission for The Department for Education {if SCHOOLCNTRY = 1} / the Education Analytical Services {if SCHOOLCNTRY = 2} / The Department for Education and Skills {if SCHOOLCNTRY = 3} / The Department of Education and the Education and Skills Authority {if SCHOOLCNTRY = 4} to disclose your information at anytime. Details on how to do this can be found in the leaflet and on the website."
+qc_educationconsents_w4_educsn	TRANSFER THE FOLLOWING SERIAL NUMBER AT 'A' ON RED CONSENT FORM 'ADDING INFORMATION FROM ADMINISTRATIVE EDUCATION RECORDS - ADULTS' IN THE BOXES SHOWN BELOW. [SERIAL] [HOUSEHOLD NUMBER] [PERSON NUMBER] [CHECK LETTER]
+qc_educationconsents_w4_educlinkb	"HAS RESPONDENT GIVEN CONSENT TO LINK TO EDUCATION DATA IN THE PLACES ON THE CONSENT FORM SHOWN BELOW? RESPONDENT MUST HAVE INITIALLED AT 'B' AND SIGNED, DATED AND PRINTED NAME AT 'C'. INTERVIEWER MUST HAVE WITNESSED CONSENT AND SIGNED, DATED AND PRINTED NAME AT 'D'. IF INTERVIEW IN ENGLAND: HAND OVER THE PRIVACY NOTICE."
+qc_educationconsents_w4_edlinkconf	"In the past, you provided permission for us to obtain your education information from The Department for Education {if SCHOOLCNTRY = 1} / the Education Analytical Services {if SCHOOLCNTRY = 2} / The Department for Education and Skills {if SCHOOLCNTRY = 3} / The Department of Education and the Education and Skills Authority {if SCHOOLCNTRY = 4}. We would very much like to be able to continue with this data linkage on a yearly basis to create a more accurate picture of your life and experiences. Further information about what will happen to your data can be found in this leaflet and can also be found on the Understanding Society website. You may withdraw your permission for The Department for Education {if SCHOOLCNTRY = 1} / the Education Analytical Services {if SCHOOLCNTRY = 2} / The Department for Education and Skills {if SCHOOLCNTRY = 3} / The Department of Education and the Education and Skills Authority {if SCHOOLCNTRY = 4} to disclose your education information at anytime. Details on how to do this can be found in the leaflet and on the website."
+qc_educationconsents_w4_edlinkconfb	"On this basis, can we continue to obtain your education record from The Department for Education {if SCHOOLCNTRY = 1} / the Education Analytical Services {if SCHOOLCNTRY = 2} / The Department for Education and Skills {if SCHOOLCNTRY = 3} / The Department of Education and the Education and Skills Authority {if SCHOOLCNTRY = 4} for the purpose of adding the data to your survey responses?"
+qc_educationconsents_w4_edlinkkide	"The Department for Education holds information about your child's education. This information includes details on the schools or colleges attended, the courses studied and the qualifications gained as well as other characteristics such as attendance, suspensions or exclusions, whether they have/had a special educational need, or have ever been eligible for free school meals. We would like to add this information to your survey answers and those of your child {if child aged 10-15}. This will create a more accurate picture of your child's life and experiences, and will be used for research and statistical purposes only. It will be kept confidential and names and addresses are never included in the results. No individual can be identified in reports. We would like to link in information about your child's education to your survey responses and those of your child {if child aged 10-15} on a yearly basis.To do this we need your permission to pass the minimum amount of your child's personal details (full name, gender, date of birth and full address) to The Department for Education so they can identify your child's individual education record. They will then create a link between this record and your survey responses and those of your child {if child aged 10-15}, before making your child's records anonymous. The education record will be placed on a secure website so that researchers can use it for research and statistical purposes. Further information about what will happen to your child's data can be found in this leaflet and can also be found on the Understanding Society website. You may withdraw your permission for The Department for Education to disclose your information at anytime. Details on how to do this can be found in the leaflet and on the website."
+qc_educationconsents_w4_edlinkkidswn	"We would like to add some information from your child's/children's administrative education records to the answers you have given. This will create a more accurate picture of your child's life and experiences, and will be used for research and statistical purposes only. It will be kept confidential and names and addresses are never included in the results. No individual can be identified in reports. This leaflet gives you information about what we would like to do. Please read it, ask me any questions and sign the form if you are happy for us to do this."
+qc_educationconsents_w4_educkidsn	TRANSFER THE FOLLOWING SERIAL NUMBER AT 'A' ON GREEN CONSENT FORM ADDING INFORMATION FROM ADMINISTRATIVE EDUCATION RECORDS - CHILDREN (4-15 YRS) IN THE BOXES SHOWN BELOW: [SERIAL] [HOUSEHOLD NUMBER] [PERSON NUMBER OF RESPONSIBLE ADULT] [CHECK LETTER]
+qc_educationconsents_w4_educkidsn2	TRANSFER THE FOLLOWING INFORMATION TO 'B' ON LINE ( [1] ) OF GREEN CONSENT FORM ADDING INFORMATION FROM ADMINISTRATIVE EDUCATION RECORDS - CHILDREN (4-15 YRS) IN THE BOXES BELOW: [CHILD FORENAME] [CHILD SURNAME] [CHILD PERSON NUMBER] [CHILD DATE OF BIRTH]
+qc_educationconsents_w4_edlinkkidbe	"Can we have your permission for us to provide the Department for Education with [CHILD NAME] 's personal information (including their full name, gender, date of birth and full address) so that their education records can be linked to your survey answers and the responses that your child provides in his/her questionnaire {if child aged 10-15}?"
+qc_educationconsents_w4_edlinkkidbswn	RESPONDENT MUST HAVE INITIALLED ON LINE ([1]) AT 'C'
+qc_educationconsents_w4_signeduckids	"HAS RESPONDENT SIGNED, DATED AND PRINTED NAME TO GIVE THEIR CONSENT AT 'D' ON THE CONSENT FORM SHOWN BELOW AND INTERVIEWER WITNESSED CONSENT AND SIGNED, DATED AND PRINTED NAME AT 'E'?"
+qc_educationconsents_w4_edlinkkidconfe	"In the past, you provided permission for us to obtain your child's education information from the Department for Education. We would very much like to be able to continue with this data linkage on a yearly basis to create a more accurate picture of your child's life and experiences. Further information about what will happen to your child's data can be found in this leaflet and can also be found on the Understanding Society website. You may withdraw your permission for the Department for Education to disclose your child's education information at anytime. Details on how to do this can be found in the leaflet and on the website."
+qc_educationconsents_w4_edlinkkidconfswn	"In the past, you provided permission for us to add some information from your child's/children's administrative education records to the answers you have given. We would very much like to be able to continue with this data linkage to create a more accurate picture of your child's life and experiences. This will be used for research and statistical purposes only. It will be kept confidential and names and addresses are never included in the results. No individual can be identified in reports. This leaflet gives you information about what we would like to do. Please read it and ask me any questions you may have."
+qc_educationconsents_w4_edlinkconfkidbe	"On this basis, can we continue to obtain [CHILD NAME] 's education record from the Department for Education for the purpose of adding the data to your survey and your child's survey {if child aged 10-15} responses?"
+qc_educationconsents_w4_edlinkconfkidbswn	"On this basis, can we continue to obtain [CHILD NAME] 's education records for the purpose of adding the data to your survey and your child's survey {if child aged 10-15} responses?"
+qc_benefitconsents_w4_benlink	"Thank you for taking part in this study. Your answers are of great value and interest to many academic and social policy researchers who will make good use of them. We would like to add records held by the Department for Work and Pensions {if region = England/Scotland/Wales} / Social Security Agency {if region = Northern Ireland}, containing information they hold on your benefit claims and time on employment programs, to the responses you have given to this study. Linking the information will help us to get a fuller picture about who claims benefits or seeks help from the DWP {if region = England/Scotland/Wales} / SSA {if region = Northern Ireland}. All information will be used for research purposes only. It will be used by academic or policy researchers under restricted access arrangements which make sure that the information is used responsibly and safely. Please read this leaflet explaining how we would like to attach your DWP {if region = England/Scotland/Wales} / SSA {if region = Northern Ireland} records to the answers you have given in this study and let me know if you have any questions. Do you give permission for us to pass your name, address, sex and date of birth to the DWP {if region = England/Scotland/Wales} / SSA {if region = Northern Ireland} for this purpose?"
+qc_healthconsents_w4_hlthlink	"We would like to add some information from administrative health records to the answers you have given. This leaflet gives you information about what we would like to do. Please read it, ask me any questions and sign the form if you are happy for us to do this."
+qc_healthconsents_w4_healthsn	TRANSFER THE FOLLOWING SERIAL NUMBER AT 'A' ON BLUE CONSENT FORM ADDING INFORMATION FROM ADMINISTRATIVE HEALTH RECORDS - ADULTS (16+) IN THE BOXES SHOWN BELOW. [SERIAL] [HOUSEHOLD NUMBER] [PERSON NUMBER] [CHECK LETTER]
+qc_healthconsents_w4_hlthlinkb	"HAS RESPONDENT GIVEN CONSENT TO LINK TO HEALTH DATA IN THE PLACES ON THE CONSENT FORM SHOWN BELOW? RESPONDENT MUST HAVE INITIALLED AT 'B' AND SIGNED, DATED AND PRINTED NAME AT 'D'"
+qc_healthconsents_w4_flaglinkb	"HAS RESPONDENT GIVEN CONSENT TO LINK TO NHS-CR DATA IN THE PLACES ON THE CONSENT FORM SHOWN BELOW? RESPONDENT MUST HAVE INITIALLED AT 'C' AND SIGNED, DATED AND PRINTED NAME AT 'D'."
+qc_healthconsents_w4_intsignhealth	HAVE YOU ALSO SIGNED TO WITNESS THAT RESPONDENT HAS GIVEN CONSENT AT 'E' ON THE CONSENT FORM SHOWN BELOW?
+qc_healthconsents_w4_hlthkidlink	We would also like to add further information on your child's health and use of health services. Could you read through this form and sign it if you wish to give permission.
+qc_healthconsents_w4_healthkidsn	TRANSFER THE FOLLOWING SERIAL NUMBER AT 'A' ON YELLOW CONSENT FORM ADDING INFORMATION FROM ADMINISTRATIVE HEALTH RECORDS - CHILDREN (0-15 YRS) IN THE BOXES SHOWN BELOW. [SERIAL] [HOUSEHOLD NUMBER] [PERSON NUMBER OF RESPONSIBLE ADULT] [CHECK LETTER]
+qc_healthconsents_w4_healthkidsn2	TRANSFER THE FOLLOWING INFORMATION TO 'B' ON LINE ( [1] ) OF YELLOW CONSENT FORM B IN THE BOXES SHOWN BELOW. [CHILD NAME] [CHILD PERSON NUMBER] [CHILD DATE OF BIRTH]
+qc_healthconsents_w4_hlthkidlinkb	HAS RESPONDENT GIVEN CONSENT TO LINK TO HEALTH DATA FOR [CHILD NAME] IN THE PLACES ON THE CONSENT FORM SHOWN BELOW? RESPONDENT MUST HAVE INITIALLED ON LINE ([1]) AT 'C'
+qc_healthconsents_w4_flagkidlinkb	HAS RESPONDENT GIVEN CONSENT TO LINK TO NHS-CR DATA FOR [CHILD NAME] IN THE PLACES ON THE CONSENT FORM SHOWN BELOW? RESPONDENT MUST HAVE INITIALLED ON LINE ([1]) AT 'D'
+qc_healthconsents_w4_signhealthki	"HAS RESPONDENT SIGNED, DATED AND PRINTED NAME TO GIVE THEIR CONSENT AT 'E' ON THE CONSENT FORM SHOWN BELOW? INTERVIEWER MUST ALSO HAVE WITNESSED CONSENT AND SIGNED, DATED AND PRINTED NAME AT 'F'."
+qc_contactdetails_w4_intcontact	Thank you very much for your time and patience. You have been a great help. One of the things we are most interested in is how things might change. We would like to contact you again in about a years time and we may also contact you to make sure you were satisfied with the way the interview was conducted {if CAPI}.
+qc_contactdetails_w4_detinc	Earlier you said that you expect to move in the coming year. To help us keep in contact {if DEMOGRAPHICS.XPMOVE = 1} I would just like to confirm the following details we have on record for you. We have...
+qc_contactdetails_w4_rhland	Could I please have your home landline number?
+qc_contactdetails_w4_rphmob	And can I please have your personal mobile phone number?
+qc_contactdetails_w4_rphwrk	Can I have a work phone number?
+qc_contactdetails_w4_hasemail	"In the future it may be possible to complete your Understanding Society interview on-line. To do this, we would need your email address so that we can send you a unique link to the survey. We would also like to use your email address to contact you if we have lost touch with you. What is your email address?"
+qc_contactdetails_w4_remail	ENTER E-MAIL ADDRESS
+qc_contactdetails_w4_soccont	"May we send you a message through any social networking web site such as Facebook or LinkedIn if we are unable to reach you through mail, telephone or regular e-mail?"
+qc_contactdetails_w4_othcont	Do you have any other contact details you can give me?
+qc_contactdetails_w4_rcotherd	What are the details for this other type of contact?
+qc_stablecontact_w4_ctcons	Sometimes people move homes and forget to let us know. It's really helpful to have the contact details of someone such as a relative or friend who would be able to let us know how to contact you. So it would be great if you could give us the details of someone who could simply put us back in touch with you.
+qc_stablecontact_w4_ctconsconf	"Last year, you told us that [ff_ctname], who is your [ff_ctrel], would know where to find you if you had moved. Are the following details correct?"
+qc_stablecontact_w4_ctname	What is your contact's name and title?
+qc_stablecontact_w4_ctadd1	ENTER ADDRESS LINE 1 (NUMBER AND STREET)
+qc_stablecontact_w4_ctadd2	ENTER ADDRESS LINE 2 (ADDITIONAL NUMBER AND STREET IF ANY)
+qc_stablecontact_w4_cttown	ENTER TOWN
+qc_stablecontact_w4_ctcnty	ENTER COUNTY
+qc_stablecontact_w4_ctpcode	ENTER POST CODE
+qc_stablecontact_w4_cttel1	ENTER CONTACT TELEPHONE NUMBER. IF NO NUMBER ENTER CTRL K
+qc_stablecontact_w4_cttel2	ENTER ALTERNATIVE TELEPHONE NUMBER FOR THE CONTACT. IF NO NUMBER ENTER CTRL K
+qc_stablecontact_w4_ctemail	ENTER CONTACT EMAIL. IF NO EMAIL ENTER CTRL K
+qc_stablecontact_w4_ctrel	What is that person's relationship to you?
+qc_interviewerobs_w4_finobsq	"THE NEXT QUESTIONS ARE FOR YOU TO MAKE YOUR OBSERVATIONS ABOUT THE INTERVIEW, SO MAKE SURE THAT THE RESPONDENT CANNOT SEE YOUR SCREEN"
+qc_interviewerobs_w4_ivcoop	"IN GENERAL, THE RESPONDENT'S COOPERATION DURING THE INTERVIEW WAS..."
+qc_interviewerobs_w4_susp	WAS THE RESPONDENT SUSPICIOUS ABOUT THE STUDY AFTER THE INTERVIEW WAS COMPLETED?
+qc_interviewerobs_w4_undqus	"IN GENERAL, HOW WOULD YOU DESCRIBE THE RESPONDENT'S UNDERSTANDING OF THE QUESTIONS?"
+qc_interviewerobs_w4_ivprsnt	WERE ANY OTHER PEOPLE PRESENT DURING THE INTERVIEW?
+qc_interviewerobs_w4_ivinfnce	DID ANY OF THESE PEOPLE SEEM TO INFLUENCE ANY OF THE ANSWERS GIVEN BY THE RESPONDENT?
+qc_interviewerobs_w4_ivaffct	IN WHAT WAY WAS RESPONDENT INFLUENCED?
+qc_interviewerobs_w4_ivlieng	WAS THE INTERVIEW CONDUCTED ENTIRELY IN ENGLISH?
+qc_interviewerobs_w4_ivlitrans	"APART FROM ENGLISH, IN WHICH OTHER LANGUAGE WAS THE INTERVIEW CONDUCTED?"
+qc_interviewerobs_w4_ivlioth	WHICH OTHER LANGUAGE?
+qc_interviewerobs_w4_ivliwho	WHO ASKED THE TRANSLATED QUESTIONS?
+qc_interviewerobs_w4_ivlibal	HOW MUCH OF THE QUESTIONNAIRE WAS CONDUCTED IN LITRANS(INDINTRO.LIENG = 2) IVLITRANS(IVLIENG = 2)?
+qc_indintro_w4_lieng	WILL THIS INTERVIEW BE CONDUCTED IN ENGLISH?
+qc_indintro_w4_litrans	WHICH LANGUAGE WILL THE INTERVIEW BE CONDUCTED IN?
+qc_indintro_w4_lioth	WHICH OTHER LANGUAGE?
+qc_indintro_w4_liwho	WHO WILL ASK TRANSLATED QUESTIONS?
+qc_indintro_w4_lihow	HOW WILL QUESTIONS BE TRANSLATED?
+qc_indintro_w4_intro	"This interview is completely voluntary, if we should come to any question that you don't want to answer, just let me know and we'll go onto the next question."
+qc_proxy_w4_iproxy	ARE YOU ABLE TO DO A PROXY INTERVIEW ABOUT [NAME] NOW?
+qc_proxy_w4_pintro	I would first like to confirm some details about [NAME] already given in the opening part of the interview.
+qc_proxy_w4_prsex	ASK IF NECESSARY PROXY RESPONDENT'S SEX
+qc_proxy_w4_prel	What is your relationship to [NAME]?
+qc_proxy_w4_preason	ASK IF NECESSARY WHAT IS THE REASON [NAME] IS BEING PROXIED?
+qc_proxy_w4_pripn	CODE FROM HHGRID PNO OF PROXY INFORMANT. CODE '0' IF NOT IN HOUSEHOLD
+qc_proxy_w4_mvever	Has [NAME] personally lived at this address her/his whole life?
+qc_proxy_w4_mvmnth	When did [NAME] personally move to this address?
+qc_proxy_w4_mvyr	When did [NAME] personally move to this address?
+qc_proxy_w4_ukborn	"Was [NAME] born in the UK, that is in England, Scotland, Wales or Northern Ireland?"
+qc_proxy_w4_plbornc	In which country was [NAME] born?
+qc_proxy_w4_plboth	PLEASE WRITE IN COUNTRY
+qc_proxy_w4_yr2uk4	"In what year did [NAME] first come to this country to live, even if she/he has spent time abroad since?"
+qc_proxy_w4_jbstat	Please look at this card and tell me what best describes [NAME]'s current employment situation?
+qc_proxy_w4_lprnt	"Does [NAME] have, or has [NAME] ever [had/fathered] any biological children?"
+qc_proxy_w4_lnprnt	"Can I just check, how many biological children has [NAME] [had/fathered] in all?"
+qc_proxy_w4_ch1bm	Can you please tell me the date of birth of [NAME]'s eldest (first born) child? Month and year is fine if you know them. ENTER MONTH
+qc_proxy_w4_ch1by	Can you please tell me the date of birth of [NAME]'s eldest (first born) child? Month and year is fine if you know them. ENTER YEAR
+qc_proxy_w4_school	How old was [NAME] when he/she left school?
+qc_proxy_w4_scend	WRITE IN AGE [NAME] LEFT SCHOOL
+qc_proxy_w4_fenow	"And how old was [NAME] when he/she left college or university, or when he/she finished or stopped his/her course?"
+qc_proxy_w4_feend	WRITE IN AGE [NAME] LEFT COLLEGE OR UNIVERSITY
+qc_proxy_w4_qfhigh	Please look at this card and tell me whether [NAME] has any of these educational or school qualifications. Just tell me the first one that [NAME] has.
+qc_proxy_w4_qualoc	"Can I just check, did [NAME] gain this qualification in the UK?"
+qc_proxy_w4_qfvoc	"And which of the following vocational or other qualifications does [NAME] have, if any?"
+qc_proxy_w4_sf1	"In general, would you say [NAME]'s health is..."
+qc_proxy_w4_health	"Does [NAME] have any long-standing physical or mental impairment, illness or disability? By 'long-standing' I mean anything that has troubled [NAME] over a period of at least 12 months or that is likely to trouble [NAME] over a period of at least 12 months."
+qc_proxy_w4_aidhh	"Is there anyone living with [NAME] who is sick, disabled or elderly whom [NAME] looks after or gives special help to (for example, a sick, disabled or elderly relative/husband/wife/friend etc)?"
+qc_proxy_w4_aidhua	Who does [NAME] look after?
+qc_proxy_w4_jbhas	Did [NAME] do any paid work last week - that is in the seven days ending last Sunday - either as an employee or self-employed?
+qc_proxy_w4_jboff	Even though [NAME] wasn't working did she/he have a job that she/he was away from last week?
+qc_proxy_w4_jboffy	What was the main reason [NAME] was away from work last week?
+qc_proxy_w4_pjulk4wk	Has [NAME] looked for any kind of paid work or government training scheme in the last four weeks?
+qc_proxy_w4_jbterm1	"Leaving aside [NAME]'s own personal intentions and circumstances, is [NAME]'s job..."
+qc_proxy_w4_jbterm2	"In what way is the job not permanent, is it..."
+qc_proxy_w4_jbsic07	What does the firm/organisation [NAME] works for mainly make or do (at the place where she/he works)?
+qc_proxy_w4_jbsoc00	"What was [NAME]'s (main) job last week? Please tell me the exact job title, if you can, and describe fully the sort of work they do."
+qc_proxy_w4_jbsemp	Is [NAME] an employee or self-employed?
+qc_proxy_w4_jbbgd	"And on what date did [NAME] start working in her/his present job? (If she/he has been promoted or changed grades, please give me the date of that change if it is known. Otherwise please give me the date when [NAME] started doing the job she/he is doing now for her/his present employer). ENTER DAY"
+qc_proxy_w4_jbbgm	"And on what date did [NAME] start working in her/his present job? (If she/he has been promoted or changed grades, please give me the date of that change if it is known. Otherwise please give me the date when [NAME] started doing the job she/he is doing now for her/his present employer). ENTER MONTH"
+qc_proxy_w4_jbbgy	"And on what date did [NAME] start working in her/his present job? (If she/he has been promoted or changed grades, please give me the date of that change if it is known. Otherwise please give me the date when [NAME] started doing the job she/he is doing now for her/his present employer). ENTER YEAR"
+qc_proxy_w4_jbmngr	Does [NAME] have any managerial duties or does [NAME] supervise any other employees?
+qc_proxy_w4_jbhrs	"Thinking about [NAME]'s (main) job, how many hours, excluding overtime and meal breaks, is [he/she] expected to work in a normal week?"
+qc_proxy_w4_pjbptft	Would you say that [NAME]'s current job is part-time or full-time?
+qc_proxy_w4_jbpl	Does [NAME] work mainly...
+qc_proxy_w4_jsboss	Does [NAME] have any employees?
+qc_proxy_w4_jssize	How many people does [NAME] employ?
+qc_proxy_w4_jstypeb	Which of these best describes [NAME]'s employment situation...
+qc_proxy_w4_jshrs	How many hours in total does [NAME] usually work a week in her/his job?
+qc_proxy_w4_pjsptft	Would you say that [NAME]'s current job is part-time or full-time?
+qc_proxy_w4_jspl	Where does [NAME] mainly work? Is it...
+qc_proxy_w4_prearn	Would you please look at this card and give me the number for the group in which you would place [NAME]'s total earnings from this job before tax and other deductions?
+qc_proxy_w4_prearnw	CODE WEEKLY INCOME BEFORE TAX
+qc_proxy_w4_prearna	CODE ANNUAL INCOME BEFORE TAX
+qc_proxy_w4_pbnft	Please look at this card and tell me which if any of the types of income does [NAME] currently receive?
+qc_proxy_w4_drive	Does [NAME] have a driving licence?
+qc_proxy_w4_caruse	Does [NAME] normally have access to a car or van that she/he can use whenever she/he wants to?
+qc_proxy_w4_mobuse	Does [NAME] personally have a mobile phone?
+qc_proxy_w4_netuse	Does [NAME] regularly use the internet?
+qc_proxy_w4_prfitb	Would you please look at this card and give me the number for the group in which you would place [NAME]'s total personal income from all sources before tax and other deductions?
+qc_proxy_w4_prfitbw	CODE WEEKLY TOTAL PERSONAL INCOME BEFORE TAX
+qc_proxy_w4_prfitba	CODE ANNUAL TOTAL PERSONAL INCOME BEFORE TAX
+qc_hhgrid_w4_adresp	WHO IS MAINLY RESPONSIBLE FOR [NAME {NAME OF HH MEMBER AGED LESS THAN 18}]?

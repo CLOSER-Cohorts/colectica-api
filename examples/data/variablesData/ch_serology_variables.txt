@@ -1,0 +1,18 @@
+ch_serology ch_betaserol_xw_t	Cross-sectional tel + web serology weight, beta version	Normal
+ch_serology ch_betaserol_xw	Cross-sectional serology weight, beta version	Normal
+ch_serology ch_sampletyp	Sample type	Normal
+ch_serology ch_sentkit	Sent Kit?	Normal
+ch_serology ch_serolconsent_t	Consented to send serology test kit	Normal
+ch_serology ch_serolconsent	Serology consent	Normal
+ch_serology ch_result	Overall result from Thriva	Normal
+ch_serology ch_covsresult	The result of the COVS test	Normal
+ch_serology ch_covsvalue	The value of the COVS test	Normal
+ch_serology ch_covgresult	The result of the COVG test	Normal
+ch_serology ch_covgvalue	The value of the COVG test	Normal
+ch_serology ch_processed_y	Date the sample was processed by Thriva lab - Year	Normal
+ch_serology ch_processed_m	Date the sample was processed by Thriva lab - Month	Normal
+ch_serology ch_processed_d	Date the sample was processed by Thriva lab - Day	Normal
+ch_serology ch_received_y	Date sample arrived at Thriva lab - Year	Normal
+ch_serology ch_received_m	Date sample arrived at Thriva lab - Month	Normal
+ch_serology ch_received_d	Date sample arrived at Thriva lab - Day	Normal
+ch_serology pidp	Cross-wave Person Identifier (Public Release)	Normal

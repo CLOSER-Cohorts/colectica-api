@@ -1,0 +1,181 @@
+us8_h_indall h_psnenui_xw	UKHLS+BHPS+IEMB cross-sectional enumerated person weight	Normal
+us8_h_indall h_psnenub_xw	UKHLS+BHPS cross-sectional enumerated person weight	Normal
+us8_h_indall h_psnenui_lw	combined BHPS+UKHLS+IEMB longitudinal enumerated person weight	Normal
+us8_h_indall h_psnenub_lw	combined BHPS+UKHLS longitudinal enumerated person weight	Normal
+us8_h_indall h_psnenus_lw	longitudinal enumerated person weight	Normal
+us8_h_indall h_psnen01_lw	BHPS 2001 longitudinal enumerated person weight	Normal
+us8_h_indall h_psnen91_lw	BHPS 1991 longitudinal enumerated person weight	Normal
+us8_h_indall h_scflag_dv	flag for self completion record	Normal
+us8_h_indall h_grmpno	Grandfather: PNO	Normal
+us8_h_indall h_grfpno	Grandfather: PNO	Normal
+us8_h_indall h_mnspno	Nat/step/adopt mother: PNO	Normal
+us8_h_indall h_mnspid	Nat/step/adopt mother: PIDP	Normal
+us8_h_indall h_mnpno	Natural mother: PNO	Normal
+us8_h_indall h_fnspno	Nat/step/adopt father: PNO	Normal
+us8_h_indall h_fnspid	Nat/step/adopt father: PIDP	Normal
+us8_h_indall h_fnpno	Natural father: PNO	Normal
+us8_h_indall h_sppno	Spouse&#39;s person number: PNO	Normal
+us8_h_indall h_sppid	Spouse&#39;s person identifier: PIDP	Normal
+us8_h_indall h_ppno	partner&#39;s person number: PNO	Normal
+us8_h_indall h_ppid	partner&#39;s person identifier: PIDP	Normal
+us8_h_indall h_hrpno	Household reference person: PNO	Normal
+us8_h_indall h_hrpid	Household reference person: PIDP	Normal
+us8_h_indall h_rach16_dv	Whether responsible for child under 16	Normal
+us8_h_indall h_respf16_dv	whether natural/adoptive/step/foster father of child under 16	Normal
+us8_h_indall h_respm16_dv	whether natural/adoptive/step mother of child under 16	Normal
+us8_h_indall h_adresp15_dv	PNO of person responsible for child under 16	Normal
+us8_h_indall h_ndepchl_dv	Number of own dependent children in household	Normal
+us8_h_indall h_nchild_dv	Number of own children in household	Normal
+us8_h_indall h_depchl_dv	Whether dependent child - official definition	Normal
+us8_h_indall h_buno_dv	benefit unit number	Normal
+us8_h_indall h_mastat_dv	De facto marital status	Normal
+us8_h_indall h_single_dv	Single in hh	Normal
+us8_h_indall h_cohab_dv	Lives with cohabitee in hh	Normal
+us8_h_indall h_livesp_dv	Lives with spouse in hh	Normal
+us8_h_indall h_agegr13_dv	Age group (age_dv): 13 categories	Normal
+us8_h_indall h_agegr10_dv	Age group (age_dv): 10 year intervals	Normal
+us8_h_indall h_agegr5_dv	Age group (age_dv): 5 year intervals	Normal
+us8_h_indall h_hhresp_dv	Household response status	Normal
+us8_h_indall h_urban_dv	Urban or rural area, derived	Normal
+us8_h_indall h_gor_dv	Government Office Region	Normal
+us8_h_indall h_country	Country of residence	Normal
+us8_h_indall h_racel_dv	Ethnic group incorp. all waves, codings, modes and bhps	Normal
+us8_h_indall h_ethn_dv	Ethnic group (derived from multiple sources)	Normal
+us8_h_indall h_npensioner_dv	Total # of pensionable age in hh	Normal
+us8_h_indall h_nnssib_dv	Number of R&#39;s nat/step/adopt siblings in hh	Normal
+us8_h_indall h_nnsib_dv	Number of R&#39;s natural siblings in hh	Normal
+us8_h_indall h_ngrp_dv	Number of R&#39;s grandparents in hh	Normal
+us8_h_indall h_npns_dv	Number of R&#39;s nat/step/adopt parents in hh	Normal
+us8_h_indall h_npn_dv	Number of R&#39;s natural parents in hh	Normal
+us8_h_indall h_marstat_dv	Harmonised de facto marital status	Normal
+us8_h_indall h_pensioner_dv	Whether R is of pensionable age	Normal
+us8_h_indall h_doby_dv	DOB: Year, derived	Normal
+us8_h_indall h_dobm_dv	DOB: Month, derived	Normal
+us8_h_indall h_intdaty_dv	Interview date: Year, derived	Normal
+us8_h_indall h_intdatm_dv	Interview date: Month, derived	Normal
+us8_h_indall h_intdatd_dv	Interview date: Day, derived	Normal
+us8_h_indall h_age_dv	Age, derived from dob_dv and intdat_dv	Normal
+us8_h_indall h_sex_dv	Sex, derived	Normal
+us8_h_indall h_ff_everint	Ever Interviewed	Normal
+us8_h_indall h_ff_ivlolw	Summary outcome at preceding wave	Normal
+us8_h_indall h_grmpid	Grandmother: PIDP	Normal
+us8_h_indall h_grfpid	Grandfather: PIDP	Normal
+us8_h_indall h_pns2sex	Nat/step/adopt parent 2: Sex	Normal
+us8_h_indall h_pns2pno	Nat/step/adopt parent 2: PNO	Normal
+us8_h_indall h_pns2pid	Nat/step/adopt parent 2: PIDP	Normal
+us8_h_indall h_pns1sex	Nat/step/adopt parent 1: Sex	Normal
+us8_h_indall h_pns1pno	Nat/step/adopt parent 1: PNO	Normal
+us8_h_indall h_pns1pid	Nat/step/adopt parent 1: PIDP	Normal
+us8_h_indall h_pn2sex	Natural parent 2: Sex	Normal
+us8_h_indall h_pn2pno	Natural parent 2: PNO	Normal
+us8_h_indall h_pn2pid	Natural parent 2: PIDP	Normal
+us8_h_indall h_pn1sex	Natural parent 1: Sex	Normal
+us8_h_indall h_pn1pno	Natural parent 1: PNO	Normal
+us8_h_indall h_pn1pid	Natural parent 1: PIDP	Normal
+us8_h_indall h_mnpid	Natural mother: PIDP	Normal
+us8_h_indall h_fnpid	Natural father: PIDP	Normal
+us8_h_indall h_ppsex	Partner&#39;s sex	Normal
+us8_h_indall h_age_if	Imputation flag for age_dv	Normal
+us8_h_indall h_doby_if	DOB Year imputation flag	Normal
+us8_h_indall h_intdaty_if	Interview date: Year, imputation flag	Normal
+us8_h_indall h_intdatm_if	Interview date: Month, imputation flag	Normal
+us8_h_indall h_intdatd_if	Interview date: Day, imputation flag	Normal
+us8_h_indall h_ringfence	CAPI ringfenced household	Normal
+us8_h_indall h_newentrant	Whether or not a new survey participant (0/1)	Normal
+us8_h_indall h_modetype	Mode in which HH grid completed	Normal
+us8_h_indall h_region	Region computed	Normal
+us8_h_indall h_hhlang	Anyone in HH need translated interview	Normal
+us8_h_indall h_hglitrans	Translated language	Normal
+us8_h_indall h_hglieng	Interview conducted in English	Normal
+us8_h_indall h_lingua	Language translation needed in	Normal
+us8_h_indall h_reasref97	Other reason	Normal
+us8_h_indall h_reasref96	No reason given	Normal
+us8_h_indall h_reasref32	Other hhold member refuses on behalf of respondent	Normal
+us8_h_indall h_reasref31	Someone has convinced respondent to refuse	Normal
+us8_h_indall h_reasref30	Other family member opposes respondent participating	Normal
+us8_h_indall h_reasref26	Previous bad experience with surveys	Normal
+us8_h_indall h_reasref25	Survey is waste of time	Normal
+us8_h_indall h_reasref24	Survey is too long	Normal
+us8_h_indall h_reasref23	Nothing ever changes	Normal
+us8_h_indall h_reasref22	Respondent does not want to be bothered	Normal
+us8_h_indall h_reasref21	Questions too personal	Normal
+us8_h_indall h_reasref20	Unhappy about confidentiality	Normal
+us8_h_indall h_reasref15	Too busy (not elsewhere specified)	Normal
+us8_h_indall h_reasref14	Stressful family situation	Normal
+us8_h_indall h_reasref13	Respondent is temporarily absent	Normal
+us8_h_indall h_reasref12	Respondent almost never home	Normal
+us8_h_indall h_reasref11	Looking after child(ren)	Normal
+us8_h_indall h_reasref10	Looking after ill/elderly	Normal
+us8_h_indall h_rising16	Enumerated at last wave and 16 at current wave	Normal
+us8_h_indall h_p1617cor	parent of child aged 16 or 17 co-res in hhold	Normal
+us8_h_indall h_respf16	Father of a child under 16	Normal
+us8_h_indall h_respm16	Mother of a child under 16	Normal
+us8_h_indall h_newdad	Biological father of a new entrant baby	Normal
+us8_h_indall h_newmum	Biological mother of a new entrant baby	Normal
+us8_h_indall h_hgadoptf	PNO of adoptive father	Normal
+us8_h_indall h_hgadoptm	PNO of adoptive mother	Normal
+us8_h_indall h_hgbioad2	PNO of second biological or adoptive parent	Normal
+us8_h_indall h_hgbioad1	PNO of primary biological or adoptive parent	Normal
+us8_h_indall h_hgbiof	PNO of biological father	Normal
+us8_h_indall h_hgbiom	PNO of biological mother	Normal
+us8_h_indall h_hgpart	PNO of husband/wife/CP	Normal
+us8_h_indall h_livpar	Living at home with parent(s)	Normal
+us8_h_indall h_pensioner	Respondent is of pensionable age	Normal
+us8_h_indall h_rjrflag	Rejoiner to household	Normal
+us8_h_indall h_bedsits	Bedsit in a building with fewer than 10 dwellings	Normal
+us8_h_indall h_purposeblt	Fewer than 10 dwellings in building	Normal
+us8_h_indall h_housebun	Type of house/bungalow	Normal
+us8_h_indall h_dwltype	Type of accommodation	Normal
+us8_h_indall h_hhelig	Household Questionnaire Respondent	Normal
+us8_h_indall h_respemail	Respondent email request	Normal
+us8_h_indall h_respemailconf	Respondent email address check	Normal
+us8_h_indall h_hhemail	Household grid email request	Normal
+us8_h_indall h_employ	In paid employment	Normal
+us8_h_indall h_livewith	Live with someone as a couple	Normal
+us8_h_indall h_livesp	Live with spouse	Normal
+us8_h_indall h_marstat	Legal marital status	Normal
+us8_h_indall h_ctitle	Correct title	Normal
+us8_h_indall h_newper	New Person Status flag	Normal
+us8_h_indall h_curstat	Current Residential Status flag	Normal
+us8_h_indall h_movctry	Leavers - new country	Normal
+us8_h_indall h_moveyr	Year left Household	Normal
+us8_h_indall h_movemth	Move left Household	Normal
+us8_h_indall h_lvwhy	Leavers...Why left	Normal
+us8_h_indall h_mothr	Moved with other HH member	Normal
+us8_h_indall h_stillres	Still resident at issued address	Normal
+us8_h_indall h_includ	Absence check	Normal
+us8_h_indall h_dieprisyr	Year to prison or died	Normal
+us8_h_indall h_dieprismth	Month to prison or died	Normal
+us8_h_indall h_more	More household members	Normal
+us8_h_indall h_ageif	Age last birthday	Normal
+us8_h_indall h_nebirthy	New entrant DOB year	Normal
+us8_h_indall h_nebirthm	New entrant DOB month	Normal
+us8_h_indall h_nesex	New entrant sex	Normal
+us8_h_indall h_jnyear	Year joined the household	Normal
+us8_h_indall h_jnmnth	Month joined the household	Normal
+us8_h_indall h_rejoinero	Joiner indicator	Normal
+us8_h_indall h_rejoiner	whether or not a rejoiner (0/1)	Normal
+us8_h_indall h_joiner	Unlisted joiner	Normal
+us8_h_indall h_ynew	New joiner reason	Normal
+us8_h_indall h_prishome	Confirm main residence	Normal
+us8_h_indall h_abspris	Still in prison	Normal
+us8_h_indall h_unihome	Confirm main residence	Normal
+us8_h_indall h_absun	Confirm absent at university	Normal
+us8_h_indall h_birthy	DOB year	Normal
+us8_h_indall h_birthm	dob month	Normal
+us8_h_indall h_dvage	Age	Normal
+us8_h_indall h_sex	sex	Normal
+us8_h_indall h_ivfho	Household level outcome	Normal
+us8_h_indall h_ioutcome	Individual outcome	Normal
+us8_h_indall h_ivfio	Individual level outcome	Normal
+us8_h_indall h_quarter	sample quarter	Normal
+us8_h_indall h_month	sample month	Normal
+us8_h_indall h_sampst	sample status	Normal
+us8_h_indall h_strata	Strata	Normal
+us8_h_indall h_psu	Primary sampling unit	Normal
+us8_h_indall h_memorig	Sample origin, individual	Normal
+us8_h_indall h_hhorig	Sample origin, household	Normal
+us8_h_indall h_pno	person number	Normal
+us8_h_indall h_hidp	household identifier (public release)	Normal
+us8_h_indall pid	personal identifier (BHPS cohort)	Normal
+us8_h_indall pidp	Cross-wave Person Identifier (Public Release)	Normal

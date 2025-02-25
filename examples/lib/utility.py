@@ -148,10 +148,10 @@ def get_topic_for_item(agency_id, identifier, version, item_type, C):
     return topics_assigned_to_item
 
 def get_url_from_item(item, hostname):
-   return f"http://{hostname}/item/" + item['AgencyId'] + "/" + item['Identifier'] + "/" + str(item['Version'])
+   return f"http://{hostname}/item/{item['AgencyId']}/{item['Identifier']}/{str(item['Version'])}"
 
 def get_urn_from_item(item):
-   return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
+   return f"urn:ddi:{item['AgencyId']}:{item['Identifier']}:{str(item['Version'])}"
 
 def map_between_questions_and_variables(items, C):
     """Method for mapping between lists of questions and variables. The 'items' input parameter
@@ -194,3 +194,19 @@ def update_repository(updated_items, transaction_message, C):
                                    item[3], transaction_id)
         commit_response = C.commit_transaction(transaction_id, transaction_message, 3)
     return commit_response
+
+def getTriple(tripleElem):
+    triple = {}
+    for elem in tripleElem.findall(".//"):
+        startOfTagName = elem.tag.index("}")+1
+        triple[elem.tag[startOfTagName:]] = elem.text
+    return(triple)
+
+def get_element_by_name(xmlTree, elementName):
+    retElem=None
+    for elem in xmlTree.findall(".//"):
+        startOfTagName = elem.tag.index("}")+1
+        tagName = elem.tag[startOfTagName:]
+        if tagName == elementName:
+            retElem = getTriple(elem)
+    return retElem

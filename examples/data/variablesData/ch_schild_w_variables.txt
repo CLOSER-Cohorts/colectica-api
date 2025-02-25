@@ -1,0 +1,77 @@
+ch_schild_w ch_betasch_xw	Cross-sectional child weight, beta version	Normal
+ch_schild_w ch_aid_dv	Address identifier	Normal
+ch_schild_w ch_chsdqtd_dv_f	SDQ Total Difficulties Score	Normal
+ch_schild_w ch_chsdqtd_dv_m	SDQ Total Difficulties Score	Normal
+ch_schild_w ch_chsdqps_dv_f	SDQ Subscale: Prosocial	Normal
+ch_schild_w ch_chsdqps_dv_m	SDQ Subscale: Prosocial	Normal
+ch_schild_w ch_chsdqpp_dv_f	SDQ Subscale: Peer Relationship Problems	Normal
+ch_schild_w ch_chsdqpp_dv_m	SDQ Subscale: Peer Relationship Problems	Normal
+ch_schild_w ch_chsdqha_dv_f	SDQ Subscale: Hyperactivity/Inattention	Normal
+ch_schild_w ch_chsdqha_dv_m	SDQ Subscale: Hyperactivity/Inattention	Normal
+ch_schild_w ch_chsdqcp_dv_f	SDQ Subscale: Conduct Problems	Normal
+ch_schild_w ch_chsdqcp_dv_m	SDQ Subscale: Conduct Problems	Normal
+ch_schild_w ch_chsdqes_dv_f	SDQ Subscale: Emotional Symptoms	Normal
+ch_schild_w ch_chsdqes_dv_m	SDQ Subscale: Emotional Symptoms	Normal
+ch_schild_w ch_chsdqt_f	SDQ: volunteers	Normal
+ch_schild_w ch_chsdqt_m	SDQ: volunteers	Normal
+ch_schild_w ch_chsdqy_f	SDQ: completes tasks	Normal
+ch_schild_w ch_chsdqy_m	SDQ: completes tasks	Normal
+ch_schild_w ch_chsdqx_f	SDQ: fears	Normal
+ch_schild_w ch_chsdqx_m	SDQ: fears	Normal
+ch_schild_w ch_chsdqw_f	SDQ: gets on better	Normal
+ch_schild_w ch_chsdqw_m	SDQ: gets on better	Normal
+ch_schild_w ch_chsdqv_f	SDQ: steals	Normal
+ch_schild_w ch_chsdqv_m	SDQ: steals	Normal
+ch_schild_w ch_chsdqu_f	SDQ: thinks	Normal
+ch_schild_w ch_chsdqu_m	SDQ: thinks	Normal
+ch_schild_w ch_chsdqs_f	SDQ: bullied	Normal
+ch_schild_w ch_chsdqs_m	SDQ: bullied	Normal
+ch_schild_w ch_chsdqr_f	SDQ: often lies	Normal
+ch_schild_w ch_chsdqr_m	SDQ: often lies	Normal
+ch_schild_w ch_chsdqq_f	SDQ: kind	Normal
+ch_schild_w ch_chsdqq_m	SDQ: kind	Normal
+ch_schild_w ch_chsdqp_f	SDQ: nervous	Normal
+ch_schild_w ch_chsdqp_m	SDQ: nervous	Normal
+ch_schild_w ch_chsdqo_f	SDQ: distracted	Normal
+ch_schild_w ch_chsdqo_m	SDQ: distracted	Normal
+ch_schild_w ch_chsdqn_f	SDQ: liked	Normal
+ch_schild_w ch_chsdqn_m	SDQ: liked	Normal
+ch_schild_w ch_chsdqm_f	SDQ: unhappy	Normal
+ch_schild_w ch_chsdqm_m	SDQ: unhappy	Normal
+ch_schild_w ch_chsdql_f	SDQ: fights	Normal
+ch_schild_w ch_chsdql_m	SDQ: fights	Normal
+ch_schild_w ch_chsdqk_f	SDQ: good friend	Normal
+ch_schild_w ch_chsdqk_m	SDQ: good friend	Normal
+ch_schild_w ch_chsdqj_f	SDQ: fidgeting	Normal
+ch_schild_w ch_chsdqj_m	SDQ: fidgeting	Normal
+ch_schild_w ch_chsdqi_f	SDQ: helpful	Normal
+ch_schild_w ch_chsdqi_m	SDQ: helpful	Normal
+ch_schild_w ch_chsdqh_f	SDQ: many worries	Normal
+ch_schild_w ch_chsdqh_m	SDQ: many worries	Normal
+ch_schild_w ch_chsdqg_f	SDQ: obedient	Normal
+ch_schild_w ch_chsdqg_m	SDQ: obedient	Normal
+ch_schild_w ch_chsdqf_f	SDQ: solitary	Normal
+ch_schild_w ch_chsdqf_m	SDQ: solitary	Normal
+ch_schild_w ch_chsdqe_f	SDQ: temper tantrums	Normal
+ch_schild_w ch_chsdqe_m	SDQ: temper tantrums	Normal
+ch_schild_w ch_chsdqd_f	SDQ: shares readily	Normal
+ch_schild_w ch_chsdqd_m	SDQ: shares readily	Normal
+ch_schild_w ch_chsdqc_f	SDQ: headaches	Normal
+ch_schild_w ch_chsdqc_m	SDQ: headaches	Normal
+ch_schild_w ch_chsdqb_f	SDQ:  restless	Normal
+ch_schild_w ch_chsdqb_m	SDQ:  restless	Normal
+ch_schild_w ch_chsdqa_f	SDQ: considerate	Normal
+ch_schild_w ch_chsdqa_m	SDQ: considerate	Normal
+ch_schild_w ch_childno_f	Child number for f	Normal
+ch_schild_w ch_childno_m	Child number for m	Normal
+ch_schild_w ch_augustage	Age on 15/08/2020	Normal
+ch_schild_w ch_chsex	Child&#39;s sex	Normal
+ch_schild_w ch_childdob_y	Child year of birth	Normal
+ch_schild_w pidp_fnspid	Cross-wave Person Identifier, natural/step/adoptive father	Normal
+ch_schild_w pidp_mnspid	Cross-wave Person Identifier, natural/step/adoptive mother	Normal
+ch_schild_w fnpid	Natural father: PIDP	Normal
+ch_schild_w mnpid	Natural mother: PIDP	Normal
+ch_schild_w pidp_f	Cross-wave Person Identifier, main male adult/guardian/&#39;father&#39;	Normal
+ch_schild_w pidp_m	Cross-wave Person Identifier, main female adult/guardian/&#39;mother&#39;	Normal
+ch_schild_w pidp_c	Cross-wave Person Identifier, child	Normal
+ch_schild_w newpidp_c	Origin of child&#39;s pidp	Normal
