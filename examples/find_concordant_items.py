@@ -4,9 +4,9 @@ PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.find_concordant_items
-variablesAcrossWavesNotAllInSameTopic=examples.find_concordant_items.getConcurrentVariablesNotInSameTopic(searchSets, HOSTNAME, C)
+variablesAcrossWavesNotAllInSameTopic=examples.find_concordant_items.getConcurrentVariablesNotInSameTopic(examples.find_concordant_items.searchSets, HOSTNAME, C)
 examples.find_concordant_items.createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllInSameTopic)
-examples.find_concordant_items.createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C)
+examples.find_concordant_items.createFileWithConcurrentQuestionsAndTheirRelatedVariables(examples.find_concordant_items.searchSets, C)
 """
 
 import os
@@ -115,7 +115,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
     contained in those files. Check if those variables are present in the
     'variablesAcrossWavesNotAllInSameTopic' object created above, and if they are write them
     to a file along with some additional information."""
-    variableInputFiles = [ "data/variablesData/" + x for x in os.listdir("data")]
+    variableInputFiles = [ "data/variablesData/" + x for x in os.listdir("data/variablesData/")]
     fw = open('concordantVariableTopicMismatches2.csv', 'w', encoding="utf-8")
     fw.write("Dataset,Variable stem,Variable,Variable label,Current topic,Topic label,New topic,Columns from here are topic frequencies across all sweeps\n")
     allVarsInInputFiles=[]
@@ -147,7 +147,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
 # CHECK IF QUESTIONS ARE MAPPED TO VARIABLES CORRECTLY THIS IS THE DEFINITIVE
 
 def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
-    questionInputFiles = [ "data/questionsData/" + x for x in os.listdir("questionsData")]
+    questionInputFiles = [ "data/questionsData/" + x for x in os.listdir("data/questionsData")]
     fw = open('concordantQuestionVariablePairs2.csv', 'w', encoding="utf-8")
     fw.write("Questionnaire,Question,Question label,Question stem,Question summary,Related variable,Related variable label,Dataset\n")
     allQuestionsInInputFiles=[]
@@ -164,7 +164,7 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
     for x in questions:
         positionOfWaveIdentifier = re.search("_w[0-9]+_", x['ItemName']['en-GB'])
         if positionOfWaveIdentifier is not None:
-                questionsWithExtraNameField.append(addQuestionNameToObject(x, x['ItemName']['en-GB'][positionOfWaveIdentifier.span()[1]:]))
+                questionsWithExtraNameField.append(examples.find_concordant_items.addQuestionNameToObject(x, x['ItemName']['en-GB'][positionOfWaveIdentifier.span()[1]:]))
     # The 'count' variable is used to display a progress indicator
     count=0
     for question in allQuestionsInInputFiles:
