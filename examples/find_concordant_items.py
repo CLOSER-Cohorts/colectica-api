@@ -115,7 +115,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
     contained in those files. Check if those variables are present in the
     'variablesAcrossWavesNotAllInSameTopic' object created above, and if they are write them
     to a file along with some additional information."""
-    variableInputFiles = [ "data/variablesData/" + x for x in os.listdir("data/variablesData/")]
+    variableInputFiles = [ "examples/data/variablesData/" + x for x in os.listdir("examples/data/variablesData/")]
     fw = open('concordantVariableTopicMismatches2.csv', 'w', encoding="utf-8")
     fw.write("Dataset,Variable stem,Variable,Variable label,Current topic,Topic label,New topic,Columns from here are topic frequencies across all sweeps\n")
     allVarsInInputFiles=[]
@@ -147,7 +147,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
 # CHECK IF QUESTIONS ARE MAPPED TO VARIABLES CORRECTLY THIS IS THE DEFINITIVE
 
 def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
-    questionInputFiles = [ "data/questionsData/" + x for x in os.listdir("data/questionsData")]
+    questionInputFiles = [ "examples/data/questionsData/" + x for x in os.listdir("examples/data/questionsData")]
     fw = open('concordantQuestionVariablePairs2.csv', 'w', encoding="utf-8")
     fw.write("Questionnaire,Question,Question label,Question stem,Question summary,Related variable,Related variable label,Dataset\n")
     allQuestionsInInputFiles=[]
