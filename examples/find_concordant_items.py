@@ -135,8 +135,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
         variableInfo=[x for x in variablesAcrossWavesNotAllInSameTopic if x[0]['VariableName']==variableStem]
         if len(variableInfo)>0:
             variableTopicMappings=variableInfo[0][1]
-            a= examples.find_concordant_items.getMostCommonMapping(variableTopicMappings)
-            b=examples.find_concordant_items.getMappingFrequencies(variableTopicMappings)
+            b=getMappingFrequencies(variableTopicMappings)
             mappingOccurrences=""
             for z in b:
                 mappingOccurrences=mappingOccurrences+str(z[0])+", " + str(z[1])+", "
@@ -164,7 +163,7 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
     for x in questions:
         positionOfWaveIdentifier = re.search("_w[0-9]+_", x['ItemName']['en-GB'])
         if positionOfWaveIdentifier is not None:
-                questionsWithExtraNameField.append(examples.find_concordant_items.addQuestionNameToObject(x, x['ItemName']['en-GB'][positionOfWaveIdentifier.span()[1]:]))
+                questionsWithExtraNameField.append(addQuestionNameToObject(x, x['ItemName']['en-GB'][positionOfWaveIdentifier.span()[1]:]))
     # The 'count' variable is used to display a progress indicator
     count=0
     for question in allQuestionsInInputFiles:
