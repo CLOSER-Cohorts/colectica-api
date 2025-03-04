@@ -181,28 +181,28 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
             concordantQuestions=[x for x in questionsWithExtraNameField if x['QuestionName']==questionName]
             for concordantQuestionItem in concordantQuestions:
                 questionnaire=C.query_set(concordantQuestionItem['AgencyId'], concordantQuestionItem['Identifier'], item_types=['f196cc07-9c99-4725-ad55-5b34f479cf7d'], reverseTraversal=True)
-            if len(questionnaire) == 1:
-                latestQuestionnaireVersion=C.get_item_json(questionnaire[0]['Item1']['Item3'], questionnaire[0]['Item1']['Item1'])
-                questionnaireName=latestQuestionnaireVersion['ItemName']['en-GB']
-            else:
-                questionnaireName="MULTIPLE QUESTIONNAIRES"   
-            relatedVariables=C.search_relationship_byobject(concordantQuestionItem['AgencyId'], concordantQuestionItem['Identifier'], item_types=C.item_code('Variable'), Version=concordantQuestionItem['Version'], Descriptions=True)
-            for relatedVariable in relatedVariables:
-                latestVariableVersion=C.get_item_xml(relatedVariable['AgencyId'], relatedVariable['Identifier'])
-                latestVariableVersionJSON=C.get_item_json(relatedVariable['AgencyId'], relatedVariable['Identifier'])
-                if concordantQuestionItem['Identifier'] in latestVariableVersion['Item']:
-                    dataset=C.query_set(latestVariableVersion['AgencyId'],
-                       latestVariableVersion['Identifier'], 
-                       item_types=['a51e85bb-6259-4488-8df2-f08cb43485f8'], 
-                       reverseTraversal=True)
-                    datasetItem=C.get_item_xml(dataset[0]['Item1']['Item3'],
-                       dataset[0]['Item1']['Item1'],
-                       version=dataset[0]['Item1']['Item2'])   
-                    datasetTitle=get_element_by_name(defusedxml.ElementTree.fromstring(datasetItem['Item']), 'Title')   
-                    variableName=latestVariableVersionJSON['ItemName']['en-GB']   
-                    variableLabel=latestVariableVersionJSON['Label']['en-GB']
-                    questionLabel=concordantQuestionItem['Label']['en-GB']
-                    questionSummary=concordantQuestionItem['Summary']['en-GB']    
-                    fw.write(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" + ",\""  + questionSummary + "\""  + ",\"" + variableName + "\""  + ",\"" + variableLabel + "\"" + ",\"" + datasetTitle['String'] + "\"\n")
-                    print(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" + ",\"" + questionSummary + "\""  + ",\"" + variableName + "\""  + ",\"" + variableLabel + "\"" + ",\"" + datasetTitle['String'] + "\"\n")
+                if len(questionnaire) == 1:
+                    latestQuestionnaireVersion=C.get_item_json(questionnaire[0]['Item1']['Item3'], questionnaire[0]['Item1']['Item1'])
+                    questionnaireName=latestQuestionnaireVersion['ItemName']['en-GB']
+                else:
+                    questionnaireName="MULTIPLE QUESTIONNAIRES"
+                relatedVariables=C.search_relationship_byobject(concordantQuestionItem['AgencyId'], concordantQuestionItem['Identifier'], item_types=C.item_code('Variable'), Version=concordantQuestionItem['Version'], Descriptions=True)
+                for relatedVariable in relatedVariables:
+                    latestVariableVersion=C.get_item_xml(relatedVariable['AgencyId'], relatedVariable['Identifier'])
+                    latestVariableVersionJSON=C.get_item_json(relatedVariable['AgencyId'], relatedVariable['Identifier'])
+                    if concordantQuestionItem['Identifier'] in latestVariableVersion['Item']:
+                        dataset=C.query_set(latestVariableVersion['AgencyId'],
+                           latestVariableVersion['Identifier'],
+                           item_types=['a51e85bb-6259-4488-8df2-f08cb43485f8'],
+                           reverseTraversal=True)
+                        datasetItem=C.get_item_xml(dataset[0]['Item1']['Item3'],
+                           dataset[0]['Item1']['Item1'],
+                           version=dataset[0]['Item1']['Item2'])
+                        datasetTitle=get_element_by_name(defusedxml.ElementTree.fromstring(datasetItem['Item']), 'Title')
+                        variableName=latestVariableVersionJSON['ItemName']['en-GB']
+                        variableLabel=latestVariableVersionJSON['Label']['en-GB']
+                        questionLabel=concordantQuestionItem['Label']['en-GB']
+                        questionSummary=concordantQuestionItem['Summary']['en-GB']
+                        fw.write(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" + ",\""  + questionSummary + "\""  + ",\"" + variableName + "\""  + ",\"" + variableLabel + "\"" + ",\"" + datasetTitle['String'] + "\"\n")
+                        print(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" + ",\"" + questionSummary + "\""  + ",\"" + variableName + "\""  + ",\"" + variableLabel + "\"" + ",\"" + datasetTitle['String'] + "\"\n")
     fw.close()
