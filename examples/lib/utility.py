@@ -20,7 +20,7 @@ def references_are_equal(reference1, reference2):
     return sorted(ref_1_elems) == sorted(ref_2_elems)
 
 def find_all_references(xml_tree, agency, identifier):
-    """Find all references to an item in an XML tree/element (e.g. a 'VariableGroup' element)"""
+    """Find all references to another item in an XML tree/element"""
     matching_references = []
     for elem in xml_tree.findall(".//"):
         if (len(elem)>0):
