@@ -90,15 +90,12 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
             datasetAlternateTitle=latestDatasetVersion['DublinCoreMetadata']['AlternateTitle']['en-GB']
             topicGroups=C.search_relationship_byobject(variable['AgencyId'], variable['Identifier'], item_types=C.item_code('Variable Group'), Version=variable['Version'], Descriptions=True)  
             topicGroupsCurrentlyReferencingVariable=[]
-            variablesWithNoGroup=[]
             # The topicGroups objects might contain groups that used to reference a variable; we have to
             # check if a reference to the variable item is present in the most recent version of the group.
             for topicGroup in topicGroups:
                 topicGroupMostRecentVersion=C.get_item_xml(topicGroup['AgencyId'], topicGroup['Identifier'])
                 if (variable['Identifier'] in topicGroupMostRecentVersion['Item']):
                     topicGroupsCurrentlyReferencingVariable.append(topicGroup)
-            if (len(topicGroupsCurrentlyReferencingVariable)==0):
-                variablesWithNoGroup.append(variable)
             for y in topicGroupsCurrentlyReferencingVariable:
                 if variable['Label'] != {}:
                     varLabel=variable['Label']['en-GB']
@@ -106,7 +103,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                     varLabel=""
                 groupNames.append((variable['ItemName']['en-GB'], varLabel, get_urn_from_item(variable), get_url_from_item(variable, hostname), y['ItemName']['en-GB'], y['Label']['en-GB'], datasetAlternateTitle))
         print(str(len(groupNames)) + " " + str(set(groupNames)))        
-        if len(set([x[4] for x in groupNames]))!=1 or len(variablesWithNoGroup)>0:
+        if len(set([x[4] for x in groupNames]))!=1 or len(topicGroupsCurrentlyReferencingVariable)>0:
             variablesAcrossWavesNotAllInSameTopic.append((variable, groupNames))
     return variablesAcrossWavesNotAllInSameTopic
 
