@@ -96,6 +96,8 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                 topicGroupMostRecentVersion=C.get_item_xml(topicGroup['AgencyId'], topicGroup['Identifier'])
                 if (variable['Identifier'] in topicGroupMostRecentVersion['Item']):
                     topicGroupsCurrentlyReferencingVariable.append(topicGroup)
+            if (len(topicGroupsCurrentlyReferencingVariable)==0):
+                groupNames.append("no_topic")
             for y in topicGroupsCurrentlyReferencingVariable:
                 if variable['Label'] != {}:
                     varLabel=variable['Label']['en-GB']
@@ -103,7 +105,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                     varLabel=""
                 groupNames.append((variable['ItemName']['en-GB'], varLabel, get_urn_from_item(variable), get_url_from_item(variable, hostname), y['ItemName']['en-GB'], y['Label']['en-GB'], datasetAlternateTitle))
         print(str(len(groupNames)) + " " + str(set(groupNames)))        
-        if len(set([x[4] for x in groupNames]))!=1 or len(topicGroupsCurrentlyReferencingVariable)>0:
+        if len(set([x[4] for x in groupNames]))!=1:
             variablesAcrossWavesNotAllInSameTopic.append((variable, groupNames))
     return variablesAcrossWavesNotAllInSameTopic
 
