@@ -75,7 +75,6 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     search queries against the API."""
     variables = C.search_items(C.item_code('Variable'), SearchSets=searchSets, ReturnIdentifiersOnly=False)['Results']
     variablesAcrossWavesNotAllInSameTopic=[]
-    variablesWithNoGroup=[]
     variablesWithExtraNameField=[addVariableNameToObject(x, "_".join(x['ItemName']['en-GB'].split("_")[1:])) for x in variables]
     uniqueVariableNames=list(set([x['VariableName'] for x in variablesWithExtraNameField]))
     # The 'count' variable is used to display a progress indicator
@@ -91,6 +90,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
             datasetAlternateTitle=latestDatasetVersion['DublinCoreMetadata']['AlternateTitle']['en-GB']
             topicGroups=C.search_relationship_byobject(variable['AgencyId'], variable['Identifier'], item_types=C.item_code('Variable Group'), Version=variable['Version'], Descriptions=True)  
             topicGroupsCurrentlyReferencingVariable=[]
+            variablesWithNoGroup=[]
             # The topicGroups objects might contain groups that used to reference a variable; we have to
             # check if a reference to the variable item is present in the most recent version of the group.
             for topicGroup in topicGroups:
