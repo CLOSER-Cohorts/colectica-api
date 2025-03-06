@@ -97,7 +97,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                 if (variable['Identifier'] in topicGroupMostRecentVersion['Item']):
                     topicGroupsCurrentlyReferencingVariable.append(topicGroup)
             if (len(topicGroupsCurrentlyReferencingVariable)==0):
-                groupNames.append("no_topic")
+                groupNames.append((variable['ItemName']['en-GB'], varLabel, get_urn_from_item(variable), get_url_from_item(variable, hostname), "no_topic", y['Label']['en-GB'], datasetAlternateTitle))
             for y in topicGroupsCurrentlyReferencingVariable:
                 if variable['Label'] != {}:
                     varLabel=variable['Label']['en-GB']
