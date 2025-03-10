@@ -16,9 +16,11 @@ from xml.etree import ElementTree as ET
 from defusedxml.ElementTree import parse
 from colectica_api import ColecticaObject
 from examples.lib.utility import get_element_by_name, get_url_from_item, get_urn_from_item
-#USERNAME = "USERNAME"
-#PASSWORD = "PASSWORD"
-#HOSTNAME = "HOSTNAME"
+
+USERNAME = "INSERT USERNAME HERE"
+PASSWORD = "INSERT PASSWORD HERE"
+HOSTNAME = "INSERT HOSTNAME HERE"
+C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 
 # Array containing object representing the USoc study
 searchSets=[
@@ -29,8 +31,8 @@ searchSets=[
         }]
 
 
-def addVariableNameToObject(obj, variableName):
-   obj['VariableName']=variableName
+def addVariableStemToObject(obj, variableName):
+   obj['VariableStem']=variableName
    return obj
 
 def addQuestionNameToObject(obj, questionName):
@@ -69,44 +71,70 @@ def getRelatedVariables(questionMapping):
    return relatedVariables
 
 def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
-    """Code for getting an array containing variables where the concurrent variables aren't all 
-    assigned to the same topic. We read all the variable identifiers into memory because it's 
-    easier to perform these operations on data that's already in memory than to perform
-    search queries against the API."""
-    variables = C.search_items(C.item_code('Variable'), SearchSets=searchSets, ReturnIdentifiersOnly=False)['Results']
+    """Code for creating an array containing concurrent variables where the variables in a 
+    concurrent set aren't all assigned to the same topic.
+    """ 
+    
+    #We read all the variable identifiers into memory because it's 
+    #easier to perform operations on data that's already in memory than to perform search queries 
+    #against the API.
+    variables = C.search_items(C.item_code('Variable'), 
+       SearchSets=searchSets,
+       ReturnIdentifiersOnly=False)['Results']
     variablesAcrossWavesNotAllInSameTopic=[]
-    variablesWithExtraNameField=[addVariableNameToObject(x, "_".join(x['ItemName']['en-GB'].split("_")[1:])) for x in variables]
-    uniqueVariableNames=list(set([x['VariableName'] for x in variablesWithExtraNameField]))
+    variablesWithExtraStemField=[addVariableStemToObject(x, "_".join(x['ItemName']['en-GB'].split("_")[1:])) for x in variables]
+    uniqueVariableStems=list(set([x['VariableStem'] for x in variablesWithExtraStemField if x['VariableStem']!='']))
     # The 'count' variable is used to display a progress indicator
     count=0
-    for variableName in uniqueVariableNames[1:]:
+    for variableStem in uniqueVariableStems:
         print(count)
         count=count+1
-        concurrentVariablesAcrossWaves=[x for x in variablesWithExtraNameField if x['VariableName']==variableName]
-        groupNames=[]
+        concurrentVariablesAcrossWaves=[x for x in variablesWithExtraStemField if x['VariableStem']==variableStem]
+        concurrentVariableDetails=[]
         for variable in concurrentVariablesAcrossWaves:
-            dataset=C.query_set(variable['AgencyId'], variable['Identifier'], item_types=['a51e85bb-6259-4488-8df2-f08cb43485f8'], reverseTraversal=True)
-            latestDatasetVersion=C.get_item_json(dataset[0]['Item1']['Item3'], dataset[0]['Item1']['Item1'])
+            if variable['Label'] != {}:
+                    variableLabel=variable['Label']['en-GB']
+                else:
+                    variableLabel=""
+            dataset=C.query_set(variable['AgencyId'],
+               variable['Identifier'],
+               item_types=['a51e85bb-6259-4488-8df2-f08cb43485f8'],
+               reverseTraversal=True)
+            latestDatasetVersion=C.get_item_json(dataset[0]['Item1']['Item3'], 
+               dataset[0]['Item1']['Item1'])
             datasetAlternateTitle=latestDatasetVersion['DublinCoreMetadata']['AlternateTitle']['en-GB']
-            topicGroups=C.search_relationship_byobject(variable['AgencyId'], variable['Identifier'], item_types=C.item_code('Variable Group'), Version=variable['Version'], Descriptions=True)  
+            topicGroups=C.search_relationship_byobject(variable['AgencyId'],
+               variable['Identifier'],
+               item_types=C.item_code('Variable Group'),
+               Version=variable['Version'],
+               Descriptions=True)  
             topicGroupsCurrentlyReferencingVariable=[]
             # The topicGroups objects might contain groups that used to reference a variable; we have to
             # check if a reference to the variable item is present in the most recent version of the group.
             for topicGroup in topicGroups:
-                topicGroupMostRecentVersion=C.get_item_xml(topicGroup['AgencyId'], topicGroup['Identifier'])
+                topicGroupMostRecentVersion=C.get_item_xml(topicGroup['AgencyId'],
+                   topicGroup['Identifier'])
                 if (variable['Identifier'] in topicGroupMostRecentVersion['Item']):
-                    topicGroupsCurrentlyReferencingVariable.append(topicGroup)
+                   topicGroupsCurrentlyReferencingVariable.append(topicGroup)
             if (len(topicGroupsCurrentlyReferencingVariable)==0):
-                groupNames.append((variable['ItemName']['en-GB'], varLabel, get_urn_from_item(variable), get_url_from_item(variable, hostname), "no_topic", y['Label']['en-GB'], datasetAlternateTitle))
-            for y in topicGroupsCurrentlyReferencingVariable:
-                if variable['Label'] != {}:
-                    varLabel=variable['Label']['en-GB']
-                else:
-                    varLabel=""
-                groupNames.append((variable['ItemName']['en-GB'], varLabel, get_urn_from_item(variable), get_url_from_item(variable, hostname), y['ItemName']['en-GB'], y['Label']['en-GB'], datasetAlternateTitle))
-        print(str(len(groupNames)) + " " + str(set(groupNames)))        
-        if len(set([x[4] for x in groupNames]))!=1:
-            variablesAcrossWavesNotAllInSameTopic.append((variable, groupNames))
+                concurrentVariableDetails.append((variable['ItemName']['en-GB'], 
+                   variableLabel,
+                   get_urn_from_item(variable),
+                   get_url_from_item(variable, hostname),
+                   "no_topic",
+                   "no_topic_label",
+                   datasetAlternateTitle))
+            for topicGroupReferencingVariable in topicGroupsCurrentlyReferencingVariable:
+                concurrentVariableDetails.append((variable['ItemName']['en-GB'],
+                   variableLabel,
+                   get_urn_from_item(variable),
+                   get_url_from_item(variable, hostname),
+                   topicGroupReferencingVariable['ItemName']['en-GB'],
+                   topicGroupReferencingVariable['Label']['en-GB'],
+                   datasetAlternateTitle))
+        print(str(len(concurrentVariableDetails)) + " " + str(set(concurrentVariableDetails)))        
+        if len(set([x[4] for x in concurrentVariableDetails]))!=1:
+            variablesAcrossWavesNotAllInSameTopic.append((variable, concurrentVariableDetails))
     return variablesAcrossWavesNotAllInSameTopic
 
 def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllInSameTopic):    
@@ -131,7 +159,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
         indexOfFirstUnderscore=var.find("_")
         variableStem=var[indexOfFirstUnderscore+1:]
         print(variableStem)
-        variableInfo=[x for x in variablesAcrossWavesNotAllInSameTopic if x[0]['VariableName']==variableStem]
+        variableInfo=[x for x in variablesAcrossWavesNotAllInSameTopic if x[0]['VariableStem']==variableStem]
         if len(variableInfo)>0:
             variableTopicMappings=variableInfo[0][1]
             b=getMappingFrequencies(variableTopicMappings)
