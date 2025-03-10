@@ -98,8 +98,8 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     # The 'count' variable is used to display a progress indicator
     count = 0
     for variableStem in uniqueVariableStems:
-        print(f"Examining variable stem {variableStem}, {count} of {len(uniqueVariableStems)}")
         count = count + 1
+        print(f"Examining variable stem {variableStem}, {count} of {len(uniqueVariableStems)}")
         concurrentVariableDetails = []
         concurrentVariablesAcrossWaves = [
             x for x in variablesWithExtraStemField if x['VariableStem'] == variableStem]
