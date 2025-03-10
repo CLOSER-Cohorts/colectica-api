@@ -19,10 +19,10 @@ from defusedxml.ElementTree import parse
 from colectica_api import ColecticaObject
 from examples.lib.utility import get_element_by_name, get_url_from_item, get_urn_from_item
 
-USERNAME = "INSERT USERNAME HERE"
-PASSWORD = "INSERT PASSWORD HERE"
-HOSTNAME = "INSERT HOSTNAME HERE"
-C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
+# USERNAME = "INSERT USERNAME HERE"
+# PASSWORD = "INSERT PASSWORD HERE"
+# HOSTNAME = "INSERT HOSTNAME HERE"
+# C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 
 # Array containing object identifying the USoc study
 searchSets = [
