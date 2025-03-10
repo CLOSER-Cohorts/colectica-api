@@ -1,4 +1,10 @@
-"""from colectica_api import ColecticaObject
+"""This code demonstrates how to find concordant questions (and their associated variables)
+and concordant variables in the Understanding Society (Usoc) study, and write details
+of these concordant items to CSV files.
+
+The set of commands that need to be executed in order to achieve this are:
+
+from colectica_api import ColecticaObject
 USERNAME = "USERNAME"
 PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
