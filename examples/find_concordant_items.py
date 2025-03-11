@@ -179,7 +179,6 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
             if len(inputVariable.strip()) > 0:
                 allVarsInInputFiles.append(
                     inputVariable.split("\t")[0].split(" ")[1])
-                print(len(allVarsInInputFiles))
     for var in set(allVarsInInputFiles):
         indexOfFirstUnderscore = var.find("_")
         variableStem = var[indexOfFirstUnderscore+1:]
