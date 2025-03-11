@@ -158,8 +158,6 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                                                   "variableTopicLabel": topicGroupReferencingVariable['Label']['en-GB'],
                                                   "variableDatasetAlternateTitle": dataset_alternate_title
                                                   })
-        print(str(len(concurrentVariableDetails)) +
-              " " + str(set(concurrentVariableDetails)))
         if len(set([variable["variableTopicName"] for variable in concurrentVariableDetails])) != 1:
             variablesAcrossWavesNotAllInSameTopic.append(
                 {"variableStem": variable["VariableStem"], "concurrentVariables": concurrentVariableDetails})
