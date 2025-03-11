@@ -273,8 +273,10 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
                     latestQuestionnaireVersion = C.get_item_json(
                         questionnaire[0]['Item1']['Item3'], questionnaire[0]['Item1']['Item1'])
                     questionnaireName = latestQuestionnaireVersion['ItemName']['en-GB']
-                else:
+                elif len(questionnaire > 1):
                     questionnaireName = "MULTIPLE QUESTIONNAIRES"
+                else:
+                    questionnaireName = "NOT IN QUESTIONNAIRE"
                 relatedVariables = C.search_relationship_byobject(concordantQuestionItem['AgencyId'], concordantQuestionItem['Identifier'], item_types=C.item_code(
                     'Variable'), Version=concordantQuestionItem['Version'], Descriptions=True)
                 for relatedVariable in relatedVariables:
