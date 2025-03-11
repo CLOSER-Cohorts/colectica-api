@@ -48,26 +48,26 @@ def addQuestionNameToObject(obj, questionName):
     return obj
 
 def getMappingFrequencies(variableTopicMapping):
-    uniqueTopics = set([x[4] for x in variableTopicMapping])
+    uniqueTopics = set([topicMapping["variableTopicName"] for topicMapping in variableTopicMapping])
     topicCounts = []
     maxOccurrences = 0
-    for x in uniqueTopics:
-        topicFrequency = len([z for z in variableTopicMapping if z[4] == x])
+    for topicName in uniqueTopics:
+        topicFrequency = len([mapping for mapping in variableTopicMapping if mapping["variableTopicName"] == topicName])
         if topicFrequency > maxOccurrences:
             maxOccurrences = topicFrequency
-        topicCounts.append((x, topicFrequency))
-    return [x for x in topicCounts]
+        topicCounts.append({"topicName": topicName, "topicFrequency": topicFrequency})
+    return topicCounts
 
 def getMostCommonMapping(variableTopicMapping):
-    uniqueTopics = set([x[3] for x in variableTopicMapping])
+    uniqueTopics = set([topicMapping["variableUrl"] for topicMapping in variableTopicMapping])
     topicCounts = []
     maxOccurrences = 0
-    for x in uniqueTopics:
-        topicFrequency = len([z for z in variableTopicMapping if z[3] == x])
+    for topicName in uniqueTopics:
+        topicFrequency = len([mapping for mapping in variableTopicMapping if mapping["variableUrl"] == topicName])
         if topicFrequency > maxOccurrences:
             maxOccurrences = topicFrequency
-        topicCounts.append((x, topicFrequency))
-    return [x for x in topicCounts if x[1] == maxOccurrences]
+        topicCounts.append({"topicName": topicName, "topicFrequency": topicFrequency})
+    return [topic for topic in topicCounts if topic["topicFrequency"] == maxOccurrences]
 
 def getRelatedVariables(questionMapping):
     relatedVariables = []
@@ -113,49 +113,56 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                                   item_types=[
                                       'a51e85bb-6259-4488-8df2-f08cb43485f8'],
                                   reverseTraversal=True)
-            latestDatasetVersion = C.get_item_json(dataset[0]['Item1']['Item3'],
+            if len(dataset) > 1:
+                print(f"""WARNING: Variable {variableLabel} is present in two datasets. 
+                   This variable will be excluded from the list.""")
+            else:
+                latestDatasetVersion = C.get_item_json(dataset[0]['Item1']['Item3'],
                                                    dataset[0]['Item1']['Item1'])
-            dataset_alternate_title = latestDatasetVersion['DublinCoreMetadata']['AlternateTitle']['en-GB']
-            topicGroups = C.search_relationship_byobject(variable['AgencyId'],
+                dataset_alternate_title = latestDatasetVersion['DublinCoreMetadata']['AlternateTitle']['en-GB']
+                topicGroups = C.search_relationship_byobject(variable['AgencyId'],
                                                          variable['Identifier'],
                                                          item_types=C.item_code(
                                                              'Variable Group'),
                                                          Version=variable['Version'],
                                                          Descriptions=True)
-            topicGroupsCurrentlyReferencingVariable = []
-            # The topicGroups objects might contain groups that used to reference a variable; we have to
-            # check if a reference to the variable item is present in the most recent version of the
-            # topicGroup.
-            for topicGroup in topicGroups:
-                topicGroupMostRecentVersion = C.get_item_xml(topicGroup['AgencyId'],
+                topicGroupsCurrentlyReferencingVariable = []
+                # The topicGroups objects might contain groups that used to reference a variable; we have to
+                # check if a reference to the variable item is present in the most recent version of the
+                # topicGroup.
+                for topicGroup in topicGroups:
+                    topicGroupMostRecentVersion = C.get_item_xml(topicGroup['AgencyId'],
                                                              topicGroup['Identifier'])
-                if (variable['Identifier'] in topicGroupMostRecentVersion['Item']):
-                    topicGroupsCurrentlyReferencingVariable.append(topicGroup)
-            # If a variable is not assigned to a topic, we add an entry to concurrentVariableDetails
-            # indicating this.
-            if (len(topicGroupsCurrentlyReferencingVariable) == 0):
-                concurrentVariableDetails.append((variable['ItemName']['en-GB'],
-                                                  variableLabel,
-                                                  get_urn_from_item(variable),
-                                                  get_url_from_item(
+                    if (variable['Identifier'] in topicGroupMostRecentVersion['Item']):
+                        topicGroupsCurrentlyReferencingVariable.append(topicGroup)
+                # If a variable is not assigned to a topic, we add an entry to concurrentVariableDetails
+                # indicating this.
+                if (len(topicGroupsCurrentlyReferencingVariable) == 0):
+                    concurrentVariableDetails.append({
+                                                  "variableName": variable['ItemName']['en-GB'],
+                                                  "variableLabel": variableLabel,
+                                                  "variableUrn": get_urn_from_item(variable),
+                                                  "variableUrl": get_url_from_item(
                                                       variable, hostname),
-                                                  "no_topic",
-                                                  "no_topic_label",
-                                                  dataset_alternate_title))
-            for topicGroupReferencingVariable in topicGroupsCurrentlyReferencingVariable:
-                concurrentVariableDetails.append((variable['ItemName']['en-GB'],
-                                                  variableLabel,
-                                                  get_urn_from_item(variable),
-                                                  get_url_from_item(
+                                                  "variableTopicName": "no_topic",
+                                                  "variableTopicLabel": "no_topic_label",
+                                                  "variableDatasetAlternateTitle": dataset_alternate_title
+                                                  })
+                for topicGroupReferencingVariable in topicGroupsCurrentlyReferencingVariable:
+                    concurrentVariableDetails.append({"variableName": variable['ItemName']['en-GB'],
+                                                  "variableLabel": variableLabel,
+                                                  "variableUrn": get_urn_from_item(variable),
+                                                  "variableUrl": get_url_from_item(
                                                       variable, hostname),
-                                                  topicGroupReferencingVariable['ItemName']['en-GB'],
-                                                  topicGroupReferencingVariable['Label']['en-GB'],
-                                                  dataset_alternate_title))
+                                                  "variableTopicName": topicGroupReferencingVariable['ItemName']['en-GB'],
+                                                  "variableTopicLabel": topicGroupReferencingVariable['Label']['en-GB'],
+                                                  "variableDatasetAlternateTitle": dataset_alternate_title
+                                                  })
         print(str(len(concurrentVariableDetails)) +
               " " + str(set(concurrentVariableDetails)))
-        if len(set([x[4] for x in concurrentVariableDetails])) != 1:
+        if len(set([variable["variableTopicName"] for variable in concurrentVariableDetails])) != 1:
             variablesAcrossWavesNotAllInSameTopic.append(
-                (variable, concurrentVariableDetails))
+                {"variableStem": variable["VariableStem"], "concurrentVariables": concurrentVariableDetails})
     return variablesAcrossWavesNotAllInSameTopic
 
 
@@ -183,17 +190,27 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
         indexOfFirstUnderscore = var.find("_")
         variableStem = var[indexOfFirstUnderscore+1:]
         variableInfo = [
-            x for x in variablesAcrossWavesNotAllInSameTopic if x[0]['VariableStem'] == variableStem]
-        if len(variableInfo) > 0:
-            variableTopicMappings = variableInfo[0][1]
+            concurrentVariable for concurrentVariable in variablesAcrossWavesNotAllInSameTopic 
+               if concurrentVariable['VariableStem'] == variableStem]
+        if len(variableInfo) == 1:
+            variableTopicMappings = variableInfo[0]["concurrentVariables"]
             mappingFrequencies = getMappingFrequencies(variableTopicMappings)
             mappingOccurrences = ""
             for mappingFrequency in mappingFrequencies:
                 mappingOccurrences = mappingOccurrences + \
-                    str(mappingFrequency[0])+", " + str(mappingFrequency[1])+", "
+                    str(mappingFrequency["topicName"])+", " + str(mappingFrequency["topicFrequency"])+", "
             for variableTopicMapping in variableTopicMappings:
-                fw.write(variableTopicMapping[6] + ", " + variableStem + ", " + variableTopicMapping[0] + ",\"" + variableTopicMapping[1] +
-                         "\", " + variableTopicMapping[4] + ",\"" + variableTopicMapping[5] + "\",," + mappingOccurrences + "\n")
+                fw.write(variableTopicMapping["variableDatasetAlternateTitle"] + ", " 
+                   + variableStem + ", "
+                   + variableTopicMapping["variableName"] + ",\""
+                   + variableTopicMapping["variableLabel"] + "\", " 
+                   + variableTopicMapping["variableTopicName"] + ",\""
+                   + variableTopicMapping["variableTopicLabel"] + "\",,"
+                   + mappingOccurrences + "\n")
+        else:
+            print(f"""WARNING: Multiple entries in variablesAcrossWavesNotAllInSameTopic object found 
+               for variable stem {variableStem}. The concurrent variables for this variable stem will 
+               not be written to the output file.""")
     fw.close()
 
 def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
@@ -217,18 +234,24 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
     questions = C.search_items(C.item_code(
         'Question'), SearchSets=searchSets, ReturnIdentifiersOnly=False)['Results']
     questionsWithExtraNameField = []
-    for x in questions:
+    for question in questions:
         positionOfWaveIdentifier = re.search(
-            "_w[0-9]+_", x['ItemName']['en-GB'])
+            "_w[0-9]+_", question['ItemName']['en-GB'])
         if positionOfWaveIdentifier is not None:
             questionsWithExtraNameField.append(addQuestionNameToObject(
-                x, x['ItemName']['en-GB'][positionOfWaveIdentifier.span()[1]:]))
+                question, question['ItemName']['en-GB'][positionOfWaveIdentifier.span()[1]:]))
     # The 'count' variable is used to display a progress indicator
     count = 0
     for question in allQuestionsInInputFiles:
         count = count + 1
-        questionStem = [x['QuestionName'] for x in questionsWithExtraNameField if x['ItemName']
-                        ['en-GB'] == question.replace("qc_", "qi_")][0]
+        questionStemList = [x['QuestionName'] for x in questionsWithExtraNameField if x['ItemName']
+                        ['en-GB'] == question.replace("qc_", "qi_")]
+        if len(questionStemList) == 0:
+            questionStem = "QUESTION STEM UNAVAILABLE"
+        elif len(questionStemList) > 1:
+            questionStem = "MULTIPLE QUESTION STEMS FOUND"
+        else:
+            questionStem = questionStemList[0]
         print(f"Examining question stem {questionStem}, {count} of {len(allQuestionsInInputFiles)}")
         questionItems = C.search_items(
             [],
@@ -260,22 +283,28 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
                     latestVariableVersionJSON = C.get_item_json(
                         relatedVariable['AgencyId'], relatedVariable['Identifier'])
                     if concordantQuestionItem['Identifier'] in latestVariableVersion['Item']:
-                        dataset = C.query_set(latestVariableVersion['AgencyId'],
+                        datasets = C.query_set(latestVariableVersion['AgencyId'],
                                               latestVariableVersion['Identifier'],
                                               item_types=[
                                                   'a51e85bb-6259-4488-8df2-f08cb43485f8'],
                                               reverseTraversal=True)
-                        datasetItem = C.get_item_xml(dataset[0]['Item1']['Item3'],
-                                                     dataset[0]['Item1']['Item1'],
-                                                     version=dataset[0]['Item1']['Item2'])
-                        datasetTitle = get_element_by_name(
-                            defusedxml.ElementTree.fromstring(datasetItem['Item']), 'Title')
-                        variableName = latestVariableVersionJSON['ItemName']['en-GB']
-                        variableLabel = latestVariableVersionJSON['Label']['en-GB']
-                        questionLabel = concordantQuestionItem['Label']['en-GB']
-                        questionSummary = concordantQuestionItem['Summary']['en-GB']
-                        fw.write(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" +
+                        if len(datasets) > 1:
+                            print(f"""WARNING: Variable in study {latestVariableVersion['AgencyId']}, with 
+                               identifier {latestVariableVersion['Identifier']} is present in two datasets.""")
+                        for dataset in datasets:
+                            datasetItem = C.get_item_xml(dataset['Item1']['Item3'],
+                                                     dataset['Item1']['Item1'],
+                                                     version=dataset['Item1']['Item2'])
+                            datasetTitle = get_element_by_name(
+                                defusedxml.ElementTree.fromstring(datasetItem['Item']), 'Title')
+                            variableName = latestVariableVersionJSON['ItemName']['en-GB']
+                            if len(datasets) > 1:
+                                variableName = variableName + " - DUPLICATED ACROSS MULTIPLE DATASETS"
+                            variableLabel = latestVariableVersionJSON['Label']['en-GB']
+                            questionLabel = concordantQuestionItem['Label']['en-GB']
+                            questionSummary = concordantQuestionItem['Summary']['en-GB']
+                            fw.write(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" +
                                  ",\"" + questionSummary + "\"" + ",\"" + variableName + "\"" + ",\"" + variableLabel + "\"" + ",\"" + datasetTitle['String'] + "\"\n")
-                        print(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" +
+                            print(questionnaireName + "," + concordantQuestionItem['ItemName']['en-GB'] + ",\"" + questionLabel + "\"" + ",\"" + questionStem + "\"" +
                               ",\"" + questionSummary + "\"" + ",\"" + variableName + "\"" + ",\"" + variableLabel + "\"" + ",\"" + datasetTitle['String'] + "\"\n")
     fw.close()
