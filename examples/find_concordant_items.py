@@ -191,7 +191,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
         variableStem = var[indexOfFirstUnderscore+1:]
         variableInfo = [
             concurrentVariable for concurrentVariable in variablesAcrossWavesNotAllInSameTopic 
-               if concurrentVariable['VariableStem'] == variableStem]
+               if concurrentVariable['variableStem'] == variableStem]
         if len(variableInfo) == 1:
             variableTopicMappings = variableInfo[0]["concurrentVariables"]
             mappingFrequencies = getMappingFrequencies(variableTopicMappings)
