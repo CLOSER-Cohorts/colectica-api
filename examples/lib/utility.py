@@ -75,9 +75,6 @@ def convert_xml_element_to_json(xml_element):
         json_object[elem.tag[start_of_tag_name:]] = elem.text
     return json_object
 
-def get_urn_from_item(item):
-   return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
-
 def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, version=None):
     """We may be performing multiple updates to the topic groups, so instead of 
     retrieving/updating/writing data using the Colectica REST API every time we need to update 
