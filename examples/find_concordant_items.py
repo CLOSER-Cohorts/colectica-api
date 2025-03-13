@@ -207,10 +207,14 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
                    + variableTopicMapping["variableTopicName"] + ",\""
                    + variableTopicMapping["variableTopicLabel"] + "\",,"
                    + mappingOccurrences + "\n")
-        else:
+        elif len(variableInfo) > 1:
             print(f"""WARNING: Multiple entries in variablesAcrossWavesNotAllInSameTopic object found 
                for variable stem {variableStem}. The concurrent variables for this variable stem will 
                not be written to the output file.""")
+        else:
+            print(f"""WARNING: No entries in variablesAcrossWavesNotAllInSameTopic object found 
+               for variable stem {variableStem}. The concurrent variables for this variable stem will 
+               not be written to the output file.""") 
     fw.close()
 
 def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
