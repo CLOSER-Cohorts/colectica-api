@@ -8,7 +8,7 @@ PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 
-# Specify the Millenium Cohort Study (MCS) which we want to search for items to deprecate in...
+# Specify the Millenium Cohort Study (MCS) which we want to search in for items to deprecate...
 search_sets = [{ "agencyId": "uk.cls.mcs", 
    "identifier": "0d8a7220-c61b-4542-967d-a40cb5aca430", 
    "version": "57" }]
@@ -37,10 +37,12 @@ for item in mcsAndCloserItemsToDeprecate:
       "version": item['Version']
        }]
     # Use the update_state method to deprecate an item.
-    # Note that although we could send a list of items to deprecate,
-    # the Colectica repository may return a 502 gateway error if 
-    # we try to deprecate a list of items that is too large, so
-    # to avoid this we are deprecating the items one by one.
+    # Note that although we could send a larger list of items to 
+    # deprecate in a single call to update_state, instead of sending
+    # a list with a single item for every call, the Colectica repository
+    # may return a 502 gateway error if we try to deprecate a list of 
+    # items that is too large, so to avoid this we are deprecating the
+    # items one by one.
     C.update_state(identifiersForItemToDeprecate, State=True)       
 
 # Verify the deprecation operations have worked. We have to read in the items again
