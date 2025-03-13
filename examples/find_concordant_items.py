@@ -113,13 +113,13 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                                   item_types=[
                                       'a51e85bb-6259-4488-8df2-f08cb43485f8'],
                                   reverseTraversal=True)
-            uniqueDatasetItems = set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in dataset])
+            uniqueDatasetItems = list(set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in dataset]))
             if len(uniqueDatasetItems) > 1:
                 print(f"""WARNING: Variable {variable['ItemName']} ({variableLabel}) is present in two datasets.
                    This variable will be excluded from the list.""")
             else:
-                latestDatasetVersion = C.get_item_json(uniqueDatasetItems[0]['Item1']['Item3'],
-                                                   uniqueDatasetItems[0]['Item1']['Item1'])
+                latestDatasetVersion = C.get_item_json(dataset[0]['Item1']['Item3'],
+                                                   dataset[0]['Item1']['Item1'])
                 dataset_alternate_title = latestDatasetVersion['DublinCoreMetadata']['AlternateTitle']['en-GB']
                 topicGroups = C.search_relationship_byobject(variable['AgencyId'],
                                                          variable['Identifier'],
