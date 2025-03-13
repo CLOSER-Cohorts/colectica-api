@@ -40,11 +40,11 @@ searchSets = [
 
 
 def addVariableStemToObject(obj, variableName):
-    obj['VariableStem'] = variableName
+    obj['variableStem'] = variableName
     return obj
 
 def addQuestionNameToObject(obj, questionName):
-    obj['QuestionName'] = questionName
+    obj['questionName'] = questionName
     return obj
 
 def getMappingFrequencies(variableTopicMapping):
@@ -92,8 +92,8 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     variablesWithExtraStemField = [addVariableStemToObject(
         x, "_".join(x['ItemName']['en-GB'].split("_")[1:])) for x in variables]
     uniqueVariableStems = list(set(
-        [x['VariableStem']
-            for x in variablesWithExtraStemField if x['VariableStem'] != '']
+        [x['variableStem']
+            for x in variablesWithExtraStemField if x['variableStem'] != '']
     ))
     # The 'count' variable is used to display a progress indicator
     count = 0
@@ -102,7 +102,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
         print(f"Examining variable stem {variableStem}, {count} of {len(uniqueVariableStems)}")
         concurrentVariableDetails = []
         concurrentVariablesAcrossWaves = [
-            x for x in variablesWithExtraStemField if x['VariableStem'] == variableStem]
+            x for x in variablesWithExtraStemField if x['variableStem'] == variableStem]
         for variable in concurrentVariablesAcrossWaves:
             if variable['Label'] != {}:
                 variableLabel = variable['Label']['en-GB']
@@ -162,7 +162,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                                                   })
         if len(set([variable["variableTopicName"] for variable in concurrentVariableDetails])) != 1:
             variablesAcrossWavesNotAllInSameTopic.append(
-                {"variableStem": variable["VariableStem"], "concurrentVariables": concurrentVariableDetails})
+                {"variableStem": variable["variableStem"], "concurrentVariables": concurrentVariableDetails})
     return variablesAcrossWavesNotAllInSameTopic
 
 
@@ -244,7 +244,7 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
     count = 0
     for question in allQuestionsInInputFiles:
         count = count + 1
-        questionStemList = [x['QuestionName'] for x in questionsWithExtraNameField if x['ItemName']
+        questionStemList = [x['questionName'] for x in questionsWithExtraNameField if x['ItemName']
                         ['en-GB'] == question.replace("qc_", "qi_")]
         if len(questionStemList) == 0:
             questionStem = "QUESTION STEM UNAVAILABLE"
@@ -265,7 +265,7 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
             questionName = latestQuestionVersionJSON['ItemName']['en-GB'][positionOfWaveIdentifier.span()[
                 1]:]
             concordantQuestions = [
-                x for x in questionsWithExtraNameField if x['QuestionName'] == questionName]
+                x for x in questionsWithExtraNameField if x['questionName'] == questionName]
             for concordantQuestionItem in concordantQuestions:
                 questionnaire = C.query_set(concordantQuestionItem['AgencyId'], concordantQuestionItem['Identifier'], item_types=[
                                             'f196cc07-9c99-4725-ad55-5b34f479cf7d'], reverseTraversal=True)
