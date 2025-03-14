@@ -81,10 +81,10 @@ for study in studies:
         "Item": studiesWithoutPhysicalInstanceAndRequiredResourceReferences
     })
 
-examples.lib.utility.update_repository(updatedDataCollections,
+update_repository(updatedDataCollections,
     "Remove instrument and questionScheme references from data collections", C)
 
-examples.lib.utility.update_repository(updatedStudies,
+update_repository(updatedStudies,
     "Remove physicalInstance and resourcePackage references from studies", C)
 
 # Code for validating that the reference elements have been removed from the data collection
