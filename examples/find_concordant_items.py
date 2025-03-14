@@ -160,7 +160,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
                                                   "variableTopicLabel": topicGroupReferencingVariable['Label']['en-GB'],
                                                   "variableDatasetAlternateTitle": dataset_alternate_title
                                                   })
-        if len(set([variable["variableTopicName"] for variable in concurrentVariableDetails])) != 1:
+        if len(set([variable["variableTopicName"] for variable in concurrentVariableDetails])) > 1:
             variablesAcrossWavesNotAllInSameTopic.append(
                 {"variableStem": variable["variableStem"], "concurrentVariables": concurrentVariableDetails})
     return variablesAcrossWavesNotAllInSameTopic
@@ -277,8 +277,11 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
                     questionnaireName = "MULTIPLE QUESTIONNAIRES"
                 else:
                     questionnaireName = "NOT IN QUESTIONNAIRE"
-                relatedVariables = C.search_relationship_byobject(concordantQuestionItem['AgencyId'], concordantQuestionItem['Identifier'], item_types=C.item_code(
-                    'Variable'), Version=concordantQuestionItem['Version'], Descriptions=True)
+                relatedVariables = C.search_relationship_byobject(concordantQuestionItem['AgencyId'],
+                    concordantQuestionItem['Identifier'],
+                    item_types=C.item_code('Variable'),
+                    Version=concordantQuestionItem['Version'],
+                    Descriptions=True)
                 for relatedVariable in relatedVariables:
                     latestVariableVersion = C.get_item_xml(
                         relatedVariable['AgencyId'], relatedVariable['Identifier'])
