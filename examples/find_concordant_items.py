@@ -38,7 +38,6 @@ searchSets = [
         "version": 77
     }]
 
-
 def addVariableStemToObject(obj, variableName):
     obj['variableStem'] = variableName
     return obj
