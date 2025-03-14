@@ -14,6 +14,7 @@ successful. In this case we are:
 
 from lib.utility import (
     update_repository,
+    get_elements_of_type,
     remove_elements_from_item
 )
 import defusedxml
@@ -108,18 +109,18 @@ def count_elements_in_items(items, elementTagname):
 
 def validate_removal_of_references():
     print("Number of instrument references in data collections before removal: "
-       f"{count_elements_in_items("InstrumentReference", dataCollectionItems)}")
+       f"{count_elements_in_items(dataCollectionItems, "InstrumentReference")}")
     print("Number of instrument references in data collections after removal: " 
-       f"{count_elements_in_items("InstrumentReference", [x['Item'] for x in updatedDataCollections])}")
+       f"{count_elements_in_items([x['Item'] for x in updatedDataCollections], "InstrumentReference")}")
     print("Number of question scheme references in data collections before removal: "
-       f"{count_elements_in_items("QuestionSchemeReference", dataCollectionItems)}")
+       f"{count_elements_in_items(dataCollectionItems, "QuestionSchemeReference")}")
     print("Number of question scheme references in data collections after removal: "
-       f"{count_elements_in_items("QuestionSchemeReference", [x['Item'] for x in updatedDataCollections])}")
+       f"{count_elements_in_items([x['Item'] for x in updatedDataCollections], "QuestionSchemeReference")}")
     print("Number of physical instance references in studies before removal: "
-       f"{count_elements_in_items("PhysicalInstanceReference", studyItems)}")
+       f"{count_elements_in_items(studyItems, "PhysicalInstanceReference")}")
     print("Number of physical instance references in studies after removal: "
-       f"{count_elements_in_items("PhysicalInstanceReference", [x['Item'] for x in updatedStudies])}") 
+       f"{count_elements_in_items([x['Item'] for x in updatedStudies], "PhysicalInstanceReference")}") 
     print("Number of required resource packages in studies before removal: "
-       f"{count_elements_in_items("RequiredResourcePackages", studyItems)}")
+       f"{count_elements_in_items(studyItems, "RequiredResourcePackages")}")
     print("Number of required resource packages in studies after removal: "
-       f"{count_elements_in_items("RequiredResourcePackages", [x['Item'] for x in updatedStudies])}")
+       f"{count_elements_in_items([x['Item'] for x in updatedStudies], "RequiredResourcePackages")}")
