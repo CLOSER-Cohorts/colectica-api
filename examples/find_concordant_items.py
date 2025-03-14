@@ -69,15 +69,6 @@ def getMostCommonMapping(variableTopicMapping):
         topicCounts.append({"topicName": topicName, "topicFrequency": topicFrequency})
     return [topic for topic in topicCounts if topic["topicFrequency"] == maxOccurrences]
 
-def getRelatedVariables(questionMapping):
-    relatedVariables = []
-    for question in questionMapping:
-        relatedVariable = C.search_relationship_byobject(question[2].split(":")[2], question[2].split(
-            ":")[3], item_types=C.item_code('Variable'), Version=str(question[2].split(":")[4]), Descriptions=True)
-        if len(relatedVariables) > 0:
-            relatedVariables.append(relatedVariable[0]['ItemName']['en-GB'])
-    return relatedVariables
-
 def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     """Code for creating an array of concurrent variables where all the variables in the
     concurrent set aren't assigned to the same topic.
@@ -118,7 +109,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
             if len(uniqueDatasetItems) > 1:
                 print(f"""WARNING: Variable {variable['ItemName']} ({variableLabel}) is present in two datasets.
                    This variable will be excluded from the list.""")
-            else:
+            elif len(uniqueDatasetItems) == 1:
                 latestDatasetVersion = C.get_item_json(datasetItems[0]['AgencyId'],
                                                    datasetItems[0]['Identifier'])
                 dataset_alternate_title = latestDatasetVersion['DublinCoreMetadata']['AlternateTitle']['en-GB']
