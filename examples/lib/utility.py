@@ -84,9 +84,9 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
     a group, we will retrieve the most recent version of it from the Colectica repository
     using the Colectica REST API for the first update, and on subsequent updates we will modify the
     in-memory version which is stored in the updated_groups array."""
-    updated_referencing_item = [x for x in updated_groups if x[0] == identifier]
+    updated_referencing_item = [x for x in updated_groups if x['AgencyId'] == identifier]
     if len(updated_referencing_item) > 0:
-        referencing_item = updated_referencing_item[0][4]
+        referencing_item = updated_referencing_item[0]['Item']
     else:
         fragment_xml = C.get_item_xml(
             agency_id, identifier, version=version)['Item']
@@ -97,13 +97,23 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
                                       item_type, updated_groups_list):
     """Update the in-memory list of groups representing topics. If the topic group we have
     updated is not in already in the list, we append it to the list."""
-    if ([x[0] for x in updated_groups_list].count(identifier) > 0):
-        index_of_updated_ref = [x[0] for x in updated_groups_list].index(identifier)
-        updated_groups_list[index_of_updated_ref] = (
-            identifier, agency, version, item_type, updated_group)
+    if ([x['Identifier'] for x in updated_groups_list].count(identifier) > 0):
+        index_of_updated_ref = [x['Identifier'] for x in updated_groups_list].index(identifier)
+        updated_groups_list[index_of_updated_ref] = {
+            "Identifier": identifier,
+            "AgencyId": agency,
+            "Version": version,
+            "ItemType": item_type,
+            "Item": updated_group
+        }
     else:
-        updated_groups_list.append(
-            (identifier, agency, version, item_type, updated_group))
+        updated_groups_list.append({
+            "Identifier": identifier,
+            "AgencyId": agency,
+            "Version": version,
+            "ItemType": item_type,
+            "Item": updated_group
+        })
  
 def get_item_from_topic_name(topic_name, topic_type, containing_item_name, containing_item_type, C):
     """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
@@ -189,8 +199,26 @@ def update_repository(updated_items, transaction_message, C):
     transaction_response = C.create_transaction()
     transaction_id = transaction_response['TransactionId']
     for item in updated_items:
-        fragment_string = defusedxml.ElementTree.tostring(item[4], encoding='unicode')
-        C.add_items_to_transaction(item[1], item[0], item[2], fragment_string, 
-                                   item[3], transaction_id)
-        commit_response = C.commit_transaction(transaction_id, transaction_message, 3)
+        fragment_string = defusedxml.ElementTree.tostring(item['Item'], encoding='unicode')
+        C.add_items_to_transaction(item['AgencyId'], item['Identifier'], item['Version'], fragment_string, 
+                                   item['ItemType'], transaction_id)
+    commit_response = C.commit_transaction(transaction_id, transaction_message, 3)
     return commit_response
+
+def get_elements_of_type(xmlTree, elementName):
+    retElem=None
+    elems=[]
+    for elem in xmlTree.findall(".//"):
+        startOfTagName = elem.tag.index("}")+1
+        tagName = elem.tag[startOfTagName:]
+        if tagName == elementName:
+            elems.append(elem)            	
+    return elems
+
+def remove_elements_from_item(item, element_name, C):
+      elementRefs=get_elements_of_type(item, element_name)
+      if len(elementRefs) > 0:
+        print(f"Removing {len(elementRefs)} occurrence(s) of {element_name}...")
+      for y in elementRefs:
+         item[0].remove(y)
+      return item
