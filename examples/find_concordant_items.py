@@ -30,7 +30,8 @@ from examples.lib.utility import get_element_by_name, get_url_from_item, get_urn
 # HOSTNAME = "INSERT HOSTNAME HERE"
 # C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 
-# Array containing object identifying the USoc study
+# Array containing object identifying the USoc study/series. Make sure you use the most up to date version
+# of the study/series!
 searchSets = [
     {
         "agencyId": "uk.iser.ukhls",
@@ -72,9 +73,8 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     """Code for creating an array of concurrent variables where all the variables in the
     concurrent set aren't assigned to the same topic.
     """
-    # We read all the variable identifiers into memory because it's
-    # easier to perform operations on data that's already in memory than to perform multiple
-    # search queries against the API.
+    # We read all the variable identifiers into memory because it's easier to perform operations 
+    # on data that's already in memory than to perform multiple search queries against the API.
     variables = C.search_items(C.item_code('Variable'),
                                SearchSets=searchSets,
                                ReturnIdentifiersOnly=False)['Results']
