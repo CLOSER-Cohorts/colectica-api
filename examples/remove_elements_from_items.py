@@ -111,19 +111,19 @@ def count_elements_in_items(items, elementTagname):
 
 def validate_removal_of_references(dataCollectionItems, 
     updatedDataCollections, studyItems, updatedStudies):
-    print("Number of instrument references in data collections before removal: "
-       f"{count_elements_in_items(dataCollectionItems, "InstrumentReference")}")
-    print("Number of instrument references in data collections after removal: " 
-       f"{count_elements_in_items([x['Item'] for x in updatedDataCollections], "InstrumentReference")}")
-    print("Number of question scheme references in data collections before removal: "
-       f"{count_elements_in_items(dataCollectionItems, "QuestionSchemeReference")}")
-    print("Number of question scheme references in data collections after removal: "
-       f"{count_elements_in_items([x['Item'] for x in updatedDataCollections], "QuestionSchemeReference")}")
-    print("Number of physical instance references in studies before removal: "
-       f"{count_elements_in_items(studyItems, "PhysicalInstanceReference")}")
-    print("Number of physical instance references in studies after removal: "
-       f"{count_elements_in_items([x['Item'] for x in updatedStudies], "PhysicalInstanceReference")}") 
-    print("Number of required resource packages in studies before removal: "
-       f"{count_elements_in_items(studyItems, "RequiredResourcePackages")}")
-    print("Number of required resource packages in studies after removal: "
-       f"{count_elements_in_items([x['Item'] for x in updatedStudies], "RequiredResourcePackages")}")
+    instrumentRefsBefore = count_elements_in_items(dataCollectionItems, "InstrumentReference")
+    print(f"Number of instrument references in data collections before removal: {instrumentRefsBefore}")
+    instrumentRefsAfter = count_elements_in_items([x['Item'] for x in updatedDataCollections], "InstrumentReference")
+    print(f"Number of instrument references in data collections after removal: {instrumentRefsAfter}")
+    questionSchemeRefsBefore = count_elements_in_items(dataCollectionItems, "QuestionSchemeReference")
+    print(f"Number of question scheme references in data collections before removal: {questionSchemeRefsBefore}")
+    questionSchemeRefsAfter = count_elements_in_items([x['Item'] for x in updatedDataCollections], "QuestionSchemeReference")
+    print(f"Number of question scheme references in data collections after removal: {questionSchemeRefsAfter}")
+    physicalInstanceRefsBefore = count_elements_in_items(studyItems, "PhysicalInstanceReference")
+    print(f"Number of physical instance references in studies before removal: {physicalInstanceRefsBefore}")
+    physicalInstanceRefsAfter = count_elements_in_items([x['Item'] for x in updatedStudies], "PhysicalInstanceReference")
+    print(f"Number of physical instance references in studies after removal: {physicalInstanceRefsAfter}")
+    requiredResourcePackagesBefore = count_elements_in_items(studyItems, "RequiredResourcePackages")
+    print(f"Number of required resource packages in studies before removal: {requiredResourcePackagesBefore}")
+    requiredResourcePackagesAfter = count_elements_in_items([x['Item'] for x in updatedStudies], "RequiredResourcePackages")
+    print(f"Number of required resource packages in studies after removal: {requiredResourcePackagesAfter}")
