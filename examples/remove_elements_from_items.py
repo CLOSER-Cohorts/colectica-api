@@ -28,10 +28,11 @@ PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 
-# Specify the Millenium Cohort Study (MCS) which we want to search for items in...
+# Specify the Millenium Cohort Study (MCS) which we want to search for items in. Make sure you 
+# use the most up to date version of the study/series!
 search_sets = [{"agencyId": "uk.cls.mcs", 
                 "identifier": "0d8a7220-c61b-4542-967d-a40cb5aca430", 
-                "version": "57"}]
+                "version": "60"}]
                 
 allItemsInOneQuery = C.search_items([], SearchSets=search_sets)['Results']
 
@@ -45,7 +46,7 @@ dataCollectionItems = []
 updatedDataCollections = []
 for dataCollection in dataCollections:
     dataCollectionItem=defusedxml.ElementTree.fromstring(C.get_item_xml(dataCollection['AgencyId'],
-        dataCollection['Identifier'], version=dataCollection['Version'])['Item'])
+        dataCollection['Identifier'])['Item'])
     # We use deepcopy to create a list of the unmodified items that we will use in a
     # 'before' and 'after' comparison'.
     dataCollectionItems.append(deepcopy(dataCollectionItem))
@@ -65,7 +66,7 @@ studyItems = []
 updatedStudies = []
 for study in studies:
     studyItem=defusedxml.ElementTree.fromstring(C.get_item_xml(study['AgencyId'],
-        study['Identifier'], version=study['Version'])['Item'])
+        study['Identifier'])['Item'])
     # We use deepcopy to create a list of the unmodified items that we will use in a
     # 'before' and 'after' comparison'.    
     studyItems.append(deepcopy(studyItem))
@@ -89,7 +90,7 @@ update_repository(updatedStudies,
 
 # Code for validating that the reference elements have been removed from the data collection
 # and study items. The code will print the number of reference elements that were present in
-# the item before we removed them, and the number of reference elements present after we
+# the items before we removed them, and the number of reference elements present after we
 # removed them (there should be 0 reference elements present after we perform the removal
 # operations).
 #
@@ -97,17 +98,19 @@ update_repository(updatedStudies,
 # 'count_elements_in_items' methods in your Python interpreter environment (e.g. by copying 
 # and pasting the method code below into your Python interpreter) and typing:
 #
-# validate_removal_of_references()
+# validate_removal_of_references(dataCollectionItems, updatedDataCollections, studyItems, 
+#    updatedStudies)
 
 def count_elements_in_items(items, elementTagname):
     """Given a list of items and the tag name of an element, this function counts
-    the number of occurrences across all items of elements with that tag name."""
+    the number of occurrences across the list of items of elements with that tag name."""
     elementCount=0
     for item in items: 
        elementCount += len(get_elements_of_type(item, elementTagname))
     return elementCount
 
-def validate_removal_of_references():
+def validate_removal_of_references(dataCollectionItems, 
+    updatedDataCollections, studyItems, updatedStudies):
     print("Number of instrument references in data collections before removal: "
        f"{count_elements_in_items(dataCollectionItems, "InstrumentReference")}")
     print("Number of instrument references in data collections after removal: " 
