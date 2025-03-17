@@ -106,7 +106,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
             datasetItems = [{"AgencyId": x['Item1']['Item3'], "Identifier": x['Item1']['Item1']} for x in dataset]
             uniqueDatasetItems = list(set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in dataset]))
             if len(uniqueDatasetItems) > 1:
-                print(f"""WARNING: Variable {variable['ItemName']} ({variableLabel}) is present in two datasets.
+                print(f"""WARNING: Variable {variable['ItemName']} ({variableLabel}) is present in multiple datasets.
                    This variable will be excluded from the list.""")
             elif len(uniqueDatasetItems) == 1:
                 latestDatasetVersion = C.get_item_json(datasetItems[0]['AgencyId'],
