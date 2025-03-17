@@ -220,8 +220,8 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
         for inputQuestion in inputQuestionsList:
             if len(inputQuestion.strip()) > 0:
                 allQuestionsInInputFiles.append(inputQuestion.split("\t")[0].split(" ")[0].strip())
-    questions = C.search_items(C.item_code(
-        'Question'), SearchSets=searchSets, ReturnIdentifiersOnly=False)['Results']
+    questions = C.search_items(C.item_code('Question'), 
+        SearchSets=searchSets, ReturnIdentifiersOnly=False)['Results']
     questionsWithExtraNameField = []
     for question in questions:
         positionOfWaveIdentifier = re.search(
