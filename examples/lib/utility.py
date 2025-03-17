@@ -216,9 +216,9 @@ def get_elements_of_type(xmlTree, elementName):
     return elems
 
 def remove_elements_from_item(item, element_name, C):
-      elementRefs=get_elements_of_type(item, element_name)
-      if len(elementRefs) > 0:
+    elementRefs=get_elements_of_type(item, element_name)
+    if len(elementRefs) > 0:
         print(f"Removing {len(elementRefs)} occurrence(s) of {element_name}...")
-      for y in elementRefs:
-         item[0].remove(y)
-      return item
+    for y in elementRefs:
+        item[0].remove(y)
+    return item

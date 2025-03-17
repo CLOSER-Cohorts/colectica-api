@@ -96,7 +96,7 @@ update_repository(updatedStudies,
 #
 # Execute this code by making sure you have defined the 'validate_removal_of_references' and
 # 'count_elements_in_items' methods in your Python interpreter environment (e.g. by copying 
-# and pasting the method code below into your Python interpreter) and typing:
+# and pasting the methods code below into your Python interpreter) and typing:
 #
 # validate_removal_of_references(dataCollectionItems, updatedDataCollections, studyItems, 
 #    updatedStudies)
