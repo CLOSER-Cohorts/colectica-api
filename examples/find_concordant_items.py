@@ -188,7 +188,7 @@ def createFileWithConcurrentVariablesNotInSameTopic(variablesAcrossWavesNotAllIn
             mappingOccurrences = ""
             for mappingFrequency in mappingFrequencies:
                 mappingOccurrences = mappingOccurrences + \
-                    str(mappingFrequency["topicName"])+", " + str(mappingFrequency["topicFrequency"])+", "
+                    str(mappingFrequency["topicName"]) + ", " + str(mappingFrequency["topicFrequency"]) + ", "
             for variableTopicMapping in variableTopicMappings:
                 fw.write(variableTopicMapping["variableDatasetAlternateTitle"] + ", " 
                    + variableStem + ", "
@@ -219,8 +219,7 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
         inputQuestionsList = inputQuestions.split("\n")
         for inputQuestion in inputQuestionsList:
             if len(inputQuestion.strip()) > 0:
-                allQuestionsInInputFiles.append(inputQuestion.split("\t")[
-                                                0].split(" ")[0].strip())
+                allQuestionsInInputFiles.append(inputQuestion.split("\t")[0].split(" ")[0].strip())
     questions = C.search_items(C.item_code(
         'Question'), SearchSets=searchSets, ReturnIdentifiersOnly=False)['Results']
     questionsWithExtraNameField = []
@@ -252,8 +251,7 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
                 questionItem['AgencyId'], questionItem['Identifier'])
             positionOfWaveIdentifier = re.search(
                 "_w[0-9]+_", latestQuestionVersionJSON['ItemName']['en-GB'])
-            questionName = latestQuestionVersionJSON['ItemName']['en-GB'][positionOfWaveIdentifier.span()[
-                1]:]
+            questionName = latestQuestionVersionJSON['ItemName']['en-GB'][positionOfWaveIdentifier.span()[1]:]
             concordantQuestions = [
                 x for x in questionsWithExtraNameField if x['questionName'] == questionName]
             for concordantQuestionItem in concordantQuestions:
@@ -285,7 +283,7 @@ def createFileWithConcurrentQuestionsAndTheirRelatedVariables(searchSets, C):
                                               reverseTraversal=True)
                         if len(datasets) > 1:
                             print(f"""WARNING: Variable in study {latestVariableVersion['AgencyId']}, with 
-                               identifier {latestVariableVersion['Identifier']} is present in two datasets.""")
+                               identifier {latestVariableVersion['Identifier']} is present in multiple datasets.""")
                         for dataset in datasets:
                             datasetItem = C.get_item_xml(dataset['Item1']['Item3'],
                                                      dataset['Item1']['Item1'],
