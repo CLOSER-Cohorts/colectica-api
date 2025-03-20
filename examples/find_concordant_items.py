@@ -24,6 +24,7 @@ from xml.etree import ElementTree as ET
 from defusedxml.ElementTree import parse
 from colectica_api import ColecticaObject
 from examples.lib.utility import get_element_by_name, get_url_from_item, get_urn_from_item
+from collections import Counter
 
 # USERNAME = "INSERT USERNAME HERE"
 # PASSWORD = "INSERT PASSWORD HERE"
@@ -48,24 +49,11 @@ def addQuestionNameToObject(obj, questionName):
     return obj
 
 def getMappingFrequencies(variableTopicMapping):
-    uniqueTopics = set([topicMapping["variableTopicName"] for topicMapping in variableTopicMapping])
     topicCounts = []
-    maxOccurrences = 0
-    for topicName in uniqueTopics:
-        topicFrequency = len([mapping for mapping in variableTopicMapping if mapping["variableTopicName"] == topicName])
-        topicCounts.append({"topicName": topicName, "topicFrequency": topicFrequency})
-    return topicCounts
-
-def getMostCommonMapping(variableTopicMapping):
-    uniqueTopics = set([topicMapping["variableUrl"] for topicMapping in variableTopicMapping])
-    topicCounts = []
-    maxOccurrences = 0
-    for topicName in uniqueTopics:
-        topicFrequency = len([mapping for mapping in variableTopicMapping if mapping["variableUrl"] == topicName])
-        if topicFrequency > maxOccurrences:
-            maxOccurrences = topicFrequency
-        topicCounts.append({"topicName": topicName, "topicFrequency": topicFrequency})
-    return [topic for topic in topicCounts if topic["topicFrequency"] == maxOccurrences]
+    topics = [topicMapping["variableTopicName"] for topicMapping in variableTopicMapping]
+    topic_counts = Counter(topics)
+    for topic_name in c.keys:
+        topicCounts.append({"topicName": topic_name, "topicFrequency": topics[topic_name]})
 
 def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     """Code for creating an array of concurrent variables where all the variables in the
@@ -75,7 +63,8 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     # on data that's already in memory than to perform multiple search queries against the API.
     variables = C.search_items(C.item_code('Variable'),
                                SearchSets=searchSets,
-                               ReturnIdentifiersOnly=False)['Results']
+                               ReturnIdentifiersOnly=False,
+                               MaxResults=10)['Results']
     variablesAcrossWavesNotAllInSameTopic = []
     variablesWithExtraStemField = [addVariableStemToObject(
         x, "_".join(x['ItemName']['en-GB'].split("_")[1:])) for x in variables]
