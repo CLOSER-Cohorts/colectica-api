@@ -63,8 +63,7 @@ def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     # on data that's already in memory than to perform multiple search queries against the API.
     variables = C.search_items(C.item_code('Variable'),
                                SearchSets=searchSets,
-                               ReturnIdentifiersOnly=False,
-                               MaxResults=10)['Results']
+                               ReturnIdentifiersOnly=False)['Results']
     variablesAcrossWavesNotAllInSameTopic = []
     variablesWithExtraStemField = [addVariableStemToObject(
         x, "_".join(x['ItemName']['en-GB'].split("_")[1:])) for x in variables]
