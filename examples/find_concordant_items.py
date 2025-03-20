@@ -53,8 +53,6 @@ def getMappingFrequencies(variableTopicMapping):
     maxOccurrences = 0
     for topicName in uniqueTopics:
         topicFrequency = len([mapping for mapping in variableTopicMapping if mapping["variableTopicName"] == topicName])
-        if topicFrequency > maxOccurrences:
-            maxOccurrences = topicFrequency
         topicCounts.append({"topicName": topicName, "topicFrequency": topicFrequency})
     return topicCounts
 
