@@ -52,7 +52,7 @@ def getMappingFrequencies(variableTopicMapping):
     topicCounts = []
     topics = [topicMapping["variableTopicName"] for topicMapping in variableTopicMapping]
     topic_counts = Counter(topics)
-    for topic_name in c.keys:
+    for topic_name in topic_counts.keys:
         topicCounts.append({"topicName": topic_name, "topicFrequency": topics[topic_name]})
 
 def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
