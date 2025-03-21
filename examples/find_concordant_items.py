@@ -48,12 +48,12 @@ def addQuestionNameToObject(obj, questionName):
     obj['questionName'] = questionName
     return obj
 
-def getMappingFrequencies(variableTopicMapping):
+def getMappingFrequencies(variableTopicMappings):
     topicCounts = []
-    topics = [topicMapping["variableTopicName"] for topicMapping in variableTopicMapping]
+    topics = [topicMapping["variableTopicName"] for topicMapping in variableTopicMappings]
     topic_counts = Counter(topics)
-    for topic_name in topic_counts.keys:
-        topicCounts.append({"topicName": topic_name, "topicFrequency": topics[topic_name]})
+    for topic_name in topic_counts.keys():
+        topicCounts.append({"topicName": topic_name, "topicFrequency": topic_counts[topic_name]})
 
 def getConcurrentVariablesNotInSameTopic(searchSets, hostname, C):
     """Code for creating an array of concurrent variables where all the variables in the
