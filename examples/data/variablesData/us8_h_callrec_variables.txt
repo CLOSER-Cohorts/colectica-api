@@ -1,0 +1,60 @@
+us8_h_callrec h_ivtnc	Total number of calls	Normal
+us8_h_callrec h_tnc	Total number of calls per issue	Normal
+us8_h_callrec h_callbackd	Date of callback (day)	Normal
+us8_h_callrec h_callbackm	Date of callback (month)	Normal
+us8_h_callrec h_callbacky	Date of callback (year)	Normal
+us8_h_callrec h_timeapptmm	Time of appointment  (minutes)	Normal
+us8_h_callrec h_timeappthh	Time of appointment  (hours)	Normal
+us8_h_callrec h_dateapptd	Date of appointment  (day)	Normal
+us8_h_callrec h_dateapptm	Date of appointment  (month)	Normal
+us8_h_callrec h_dateappty	Date of appointment  (year)	Normal
+us8_h_callrec h_iv_outcome16	Individual outcome at this call (person 16)	Normal
+us8_h_callrec h_iv_outcome15	Individual outcome at this call (person 15)	Normal
+us8_h_callrec h_iv_outcome14	Individual outcome at this call (person 14)	Normal
+us8_h_callrec h_iv_outcome13	Individual outcome at this call (person 13)	Normal
+us8_h_callrec h_iv_outcome12	Individual outcome at this call (person 12)	Normal
+us8_h_callrec h_iv_outcome11	Individual outcome at this call (person 11)	Normal
+us8_h_callrec h_iv_outcome10	Individual outcome at this call (person 10)	Normal
+us8_h_callrec h_iv_outcome9	Individual outcome at this call (person 9)	Normal
+us8_h_callrec h_iv_outcome8	Individual outcome at this call (person 8)	Normal
+us8_h_callrec h_iv_outcome7	Individual outcome at this call (person 7)	Normal
+us8_h_callrec h_iv_outcome6	Individual outcome at this call (person 6)	Normal
+us8_h_callrec h_iv_outcome5	Individual outcome at this call (person 5)	Normal
+us8_h_callrec h_iv_outcome4	Individual outcome at this call (person 4)	Normal
+us8_h_callrec h_iv_outcome3	Individual outcome at this call (person 3)	Normal
+us8_h_callrec h_iv_outcome2	Individual outcome at this call (person 2)	Normal
+us8_h_callrec h_iv_outcome1	Individual outcome at this call (person 1)	Normal
+us8_h_callrec h_hh_outcome	HH outcome at this call	Normal
+us8_h_callrec h_hhint_length	Length of time it took to complete the household interview	Normal
+us8_h_callrec h_hhgrid_length	Length of time it took to complete household grid	Normal
+us8_h_callrec h_q8	Alive and living in the UK	Normal
+us8_h_callrec h_q7	If any OSM / PSM live at address	Normal
+us8_h_callrec h_q5	Whether contact made	Normal
+us8_h_callrec h_q4	Type of letter posted	Normal
+us8_h_callrec h_q3	Address/Tel no attempting	Normal
+us8_h_callrec h_q2	Contact type	Normal
+us8_h_callrec h_q1	Who attempting to contact	Normal
+us8_h_callrec h_callenddatss	End time (seconds)	Normal
+us8_h_callrec h_callenddatmm	End time (minutes)	Normal
+us8_h_callrec h_callenddathh	End time (hours)	Normal
+us8_h_callrec h_callenddaty	Year - ended	Normal
+us8_h_callrec h_callenddatm	Month call ended	Normal
+us8_h_callrec h_callenddatd	Day call ended	Normal
+us8_h_callrec h_callstrtdatss	Start time   (seconds)	Normal
+us8_h_callrec h_callstrtdatmm	Start time   (minutes)	Normal
+us8_h_callrec h_callstrtdathh	Start time   (hours)	Normal
+us8_h_callrec h_callstrtdaty	Year - started	Normal
+us8_h_callrec h_callstrtdatm	Month call started	Normal
+us8_h_callrec h_callstrtdatd	Day call started	Normal
+us8_h_callrec h_c_status	Call status	Normal
+us8_h_callrec h_c_length	call length (mins)	Normal
+us8_h_callrec h_ivfho	Household level outcome	Normal
+us8_h_callrec h_quarter	sample quarter	Normal
+us8_h_callrec h_month	sample month	Normal
+us8_h_callrec h_strata	Strata	Normal
+us8_h_callrec h_psu	Primary sampling unit	Normal
+us8_h_callrec h_hhorig	Sample origin, household	Normal
+us8_h_callrec h_intnum	Interviewer number	Normal
+us8_h_callrec h_callno	Call number	Normal
+us8_h_callrec h_issueno	Issue Number	Normal
+us8_h_callrec h_hidp	household identifier (public release)	Normal

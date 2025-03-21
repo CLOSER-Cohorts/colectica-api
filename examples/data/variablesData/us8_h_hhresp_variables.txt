@@ -1,0 +1,531 @@
+us8_h_hhresp h_hhdenui_xw	BHPS+UKHLS+IEMB cross-sectional household weight	Normal
+us8_h_hhresp h_hhdenub_xw	BHPS+UKHLS cross-sectional household weight	Normal
+us8_h_hhresp h_fihhmngrs_dv	gross household income: month before interview	Normal
+us8_h_hhresp h_fihhmngrs_if	share of imputed HH total income	Normal
+us8_h_hhresp h_fihhnegsei_if	flag for negative self employment income	Normal
+us8_h_hhresp h_tenure_dv	housing tenure	Normal
+us8_h_hhresp h_ieqmoecd_dv	Modified OECD equivalence scale	Normal
+us8_h_hhresp h_nadoecd_dv	Number of adults aged 14+ in hh, OECD definition	Normal
+us8_h_hhresp h_nchoecd_dv	Number of children aged 0-13 in hh, OECD definition	Normal
+us8_h_hhresp h_nwage_dv	Number working age in hh	Normal
+us8_h_hhresp h_nue_dv	Number not in paid employment in the hh	Normal
+us8_h_hhresp h_nemp_dv	Number employed in the hh	Normal
+us8_h_hhresp h_npens_dv	# of people over pensionable age in hh	Normal
+us8_h_hhresp h_agechy_dv	Age of youngest child in HH	Normal
+us8_h_hhresp h_nch1215_dv	Number of children aged 12-15 in household	Normal
+us8_h_hhresp h_nch511_dv	Number of children aged 5-11 in household	Normal
+us8_h_hhresp h_nch34_dv	Number of children aged 3-4 in household	Normal
+us8_h_hhresp h_nch02_dv	Number of children aged 0-2 in household	Normal
+us8_h_hhresp h_nkids_dv	Number of children in household	Normal
+us8_h_hhresp h_nonepar_dv	Number of lone parents in hh	Normal
+us8_h_hhresp h_ncouple_dv	# of couples within hh	Normal
+us8_h_hhresp h_hrpno	Household reference person: PNO	Normal
+us8_h_hhresp h_hrpid	Household reference person: PIDP	Normal
+us8_h_hhresp h_hhtype_dv	Composition of household, LFS-version	Normal
+us8_h_hhresp h_hhresp_dv	Household response status	Normal
+us8_h_hhresp h_urban_dv	Urban or rural area, derived	Normal
+us8_h_hhresp h_gor_dv	Government Office Region	Normal
+us8_h_hhresp h_country	Country of residence	Normal
+us8_h_hhresp h_ctband_dv	council tax band, using reports, external data and imputes	Normal
+us8_h_hhresp h_fihhmnnet4_dv	total household net income - hb adj &amp; individual/household deductions	Normal
+us8_h_hhresp h_fihhmngrs1_dv	gross household income: month before interview, hb adj	Normal
+us8_h_hhresp h_houscost2_dv	monthly housing cost excluding mortgage principal payments	Normal
+us8_h_hhresp h_houscost1_dv	monthly housing cost including mortgage principal payments	Normal
+us8_h_hhresp h_xpmgint_dv	estimated interest in monthly mortgage payment	Normal
+us8_h_hhresp h_xpmg_dv	monthly mortgage payment including imputations	Normal
+us8_h_hhresp h_hbadjust_dv	income adjustment for housing benefit included in gross rent	Normal
+us8_h_hhresp h_rentgrs_dv	monthly gross rent, including housing benefit	Normal
+us8_h_hhresp h_rent_dv	last rent payment, montly	Normal
+us8_h_hhresp h_fihhmnsben_dv	total household social benefit income: month before interview	Normal
+us8_h_hhresp h_fihhmnpen_dv	total household pension income: month before interview	Normal
+us8_h_hhresp h_fihhmninv_dv	total household investment income: month before interview	Normal
+us8_h_hhresp h_fihhmnprben_dv	total household private benefit income: month before interview	Normal
+us8_h_hhresp h_fihhmnmisc_dv	total household miscellaneous income: month before interview	Normal
+us8_h_hhresp h_fihhmnlabnet_dv	total net household labour income: month before interview	Normal
+us8_h_hhresp h_fihhmnlabgrs_dv	total gross household labour income: month before interview	Normal
+us8_h_hhresp h_fihhmnnet3_dv	total household net income - individual/household deductions	Normal
+us8_h_hhresp h_ficountax_dv	amount deduction component 9: (net) council tax	Normal
+us8_h_hhresp h_fihhmnnet1_dv	total household net income - no deductions	Normal
+us8_h_hhresp h_npensioner_dv	Total # of pensionable age in hh	Normal
+us8_h_hhresp h_ff_hsownd	Tenancy status	Normal
+us8_h_hhresp h_ff_hsrooms	Number of other rooms	Normal
+us8_h_hhresp h_ff_hsbeds	Number of bedrooms	Normal
+us8_h_hhresp h_hgenddatss	household grid ends (seconds)	Normal
+us8_h_hhresp h_hgenddatmm	household grid ends (minutes)	Normal
+us8_h_hhresp h_hgenddathh	household grid ends (hours)	Normal
+us8_h_hhresp h_hgenddatd	household grid ends (day)	Normal
+us8_h_hhresp h_hgenddatm	household grid ends (month)	Normal
+us8_h_hhresp h_hgenddaty	household grid ends (year)	Normal
+us8_h_hhresp h_hgstrtdatss	household grid starts (seconds)	Normal
+us8_h_hhresp h_hgstrtdatmm	household grid starts (minutes)	Normal
+us8_h_hhresp h_hgstrtdathh	household grid starts (hours)	Normal
+us8_h_hhresp h_hgstrtdatd	household grid starts (day)	Normal
+us8_h_hhresp h_hgstrtdatm	household grid starts (month)	Normal
+us8_h_hhresp h_hgstrtdaty	household grid starts (year)	Normal
+us8_h_hhresp h_ctband_if	data source for council tax band (ctband_dv)	Normal
+us8_h_hhresp h_xpmg_if	monthly mortgage payment imputation flag	Normal
+us8_h_hhresp h_rentgrs_if	monthly gross rent, imputation flag	Normal
+us8_h_hhresp h_fihhmnlabgrs_tc	fihhmnlabgrs_dv includes top coded component (EUL version only) (EUL version onl	Normal
+us8_h_hhresp h_fihhmngrs_tc	fihhmngrs_dv includes top coded component (EUL version only) (EUL version only)	Normal
+us8_h_hhresp h_hhsize	Household size, incl. absent members	Normal
+us8_h_hhresp h_nvestlskrt97	Investment type 97: amount held by hh members, in GBP	Normal
+us8_h_hhresp h_nvestljrt97	Investment type 97: joint with someone outside hh?	Normal
+us8_h_hhresp h_nvestbrt97	Investment type 97: approximate amount, in GBP	Normal
+us8_h_hhresp h_nvestamtrt97	Investment type 97: amount, in GBP	Normal
+us8_h_hhresp h_nvestlskrt3	Investment type 3: amount held by hh members, in GBP	Normal
+us8_h_hhresp h_nvestljrt3	Investment type 3: joint with someone outside hh?	Normal
+us8_h_hhresp h_nvestbrt3	Investment type 3: approximate amount, in GBP	Normal
+us8_h_hhresp h_nvestamtrt3	Investment type 3: amount, in GBP	Normal
+us8_h_hhresp h_nvestlskrt2	Investment type 2: amount held by hh members, in GBP	Normal
+us8_h_hhresp h_nvestljrt2	Investment type 2: joint with someone outside hh?	Normal
+us8_h_hhresp h_nvestbrt2	Investment type 2: approximate amount, in GBP	Normal
+us8_h_hhresp h_nvestamtrt2	Investment type 2: amount, in GBP	Normal
+us8_h_hhresp h_nvestlskrt1	Investment type 1: amount held by hh members, in GBP	Normal
+us8_h_hhresp h_nvestljrt1	Investment type 1: joint with someone outside hh?	Normal
+us8_h_hhresp h_nvestbrt1	Investment type 1: approximate amount, in GBP	Normal
+us8_h_hhresp h_nvestamtrt1	Investment type 1: amount, in GBP	Normal
+us8_h_hhresp h_carage5	car no.5: Age of car/van	Normal
+us8_h_hhresp h_carfuel5	car no.5: Type of fuel car/van uses	Normal
+us8_h_hhresp h_carn2h5	car no.5: Car/Van bought new or secondhand	Normal
+us8_h_hhresp h_whodrive5	car no.5: Main driver of car	Normal
+us8_h_hhresp h_ensze5	car no.5: Engine size	Normal
+us8_h_hhresp h_carage4	car no.4: Age of car/van	Normal
+us8_h_hhresp h_carfuel4	car no.4: Type of fuel car/van uses	Normal
+us8_h_hhresp h_carn2h4	car no.4: Car/Van bought new or secondhand	Normal
+us8_h_hhresp h_whodrive4	car no.4: Main driver of car	Normal
+us8_h_hhresp h_ensze4	car no.4: Engine size	Normal
+us8_h_hhresp h_carage3	car no.3: Age of car/van	Normal
+us8_h_hhresp h_carfuel3	car no.3: Type of fuel car/van uses	Normal
+us8_h_hhresp h_carn2h3	car no.3: Car/Van bought new or secondhand	Normal
+us8_h_hhresp h_whodrive3	car no.3: Main driver of car	Normal
+us8_h_hhresp h_ensze3	car no.3: Engine size	Normal
+us8_h_hhresp h_carage2	car no.2: Age of car/van	Normal
+us8_h_hhresp h_carfuel2	car no.2: Type of fuel car/van uses	Normal
+us8_h_hhresp h_carn2h2	car no.2: Car/Van bought new or secondhand	Normal
+us8_h_hhresp h_whodrive2	car no.2: Main driver of car	Normal
+us8_h_hhresp h_ensze2	car no.2: Engine size	Normal
+us8_h_hhresp h_carage1	car no.1: Age of car/van	Normal
+us8_h_hhresp h_carfuel1	car no.1: Type of fuel car/van uses	Normal
+us8_h_hhresp h_carn2h1	car no.1: Car/Van bought new or secondhand	Normal
+us8_h_hhresp h_whodrive1	car no.1: Main driver of car	Normal
+us8_h_hhresp h_ensze1	car no.1: Engine size	Normal
+us8_h_hhresp h_ringfence	CAPI ringfenced household	Normal
+us8_h_hhresp h_hholdmodedv	Mode for the completion of the household interview	Normal
+us8_h_hhresp h_outcome	INTERVIEWER:FINAL OUTCOME FOR HOUSEHOLD INTERVIEW (ISER list)	Normal
+us8_h_hhresp h_hhintlang	LANGUAGE HHOLD INTERVIEW CONDUCTED IN	Normal
+us8_h_hhresp h_intdated	Interview date   (day)	Normal
+us8_h_hhresp h_intdatem	Interview date   (month)	Normal
+us8_h_hhresp h_intdatey	Interview date   (year)	Normal
+us8_h_hhresp h_needesent	Email reminder sent of agreement for consent link to energy use records	Normal
+us8_h_hhresp h_hienddatss	household interview end (seconds)	Normal
+us8_h_hhresp h_hienddatmm	household interview end (minutes)	Normal
+us8_h_hhresp h_hienddathh	household interview end (hours)	Normal
+us8_h_hhresp h_hienddatd	household interview end (day)	Normal
+us8_h_hhresp h_hienddatm	household interview end (month)	Normal
+us8_h_hhresp h_hienddaty	household interview end (year)	Normal
+us8_h_hhresp h_hhqurecomplete	HHold Questionnaire completed CAWI	Normal
+us8_h_hhresp h_carval	Value vehicle(s) less amount outstanding	Normal
+us8_h_hhresp h_ncars	Number of cars in household	Normal
+us8_h_hhresp h_invdocs	Investments: documents seen by interviewer	Normal
+us8_h_hhresp h_nvestrt96	SPONTANEOUS: None of these	Normal
+us8_h_hhresp h_nvestrt97	Other investments (e.g. gilts, government or company bonds or securities, stock	Normal
+us8_h_hhresp h_nvestrt3	Company stocks or shares, UK or foreign (excluding ISAs/PEPs)	Normal
+us8_h_hhresp h_nvestrt2	Unit Trusts / Investment Trusts (excluding ISAs/PEPs)	Normal
+us8_h_hhresp h_nvestrt1	National Savings Certificates / National Savings Bonds (Capital, Income or Depos	Normal
+us8_h_hhresp h_pdepoh97	how pay unexpected expense: spontaneous: other	Normal
+us8_h_hhresp h_pdepoh5	how pay unexpected expense: money from family or friends	Normal
+us8_h_hhresp h_pdepoh4	how pay unexpected expense: use a form of credit	Normal
+us8_h_hhresp h_pdepoh3	how pay unexpected expense: savings	Normal
+us8_h_hhresp h_pdepoh2	how pay unexpected expense: income, not cutting back on essentials	Normal
+us8_h_hhresp h_pdepoh1	how pay unexpected expense: income, cutting back on essentials	Normal
+us8_h_hhresp h_pdepo97	pay unexpected expense: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepo8	pay unexpected expense: no, not relevant	Normal
+us8_h_hhresp h_pdepo7	pay unexpected expense: no, not wanted	Normal
+us8_h_hhresp h_pdepo6	pay unexpected expense: no, no company/help	Normal
+us8_h_hhresp h_pdepo5	pay unexpected expense: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepo4	pay unexpected expense: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepo3	pay unexpected expense: no, not a priority	Normal
+us8_h_hhresp h_pdepo2	pay unexpected expense: no, no money for this	Normal
+us8_h_hhresp h_pdepo1	pay unexpected expense: yes	Normal
+us8_h_hhresp h_pdepn97	warm waterproof coat: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepn8	warm waterproof coat: no, not relevant	Normal
+us8_h_hhresp h_pdepn7	warm waterproof coat: no, not wanted	Normal
+us8_h_hhresp h_pdepn6	warm waterproof coat: no, no company/help	Normal
+us8_h_hhresp h_pdepn5	warm waterproof coat: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepn4	warm waterproof coat: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepn3	warm waterproof coat: no, not a priority	Normal
+us8_h_hhresp h_pdepn2	warm waterproof coat: no, no money for this	Normal
+us8_h_hhresp h_pdepn1	warm waterproof coat: yes	Normal
+us8_h_hhresp h_pdepm97	hair cut regularly: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepm8	hair cut regularly: no, not relevant	Normal
+us8_h_hhresp h_pdepm7	hair cut regularly: no, not wanted	Normal
+us8_h_hhresp h_pdepm6	hair cut regularly: no, no company/help	Normal
+us8_h_hhresp h_pdepm5	hair cut regularly: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepm4	hair cut regularly: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepm3	hair cut regularly: no, not a priority	Normal
+us8_h_hhresp h_pdepm2	hair cut regularly: no, no money for this	Normal
+us8_h_hhresp h_pdepm1	hair cut regularly: yes	Normal
+us8_h_hhresp h_pdepl97	access to car/taxi: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepl8	access to car/taxi: no, not relevant	Normal
+us8_h_hhresp h_pdepl7	access to car/taxi: no, not wanted	Normal
+us8_h_hhresp h_pdepl6	access to car/taxi: no, no company/help	Normal
+us8_h_hhresp h_pdepl5	access to car/taxi: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepl4	access to car/taxi: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepl3	access to car/taxi: no, not a priority	Normal
+us8_h_hhresp h_pdepl2	access to car/taxi: no, no money for this	Normal
+us8_h_hhresp h_pdepl1	access to car/taxi: yes	Normal
+us8_h_hhresp h_pdepk97	has telephone: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepk8	has telephone: no, not relevant	Normal
+us8_h_hhresp h_pdepk7	has telephone: no, not wanted	Normal
+us8_h_hhresp h_pdepk6	has telephone: no, no company/help	Normal
+us8_h_hhresp h_pdepk5	has telephone: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepk4	has telephone: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepk3	has telephone: no, not a priority	Normal
+us8_h_hhresp h_pdepk2	has telephone: no, no money for this	Normal
+us8_h_hhresp h_pdepk1	has telephone: yes	Normal
+us8_h_hhresp h_pdepi97	home kept warm: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepi8	home kept warm: no, not relevant	Normal
+us8_h_hhresp h_pdepi7	home kept warm: no, not wanted	Normal
+us8_h_hhresp h_pdepi6	home kept warm: no, no company/help	Normal
+us8_h_hhresp h_pdepi5	home kept warm: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepi4	home kept warm: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepi3	home kept warm: no, not a priority	Normal
+us8_h_hhresp h_pdepi2	home kept warm: no, no money for this	Normal
+us8_h_hhresp h_pdepi1	home kept warm: yes	Normal
+us8_h_hhresp h_pdeph97	damp-free home: spontaneous: no, other	Normal
+us8_h_hhresp h_pdeph8	damp-free home: no, not relevant	Normal
+us8_h_hhresp h_pdeph7	damp-free home: no, not wanted	Normal
+us8_h_hhresp h_pdeph6	damp-free home: no, no company/help	Normal
+us8_h_hhresp h_pdeph5	damp-free home: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdeph4	damp-free home: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdeph3	damp-free home: no, not a priority	Normal
+us8_h_hhresp h_pdeph2	damp-free home: no, no money for this	Normal
+us8_h_hhresp h_pdeph1	damp-free home: yes	Normal
+us8_h_hhresp h_pdepg97	services good working order: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepg8	services good working order: no, not relevant	Normal
+us8_h_hhresp h_pdepg7	services good working order: no, not wanted	Normal
+us8_h_hhresp h_pdepg6	services good working order: no, no company/help	Normal
+us8_h_hhresp h_pdepg5	services good working order: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepg4	services good working order: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepg3	services good working order: no, not a priority	Normal
+us8_h_hhresp h_pdepg2	services good working order: no, no money for this	Normal
+us8_h_hhresp h_pdepg1	services good working order: yes	Normal
+us8_h_hhresp h_pdepf97	home good state of repair: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepf8	home good state of repair: no, not relevant	Normal
+us8_h_hhresp h_pdepf7	home good state of repair: no, not wanted	Normal
+us8_h_hhresp h_pdepf6	home good state of repair: no, no company/help	Normal
+us8_h_hhresp h_pdepf5	home good state of repair: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepf4	home good state of repair: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepf3	home good state of repair: no, not a priority	Normal
+us8_h_hhresp h_pdepf2	home good state of repair: no, no money for this	Normal
+us8_h_hhresp h_pdepf1	home good state of repair: yes	Normal
+us8_h_hhresp h_pdepe97	replace broken cooker: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepe8	replace broken cooker: no, not relevant	Normal
+us8_h_hhresp h_pdepe7	replace broken cooker: no, not wanted	Normal
+us8_h_hhresp h_pdepe6	replace broken cooker: no, no company/help	Normal
+us8_h_hhresp h_pdepe5	replace broken cooker: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepe4	replace broken cooker: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepe3	replace broken cooker: no, not a priority	Normal
+us8_h_hhresp h_pdepe2	replace broken cooker: no, no money for this	Normal
+us8_h_hhresp h_pdepe1	replace broken cooker: yes	Normal
+us8_h_hhresp h_pdepd97	holiday away from home: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepd8	holiday away from home: no, not relevant	Normal
+us8_h_hhresp h_pdepd7	holiday away from home: no, not wanted	Normal
+us8_h_hhresp h_pdepd6	holiday away from home: no, no company/help	Normal
+us8_h_hhresp h_pdepd5	holiday away from home: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepd4	holiday away from home: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepd3	holiday away from home: no, not a priority	Normal
+us8_h_hhresp h_pdepd2	holiday away from home: no, no money for this	Normal
+us8_h_hhresp h_pdepd1	holiday away from home: yes	Normal
+us8_h_hhresp h_pdepc97	see friends/family: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepc8	see friends/family: no, not relevant	Normal
+us8_h_hhresp h_pdepc7	see friends/family: no, not wanted	Normal
+us8_h_hhresp h_pdepc6	see friends/family: no, no company/help	Normal
+us8_h_hhresp h_pdepc5	see friends/family: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepc4	see friends/family: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepc3	see friends/family: no, not a priority	Normal
+us8_h_hhresp h_pdepc2	see friends/family: no, no money for this	Normal
+us8_h_hhresp h_pdepc1	see friends/family: yes	Normal
+us8_h_hhresp h_pdepb97	go out socially: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepb8	go out socially: no, not relevant	Normal
+us8_h_hhresp h_pdepb7	go out socially: no, not wanted	Normal
+us8_h_hhresp h_pdepb6	go out socially: no, no company/help	Normal
+us8_h_hhresp h_pdepb5	go out socially: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepb4	go out socially: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepb3	go out socially: no, not a priority	Normal
+us8_h_hhresp h_pdepb2	go out socially: no, no money for this	Normal
+us8_h_hhresp h_pdepb1	go out socially: yes	Normal
+us8_h_hhresp h_pdepa97	filling meal a day: spontaneous: no, other	Normal
+us8_h_hhresp h_pdepa8	filling meal a day: no, not relevant	Normal
+us8_h_hhresp h_pdepa7	filling meal a day: no, not wanted	Normal
+us8_h_hhresp h_pdepa6	filling meal a day: no, no company/help	Normal
+us8_h_hhresp h_pdepa5	filling meal a day: no, too much trouble/too tiring	Normal
+us8_h_hhresp h_pdepa4	filling meal a day: no, health/disability prevents this	Normal
+us8_h_hhresp h_pdepa3	filling meal a day: no, not a priority	Normal
+us8_h_hhresp h_pdepa2	filling meal a day: no, no money for this	Normal
+us8_h_hhresp h_pdepa1	filling meal a day: yes	Normal
+us8_h_hhresp h_cdelply	Space outdoors to play	Normal
+us8_h_hhresp h_cdeptrp	Child goes on school trips	Normal
+us8_h_hhresp h_cplay	Toddler attends social group	Normal
+us8_h_hhresp h_cdepdo6	Have a warm winter coat	Normal
+us8_h_hhresp h_cdepdo5	Eat fruit and veg every day	Normal
+us8_h_hhresp h_cdepdo3	Have friends over	Normal
+us8_h_hhresp h_cdepdo2	Do a hobby/leisure activity	Normal
+us8_h_hhresp h_cdepdo4	Regular organised activity	Normal
+us8_h_hhresp h_cdephave2	Own bedrooms	Normal
+us8_h_hhresp h_cdephave4	Celebrations on special occasions	Normal
+us8_h_hhresp h_cdephave3	Leisure equipment	Normal
+us8_h_hhresp h_cdephave1	Family holiday	Normal
+us8_h_hhresp h_hheat	Adequate heating	Normal
+us8_h_hhresp h_matdeph	Material deprivation: electrical goods	Normal
+us8_h_hhresp h_matdepg	Material deprivation: furniture	Normal
+us8_h_hhresp h_matdepf	Material deprivation: savings	Normal
+us8_h_hhresp h_matdepe	Material deprivation: contents insurance	Normal
+us8_h_hhresp h_matdepd	Material deprivation: house	Normal
+us8_h_hhresp h_matdepj	Material deprivation: keep up with bills	Normal
+us8_h_hhresp h_matdepi	Material deprivation: money for self	Normal
+us8_h_hhresp h_matdepa	Material deprivation: holiday	Normal
+us8_h_hhresp h_xpaltob_g3	Amount spent on alcohol	Normal
+us8_h_hhresp h_xpfdout_g3	Amount spent on meals/snacks outside the home	Normal
+us8_h_hhresp h_xpfood1_g3	Amount spent on food from supermarket	Normal
+us8_h_hhresp h_nethow5	Other	Normal
+us8_h_hhresp h_nethow4	Games console	Normal
+us8_h_hhresp h_nethow3	Mobile phone	Normal
+us8_h_hhresp h_nethow2	Digital Television	Normal
+us8_h_hhresp h_nethow1	Home computer / Laptop / Netbook / Tablet computer	Normal
+us8_h_hhresp h_pcnet	Has access to the internet from home	Normal
+us8_h_hhresp h_hhpc96	None of the above?	Normal
+us8_h_hhresp h_hhpc5	Other	Normal
+us8_h_hhresp h_hhpc4	Tablet computer	Normal
+us8_h_hhresp h_hhpc3	Netbook computer	Normal
+us8_h_hhresp h_hhpc2	Laptop computer	Normal
+us8_h_hhresp h_hhpc1	Desktop computer	Normal
+us8_h_hhresp h_cdtv	Has TV set in the accommodation	Normal
+us8_h_hhresp h_cduse96	Or none of the above?	Normal
+us8_h_hhresp h_cduse13	Mobile telephone (anyone in household)	Normal
+us8_h_hhresp h_cduse12	Landline telephone	Normal
+us8_h_hhresp h_cduse9	Microwave oven	Normal
+us8_h_hhresp h_cduse8	Dish washer	Normal
+us8_h_hhresp h_cduse7	Tumble drier	Normal
+us8_h_hhresp h_cduse6	Washing machine	Normal
+us8_h_hhresp h_cduse5	Deep freeze or fridge freezer (EXCLUDE: fridge only)	Normal
+us8_h_hhresp h_cduse2	DVD/Blu-Ray player	Normal
+us8_h_hhresp h_cduse1	Television set	Normal
+us8_h_hhresp h_xphsdba	Problems paying bills	Normal
+us8_h_hhresp h_xphsdct	Problems paying Council Tax	Normal
+us8_h_hhresp h_xphsdb	Problems paying for housing	Normal
+us8_h_hhresp h_hsctax	Council tax band of accommodation	Normal
+us8_h_hhresp h_needlink	Linkage to household energy use data	Normal
+us8_h_hhresp h_heatch	Household has central heating	Normal
+us8_h_hhresp h_xpsfly	Amount spent on other fuel	Normal
+us8_h_hhresp h_xpoily	Amount spent on oil	Normal
+us8_h_hhresp h_gaspay	Method of payment for gas	Normal
+us8_h_hhresp h_xpgasy	Amount spent on gas	Normal
+us8_h_hhresp h_elecpay	Method of payment for electricity	Normal
+us8_h_hhresp h_xpelecy	Amount spent on electricity	Normal
+us8_h_hhresp h_duelpay	Method of payment for gas and electric combined	Normal
+us8_h_hhresp h_xpduely	Amount spent on gas and electricity combined	Normal
+us8_h_hhresp h_fuelduel	Separate or combined gas and electricity bill	Normal
+us8_h_hhresp h_fuelhave96	Or none of these?	Normal
+us8_h_hhresp h_fuelhave4	Other fuel, including solid fuel	Normal
+us8_h_hhresp h_fuelhave3	Oil	Normal
+us8_h_hhresp h_fuelhave2	Gas, including Calor Gas	Normal
+us8_h_hhresp h_fuelhave1	Electricity	Normal
+us8_h_hhresp h_rentg	Gross rent including Housing Benefit	Normal
+us8_h_hhresp h_renthb	Receives rent rebate or rent allowance	Normal
+us8_h_hhresp h_rentinc96	None of these	Normal
+us8_h_hhresp h_rentinc3	[Council Tax {if REGION = GB}] / [Rates {if REGION = NI}]	Normal
+us8_h_hhresp h_rentinc2	Heating or lighting or hot water	Normal
+us8_h_hhresp h_rentinc1	[Water and/or sewerage charges {If REGION = GB}]	Normal
+us8_h_hhresp h_rentwc	Weeks covered by last rental payment	Normal
+us8_h_hhresp h_rent	Net amount of last rent payment	Normal
+us8_h_hhresp h_rentf	Accommodation rented furnished or other	Normal
+us8_h_hhresp h_rentll	Landlord of rented accommodation	Normal
+us8_h_hhresp h_rentp16	Person number 16	Normal
+us8_h_hhresp h_rentp15	Person number 15	Normal
+us8_h_hhresp h_rentp14	Person number 14	Normal
+us8_h_hhresp h_rentp13	Person number 13	Normal
+us8_h_hhresp h_rentp12	Person number 12	Normal
+us8_h_hhresp h_rentp11	Person number 11	Normal
+us8_h_hhresp h_rentp10	Person number 10	Normal
+us8_h_hhresp h_rentp9	Person number 9	Normal
+us8_h_hhresp h_rentp8	Person number 8	Normal
+us8_h_hhresp h_rentp7	Person number 7	Normal
+us8_h_hhresp h_rentp6	Person number 6	Normal
+us8_h_hhresp h_rentp5	Person number 5	Normal
+us8_h_hhresp h_rentp4	Person number 4	Normal
+us8_h_hhresp h_rentp3	Person number 3	Normal
+us8_h_hhresp h_rentp2	Person number 2	Normal
+us8_h_hhresp h_rentp1	Person number 1	Normal
+us8_h_hhresp h_rentp0	Non-household member whether rents accomodation: non hh member	Normal
+us8_h_hhresp h_hsjb	Accommodation with present job: renter	Normal
+us8_h_hhresp h_xpmg	Last total monthly mortgage payment	Normal
+us8_h_hhresp h_hstotmg	Total amount secured against property	Normal
+us8_h_hhresp h_mgxty97	Other	Normal
+us8_h_hhresp h_mgxty6	Consolidation	Normal
+us8_h_hhresp h_mgxty5	Emergencies, loss of income or subsistence goods	Normal
+us8_h_hhresp h_mgxty4	Other consumer goods	Normal
+us8_h_hhresp h_mgxty3	Car purchase	Normal
+us8_h_hhresp h_mgxty2	Home improvements or repairs	Normal
+us8_h_hhresp h_mgxty1	Home extension	Normal
+us8_h_hhresp h_mgnew	Amount of additional mortgage on home	Normal
+us8_h_hhresp h_mgextra	Taken out additional mortgage on home	Normal
+us8_h_hhresp h_mgtype	Type of mortgage	Normal
+us8_h_hhresp h_mglife	Years left to pay: mortgage	Normal
+us8_h_hhresp h_mgold	Amount borrowed at purchase: mortgagee	Normal
+us8_h_hhresp h_hsyr04	Year mortgage began	Normal
+us8_h_hhresp h_hscost	Original purchase price of property	Normal
+us8_h_hhresp h_hsyrbuy	Year became owner: home owners	Normal
+us8_h_hhresp h_mgynot	How home came to be owned outright	Normal
+us8_h_hhresp h_hsval	Value of property: home owners	Normal
+us8_h_hhresp h_hsowr116	whether owns accomodation: pno 16	Normal
+us8_h_hhresp h_hsowr115	whether owns accomodation: pno 15	Normal
+us8_h_hhresp h_hsowr114	whether owns accomodation: pno 14	Normal
+us8_h_hhresp h_hsowr113	whether owns accomodation: pno 13	Normal
+us8_h_hhresp h_hsowr112	whether owns accomodation: pno 12	Normal
+us8_h_hhresp h_hsowr111	whether owns accomodation: pno 11	Normal
+us8_h_hhresp h_hsowr110	whether owns accomodation: pno 10	Normal
+us8_h_hhresp h_hsowr19	whether owns accomodation: pno 9	Normal
+us8_h_hhresp h_hsowr18	whether owns accomodation: pno 8	Normal
+us8_h_hhresp h_hsowr17	whether owns accomodation: pno 7	Normal
+us8_h_hhresp h_hsowr16	whether owns accomodation: pno 6	Normal
+us8_h_hhresp h_hsowr15	whether owns accomodation: pno 5	Normal
+us8_h_hhresp h_hsowr14	whether owns accomodation: pno 4	Normal
+us8_h_hhresp h_hsowr13	whether owns accomodation: pno 3	Normal
+us8_h_hhresp h_hsowr12	whether owns accomodation: pno 2	Normal
+us8_h_hhresp h_hsowr11	whether owns accomodation: pno 1	Normal
+us8_h_hhresp h_hsowr10	whether owns accomodation: non hh member	Normal
+us8_h_hhresp h_hsownd	House owned or rented	Normal
+us8_h_hhresp h_hsowndchk	Housing tenure check	Normal
+us8_h_hhresp h_hsrooms	Number of other rooms in accommodation	Normal
+us8_h_hhresp h_hsbeds	Number of bedrooms	Normal
+us8_h_hhresp h_hsroomchk	House room check	Normal
+us8_h_hhresp h_histrtdatss	household interview start (seconds)	Normal
+us8_h_hhresp h_histrtdatmm	household interview start (minutes)	Normal
+us8_h_hhresp h_histrtdathh	household interview start (hours)	Normal
+us8_h_hhresp h_histrtdatd	household interview start (day)	Normal
+us8_h_hhresp h_histrtdatm	household interview start (month)	Normal
+us8_h_hhresp h_histrtdaty	household interview start (year)	Normal
+us8_h_hhresp h_ivh16	Person number 16	Normal
+us8_h_hhresp h_ivh15	Person number 15	Normal
+us8_h_hhresp h_ivh14	Person number 14	Normal
+us8_h_hhresp h_ivh13	Person number 13	Normal
+us8_h_hhresp h_ivh12	Person number 12	Normal
+us8_h_hhresp h_ivh11	Person number 11	Normal
+us8_h_hhresp h_ivh10	Person number 10	Normal
+us8_h_hhresp h_ivh9	Person number 9	Normal
+us8_h_hhresp h_ivh8	Person number 8	Normal
+us8_h_hhresp h_ivh7	Person number 7	Normal
+us8_h_hhresp h_ivh6	Person number 6	Normal
+us8_h_hhresp h_ivh5	Person number 5	Normal
+us8_h_hhresp h_ivh4	Person number 4	Normal
+us8_h_hhresp h_ivh3	Person number 3	Normal
+us8_h_hhresp h_ivh2	Person number 2	Normal
+us8_h_hhresp h_ivh1	Person number 1	Normal
+us8_h_hhresp h_ivh0	whether answers hh questions: non hh member	Normal
+us8_h_hhresp h_hliwho	Who translated	Normal
+us8_h_hhresp h_hlitrans	Translated language	Normal
+us8_h_hhresp h_hlieng	Interview conducted in English	Normal
+us8_h_hhresp h_npensioner	Number of pensioners in the hhold	Normal
+us8_h_hhresp h_nkids615	Number of children aged 6-15 in hhold	Normal
+us8_h_hhresp h_n10to15	Number of children aged 10 - 15 in HH	Normal
+us8_h_hhresp h_nkids015	Number of children aged 0-15 in hhold	Normal
+us8_h_hhresp h_nkids05	Number of children aged 0-5 in hhold	Normal
+us8_h_hhresp h_fborn	Not born in UK/living with someone not born in UK	Normal
+us8_h_hhresp h_iemb	IEMB sample member	Normal
+us8_h_hhresp h_hhqref32	Household Questionnaire Ref Person: PNO32	Normal
+us8_h_hhresp h_hhqref31	Household Questionnaire Ref Person: PNO31	Normal
+us8_h_hhresp h_hhqref30	Household Questionnaire Ref Person: PNO30	Normal
+us8_h_hhresp h_hhqref29	Household Questionnaire Ref Person: PNO29	Normal
+us8_h_hhresp h_hhqref28	Household Questionnaire Ref Person: PNO28	Normal
+us8_h_hhresp h_hhqref27	Household Questionnaire Ref Person: PNO27	Normal
+us8_h_hhresp h_hhqref26	Household Questionnaire Ref Person: PNO26	Normal
+us8_h_hhresp h_hhqref25	Household Questionnaire Ref Person: PNO25	Normal
+us8_h_hhresp h_hhqref24	Household Questionnaire Ref Person: PNO24	Normal
+us8_h_hhresp h_hhqref23	Household Questionnaire Ref Person: PNO23	Normal
+us8_h_hhresp h_hhqref22	Household Questionnaire Ref Person: PNO22	Normal
+us8_h_hhresp h_hhqref21	Household Questionnaire Ref Person: PNO21	Normal
+us8_h_hhresp h_hhqref20	Household Questionnaire Ref Person: PNO20	Normal
+us8_h_hhresp h_hhqref19	Household Questionnaire Ref Person: PNO19	Normal
+us8_h_hhresp h_hhqref18	Household Questionnaire Ref Person: PNO18	Normal
+us8_h_hhresp h_hhqref17	Household Questionnaire Ref Person: PNO17	Normal
+us8_h_hhresp h_hhqref16	Person number 16	Normal
+us8_h_hhresp h_hhqref15	Person number 15	Normal
+us8_h_hhresp h_hhqref14	Person number 14	Normal
+us8_h_hhresp h_hhqref13	Person number 13	Normal
+us8_h_hhresp h_hhqref12	Person number 12	Normal
+us8_h_hhresp h_hhqref11	Person number 11	Normal
+us8_h_hhresp h_hhqref10	Person number 10	Normal
+us8_h_hhresp h_hhqref9	Person number 9	Normal
+us8_h_hhresp h_hhqref8	Person number 8	Normal
+us8_h_hhresp h_hhqref7	Person number 7	Normal
+us8_h_hhresp h_hhqref6	Person number 6	Normal
+us8_h_hhresp h_hhqref5	Person number 5	Normal
+us8_h_hhresp h_hhqref4	Person number 4	Normal
+us8_h_hhresp h_hhqref3	Person number 3	Normal
+us8_h_hhresp h_hhqref2	Person number 2	Normal
+us8_h_hhresp h_hhqref1	Person number 1	Normal
+us8_h_hhresp h_hhlang	Anyone in HH need translated interview	Normal
+us8_h_hhresp h_cordet96	None correct	Normal
+us8_h_hhresp h_cordet32	Correct details check: PNO 32	Normal
+us8_h_hhresp h_cordet31	Correct details check: PNO 31	Normal
+us8_h_hhresp h_cordet30	Correct details check: PNO 30	Normal
+us8_h_hhresp h_cordet29	Correct details check: PNO 29	Normal
+us8_h_hhresp h_cordet28	Correct details check: PNO 28	Normal
+us8_h_hhresp h_cordet27	Correct details check: PNO 27	Normal
+us8_h_hhresp h_cordet26	Correct details check: PNO 26	Normal
+us8_h_hhresp h_cordet25	Correct details check: PNO 25	Normal
+us8_h_hhresp h_cordet24	Correct details check: PNO 24	Normal
+us8_h_hhresp h_cordet23	Correct details check: PNO 23	Normal
+us8_h_hhresp h_cordet22	Correct details check: PNO 22	Normal
+us8_h_hhresp h_cordet21	Correct details check: PNO 21	Normal
+us8_h_hhresp h_cordet20	Correct details check: PNO 20	Normal
+us8_h_hhresp h_cordet19	Correct details check: PNO 19	Normal
+us8_h_hhresp h_cordet18	Correct details check: PNO 18	Normal
+us8_h_hhresp h_cordet17	Correct details check: PNO 17	Normal
+us8_h_hhresp h_cordet16	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet15	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet14	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet13	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet12	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet11	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet10	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet9	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet8	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet7	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet6	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet5	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet4	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet3	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet2	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_cordet1	ff_ttl ff_forname ff_surname, ff_sex, ff_birthd ff_birthm ff_birthy	Normal
+us8_h_hhresp h_mores	More people resident	Normal
+us8_h_hhresp h_coreswho96	No longer live with any of these people	Normal
+us8_h_hhresp h_coreswho16	Person number 16	Normal
+us8_h_hhresp h_coreswho15	Person number 15	Normal
+us8_h_hhresp h_coreswho14	Person number 14	Normal
+us8_h_hhresp h_coreswho13	Person number 13	Normal
+us8_h_hhresp h_coreswho12	Person number 12	Normal
+us8_h_hhresp h_coreswho11	Person number 11	Normal
+us8_h_hhresp h_coreswho10	Person number 10	Normal
+us8_h_hhresp h_coreswho9	Person number 9	Normal
+us8_h_hhresp h_coreswho8	Person number 8	Normal
+us8_h_hhresp h_coreswho7	Person number 7	Normal
+us8_h_hhresp h_coreswho6	Person number 6	Normal
+us8_h_hhresp h_coreswho5	Person number 5	Normal
+us8_h_hhresp h_coreswho4	Person number 4	Normal
+us8_h_hhresp h_coreswho3	Person number 3	Normal
+us8_h_hhresp h_coreswho2	Person number 2	Normal
+us8_h_hhresp h_coreswho1	Person number 1	Normal
+us8_h_hhresp h_origadd	Interview being conducted at original address - computed	Normal
+us8_h_hhresp h_addrchck	Address check - asked	Normal
+us8_h_hhresp h_hglitrans	Translated language	Normal
+us8_h_hhresp h_hglieng	Interview conducted in English	Normal
+us8_h_hhresp h_ivfho	Household level outcome	Normal
+us8_h_hhresp h_quarter	sample quarter	Normal
+us8_h_hhresp h_month	sample month	Normal
+us8_h_hhresp h_strata	Strata	Normal
+us8_h_hhresp h_psu	Primary sampling unit	Normal
+us8_h_hhresp h_hhorig	Sample origin, household	Normal
+us8_h_hhresp h_intnum	Interviewer Number	Normal
+us8_h_hhresp h_hidp	household identifier (public release)	Normal

@@ -1,0 +1,210 @@
+us8_h_youth h_ythscui_xw	BHPS+UKHLS+IEMB cross-sectional youth interview weight	Normal
+us8_h_youth h_ythscub_xw	BHPS+UKHLS cross-sectional youth interview weight	Normal
+us8_h_youth h_grmpno	Grandfather: PNO	Normal
+us8_h_youth h_grfpno	Grandfather: PNO	Normal
+us8_h_youth h_mnspno	Nat/step/adopt mother: PNO	Normal
+us8_h_youth h_mnspid	Nat/step/adopt mother: PIDP	Normal
+us8_h_youth h_mnpno	Natural mother: PNO	Normal
+us8_h_youth h_fnspno	Nat/step/adopt father: PNO	Normal
+us8_h_youth h_fnspid	Nat/step/adopt father: PIDP	Normal
+us8_h_youth h_fnpno	Natural father: PNO	Normal
+us8_h_youth h_hrpno	Household reference person: PNO	Normal
+us8_h_youth h_hrpid	Household reference person: PIDP	Normal
+us8_h_youth h_rach16_dv	Whether responsible for child under 16	Normal
+us8_h_youth h_adresp15_dv	PNO of person responsible for child under 16	Normal
+us8_h_youth h_buno_dv	benefit unit number	Normal
+us8_h_youth h_agegr13_dv	Age group (age_dv): 13 categories	Normal
+us8_h_youth h_agegr10_dv	Age group (age_dv): 10 year intervals	Normal
+us8_h_youth h_agegr5_dv	Age group (age_dv): 5 year intervals	Normal
+us8_h_youth h_hhresp_dv	Household response status	Normal
+us8_h_youth h_urban_dv	Urban or rural area, derived	Normal
+us8_h_youth h_gor_dv	Government Office Region	Normal
+us8_h_youth h_country	Country of residence	Normal
+us8_h_youth h_racel_dv	Ethnic group incorp. all waves, codings, modes and bhps	Normal
+us8_h_youth h_ethn_dv	Ethnic group (derived from multiple sources)	Normal
+us8_h_youth h_ypbmi_dv	Body Mass Index	Normal
+us8_h_youth h_yphlwtkg_dv	Weight in kg, derived	Normal
+us8_h_youth h_yphlwtk_dv	Weight reported in kg	Normal
+us8_h_youth h_yphlwtp_dv	Weight in stones and pounds: pounds	Normal
+us8_h_youth h_yphlwts_dv	Weight in stones and pounds: stones	Normal
+us8_h_youth h_yphlwtm_dv	Unit of current weight	Normal
+us8_h_youth h_yphlhtcm_dv	Height in cm, derived	Normal
+us8_h_youth h_yphlhti_dv	Height in feet and inches: inches	Normal
+us8_h_youth h_yphlhtf_dv	Height in feet and inches: feet	Normal
+us8_h_youth h_yphlhtm_dv	Unit of current height	Normal
+us8_h_youth h_nnssib_dv	Number of R&#39;s nat/step/adopt siblings in hh	Normal
+us8_h_youth h_nnsib_dv	Number of R&#39;s natural siblings in hh	Normal
+us8_h_youth h_ngrp_dv	Number of R&#39;s grandparents in hh	Normal
+us8_h_youth h_npns_dv	Number of R&#39;s nat/step/adopt parents in hh	Normal
+us8_h_youth h_npn_dv	Number of R&#39;s natural parents in hh	Normal
+us8_h_youth h_doby_dv	DOB: Year, derived	Normal
+us8_h_youth h_dobm_dv	DOB: Month, derived	Normal
+us8_h_youth h_intdaty_dv	Interview date: Year, derived	Normal
+us8_h_youth h_intdatm_dv	Interview date: Month, derived	Normal
+us8_h_youth h_intdatd_dv	Interview date: Day, derived	Normal
+us8_h_youth h_age_dv	Age, derived from dob_dv and intdat_dv	Normal
+us8_h_youth h_sex_dv	Sex, derived	Normal
+us8_h_youth h_grmpid	Grandmother: PIDP	Normal
+us8_h_youth h_grfpid	Grandfather: PIDP	Normal
+us8_h_youth h_pns2sex	Nat/step/adopt parent 2: Sex	Normal
+us8_h_youth h_pns2pno	Nat/step/adopt parent 2: PNO	Normal
+us8_h_youth h_pns2pid	Nat/step/adopt parent 2: PIDP	Normal
+us8_h_youth h_pns1sex	Nat/step/adopt parent 1: Sex	Normal
+us8_h_youth h_pns1pno	Nat/step/adopt parent 1: PNO	Normal
+us8_h_youth h_pns1pid	Nat/step/adopt parent 1: PIDP	Normal
+us8_h_youth h_pn2sex	Natural parent 2: Sex	Normal
+us8_h_youth h_pn2pno	Natural parent 2: PNO	Normal
+us8_h_youth h_pn2pid	Natural parent 2: PIDP	Normal
+us8_h_youth h_pn1sex	Natural parent 1: Sex	Normal
+us8_h_youth h_pn1pno	Natural parent 1: PNO	Normal
+us8_h_youth h_pn1pid	Natural parent 1: PIDP	Normal
+us8_h_youth h_mnpid	Natural mother: PIDP	Normal
+us8_h_youth h_fnpid	Natural father: PIDP	Normal
+us8_h_youth h_age_if	Imputation flag for age_dv	Normal
+us8_h_youth h_doby_if	DOB Year imputation flag	Normal
+us8_h_youth h_intdaty_if	Interview date: Year, imputation flag	Normal
+us8_h_youth h_intdatm_if	Interview date: Month, imputation flag	Normal
+us8_h_youth h_intdatd_if	Interview date: Day, imputation flag	Normal
+us8_h_youth h_ringfence	CAPI ringfenced household	Normal
+us8_h_youth h_ypfutb	Like to do in 10 years 2nd mention	Normal
+us8_h_youth h_ypfuta	Like to do in 10 years	Normal
+us8_h_youth h_yposclas8_code	other classes followed outside school	Normal
+us8_h_youth h_ypapar	Age want to start family	Normal
+us8_h_youth h_ypamar	Age want to get married	Normal
+us8_h_youth h_ypopecl	Do you believe that people in the UK will be affected by climate change in th	Normal
+us8_h_youth h_ypenvhabit3	How often do you keep the tap running while you brush your teeth?	Normal
+us8_h_youth h_ypenvhabit2	How often do you switch off lights in rooms that arent being used?	Normal
+us8_h_youth h_ypenvhabit1	How often do you leave the TV on standby?	Normal
+us8_h_youth h_ypamrsk2	Take amphetamines regularly	Normal
+us8_h_youth h_ypamrsk1	Try an amphetamine once or twice	Normal
+us8_h_youth h_ypersk1	Try ecstasy once or twice	Normal
+us8_h_youth h_ypmjrsk3	Smoke cannabis regularly	Normal
+us8_h_youth h_ypmjrsk2	Smoke cannabis occasionally	Normal
+us8_h_youth h_ypmjrsk1	Try cannabis once or twice	Normal
+us8_h_youth h_ypalcrsk3	Have five or more alcoholic drinks each weekend	Normal
+us8_h_youth h_ypalcrsk2	Have four or five alcoholic drinks nearly every day	Normal
+us8_h_youth h_ypalcrsk1	Have one or two alcoholic drinks nearly every day	Normal
+us8_h_youth h_ypsmrsk2	Smoke one or more packs of cigarettes per day	Normal
+us8_h_youth h_ypsmrsk1	Smoke cigarettes occasionally	Normal
+us8_h_youth h_ypeasmj	How difficult do you think it would be for you to get cannabis?	Normal
+us8_h_youth h_ypfrdrg	How many times have you ever used or taken any illegal drugs?	Normal
+us8_h_youth h_ypdrgoth	Have you ever tried.. Any other illegal drug?	Normal
+us8_h_youth h_ypdrgmj	Have you ever tried.. Cannabis?	Normal
+us8_h_youth h_ypdrgsol	Have you ever tried.. Glue/solvent sniffing?	Normal
+us8_h_youth h_ypdrnk4w	On how many occasions have you been intoxicated or drunk - during the last 4	Normal
+us8_h_youth h_ypdrnkyr	On how many occasions have you been intoxicated or drunk - during the last 12	Normal
+us8_h_youth h_ypdrnklt	On how many occasions have you been intoxicated or drunk - in your lifetime?	Normal
+us8_h_youth h_yp5alcdr	Over the last 4 weeks, how many times have you had five or more drinks on one	Normal
+us8_h_youth h_ypdklm	How many times in the last four weeks have you had an alcoholic drink?	Normal
+us8_h_youth h_ypevralc	Have you ever had an alcoholic drink?	Normal
+us8_h_youth h_ypevresmo	Have you ever used e-cigarettes?	Normal
+us8_h_youth h_ypsmofrq	Statement that describes you best - smoking	Normal
+us8_h_youth h_ypevrsmo	Do you ever smoke cigarettes at all?	Normal
+us8_h_youth h_yptrvl2sch	What is the main way you usually travel to school?	Normal
+us8_h_youth h_yppsprt	How many days in a usual week do you usually play sports, do aerobics or do s	Normal
+us8_h_youth h_ypextype16	Other type of sport or activity	Normal
+us8_h_youth h_ypextype15	Dance	Normal
+us8_h_youth h_ypextype14	Gymnastics	Normal
+us8_h_youth h_ypextype13	Horse riding	Normal
+us8_h_youth h_ypextype12	Martial Arts	Normal
+us8_h_youth h_ypextype11	Athletics	Normal
+us8_h_youth h_ypextype10	Cricket	Normal
+us8_h_youth h_ypextype9	Netball, basketball or hockey	Normal
+us8_h_youth h_ypextype8	Rugby	Normal
+us8_h_youth h_ypextype7	Football	Normal
+us8_h_youth h_ypextype6	Keep fit, aerobics or gym training	Normal
+us8_h_youth h_ypextype5	Tennis, squash or badminton	Normal
+us8_h_youth h_ypextype4	Jogging or running	Normal
+us8_h_youth h_ypextype3	Cycling	Normal
+us8_h_youth h_ypextype2	Swimming or diving	Normal
+us8_h_youth h_ypextype1	Walking	Normal
+us8_h_youth h_yptrydiet	Do ever diet or try to lose weight?	Normal
+us8_h_youth h_yphlwtr	Do you think you are...	Normal
+us8_h_youth h_ypfrutppd	How many portions of fresh fruit or vegetables do you eat on a typical day?	Normal
+us8_h_youth h_ypsrhlth	In general, would you say your health is..	Normal
+us8_h_youth h_yptruant	In the last 12 months, have you ever played truant?	Normal
+us8_h_youth h_yp2uni	Would you like to go on to do further full-time education at a college or Uni	Normal
+us8_h_youth h_yplvsc2do	What would you most like to do when you are 16?	Normal
+us8_h_youth h_ypacvwell	How important do you think it is for you to do well in your GCSE exams or Sta	Normal
+us8_h_youth h_yphmwkwho6	No-one, I do it myself	Normal
+us8_h_youth h_yphmwkwho5	Any non-relative living with you	Normal
+us8_h_youth h_yphmwkwho4	Another relative living with you	Normal
+us8_h_youth h_yphmwkwho3	A brother or sister	Normal
+us8_h_youth h_yphmwkwho2	Dad or stepdad	Normal
+us8_h_youth h_yphmwkwho1	Mum or stepmum	Normal
+us8_h_youth h_yphmwkhlp	Does anyone here at home help you with your homework?	Normal
+us8_h_youth h_yphmwkwe	On the weekend, how many hours do you spend doing homework?	Normal
+us8_h_youth h_yphmwkhrs	On a week day evening, how many hours do you usually spend doing your homework	Normal
+us8_h_youth h_ypfhweve	During an average week, on how many evenings do you do any homework?	Normal
+us8_h_youth h_ypfhmwrk	How often are you given homework?	Normal
+us8_h_youth h_yphmwrk	Do you ever get set any homework at school?	Normal
+us8_h_youth h_yphlf	How feel about life as a whole	Normal
+us8_h_youth h_yphsc	How feel about school go to	Normal
+us8_h_youth h_yphfr	How feel about friends	Normal
+us8_h_youth h_yphfm	How feel about family	Normal
+us8_h_youth h_yphap	How feel about appearance	Normal
+us8_h_youth h_yphsw	How feel about school work	Normal
+us8_h_youth h_yposclas8	Other	Normal
+us8_h_youth h_yposclas7	None of these	Normal
+us8_h_youth h_yposclas6	Religious classes	Normal
+us8_h_youth h_yposclas5	Tutorials for school subjects	Normal
+us8_h_youth h_yposclas4	Sport	Normal
+us8_h_youth h_yposclas3	Dance	Normal
+us8_h_youth h_yposclas2	Art	Normal
+us8_h_youth h_yposclas1	Music	Normal
+us8_h_youth h_ypmusinst	Do you play a musical instrument?	Normal
+us8_h_youth h_ypfadttr	My parents/other adults take me to the theatre or to see a dance performance	Normal
+us8_h_youth h_ypfadspt	My parents/other adults take me to watch sporting events	Normal
+us8_h_youth h_ypfadmus	My parents/other adults take me to museums or art galleries	Normal
+us8_h_youth h_ypgetbuk	My parents/other adults at home buy me books as gifts	Normal
+us8_h_youth h_ypdistv	We discuss TV programmes we have watched at home	Normal
+us8_h_youth h_ypdisbuk	We discuss books at home	Normal
+us8_h_youth h_ypnbuks	Over the past month, how many books have you read for pleasure?	Normal
+us8_h_youth h_ypfpolitm	Go to a political meeting/march, rally or demonstration	Normal
+us8_h_youth h_ypfvolunt	Do voluntary or community work	Normal
+us8_h_youth h_ypfhistplc	Go to visit an historic place or stately home	Normal
+us8_h_youth h_ypfmuseum	Go to museums or galleries	Normal
+us8_h_youth h_ypflibrary	Go to a library	Normal
+us8_h_youth h_ypfythclub	Go to youth clubs, scouts, girl guides or other organised activities	Normal
+us8_h_youth h_ypfhngtn	Just hang around/mess about in the high street or the town/city centre	Normal
+us8_h_youth h_ypfhnghm	Just hang around/mess about near your home	Normal
+us8_h_youth h_ypfgo2pub	Go to a pub or bar	Normal
+us8_h_youth h_ypflvespt	Go to watch live sport	Normal
+us8_h_youth h_ypfpcart	Use a computer to create original artworks or animation	Normal
+us8_h_youth h_ypftheatre	Go to the theatre	Normal
+us8_h_youth h_ypfpaint	Do painting, drawing, printmaking or sculpture	Normal
+us8_h_youth h_ypfcinema	Go to the cinema	Normal
+us8_h_youth h_ypfparty	Go to a party, dance, disco or nightclub	Normal
+us8_h_youth h_ypestf	At times I feel I am no good at all	Normal
+us8_h_youth h_ypeste	I am inclined to feel I am a failure	Normal
+us8_h_youth h_ypestk	I can usually solve my own problems	Normal
+us8_h_youth h_ypestc	I am a likeable person	Normal
+us8_h_youth h_ypestj	I am as able as most people	Normal
+us8_h_youth h_ypestb	I certainly feel useless at times	Normal
+us8_h_youth h_ypesti	I don&#39;t have much to be proud of	Normal
+us8_h_youth h_ypesta	I feel I have a number good qualities	Normal
+us8_h_youth h_ypsbfgf	Do you have a steady boyfriend or girlfriend?	Normal
+us8_h_youth h_ypnpal	How many close friends	Normal
+us8_h_youth h_yplate	In the past month, how many times have you stayed out after 9pm at night with	Normal
+us8_h_youth h_yphrshswk	How many hours do you spend doing or helping with housework in an average wee	Normal
+us8_h_youth h_ypeatlivu	In the past 7 days how many times have you eaten an evening meal together wit	Normal
+us8_h_youth h_ypmulpgms	Do you ever play multi-player online games?	Normal
+us8_h_youth h_ypnetcht	Hours using social media on weekdays	Normal
+us8_h_youth h_ypsocweb	Belong to social website	Normal
+us8_h_youth h_yptvvidhrw	Hours spend watching TV, video and DVDs on a weekend?	Normal
+us8_h_youth h_yptvvidhrs	Hours spend watching TV, video and DVDs on a normal school day?	Normal
+us8_h_youth h_ypsex	Sex of respondent	Normal
+us8_h_youth h_ypdoby	Date of birth - YEAR	Normal
+us8_h_youth h_ypdobm	Date of birth - MONTH	Normal
+us8_h_youth h_dvage	Age	Normal
+us8_h_youth h_sex	sex	Normal
+us8_h_youth h_ivfio	Individual level outcome	Normal
+us8_h_youth h_sampst	sample status	Normal
+us8_h_youth h_strata	Strata	Normal
+us8_h_youth h_psu	Primary sampling unit	Normal
+us8_h_youth h_memorig	Sample origin, individual	Normal
+us8_h_youth h_hhorig	Sample origin, household	Normal
+us8_h_youth h_pno	person number	Normal
+us8_h_youth h_hidp	household identifier (public release)	Normal
+us8_h_youth pid	personal identifier (BHPS cohort)	Normal
+us8_h_youth pidp	Cross-wave Person Identifier (Public Release)	Normal

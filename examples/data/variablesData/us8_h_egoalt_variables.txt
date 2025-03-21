@@ -1,0 +1,21 @@
+us8_h_egoalt h_alwstat	alter&#39;s residence at last wave	Normal
+us8_h_egoalt h_enwstat	ego&#39;s residence at next wave	Normal
+us8_h_egoalt h_anwstat	alter&#39;s residence at next wave	Normal
+us8_h_egoalt h_elwstat	ego&#39;s residence at last wave	Normal
+us8_h_egoalt apid	personal identifier (BHPS cohort)	Normal
+us8_h_egoalt pid	personal identifier (BHPS cohort)	Normal
+us8_h_egoalt h_asex	alter&#39;s sex (indall)	Normal
+us8_h_egoalt h_relationship_dv	ego&#39;s relationship to alter, edited	Normal
+us8_h_egoalt h_rel_dv	Alter&#39;s relationship to Ego (BHPS)	Normal
+us8_h_egoalt h_relationship	Relationship code. EPNo is APNos...	Normal
+us8_h_egoalt h_sex	sex	Normal
+us8_h_egoalt h_sampst	sample status	Normal
+us8_h_egoalt h_strata	Strata	Normal
+us8_h_egoalt h_psu	Primary sampling unit	Normal
+us8_h_egoalt h_memorig	Sample origin, individual	Normal
+us8_h_egoalt h_hhorig	Sample origin, household	Normal
+us8_h_egoalt h_apno	Alter person number (alter person no, 1..16)	Normal
+us8_h_egoalt apidp	Cross-wave Person Identifier (Public Release)	Normal
+us8_h_egoalt h_pno	person number	Normal
+us8_h_egoalt h_hidp	household identifier (public release)	Normal
+us8_h_egoalt pidp	Cross-wave Person Identifier (Public Release)	Normal

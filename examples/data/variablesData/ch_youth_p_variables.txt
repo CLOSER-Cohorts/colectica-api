@@ -1,0 +1,38 @@
+ch_youth_p ch_betayth_lw	Longitudinal youth weight, beta version	Normal
+ch_youth_p ch_betayth_xw	Cross-sectional youth weight, beta version	Normal
+ch_youth_p ch_aid_dv	Address identifier	Normal
+ch_youth_p ch_chsex	Child&#39;s sex	Normal
+ch_youth_p ch_ageon20200815	Age on 15/08/2020	Normal
+ch_youth_p ch_childdob_y	Child year of birth	Normal
+ch_youth_p ch_ypsdqtd_dv	SDQ Total Difficulties Score	Normal
+ch_youth_p ch_ypsdqps_dv	SDQ Subscale: Prosocial	Normal
+ch_youth_p ch_ypsdqpp_dv	SDQ Subscale: Peer Relationship Problems	Normal
+ch_youth_p ch_ypsdqha_dv	SDQ Subscale: Hyperactivity/Inattention	Normal
+ch_youth_p ch_ypsdqcp_dv	SDQ Subscale: Conduct Problems	Normal
+ch_youth_p ch_ypsdqes_dv	SDQ Subscale: Emotional Symptoms	Normal
+ch_youth_p ch_ypsdqy	I finish the work I&#39;m doing	Normal
+ch_youth_p ch_ypsdqx	I have many feats, I am easily scared	Normal
+ch_youth_p ch_ypsdqw	I get on better with adults than with people my own age	Normal
+ch_youth_p ch_ypsdqv	I take things that are not mine from home, school or elsewhere	Normal
+ch_youth_p ch_ypsdqu	I think before I do things	Normal
+ch_youth_p ch_ypsdqt	I often volunteer to help others (parents, teachers, children)	Normal
+ch_youth_p ch_ypsdqs	Other children or young people pick on me or bully me	Normal
+ch_youth_p ch_ypsdqr	I am often accused of lying or cheating	Normal
+ch_youth_p ch_ypsdqq	I am kind to younger children	Normal
+ch_youth_p ch_ypsdqp	I am nervous in new situations. I easily lose confidence	Normal
+ch_youth_p ch_ypsdqo	I am easily distracted, I find it difficult to concentrate	Normal
+ch_youth_p ch_ypsdqn	Other people my age generally like me	Normal
+ch_youth_p ch_ypsdqm	I am often unhappy, down-hearted or tearful	Normal
+ch_youth_p ch_ypsdql	I fight a lot. I can make other people do what I want	Normal
+ch_youth_p ch_ypsdqk	I have one good friend or more	Normal
+ch_youth_p ch_ypsdqj	I am constantly fidgeting or squirming	Normal
+ch_youth_p ch_ypsdqi	I am helpful if someone is hurt, upset or feeling ill	Normal
+ch_youth_p ch_ypsdqh	I worry a lot	Normal
+ch_youth_p ch_ypsdqg	I usually do as I am told	Normal
+ch_youth_p ch_ypsdqf	I am usually on my own. I generally play alone or keep to myself	Normal
+ch_youth_p ch_ypsdqe	I get very angry and often lose my temper	Normal
+ch_youth_p ch_ypsdqd	I usually share with others (food, games, pens, etc.)	Normal
+ch_youth_p ch_ypsdqc	I get a lot of headaches, stomach-aches or sickness	Normal
+ch_youth_p ch_ypsdqb	I am restless, I cannot stay still for long	Normal
+ch_youth_p ch_ypsdqa	I try to be nice to other people, I care about their feelings	Normal
+ch_youth_p pidp_c	Cross-wave Person Identifier, child	Normal

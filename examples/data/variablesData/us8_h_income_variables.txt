@@ -1,0 +1,23 @@
+us8_h_income h_frmnthimp_dv	Total income from source, including imputed	Normal
+us8_h_income h_frjtkeep_dv	Indicator for whether joint income included in frmnthimp_dv	Normal
+us8_h_income h_frjtpnmod_dv	Person received jointly - modified for other responses	Normal
+us8_h_income h_frjtmod_dv	Joint receipt flag - modified for other responses	Normal
+us8_h_income h_frmnth_dv	computed monthly income received from source	Normal
+us8_h_income h_frmnth_tc	frmnth_dv includes top coded component (EUL version only) (EUL version only)	Normal
+us8_h_income h_frmnthimp_if	Imputation flag for total income from source	Normal
+us8_h_income h_fitax	Pre/post tax income	Normal
+us8_h_income h_fraddl	Received additional payment from source	Normal
+us8_h_income h_frjtpn	PNO of joint recipient	Normal
+us8_h_income h_frjt	Last payment: Sole or joint recipient	Normal
+us8_h_income h_frwc	Period covered by last amount received	Normal
+us8_h_income h_frval	Last amount received	Normal
+us8_h_income h_ficode	Income receipt code	Normal
+us8_h_income h_sampst	sample status	Normal
+us8_h_income h_strata	Strata	Normal
+us8_h_income h_psu	Primary sampling unit	Normal
+us8_h_income h_memorig	Sample origin, individual	Normal
+us8_h_income h_hhorig	Sample origin, household	Normal
+us8_h_income h_fiseq	Income receipt sequence number	Normal
+us8_h_income h_pno	person number	Normal
+us8_h_income h_hidp	household identifier (public release)	Normal
+us8_h_income pidp	Cross-wave Person Identifier (Public Release)	Normal

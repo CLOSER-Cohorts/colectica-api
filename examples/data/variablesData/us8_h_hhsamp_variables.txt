@@ -1,0 +1,93 @@
+us8_h_hhsamp h_urban_dv	Urban or rural area, derived	Normal
+us8_h_hhsamp h_gor_dv	Government Office Region	Normal
+us8_h_hhsamp h_country	Country of residence	Normal
+us8_h_hhsamp h_ff_hhadaptw807	Adaptive design experiment 7	Normal
+us8_h_hhsamp h_ff_hhadaptw806	Adaptive design experiment 6	Normal
+us8_h_hhsamp h_ff_hhadaptw805	Adaptive design experiment 5	Normal
+us8_h_hhsamp h_ff_hhadaptw804	Adaptive design experiment 4	Normal
+us8_h_hhsamp h_ff_hhadaptw803	Adaptive design experiment 3	Normal
+us8_h_hhsamp h_ff_hhadaptw802	Adaptive design experiment 2	Normal
+us8_h_hhsamp h_ff_hhadaptw801	Adaptive design experiment 1	Normal
+us8_h_hhsamp h_ff_all_moved	Everyone moved	Normal
+us8_h_hhsamp h_ff_nonprod	Non Productive at Preceding Wave	Normal
+us8_h_hhsamp h_ivtnc	Total number of calls	Normal
+us8_h_hhsamp h_w8mode	Mode protocol initially allocated at w8 (prior to any reallocs e.g. resp pref)	Normal
+us8_h_hhsamp h_propstr	Web response propensity stratum (used for wave 8 mode allocation)	Normal
+us8_h_hhsamp h_dormant	Dormant sample prior to wave 8 (used for wave 8 mode allocation)	Normal
+us8_h_hhsamp h_prodw7	Individual response at wave 7 (dv used for wave 8 mode allocation)	Normal
+us8_h_hhsamp h_splitoff	Split-off household	Normal
+us8_h_hhsamp h_ringfence	CAPI ringfenced household	Normal
+us8_h_hhsamp h_hhadaptw807	Adaptive fieldwork hhold experiment 07	Normal
+us8_h_hhsamp h_hhadaptw806	Adaptive fieldwork hhold experiment 06	Normal
+us8_h_hhsamp h_hhadaptw805	Adaptive fieldwork hhold experiment 05	Normal
+us8_h_hhsamp h_hhadaptw804	Adaptive fieldwork hhold experiment 04	Normal
+us8_h_hhsamp h_hhadaptw803	Adaptive fieldwork hhold experiment 03	Normal
+us8_h_hhsamp h_hhadaptw802	Adaptive fieldwork hhold experiment 02	Normal
+us8_h_hhsamp h_hhadaptw801	Adaptive fieldwork hhold experiment 01	Normal
+us8_h_hhsamp h_issue_mode	Mode of issue	Normal
+us8_h_hhsamp h_hideviceused	Device used for first accessing the household grid	Normal
+us8_h_hhsamp h_scriptno_hhgrid	Script version number used on household grid	Normal
+us8_h_hhsamp h_scriptno_hhint	Script version number used on household interview	Normal
+us8_h_hhsamp h_hholdmodedv	Mode for the completion of the household interview	Normal
+us8_h_hhsamp h_hhgridmodedv	Mode for the completion of the enumeration grid	Normal
+us8_h_hhsamp h_catihholdreiss	Whether subject to telephone mop-up (1=yes, 0=no)	Normal
+us8_h_hhsamp h_withdrawn1	Does the household member want to permanently withdraw from the study?	Normal
+us8_h_hhsamp h_reissue1	Should this address be reissued?	Normal
+us8_h_hhsamp h_refcode97	Other reason	Normal
+us8_h_hhsamp h_refcode96	No reason given	Normal
+us8_h_hhsamp h_refcode32	Other hhold member refuses on behalf of respondent	Normal
+us8_h_hhsamp h_refcode31	Someone has convinced respondent to refuse	Normal
+us8_h_hhsamp h_refcode30	Other family member opposes respondent participating	Normal
+us8_h_hhsamp h_refcode26	Previous bad experience with surveys	Normal
+us8_h_hhsamp h_refcode25	Survey is waste of time	Normal
+us8_h_hhsamp h_refcode24	Survey is too long	Normal
+us8_h_hhsamp h_refcode23	Nothing ever changes	Normal
+us8_h_hhsamp h_refcode22	Respondent does not want to be bothered	Normal
+us8_h_hhsamp h_refcode21	Questions too personal	Normal
+us8_h_hhsamp h_refcode20	Unhappy about confidentiality	Normal
+us8_h_hhsamp h_refcode15	Too busy (not elsewhere specified)	Normal
+us8_h_hhsamp h_refcode14	Stressful family situation	Normal
+us8_h_hhsamp h_refcode13	Respondent is temporarily absent	Normal
+us8_h_hhsamp h_refcode12	Respondent almost never home	Normal
+us8_h_hhsamp h_refcode11	Looking after child(ren)	Normal
+us8_h_hhsamp h_refcode10	Looking after ill/elderly	Normal
+us8_h_hhsamp h_outcome_tns	Final outcome (TNS list of codes)	Normal
+us8_h_hhsamp h_outcome	INTERVIEWER:FINAL OUTCOME FOR HOUSEHOLD INTERVIEW (ISER list)	Normal
+us8_h_hhsamp h_nproxy	Number of proxy individual questionnaires completed	Normal
+us8_h_hhsamp h_nindiv	Number full individual questionnaire completed	Normal
+us8_h_hhsamp h_hhwhoint	INTERPRETER OR INTERVIEWER FOR NON-ENGLISH	Normal
+us8_h_hhsamp h_hhintlang	LANGUAGE HHOLD INTERVIEW CONDUCTED IN	Normal
+us8_h_hhsamp h_hhdone	Household questionnaire completed	Normal
+us8_h_hhsamp h_hsfit	ARF A10: How is the external condition of the address relative to other resid	Normal
+us8_h_hhsamp h_rescond	ARF A9: Which of these best describes the condition of residential properties	Normal
+us8_h_hhsamp h_vicini96	None of these	Normal
+us8_h_hhsamp h_vicini3	Heavy traffic on street/road	Normal
+us8_h_hhsamp h_vicini2	Trash: litter or junk in street/road	Normal
+us8_h_hhsamp h_vicini1	Boarded houses: abandoned buildings: demolished houses or demolished buildings	Normal
+us8_h_hhsamp h_childb	ARF A7: Standing outside: can you observe any signs of children under 10 (inc	Normal
+us8_h_hhsamp h_carvanb	ARF A6: Standing outside: can you observe any signs of a car or van belonging	Normal
+us8_h_hhsamp h_unkgard	ARF A5: Does the address have an unkempt garden ?	Normal
+us8_h_hhsamp h_addfloor	ARF A4: On what floor of the building is the address s main entrance? CODE ONE	Normal
+us8_h_hhsamp h_barriers6	Unable to obtain information	Normal
+us8_h_hhsamp h_barriers5	None of these	Normal
+us8_h_hhsamp h_barriers4	Entry phone access	Normal
+us8_h_hhsamp h_barriers3	Security staff or gatekeeper	Normal
+us8_h_hhsamp h_barriers2	Locked gates	Normal
+us8_h_hhsamp h_barriers1	Locked common entrance	Normal
+us8_h_hhsamp h_floors	How many floors are there at the address?	Normal
+us8_h_hhsamp h_dweltyp	The following observation questions relate to the original issued address: QH	Normal
+us8_h_hhsamp h_emboost	EMBoost sample member	Normal
+us8_h_hhsamp h_outcdated	Date on which household outcome was assigned (day)	Normal
+us8_h_hhsamp h_outcdatem	Date on which household outcome was assigned (month)	Normal
+us8_h_hhsamp h_outcdatey	Date on which household outcome was assigned (year)	Normal
+us8_h_hhsamp h_aintlen	Computed Interview length in minutes	Normal
+us8_h_hhsamp h_allocmnth	Allocated fieldwork month	Normal
+us8_h_hhsamp h_issue_num	Number of times address was issued to field	Normal
+us8_h_hhsamp h_ivfho	Household level outcome	Normal
+us8_h_hhsamp h_quarter	sample quarter	Normal
+us8_h_hhsamp h_month	sample month	Normal
+us8_h_hhsamp h_strata	Strata	Normal
+us8_h_hhsamp h_psu	Primary sampling unit	Normal
+us8_h_hhsamp h_hhorig	Sample origin, household	Normal
+us8_h_hhsamp h_intnum	Interviewer Number	Normal
+us8_h_hhsamp h_hidp	household identifier (public release)	Normal

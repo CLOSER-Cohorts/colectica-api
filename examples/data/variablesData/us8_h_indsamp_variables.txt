@@ -1,0 +1,31 @@
+us8_h_indsamp h_ff_indadaptw807	Adaptive design experiment 7	Normal
+us8_h_indsamp h_ff_indadaptw806	Adaptive design experiment 6	Normal
+us8_h_indsamp h_ff_indadaptw805	Adaptive design experiment 5	Normal
+us8_h_indsamp h_ff_indadaptw804	Adaptive design experiment 4	Normal
+us8_h_indsamp h_ff_indadaptw803	Adaptive design experiment 3	Normal
+us8_h_indsamp h_ff_indadaptw802	Adaptive design experiment 2	Normal
+us8_h_indsamp h_ff_indadaptw801	Adaptive design experiment 1	Normal
+us8_h_indsamp h_moveyr	Year left Household	Normal
+us8_h_indsamp h_movemth	Move left Household	Normal
+us8_h_indsamp h_jnyear	Year joined the household	Normal
+us8_h_indsamp h_jnmnth	Month joined the household	Normal
+us8_h_indsamp h_issued2w	issued to this wave?	Normal
+us8_h_indsamp h_rejoiner	whether or not a rejoiner (0/1)	Normal
+us8_h_indsamp h_newentrant	Whether or not a new survey participant (0/1)	Normal
+us8_h_indsamp h_hhmem	Household membership	Normal
+us8_h_indsamp h_everint	Ever full inividual interview	Normal
+us8_h_indsamp h_iviolw	Individual Interview Outcome at preceding wave	Normal
+us8_h_indsamp h_ivfho	Household level outcome	Normal
+us8_h_indsamp h_ivfio	Individual level outcome	Normal
+us8_h_indsamp h_quarter	sample quarter	Normal
+us8_h_indsamp h_month	sample month	Normal
+us8_h_indsamp h_sampst	sample status	Normal
+us8_h_indsamp h_strata	Strata	Normal
+us8_h_indsamp h_psu	Primary sampling unit	Normal
+us8_h_indsamp h_memorig	Sample origin, individual	Normal
+us8_h_indsamp h_hhorig	Sample origin, household	Normal
+us8_h_indsamp h_finloc	Individual is finally located in this household (0/1)	Normal
+us8_h_indsamp h_pno	person number	Normal
+us8_h_indsamp h_hidp	household identifier (public release)	Normal
+us8_h_indsamp pid	personal identifier (BHPS cohort)	Normal
+us8_h_indsamp pidp	Cross-wave Person Identifier (Public Release)	Normal

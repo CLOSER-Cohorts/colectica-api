@@ -1,0 +1,45 @@
+us8_h_parstyle h_psdqc_dv	PSDQ: Permissive parenting scale	Normal
+us8_h_parstyle h_psdqb_dv	PSDQ: Authoritarian parenting scale	Normal
+us8_h_parstyle h_psdqa_dv	PSDQ: Authorative parenting scale	Normal
+us8_h_parstyle h_ps32	Slap child when misbehaves	Normal
+us8_h_parstyle h_ps31	Explain consequences of child&#39;s behaviour	Normal
+us8_h_parstyle h_ps30	Scold when child&#39;s behaviour doesn&#39;t meet expectations	Normal
+us8_h_parstyle h_ps29	Help child understand consequences of their actions	Normal
+us8_h_parstyle h_ps28	Child left alone with no explanation	Normal
+us8_h_parstyle h_ps27	Warm happy times with child	Normal
+us8_h_parstyle h_ps26	Use threats with no justification	Normal
+us8_h_parstyle h_ps25	Give reasons rules should be followed	Normal
+us8_h_parstyle h_ps24	Spoil child	Normal
+us8_h_parstyle h_ps23	Scold and criticise	Normal
+us8_h_parstyle h_ps22	Allow child input into rules	Normal
+us8_h_parstyle h_ps21	Respect child&#39;s opinion	Normal
+us8_h_parstyle h_ps20	State punishment but don&#39;t give	Normal
+us8_h_parstyle h_ps19	Grab child when disobedient	Normal
+us8_h_parstyle h_ps18	Consider child&#39;s preferences when making plans	Normal
+us8_h_parstyle h_ps17	Threaten punishment more than give	Normal
+us8_h_parstyle h_ps16	Explode in anger towards child	Normal
+us8_h_parstyle h_ps15	Give in when child makes a fuss	Normal
+us8_h_parstyle h_ps14	Praise child when good	Normal
+us8_h_parstyle h_ps13	Yell when child misbehaves	Normal
+us8_h_parstyle h_ps12	Comfort child when upset	Normal
+us8_h_parstyle h_ps11	Emphasise reasons for rules	Normal
+us8_h_parstyle h_ps10	Take privileges away without explanation	Normal
+us8_h_parstyle h_ps9	Encourage child to express self	Normal
+us8_h_parstyle h_ps8	Find it difficult to discipline child	Normal
+us8_h_parstyle h_ps7	Encourage child to talk about feelings	Normal
+us8_h_parstyle h_ps6	Spank child when disobedient	Normal
+us8_h_parstyle h_ps5	Give feedback on child&#39;s behaviour	Normal
+us8_h_parstyle h_ps4	Reasons for requests not given	Normal
+us8_h_parstyle h_ps3	Take child&#39;s desires into account	Normal
+us8_h_parstyle h_ps2	Use physical punishment to discipline child	Normal
+us8_h_parstyle h_ps1	Responsive to child&#39;s needs	Normal
+us8_h_parstyle h_sampst	sample status	Normal
+us8_h_parstyle h_strata	Strata	Normal
+us8_h_parstyle h_psu	Primary sampling unit	Normal
+us8_h_parstyle h_memorig	Sample origin, individual	Normal
+us8_h_parstyle h_hhorig	Sample origin, household	Normal
+us8_h_parstyle h_childpno	pno of child	Normal
+us8_h_parstyle h_pno	person number	Normal
+us8_h_parstyle h_hidp	household identifier (public release)	Normal
+us8_h_parstyle pid	personal identifier (BHPS cohort)	Normal
+us8_h_parstyle pidp	Cross-wave Person Identifier (Public Release)	Normal

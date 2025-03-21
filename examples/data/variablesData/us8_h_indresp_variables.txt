@@ -1,0 +1,2196 @@
+us8_h_indresp h_racel_dv	Ethnic group incorp. all waves, codings, modes and bhps	Normal
+us8_h_indresp h_ind5mus_xw	cross-sectional extra 5 minute interview person weight	Normal
+us8_h_indresp h_indscui_xw	BHPS+UKHLS+IEMB cross-sectional adult self-completion interview weight	Normal
+us8_h_indresp h_indscub_xw	cross-sectional adult self-completion interview weight	Normal
+us8_h_indresp h_indinui_xw	BHPS+UKHLS+IEMB cross-sectional adult main interview weight	Normal
+us8_h_indresp h_indpxui_xw	BHPS+UKHLS+IEMB cross-sectional adult main or proxy interview weight	Normal
+us8_h_indresp h_indpxub_xw	cross-sectional adult main or proxy interview weight	Normal
+us8_h_indresp h_indbdub_lw	combined longitudinal blood interview weight	Normal
+us8_h_indresp h_indnsub_lw	combined longitudinal nurse interview weight	Normal
+us8_h_indresp h_indbd91_lw	BHPS 1991 longitudinal blood interview weight	Normal
+us8_h_indresp h_indns91_lw	BHPS 1991 longitudinal nurse interview weight	Normal
+us8_h_indresp h_ind5mus_lw	longitudinal adult extra 5 minute interview weight	Normal
+us8_h_indresp h_indscui_lw	combined UKHLS+BHPS+IEMB longitudinal adult self-completion interview weight	Normal
+us8_h_indresp h_indscub_lw	combined BHPS+UKHLS longitudinal adult self-completion interview weight	Normal
+us8_h_indresp h_indscus_lw	longitudinal adult self-completion interview weight	Normal
+us8_h_indresp h_indinui_lw	combined UKHLS+BHPS+IEMB longitudinal adult main interview weight	Normal
+us8_h_indresp h_indinub_xw	cross-sectional adult main interview weight	Normal
+us8_h_indresp h_indinus_lw	longitudinal adult main interview weight	Normal
+us8_h_indresp h_indin01_lw	BHPS 2001 longitudinal adult main interview weight	Normal
+us8_h_indresp h_indin91_lw	BHPS 1991 longitudinal adult main interview weight	Normal
+us8_h_indresp h_indpxui_lw	combined BHPS+ UKHLS+IEMB longitudinal adult main or proxy interview weight	Normal
+us8_h_indresp h_indpxub_lw	combined BHPS+ UKHLS longitudinal adult main or proxy interview weight	Normal
+us8_h_indresp h_indpxus_lw	longitudinal adult main or proxy interview weight	Normal
+us8_h_indresp h_indinub_lw	combined UKHLS+ BHPS longitudinal adult main interview weight	Normal
+us8_h_indresp h_fimngrs_if	imputation flag fimngrs_dv	Normal
+us8_h_indresp h_fimngrs_dv	total monthly personal income gross	Normal
+us8_h_indresp h_fimnlabgrs_if	imputation flag fimnlabgrs_dv	Normal
+us8_h_indresp h_fimnlabgrs_dv	total monthly labour income gross	Normal
+us8_h_indresp h_fibenothr_if	share of c_fibenothr_dv imputed	Normal
+us8_h_indresp h_fibenothr_dv	Total income from benefits and other sources	Normal
+us8_h_indresp h_fiyrinvinc_if	imputation flag var fiyrinvinc_dv	Normal
+us8_h_indresp h_fiyrinvinc_dv	income from savings and investments, annual	Normal
+us8_h_indresp h_seearngrs_if	imputation flag var - seearngrs_dv	Normal
+us8_h_indresp h_seearnnet_dv	self employment earnings - net	Normal
+us8_h_indresp h_seearngrs_dv	self employment earnings - gross	Normal
+us8_h_indresp h_paynu_if	imputation flag var - paynu_dv	Normal
+us8_h_indresp h_paynu_dv	usual net pay per month: current job	Normal
+us8_h_indresp h_paygu_if	imputation flag var - paygu_dv	Normal
+us8_h_indresp h_paygu_dv	usual gross pay per month: current job	Normal
+us8_h_indresp h_payu_dv	usual pay per month if different from last	Normal
+us8_h_indresp h_payn_dv	net pay per month in current job: last payment	Normal
+us8_h_indresp h_payg_dv	gross pay per month in current job: last payment	Normal
+us8_h_indresp h_scflag_dv	flag for self completion record	Normal
+us8_h_indresp h_psdqc_dv	PSDQ: Permissive parenting scale	Normal
+us8_h_indresp h_psdqb_dv	PSDQ: Authoritarian parenting scale	Normal
+us8_h_indresp h_psdqa_dv	PSDQ: Authorative parenting scale	Normal
+us8_h_indresp h_jwbs2_dv	Job-related Wellbeing Scale: Depression subscale	Normal
+us8_h_indresp h_jwbs1_dv	Job-related Wellbeing Scale: Anxiety subscale	Normal
+us8_h_indresp h_sf12mcs_dv	SF-12 Mental Component Summary (PCS)	Normal
+us8_h_indresp h_sf12pcs_dv	SF-12 Physical Component Summary (PCS)	Normal
+us8_h_indresp h_scghq2_dv	Subjective wellbeing (GHQ): Caseness	Normal
+us8_h_indresp h_scghq1_dv	Subjective wellbeing (GHQ): Likert	Normal
+us8_h_indresp h_yasoc10_cc	young adult: job like: SOC 2010, condensed	Normal
+us8_h_indresp h_yasoc10	young adult: job like: SOC 2010	Normal
+us8_h_indresp h_yasoc00_cc	young adult: job like: SOC 2000, condensed	Normal
+us8_h_indresp h_yasoc00	young adult: job like: SOC 2000	Normal
+us8_h_indresp h_yasoc90_cc	young adult: job like: SOC 1990, condensed	Normal
+us8_h_indresp h_yasoc90	young adult: job like: SOC 1990	Normal
+us8_h_indresp h_j2soc10_cc	2nd current job: SOC 2010, condensed	Normal
+us8_h_indresp h_j2soc10	2nd current job: SOC 2010	Normal
+us8_h_indresp h_j2soc00_cc	2nd current job: SOC 2000, condensed	Normal
+us8_h_indresp h_j2soc00	2nd current job: SOC 2000	Normal
+us8_h_indresp h_j2soc90_cc	2nd current job: SOC 1990, condensed	Normal
+us8_h_indresp h_j2soc90	2nd current job: SOC 1990	Normal
+us8_h_indresp h_j1soc10_cc	First job: SOC 2010, condensed	Normal
+us8_h_indresp h_j1soc10	First job: SOC 2010	Normal
+us8_h_indresp h_j1soc00_cc	First job: SOC 2000, condensed	Normal
+us8_h_indresp h_j1soc00	First job: SOC 2000	Normal
+us8_h_indresp h_j1soc90_cc	First job: SOC 1990, condensed	Normal
+us8_h_indresp h_j1soc90	First job: SOC 1990	Normal
+us8_h_indresp h_masoc10_cc	Mother&#39;s SOC 2010, resp aged 14, condensed	Normal
+us8_h_indresp h_masoc10	Mother&#39;s SOC 2010, resp aged 14	Normal
+us8_h_indresp h_masoc00_cc	Mother&#39;s SOC 2000, resp aged 14, condensed	Normal
+us8_h_indresp h_masoc00	Mother&#39;s SOC 2000, resp aged 14	Normal
+us8_h_indresp h_masoc90_cc	Mother&#39;s SOC 1990, resp aged 14, condensed	Normal
+us8_h_indresp h_masoc90	Mother&#39;s SOC 1990, resp aged 14	Normal
+us8_h_indresp h_pasoc10_cc	Father&#39;s SOC 2010, resp aged 14, condensed	Normal
+us8_h_indresp h_pasoc10	Father&#39;s SOC 2010, resp aged 14	Normal
+us8_h_indresp h_pasoc00_cc	Father&#39;s SOC 2000, resp aged 14, condensed	Normal
+us8_h_indresp h_pasoc00	Father&#39;s SOC 2000, resp aged 14	Normal
+us8_h_indresp h_pasoc90_cc	Father&#39;s SOC 1990, resp aged 14, condensed	Normal
+us8_h_indresp h_pasoc90	Father&#39;s SOC 1990, resp aged 14	Normal
+us8_h_indresp h_jlisco88_cc	Last job: ISCO88 (condensed 3 digits version)	Normal
+us8_h_indresp h_jlisco88	Last job: International Classification of Occupations 1988	Normal
+us8_h_indresp h_jlnssec3_dv	Last job: Three Class NS-SEC	Normal
+us8_h_indresp h_jlnssec5_dv	Last job: Five Class NS-SEC	Normal
+us8_h_indresp h_jlnssec8_dv	Last job: Eight Class NS-SEC	Normal
+us8_h_indresp h_jlnssec_dv	Last job: NS-SEC	Normal
+us8_h_indresp h_jlrgsc_dv	Last job: Registrar General&#39;s Social Class	Normal
+us8_h_indresp h_jlseg_dv	Last job: Socio-economic Group	Normal
+us8_h_indresp h_jles2000	Last job: Employment Status 2000	Normal
+us8_h_indresp h_jliindb_dv	Last job: Industrial classification (CNEF), two digits	Normal
+us8_h_indresp h_jlsic07_cc	Last job: SIC 2007, condensed	Normal
+us8_h_indresp h_jlsic07	Last job: SIC 2007	Normal
+us8_h_indresp h_jlsoc10_cc	Last job: SOC 2010, condensed	Normal
+us8_h_indresp h_jlsoc10	Last job: SOC 2010	Normal
+us8_h_indresp h_jlsoc00_cc	Last job: SOC 2000, condensed	Normal
+us8_h_indresp h_jlsoc00	Last job: SOC 2000	Normal
+us8_h_indresp h_jbisco88_cc	Current job: ISCO88 (condensed 3 digits version)	Normal
+us8_h_indresp h_jbisco88	Current job: International Classification of Occupations 1988	Normal
+us8_h_indresp h_jbnssec3_dv	Current job: Three Class NS-SEC	Normal
+us8_h_indresp h_jbnssec5_dv	Current job: Five Class NS-SEC	Normal
+us8_h_indresp h_jbnssec8_dv	Current job: Eight Class NS-SEC	Normal
+us8_h_indresp h_jbnssec_dv	Current job: NS-SEC (detailed)	Normal
+us8_h_indresp h_jbrgsc_dv	Current job: Registrar General&#39;s Social Class	Normal
+us8_h_indresp h_jbseg_dv	Current job: Socio-economic Group	Normal
+us8_h_indresp h_jbes2000	Current job: Employment Status 2000	Normal
+us8_h_indresp h_jbiindb_dv	Current job: Industrial classification (CNEF), two digits	Normal
+us8_h_indresp h_jbsic07_cc	Current job: SIC 2007, condensed	Normal
+us8_h_indresp h_jbsic07	Current job: SIC 2007	Normal
+us8_h_indresp h_jbsoc10_cc	Current job: SOC 2010, condensed	Normal
+us8_h_indresp h_jbsoc10	Current job: SOC 2010	Normal
+us8_h_indresp h_jbsoc00_cc	Current job: SOC 2000, condensed	Normal
+us8_h_indresp h_jbsoc00	Current job: SOC 2000	Normal
+us8_h_indresp h_jbft_dv	Full or part-time employee	Normal
+us8_h_indresp h_nunmpsp_dv	No. unemployment spells since last interview	Normal
+us8_h_indresp h_nmpsp_dv	No. employment spells since last interview	Normal
+us8_h_indresp h_nnmpsp_dv	No. non-employment spells since last interview	Normal
+us8_h_indresp h_nhiqual_dv	Highest new qualification, UKHLS &amp; BHPS samples	Normal
+us8_h_indresp h_hiqual_dv	Highest qualification, UKHLS &amp; BHPS samples	Normal
+us8_h_indresp h_qfhighfl_dv	Eligibility flag for QFHIGH in UKHLS format	Normal
+us8_h_indresp h_nqfhigh_dv	Newly reported highest educational qualification	Normal
+us8_h_indresp h_qfhigh_dv	Highest educational qualification	Normal
+us8_h_indresp h_grmpno	Grandfather: PNO	Normal
+us8_h_indresp h_grfpno	Grandfather: PNO	Normal
+us8_h_indresp h_mnspno	Nat/step/adopt mother: PNO	Normal
+us8_h_indresp h_mnspid	Nat/step/adopt mother: PIDP	Normal
+us8_h_indresp h_mnpno	Natural mother: PNO	Normal
+us8_h_indresp h_fnspno	Nat/step/adopt father: PNO	Normal
+us8_h_indresp h_fnspid	Nat/step/adopt father: PIDP	Normal
+us8_h_indresp h_fnpno	Natural father: PNO	Normal
+us8_h_indresp h_sppno	Spouse&#39;s person number: PNO	Normal
+us8_h_indresp h_sppid	Spouse&#39;s person identifier: PIDP	Normal
+us8_h_indresp h_ppno	partner&#39;s person number: PNO	Normal
+us8_h_indresp h_ppid	partner&#39;s person identifier: PIDP	Normal
+us8_h_indresp h_hrpno	Household reference person: PNO	Normal
+us8_h_indresp h_hrpid	Household reference person: PIDP	Normal
+us8_h_indresp h_rach16_dv	Whether responsible for child under 16	Normal
+us8_h_indresp h_respf16_dv	whether natural/adoptive/step/foster father of child under 16	Normal
+us8_h_indresp h_respm16_dv	whether natural/adoptive/step mother of child under 16	Normal
+us8_h_indresp h_adresp15_dv	PNO of person responsible for child under 16	Normal
+us8_h_indresp h_ndepchl_dv	Number of own dependent children in household	Normal
+us8_h_indresp h_nchild_dv	Number of own children in household	Normal
+us8_h_indresp h_depchl_dv	Whether dependent child - official definition	Normal
+us8_h_indresp h_buno_dv	benefit unit number	Normal
+us8_h_indresp h_hhtype_dv	Composition of household, LFS-version	Normal
+us8_h_indresp h_mastat_dv	De facto marital status	Normal
+us8_h_indresp h_single_dv	Single in hh	Normal
+us8_h_indresp h_cohab_dv	Lives with cohabitee in hh	Normal
+us8_h_indresp h_livesp_dv	Lives with spouse in hh	Normal
+us8_h_indresp h_agegr13_dv	Age group (age_dv): 13 categories	Normal
+us8_h_indresp h_agegr10_dv	Age group (age_dv): 10 year intervals	Normal
+us8_h_indresp h_agegr5_dv	Age group (age_dv): 5 year intervals	Normal
+us8_h_indresp h_xtra5minosm_dv	Received extra 5 mins EMB questions? longitudinal	Normal
+us8_h_indresp h_xtra5min_dv	Received extra 5 mins EMB questions? cross-sectional	Normal
+us8_h_indresp h_hhresp_dv	Household response status	Normal
+us8_h_indresp h_urban_dv	Urban or rural area, derived	Normal
+us8_h_indresp h_gor_dv	Government Office Region	Normal
+us8_h_indresp h_country	Country of residence	Normal
+us8_h_indresp h_distmov_dv	Distance participant moved since last wave (km)	Normal
+us8_h_indresp h_addrmov_dv		Normal
+us8_h_indresp h_fimnnet_dv	total net personal income - no deductions	Normal
+us8_h_indresp h_fimnsben_dv	amount income component 7: social benefit income	Normal
+us8_h_indresp h_fimnpen_dv	amount income component 6: pension income	Normal
+us8_h_indresp h_fimninvnet_dv	amount income component 5: investment income	Normal
+us8_h_indresp h_fimnprben_dv	amount income component 3: private benefit income	Normal
+us8_h_indresp h_fimnmisc_dv	amount income component 2: miscellaneous income	Normal
+us8_h_indresp h_fimnlabnet_dv	amount income component 1: net labour income	Normal
+us8_h_indresp h_j2paynet_dv	amount income component 1c: net earnings second job	Normal
+us8_h_indresp h_j2pay_dv	pay in second job	Normal
+us8_h_indresp h_ethn_dv	Ethnic group (derived from multiple sources)	Normal
+us8_h_indresp h_scdata_dv	Self-completion module completed	Normal
+us8_h_indresp h_j2nssec8_dv	2nd job: NSSEC 8 classes	Normal
+us8_h_indresp h_yanssec8_dv	young adult: job like: NSSEC 8 classes	Normal
+us8_h_indresp h_manssec8_dv	Mother&#39;s job: NSSEC 8 classes, resp aged 14	Normal
+us8_h_indresp h_panssec8_dv	Father&#39;s job: NSSEC 8 classes, resp aged 14	Normal
+us8_h_indresp h_j1nssec8_dv	own first job: NSSEC 8 classes	Normal
+us8_h_indresp h_npensioner_dv	Total # of pensionable age in hh	Normal
+us8_h_indresp h_nnssib_dv	Number of R&#39;s nat/step/adopt siblings in hh	Normal
+us8_h_indresp h_nnsib_dv	Number of R&#39;s natural siblings in hh	Normal
+us8_h_indresp h_ngrp_dv	Number of R&#39;s grandparents in hh	Normal
+us8_h_indresp h_npns_dv	Number of R&#39;s nat/step/adopt parents in hh	Normal
+us8_h_indresp h_npn_dv	Number of R&#39;s natural parents in hh	Normal
+us8_h_indresp h_marstat_dv	Harmonised de facto marital status	Normal
+us8_h_indresp h_pensioner_dv	Whether R is of pensionable age	Normal
+us8_h_indresp h_doby_dv	DOB: Year, derived	Normal
+us8_h_indresp h_dobm_dv	DOB: Month, derived	Normal
+us8_h_indresp h_intdaty_dv	Interview date: Year, derived	Normal
+us8_h_indresp h_intdatm_dv	Interview date: Month, derived	Normal
+us8_h_indresp h_intdatd_dv	Interview date: Day, derived	Normal
+us8_h_indresp h_age_dv	Age, derived from dob_dv and intdat_dv	Normal
+us8_h_indresp h_sex_dv	Sex, derived	Normal
+us8_h_indresp h_ff_oprlg0ni	Religion brought up in: NI	Normal
+us8_h_indresp h_ff_oprlg1	Religion affiliation	Normal
+us8_h_indresp h_ff_oprlg0	Religion brought up in	Normal
+us8_h_indresp h_ff_oprlg	Belongs to a religion	Normal
+us8_h_indresp h_ff_yr2uk4	fed-forward year to uk	Normal
+us8_h_indresp h_ff_ivintlang	Interview language previous interview	Normal
+us8_h_indresp h_ff_bentype41	fed-forward: personal independence payments	Normal
+us8_h_indresp h_ff_bentype40	fed-forward: universal credit	Normal
+us8_h_indresp h_ff_bentype39	fed-forward: any other state benefit	Normal
+us8_h_indresp h_ff_bentype38	fed-forward: any other regular payment	Normal
+us8_h_indresp h_ff_bentype37	fed-forward: other disability related benefit or payment	Normal
+us8_h_indresp h_ff_bentype36	fed-forward: received in-work credit for lone parents	Normal
+us8_h_indresp h_ff_bentype35	fed-forward: received sickness and accident insurance	Normal
+us8_h_indresp h_ff_bentype34	fed-forward: received return to work credit	Normal
+us8_h_indresp h_ff_bentype33	fed-forward: received employment and support allowance	Normal
+us8_h_indresp h_ff_bentype32	fed-forward: received rate rebate	Normal
+us8_h_indresp h_ff_bentype31	fed-forward: received rent rebate	Normal
+us8_h_indresp h_ff_bentype30	fed-forward: received foster allowance / guardian allowance	Normal
+us8_h_indresp h_ff_bentype29	fed-forward: received rent from any other property	Normal
+us8_h_indresp h_ff_bentype28	fed-forward: received rent from boarders or lodgers (not family members) living	Normal
+us8_h_indresp h_ff_bentype27	fed-forward: received payments from a family member not living here	Normal
+us8_h_indresp h_ff_bentype26	fed-forward: received maintenance or alimony	Normal
+us8_h_indresp h_ff_bentype25	fed-forward: received trade union / friendly society payment	Normal
+us8_h_indresp h_ff_bentype24	fed-forward: received educational grant (not student loan or tuition fee loan)	Normal
+us8_h_indresp h_ff_bentype23	fed-forward: received council tax benefit	Normal
+us8_h_indresp h_ff_bentype22	fed-forward: received housing benefit	Normal
+us8_h_indresp h_ff_bentype21	fed-forward: received maternity allowance	Normal
+us8_h_indresp h_ff_bentype20	fed-forward: received working tax credit (incl. disabled person&#39;s tax credit)	Normal
+us8_h_indresp h_ff_bentype19	fed-forward: received child tax credit	Normal
+us8_h_indresp h_ff_bentype18	fed-forward: received child benefit (incl. lone-parent child benefit payments)	Normal
+us8_h_indresp h_ff_bentype17	fed-forward: received national insurance credits	Normal
+us8_h_indresp h_ff_bentype16	fed-forward: received job seeker&#39;s allowance	Normal
+us8_h_indresp h_ff_bentype15	fed-forward: received income support	Normal
+us8_h_indresp h_ff_bentype14	fed-forward: received incapacity benefit	Normal
+us8_h_indresp h_ff_bentype13	fed-forward: received war disablement pension	Normal
+us8_h_indresp h_ff_bentype12	fed-forward: received carer&#39;s allowance (was invalid care allowance)	Normal
+us8_h_indresp h_ff_bentype11	fed-forward: received attendance allowance	Normal
+us8_h_indresp h_ff_bentype10	fed-forward: received disability living allowance	Normal
+us8_h_indresp h_ff_bentype09	fed-forward: received industrial injury disablement allowance	Normal
+us8_h_indresp h_ff_bentype08	fed-forward: received severe disablement allowance	Normal
+us8_h_indresp h_ff_bentype07	fed-forward: received pension credit (incl. guarantee credit &amp; saving credit)	Normal
+us8_h_indresp h_ff_bentype06	fed-forward: received widowed mother&#39;s allowance / widowed parent&#39;s allowance	Normal
+us8_h_indresp h_ff_bentype05	fed-forward: received widow&#39;s or war widow&#39;s pension	Normal
+us8_h_indresp h_ff_bentype04	fed-forward: received private pension/annuity	Normal
+us8_h_indresp h_ff_bentype03	fed-forward: received pension from a spouse&#39;s previous employer	Normal
+us8_h_indresp h_ff_bentype02	fed-forward: received pension, previous employer	Normal
+us8_h_indresp h_ff_bentype01	fed-forward: received ni retirement/state retirement (old age) pension	Normal
+us8_h_indresp h_ff_emplw	In Paid Employment	Normal
+us8_h_indresp h_ff_jbstat	Employment Status	Normal
+us8_h_indresp h_ff_jbsize	fed-forward job status: number employed at workplace	Normal
+us8_h_indresp h_ff_jbmngr	fed-forward job status: managerial duties	Normal
+us8_h_indresp h_ff_jbsemp	fed-forward job status: employed or self employed	Normal
+us8_h_indresp h_ff_ivlolw	Summary outcome at preceding wave	Normal
+us8_h_indresp h_fibenothr_tc	fibenothr_dv includes top coded component (EUL version only) (EUL version only)	Normal
+us8_h_indresp h_fiyrinvinc_tc	fiyrinvinc_dv includes top coded component (EUL version only) (EUL version only)	Normal
+us8_h_indresp h_fimnlabnet_tc	fimnlabnet_dv includes top coded component (EUL version only) (EUL version only)	Normal
+us8_h_indresp h_fimnlabgrs_tc	fimnlabgrs_dv includes top coded component (EUL version only) (EUL version only)	Normal
+us8_h_indresp h_fimngrs_tc	fimngrs_dv includes top coded component (EUL version only) (EUL version only)	Normal
+us8_h_indresp h_j2pay_if	imputation flag jb2pay_dv	Normal
+us8_h_indresp h_grmpid	Grandmother: PIDP	Normal
+us8_h_indresp h_grfpid	Grandfather: PIDP	Normal
+us8_h_indresp h_pns2sex	Nat/step/adopt parent 2: Sex	Normal
+us8_h_indresp h_pns2pno	Nat/step/adopt parent 2: PNO	Normal
+us8_h_indresp h_pns2pid	Nat/step/adopt parent 2: PIDP	Normal
+us8_h_indresp h_pns1sex	Nat/step/adopt parent 1: Sex	Normal
+us8_h_indresp h_pns1pno	Nat/step/adopt parent 1: PNO	Normal
+us8_h_indresp h_pns1pid	Nat/step/adopt parent 1: PIDP	Normal
+us8_h_indresp h_pn2sex	Natural parent 2: Sex	Normal
+us8_h_indresp h_pn2pno	Natural parent 2: PNO	Normal
+us8_h_indresp h_pn2pid	Natural parent 2: PIDP	Normal
+us8_h_indresp h_pn1sex	Natural parent 1: Sex	Normal
+us8_h_indresp h_pn1pno	Natural parent 1: PNO	Normal
+us8_h_indresp h_pn1pid	Natural parent 1: PIDP	Normal
+us8_h_indresp h_mnpid	Natural mother: PIDP	Normal
+us8_h_indresp h_fnpid	Natural father: PIDP	Normal
+us8_h_indresp h_ppsex	Partner&#39;s sex	Normal
+us8_h_indresp h_age_if	Imputation flag for age_dv	Normal
+us8_h_indresp h_doby_if	DOB Year imputation flag	Normal
+us8_h_indresp h_intdaty_if	Interview date: Year, imputation flag	Normal
+us8_h_indresp h_intdatm_if	Interview date: Month, imputation flag	Normal
+us8_h_indresp h_intdatd_if	Interview date: Day, imputation flag	Normal
+us8_h_indresp h_indmode	mode this individual was given final ind outcome in	Normal
+us8_h_indresp h_ideviceused	Device used for first accessing individual interview	Normal
+us8_h_indresp h_origadd	Interview being conducted at original address - computed	Normal
+us8_h_indresp h_ringfence	CAPI ringfenced household	Normal
+us8_h_indresp h_ctemail_code	stable contact email given	Normal
+us8_h_indresp h_cttel2_code	stable contact phone 2 given	Normal
+us8_h_indresp h_cttel1_code	stable contact phone 1 given	Normal
+us8_h_indresp h_ctpcode_code	stable contact postcode given	Normal
+us8_h_indresp h_ctcnty_code	stable contact county given	Normal
+us8_h_indresp h_cttown_code	stable contact town 1 given	Normal
+us8_h_indresp h_ctadd2_code	stable contact address 2 given	Normal
+us8_h_indresp h_ctadd1_code	stable contact address 1 given	Normal
+us8_h_indresp h_ctrel	Stable contact relation to R	Normal
+us8_h_indresp h_ctconsconf95	Stable contact refused	Normal
+us8_h_indresp h_ctconsconf94	Stable contact refused and future interview refused	Normal
+us8_h_indresp h_ctconsconf8	No changes or corrections	Normal
+us8_h_indresp h_ctconsconf7	Email	Normal
+us8_h_indresp h_ctconsconf6	Alternative telephone	Normal
+us8_h_indresp h_ctconsconf5	Telephone	Normal
+us8_h_indresp h_ctconsconf4	Postcode	Normal
+us8_h_indresp h_ctconsconf3	Address	Normal
+us8_h_indresp h_ctconsconf2	Name	Normal
+us8_h_indresp h_ctconsconf1	Relation	Normal
+us8_h_indresp h_remail_code	participant email given	Normal
+us8_h_indresp h_rphwrk_code	participant work number given	Normal
+us8_h_indresp h_rphmob_code	participant mobile given	Normal
+us8_h_indresp h_rhland_code	participant landline given	Normal
+us8_h_indresp h_othcont	Other contact details provided	Normal
+us8_h_indresp h_hasemail	Has e-mail	Normal
+us8_h_indresp h_detinc6	(SPONTANEOUS) Respondent adamantly refuses further contact	Normal
+us8_h_indresp h_detinc5	All correct	Normal
+us8_h_indresp h_detinc4	E-mail address	Normal
+us8_h_indresp h_detinc3	Work phone number	Normal
+us8_h_indresp h_detinc2	Personal mobile	Normal
+us8_h_indresp h_detinc1	Home landline	Normal
+us8_h_indresp h_respf16	Father of a child under 16	Normal
+us8_h_indresp h_respm16	Mother of a child under 16	Normal
+us8_h_indresp h_hgadoptf	PNO of adoptive father	Normal
+us8_h_indresp h_hgadoptm	PNO of adoptive mother	Normal
+us8_h_indresp h_hgbiof	PNO of biological father	Normal
+us8_h_indresp h_hgbiom	PNO of biological mother	Normal
+us8_h_indresp h_hgpart	PNO of husband/wife/CP	Normal
+us8_h_indresp h_ivlibal	Amount of interview conducted in translation	Normal
+us8_h_indresp h_ivliwho	Who translated if not entire interview in English	Normal
+us8_h_indresp h_ivlitrans	Language other than English for interview	Normal
+us8_h_indresp h_ivlieng	Entire interview conducted in English	Normal
+us8_h_indresp h_ivaffct97	Any other effect	Normal
+us8_h_indresp h_ivaffct30	Children/family/other being disruptive	Normal
+us8_h_indresp h_ivaffct27	Other positive effect, influence, disturbance	Normal
+us8_h_indresp h_ivaffct23	Other helped recall of dates, amounts etc but did not answer directly for respon	Normal
+us8_h_indresp h_ivaffct22	Other helped in translation, reading showcards, other survey tasks	Normal
+us8_h_indresp h_ivaffct21	Other confirmed respondent&#39;s answers	Normal
+us8_h_indresp h_ivaffct17	Other negative effect, influence, disturbance	Normal
+us8_h_indresp h_ivaffct15	Respondent sought help from/conferred with other(s)	Normal
+us8_h_indresp h_ivaffct14	Other disapproved of answers/stopped respondent answering	Normal
+us8_h_indresp h_ivaffct13	Other augmented/added to respondent&#39;s answers	Normal
+us8_h_indresp h_ivaffct12	Other changed/altered respondent&#39;s answers	Normal
+us8_h_indresp h_ivaffct11	Other answered directly for respondent (butted in, prompted respondent)	Normal
+us8_h_indresp h_ivinfnce	Others influenced the interview	Normal
+us8_h_indresp h_ivprsnt	Anyone present during interview	Normal
+us8_h_indresp h_coopnxtyr	How easy gain cooperation next year	Normal
+us8_h_indresp h_intqus	Respondent&#39;s interest	Normal
+us8_h_indresp h_undqus	Respondent&#39;s understanding	Normal
+us8_h_indresp h_susp	Respondent suspicion	Normal
+us8_h_indresp h_ivcoop	Respondent cooperation	Normal
+us8_h_indresp h_prfitba	Total personal income annually	Normal
+us8_h_indresp h_prfitbw	Total personal income weekly	Normal
+us8_h_indresp h_prfitb	Total personal income	Normal
+us8_h_indresp h_netuse	Regularly uses internet	Normal
+us8_h_indresp h_pbnft96	None of these	Normal
+us8_h_indresp h_pbnft12	Pension Credit	Normal
+us8_h_indresp h_pbnft11	Child Tax Credit	Normal
+us8_h_indresp h_pbnft10	Any other state benefit	Normal
+us8_h_indresp h_pbnft9	Incapacity Benefit (Replaces Invalidity and NI Sickness Benefit)	Normal
+us8_h_indresp h_pbnft8	Housing Benefit/Rent Rebate	Normal
+us8_h_indresp h_pbnft7	Working Tax Credit (formerly Working Family Tax Credit and Disabled Person&#39;s Tax	Normal
+us8_h_indresp h_pbnft6	Child Benefit	Normal
+us8_h_indresp h_pbnft5	Employment and Support Allowance	Normal
+us8_h_indresp h_pbnft4	Job Seekers Allowance (Unemployment) and/or Income Support	Normal
+us8_h_indresp h_pbnft3	Disability Living Allowance	Normal
+us8_h_indresp h_pbnft13	Universal Credit	Normal
+us8_h_indresp h_pbnft2	Pension from previous employer(s)	Normal
+us8_h_indresp h_pbnft1	NI Retirement/State Retirement (old age) Pension	Normal
+us8_h_indresp h_prearna	Total earnings annually	Normal
+us8_h_indresp h_prearnw	Total earnings weekly	Normal
+us8_h_indresp h_prearn	Total earnings	Normal
+us8_h_indresp h_pjsptft	S/emp: part-time or full-time	Normal
+us8_h_indresp h_pjbptft	Part-time or full-time: current job	Normal
+us8_h_indresp h_pjulk4wk	Looked for work in last 4 weeks	Normal
+us8_h_indresp h_sf1	General health	Normal
+us8_h_indresp h_pripn	PNO of proxy informant	Normal
+us8_h_indresp h_preason	Reason for proxy	Normal
+us8_h_indresp h_prel	Rel between proxy and proxy informant	Normal
+us8_h_indresp h_plitrans	Translated language	Normal
+us8_h_indresp h_plieng	Interview conducted in English	Normal
+us8_h_indresp h_iproxy	Able to do a proxy	Normal
+us8_h_indresp h_doneproxy	Proxy interview done previously for this respondent	Normal
+us8_h_indresp h_hospdc7	health cond no. 7: Hospital in-patient days due to new condition	Normal
+us8_h_indresp h_hospc7	health cond no. 7: Hospital in-patient due to new condition	Normal
+us8_h_indresp h_hospdc6	health cond no. 6: Hospital in-patient days due to new condition	Normal
+us8_h_indresp h_hospc6	health cond no. 6: Hospital in-patient due to new condition	Normal
+us8_h_indresp h_hospdc5	health cond no. 5: Hospital in-patient days due to new condition	Normal
+us8_h_indresp h_hospc5	health cond no. 5: Hospital in-patient due to new condition	Normal
+us8_h_indresp h_hospdc4	health cond no. 4: Hospital in-patient days due to new condition	Normal
+us8_h_indresp h_hospc4	health cond no. 4: Hospital in-patient due to new condition	Normal
+us8_h_indresp h_hospdc3	health cond no. 3: Hospital in-patient days due to new condition	Normal
+us8_h_indresp h_hospc3	health cond no. 3: Hospital in-patient due to new condition	Normal
+us8_h_indresp h_hospdc2	health cond no. 2: Hospital in-patient days due to new condition	Normal
+us8_h_indresp h_hospc2	health cond no. 2: Hospital in-patient due to new condition	Normal
+us8_h_indresp h_hospdc1	health cond no. 1: Hospital in-patient days due to new condition	Normal
+us8_h_indresp h_hospc1	health cond no. 1: Hospital in-patient due to new condition	Normal
+us8_h_indresp h_ftedmor2	edu spell no. 2: More FT education periods	Normal
+us8_h_indresp h_ft2endy42	edu spell no. 2: Year finished next FT education period	Normal
+us8_h_indresp h_ft2endm2	edu spell no. 2: Month finished next FT education period	Normal
+us8_h_indresp h_ftedend2	edu spell no. 2: FT education period ended	Normal
+us8_h_indresp h_ftedstarty42	edu spell no. 2: Year started FT education period	Normal
+us8_h_indresp h_ftedstartm2	edu spell no. 2: Month started FT education period	Normal
+us8_h_indresp h_ftedmor1	edu spell no. 1: More FT education periods	Normal
+us8_h_indresp h_ft2endy41	edu spell no. 1: Year finished next FT education period	Normal
+us8_h_indresp h_ft2endm1	edu spell no. 1: Month finished next FT education period	Normal
+us8_h_indresp h_ftedend1	edu spell no. 1: FT education period ended	Normal
+us8_h_indresp h_ftedstarty41	edu spell no. 1: Year started FT education period	Normal
+us8_h_indresp h_ftedstartm1	edu spell no. 1: Month started FT education period	Normal
+us8_h_indresp h_trainqual3	training spell 3: Qualifications from training	Normal
+us8_h_indresp h_trainpurp73	training spell 3: For hobbies or leisure	Normal
+us8_h_indresp h_trainpurp63	training spell 3: Health and Safety Training	Normal
+us8_h_indresp h_trainpurp53	training spell 3: To help you get a promotion	Normal
+us8_h_indresp h_trainpurp43	training spell 3: To prepare you for a job you might do in the future	Normal
+us8_h_indresp h_trainpurp33	training spell 3: To maintain professional status and/or meet occupational stand	Normal
+us8_h_indresp h_trainpurp23	training spell 3: To improve your skills in your current job	Normal
+us8_h_indresp h_trainpurp13	training spell 3: To help you get started in your job	Normal
+us8_h_indresp h_trainend3	training spell 3: Training ended	Normal
+us8_h_indresp h_trainhrs3	training spell 3: No. of hours per day training	Normal
+us8_h_indresp h_traindays3	training spell 3: No. of days on training course	Normal
+us8_h_indresp h_trwho3	training spell 3: Training provider	Normal
+us8_h_indresp h_trainqual2	training spell 2: Qualifications from training	Normal
+us8_h_indresp h_trainpurp72	training spell 2: For hobbies or leisure	Normal
+us8_h_indresp h_trainpurp62	training spell 2: Health and Safety Training	Normal
+us8_h_indresp h_trainpurp52	training spell 2: To help you get a promotion	Normal
+us8_h_indresp h_trainpurp42	training spell 2: To prepare you for a job you might do in the future	Normal
+us8_h_indresp h_trainpurp32	training spell 2: To maintain professional status and/or meet occupational stand	Normal
+us8_h_indresp h_trainpurp22	training spell 2: To improve your skills in your current job	Normal
+us8_h_indresp h_trainpurp12	training spell 2: To help you get started in your job	Normal
+us8_h_indresp h_trainend2	training spell 2: Training ended	Normal
+us8_h_indresp h_trainhrs2	training spell 2: No. of hours per day training	Normal
+us8_h_indresp h_traindays2	training spell 2: No. of days on training course	Normal
+us8_h_indresp h_trwho2	training spell 2: Training provider	Normal
+us8_h_indresp h_trainqual1	training spell 1: Qualifications from training	Normal
+us8_h_indresp h_trainpurp71	training spell 1: For hobbies or leisure	Normal
+us8_h_indresp h_trainpurp61	training spell 1: Health and Safety Training	Normal
+us8_h_indresp h_trainpurp51	training spell 1: To help you get a promotion	Normal
+us8_h_indresp h_trainpurp41	training spell 1: To prepare you for a job you might do in the future	Normal
+us8_h_indresp h_trainpurp31	training spell 1: To maintain professional status and/or meet occupational stand	Normal
+us8_h_indresp h_trainpurp21	training spell 1: To improve your skills in your current job	Normal
+us8_h_indresp h_trainpurp11	training spell 1: To help you get started in your job	Normal
+us8_h_indresp h_trainend1	training spell 1: Training ended	Normal
+us8_h_indresp h_trainhrs1	training spell 1: No. of hours per day training	Normal
+us8_h_indresp h_traindays1	training spell 1: No. of days on training course	Normal
+us8_h_indresp h_trwho1	training spell 1: Training provider	Normal
+us8_h_indresp h_lmspy47	cohab no. 7: Year ended ML spell	Normal
+us8_h_indresp h_lmspm7	cohab no. 7: Month ended ML spell	Normal
+us8_h_indresp h_currpart7	cohab no. 7: Check if current husband/wife/partner	Normal
+us8_h_indresp h_lmcby47	cohab no. 7: Year began cohabitation spell	Normal
+us8_h_indresp h_lmcbm7	cohab no. 7: Month began cohabitation spell	Normal
+us8_h_indresp h_lmspy46	cohab no. 6: Year ended ML spell	Normal
+us8_h_indresp h_lmspm6	cohab no. 6: Month ended ML spell	Normal
+us8_h_indresp h_currpart6	cohab no. 6: Check if current husband/wife/partner	Normal
+us8_h_indresp h_lmcby46	cohab no. 6: Year began cohabitation spell	Normal
+us8_h_indresp h_lmcbm6	cohab no. 6: Month began cohabitation spell	Normal
+us8_h_indresp h_lmspy45	cohab no. 5: Year ended ML spell	Normal
+us8_h_indresp h_lmspm5	cohab no. 5: Month ended ML spell	Normal
+us8_h_indresp h_currpart5	cohab no. 5: Check if current husband/wife/partner	Normal
+us8_h_indresp h_lmcby45	cohab no. 5: Year began cohabitation spell	Normal
+us8_h_indresp h_lmcbm5	cohab no. 5: Month began cohabitation spell	Normal
+us8_h_indresp h_lmspy44	cohab no. 4: Year ended ML spell	Normal
+us8_h_indresp h_lmspm4	cohab no. 4: Month ended ML spell	Normal
+us8_h_indresp h_currpart4	cohab no. 4: Check if current husband/wife/partner	Normal
+us8_h_indresp h_lmcby44	cohab no. 4: Year began cohabitation spell	Normal
+us8_h_indresp h_lmcbm4	cohab no. 4: Month began cohabitation spell	Normal
+us8_h_indresp h_lmspy43	cohab no. 3: Year ended ML spell	Normal
+us8_h_indresp h_lmspm3	cohab no. 3: Month ended ML spell	Normal
+us8_h_indresp h_currpart3	cohab no. 3: Check if current husband/wife/partner	Normal
+us8_h_indresp h_lmcby43	cohab no. 3: Year began cohabitation spell	Normal
+us8_h_indresp h_lmcbm3	cohab no. 3: Month began cohabitation spell	Normal
+us8_h_indresp h_lmspy42	cohab no. 2: Year ended ML spell	Normal
+us8_h_indresp h_lmspm2	cohab no. 2: Month ended ML spell	Normal
+us8_h_indresp h_currpart2	cohab no. 2: Check if current husband/wife/partner	Normal
+us8_h_indresp h_lmcby42	cohab no. 2: Year began cohabitation spell	Normal
+us8_h_indresp h_lmcbm2	cohab no. 2: Month began cohabitation spell	Normal
+us8_h_indresp h_lmspy41	cohab no. 1: Year ended ML spell	Normal
+us8_h_indresp h_lmspm1	cohab no. 1: Month ended ML spell	Normal
+us8_h_indresp h_currpart1	cohab no. 1: Check if current husband/wife/partner	Normal
+us8_h_indresp h_lmcby41	cohab no. 1: Year began cohabitation spell	Normal
+us8_h_indresp h_lmcbm1	cohab no. 1: Month began cohabitation spell	Normal
+us8_h_indresp h_svsk6	savings no.6: Savings amount in sole name	Normal
+us8_h_indresp h_svpn16_6	savings no.6: Person number 16	Normal
+us8_h_indresp h_svpn15_6	savings no.6: Person number 15	Normal
+us8_h_indresp h_svpn14_6	savings no.6: Person number 14	Normal
+us8_h_indresp h_svpn13_6	savings no.6: Person number 13	Normal
+us8_h_indresp h_svpn12_6	savings no.6: Person number 12	Normal
+us8_h_indresp h_svpn11_6	savings no.6: Person number 11	Normal
+us8_h_indresp h_svpn10_6	savings no.6: Person number 10	Normal
+us8_h_indresp h_svpn9_6	savings no.6: Person number 9	Normal
+us8_h_indresp h_svpn8_6	savings no.6: Person number 8	Normal
+us8_h_indresp h_svpn7_6	savings no.6: Person number 7	Normal
+us8_h_indresp h_svpn6_6	savings no.6: Person number 6	Normal
+us8_h_indresp h_svpn5_6	savings no.6: Person number 5	Normal
+us8_h_indresp h_svpn4_6	savings no.6: Person number 4	Normal
+us8_h_indresp h_svpn3_6	savings no.6: Person number 3	Normal
+us8_h_indresp h_svpn2_6	savings no.6: Person number 2	Normal
+us8_h_indresp h_svpn1_6	savings no.6: Person number 1	Normal
+us8_h_indresp h_svpn0_6	savings no.6: Non-household member	Normal
+us8_h_indresp h_svsj6	savings no.6: Account(s) in sole name or joint	Normal
+us8_h_indresp h_svb4_6	savings no.6: Amount: branching q	Normal
+us8_h_indresp h_svb5_6	savings no.6: Amount: branching q	Normal
+us8_h_indresp h_svb3_6	savings no.6: Amount: branching q	Normal
+us8_h_indresp h_svb2_6	savings no.6: Amount: branching q	Normal
+us8_h_indresp h_svb1_6	savings no.6: Amount: branching q	Normal
+us8_h_indresp h_svamt6	savings no.6: Amount held in account	Normal
+us8_h_indresp h_svsk5	savings no.5: Savings amount in sole name	Normal
+us8_h_indresp h_svpn16_5	savings no.5: Person number 16	Normal
+us8_h_indresp h_svpn15_5	savings no.5: Person number 15	Normal
+us8_h_indresp h_svpn14_5	savings no.5: Person number 14	Normal
+us8_h_indresp h_svpn13_5	savings no.5: Person number 13	Normal
+us8_h_indresp h_svpn12_5	savings no.5: Person number 12	Normal
+us8_h_indresp h_svpn11_5	savings no.5: Person number 11	Normal
+us8_h_indresp h_svpn10_5	savings no.5: Person number 10	Normal
+us8_h_indresp h_svpn9_5	savings no.5: Person number 9	Normal
+us8_h_indresp h_svpn8_5	savings no.5: Person number 8	Normal
+us8_h_indresp h_svpn7_5	savings no.5: Person number 7	Normal
+us8_h_indresp h_svpn6_5	savings no.5: Person number 6	Normal
+us8_h_indresp h_svpn5_5	savings no.5: Person number 5	Normal
+us8_h_indresp h_svpn4_5	savings no.5: Person number 4	Normal
+us8_h_indresp h_svpn3_5	savings no.5: Person number 3	Normal
+us8_h_indresp h_svpn2_5	savings no.5: Person number 2	Normal
+us8_h_indresp h_svpn1_5	savings no.5: Person number 1	Normal
+us8_h_indresp h_svpn0_5	savings no.5: Non-household member	Normal
+us8_h_indresp h_svsj5	savings no.5: Account(s) in sole name or joint	Normal
+us8_h_indresp h_svb4_5	savings no.5: Amount: branching q	Normal
+us8_h_indresp h_svb5_5	savings no.5: Amount: branching q	Normal
+us8_h_indresp h_svb3_5	savings no.5: Amount: branching q	Normal
+us8_h_indresp h_svb2_5	savings no.5: Amount: branching q	Normal
+us8_h_indresp h_svb1_5	savings no.5: Amount: branching q	Normal
+us8_h_indresp h_svamt5	savings no.5: Amount held in account	Normal
+us8_h_indresp h_svsk4	savings no.4: Savings amount in sole name	Normal
+us8_h_indresp h_svpn16_4	savings no.4: Person number 16	Normal
+us8_h_indresp h_svpn15_4	savings no.4: Person number 15	Normal
+us8_h_indresp h_svpn14_4	savings no.4: Person number 14	Normal
+us8_h_indresp h_svpn13_4	savings no.4: Person number 13	Normal
+us8_h_indresp h_svpn12_4	savings no.4: Person number 12	Normal
+us8_h_indresp h_svpn11_4	savings no.4: Person number 11	Normal
+us8_h_indresp h_svpn10_4	savings no.4: Person number 10	Normal
+us8_h_indresp h_svpn9_4	savings no.4: Person number 9	Normal
+us8_h_indresp h_svpn8_4	savings no.4: Person number 8	Normal
+us8_h_indresp h_svpn7_4	savings no.4: Person number 7	Normal
+us8_h_indresp h_svpn6_4	savings no.4: Person number 6	Normal
+us8_h_indresp h_svpn5_4	savings no.4: Person number 5	Normal
+us8_h_indresp h_svpn4_4	savings no.4: Person number 4	Normal
+us8_h_indresp h_svpn3_4	savings no.4: Person number 3	Normal
+us8_h_indresp h_svpn2_4	savings no.4: Person number 2	Normal
+us8_h_indresp h_svpn1_4	savings no.4: Person number 1	Normal
+us8_h_indresp h_svpn0_4	savings no.4: Non-household member	Normal
+us8_h_indresp h_svsj4	savings no.4: Account(s) in sole name or joint	Normal
+us8_h_indresp h_svb4_4	savings no.4: Amount: branching q	Normal
+us8_h_indresp h_svb5_4	savings no.4: Amount: branching q	Normal
+us8_h_indresp h_svb3_4	savings no.4: Amount: branching q	Normal
+us8_h_indresp h_svb2_4	savings no.4: Amount: branching q	Normal
+us8_h_indresp h_svb1_4	savings no.4: Amount: branching q	Normal
+us8_h_indresp h_svamt4	savings no.4: Amount held in account	Normal
+us8_h_indresp h_svsk3	savings no.3: Savings amount in sole name	Normal
+us8_h_indresp h_svpn16_3	savings no.3: Person number 16	Normal
+us8_h_indresp h_svpn15_3	savings no.3: Person number 15	Normal
+us8_h_indresp h_svpn14_3	savings no.3: Person number 14	Normal
+us8_h_indresp h_svpn13_3	savings no.3: Person number 13	Normal
+us8_h_indresp h_svpn12_3	savings no.3: Person number 12	Normal
+us8_h_indresp h_svpn11_3	savings no.3: Person number 11	Normal
+us8_h_indresp h_svpn10_3	savings no.3: Person number 10	Normal
+us8_h_indresp h_svpn9_3	savings no.3: Person number 9	Normal
+us8_h_indresp h_svpn8_3	savings no.3: Person number 8	Normal
+us8_h_indresp h_svpn7_3	savings no.3: Person number 7	Normal
+us8_h_indresp h_svpn6_3	savings no.3: Person number 6	Normal
+us8_h_indresp h_svpn5_3	savings no.3: Person number 5	Normal
+us8_h_indresp h_svpn4_3	savings no.3: Person number 4	Normal
+us8_h_indresp h_svpn3_3	savings no.3: Person number 3	Normal
+us8_h_indresp h_svpn2_3	savings no.3: Person number 2	Normal
+us8_h_indresp h_svpn1_3	savings no.3: Person number 1	Normal
+us8_h_indresp h_svpn0_3	savings no.3: Non-household member	Normal
+us8_h_indresp h_svsj3	savings no.3: Account(s) in sole name or joint	Normal
+us8_h_indresp h_svb4_3	savings no.3: Amount: branching q	Normal
+us8_h_indresp h_svb5_3	savings no.3: Amount: branching q	Normal
+us8_h_indresp h_svb3_3	savings no.3: Amount: branching q	Normal
+us8_h_indresp h_svb2_3	savings no.3: Amount: branching q	Normal
+us8_h_indresp h_svb1_3	savings no.3: Amount: branching q	Normal
+us8_h_indresp h_svamt3	savings no.3: Amount held in account	Normal
+us8_h_indresp h_svsk2	savings no.2: Savings amount in sole name	Normal
+us8_h_indresp h_svpn16_2	savings no.2: Person number 16	Normal
+us8_h_indresp h_svpn15_2	savings no.2: Person number 15	Normal
+us8_h_indresp h_svpn14_2	savings no.2: Person number 14	Normal
+us8_h_indresp h_svpn13_2	savings no.2: Person number 13	Normal
+us8_h_indresp h_svpn12_2	savings no.2: Person number 12	Normal
+us8_h_indresp h_svpn11_2	savings no.2: Person number 11	Normal
+us8_h_indresp h_svpn10_2	savings no.2: Person number 10	Normal
+us8_h_indresp h_svpn9_2	savings no.2: Person number 9	Normal
+us8_h_indresp h_svpn8_2	savings no.2: Person number 8	Normal
+us8_h_indresp h_svpn7_2	savings no.2: Person number 7	Normal
+us8_h_indresp h_svpn6_2	savings no.2: Person number 6	Normal
+us8_h_indresp h_svpn5_2	savings no.2: Person number 5	Normal
+us8_h_indresp h_svpn4_2	savings no.2: Person number 4	Normal
+us8_h_indresp h_svpn3_2	savings no.2: Person number 3	Normal
+us8_h_indresp h_svpn2_2	savings no.2: Person number 2	Normal
+us8_h_indresp h_svpn1_2	savings no.2: Person number 1	Normal
+us8_h_indresp h_svpn0_2	savings no.2: Non-household member	Normal
+us8_h_indresp h_svsj2	savings no.2: Account(s) in sole name or joint	Normal
+us8_h_indresp h_svb4_2	savings no.2: Amount: branching q	Normal
+us8_h_indresp h_svb5_2	savings no.2: Amount: branching q	Normal
+us8_h_indresp h_svb3_2	savings no.2: Amount: branching q	Normal
+us8_h_indresp h_svb2_2	savings no.2: Amount: branching q	Normal
+us8_h_indresp h_svb1_2	savings no.2: Amount: branching q	Normal
+us8_h_indresp h_svamt2	savings no.2: Amount held in account	Normal
+us8_h_indresp h_svsk1	savings no.1: Savings amount in sole name	Normal
+us8_h_indresp h_svpn16_1	savings no.1: Person number 16	Normal
+us8_h_indresp h_svpn15_1	savings no.1: Person number 15	Normal
+us8_h_indresp h_svpn14_1	savings no.1: Person number 14	Normal
+us8_h_indresp h_svpn13_1	savings no.1: Person number 13	Normal
+us8_h_indresp h_svpn12_1	savings no.1: Person number 12	Normal
+us8_h_indresp h_svpn11_1	savings no.1: Person number 11	Normal
+us8_h_indresp h_svpn10_1	savings no.1: Person number 10	Normal
+us8_h_indresp h_svpn9_1	savings no.1: Person number 9	Normal
+us8_h_indresp h_svpn8_1	savings no.1: Person number 8	Normal
+us8_h_indresp h_svpn7_1	savings no.1: Person number 7	Normal
+us8_h_indresp h_svpn6_1	savings no.1: Person number 6	Normal
+us8_h_indresp h_svpn5_1	savings no.1: Person number 5	Normal
+us8_h_indresp h_svpn4_1	savings no.1: Person number 4	Normal
+us8_h_indresp h_svpn3_1	savings no.1: Person number 3	Normal
+us8_h_indresp h_svpn2_1	savings no.1: Person number 2	Normal
+us8_h_indresp h_svpn1_1	savings no.1: Person number 1	Normal
+us8_h_indresp h_svpn0_1	savings no.1: Non-household member	Normal
+us8_h_indresp h_svsj1	savings no.1: Account(s) in sole name or joint	Normal
+us8_h_indresp h_svb4_1	savings no.1: Amount: branching q	Normal
+us8_h_indresp h_svb5_1	savings no.1: Amount: branching q	Normal
+us8_h_indresp h_svb3_1	savings no.1: Amount: branching q	Normal
+us8_h_indresp h_svb2_1	savings no.1: Amount: branching q	Normal
+us8_h_indresp h_svb1_1	savings no.1: Amount: branching q	Normal
+us8_h_indresp h_svamt1	savings no.1: Amount held in account	Normal
+us8_h_indresp h_psnumch	number of 10 yr olds answered parenting style of	Normal
+us8_h_indresp h_ps32	Slap child when misbehaves	Normal
+us8_h_indresp h_ps31	Explain consequences of child&#39;s behaviour	Normal
+us8_h_indresp h_ps30	Scold when child&#39;s behaviour doesn&#39;t meet expectations	Normal
+us8_h_indresp h_ps29	Help child understand consequences of their actions	Normal
+us8_h_indresp h_ps28	Child left alone with no explanation	Normal
+us8_h_indresp h_ps27	Warm happy times with child	Normal
+us8_h_indresp h_ps26	Use threats with no justification	Normal
+us8_h_indresp h_ps25	Give reasons rules should be followed	Normal
+us8_h_indresp h_ps24	Spoil child	Normal
+us8_h_indresp h_ps23	Scold and criticise	Normal
+us8_h_indresp h_ps22	Allow child input into rules	Normal
+us8_h_indresp h_ps21	Respect child&#39;s opinion	Normal
+us8_h_indresp h_ps20	State punishment but don&#39;t give	Normal
+us8_h_indresp h_ps19	Grab child when disobedient	Normal
+us8_h_indresp h_ps18	Consider child&#39;s preferences when making plans	Normal
+us8_h_indresp h_ps17	Threaten punishment more than give	Normal
+us8_h_indresp h_ps16	Explode in anger towards child	Normal
+us8_h_indresp h_ps15	Give in when child makes a fuss	Normal
+us8_h_indresp h_ps14	Praise child when good	Normal
+us8_h_indresp h_ps13	Yell when child misbehaves	Normal
+us8_h_indresp h_ps12	Comfort child when upset	Normal
+us8_h_indresp h_ps11	Emphasise reasons for rules	Normal
+us8_h_indresp h_ps10	Take privileges away without explanation	Normal
+us8_h_indresp h_ps9	Encourage child to express self	Normal
+us8_h_indresp h_ps8	Find it difficult to discipline child	Normal
+us8_h_indresp h_ps7	Encourage child to talk about feelings	Normal
+us8_h_indresp h_ps6	Spank child when disobedient	Normal
+us8_h_indresp h_ps5	Give feedback on child&#39;s behaviour	Normal
+us8_h_indresp h_ps4	Reasons for requests not given	Normal
+us8_h_indresp h_ps3	Take child&#39;s desires into account	Normal
+us8_h_indresp h_ps2	Use physical punishment to discipline child	Normal
+us8_h_indresp h_ps1	Responsive to child&#39;s needs	Normal
+us8_h_indresp h_lchmulti4	pregnancy 4: Pregnancy resulted in multiple births	Normal
+us8_h_indresp h_aepuda4	pregnancy 4: Units alcohol per occasion	Normal
+us8_h_indresp h_aepuwk4	pregnancy 4: Units alcohol per week	Normal
+us8_h_indresp h_aedrof4	pregnancy 4: Freq alcohol while preg	Normal
+us8_h_indresp h_pregsmk34	pregnancy 4: No. of cigarettes smoked during third trimester	Normal
+us8_h_indresp h_pregsmk24	pregnancy 4: No. of cigarettes smoked during second trimester	Normal
+us8_h_indresp h_pregsmk14	pregnancy 4: No. of cigarettes smoked during first trimester	Normal
+us8_h_indresp h_smkmnth34	pregnancy 4: Months 7 to 9	Normal
+us8_h_indresp h_smkmnth24	pregnancy 4: Months 4 to 6	Normal
+us8_h_indresp h_smkmnth14	pregnancy 4: Months 1 to 3	Normal
+us8_h_indresp h_pregsmoke4	pregnancy 4: Smoked during pregnancy	Normal
+us8_h_indresp h_endmnth4	pregnancy 4: Month pregnancy ended if not live birth	Normal
+us8_h_indresp h_pregend4	pregnancy 4: How pregnancy ended	Normal
+us8_h_indresp h_pregout4	pregnancy 4: Outcome of pregnancy	Normal
+us8_h_indresp h_pregspd4	pregnancy 4: Sperm donation	Normal
+us8_h_indresp h_pregft964	pregnancy 4: None of these	Normal
+us8_h_indresp h_pregft64	pregnancy 4: Other treatment	Normal
+us8_h_indresp h_pregft54	pregnancy 4: Artificial insemination	Normal
+us8_h_indresp h_pregft44	pregnancy 4: Egg donation	Normal
+us8_h_indresp h_pregft34	pregnancy 4: Sperm donation	Normal
+us8_h_indresp h_pregft24	pregnancy 4: Medication	Normal
+us8_h_indresp h_pregft14	pregnancy 4: In vitro fertilisation treatment	Normal
+us8_h_indresp h_pregfert4	pregnancy 4: Used fertility treatment	Normal
+us8_h_indresp h_pregy44	pregnancy 4: Year of pregnancy	Normal
+us8_h_indresp h_pregm4	pregnancy 4: Month of pregnancy	Normal
+us8_h_indresp h_lchmulti3	pregnancy 3: Pregnancy resulted in multiple births	Normal
+us8_h_indresp h_aepuda3	pregnancy 3: Units alcohol per occasion	Normal
+us8_h_indresp h_aepuwk3	pregnancy 3: Units alcohol per week	Normal
+us8_h_indresp h_aedrof3	pregnancy 3: Freq alcohol while preg	Normal
+us8_h_indresp h_pregsmk33	pregnancy 3: No. of cigarettes smoked during third trimester	Normal
+us8_h_indresp h_pregsmk23	pregnancy 3: No. of cigarettes smoked during second trimester	Normal
+us8_h_indresp h_pregsmk13	pregnancy 3: No. of cigarettes smoked during first trimester	Normal
+us8_h_indresp h_smkmnth33	pregnancy 3: Months 7 to 9	Normal
+us8_h_indresp h_smkmnth23	pregnancy 3: Months 4 to 6	Normal
+us8_h_indresp h_smkmnth13	pregnancy 3: Months 1 to 3	Normal
+us8_h_indresp h_pregsmoke3	pregnancy 3: Smoked during pregnancy	Normal
+us8_h_indresp h_endmnth3	pregnancy 3: Month pregnancy ended if not live birth	Normal
+us8_h_indresp h_pregend3	pregnancy 3: How pregnancy ended	Normal
+us8_h_indresp h_pregout3	pregnancy 3: Outcome of pregnancy	Normal
+us8_h_indresp h_pregspd3	pregnancy 3: Sperm donation	Normal
+us8_h_indresp h_pregft963	pregnancy 3: None of these	Normal
+us8_h_indresp h_pregft63	pregnancy 3: Other treatment	Normal
+us8_h_indresp h_pregft53	pregnancy 3: Artificial insemination	Normal
+us8_h_indresp h_pregft43	pregnancy 3: Egg donation	Normal
+us8_h_indresp h_pregft33	pregnancy 3: Sperm donation	Normal
+us8_h_indresp h_pregft23	pregnancy 3: Medication	Normal
+us8_h_indresp h_pregft13	pregnancy 3: In vitro fertilisation treatment	Normal
+us8_h_indresp h_pregfert3	pregnancy 3: Used fertility treatment	Normal
+us8_h_indresp h_pregy43	pregnancy 3: Year of pregnancy	Normal
+us8_h_indresp h_pregm3	pregnancy 3: Month of pregnancy	Normal
+us8_h_indresp h_lchmulti2	pregnancy 2: Pregnancy resulted in multiple births	Normal
+us8_h_indresp h_aepuda2	pregnancy 2: Units alcohol per occasion	Normal
+us8_h_indresp h_aepuwk2	pregnancy 2: Units alcohol per week	Normal
+us8_h_indresp h_aedrof2	pregnancy 2: Freq alcohol while preg	Normal
+us8_h_indresp h_pregsmk32	pregnancy 2: No. of cigarettes smoked during third trimester	Normal
+us8_h_indresp h_pregsmk22	pregnancy 2: No. of cigarettes smoked during second trimester	Normal
+us8_h_indresp h_pregsmk12	pregnancy 2: No. of cigarettes smoked during first trimester	Normal
+us8_h_indresp h_smkmnth32	pregnancy 2: Months 7 to 9	Normal
+us8_h_indresp h_smkmnth22	pregnancy 2: Months 4 to 6	Normal
+us8_h_indresp h_smkmnth12	pregnancy 2: Months 1 to 3	Normal
+us8_h_indresp h_pregsmoke2	pregnancy 2: Smoked during pregnancy	Normal
+us8_h_indresp h_endmnth2	pregnancy 2: Month pregnancy ended if not live birth	Normal
+us8_h_indresp h_pregend2	pregnancy 2: How pregnancy ended	Normal
+us8_h_indresp h_pregout2	pregnancy 2: Outcome of pregnancy	Normal
+us8_h_indresp h_pregspd2	pregnancy 2: Sperm donation	Normal
+us8_h_indresp h_pregft962	pregnancy 2: None of these	Normal
+us8_h_indresp h_pregft62	pregnancy 2: Other treatment	Normal
+us8_h_indresp h_pregft52	pregnancy 2: Artificial insemination	Normal
+us8_h_indresp h_pregft42	pregnancy 2: Egg donation	Normal
+us8_h_indresp h_pregft32	pregnancy 2: Sperm donation	Normal
+us8_h_indresp h_pregft22	pregnancy 2: Medication	Normal
+us8_h_indresp h_pregft12	pregnancy 2: In vitro fertilisation treatment	Normal
+us8_h_indresp h_pregfert2	pregnancy 2: Used fertility treatment	Normal
+us8_h_indresp h_pregy42	pregnancy 2: Year of pregnancy	Normal
+us8_h_indresp h_pregm2	pregnancy 2: Month of pregnancy	Normal
+us8_h_indresp h_lchmulti1	pregnancy 1: Pregnancy resulted in multiple births	Normal
+us8_h_indresp h_aepuda1	pregnancy 1: Units alcohol per occasion	Normal
+us8_h_indresp h_aepuwk1	pregnancy 1: Units alcohol per week	Normal
+us8_h_indresp h_aedrof1	pregnancy 1: Freq alcohol while preg	Normal
+us8_h_indresp h_pregsmk31	pregnancy 1: No. of cigarettes smoked during third trimester	Normal
+us8_h_indresp h_pregsmk21	pregnancy 1: No. of cigarettes smoked during second trimester	Normal
+us8_h_indresp h_pregsmk11	pregnancy 1: No. of cigarettes smoked during first trimester	Normal
+us8_h_indresp h_smkmnth31	pregnancy 1: Months 7 to 9	Normal
+us8_h_indresp h_smkmnth21	pregnancy 1: Months 4 to 6	Normal
+us8_h_indresp h_smkmnth11	pregnancy 1: Months 1 to 3	Normal
+us8_h_indresp h_pregsmoke1	pregnancy 1: Smoked during pregnancy	Normal
+us8_h_indresp h_endmnth1	pregnancy 1: Month pregnancy ended if not live birth	Normal
+us8_h_indresp h_pregend1	pregnancy 1: How pregnancy ended	Normal
+us8_h_indresp h_pregout1	pregnancy 1: Outcome of pregnancy	Normal
+us8_h_indresp h_pregspd1	pregnancy 1: Sperm donation	Normal
+us8_h_indresp h_pregft961	pregnancy 1: None of these	Normal
+us8_h_indresp h_pregft61	pregnancy 1: Other treatment	Normal
+us8_h_indresp h_pregft51	pregnancy 1: Artificial insemination	Normal
+us8_h_indresp h_pregft41	pregnancy 1: Egg donation	Normal
+us8_h_indresp h_pregft31	pregnancy 1: Sperm donation	Normal
+us8_h_indresp h_pregft21	pregnancy 1: Medication	Normal
+us8_h_indresp h_pregft11	pregnancy 1: In vitro fertilisation treatment	Normal
+us8_h_indresp h_pregfert1	pregnancy 1: Used fertility treatment	Normal
+us8_h_indresp h_pregy41	pregnancy 1: Year of pregnancy	Normal
+us8_h_indresp h_pregm1	pregnancy 1: Month of pregnancy	Normal
+us8_h_indresp h_cmlstat5	marst change 5: Current legal marital status	Normal
+us8_h_indresp h_dvy45	marst change 5: Year divorce/CP dissolved	Normal
+us8_h_indresp h_dvm5	marst change 5: Month divorce/CP dissolved	Normal
+us8_h_indresp h_divfin5	marst change 5: Divorce final check	Normal
+us8_h_indresp h_divchk5	marst change 5: Divorce/CP dissolved date check	Normal
+us8_h_indresp h_statcy45	marst change 5: Year legal marital status changed	Normal
+us8_h_indresp h_statcm5	marst change 5: Month legal marital status changed	Normal
+us8_h_indresp h_mstatch5	marst change 5: Legal marital status change	Normal
+us8_h_indresp h_cmlstat4	marst change 4: Current legal marital status	Normal
+us8_h_indresp h_dvy44	marst change 4: Year divorce/CP dissolved	Normal
+us8_h_indresp h_dvm4	marst change 4: Month divorce/CP dissolved	Normal
+us8_h_indresp h_divfin4	marst change 4: Divorce final check	Normal
+us8_h_indresp h_divchk4	marst change 4: Divorce/CP dissolved date check	Normal
+us8_h_indresp h_statcy44	marst change 4: Year legal marital status changed	Normal
+us8_h_indresp h_statcm4	marst change 4: Month legal marital status changed	Normal
+us8_h_indresp h_mstatch4	marst change 4: Legal marital status change	Normal
+us8_h_indresp h_cmlstat3	marst change 3: Current legal marital status	Normal
+us8_h_indresp h_dvy43	marst change 3: Year divorce/CP dissolved	Normal
+us8_h_indresp h_dvm3	marst change 3: Month divorce/CP dissolved	Normal
+us8_h_indresp h_divfin3	marst change 3: Divorce final check	Normal
+us8_h_indresp h_divchk3	marst change 3: Divorce/CP dissolved date check	Normal
+us8_h_indresp h_statcy43	marst change 3: Year legal marital status changed	Normal
+us8_h_indresp h_statcm3	marst change 3: Month legal marital status changed	Normal
+us8_h_indresp h_mstatch3	marst change 3: Legal marital status change	Normal
+us8_h_indresp h_cmlstat2	marst change 2: Current legal marital status	Normal
+us8_h_indresp h_dvy42	marst change 2: Year divorce/CP dissolved	Normal
+us8_h_indresp h_dvm2	marst change 2: Month divorce/CP dissolved	Normal
+us8_h_indresp h_divfin2	marst change 2: Divorce final check	Normal
+us8_h_indresp h_divchk2	marst change 2: Divorce/CP dissolved date check	Normal
+us8_h_indresp h_statcy42	marst change 2: Year legal marital status changed	Normal
+us8_h_indresp h_statcm2	marst change 2: Month legal marital status changed	Normal
+us8_h_indresp h_mstatch2	marst change 2: Legal marital status change	Normal
+us8_h_indresp h_cmlstat1	marst change 1: Current legal marital status	Normal
+us8_h_indresp h_dvy41	marst change 1: Year divorce/CP dissolved	Normal
+us8_h_indresp h_dvm1	marst change 1: Month divorce/CP dissolved	Normal
+us8_h_indresp h_divfin1	marst change 1: Divorce final check	Normal
+us8_h_indresp h_divchk1	marst change 1: Divorce/CP dissolved date check	Normal
+us8_h_indresp h_statcy41	marst change 1: Year legal marital status changed	Normal
+us8_h_indresp h_statcm1	marst change 1: Month legal marital status changed	Normal
+us8_h_indresp h_mstatch1	marst change 1: Legal marital status change	Normal
+us8_h_indresp h_reasendoth_code_9	empl spell no. 9: Job finished for other reasons	Normal
+us8_h_indresp h_statendy49	empl spell no. 9: Employment status end: year	Normal
+us8_h_indresp h_statendm9	empl spell no. 9: Employment status end: month	Normal
+us8_h_indresp h_statendd9	empl spell no. 9: Employment status end: day	Normal
+us8_h_indresp h_jbatt9	empl spell no. 9: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_9	empl spell no. 9: Other reason	Normal
+us8_h_indresp h_reasend11_9	empl spell no. 9: Moved area	Normal
+us8_h_indresp h_reasend10_9	empl spell no. 9: Look after other person	Normal
+us8_h_indresp h_reasend9_9	empl spell no. 9: Look after family	Normal
+us8_h_indresp h_reasend8_9	empl spell no. 9: Left to have baby	Normal
+us8_h_indresp h_reasend7_9	empl spell no. 9: Health reasons	Normal
+us8_h_indresp h_reasend6_9	empl spell no. 9: Took retirement	Normal
+us8_h_indresp h_reasend5_9	empl spell no. 9: Temporary job ended	Normal
+us8_h_indresp h_reasend4_9	empl spell no. 9: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_9	empl spell no. 9: Made redundant	Normal
+us8_h_indresp h_reasend2_9	empl spell no. 9: Left for better job	Normal
+us8_h_indresp h_reasend1_9	empl spell no. 9: Promoted	Normal
+us8_h_indresp h_jobhours9	empl spell no. 9: Next job hours	Normal
+us8_h_indresp h_currjob9	empl spell no. 9: Current job indicator	Normal
+us8_h_indresp h_nextjob9	empl spell no. 9: Next job	Normal
+us8_h_indresp h_currstat9	empl spell no. 9: Current non-employment status	Normal
+us8_h_indresp h_nextelse9	empl spell no. 9: Next non-employment status	Normal
+us8_h_indresp h_nextstat9	empl spell no. 9: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_8	empl spell no. 8: Job finished for other reasons	Normal
+us8_h_indresp h_statendy48	empl spell no. 8: Employment status end: year	Normal
+us8_h_indresp h_statendm8	empl spell no. 8: Employment status end: month	Normal
+us8_h_indresp h_statendd8	empl spell no. 8: Employment status end: day	Normal
+us8_h_indresp h_jbatt8	empl spell no. 8: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_8	empl spell no. 8: Other reason	Normal
+us8_h_indresp h_reasend11_8	empl spell no. 8: Moved area	Normal
+us8_h_indresp h_reasend10_8	empl spell no. 8: Look after other person	Normal
+us8_h_indresp h_reasend9_8	empl spell no. 8: Look after family	Normal
+us8_h_indresp h_reasend8_8	empl spell no. 8: Left to have baby	Normal
+us8_h_indresp h_reasend7_8	empl spell no. 8: Health reasons	Normal
+us8_h_indresp h_reasend6_8	empl spell no. 8: Took retirement	Normal
+us8_h_indresp h_reasend5_8	empl spell no. 8: Temporary job ended	Normal
+us8_h_indresp h_reasend4_8	empl spell no. 8: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_8	empl spell no. 8: Made redundant	Normal
+us8_h_indresp h_reasend2_8	empl spell no. 8: Left for better job	Normal
+us8_h_indresp h_reasend1_8	empl spell no. 8: Promoted	Normal
+us8_h_indresp h_jobhours8	empl spell no. 8: Next job hours	Normal
+us8_h_indresp h_currjob8	empl spell no. 8: Current job indicator	Normal
+us8_h_indresp h_nextjob8	empl spell no. 8: Next job	Normal
+us8_h_indresp h_currstat8	empl spell no. 8: Current non-employment status	Normal
+us8_h_indresp h_nextelse8	empl spell no. 8: Next non-employment status	Normal
+us8_h_indresp h_nextstat8	empl spell no. 8: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_7	empl spell no. 7: Job finished for other reasons	Normal
+us8_h_indresp h_statendy47	empl spell no. 7: Employment status end: year	Normal
+us8_h_indresp h_statendm7	empl spell no. 7: Employment status end: month	Normal
+us8_h_indresp h_statendd7	empl spell no. 7: Employment status end: day	Normal
+us8_h_indresp h_jbatt7	empl spell no. 7: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_7	empl spell no. 7: Other reason	Normal
+us8_h_indresp h_reasend11_7	empl spell no. 7: Moved area	Normal
+us8_h_indresp h_reasend10_7	empl spell no. 7: Look after other person	Normal
+us8_h_indresp h_reasend9_7	empl spell no. 7: Look after family	Normal
+us8_h_indresp h_reasend8_7	empl spell no. 7: Left to have baby	Normal
+us8_h_indresp h_reasend7_7	empl spell no. 7: Health reasons	Normal
+us8_h_indresp h_reasend6_7	empl spell no. 7: Took retirement	Normal
+us8_h_indresp h_reasend5_7	empl spell no. 7: Temporary job ended	Normal
+us8_h_indresp h_reasend4_7	empl spell no. 7: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_7	empl spell no. 7: Made redundant	Normal
+us8_h_indresp h_reasend2_7	empl spell no. 7: Left for better job	Normal
+us8_h_indresp h_reasend1_7	empl spell no. 7: Promoted	Normal
+us8_h_indresp h_jobhours7	empl spell no. 7: Next job hours	Normal
+us8_h_indresp h_currjob7	empl spell no. 7: Current job indicator	Normal
+us8_h_indresp h_nextjob7	empl spell no. 7: Next job	Normal
+us8_h_indresp h_currstat7	empl spell no. 7: Current non-employment status	Normal
+us8_h_indresp h_nextelse7	empl spell no. 7: Next non-employment status	Normal
+us8_h_indresp h_nextstat7	empl spell no. 7: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_6	empl spell no. 6: Job finished for other reasons	Normal
+us8_h_indresp h_statendy46	empl spell no. 6: Employment status end: year	Normal
+us8_h_indresp h_statendm6	empl spell no. 6: Employment status end: month	Normal
+us8_h_indresp h_statendd6	empl spell no. 6: Employment status end: day	Normal
+us8_h_indresp h_jbatt6	empl spell no. 6: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_6	empl spell no. 6: Other reason	Normal
+us8_h_indresp h_reasend11_6	empl spell no. 6: Moved area	Normal
+us8_h_indresp h_reasend10_6	empl spell no. 6: Look after other person	Normal
+us8_h_indresp h_reasend9_6	empl spell no. 6: Look after family	Normal
+us8_h_indresp h_reasend8_6	empl spell no. 6: Left to have baby	Normal
+us8_h_indresp h_reasend7_6	empl spell no. 6: Health reasons	Normal
+us8_h_indresp h_reasend6_6	empl spell no. 6: Took retirement	Normal
+us8_h_indresp h_reasend5_6	empl spell no. 6: Temporary job ended	Normal
+us8_h_indresp h_reasend4_6	empl spell no. 6: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_6	empl spell no. 6: Made redundant	Normal
+us8_h_indresp h_reasend2_6	empl spell no. 6: Left for better job	Normal
+us8_h_indresp h_reasend1_6	empl spell no. 6: Promoted	Normal
+us8_h_indresp h_jobhours6	empl spell no. 6: Next job hours	Normal
+us8_h_indresp h_currjob6	empl spell no. 6: Current job indicator	Normal
+us8_h_indresp h_nextjob6	empl spell no. 6: Next job	Normal
+us8_h_indresp h_currstat6	empl spell no. 6: Current non-employment status	Normal
+us8_h_indresp h_nextelse6	empl spell no. 6: Next non-employment status	Normal
+us8_h_indresp h_nextstat6	empl spell no. 6: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_5	empl spell no. 5: Job finished for other reasons	Normal
+us8_h_indresp h_statendy45	empl spell no. 5: Employment status end: year	Normal
+us8_h_indresp h_statendm5	empl spell no. 5: Employment status end: month	Normal
+us8_h_indresp h_statendd5	empl spell no. 5: Employment status end: day	Normal
+us8_h_indresp h_jbatt5	empl spell no. 5: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_5	empl spell no. 5: Other reason	Normal
+us8_h_indresp h_reasend11_5	empl spell no. 5: Moved area	Normal
+us8_h_indresp h_reasend10_5	empl spell no. 5: Look after other person	Normal
+us8_h_indresp h_reasend9_5	empl spell no. 5: Look after family	Normal
+us8_h_indresp h_reasend8_5	empl spell no. 5: Left to have baby	Normal
+us8_h_indresp h_reasend7_5	empl spell no. 5: Health reasons	Normal
+us8_h_indresp h_reasend6_5	empl spell no. 5: Took retirement	Normal
+us8_h_indresp h_reasend5_5	empl spell no. 5: Temporary job ended	Normal
+us8_h_indresp h_reasend4_5	empl spell no. 5: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_5	empl spell no. 5: Made redundant	Normal
+us8_h_indresp h_reasend2_5	empl spell no. 5: Left for better job	Normal
+us8_h_indresp h_reasend1_5	empl spell no. 5: Promoted	Normal
+us8_h_indresp h_jobhours5	empl spell no. 5: Next job hours	Normal
+us8_h_indresp h_currjob5	empl spell no. 5: Current job indicator	Normal
+us8_h_indresp h_nextjob5	empl spell no. 5: Next job	Normal
+us8_h_indresp h_currstat5	empl spell no. 5: Current non-employment status	Normal
+us8_h_indresp h_nextelse5	empl spell no. 5: Next non-employment status	Normal
+us8_h_indresp h_nextstat5	empl spell no. 5: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_4	empl spell no. 4: Job finished for other reasons	Normal
+us8_h_indresp h_statendy44	empl spell no. 4: Employment status end: year	Normal
+us8_h_indresp h_statendm4	empl spell no. 4: Employment status end: month	Normal
+us8_h_indresp h_statendd4	empl spell no. 4: Employment status end: day	Normal
+us8_h_indresp h_jbatt4	empl spell no. 4: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_4	empl spell no. 4: Other reason	Normal
+us8_h_indresp h_reasend11_4	empl spell no. 4: Moved area	Normal
+us8_h_indresp h_reasend10_4	empl spell no. 4: Look after other person	Normal
+us8_h_indresp h_reasend9_4	empl spell no. 4: Look after family	Normal
+us8_h_indresp h_reasend8_4	empl spell no. 4: Left to have baby	Normal
+us8_h_indresp h_reasend7_4	empl spell no. 4: Health reasons	Normal
+us8_h_indresp h_reasend6_4	empl spell no. 4: Took retirement	Normal
+us8_h_indresp h_reasend5_4	empl spell no. 4: Temporary job ended	Normal
+us8_h_indresp h_reasend4_4	empl spell no. 4: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_4	empl spell no. 4: Made redundant	Normal
+us8_h_indresp h_reasend2_4	empl spell no. 4: Left for better job	Normal
+us8_h_indresp h_reasend1_4	empl spell no. 4: Promoted	Normal
+us8_h_indresp h_jobhours4	empl spell no. 4: Next job hours	Normal
+us8_h_indresp h_currjob4	empl spell no. 4: Current job indicator	Normal
+us8_h_indresp h_nextjob4	empl spell no. 4: Next job	Normal
+us8_h_indresp h_currstat4	empl spell no. 4: Current non-employment status	Normal
+us8_h_indresp h_nextelse4	empl spell no. 4: Next non-employment status	Normal
+us8_h_indresp h_nextstat4	empl spell no. 4: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_3	empl spell no. 3: Job finished for other reasons	Normal
+us8_h_indresp h_statendy43	empl spell no. 3: Employment status end: year	Normal
+us8_h_indresp h_statendm3	empl spell no. 3: Employment status end: month	Normal
+us8_h_indresp h_statendd3	empl spell no. 3: Employment status end: day	Normal
+us8_h_indresp h_jbatt3	empl spell no. 3: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_3	empl spell no. 3: Other reason	Normal
+us8_h_indresp h_reasend11_3	empl spell no. 3: Moved area	Normal
+us8_h_indresp h_reasend10_3	empl spell no. 3: Look after other person	Normal
+us8_h_indresp h_reasend9_3	empl spell no. 3: Look after family	Normal
+us8_h_indresp h_reasend8_3	empl spell no. 3: Left to have baby	Normal
+us8_h_indresp h_reasend7_3	empl spell no. 3: Health reasons	Normal
+us8_h_indresp h_reasend6_3	empl spell no. 3: Took retirement	Normal
+us8_h_indresp h_reasend5_3	empl spell no. 3: Temporary job ended	Normal
+us8_h_indresp h_reasend4_3	empl spell no. 3: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_3	empl spell no. 3: Made redundant	Normal
+us8_h_indresp h_reasend2_3	empl spell no. 3: Left for better job	Normal
+us8_h_indresp h_reasend1_3	empl spell no. 3: Promoted	Normal
+us8_h_indresp h_jobhours3	empl spell no. 3: Next job hours	Normal
+us8_h_indresp h_currjob3	empl spell no. 3: Current job indicator	Normal
+us8_h_indresp h_nextjob3	empl spell no. 3: Next job	Normal
+us8_h_indresp h_currstat3	empl spell no. 3: Current non-employment status	Normal
+us8_h_indresp h_nextelse3	empl spell no. 3: Next non-employment status	Normal
+us8_h_indresp h_nextstat3	empl spell no. 3: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_2	empl spell no. 2: Job finished for other reasons	Normal
+us8_h_indresp h_statendy42	empl spell no. 2: Employment status end: year	Normal
+us8_h_indresp h_statendm2	empl spell no. 2: Employment status end: month	Normal
+us8_h_indresp h_statendd2	empl spell no. 2: Employment status end: day	Normal
+us8_h_indresp h_jbatt2	empl spell no. 2: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_2	empl spell no. 2: Other reason	Normal
+us8_h_indresp h_reasend11_2	empl spell no. 2: Moved area	Normal
+us8_h_indresp h_reasend10_2	empl spell no. 2: Look after other person	Normal
+us8_h_indresp h_reasend9_2	empl spell no. 2: Look after family	Normal
+us8_h_indresp h_reasend8_2	empl spell no. 2: Left to have baby	Normal
+us8_h_indresp h_reasend7_2	empl spell no. 2: Health reasons	Normal
+us8_h_indresp h_reasend6_2	empl spell no. 2: Took retirement	Normal
+us8_h_indresp h_reasend5_2	empl spell no. 2: Temporary job ended	Normal
+us8_h_indresp h_reasend4_2	empl spell no. 2: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_2	empl spell no. 2: Made redundant	Normal
+us8_h_indresp h_reasend2_2	empl spell no. 2: Left for better job	Normal
+us8_h_indresp h_reasend1_2	empl spell no. 2: Promoted	Normal
+us8_h_indresp h_jobhours2	empl spell no. 2: Next job hours	Normal
+us8_h_indresp h_currjob2	empl spell no. 2: Current job indicator	Normal
+us8_h_indresp h_nextjob2	empl spell no. 2: Next job	Normal
+us8_h_indresp h_currstat2	empl spell no. 2: Current non-employment status	Normal
+us8_h_indresp h_nextelse2	empl spell no. 2: Next non-employment status	Normal
+us8_h_indresp h_nextstat2	empl spell no. 2: Next employment status	Normal
+us8_h_indresp h_reasendoth_code_1	empl spell no. 1: Job finished for other reasons	Normal
+us8_h_indresp h_statendy41	empl spell no. 1: Employment status end: year	Normal
+us8_h_indresp h_statendm1	empl spell no. 1: Employment status end: month	Normal
+us8_h_indresp h_statendd1	empl spell no. 1: Employment status end: day	Normal
+us8_h_indresp h_jbatt1	empl spell no. 1: Main attraction of current job	Normal
+us8_h_indresp h_reasend97_1	empl spell no. 1: Other reason	Normal
+us8_h_indresp h_reasend11_1	empl spell no. 1: Moved area	Normal
+us8_h_indresp h_reasend10_1	empl spell no. 1: Look after other person	Normal
+us8_h_indresp h_reasend9_1	empl spell no. 1: Look after family	Normal
+us8_h_indresp h_reasend8_1	empl spell no. 1: Left to have baby	Normal
+us8_h_indresp h_reasend7_1	empl spell no. 1: Health reasons	Normal
+us8_h_indresp h_reasend6_1	empl spell no. 1: Took retirement	Normal
+us8_h_indresp h_reasend5_1	empl spell no. 1: Temporary job ended	Normal
+us8_h_indresp h_reasend4_1	empl spell no. 1: Dismissed/sacked	Normal
+us8_h_indresp h_reasend3_1	empl spell no. 1: Made redundant	Normal
+us8_h_indresp h_reasend2_1	empl spell no. 1: Left for better job	Normal
+us8_h_indresp h_reasend1_1	empl spell no. 1: Promoted	Normal
+us8_h_indresp h_jobhours1	empl spell no. 1: Next job hours	Normal
+us8_h_indresp h_currjob1	empl spell no. 1: Current job indicator	Normal
+us8_h_indresp h_nextjob1	empl spell no. 1: Next job	Normal
+us8_h_indresp h_currstat1	empl spell no. 1: Current non-employment status	Normal
+us8_h_indresp h_nextelse1	empl spell no. 1: Next non-employment status	Normal
+us8_h_indresp h_nextstat1	empl spell no. 1: Next employment status	Normal
+us8_h_indresp h_lingua	Language translation needed in	Normal
+us8_h_indresp h_employ	In paid employment	Normal
+us8_h_indresp h_livewith	Live with someone as a couple	Normal
+us8_h_indresp h_livesp	Live with spouse	Normal
+us8_h_indresp h_marstat	Legal marital status	Normal
+us8_h_indresp h_scux_code	Other reason Resp unable	Normal
+us8_h_indresp h_scrx_code	Other reason SC refused	Normal
+us8_h_indresp h_nxtendoth_code	Job finished for other reasons	Normal
+us8_h_indresp h_jbendoth_code	Job finished for other reasons	Normal
+us8_h_indresp h_stendoth_code	Job finished for other reasons	Normal
+us8_h_indresp h_kidlango_code	Other childhood language	Normal
+us8_h_indresp h_yafutb	Young Adult: Future Plans 2nd mention	Normal
+us8_h_indresp h_yafuta	Young Adult: Future Plans 1st mention	Normal
+us8_h_indresp h_hednto_code	Other reason not going to HE	Normal
+us8_h_indresp h_nirel_all	religion: ni	Normal
+us8_h_indresp h_plbornuk_all	County of birth	Normal
+us8_h_indresp h_macob_all	country of mother&#39;s birth	Normal
+us8_h_indresp h_pacob_all	country of father&#39;s birth	Normal
+us8_h_indresp h_plbornc_all	country of birth	Normal
+us8_h_indresp h_hmrcesent	Email reminder sent of agreement for consent link to HMRC records	Normal
+us8_h_indresp h_ienddatd	Date at end of individual interview  (day)	Normal
+us8_h_indresp h_ienddatm	Date at end of individual interview  (month)	Normal
+us8_h_indresp h_ienddaty	Date at end of individual interview  (year)	Normal
+us8_h_indresp h_ienddatss	Time at end of individual interview  (seconds)	Normal
+us8_h_indresp h_ienddatmm	Time at end of individual interview  (minutes)	Normal
+us8_h_indresp h_ienddathh	Time at end of individual interview  (hours)	Normal
+us8_h_indresp h_vouchletter	Received voucher and letter	Normal
+us8_h_indresp h_hmrclink	HMRC record linkage	Normal
+us8_h_indresp h_casiintno	Self-completion interviewer number	Normal
+us8_h_indresp h_ncrr12	Likelihood of marrying partner in future	Normal
+us8_h_indresp h_ncrr11	Intention to live together within 3 years	Normal
+us8_h_indresp h_ncrr9	Frequency of seeing partner	Normal
+us8_h_indresp h_ncrr8	Where partner lives	Normal
+us8_h_indresp h_ncrr6	Labour market status of partner	Normal
+us8_h_indresp h_ncrr5	Sex of non co-resident partner	Normal
+us8_h_indresp h_ncrr4	Whose decision to live apart	Normal
+us8_h_indresp h_ncrr3	Definite decision not to live together	Normal
+us8_h_indresp h_ncrry4	Year relationship started	Normal
+us8_h_indresp h_ncrrm	Month relationship started	Normal
+us8_h_indresp h_ncrr1	Non co-resident relationship	Normal
+us8_h_indresp h_frdrg	Frequency of drug use	Normal
+us8_h_indresp h_drgoth	Last year: Other drugs	Normal
+us8_h_indresp h_drgmj	Last year: Cannabis	Normal
+us8_h_indresp h_drgsol	Last year: Glue/solvent sniffing	Normal
+us8_h_indresp h_drnk4w	How many times intoxicated in last 4 weeks	Normal
+us8_h_indresp h_fivealcdr	Frequency of 5 plus alcoholic drinks	Normal
+us8_h_indresp h_dklm	Past month: how many alcoholic drinks?	Normal
+us8_h_indresp h_evralc	Ever had an alcoholic drink	Normal
+us8_h_indresp h_yajbsrv96	None of the above	Normal
+us8_h_indresp h_yajbsrv7	Anyone else	Normal
+us8_h_indresp h_yajbsrv8	Jobcentre Plus	Normal
+us8_h_indresp h_yajbsrv5	DirectGov	Normal
+us8_h_indresp h_yajbsrv4	Apprenticeships website	Normal
+us8_h_indresp h_yajbsrv3	Connexions	Normal
+us8_h_indresp h_yajbsrv2	Teachers and/or a school or college careers advisor	Normal
+us8_h_indresp h_yajbsrv1	Friends and/or relatives	Normal
+us8_h_indresp h_ypestf	At times I feel I am no good at all	Normal
+us8_h_indresp h_ypeste	I am inclined to feel I am a failure	Normal
+us8_h_indresp h_ypestk	I can usually solve my own problems	Normal
+us8_h_indresp h_ypestc	I am a likeable person	Normal
+us8_h_indresp h_ypestj	I am as able as most people	Normal
+us8_h_indresp h_ypestb	I certainly feel useless at times	Normal
+us8_h_indresp h_ypesti	I don&#39;t have much to be proud of	Normal
+us8_h_indresp h_ypesta	I feel I have a number good qualities	Normal
+us8_h_indresp h_late	Past month: times out after 9.00 pm?	Normal
+us8_h_indresp h_upset	Suppose felt upset or worried - who would you turn to first	Normal
+us8_h_indresp h_famsup	Feel supported by family - that is those that live with you	Normal
+us8_h_indresp h_eatlivu	How many times in last 7 days has eaten evening meal with family	Normal
+us8_h_indresp h_ypnetcht	Hours using social media on weekdays	Normal
+us8_h_indresp h_ypsocweb	Belong to social website	Normal
+us8_h_indresp h_ypnpal	How many close friends	Normal
+us8_h_indresp h_scfinsmall	Felt small by low income	Normal
+us8_h_indresp h_scfinemb	Embarrassed by low income	Normal
+us8_h_indresp h_scwhoruage	Important who you are: Age/life stage	Normal
+us8_h_indresp h_scwhorusex	Important who you are: Gender	Normal
+us8_h_indresp h_scwhorufam	Important who you are: Family	Normal
+us8_h_indresp h_scwhorupol	Important who you are: Political beliefs	Normal
+us8_h_indresp h_scwhorurac	Important who you are: Ethnic background	Normal
+us8_h_indresp h_scwhoruedu	Important who you are: Education	Normal
+us8_h_indresp h_scwhorupro	Important who you are: Profession	Normal
+us8_h_indresp h_eumem	Should UK remain a member of the EU	Normal
+us8_h_indresp h_sclfsato	Satisfaction with life overall	Normal
+us8_h_indresp h_sclfsat7	Satisfaction with amount of leisure time	Normal
+us8_h_indresp h_sclfsat2	Satisfaction with income	Normal
+us8_h_indresp h_sclfsat1	Satisfaction with health	Normal
+us8_h_indresp h_scghql	GHQ: general happiness	Normal
+us8_h_indresp h_scghqk	GHQ: believe worthless	Normal
+us8_h_indresp h_scghqj	GHQ: losing confidence	Normal
+us8_h_indresp h_scghqi	GHQ: unhappy or depressed	Normal
+us8_h_indresp h_scghqh	GHQ: ability to face problems	Normal
+us8_h_indresp h_scghqg	GHQ: enjoy day-to-day activities	Normal
+us8_h_indresp h_scghqf	GHQ: problem overcoming difficulties	Normal
+us8_h_indresp h_scghqe	GHQ: constantly under strain	Normal
+us8_h_indresp h_scghqd	GHQ: capable of making decisions	Normal
+us8_h_indresp h_scghqc	GHQ: playing a useful role	Normal
+us8_h_indresp h_scghqb	GHQ: loss of sleep	Normal
+us8_h_indresp h_scghqa	GHQ: concentration	Normal
+us8_h_indresp h_scsf7	Last 4 weeks: Physical or mental health interfered with social life	Normal
+us8_h_indresp h_scsf6c	Last 4 weeks: Felt downhearted and depressed	Normal
+us8_h_indresp h_scsf6b	Last 4 weeks: Had a lot of energy	Normal
+us8_h_indresp h_scsf6a	Last 4 weeks: Felt calm and peaceful	Normal
+us8_h_indresp h_scsf5	Last 4 weeks: Pain interfered with work	Normal
+us8_h_indresp h_scsf4b	Last 4 weeks: Mental health meant worked less carefully	Normal
+us8_h_indresp h_scsf4a	Last 4 weeks: Mental health meant accomplished less	Normal
+us8_h_indresp h_scsf3b	Last 4 weeks: Physical health limits kind of work	Normal
+us8_h_indresp h_scsf3a	Last 4 weeks: Physical health limits amount of work	Normal
+us8_h_indresp h_scsf2b	Health limits several flights of stairs	Normal
+us8_h_indresp h_scsf2a	Health limits moderate activities	Normal
+us8_h_indresp h_scsf1	General health	Normal
+us8_h_indresp h_vote8	Party voted for in last general election	Normal
+us8_h_indresp h_vote7	Voted in last general election	Normal
+us8_h_indresp h_scun97	Other	Normal
+us8_h_indresp h_scun3	Language problems	Normal
+us8_h_indresp h_scun2	Reading/literacy problems	Normal
+us8_h_indresp h_scun1	Eyesight problems	Normal
+us8_h_indresp h_scrf97	Other	Normal
+us8_h_indresp h_scrf6	Interview taking too long/ran out of time	Normal
+us8_h_indresp h_scrf5	Couldn&#39;t be bothered	Normal
+us8_h_indresp h_scrf4	Concerned because someone else was present	Normal
+us8_h_indresp h_scrf3	Worried about confidentiality	Normal
+us8_h_indresp h_scrf2	Child crying/needed attention etc.	Normal
+us8_h_indresp h_scrf1	Didn&#39;t like computer	Normal
+us8_h_indresp h_scac	Self-completion accepted	Normal
+us8_h_indresp h_howlng	Hours per week on housework	Normal
+us8_h_indresp h_huboss	Household financial decisions	Normal
+us8_h_indresp h_husits	Who is responsible for childcare	Normal
+us8_h_indresp h_hudiy	Who does the DIY jobs (couples)	Normal
+us8_h_indresp h_hupots	Who does the gardening (couples)	Normal
+us8_h_indresp h_huiron	Who does the washing/ironing (couples)	Normal
+us8_h_indresp h_humops	Who does the cleaning (couples)	Normal
+us8_h_indresp h_hufrys	Who does the cooking (couples)	Normal
+us8_h_indresp h_hubuys	Who does the grocery shopping (couples)	Normal
+us8_h_indresp h_retsuf	Adequacy expected retirement income	Normal
+us8_h_indresp h_retamt	Expected ratio of post to pre-retirement income	Normal
+us8_h_indresp h_rtfnd96	None of the above	Normal
+us8_h_indresp h_rtfnd10	Something else	Normal
+us8_h_indresp h_rtfnd9	Occupational or personal pension from scheme not yet started	Normal
+us8_h_indresp h_rtfnd8	Earnings from part-time/freelance work	Normal
+us8_h_indresp h_rtfnd7	Financial support from your partner or family	Normal
+us8_h_indresp h_rtfnd6	Inheritance in the future	Normal
+us8_h_indresp h_rtfnd5	Sale of another property (other than your main home)	Normal
+us8_h_indresp h_rtfnd4	Renting out a property (other than your main home)	Normal
+us8_h_indresp h_rtfnd3	Releasing equity in your home by moving to a less expensive one	Normal
+us8_h_indresp h_rtfnd2	Savings or investments	Normal
+us8_h_indresp h_rtfnd1	State retirement (Old Age) pension, including State Second Pension (SERPS)	Normal
+us8_h_indresp h_rtexpjb	Expects to have pd employment during retirement	Normal
+us8_h_indresp h_sppen	Benefit from spouse&#39;s pension scheme	Normal
+us8_h_indresp h_pppexm	Any other retirement income	Normal
+us8_h_indresp h_pppex	Have private pension scheme	Normal
+us8_h_indresp h_penmex	Have employers pension scheme	Normal
+us8_h_indresp h_rtcon4	Disadvantages retirement: lonely/isolated	Normal
+us8_h_indresp h_rtcon3	Disadvantages retirement: lack of income	Normal
+us8_h_indresp h_rtcon2	Disadvantages retirement: illness/disability	Normal
+us8_h_indresp h_rtcon1	Disadvantages retirement: unproductive	Normal
+us8_h_indresp h_rtpro6	Benefits retirement: time for voluntary work	Normal
+us8_h_indresp h_rtpro5	Benefits retirement: time for leisure activities	Normal
+us8_h_indresp h_rtpro4	Benefits retirement: time for family/friends	Normal
+us8_h_indresp h_rtpro3	Benefits retirement: chance to travel	Normal
+us8_h_indresp h_rtpro2	Benefits retirement: taking things easy	Normal
+us8_h_indresp h_rtpro1	Benefits retirement: being own boss	Normal
+us8_h_indresp h_ageret	Age expected to retire	Normal
+us8_h_indresp h_retchk	Retired check	Normal
+us8_h_indresp h_pprampc	Pension period covered	Normal
+us8_h_indresp h_ppram	Pension amount contributed	Normal
+us8_h_indresp h_ppreg	Contributes regularly to pension	Normal
+us8_h_indresp h_ppyrs	Date joined personal pension scheme	Normal
+us8_h_indresp h_ppent	Stakeholder or other personal pension	Normal
+us8_h_indresp h_ppen	Whether contributes to personal pension	Normal
+us8_h_indresp h_savlt	Saving long or short term	Normal
+us8_h_indresp h_savreg	Regular saver	Normal
+us8_h_indresp h_saved	Monthly amount saved	Normal
+us8_h_indresp h_save	Whether saves	Normal
+us8_h_indresp h_finfut	Subjective financial situation - future	Normal
+us8_h_indresp h_finnow	Subjective financial situation - current	Normal
+us8_h_indresp h_fiyrdb6	Over 100 in interest/dividends	Normal
+us8_h_indresp h_fiyrdb4	Over 2500 in interest/dividends	Normal
+us8_h_indresp h_fiyrdb5	Over 10000 in interest/dividends	Normal
+us8_h_indresp h_fiyrdb3	Over 5000 in interest/dividends	Normal
+us8_h_indresp h_fiyrdb2	Over 1000 in interest/dividends	Normal
+us8_h_indresp h_fiyrdb1	Over 500 in interest/dividends	Normal
+us8_h_indresp h_fiyrdia	Amount received in interest/dividends	Normal
+us8_h_indresp h_huruns	Who organises finances	Normal
+us8_h_indresp h_debtsk	Owe amount in sole name	Normal
+us8_h_indresp h_debtpn16	Person number 16	Normal
+us8_h_indresp h_debtpn15	Person number 15	Normal
+us8_h_indresp h_debtpn14	Person number 14	Normal
+us8_h_indresp h_debtpn13	Person number 13	Normal
+us8_h_indresp h_debtpn12	Person number 12	Normal
+us8_h_indresp h_debtpn11	Person number 11	Normal
+us8_h_indresp h_debtpn10	Person number 10	Normal
+us8_h_indresp h_debtpn9	Person number 9	Normal
+us8_h_indresp h_debtpn8	Person number 8	Normal
+us8_h_indresp h_debtpn7	Person number 7	Normal
+us8_h_indresp h_debtpn6	Person number 6	Normal
+us8_h_indresp h_debtpn5	Person number 5	Normal
+us8_h_indresp h_debtpn4	Person number 4	Normal
+us8_h_indresp h_debtpn3	Person number 3	Normal
+us8_h_indresp h_debtpn2	Person number 2	Normal
+us8_h_indresp h_debtpn1	Person number 1	Normal
+us8_h_indresp h_debtpn0	Non-household member	Normal
+us8_h_indresp h_debtsj	Owe money in sole name or joint	Normal
+us8_h_indresp h_debtc4	Owe 100 or more	Normal
+us8_h_indresp h_debtc5	Owe 10,000 or more	Normal
+us8_h_indresp h_debtc3	Owe 5,000 or more	Normal
+us8_h_indresp h_debtc2	Owe 1,500 or more	Normal
+us8_h_indresp h_debtc1	Owe 500 or more	Normal
+us8_h_indresp h_debty	Total amount owed	Normal
+us8_h_indresp h_debt96	SPONTANEOUS: None of these	Normal
+us8_h_indresp h_debt97	Other debt not listed here	Normal
+us8_h_indresp h_debt8	Student loan	Normal
+us8_h_indresp h_debt7	Overdraft(s)	Normal
+us8_h_indresp h_debt6	Any other loan(s) from a private individual	Normal
+us8_h_indresp h_debt5	DWP/SSA Social Fund loan	Normal
+us8_h_indresp h_debt4	Catalogue or mail order purchase agreement(s)	Normal
+us8_h_indresp h_debt2	Personal loan(s) (from bank, building society or other financial institution)	Normal
+us8_h_indresp h_debt1	Hire purchase agreement(s)	Normal
+us8_h_indresp h_ccamtjt	Outstanding balance, cards in joint names	Normal
+us8_h_indresp h_ccbilljt	Repayment behaviour, cards in joint names	Normal
+us8_h_indresp h_credjt	Max borrowing limit on cards in joint names	Normal
+us8_h_indresp h_ccjtp16	Person number 16	Normal
+us8_h_indresp h_ccjtp15	Person number 15	Normal
+us8_h_indresp h_ccjtp14	Person number 14	Normal
+us8_h_indresp h_ccjtp13	Person number 13	Normal
+us8_h_indresp h_ccjtp12	Person number 12	Normal
+us8_h_indresp h_ccjtp11	Person number 11	Normal
+us8_h_indresp h_ccjtp10	Person number 10	Normal
+us8_h_indresp h_ccjtp9	Person number 9	Normal
+us8_h_indresp h_ccjtp8	Person number 8	Normal
+us8_h_indresp h_ccjtp7	Person number 7	Normal
+us8_h_indresp h_ccjtp6	Person number 6	Normal
+us8_h_indresp h_ccjtp5	Person number 5	Normal
+us8_h_indresp h_ccjtp4	Person number 4	Normal
+us8_h_indresp h_ccjtp3	Person number 3	Normal
+us8_h_indresp h_ccjtp2	Person number 2	Normal
+us8_h_indresp h_ccjtp1	Person number 1	Normal
+us8_h_indresp h_ccjtp0	Non-household member	Normal
+us8_h_indresp h_nccjt	Number of store/credit cards in joint names	Normal
+us8_h_indresp h_ccjt	Has store cards/credit cards in joint names	Normal
+us8_h_indresp h_ccamtsole	Balance outstanding, cards in sole name	Normal
+us8_h_indresp h_ccbillsole	Repayment behaviour, cards in sole name	Normal
+us8_h_indresp h_credsole	Max borrowing limit on cards in sole name	Normal
+us8_h_indresp h_nccsole	Number of store cards/credit cards in sole name	Normal
+us8_h_indresp h_ccsole	Has store cards/credit cards in sole name	Normal
+us8_h_indresp h_savdocs	Savings documents seen by interviewer	Normal
+us8_h_indresp h_svacts96	SPONTANEOUS: None	Normal
+us8_h_indresp h_svacts97	Other types of savings accounts	Normal
+us8_h_indresp h_svacts5	Premium Bonds	Normal
+us8_h_indresp h_svacts4	ISA - stocks and shares, or PEPs	Normal
+us8_h_indresp h_svacts3	ISA - cash only	Normal
+us8_h_indresp h_svacts2	National Savings Accounts (formerly National Savings Bank or Post Office Account	Normal
+us8_h_indresp h_svacts1	Savings or deposit accounts (with a bank, post office or building society)	Normal
+us8_h_indresp h_nfh41	Personal Independence Payments  : Further income sources	Normal
+us8_h_indresp h_nfh40	Universal Credit  : Further income sources	Normal
+us8_h_indresp h_nfh39	Any Other State Benefit : Further income sources	Normal
+us8_h_indresp h_nfh38	Any Other Regular Payment : Further income	Normal
+us8_h_indresp h_nfh37	Other Disability Related Benefit Or Payment : Further income	Normal
+us8_h_indresp h_nfh36	In-Work Credit For Lone Parents : Further income	Normal
+us8_h_indresp h_nfh35	Sickness And Accident Insurance : Further income	Normal
+us8_h_indresp h_nfh34	Return To Work Credit : Further income sources	Normal
+us8_h_indresp h_nfh33	Employment And Support Allowance : Further income sources	Normal
+us8_h_indresp h_nfh32	Rate Rebate : Further income sources	Normal
+us8_h_indresp h_nfh31	Rent Rebate : Further income sources	Normal
+us8_h_indresp h_nfh30	Foster Allowance / Guardian Allowance : Further income sources	Normal
+us8_h_indresp h_nfh29	Rent From Any Other Property : Further income sources	Normal
+us8_h_indresp h_nfh28	Rent From Boarders Or Lodgers (not Family Members) Living Here With You : Fu	Normal
+us8_h_indresp h_nfh27	Payments From A Family Member Not Living Here : Further income sources	Normal
+us8_h_indresp h_nfh26	Maintenance Or Alimony : Further income sources	Normal
+us8_h_indresp h_nfh25	Trade Union / Friendly Society Payment : Further income sources	Normal
+us8_h_indresp h_nfh24	Educational Grant (not Student Loan Or Tuition Fee Loan : Further income sou	Normal
+us8_h_indresp h_nfh23	Council Tax Benefit : Further income sources	Normal
+us8_h_indresp h_nfh22	Housing Benefit : Further income sources	Normal
+us8_h_indresp h_nfh21	Maternity Allowance : Further income sources	Normal
+us8_h_indresp h_nfh20	Working Tax Credit (includes Disabled Person&#39;s Tax Credit) : Further income	Normal
+us8_h_indresp h_nfh19	Child Tax Credit : Further income sources	Normal
+us8_h_indresp h_nfh18	Child Benefit (including Lone-Parent Child Benefit Payments) : Further income	Normal
+us8_h_indresp h_nfh16	Job Seeker&#39;s Allowance : Further income sources	Normal
+us8_h_indresp h_nfh15	Income Support : Further income sources	Normal
+us8_h_indresp h_nfh14	Incapacity Benefit : Further income sources	Normal
+us8_h_indresp h_nfh13	War Disablement Pension : Further income sources	Normal
+us8_h_indresp h_nfh12	Carer&#39;s Allowance (formerly Invalid Care Allowance) : Further income sources	Normal
+us8_h_indresp h_nfh11	Attendance Allowance : Further income sources	Normal
+us8_h_indresp h_nfh10	Disability Living Allowance : Further income sources	Normal
+us8_h_indresp h_nfh09	Industrial Injury Disablement Allowance : Further income sources	Normal
+us8_h_indresp h_nfh08	Severe Disablement Allowance : Further income sources	Normal
+us8_h_indresp h_nfh07	Pension Credit (includes Guarantee Credit &amp; Saving Credit) : Further income	Normal
+us8_h_indresp h_nfh06	A Widowed Mother&#39;s Allowance / Widowed Parent&#39;s Allowance / Bereavement Allow	Normal
+us8_h_indresp h_nfh05	A Widow&#39;s Or War Widow&#39;s Pension : Further income	Normal
+us8_h_indresp h_nfh04	A Private Pension/Annuity : Further income sources	Normal
+us8_h_indresp h_nfh03	A Pension From A Spouse&#39;s Previous Employer : Further income sources	Normal
+us8_h_indresp h_nfh02	A Pension From A Previous Employer : Further income sources	Normal
+us8_h_indresp h_nfh01	NI Retirement/State Retirement (Old Age) Pension : Further income sources	Normal
+us8_h_indresp h_missource41	Income source enumerated at previous wave but not current wave: Personal Inde	Normal
+us8_h_indresp h_missource40	Income source enumerated at previous wave but not current wave: Universal Cre	Normal
+us8_h_indresp h_missource39	Income source enumerated at previous wave but not current wave: Any other sta	Normal
+us8_h_indresp h_missource38	Income source enumerated at previous wave but not current wave: Any other reg	Normal
+us8_h_indresp h_missource37	Income source enumerated at previous wave but not current wave: Other Disabil	Normal
+us8_h_indresp h_missource36	Income source enumerated at previous wave but not current wave: In-Work Credi	Normal
+us8_h_indresp h_missource35	Income source enumerated at previous wave but not current wave: Sickness and	Normal
+us8_h_indresp h_missource34	Income source enumerated at previous wave but not current wave: Return to Wor	Normal
+us8_h_indresp h_missource33	Income source enumerated at previous wave but not current wave: Employment an	Normal
+us8_h_indresp h_missource32	Income source enumerated at previous wave but not current wave: Rate Rebate	Normal
+us8_h_indresp h_missource31	Income source enumerated at previous wave but not current wave: Rent Rebate	Normal
+us8_h_indresp h_missource30	Income source enumerated at previous wave but not current wave: Foster Allowa	Normal
+us8_h_indresp h_missource29	Income source enumerated at previous wave but not current wave: Rent from any	Normal
+us8_h_indresp h_missource28	Income source enumerated at previous wave but not current wave: Rent from Boa	Normal
+us8_h_indresp h_missource27	Income source enumerated at previous wave but not current wave: Payments from	Normal
+us8_h_indresp h_missource26	Income source enumerated at previous wave but not current wave: Maintenance o	Normal
+us8_h_indresp h_missource25	Income source enumerated at previous wave but not current wave: Trade Union /	Normal
+us8_h_indresp h_missource24	Income source enumerated at previous wave but not current wave: Educational G	Normal
+us8_h_indresp h_missource23	Income source enumerated at previous wave but not current wave: Council Tax B	Normal
+us8_h_indresp h_missource22	Income source enumerated at previous wave but not current wave: Housing Benef	Normal
+us8_h_indresp h_missource21	Income source enumerated at previous wave but not current wave: Maternity All	Normal
+us8_h_indresp h_missource20	Income source enumerated at previous wave but not current wave: Working Tax C	Normal
+us8_h_indresp h_missource19	Income source enumerated at previous wave but not current wave: Child Tax Cre	Normal
+us8_h_indresp h_missource18	Income source enumerated at previous wave but not current wave: Child Benefit	Normal
+us8_h_indresp h_missource16	Income source enumerated at previous wave but not current wave: Job Seeker&#39;s	Normal
+us8_h_indresp h_missource15	Income source enumerated at previous wave but not current wave: Income Support	Normal
+us8_h_indresp h_missource14	Income source enumerated at previous wave but not current wave: Incapacity Be	Normal
+us8_h_indresp h_missource13	Income source enumerated at previous wave but not current wave: War Disableme	Normal
+us8_h_indresp h_missource12	Income source enumerated at previous wave but not current wave: Carer&#39;s Allow	Normal
+us8_h_indresp h_missource11	Income source enumerated at previous wave but not current wave: Attendance Al	Normal
+us8_h_indresp h_missource10	Income source enumerated at previous wave but not current wave: Disability Li	Normal
+us8_h_indresp h_missource09	Income source enumerated at previous wave but not current wave: Industrial In	Normal
+us8_h_indresp h_missource08	Income source enumerated at previous wave but not current wave: Severe Disabl	Normal
+us8_h_indresp h_missource07	Income source enumerated at previous wave but not current wave: Pension Credi	Normal
+us8_h_indresp h_missource06	Income source enumerated at previous wave but not current wave: A Widowed Mot	Normal
+us8_h_indresp h_missource05	Income source enumerated at previous wave but not current wave: A Widow&#39;s or	Normal
+us8_h_indresp h_missource04	Income source enumerated at previous wave but not current wave: A Private Pen	Normal
+us8_h_indresp h_missource03	Income source enumerated at previous wave but not current wave: A Pension fro	Normal
+us8_h_indresp h_missource02	Income source enumerated at previous wave but not current wave: A Pension fro	Normal
+us8_h_indresp h_missource01	Income source enumerated at previous wave but not current wave: NI Retirement	Normal
+us8_h_indresp h_bensta96	None of these	Normal
+us8_h_indresp h_bensta97	Or any other regular payment	Normal
+us8_h_indresp h_bensta7	Rent from any other property even if that only covers that property&#39;s mortgage o	Normal
+us8_h_indresp h_bensta6	Rent from Boarders or Lodgers (not family members) living here with you	Normal
+us8_h_indresp h_bensta5	Payments from a family member not living with you	Normal
+us8_h_indresp h_bensta4	Maintenance or Alimony	Normal
+us8_h_indresp h_bensta3	Trade Union or Friendly Society Payment	Normal
+us8_h_indresp h_bensta2	Education Grant other than a Student Loan or Tuition Fee Loan	Normal
+us8_h_indresp h_othben96	None of these	Normal
+us8_h_indresp h_othben97	Any other state benefit or credit	Normal
+us8_h_indresp h_othben9	Rent Rebate	Normal
+us8_h_indresp h_othben8	Housing Benefit	Normal
+us8_h_indresp h_othben7	Rate Rebate	Normal
+us8_h_indresp h_othben6	Council Tax Reduction	Normal
+us8_h_indresp h_othben5	Working Tax Credit	Normal
+us8_h_indresp h_othben4	Return to Work Credit	Normal
+us8_h_indresp h_othben3	In-Work Credit for Lone Parents	Normal
+us8_h_indresp h_othben2	Maternity Allowance	Normal
+us8_h_indresp h_othben1	Foster Allowance	Normal
+us8_h_indresp h_benesa	Employment and Support Allowance: Work-Related Activity Group or Support Group	Normal
+us8_h_indresp h_bendis96	None of these	Normal
+us8_h_indresp h_bendis97	Any other disability related benefit or payment	Normal
+us8_h_indresp h_bendis10	Sickness and Accident Insurance	Normal
+us8_h_indresp h_bendis8	Industrial Injury Disablement Benefit	Normal
+us8_h_indresp h_bendis7	Attendance Allowance	Normal
+us8_h_indresp h_bendis12	Personal Independence Payments	Normal
+us8_h_indresp h_bendis5	Disability Living Allowance	Normal
+us8_h_indresp h_bendis4	Carer&#39;s Allowance	Normal
+us8_h_indresp h_bendis3	Severe Disablement Allowance	Normal
+us8_h_indresp h_bendis2	Employment and Support Allowance	Normal
+us8_h_indresp h_bendis1	Incapacity Benefit	Normal
+us8_h_indresp h_niserps	Income: Receives SERPS	Normal
+us8_h_indresp h_benpen96	None of these	Normal
+us8_h_indresp h_benpen8	War Disablement Pension	Normal
+us8_h_indresp h_benpen7	Widowed Mother&#39;s Allowance, Parent&#39;s Allowance or Bereavement Allowance	Normal
+us8_h_indresp h_benpen6	Widow&#39;s or War Widow&#39;s Pension	Normal
+us8_h_indresp h_benpen5	Private Pension or Annuity	Normal
+us8_h_indresp h_benpen4	Pension Credit including Guarantee Credit &amp; Savings Credit	Normal
+us8_h_indresp h_benpen3	A pension from a spouse&#39;s previous employer	Normal
+us8_h_indresp h_benpen2	A pension from a previous employer	Normal
+us8_h_indresp h_benpen1	NI Pension or State Retirement (Old Age) Pension	Normal
+us8_h_indresp h_benctc	Income: Receives Child Tax Credit	Normal
+us8_h_indresp h_benbase96	None of these	Normal
+us8_h_indresp h_benbase4	Universal Credit	Normal
+us8_h_indresp h_benbase3	Child Benefit	Normal
+us8_h_indresp h_benbase2	Job Seeker&#39;s Allowance	Normal
+us8_h_indresp h_benbase1	Income Support	Normal
+us8_h_indresp h_ccwork	Other arrangements for child whilst working	Normal
+us8_h_indresp h_ccare	Uses childcare	Normal
+us8_h_indresp h_carbuy97	Other things	Normal
+us8_h_indresp h_carbuy12	Features - SAT-NAV, CD player, music system, power steering etc...	Normal
+us8_h_indresp h_carbuy11	Speed/performance	Normal
+us8_h_indresp h_carbuy10	Safety	Normal
+us8_h_indresp h_carbuy9	Reliability	Normal
+us8_h_indresp h_carbuy8	Interior space/functionality/boot size	Normal
+us8_h_indresp h_carbuy7	Style/design/image of brand/model	Normal
+us8_h_indresp h_carbuy6	Electric car/van - one that&#39;s plugged directly into an electricity supply	Normal
+us8_h_indresp h_carbuy5	Environmentally friendly/low CO2 emissions	Normal
+us8_h_indresp h_carbuy4	Large engine	Normal
+us8_h_indresp h_carbuy3	Small engine	Normal
+us8_h_indresp h_carbuy2	Costs - purchase/running/resale value/tax/insurance	Normal
+us8_h_indresp h_carbuy1	Comfort	Normal
+us8_h_indresp h_hucar	Responsibility for car purchase decision	Normal
+us8_h_indresp h_pncars	Number of cars in hh	Normal
+us8_h_indresp h_carsrv3	Neither	Normal
+us8_h_indresp h_carsrv2	Car club (e.g. Street Car, Zip Car, City Car etc.)	Normal
+us8_h_indresp h_carsrv1	Formal car sharing scheme	Normal
+us8_h_indresp h_ynotbike96	None of the above	Normal
+us8_h_indresp h_ynotbike3	I do not own a bicycle	Normal
+us8_h_indresp h_ynotbike2	I have a disability or long-term illness which makes it impossible for me to rid	Normal
+us8_h_indresp h_ynotbike1	I have never learnt how to ride a bicycle	Normal
+us8_h_indresp h_trbikefq	Frequency of using a bicycle	Normal
+us8_h_indresp h_trtrnfq	Frequency of travel by train	Normal
+us8_h_indresp h_trbusfq	Frequency of travel by bus	Normal
+us8_h_indresp h_trcarfq	Frequency of travel by car	Normal
+us8_h_indresp h_charam	Amount given to charity last 12 months	Normal
+us8_h_indresp h_charfreq	Frequency donated to charity	Normal
+us8_h_indresp h_chargv	Donated money to charity	Normal
+us8_h_indresp h_volhrs	Hours spent volunteering in last 4 weeks	Normal
+us8_h_indresp h_volfreq	Frequency of volunteering	Normal
+us8_h_indresp h_volun	Volunteer in last 12 months	Normal
+us8_h_indresp h_j2pay	Gross earnings from second jobs last month	Normal
+us8_h_indresp h_j2hrs	No. of hours worked per month, second job	Normal
+us8_h_indresp h_j2semp	Employee or self employed, second job	Normal
+us8_h_indresp h_j2has	Has a second job	Normal
+us8_h_indresp h_mlwkfpt	New mum: work FT or PT in future	Normal
+us8_h_indresp h_mlagstu	Units of child age when start work	Normal
+us8_h_indresp h_mlagst	New mum: age of child when start work in future	Normal
+us8_h_indresp h_mlrnot97	Some other reason	Normal
+us8_h_indresp h_mlrnot13	My husband/partner disapproves	Normal
+us8_h_indresp h_mlrnot12	I prefer not to work	Normal
+us8_h_indresp h_mlrnot11	I cannot work because of poor health	Normal
+us8_h_indresp h_mlrnot10	I am caring for an elderly or ill relative or friend	Normal
+us8_h_indresp h_mlrnot9	My family would lose benefits if I was earning	Normal
+us8_h_indresp h_mlrnot8	I am on a training course	Normal
+us8_h_indresp h_mlrnot7	I am in full-time education	Normal
+us8_h_indresp h_mlrnot6	There are no jobs available for me	Normal
+us8_h_indresp h_mlrnot5	There are no jobs with the right hours for me	Normal
+us8_h_indresp h_mlrnot4	There are no jobs in the right place for me	Normal
+us8_h_indresp h_mlrnot3	I cannot find suitable childcare	Normal
+us8_h_indresp h_mlrnot2	I cannot earn enough to pay for childcare	Normal
+us8_h_indresp h_mlrnot1	I prefer to look after my child(ren) myself	Normal
+us8_h_indresp h_mlfutr	New mum: intends returning to work	Normal
+us8_h_indresp h_matleave	Currently on maternity leave	Normal
+us8_h_indresp h_eprosh	Chance starting work within 12 months	Normal
+us8_h_indresp h_jlsize	Number of people employed at workplace, last job employee	Normal
+us8_h_indresp h_jlmngr	Managerial duties, last job	Normal
+us8_h_indresp h_jlboss	Hired employees, last job	Normal
+us8_h_indresp h_jlsemp	Employee or self employed, last job	Normal
+us8_h_indresp h_jlendy	Year left last job	Normal
+us8_h_indresp h_jlendm	Month left last job	Normal
+us8_h_indresp h_jbhad	Ever had paid employment	Normal
+us8_h_indresp h_julk4x96	Or none of these steps?	Normal
+us8_h_indresp h_julk4x6	Taken steps to start your own business	Normal
+us8_h_indresp h_julk4x5	Asked friends or contacts	Normal
+us8_h_indresp h_julk4x4	Contacted a private employment agency or job centre	Normal
+us8_h_indresp h_julk4x3	Searched for jobs/information about jobs on the internet	Normal
+us8_h_indresp h_julk4x2	Studied or replied to advertisements	Normal
+us8_h_indresp h_julk4x1	Applied directly to an employer	Normal
+us8_h_indresp h_jubgn	Able to start work within 2 weeks	Normal
+us8_h_indresp h_julkjb	Would like a regular paid job	Normal
+us8_h_indresp h_julk4wk	Looked for work in last 4 weeks	Normal
+us8_h_indresp h_jbsec	Job security in next 12 months	Normal
+us8_h_indresp h_jbxpche	Expect: Give up paid work	Normal
+us8_h_indresp h_jblkche	Would like: Give up paid work	Normal
+us8_h_indresp h_jbxpchd	Expect: Start own business	Normal
+us8_h_indresp h_jblkchd	Would like: Start own business	Normal
+us8_h_indresp h_jbxpchc	Expect: New job with a new employer	Normal
+us8_h_indresp h_jblkchc	Would like: New job with a new employer	Normal
+us8_h_indresp h_jbxpchb	Expect: Work related training	Normal
+us8_h_indresp h_jblkchb	Would like: Work related training	Normal
+us8_h_indresp h_jbxpcha	Expect: Better job with same employer	Normal
+us8_h_indresp h_jblkcha	Would like: Better job with same employer	Normal
+us8_h_indresp h_depenth6	Feels miserable about job	Normal
+us8_h_indresp h_depenth5	Feels gloomy about job	Normal
+us8_h_indresp h_depenth4	Feels depressed about job	Normal
+us8_h_indresp h_depenth3	Feels worried about job	Normal
+us8_h_indresp h_depenth2	Feels uneasy about job	Normal
+us8_h_indresp h_depenth1	Feels tense about job	Normal
+us8_h_indresp h_wkaut5	Autonomy over work hours	Normal
+us8_h_indresp h_wkaut4	Autonomy over task order	Normal
+us8_h_indresp h_wkaut3	Autonomy over work manner	Normal
+us8_h_indresp h_wkaut2	Autonomy over work pace	Normal
+us8_h_indresp h_wkaut1	Autonomy over job tasks	Normal
+us8_h_indresp h_jbfxinf	Informal flexible working arrangements	Normal
+us8_h_indresp h_jbfxuse96	None of these	Normal
+us8_h_indresp h_jbfxuse8	Other flexible working arrangements	Normal
+us8_h_indresp h_jbfxuse10	On-call working	Normal
+us8_h_indresp h_jbfxuse9	Zero-hours contract	Normal
+us8_h_indresp h_jbfxuse7	To work from home on a regular basis	Normal
+us8_h_indresp h_jbfxuse6	To work annualised hours	Normal
+us8_h_indresp h_jbfxuse5	Working compressed hours	Normal
+us8_h_indresp h_jbfxuse4	Flexi-time	Normal
+us8_h_indresp h_jbfxuse3	Job sharing	Normal
+us8_h_indresp h_jbfxuse2	Working term-time only	Normal
+us8_h_indresp h_jbfxuse1	Part-time working	Normal
+us8_h_indresp h_jbflex96	None of these	Normal
+us8_h_indresp h_jbflex8	Other flexible working arrangements	Normal
+us8_h_indresp h_jbflex10	On-call working	Normal
+us8_h_indresp h_jbflex9	Zero-hours contract	Normal
+us8_h_indresp h_jbflex7	To work from home on a regular basis	Normal
+us8_h_indresp h_jbflex6	To work annualised hours	Normal
+us8_h_indresp h_jbflex5	Working compressed hours	Normal
+us8_h_indresp h_jbflex4	Flexi-time	Normal
+us8_h_indresp h_jbflex3	Job sharing	Normal
+us8_h_indresp h_jbflex2	Working term-time only	Normal
+us8_h_indresp h_jbflex1	Part-time working	Normal
+us8_h_indresp h_wkends	Usually works weekends	Normal
+us8_h_indresp h_wktime	Times of day usually worked	Normal
+us8_h_indresp h_penspb	Partner receives benefits under occup pension scheme	Normal
+us8_h_indresp h_penmtp	Final pension calculated	Normal
+us8_h_indresp h_penmpy	Percentage of pay/salary made	Normal
+us8_h_indresp h_penmcn	Contributions made to employer&#39;s pension scheme	Normal
+us8_h_indresp h_jbpeny4	Year pension started	Normal
+us8_h_indresp h_jbpenm	Pension: Member of employers scheme	Normal
+us8_h_indresp h_jbpen	Pension: Employer runs a pension scheme	Normal
+us8_h_indresp h_tuin1	Member of workplace union	Normal
+us8_h_indresp h_tujbpl	Union or staff association at workplace	Normal
+us8_h_indresp h_jbrise	Pay includes annual increments	Normal
+us8_h_indresp h_jbonus	Pay includes bonuses or profit share	Normal
+us8_h_indresp h_jbperfp	Pay includes performance related pay	Normal
+us8_h_indresp h_jbsat	Job satisfaction	Normal
+us8_h_indresp h_twkcar	Ease of travelling to work if not by car/van	Normal
+us8_h_indresp h_twkdiffm	Main difficulty commuting by car	Normal
+us8_h_indresp h_twkdiff97	Other	Normal
+us8_h_indresp h_twkdiff8	Stress of driving	Normal
+us8_h_indresp h_twkdiff7	Personal safety concerns	Normal
+us8_h_indresp h_twkdiff6	Traffic congestion or roadworks	Normal
+us8_h_indresp h_twkdiff5	Cost of parking	Normal
+us8_h_indresp h_twkdiff4	Lack of parking facilities	Normal
+us8_h_indresp h_twkdiff3	Cost of petrol	Normal
+us8_h_indresp h_twkdiff2	Too far	Normal
+us8_h_indresp h_twkdiff1	No, no difficulties	Normal
+us8_h_indresp h_workdis	Distance from work	Normal
+us8_h_indresp h_jsworktrav	S/emp: mode of transport to work	Normal
+us8_h_indresp h_jsttwtb	S/emp: commuting time	Normal
+us8_h_indresp h_jsttwt	S/emp: commuting time provided	Normal
+us8_h_indresp h_jsttwtb_cawi	Time taken to get to work (CAWI)	Normal
+us8_h_indresp h_jspl	S/emp: work location	Normal
+us8_h_indresp h_jspyni	Job/business income: whether before NI	Normal
+us8_h_indresp h_jspytx	Job/business income: whether before tax	Normal
+us8_h_indresp h_jspayw	Job/business income: pay period (weeks)	Normal
+us8_h_indresp h_jspayu	Average income from job/business	Normal
+us8_h_indresp h_jsowotam	Non-business average amount	Normal
+us8_h_indresp h_jsownoth	Other non-business income	Normal
+us8_h_indresp h_jsownamt	Non-business amount per month	Normal
+us8_h_indresp h_jsownsum	Draw money for non-business	Normal
+us8_h_indresp h_jsworkac	Work account	Normal
+us8_h_indresp h_jsprni	Sole accounts: whether before NI	Normal
+us8_h_indresp h_jsprtx	Sole accounts: whether before tax	Normal
+us8_h_indresp h_jsprls	Sole accounts: Whether profit/loss	Normal
+us8_h_indresp h_jsprf	S/emp: net profit in last yearly account	Normal
+us8_h_indresp h_jsprey4	S/emp: date accounts ended: year	Normal
+us8_h_indresp h_jsprem	S/emp: date accounts ended: month	Normal
+us8_h_indresp h_jsprby4	S/emp: date accounts began: year	Normal
+us8_h_indresp h_jsprbm	S/emp: date accounts began: month	Normal
+us8_h_indresp h_jspart	S/emp: own account or partnership	Normal
+us8_h_indresp h_jsaccs	S/emp: draws up profit/loss accounts	Normal
+us8_h_indresp h_jstypeb	S/emp: nature of employment	Normal
+us8_h_indresp h_jshrs	S/emp: hours normally worked per week	Normal
+us8_h_indresp h_jssize	S/emp: number of employees	Normal
+us8_h_indresp h_jsboss	S/emp: hires employees	Normal
+us8_h_indresp h_worktrav	Mode of transport for journey to work	Normal
+us8_h_indresp h_jbttwt	Minutes spent travelling to work	Normal
+us8_h_indresp h_ovtrest	Estimated amount - hourly overtime rate	Normal
+us8_h_indresp h_ovtrate	Overtime pay hourly rate	Normal
+us8_h_indresp h_ovtnset	Overtime pay: set amount	Normal
+us8_h_indresp h_basrest	Estimated amount - hourly basic pay rate	Normal
+us8_h_indresp h_basrate	Basic pay hourly rate	Normal
+us8_h_indresp h_basnset	Basic pay: set amount	Normal
+us8_h_indresp h_extrest	Estimated amount - additional pay for extra hours	Normal
+us8_h_indresp h_extrate	Additional pay for extra hours hourly rate	Normal
+us8_h_indresp h_pvtpyset	Additional pay for extra hours: set amount	Normal
+us8_h_indresp h_ovtpay	Additional pay for extra hours	Normal
+us8_h_indresp h_paytyp	Salaried or paid by the hour	Normal
+us8_h_indresp h_payug	Usual pay: gross/net of deductions	Normal
+us8_h_indresp h_payuwc	Pay period: usual pay	Normal
+us8_h_indresp h_payu	Usual pay	Normal
+us8_h_indresp h_payusl	Last take home pay the usual amount	Normal
+us8_h_indresp h_paynwc	Pay period: take home pay	Normal
+us8_h_indresp h_paynl	Take home pay at last payment	Normal
+us8_h_indresp h_paygwc	Pay period: gross pay	Normal
+us8_h_indresp h_paygl	Gross pay at last payment	Normal
+us8_h_indresp h_jbpl	Work location	Normal
+us8_h_indresp h_jbotpd	No. of hours worked as paid overtime	Normal
+us8_h_indresp h_jbot	No. of overtime hours in normal week	Normal
+us8_h_indresp h_jbhrs	No. of hours normally worked per week	Normal
+us8_h_indresp h_jbsectpub	Non-private organisation	Normal
+us8_h_indresp h_jbsect	Private company	Normal
+us8_h_indresp h_jbsize	No. employed at workplace: current job	Normal
+us8_h_indresp h_jbsizechk	No. employed at workplace check	Normal
+us8_h_indresp h_jbmngr	Managerial duties: current job	Normal
+us8_h_indresp h_jbmngrchk	Managerial duties current job check	Normal
+us8_h_indresp h_jbbgy	Year started current job	Normal
+us8_h_indresp h_jbbgm	Month started current job	Normal
+us8_h_indresp h_jbbgd	Day started current job	Normal
+us8_h_indresp h_jbsemp	Employed or self-employed: current job	Normal
+us8_h_indresp h_jbsempchk	Employed or self-employed check	Normal
+us8_h_indresp h_jbsoc00chk	Occupation (SOC2000) check	Normal
+us8_h_indresp h_jbsic07chk	Industry (SIC07) of employer check	Normal
+us8_h_indresp h_jbterm2	Type of non-permanent job	Normal
+us8_h_indresp h_jbterm1	Current job: permanent or temporary	Normal
+us8_h_indresp h_jboffy	Reason off work last week	Normal
+us8_h_indresp h_jboff	No work last week but has paid job	Normal
+us8_h_indresp h_jbhas	Did paid work last week	Normal
+us8_h_indresp h_cjbatt	Main attraction of current job	Normal
+us8_h_indresp h_nxtendreas97	Other reason	Normal
+us8_h_indresp h_nxtendreas11	Moved area	Normal
+us8_h_indresp h_nxtendreas10	Look after other person	Normal
+us8_h_indresp h_nxtendreas9	Look after family	Normal
+us8_h_indresp h_nxtendreas8	Left to have baby	Normal
+us8_h_indresp h_nxtendreas7	Health reasons	Normal
+us8_h_indresp h_nxtendreas6	Took retirement	Normal
+us8_h_indresp h_nxtendreas5	Temporary job ended	Normal
+us8_h_indresp h_nxtendreas4	Dismissed/sacked	Normal
+us8_h_indresp h_nxtendreas3	Made redundant	Normal
+us8_h_indresp h_nxtendreas2	Left for better job	Normal
+us8_h_indresp h_nxtendreas1	Promoted	Normal
+us8_h_indresp h_nxtjbendy4	Next job end: year	Normal
+us8_h_indresp h_nxtjbendm	Next job end: month	Normal
+us8_h_indresp h_nxtjbendd	Next job end: day	Normal
+us8_h_indresp h_nxtjbes	Next job employment status	Normal
+us8_h_indresp h_nxtjbhrs	Next job hours	Normal
+us8_h_indresp h_cjob	Current job indicator	Normal
+us8_h_indresp h_jbendreas97	Other reason	Normal
+us8_h_indresp h_jbendreas11	Moved area	Normal
+us8_h_indresp h_jbendreas10	Look after other person	Normal
+us8_h_indresp h_jbendreas9	Look after family	Normal
+us8_h_indresp h_jbendreas8	Left to have baby	Normal
+us8_h_indresp h_jbendreas7	Health reasons	Normal
+us8_h_indresp h_jbendreas6	Took retirement	Normal
+us8_h_indresp h_jbendreas5	Temporary job ended	Normal
+us8_h_indresp h_jbendreas4	Dismissed/sacked	Normal
+us8_h_indresp h_jbendreas3	Made redundant	Normal
+us8_h_indresp h_jbendreas2	Left for better job	Normal
+us8_h_indresp h_jbendreas1	Promoted	Normal
+us8_h_indresp h_jbendy4	Job end: year	Normal
+us8_h_indresp h_jbendm	Job end: month	Normal
+us8_h_indresp h_jbendd	Job end: day	Normal
+us8_h_indresp h_matlvendy4	Maternity/paternity leave end: year	Normal
+us8_h_indresp h_matlvendm	Maternity/paternity leave end: month	Normal
+us8_h_indresp h_matlvendd	Maternity/paternity leave end: day	Normal
+us8_h_indresp h_matlvsty4	Maternity/paternity leave start: year	Normal
+us8_h_indresp h_matlvstm	Maternity/paternity leave start: month	Normal
+us8_h_indresp h_matlvstd	Maternity/paternity leave start: day	Normal
+us8_h_indresp h_matlv	Had period of maternity/paternity leave	Normal
+us8_h_indresp h_samejob	Check for same job within employer	Normal
+us8_h_indresp h_wkplsam	Same workplace check	Normal
+us8_h_indresp h_jbsamr	Same employer check	Normal
+us8_h_indresp h_nxtstendy4	Next status end: year	Normal
+us8_h_indresp h_nxtstendm	Next status end: month	Normal
+us8_h_indresp h_nxtstendd	Next status end: day	Normal
+us8_h_indresp h_cstat	Current non-employment status	Normal
+us8_h_indresp h_nxtstelse	Next non-employment status	Normal
+us8_h_indresp h_nxtst	Next employment status	Normal
+us8_h_indresp h_stendreas97	Other reason	Normal
+us8_h_indresp h_stendreas11	Moved area	Normal
+us8_h_indresp h_stendreas10	Look after other person	Normal
+us8_h_indresp h_stendreas9	Look after family	Normal
+us8_h_indresp h_stendreas8	Left to have baby	Normal
+us8_h_indresp h_stendreas7	Health reasons	Normal
+us8_h_indresp h_stendreas6	Took retirement	Normal
+us8_h_indresp h_stendreas5	Temporary job ended	Normal
+us8_h_indresp h_stendreas4	Dismissed/sacked	Normal
+us8_h_indresp h_stendreas3	Made redundant	Normal
+us8_h_indresp h_stendreas2	Left for better job	Normal
+us8_h_indresp h_stendreas1	Promoted	Normal
+us8_h_indresp h_empstendy4	Employment status end: year	Normal
+us8_h_indresp h_empstendm	Employment status end: month	Normal
+us8_h_indresp h_empstendd	Employment status end: day	Normal
+us8_h_indresp h_empchk	Prev wave employed status check	Normal
+us8_h_indresp h_notempchk	Prev wave non-employed status check	Normal
+us8_h_indresp h_trqual31	Other voc/tech/prof qual	Normal
+us8_h_indresp h_trqual34	First Aid and other Health &amp; Safety Certificates	Normal
+us8_h_indresp h_trqual30	SCOTVEC/SCOTEC/SCOTBEC	Normal
+us8_h_indresp h_trqual29	BTEC/BEC/TEC/EdExcel/LQL	Normal
+us8_h_indresp h_trqual28	ONC/OND	Normal
+us8_h_indresp h_trqual27	HNC/HND	Normal
+us8_h_indresp h_trqual26	NVQ/SVQ - Level 3 - 5	Normal
+us8_h_indresp h_trqual25	NVQ/SVQ - Level 1 - 2	Normal
+us8_h_indresp h_trqual24	GNVQ/GSVQ	Normal
+us8_h_indresp h_trqual23	City and Guilds Cert	Normal
+us8_h_indresp h_trqual22	RSA/OCR/Cleri/comm qual	Normal
+us8_h_indresp h_trqual21	Modern apprenticeship	Normal
+us8_h_indresp h_trqual20	Entry lvl qual (Wales)	Normal
+us8_h_indresp h_trqual19	Basic skills	Normal
+us8_h_indresp h_trqual18	Key Skills	Normal
+us8_h_indresp h_trqual17	Youth training cert	Normal
+us8_h_indresp h_trqual16	Other school cert	Normal
+us8_h_indresp h_trqual33	Foundation Standard Grade (National 3 / Access 3)	Normal
+us8_h_indresp h_trqual32	General Standard Grade (National 4 / Intermediate 1)	Normal
+us8_h_indresp h_trqual15	Credit Standard Grade (National 5 / Intermediate 2)	Normal
+us8_h_indresp h_trqual13	GCSE	Normal
+us8_h_indresp h_trqual11	Advanced Higher / Scottish Baccalaureate	Normal
+us8_h_indresp h_trqual10	AS Level	Normal
+us8_h_indresp h_trqual9	Internt&#39;l Baccalaureate	Normal
+us8_h_indresp h_trqual8	Welsh Baccalaureate	Normal
+us8_h_indresp h_trqual7	A Level	Normal
+us8_h_indresp h_trqual6	Other higher degree	Normal
+us8_h_indresp h_trqual5	Nursing/other med qual	Normal
+us8_h_indresp h_trqual4	Teaching qual not PGCE	Normal
+us8_h_indresp h_trqual3	Diploma in HE	Normal
+us8_h_indresp h_trqual2	First degree level qual inc foundation degree, grad memb prof Inst, PGCE|1st deg	Normal
+us8_h_indresp h_trqual1	Higher Degree	Normal
+us8_h_indresp h_trainn	Number of training periods	Normal
+us8_h_indresp h_trainany	Training since last interview	Normal
+us8_h_indresp h_gcsematalpha	Alpha Maths GCSE grade (obtained since last interview)	Normal
+us8_h_indresp h_gcsematnum	Numerical Maths GCSE grade 9-1 (obtained since last interview)	Normal
+us8_h_indresp h_ngcsematnie	Maths GCSE alpha or numerical	Normal
+us8_h_indresp h_gcseengalpha	Alpha English GCSE grade (obtained since last interview)	Normal
+us8_h_indresp h_gcseengnum	English GCSE grade 9-1 text = What was your English GCSE grade?	Normal
+us8_h_indresp h_ngcseengnie	English GCSE alpha or numerical	Normal
+us8_h_indresp h_ngcsemat	Maths GCSE grade (obtained since last interview)	Normal
+us8_h_indresp h_ngcseeng	English GCSE grade (obtained since last interview)	Normal
+us8_h_indresp h_ngcse5	New GCSEs (obtained since last interview)	Normal
+us8_h_indresp h_qualnew31	Other voc/tech/prof qual	Normal
+us8_h_indresp h_qualnew30	SCOTVEC/SCOTEC/SCOTBEC	Normal
+us8_h_indresp h_qualnew29	BTEC/BEC/TEC/EdExcel/LQL	Normal
+us8_h_indresp h_qualnew28	ONC/OND	Normal
+us8_h_indresp h_qualnew27	HNC/HND	Normal
+us8_h_indresp h_qualnew26	NVQ/SVQ - Level 3 - 5	Normal
+us8_h_indresp h_qualnew25	NVQ/SVQ - Level 1 - 2	Normal
+us8_h_indresp h_qualnew24	GNVQ/GSVQ	Normal
+us8_h_indresp h_qualnew23	City and Guilds Cert	Normal
+us8_h_indresp h_qualnew22	RSA/OCR/Cleri/comm qual	Normal
+us8_h_indresp h_qualnew21	Modern apprenticeship	Normal
+us8_h_indresp h_qualnew20	Entry lvl qual (Wales)	Normal
+us8_h_indresp h_qualnew19	Basic skills	Normal
+us8_h_indresp h_qualnew18	Key Skills	Normal
+us8_h_indresp h_qualnew17	Youth training cert	Normal
+us8_h_indresp h_qualnew16	Other school cert	Normal
+us8_h_indresp h_qualnew33	Foundation Standard Grade (National 3 / Access 3)	Normal
+us8_h_indresp h_qualnew32	General Standard Grade (National 4 / Intermediate 1)	Normal
+us8_h_indresp h_qualnew15	Credit Standard Grade (National 5 / Intermediate 2)	Normal
+us8_h_indresp h_qualnew13	GCSE	Normal
+us8_h_indresp h_qualnew11	Advanced Higher / Scottish Baccalaureate	Normal
+us8_h_indresp h_qualnew10	AS Level	Normal
+us8_h_indresp h_qualnew9	Internt&#39;l Baccalaureate	Normal
+us8_h_indresp h_qualnew8	Welsh Baccalaureate	Normal
+us8_h_indresp h_qualnew7	A Level	Normal
+us8_h_indresp h_qualnew6	Other higher degree	Normal
+us8_h_indresp h_qualnew5	Nursing/other med qual	Normal
+us8_h_indresp h_qualnew4	Teaching qual not PGCE	Normal
+us8_h_indresp h_qualnew3	Diploma in HE	Normal
+us8_h_indresp h_qualnew2	First degree level qual inc foundation degree, grad memb prof Inst, PGCE|1st deg	Normal
+us8_h_indresp h_qualnew1	Higher Degree	Normal
+us8_h_indresp h_ftquals	Qualifications from FT education	Normal
+us8_h_indresp h_ftedany	Any FT education	Normal
+us8_h_indresp h_ftendy4	Year finished FT education period	Normal
+us8_h_indresp h_ftendm	Month finished FT education period	Normal
+us8_h_indresp h_contft	Continuous FT education	Normal
+us8_h_indresp h_hcondns7	health cond no. 7: Still has newly diagnosed health condition	Normal
+us8_h_indresp h_hcondno7	health cond no. 7: Health Condition Number	Normal
+us8_h_indresp h_hcondns6	health cond no. 6: Still has newly diagnosed health condition	Normal
+us8_h_indresp h_hcondno6	health cond no. 6: Health Condition Number	Normal
+us8_h_indresp h_hcondns5	health cond no. 5: Still has newly diagnosed health condition	Normal
+us8_h_indresp h_hcondno5	health cond no. 5: Health Condition Number	Normal
+us8_h_indresp h_hcondns4	health cond no. 4: Still has newly diagnosed health condition	Normal
+us8_h_indresp h_hcondno4	health cond no. 4: Health Condition Number	Normal
+us8_h_indresp h_hcondns3	health cond no. 3: Still has newly diagnosed health condition	Normal
+us8_h_indresp h_hcondno3	health cond no. 3: Health Condition Number	Normal
+us8_h_indresp h_hcondns2	health cond no. 2: Still has newly diagnosed health condition	Normal
+us8_h_indresp h_hcondno2	health cond no. 2: Health Condition Number	Normal
+us8_h_indresp h_hcondns1	health cond no. 1: Still has newly diagnosed health condition	Normal
+us8_h_indresp h_hcondno1	health cond no. 1: Health Condition Number	Normal
+us8_h_indresp h_hcondno_code	Has other long standing/chronic health condition since last interview	Normal
+us8_h_indresp h_hcondo_code	Has other health condition since last interview	Normal
+us8_h_indresp h_hcondn96	None of these	Normal
+us8_h_indresp h_hcondn18	Other long standing/chronic condition, please specify	Normal
+us8_h_indresp h_hcondn20	H.I.V.	Normal
+us8_h_indresp h_hcondn19	Multiple Sclerosis	Normal
+us8_h_indresp h_hcondn17	Clinical depression	Normal
+us8_h_indresp h_hcondn16	High blood pressure	Normal
+us8_h_indresp h_hcondn15	Epilepsy	Normal
+us8_h_indresp h_hcondn14	Diabetes	Normal
+us8_h_indresp h_hcondn13	Cancer or malignancy	Normal
+us8_h_indresp h_hcondn12	Any kind of liver condition	Normal
+us8_h_indresp h_hcondn11	Chronic bronchitis	Normal
+us8_h_indresp h_hcondn10	Hypothyroidism or an under-active thyroid	Normal
+us8_h_indresp h_hcondn9	Hyperthyroidism or an over-active thyroid	Normal
+us8_h_indresp h_hcondn8	Emphysema	Normal
+us8_h_indresp h_hcondn7	Stroke	Normal
+us8_h_indresp h_hcondn6	Heart attack or myocardial infarction	Normal
+us8_h_indresp h_hcondn5	Angina	Normal
+us8_h_indresp h_hcondn4	Coronary heart disease	Normal
+us8_h_indresp h_hcondn3	Congestive heart failure	Normal
+us8_h_indresp h_hcondn2	Arthritis	Normal
+us8_h_indresp h_hcondn1	Asthma	Normal
+us8_h_indresp h_nnewborn	Number of newborns since last interview	Normal
+us8_h_indresp h_preg	Has had a pregnancy	Normal
+us8_h_indresp h_nchild	Number of new children	Normal
+us8_h_indresp h_father	Fathered children since last interview	Normal
+us8_h_indresp h_cohabn	Number spells of cohabitation	Normal
+us8_h_indresp h_cohab	Any cohabitation spells since last interview	Normal
+us8_h_indresp h_currmstat	Current legal marital status	Normal
+us8_h_indresp h_mstatsamn	Whether marital status changed	Normal
+us8_h_indresp h_lwwrong	Correct marital status last wave	Normal
+us8_h_indresp h_mstatsam	Whether marital status changed within cohab rel	Normal
+us8_h_indresp h_relup	Last wave partner resident or split (from Household Grid)	Normal
+us8_h_indresp h_plnowy4	Year of moving to current address	Normal
+us8_h_indresp h_plnowm	Month of moving to current address	Normal
+us8_h_indresp h_movdir	Moved direct or multiple moves	Normal
+us8_h_indresp h_moveoth_code	moved for other reasons	Normal
+us8_h_indresp h_area	Moved for area related reasons	Normal
+us8_h_indresp h_housing	Moved for housing reasons	Normal
+us8_h_indresp h_memploy	Moved for employment reasons	Normal
+us8_h_indresp h_education	Moved for education reasons	Normal
+us8_h_indresp h_family	Moved for family reasons	Normal
+us8_h_indresp h_movy16	Or did you have to move for some other reason?	Normal
+us8_h_indresp h_movy15	Area related reasons	Normal
+us8_h_indresp h_movy14	Housing related reasons	Normal
+us8_h_indresp h_movy13	Employer related reasons	Normal
+us8_h_indresp h_movy12	Education related reasons	Normal
+us8_h_indresp h_movy11	Family related reasons	Normal
+us8_h_indresp h_adcts	Lived continuously at this address since last interview	Normal
+us8_h_indresp h_ch1by4	DOB of eldest child: Year	Normal
+us8_h_indresp h_ch1bm	DOB of eldest child: Month	Normal
+us8_h_indresp h_lnprnt	No. of children natural parent to	Normal
+us8_h_indresp h_lprnt	Ever had/fathered children	Normal
+us8_h_indresp h_lnadopt	Number of step/adopted child(ren)	Normal
+us8_h_indresp h_ladopt	Ever had step/adopted child(ren)	Normal
+us8_h_indresp h_lmar1y	Year of first marriage	Normal
+us8_h_indresp h_lmar1m	Month of first marriage	Normal
+us8_h_indresp h_nmar	Number of times resp married	Normal
+us8_h_indresp h_coh1ey	Year first cohabitation ended	Normal
+us8_h_indresp h_coh1em	Month first cohabitation ended	Normal
+us8_h_indresp h_coh1mr	Went on to marry first cohabitee	Normal
+us8_h_indresp h_coh1by	Year first began cohabiting	Normal
+us8_h_indresp h_coh1bm	Month first began cohabiting	Normal
+us8_h_indresp h_lcohnpi	Ever cohabited without marrying	Normal
+us8_h_indresp h_casch	Misses school to care for someone	Normal
+us8_h_indresp h_aideft	Caring prevents paid employment	Normal
+us8_h_indresp h_aidhrs	Hours per week spent caring	Normal
+us8_h_indresp h_aidhu2	Caring: relation to 2nd non-res dependent	Normal
+us8_h_indresp h_aidhu1	Caring: relation to 1st non-res dependent	Normal
+us8_h_indresp h_naidxhh	Number of non-residents cared for	Normal
+us8_h_indresp h_aidxhh	Non-residents cared for	Normal
+us8_h_indresp h_aidhua16	Person number 16 Resp. aids person number 16	Normal
+us8_h_indresp h_aidhua15	Person number 15 Resp. aids person number 15	Normal
+us8_h_indresp h_aidhua14	Person number 14 Resp. aids person number 14	Normal
+us8_h_indresp h_aidhua13	Person number 13 Resp. aids person number 13	Normal
+us8_h_indresp h_aidhua12	Person number 12 Resp. aids person number 12	Normal
+us8_h_indresp h_aidhua11	Person number 11 Resp. aids person number 11	Normal
+us8_h_indresp h_aidhua10	Person number 10 Resp. aids person number 10	Normal
+us8_h_indresp h_aidhua9	Person number 9 Resp. aids person number 9	Normal
+us8_h_indresp h_aidhua8	Person number 8 Resp. aids person number 8	Normal
+us8_h_indresp h_aidhua7	Person number 7 Resp. aids person number 7	Normal
+us8_h_indresp h_aidhua6	Person number 6 Resp. aids person number 6	Normal
+us8_h_indresp h_aidhua5	Person number 5 Resp. aids person number 5	Normal
+us8_h_indresp h_aidhua4	Person number 4 Resp. aids person number 4	Normal
+us8_h_indresp h_aidhua3	Person number 3 Resp. aids person number 3	Normal
+us8_h_indresp h_aidhua2	Person number 2 Resp. aids person number 2	Normal
+us8_h_indresp h_aidhua1	Person number 1 Resp. aids person number 1	Normal
+us8_h_indresp h_aidhh	Cares for handicapped/other in household	Normal
+us8_h_indresp h_ecigs	Uses electronic cigarettes	Normal
+us8_h_indresp h_ncigs	Usual no. of cigarettes smoked per day	Normal
+us8_h_indresp h_smoker	Smoker	Normal
+us8_h_indresp h_hospch	In-patient childbirth	Normal
+us8_h_indresp h_hospd	In-patient number of days	Normal
+us8_h_indresp h_hosp	Hosp or clinic in-patient last 12 months	Normal
+us8_h_indresp h_hl2hop	Hosp or clinic out-patient last 12 months	Normal
+us8_h_indresp h_hl2gp	Visited GP in last 12 months	Normal
+us8_h_indresp h_hconda20	Age told had H.I.V.	Normal
+us8_h_indresp h_hconda19	Age told had multiple sclerosis	Normal
+us8_h_indresp h_hconda17	Age told had clinical depression	Normal
+us8_h_indresp h_hconda16	Age told had high blood pressure	Normal
+us8_h_indresp h_hconda15	Age told had epilepsy	Normal
+us8_h_indresp h_hconda14	Age told had diabetes	Normal
+us8_h_indresp h_hconda13	Age told had cancer of malignancy	Normal
+us8_h_indresp h_hconda12	Age told had any kind of liver condition	Normal
+us8_h_indresp h_hconda11	Age told had chronic bronchitis	Normal
+us8_h_indresp h_hconda10	Age told had hypothyroidism or an under-active thyroid	Normal
+us8_h_indresp h_hconda09	Age told had hyperthyroidism or an over-active thyroid	Normal
+us8_h_indresp h_hconda08	Age told had emphysema	Normal
+us8_h_indresp h_hconda07	Age told had stroke	Normal
+us8_h_indresp h_hconda06	Age told had heart attack or myocardial infarction	Normal
+us8_h_indresp h_hconda05	Age told had angina	Normal
+us8_h_indresp h_hconda04	Age told had coronary heart disease	Normal
+us8_h_indresp h_hconda03	Age told had congestive heart failure	Normal
+us8_h_indresp h_hconda02	Age told had arthritis	Normal
+us8_h_indresp h_hconda01	Age told had asthma	Normal
+us8_h_indresp h_hconds17	Still have clinical depression	Normal
+us8_h_indresp h_hconds16	Still have high blood pressure	Normal
+us8_h_indresp h_hconds15	Still have epilepsy	Normal
+us8_h_indresp h_hconds14	Still have diabetes	Normal
+us8_h_indresp h_hconds13	Still have cancer of malignancy	Normal
+us8_h_indresp h_hconds12	Still have any kind of liver condition	Normal
+us8_h_indresp h_hconds11	Still have chronic bronchitis	Normal
+us8_h_indresp h_hconds10	Still have hypothyroidism or an under-active thyroid	Normal
+us8_h_indresp h_hconds09	Still have hyperthyroidism or an over-active thyroid	Normal
+us8_h_indresp h_hconds08	Still have emphysema	Normal
+us8_h_indresp h_hconds05	Still have angina	Normal
+us8_h_indresp h_hconds04	Still have coronary heart disease	Normal
+us8_h_indresp h_hconds03	Still have congestive heart failure	Normal
+us8_h_indresp h_hconds02	Still have arthritis	Normal
+us8_h_indresp h_hconds01	Still have asthma	Normal
+us8_h_indresp h_hcond96	None of these	Normal
+us8_h_indresp h_hcond18	Other long standing/chronic condition, please specify	Normal
+us8_h_indresp h_hcond20	H.I.V.	Normal
+us8_h_indresp h_hcond19	Multiple Sclerosis	Normal
+us8_h_indresp h_hcond17	Clinical depression	Normal
+us8_h_indresp h_hcond16	High blood pressure	Normal
+us8_h_indresp h_hcond15	Epilepsy	Normal
+us8_h_indresp h_hcond14	Diabetes	Normal
+us8_h_indresp h_hcond13	Cancer or malignancy	Normal
+us8_h_indresp h_hcond12	Any kind of liver condition	Normal
+us8_h_indresp h_hcond11	Chronic bronchitis	Normal
+us8_h_indresp h_hcond10	Hypothyroidism or an under-active thyroid	Normal
+us8_h_indresp h_hcond9	Hyperthyroidism or an over-active thyroid	Normal
+us8_h_indresp h_hcond8	Emphysema	Normal
+us8_h_indresp h_hcond7	Stroke	Normal
+us8_h_indresp h_hcond6	Heart attack or myocardial infarction	Normal
+us8_h_indresp h_hcond5	Angina	Normal
+us8_h_indresp h_hcond4	Coronary heart disease	Normal
+us8_h_indresp h_hcond3	Congestive heart failure	Normal
+us8_h_indresp h_hcond2	Arthritis	Normal
+us8_h_indresp h_hcond1	Asthma	Normal
+us8_h_indresp h_dissev12	How much difficulty do you have with Other health problem or disability	Normal
+us8_h_indresp h_dissev11	How much difficulty do you have with Difficulties with own personal care	Normal
+us8_h_indresp h_dissev10	How much difficulty do you have with Your physical co-ordination	Normal
+us8_h_indresp h_dissev9	How much difficulty do you have with Recognising when you are in physical dan	Normal
+us8_h_indresp h_dissev8	How much difficulty do you have with Memory	Normal
+us8_h_indresp h_dissev7	How much difficulty do you have with Communication	Normal
+us8_h_indresp h_dissev6	How much difficulty do you have with Sight	Normal
+us8_h_indresp h_dissev5	How much difficulty do you have with Hearing	Normal
+us8_h_indresp h_dissev4	How much difficulty do you have with Continence	Normal
+us8_h_indresp h_dissev3	How much difficulty do you have with Manual dexterity	Normal
+us8_h_indresp h_dissev2	How much difficulty do you have with Lifting, carrying or moving objects	Normal
+us8_h_indresp h_dissev1	How much difficulty do you have with Mobility	Normal
+us8_h_indresp h_disdif96	None of these	Normal
+us8_h_indresp h_disdif12	Other health problem or disability	Normal
+us8_h_indresp h_disdif11	Difficulties with own personal care	Normal
+us8_h_indresp h_disdif10	Your physical co-ordination (e.g. balance)	Normal
+us8_h_indresp h_disdif9	Recognising when you are in physical danger	Normal
+us8_h_indresp h_disdif8	Memory or ability to concentrate, learn or understand	Normal
+us8_h_indresp h_disdif7	Communication or speech problems	Normal
+us8_h_indresp h_disdif6	Sight (apart from wearing standard glasses)	Normal
+us8_h_indresp h_disdif5	Hearing (apart from using a standard hearing aid)	Normal
+us8_h_indresp h_disdif4	Continence (bladder and bowel control)	Normal
+us8_h_indresp h_disdif3	Manual dexterity (using your hands to carry out everyday tasks)	Normal
+us8_h_indresp h_disdif2	Lifting, carrying or moving objects	Normal
+us8_h_indresp h_disdif1	Mobility (moving around at home and walking)	Normal
+us8_h_indresp h_health	Long-standing illness or disability	Normal
+us8_h_indresp h_oprlg3	Religion makes a difference to life	Normal
+us8_h_indresp h_prayfreq	Frequency of prayer	Normal
+us8_h_indresp h_oprlg2	Attendance at religious services	Normal
+us8_h_indresp h_niact	Religion active: NI	Normal
+us8_h_indresp h_nirel	Religion: NI	Normal
+us8_h_indresp h_oprlg0ni	Religion brought up in: NI	Normal
+us8_h_indresp h_oprlg1	Religion: E/S/W	Normal
+us8_h_indresp h_oprlg0	Religion brought up in: E/S/W	Normal
+us8_h_indresp h_oprlg	Whether belong to a religion	Normal
+us8_h_indresp h_food7	Eats food from paternal grandfather&#39;s COB	Normal
+us8_h_indresp h_food6	Eats food from paternal grandmother&#39;s COB	Normal
+us8_h_indresp h_food5	Eats food from maternal grandfather&#39;s COB	Normal
+us8_h_indresp h_food4	Eats food from maternal grandmother&#39;s COB	Normal
+us8_h_indresp h_food3	Eats food from father&#39;s COB	Normal
+us8_h_indresp h_food2	Eats food from mother&#39;s COB	Normal
+us8_h_indresp h_food1	Eats food from where born	Normal
+us8_h_indresp h_pride14	Pride in colour of skin	Normal
+us8_h_indresp h_pride13	Pride in paternal grandfather&#39;s COB	Normal
+us8_h_indresp h_pride12	Pride in paternal grandmother&#39;s COB	Normal
+us8_h_indresp h_pride11	Pride in maternal grandfather&#39;s COB	Normal
+us8_h_indresp h_pride10	Pride in maternal grandmother&#39;s COB	Normal
+us8_h_indresp h_pride9	Pride in father&#39;s COB	Normal
+us8_h_indresp h_pride8	Pride in mother&#39;s COB	Normal
+us8_h_indresp h_pride5	Pride in region live in	Normal
+us8_h_indresp h_pride7	Pride in region brought up in	Normal
+us8_h_indresp h_pride6	Pride in birth country	Normal
+us8_h_indresp h_pride4b	Pride in religion brought up in	Normal
+us8_h_indresp h_pride4a	Pride in own religion	Normal
+us8_h_indresp h_pride2	Pride in language brought up in	Normal
+us8_h_indresp h_ethclose11	Closeness to someone with same skin colour	Normal
+us8_h_indresp h_ethclose10	Closeness to someone of paternal grandfather&#39;s COB	Normal
+us8_h_indresp h_ethclose9	Closeness to someone of paternal grandmother&#39;s COB	Normal
+us8_h_indresp h_ethclose8	Closeness to someone of maternal grandfather&#39;s COB	Normal
+us8_h_indresp h_ethclose7	Closeness to someone of maternal grandmother&#39;s COB	Normal
+us8_h_indresp h_ethclose6	Closeness to someone of father&#39;s COB	Normal
+us8_h_indresp h_ethclose5	Closeness to someone of mother&#39;s COB	Normal
+us8_h_indresp h_ethclose4b	Closeness to someone of same region as currently live	Normal
+us8_h_indresp h_ethclose4a	Closeness to someone of same region as brought up in	Normal
+us8_h_indresp h_ethclose3	Closeness to compatriot	Normal
+us8_h_indresp h_ethclose2b	Closeness to someone of same religion as brought up in	Normal
+us8_h_indresp h_ethclose2a	Closeness to someone of same religion as own	Normal
+us8_h_indresp h_ethclose1	Closeness to speaker of same language	Normal
+us8_h_indresp h_ethid14	Importance of skin colour	Normal
+us8_h_indresp h_ethid13	Importance of paternal grandfather&#39;s COB	Normal
+us8_h_indresp h_ethid12	Importance of paternal grandmother&#39;s COB	Normal
+us8_h_indresp h_ethid11	Importance of maternal grandfather&#39;s COB	Normal
+us8_h_indresp h_ethid10	Importance of maternal grandmother&#39;s COB	Normal
+us8_h_indresp h_ethid9	Importance of father&#39;s COB	Normal
+us8_h_indresp h_ethid8	Importance of mother&#39;s COB	Normal
+us8_h_indresp h_ethid7	Importance of region/city where grew up	Normal
+us8_h_indresp h_ethid6	Importance of country where born	Normal
+us8_h_indresp h_ethid5	Importance of region/city where live	Normal
+us8_h_indresp h_ethid4b	Importance of religion brought up in	Normal
+us8_h_indresp h_ethid4a	Importance of own religion	Normal
+us8_h_indresp h_ethid3	Importance of English language	Normal
+us8_h_indresp h_ethid2	Importance of language spoken at home	Normal
+us8_h_indresp h_kidlang	Childhood language	Normal
+us8_h_indresp h_racelot_code	Specific code for other ethnic groups	Normal
+us8_h_indresp h_racelbt	Black ethnic group TI	Normal
+us8_h_indresp h_racelat	Asian ethnic group TI	Normal
+us8_h_indresp h_racelmt	Mixed ethnic group TI	Normal
+us8_h_indresp h_racelwt	White ethnic group TI	Normal
+us8_h_indresp h_racelt	Ethnic group TI	Normal
+us8_h_indresp h_racelo_code	Specific code for generic ethnic groups	Normal
+us8_h_indresp h_racel	Ethnic group	Normal
+us8_h_indresp h_natid_other	Other national identity	Normal
+us8_h_indresp h_natid97	Other	Normal
+us8_h_indresp h_natid6	Irish	Normal
+us8_h_indresp h_natid5	British	Normal
+us8_h_indresp h_natid4	Northern Irish	Normal
+us8_h_indresp h_natid3	Scottish	Normal
+us8_h_indresp h_natid2	Welsh	Normal
+us8_h_indresp h_natid1	English	Normal
+us8_h_indresp h_mayruk	Mother ever lived in UK	Normal
+us8_h_indresp h_macob	Country mother born in	Normal
+us8_h_indresp h_payruk	Father ever lived in UK	Normal
+us8_h_indresp h_pacob	Country father born in	Normal
+us8_h_indresp h_maju	Mother not working when resp. aged 14	Normal
+us8_h_indresp h_paju	Father not working when resp. aged 14	Normal
+us8_h_indresp h_pxpearng3dk	Expected earnings, same gender, no degree, brackets	Normal
+us8_h_indresp h_pxpearng3	Expected earnings of same gender, no degree	Normal
+us8_h_indresp h_pxpearng1dk	Expected earnings, same gender, brackets	Normal
+us8_h_indresp h_pxpearng1	Expected earnings of same gender	Normal
+us8_h_indresp h_pxpearn3dk	Expected earnings without degree, brackets	Normal
+us8_h_indresp h_pxpearn3	Expected earnings without a university degree	Normal
+us8_h_indresp h_pxpearn1dk	Expected earnings first choice, bracketed	Normal
+us8_h_indresp h_pxpearn1	Expected earnings if study first choice	Normal
+us8_h_indresp h_poddsemp3	Chance of being employed if do not go to university	Normal
+us8_h_indresp h_poddsemp1	Chance of being employed if study first choice	Normal
+us8_h_indresp h_punisub1	Most preferred subject at university	Normal
+us8_h_indresp h_punifin1	Likelihood of finishing studies, first choice	Normal
+us8_h_indresp h_pxpborrow	Expected loans for university	Normal
+us8_h_indresp h_pxptuition	Expected tuition	Normal
+us8_h_indresp h_poddsschol	Chance of applying to Uni if scholarship	Normal
+us8_h_indresp h_poddsapply	Chance of applying to university	Normal
+us8_h_indresp h_pheapplied	Parental: Applied to HE	Normal
+us8_h_indresp h_poddsqual	Chance of getting qualifications to enter university	Normal
+us8_h_indresp h_pedchpno	Identifier for co-resident child, ed expectations	Normal
+us8_h_indresp h_xpearng3dk	Expected earnings, same gender, no degree, brackets	Normal
+us8_h_indresp h_xpearng3	Expected earnings of same gender, no degree	Normal
+us8_h_indresp h_xpearng1dk	Expected earnings, same gender, first choice, brackets	Normal
+us8_h_indresp h_xpearng1	Expected earnings of same gender, with degree	Normal
+us8_h_indresp h_xpearn3dk	Expected earnings without degree, brackets	Normal
+us8_h_indresp h_xpearn3	Expected earnings without a university degree	Normal
+us8_h_indresp h_xpearn1dk	Expected earnings if have degree, bracketed	Normal
+us8_h_indresp h_xpearn1	Expected earnings if have degree	Normal
+us8_h_indresp h_oddsemp3	Chance of being employed if do not go to university	Normal
+us8_h_indresp h_oddsemp1	Chance of being employed if have degree	Normal
+us8_h_indresp h_unisub1	Most preferred subject at university	Normal
+us8_h_indresp h_unifin1	Likelihood of finishing studies, first choice	Normal
+us8_h_indresp h_xpborrow	Expected loans for university	Normal
+us8_h_indresp h_xptuition	Expected tuition	Normal
+us8_h_indresp h_oddsschol	Chance of applying to Uni if scholarship	Normal
+us8_h_indresp h_oddsapply	Chance of applying to university	Normal
+us8_h_indresp h_heapplied	Applied to HE	Normal
+us8_h_indresp h_oddsqual	Chance of getting qualifications to enter university	Normal
+us8_h_indresp h_lvhm	Age you think when you leave home?	Normal
+us8_h_indresp h_ypapar	Age want to start family	Normal
+us8_h_indresp h_ypamar	Age want to get married	Normal
+us8_h_indresp h_hednt	Reason might not go on to higher education	Normal
+us8_h_indresp h_hedlik	Likelihood of entering higher education	Normal
+us8_h_indresp h_ahvwell	Importance of doing well in quals	Normal
+us8_h_indresp h_lvschdo	Want to do after school/college	Normal
+us8_h_indresp h_edasp	Highest level exam like to get b/f leave school/college	Normal
+us8_h_indresp h_edtype	Type of educational institution attending	Normal
+us8_h_indresp h_j1mngr	Managerial duties: first job	Normal
+us8_h_indresp h_j1boss	Hired employees: First job	Normal
+us8_h_indresp h_j1semp	Employee or self-employed: First job	Normal
+us8_h_indresp h_j1none	Still in full-time education / never had a job	Normal
+us8_h_indresp h_feend	Further Education leaving age	Normal
+us8_h_indresp h_fenow	Still in further education	Normal
+us8_h_indresp h_fenow_cawi	Age left further education (web)	Normal
+us8_h_indresp h_schok	School details correct	Normal
+us8_h_indresp h_schlloc	Place of school	Normal
+us8_h_indresp h_scend	School leaving age	Normal
+us8_h_indresp h_school	Never went to/still at school	Normal
+us8_h_indresp h_school_cawi	Age left school (web)	Normal
+us8_h_indresp h_qfvoc96	None of the above	Normal
+us8_h_indresp h_qfvoc15	Other voc/tech/prof qual	Normal
+us8_h_indresp h_qfvoc14	SCOTVEC/SCOTEC/SCOTBEC	Normal
+us8_h_indresp h_qfvoc13	BTEC/BEC/TEC/EdExcel/LQL	Normal
+us8_h_indresp h_qfvoc12	ONC/OND	Normal
+us8_h_indresp h_qfvoc11	HNC/HND	Normal
+us8_h_indresp h_qfvoc10	NVQ/SVQ - Level 3 - 5	Normal
+us8_h_indresp h_qfvoc9	NVQ/SVQ - Level 1 - 2	Normal
+us8_h_indresp h_qfvoc8	GNVQ/GSVQ	Normal
+us8_h_indresp h_qfvoc7	City and Guilds Cert	Normal
+us8_h_indresp h_qfvoc6	RSA/OCR/Cleri/comm qual	Normal
+us8_h_indresp h_qfvoc5	Modern/trade apprentice	Normal
+us8_h_indresp h_qfvoc4	Entry lvl qual (Wales)	Normal
+us8_h_indresp h_qfvoc3	Basic skills	Normal
+us8_h_indresp h_qfvoc2	Key Skills	Normal
+us8_h_indresp h_qfvoc1	Youth training cert.	Normal
+us8_h_indresp h_gcsematw	Maths GCSE grade (Wales)	Normal
+us8_h_indresp h_gcseengw	English GCSE grade (Wales)	Normal
+us8_h_indresp h_gcsemate	Maths GCSE grade (England)	Normal
+us8_h_indresp h_gcseenge	English GCSE grade (England)	Normal
+us8_h_indresp h_gcsemat	Maths GCSE grade	Normal
+us8_h_indresp h_gcseeng	English GCSE grade	Normal
+us8_h_indresp h_gcse5	New GCSEs	Normal
+us8_h_indresp h_qualoc	UK or non-UK qualification	Normal
+us8_h_indresp h_qfhigh	Highest qualification	Normal
+us8_h_indresp h_citzn2_code	Citizenship of other country - 2nd mention	Normal
+us8_h_indresp h_citzn_code	Citizenship of other country	Normal
+us8_h_indresp h_citzn3	citizen of other country	Normal
+us8_h_indresp h_citzn2	citizen of country of birth	Normal
+us8_h_indresp h_citzn1	UK citizen uk citizen	Normal
+us8_h_indresp h_yr2uk4	Year came to Britain	Normal
+us8_h_indresp h_plbornuk	UK county of birth	Normal
+us8_h_indresp h_plbornc	Country of birth	Normal
+us8_h_indresp h_ukborn	Born in UK	Normal
+us8_h_indresp h_netpuse	Frequency of using the internet	Normal
+us8_h_indresp h_mobcomp	Has a mobile computing device	Normal
+us8_h_indresp h_smartmob	Has a smartphone	Normal
+us8_h_indresp h_mobuse	Has mobile phone	Normal
+us8_h_indresp h_caruse	Has use of car or van	Normal
+us8_h_indresp h_drive	Respondent has driving licence	Normal
+us8_h_indresp h_mlstat	Present legal marital status	Normal
+us8_h_indresp h_mlstatchk	Present legal marital status check	Normal
+us8_h_indresp h_jbstat	Current economic activity	Normal
+us8_h_indresp h_xpmvwhr	Location of expected move known	Normal
+us8_h_indresp h_xpmvyr	Year of expected move	Normal
+us8_h_indresp h_xpmvmnth	Month of expected move	Normal
+us8_h_indresp h_xpmvwhn	Date of expected move known	Normal
+us8_h_indresp h_xpmove	Expects to move in next year	Normal
+us8_h_indresp h_lkmove	Prefers to move house	Normal
+us8_h_indresp h_mvyr	Year of move	Normal
+us8_h_indresp h_mvmnth	Month moved to current address	Normal
+us8_h_indresp h_mvever	Lived at address whole life	Normal
+us8_h_indresp h_pdvage	Definitive age variable in the person record	Normal
+us8_h_indresp h_pbirthy	Definitive DOB year variable in the person record	Normal
+us8_h_indresp h_pbirthm	Definitive DOB month variable in the person record	Normal
+us8_h_indresp h_dcsex	Correct sex	Normal
+us8_h_indresp h_dcdoby	Correct DOB year	Normal
+us8_h_indresp h_dcdobm	Correct DOB month	Normal
+us8_h_indresp h_chkresp4	No, sex is wrong	Normal
+us8_h_indresp h_chkresp3	No, date of birth is wrong	Normal
+us8_h_indresp h_chkresp2	No, name is wrong	Normal
+us8_h_indresp h_chkresp1	All correct	Normal
+us8_h_indresp h_lihow	How translations applied	Normal
+us8_h_indresp h_liwho	Who translated	Normal
+us8_h_indresp h_litrans	Translated language	Normal
+us8_h_indresp h_lieng	Interview conducted in English	Normal
+us8_h_indresp h_istrtdatd	Interview start date (day)	Normal
+us8_h_indresp h_istrtdatm	Interview start date (month)	Normal
+us8_h_indresp h_istrtdaty	Interview start date (year)	Normal
+us8_h_indresp h_istrtdatss	Individual interview start time  (seconds)	Normal
+us8_h_indresp h_istrtdatmm	Individual interview start time  (minutes)	Normal
+us8_h_indresp h_istrtdathh	Individual interview start time  (hours)	Normal
+us8_h_indresp h_nnatch	Number of respondent&#39;s biological children in the household	Normal
+us8_h_indresp h_nadoptch	Number of respondent&#39;s adoptive/step-children in the household	Normal
+us8_h_indresp h_respchild16	Person number 16	Normal
+us8_h_indresp h_respchild15	Person number 15	Normal
+us8_h_indresp h_respchild14	Person number 14	Normal
+us8_h_indresp h_respchild13	Person number 13	Normal
+us8_h_indresp h_respchild12	Person number 12	Normal
+us8_h_indresp h_respchild11	Person number 11	Normal
+us8_h_indresp h_respchild10	Person number 10	Normal
+us8_h_indresp h_respchild9	Person number 9	Normal
+us8_h_indresp h_respchild8	Person number 8	Normal
+us8_h_indresp h_respchild7	Person number 7	Normal
+us8_h_indresp h_respchild6	Person number 6	Normal
+us8_h_indresp h_respchild5	Person number 5	Normal
+us8_h_indresp h_respchild4	Person number 4	Normal
+us8_h_indresp h_respchild3	Person number 3	Normal
+us8_h_indresp h_respchild2	Person number 2	Normal
+us8_h_indresp h_respchild1	Person number 1	Normal
+us8_h_indresp h_nch8resp	Number of children aged 8 that respondent is responsible for	Normal
+us8_h_indresp h_nch5resp	Number of children aged 5 that respondent is responsible for	Normal
+us8_h_indresp h_nch3resp	Number of children aged 3 that respondent is responsible for	Normal
+us8_h_indresp h_nch415resp	Number of children aged 4 to 15 that respondent is responsible for	Normal
+us8_h_indresp h_nch14resp	Number of children aged under 15 that respondent is responsible for	Normal
+us8_h_indresp h_nchresp	Number of children aged under 16 that resp is responsible for	Normal
+us8_h_indresp h_n1619abs	Number of kids aged 16-19 with one and only one parent in HH	Normal
+us8_h_indresp h_nunder16abs	Number of kids aged 0-15 with one and only one parent in HH	Normal
+us8_h_indresp h_nch10	Number of children aged 10 that resp is parent (biological mother, biological fa	Normal
+us8_h_indresp h_nch10to15	Number of children aged 10 to 15 that resp is parent (biological mother, biologi	Normal
+us8_h_indresp h_nch5to15	Number of children aged 5 to 15 that resp is parent (biological mother, biologic	Normal
+us8_h_indresp h_nchunder16	Number of children aged under 16 that resp is parent (biological mother, biologi	Normal
+us8_h_indresp h_chkwebsex	Check Respondent sex web	Normal
+us8_h_indresp h_chkwebdoby	Check Respondent year of birth web	Normal
+us8_h_indresp h_chkwebdobm	Check Respondent month of birth web	Normal
+us8_h_indresp h_chkwebdobd	Check Respondent day of birth web	Normal
+us8_h_indresp h_chkrespweb4	No, sex is wrong	Normal
+us8_h_indresp h_chkrespweb3	No, date of birth is wrong	Normal
+us8_h_indresp h_chkrespweb2	No, name is wrong	Normal
+us8_h_indresp h_chkrespweb1	All correct	Normal
+us8_h_indresp h_birthy	DOB year	Normal
+us8_h_indresp h_birthm	dob month	Normal
+us8_h_indresp h_dvage	Age	Normal
+us8_h_indresp h_sex	sex	Normal
+us8_h_indresp h_ioutcome	Individual outcome	Normal
+us8_h_indresp h_ivfio	Individual level outcome	Normal
+us8_h_indresp h_quarter	sample quarter	Normal
+us8_h_indresp h_month	sample month	Normal
+us8_h_indresp h_sampst	sample status	Normal
+us8_h_indresp h_strata	Strata	Normal
+us8_h_indresp h_psu	Primary sampling unit	Normal
+us8_h_indresp h_memorig	Sample origin, individual	Normal
+us8_h_indresp h_hhorig	Sample origin, household	Normal
+us8_h_indresp h_childpno	pno of child	Normal
+us8_h_indresp h_pno	person number	Normal
+us8_h_indresp h_hidp	household identifier (public release)	Normal
+us8_h_indresp pid	personal identifier (BHPS cohort)	Normal
+us8_h_indresp pidp	Cross-wave Person Identifier (Public Release)	Normal

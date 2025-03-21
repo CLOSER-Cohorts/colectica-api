@@ -1,0 +1,876 @@
+ch_indresp_w ch_betaindin_lw	Longitudinal individual web survey weight, beta version	Normal
+ch_indresp_w ch_betaindin_xw	Cross-sectional individual web survey weight, beta version	Normal
+ch_indresp_w ch_aid_dv	Address identifier	Normal
+ch_indresp_w ch_gor_dv	Government Office Region	Normal
+ch_indresp_w ch_scghq2_dv	Subjective wellbeing (GHQ): Caseness	Normal
+ch_indresp_w ch_sentkit	Was this respondent sent a testing kit?	Normal
+ch_indresp_w ch_ff_country	Country of residence	Normal
+ch_indresp_w ch_ff_consentpos	Position and order of consent questions	Normal
+ch_indresp_w ch_ff_inty	Date of the last monthly interview the respondent completed - year	Normal
+ch_indresp_w ch_ff_intm	Date of the last monthly interview the respondent completed - month	Normal
+ch_indresp_w ch_ff_intd	Date of the last monthly interview the respondent completed - day	Normal
+ch_indresp_w ch_ff_prevsurv	Full respondent in a previous monthly survey	Normal
+ch_indresp_w ch_tscloseend	Time stamp: closing module end	Normal
+ch_indresp_w ch_tsclosest	Time stamp: closing module start	Normal
+ch_indresp_w ch_tsdeviceend	Time stamp: survey device module end	Normal
+ch_indresp_w ch_tsdevicest	Time stamp: survey device module start	Normal
+ch_indresp_w ch_tsconsfuend	Time stamp: consent follow-up module end	Normal
+ch_indresp_w ch_tsconsfust	Time stamp: consent follow-up module start	Normal
+ch_indresp_w ch_tsserolend	Time stamp: serology module end	Normal
+ch_indresp_w ch_tsserqtime	Time taken to answer serolconsent, seconds	Normal
+ch_indresp_w ch_tsserqend	Time stamp: serology consent question end	Normal
+ch_indresp_w ch_tsserolst	Time stamp: serology module start	Normal
+ch_indresp_w ch_tshlthdataend	Time stamp: health data module end	Normal
+ch_indresp_w ch_tshlthqtime	Time taken to answer cvhlthlink, seconds	Normal
+ch_indresp_w ch_tshlthqend	Time stamp: health data linkage consent question end	Normal
+ch_indresp_w ch_tshlthdatast	Time stamp: health linkage module start	Normal
+ch_indresp_w ch_tsghqend	Time stamp: GHQ module end	Normal
+ch_indresp_w ch_tsghqst	Time stamp: GHQ module start	Normal
+ch_indresp_w ch_tslfsatend	Time stamp: life satisfaction module end	Normal
+ch_indresp_w ch_tslfsatst	Time stamp: life satisfaction module start	Normal
+ch_indresp_w ch_tsvolend	Time stamp: volunteering module end	Normal
+ch_indresp_w ch_tsvolst	Time stamp: volunteering module start	Normal
+ch_indresp_w ch_tsnbhdend	Time stamp: neighbourhood module end	Normal
+ch_indresp_w ch_tsnbhdst	Time stamp: neighbourhood module start	Normal
+ch_indresp_w ch_tssdqend	Time stamp: SDQ module end	Normal
+ch_indresp_w ch_tssdqst	Time stamp: SDQ module start	Normal
+ch_indresp_w ch_tsfinsecend	Time stamp: financial security module end	Normal
+ch_indresp_w ch_tsfinsecst	Time stamp: financial security module start	Normal
+ch_indresp_w ch_tsfinend	Time stamp: finance module end	Normal
+ch_indresp_w ch_tsfinst	Time stamp: finance module start	Normal
+ch_indresp_w ch_tstranspend	Time stamp: transport module end	Normal
+ch_indresp_w ch_tstranspst	Time stamp: transport module start	Normal
+ch_indresp_w ch_tsttwend	Time stamp: travel to work module end	Normal
+ch_indresp_w ch_tsttwst	Time stamp: travel to work module start	Normal
+ch_indresp_w ch_tsempend	Time stamp: employment module end	Normal
+ch_indresp_w ch_tsempst	Time stamp: employment module start	Normal
+ch_indresp_w ch_tshsingend	Time stamp: housing module end	Normal
+ch_indresp_w ch_tshsingst	Time stamp: housing module start	Normal
+ch_indresp_w ch_tslonelyend	Time stamp: loneliness module end	Normal
+ch_indresp_w ch_tslonelyst	Time stamp: loneliness module start	Normal
+ch_indresp_w ch_tscareexhhend	Time stamp: caring outside household module end	Normal
+ch_indresp_w ch_tscareexhhst	Time stamp: caring outside household module start	Normal
+ch_indresp_w ch_tscaringhhend	Time stamp: caring within household module end	Normal
+ch_indresp_w ch_tscaringhhst	Time stamp: caring within household module start	Normal
+ch_indresp_w ch_tslthealthend	Time stamp: long term health module end	Normal
+ch_indresp_w ch_tslthealthst	Time stamp: long term health module start	Normal
+ch_indresp_w ch_tscvvacend	Time stamp Coronavirus vaccine module end	Normal
+ch_indresp_w ch_tscvvacst	Time stamp: Coronavirus vaccine module start	Normal
+ch_indresp_w ch_tscovidend	Time stamp: coronavirus illness module end	Normal
+ch_indresp_w ch_tscovidst	Time stamp: coronavirus illness module start	Normal
+ch_indresp_w ch_tssahend	Time stamp: sah module end	Normal
+ch_indresp_w ch_tssahst	Time stamp: sah module start	Normal
+ch_indresp_w ch_tshhrelend	Time stamp: household relationships module end	Normal
+ch_indresp_w ch_tshhrelst	Time stamp: household relationships module start	Normal
+ch_indresp_w ch_tsidcheckend	Time stamp: id check module end	Normal
+ch_indresp_w ch_tsidcheckst	Time stamp: id check module start	Normal
+ch_indresp_w ch_surveytime	Total time spent in the survey, seconds	Normal
+ch_indresp_w ch_surveyend	Date survey interview ended	Normal
+ch_indresp_w ch_surveystart	Date survey interview started	Normal
+ch_indresp_w ch_link	Link respondent used to get to the survey	Normal
+ch_indresp_w ch_lastmodule	What was the last module the respondent started?	Normal
+ch_indresp_w ch_lastq	What question was the respondent on when the interview ended?	Normal
+ch_indresp_w ch_outcome	Survey outcome	Normal
+ch_indresp_w ch_scghq1_dv	Subjective wellbeing (GHQ): Likert	Normal
+ch_indresp_w ch_noemailvoucher	Voucher without email	Normal
+ch_indresp_w ch_incentives	Incentives earned	Normal
+ch_indresp_w ch_incentvalhow	How reported incentive value	Normal
+ch_indresp_w ch_incentval	Incentive value	Normal
+ch_indresp_w ch_device	Device used for survey	Normal
+ch_indresp_w ch_objundd	Objective understanding of health data linkage D	Normal
+ch_indresp_w ch_objundc	Objective understanding of health data linkage C	Normal
+ch_indresp_w ch_objundb	Objective understanding of health data linkage B	Normal
+ch_indresp_w ch_objunda	Objective understanding of health data linkage A	Normal
+ch_indresp_w ch_serolwhy7	Why consented to serology - Other reason	Normal
+ch_indresp_w ch_serolwhy6	Why consented to serology - I wanted to know if I have had COVID-19	Normal
+ch_indresp_w ch_serolwhy5	Why consented to serology - Didn&#39;t see reason not to, nothing to hide	Normal
+ch_indresp_w ch_serolwhy4	Why consented to serology - To support research for the greater good of society	Normal
+ch_indresp_w ch_serolwhy3	Why consented to serology - To support the NHS	Normal
+ch_indresp_w ch_serolwhy2	Why consented to serology - I trust the NHS	Normal
+ch_indresp_w ch_serolwhy1	Why consented to serology - Trust study not to mishandle information	Normal
+ch_indresp_w ch_regwhy6	Why consented to Registry data linkage - Other reason	Normal
+ch_indresp_w ch_regwhy5	Why consented to Registry data linkage - Didn&#39;t see reason not to, nothing hide	Normal
+ch_indresp_w ch_regwhy4	Why consented to Registry data linkage - Support research for good of society	Normal
+ch_indresp_w ch_regwhy3	Why consented to Registry data linkage - Support General Registrars and bodies	Normal
+ch_indresp_w ch_regwhy2	Why consented to Registry data linkage - Trust General Registrars and bodies	Normal
+ch_indresp_w ch_regwhy1	Why consented to Registry data linkage - Trust not to mishandle information	Normal
+ch_indresp_w ch_healthwhy6	Why consented to health data linkage - Other reason	Normal
+ch_indresp_w ch_healthwhy5	Why consented to health data linkage - Didn&#39;t see reason not to, nothing to hide	Normal
+ch_indresp_w ch_healthwhy4	Why consented to health data linkage - Support research for good of society	Normal
+ch_indresp_w ch_healthwhy3	Why consented to health data linkage - To support the NHS	Normal
+ch_indresp_w ch_healthwhy2	Why consented to health data linkage - I trust the NHS	Normal
+ch_indresp_w ch_healthwhy1	Why consented to health data linkage - Trust study not to mishandle information	Normal
+ch_indresp_w ch_whyorder	Why consented to data linkage, response order	Normal
+ch_indresp_w ch_serolwhynot10	Why not consented to serology - Other reason	Normal
+ch_indresp_w ch_serolwhynot9	Why not consented to serology - Takes too much time	Normal
+ch_indresp_w ch_serolwhynot8	Why not consented to serology - Don&#39;t want to prick my finger	Normal
+ch_indresp_w ch_serolwhynot7	Why not consented to serology - Don&#39;t want to know whether I have had COVID-19	Normal
+ch_indresp_w ch_serolwhynot6	Why not consented to serology - Unclear why I am being asked	Normal
+ch_indresp_w ch_serolwhynot5	Why not consented to serology - Too tired, not want make decision	Normal
+ch_indresp_w ch_serolwhynot4	Why not consented to serology - Worried records might be lost	Normal
+ch_indresp_w ch_serolwhynot3	Why not consented to serology - Worried used against me	Normal
+ch_indresp_w ch_serolwhynot2	Why not consented to serology - Unclear on risks, don&#39;t understand	Normal
+ch_indresp_w ch_serolwhynot1	Why not consented to serology - Too personal, I&#39;ve shared enough	Normal
+ch_indresp_w ch_regwhynot8	Why not consented to Registry data linkage - Other reason	Normal
+ch_indresp_w ch_regwhynot7	Why not consented to Registry data linkage - They don&#39;t have any data about me	Normal
+ch_indresp_w ch_regwhynot6	Why not consented to Registry data linkage - Unclear why I am being asked	Normal
+ch_indresp_w ch_regwhynot5	Why not consented to Registry data linkage - Too tired, not want make decision	Normal
+ch_indresp_w ch_regwhynot4	Why not consented to Registry data linkage - Worried records might be lost	Normal
+ch_indresp_w ch_regwhynot3	Why not consented to Registry data linkage - Worried used against me	Normal
+ch_indresp_w ch_regwhynot2	Why not consented to Registry data linkage - Unclear on risks, don&#39;t understand	Normal
+ch_indresp_w ch_regwhynot1	Why not consented to Registry data linkage - Too personal, I&#39;ve shared enough	Normal
+ch_indresp_w ch_healthwhynot8	Why not consented to health data linkage - Other reason	Normal
+ch_indresp_w ch_healthwhynot7	Why not consented to health data linkage - NHS doesn&#39;t have any data about me	Normal
+ch_indresp_w ch_healthwhynot6	Why not consented to health data linkage - Unclear why I am being asked	Normal
+ch_indresp_w ch_healthwhynot5	Why not consented to health data linkage - Too tired, not want make decision	Normal
+ch_indresp_w ch_healthwhynot4	Why not consented to health data linkage - Worried records might be lost	Normal
+ch_indresp_w ch_healthwhynot3	Why not consented to health data linkage - Worried used against me	Normal
+ch_indresp_w ch_healthwhynot2	Why not consented to health data linkage - Unclear on risks, don&#39;t understand	Normal
+ch_indresp_w ch_healthwhynot1	Why not consented to health data linkage - Too personal, I&#39;ve shared enough	Normal
+ch_indresp_w ch_whynotorder2	Why not consented to data linkage, response order 2	Normal
+ch_indresp_w ch_whynotorder1	Why not consented to data linkage, response order 1	Normal
+ch_indresp_w ch_serolfeed	Serology feedback	Normal
+ch_indresp_w ch_serolconsentr2	Serology consent - Right mouse click counter - Link 2	Normal
+ch_indresp_w ch_serolconsentl2	Serology consent - Left mouse click counter - Link 2	Normal
+ch_indresp_w ch_serolconsentr1	Serology consent - Right mouse click counter - Link 1	Normal
+ch_indresp_w ch_serolconsentl1	Serology consent - Left mouse click counter - Link 1	Normal
+ch_indresp_w ch_serolconsent	Serology consent	Normal
+ch_indresp_w ch_ff_incentw8	Treatment allocation for incentive experiment, wave 8	Normal
+ch_indresp_w ch_cvreglink	Registry data linkage consent	Normal
+ch_indresp_w ch_cvhlthlink	Health data linkage consent	Normal
+ch_indresp_w ch_scghql	GHQ: general happiness	Normal
+ch_indresp_w ch_scghqk	GHQ: believe worthless	Normal
+ch_indresp_w ch_scghqj	GHQ: losing confidence	Normal
+ch_indresp_w ch_scghqi	GHQ: unhappy or depressed	Normal
+ch_indresp_w ch_scghqh	GHQ: ability to face problems	Normal
+ch_indresp_w ch_scghqg	GHQ: enjoy day-to-day activities	Normal
+ch_indresp_w ch_scghqf	GHQ: problem overcoming difficulties	Normal
+ch_indresp_w ch_scghqe	GHQ: constantly under strain	Normal
+ch_indresp_w ch_scghqd	GHQ: capable of making decisions	Normal
+ch_indresp_w ch_scghqc	GHQ: playing a useful role	Normal
+ch_indresp_w ch_scghqb	GHQ: loss of sleep	Normal
+ch_indresp_w ch_scghqa	GHQ: concentration	Normal
+ch_indresp_w ch_sclfsato_cv	Satisfaction with life overall	Normal
+ch_indresp_w ch_volhrs	Hours spent volunteering in last 4 weeks	Normal
+ch_indresp_w ch_volhow6	How volunteering - Other	Normal
+ch_indresp_w ch_volhow5	How volunteering - Remotely from my home, by using the internet	Normal
+ch_indresp_w ch_volhow4	How volunteering - Remotely from my home, by making phone calls	Normal
+ch_indresp_w ch_volhow3	How volunteering - In person, on my own	Normal
+ch_indresp_w ch_volhow2	How volunteering - In person, with members of my household	Normal
+ch_indresp_w ch_volhow1	How volunteering - In person, with other volunteers outside of household	Normal
+ch_indresp_w ch_volcause2	Reason for volunteering - Other reasons	Normal
+ch_indresp_w ch_volcause1	Reason for volunteering - support response to coronavirus	Normal
+ch_indresp_w ch_volun_cv	Volunteer in last 4 months	Normal
+ch_indresp_w ch_crrace_cv	Extent of: Racial insults/attacks	Normal
+ch_indresp_w ch_scopngbhg	Am similar to others in neighbourhood	Normal
+ch_indresp_w ch_nbrcoh4	People don&#39;t get along with each other	Normal
+ch_indresp_w ch_nbrcoh2	People willing to help their neighbours	Normal
+ch_indresp_w ch_nbrcoh3	People in this neighbourhood can be trusted	Normal
+ch_indresp_w ch_scopngbhh_cv	Talk regularly to neighbours	Normal
+ch_indresp_w ch_chsdte_cv_childe	Behaviour: completes tasks - childe	Normal
+ch_indresp_w ch_chsdte_cv_childd	Behaviour: completes tasks - childd	Normal
+ch_indresp_w ch_chsdte_cv_childc	Behaviour: completes tasks - childc	Normal
+ch_indresp_w ch_chsdte_cv_childb	Behaviour: completes tasks - childb	Normal
+ch_indresp_w ch_chsdte_cv_childa	Behaviour: completes tasks - childa	Normal
+ch_indresp_w ch_chsdfe_cv_childe	Behaviour: fears - childe	Normal
+ch_indresp_w ch_chsdfe_cv_childd	Behaviour: fears - childd	Normal
+ch_indresp_w ch_chsdfe_cv_childc	Behaviour: fears - childc	Normal
+ch_indresp_w ch_chsdfe_cv_childb	Behaviour: fears - childb	Normal
+ch_indresp_w ch_chsdfe_cv_childa	Behaviour: fears - childa	Normal
+ch_indresp_w ch_chsdgb_cv_childe	Behaviour: gets on better - childe	Normal
+ch_indresp_w ch_chsdgb_cv_childd	Behaviour: gets on better - childd	Normal
+ch_indresp_w ch_chsdgb_cv_childc	Behaviour: gets on better - childc	Normal
+ch_indresp_w ch_chsdgb_cv_childb	Behaviour: gets on better - childb	Normal
+ch_indresp_w ch_chsdgb_cv_childa	Behaviour: gets on better - childa	Normal
+ch_indresp_w ch_chsdcs_cv_childe	Behaviour: steals - childe	Normal
+ch_indresp_w ch_chsdcs_cv_childd	Behaviour: steals - childd	Normal
+ch_indresp_w ch_chsdcs_cv_childc	Behaviour: steals - childc	Normal
+ch_indresp_w ch_chsdcs_cv_childb	Behaviour: steals - childb	Normal
+ch_indresp_w ch_chsdcs_cv_childa	Behaviour: steals - childa	Normal
+ch_indresp_w ch_chsdst_cv_childe	Behaviour: thinks - childe	Normal
+ch_indresp_w ch_chsdst_cv_childd	Behaviour: thinks - childd	Normal
+ch_indresp_w ch_chsdst_cv_childc	Behaviour: thinks - childc	Normal
+ch_indresp_w ch_chsdst_cv_childb	Behaviour: thinks - childb	Normal
+ch_indresp_w ch_chsdst_cv_childa	Behaviour: thinks - childa	Normal
+ch_indresp_w ch_chsdvh_cv_childe	Behaviour: volunteers - childe	Normal
+ch_indresp_w ch_chsdvh_cv_childd	Behaviour: volunteers - childd	Normal
+ch_indresp_w ch_chsdvh_cv_childc	Behaviour: volunteers - childc	Normal
+ch_indresp_w ch_chsdvh_cv_childb	Behaviour: volunteers - childb	Normal
+ch_indresp_w ch_chsdvh_cv_childa	Behaviour: volunteers - childa	Normal
+ch_indresp_w ch_chsdpb_cv_childe	Behaviour: bullied - childe	Normal
+ch_indresp_w ch_chsdpb_cv_childd	Behaviour: bullied - childd	Normal
+ch_indresp_w ch_chsdpb_cv_childc	Behaviour: bullied - childc	Normal
+ch_indresp_w ch_chsdpb_cv_childb	Behaviour: bullied - childb	Normal
+ch_indresp_w ch_chsdpb_cv_childa	Behaviour: bullied - childa	Normal
+ch_indresp_w ch_chsdoa_cv_childe	Behaviour: often lies - childe	Normal
+ch_indresp_w ch_chsdoa_cv_childd	Behaviour: often lies - childd	Normal
+ch_indresp_w ch_chsdoa_cv_childc	Behaviour: often lies - childc	Normal
+ch_indresp_w ch_chsdoa_cv_childb	Behaviour: often lies - childb	Normal
+ch_indresp_w ch_chsdoa_cv_childa	Behaviour: often lies - childa	Normal
+ch_indresp_w ch_chsdky_cv_childe	Behaviour: kind - childe	Normal
+ch_indresp_w ch_chsdky_cv_childd	Behaviour: kind - childd	Normal
+ch_indresp_w ch_chsdky_cv_childc	Behaviour: kind - childc	Normal
+ch_indresp_w ch_chsdky_cv_childb	Behaviour: kind - childb	Normal
+ch_indresp_w ch_chsdky_cv_childa	Behaviour: kind - childa	Normal
+ch_indresp_w ch_chsdnc_cv_childe	Behaviour: nervous - childe	Normal
+ch_indresp_w ch_chsdnc_cv_childd	Behaviour: nervous - childd	Normal
+ch_indresp_w ch_chsdnc_cv_childc	Behaviour: nervous - childc	Normal
+ch_indresp_w ch_chsdnc_cv_childb	Behaviour: nervous - childb	Normal
+ch_indresp_w ch_chsdnc_cv_childa	Behaviour: nervous - childa	Normal
+ch_indresp_w ch_chsddc_cv_childe	Behaviour: distracted - childe	Normal
+ch_indresp_w ch_chsddc_cv_childd	Behaviour: distracted - childd	Normal
+ch_indresp_w ch_chsddc_cv_childc	Behaviour: distracted - childc	Normal
+ch_indresp_w ch_chsddc_cv_childb	Behaviour: distracted - childb	Normal
+ch_indresp_w ch_chsddc_cv_childa	Behaviour: distracted - childa	Normal
+ch_indresp_w ch_chsdlc_cv_childe	Behaviour: liked - childe	Normal
+ch_indresp_w ch_chsdlc_cv_childd	Behaviour: liked - childd	Normal
+ch_indresp_w ch_chsdlc_cv_childc	Behaviour: liked - childc	Normal
+ch_indresp_w ch_chsdlc_cv_childb	Behaviour: liked - childb	Normal
+ch_indresp_w ch_chsdlc_cv_childa	Behaviour: liked - childa	Normal
+ch_indresp_w ch_chsdud_cv_childe	Behaviour: unhappy - childe	Normal
+ch_indresp_w ch_chsdud_cv_childd	Behaviour: unhappy - childd	Normal
+ch_indresp_w ch_chsdud_cv_childc	Behaviour: unhappy - childc	Normal
+ch_indresp_w ch_chsdud_cv_childb	Behaviour: unhappy - childb	Normal
+ch_indresp_w ch_chsdud_cv_childa	Behaviour: unhappy - childa	Normal
+ch_indresp_w ch_chsdfb_cv_childe	Behaviour: fights - childe	Normal
+ch_indresp_w ch_chsdfb_cv_childd	Behaviour: fights - childd	Normal
+ch_indresp_w ch_chsdfb_cv_childc	Behaviour: fights - childc	Normal
+ch_indresp_w ch_chsdfb_cv_childb	Behaviour: fights - childb	Normal
+ch_indresp_w ch_chsdfb_cv_childa	Behaviour: fights - childa	Normal
+ch_indresp_w ch_chsdgf_cv_childe	Behaviour: good friend - childe	Normal
+ch_indresp_w ch_chsdgf_cv_childd	Behaviour: good friend - childd	Normal
+ch_indresp_w ch_chsdgf_cv_childc	Behaviour: good friend - childc	Normal
+ch_indresp_w ch_chsdgf_cv_childb	Behaviour: good friend - childb	Normal
+ch_indresp_w ch_chsdgf_cv_childa	Behaviour: good friend - childa	Normal
+ch_indresp_w ch_chsdfs_cv_childe	Behaviour: fidgeting - childe	Normal
+ch_indresp_w ch_chsdfs_cv_childd	Behaviour: fidgeting - childd	Normal
+ch_indresp_w ch_chsdfs_cv_childc	Behaviour: fidgeting - childc	Normal
+ch_indresp_w ch_chsdfs_cv_childb	Behaviour: fidgeting - childb	Normal
+ch_indresp_w ch_chsdfs_cv_childa	Behaviour: fidgeting - childa	Normal
+ch_indresp_w ch_chsdhu_cv_childe	Behaviour: helpful - childe	Normal
+ch_indresp_w ch_chsdhu_cv_childd	Behaviour: helpful - childd	Normal
+ch_indresp_w ch_chsdhu_cv_childc	Behaviour: helpful - childc	Normal
+ch_indresp_w ch_chsdhu_cv_childb	Behaviour: helpful - childb	Normal
+ch_indresp_w ch_chsdhu_cv_childa	Behaviour: helpful - childa	Normal
+ch_indresp_w ch_chsdmw_cv_childe	Behaviour: many worries - childe	Normal
+ch_indresp_w ch_chsdmw_cv_childd	Behaviour: many worries - childd	Normal
+ch_indresp_w ch_chsdmw_cv_childc	Behaviour: many worries - childc	Normal
+ch_indresp_w ch_chsdmw_cv_childb	Behaviour: many worries - childb	Normal
+ch_indresp_w ch_chsdmw_cv_childa	Behaviour: many worries - childa	Normal
+ch_indresp_w ch_chsdor_cv_childe	Behaviour: obedient - childe	Normal
+ch_indresp_w ch_chsdor_cv_childd	Behaviour: obedient - childd	Normal
+ch_indresp_w ch_chsdor_cv_childc	Behaviour: obedient - childc	Normal
+ch_indresp_w ch_chsdor_cv_childb	Behaviour: obedient - childb	Normal
+ch_indresp_w ch_chsdor_cv_childa	Behaviour: obedient - childa	Normal
+ch_indresp_w ch_chsdsp_cv_childe	Behaviour: solitary - childe	Normal
+ch_indresp_w ch_chsdsp_cv_childd	Behaviour: solitary - childd	Normal
+ch_indresp_w ch_chsdsp_cv_childc	Behaviour: solitary - childc	Normal
+ch_indresp_w ch_chsdsp_cv_childb	Behaviour: solitary - childb	Normal
+ch_indresp_w ch_chsdsp_cv_childa	Behaviour: solitary - childa	Normal
+ch_indresp_w ch_chsdtt_cv_childe	Behaviour: temper tantrums - childe	Normal
+ch_indresp_w ch_chsdtt_cv_childd	Behaviour: temper tantrums - childd	Normal
+ch_indresp_w ch_chsdtt_cv_childc	Behaviour: temper tantrums - childc	Normal
+ch_indresp_w ch_chsdtt_cv_childb	Behaviour: temper tantrums - childb	Normal
+ch_indresp_w ch_chsdtt_cv_childa	Behaviour: temper tantrums - childa	Normal
+ch_indresp_w ch_chsdsr_cv_childe	Behaviour: shares readily - childe	Normal
+ch_indresp_w ch_chsdsr_cv_childd	Behaviour: shares readily - childd	Normal
+ch_indresp_w ch_chsdsr_cv_childc	Behaviour: shares readily - childc	Normal
+ch_indresp_w ch_chsdsr_cv_childb	Behaviour: shares readily - childb	Normal
+ch_indresp_w ch_chsdsr_cv_childa	Behaviour: shares readily - childa	Normal
+ch_indresp_w ch_chsdhs_cv_childe	Behaviour: headaches - childe	Normal
+ch_indresp_w ch_chsdhs_cv_childd	Behaviour: headaches - childd	Normal
+ch_indresp_w ch_chsdhs_cv_childc	Behaviour: headaches - childc	Normal
+ch_indresp_w ch_chsdhs_cv_childb	Behaviour: headaches - childb	Normal
+ch_indresp_w ch_chsdhs_cv_childa	Behaviour: headaches - childa	Normal
+ch_indresp_w ch_chsdro_cv_childe	Behaviour: restless - childe	Normal
+ch_indresp_w ch_chsdro_cv_childd	Behaviour: restless - childd	Normal
+ch_indresp_w ch_chsdro_cv_childc	Behaviour: restless - childc	Normal
+ch_indresp_w ch_chsdro_cv_childb	Behaviour: restless - childb	Normal
+ch_indresp_w ch_chsdro_cv_childa	Behaviour: restless - childa	Normal
+ch_indresp_w ch_chsdpf_cv_childe	Behaviour: considerate - childe	Normal
+ch_indresp_w ch_chsdpf_cv_childd	Behaviour: considerate - childd	Normal
+ch_indresp_w ch_chsdpf_cv_childc	Behaviour: considerate - childc	Normal
+ch_indresp_w ch_chsdpf_cv_childb	Behaviour: considerate - childb	Normal
+ch_indresp_w ch_chsdpf_cv_childa	Behaviour: considerate - childa	Normal
+ch_indresp_w ch_ch511dobe_y	Details of 5-11 year olds - ch511dobe - year	Normal
+ch_indresp_w ch_ch511dobd_y	Details of 5-11 year olds - ch511dobd - year	Normal
+ch_indresp_w ch_ch511dobc_y	Details of 5-11 year olds - ch511dobc - year	Normal
+ch_indresp_w ch_ch511dobb_y	Details of 5-11 year olds - ch511dobb - year	Normal
+ch_indresp_w ch_ch511doba_y	Details of 5-11 year olds - ch511doba - year	Normal
+ch_indresp_w ch_num511	Number of children aged 5-11	Normal
+ch_indresp_w ch_mpc3b4	Marginal propensity to borrow and save, public windfall - give more help	Normal
+ch_indresp_w ch_mpc3b3	Marginal propensity to borrow and save, public windfall - receive less help	Normal
+ch_indresp_w ch_mpc3b2	Marginal propensity to borrow and save, public windfall - save more	Normal
+ch_indresp_w ch_mpc3b1	Marginal propensity to borrow and save, public windfall - pay off more debt	Normal
+ch_indresp_w ch_mpc2b	Marginal propensity to consume amount, public windfall	Normal
+ch_indresp_w ch_mpc1b	Marginal propensity to consume, public windfall	Normal
+ch_indresp_w ch_mpc34	Marginal propensity to borrow and save - I would give more financial help	Normal
+ch_indresp_w ch_mpc33	Marginal propensity to borrow and save - I would receive less financial help	Normal
+ch_indresp_w ch_mpc32	Marginal propensity to borrow and save - I would save more	Normal
+ch_indresp_w ch_mpc31	Marginal propensity to borrow and save - I would pay off more debt (borrow less)	Normal
+ch_indresp_w ch_mpc2	Marginal propensity to consume amount	Normal
+ch_indresp_w ch_mpc1	Marginal propensity to consume	Normal
+ch_indresp_w ch_finsec	Financial security	Normal
+ch_indresp_w ch_jobsec	Job security	Normal
+ch_indresp_w ch_finfut_cv3	Subjective financial situation - 3 months future	Normal
+ch_indresp_w ch_finnow	Subjective financial situation - current	Normal
+ch_indresp_w ch_ff_mpcalloc	Allocation to marginal propensity to consume questions	Normal
+ch_indresp_w ch_wchange2	Effect of pandemic on net wealth	Normal
+ch_indresp_w ch_wchange	Net wealth change	Normal
+ch_indresp_w ch_debt3	Amount of debt change	Normal
+ch_indresp_w ch_debt2	Debt change	Normal
+ch_indresp_w ch_debtamt	debt amount	Normal
+ch_indresp_w ch_debtnonmort	Any non-mortgage debt	Normal
+ch_indresp_w ch_saved_cv	Savings amount	Normal
+ch_indresp_w ch_save_cv	Any savings	Normal
+ch_indresp_w ch_inoutflows8	Earnings loss - None of these / does not apply	Normal
+ch_indresp_w ch_inoutflows7	Earnings loss - Dealt with earnings loss in another way	Normal
+ch_indresp_w ch_inoutflows10	Earnings loss - New or increased welfare benefits	Normal
+ch_indresp_w ch_inoutflows6	Earnings loss - Another member of my household found new work or increased hours	Normal
+ch_indresp_w ch_inoutflows5	Earnings loss - Found new work	Normal
+ch_indresp_w ch_inoutflows4	Earnings loss - New borrowing from family and friends	Normal
+ch_indresp_w ch_inoutflows3	Earnings loss - New borrowing from bank or credit card	Normal
+ch_indresp_w ch_inoutflows9	Earnings loss - Accessed pension or reduced pension contribution	Normal
+ch_indresp_w ch_inoutflows2	Earnings loss - Used savings	Normal
+ch_indresp_w ch_inoutflows1	Earnings loss - Reduced spending	Normal
+ch_indresp_w ch_creditholwhich5	Which credit holiday ended - Other loans/credits	Normal
+ch_indresp_w ch_creditholwhich4	Which credit holiday ended - Payday loan	Normal
+ch_indresp_w ch_creditholwhich3	Which credit holiday ended - Car loan	Normal
+ch_indresp_w ch_creditholwhich2	Which credit holiday ended - Personal loan	Normal
+ch_indresp_w ch_creditholwhich1	Which credit holiday ended - Credit card	Normal
+ch_indresp_w ch_creditholend	Credit holiday ended	Normal
+ch_indresp_w ch_credithol	Credit holiday	Normal
+ch_indresp_w ch_xpbills_cv	Up to date with bill payments	Normal
+ch_indresp_w ch_renthol	Rent holiday or reduction	Normal
+ch_indresp_w ch_mortover3	Mortgage overpayments prior to pandemic	Normal
+ch_indresp_w ch_mortover1	Mortgage overpayment	Normal
+ch_indresp_w ch_morhol3	Mortgage holiday ended	Normal
+ch_indresp_w ch_morhol2	Mortgage holiday - outcome of previous application	Normal
+ch_indresp_w ch_morhol	Mortgage holiday	Normal
+ch_indresp_w ch_xphs_cv	Up to date with housing payments	Normal
+ch_indresp_w ch_transfin2	Amount Transfers received	Normal
+ch_indresp_w ch_transfout2	Amount Transfers made	Normal
+ch_indresp_w ch_transfrec7	Financial transfers received - Someone else	Normal
+ch_indresp_w ch_transfrec6	Financial transfers received - Neighbours	Normal
+ch_indresp_w ch_transfrec5	Financial transfers received - Friends	Normal
+ch_indresp_w ch_transfrec4	Financial transfers received - Former spouse or partner	Normal
+ch_indresp_w ch_transfrec3	Financial transfers received - Siblings	Normal
+ch_indresp_w ch_transfrec2	Financial transfers received - Parents or grandparents, including in-laws	Normal
+ch_indresp_w ch_transfrec1	Financial transfers received - Adult children, including in-laws	Normal
+ch_indresp_w ch_transfmade7	Transfers made - Someone else	Normal
+ch_indresp_w ch_transfmade6	Transfers made - Neighbours	Normal
+ch_indresp_w ch_transfmade5	Transfers made - Friends	Normal
+ch_indresp_w ch_transfmade4	Transfers made - Former spouse or partner	Normal
+ch_indresp_w ch_transfmade3	Transfers made - Siblings	Normal
+ch_indresp_w ch_transfmade2	Transfers made - Parents or grandparents, including in-laws	Normal
+ch_indresp_w ch_transfmade1	Transfers made - Adult children, including in-laws	Normal
+ch_indresp_w ch_transfers	Transfers	Normal
+ch_indresp_w ch_benefitsamt65	Benefits amount	Normal
+ch_indresp_w ch_ucreditadvance65	Universal Credit Advance	Normal
+ch_indresp_w ch_ucredit2b65	Universal Credit, previous applicants	Normal
+ch_indresp_w ch_ucreditb65	Universal Credit	Normal
+ch_indresp_w ch_ff_credithol	Credit holiday	Normal
+ch_indresp_w ch_ff_hsownd_cv	House owned or rented	Normal
+ch_indresp_w ch_ff_morhol3	Mortgage holiday ended	Normal
+ch_indresp_w ch_ff_morhol	Mortgage holiday	Normal
+ch_indresp_w ch_ff_ucredit	Receives Universal Credit	Normal
+ch_indresp_w ch_trtubefq	Frequency tube	Normal
+ch_indresp_w ch_trtrnfq_cv	Frequency of travel by train	Normal
+ch_indresp_w ch_trbusfq_cv	Frequency travel by bus	Normal
+ch_indresp_w ch_trwalkfq	Frequency walking	Normal
+ch_indresp_w ch_trbikefq_cv	Frequency using a bicycle	Normal
+ch_indresp_w ch_trcarfq_cv	Frequency travel by car	Normal
+ch_indresp_w ch_wktrvfar_cv	Main mode of transport to work	Normal
+ch_indresp_w ch_wktrv_cv12	Mode(s) of transport for journey to work - I did not travel to my place of work	Normal
+ch_indresp_w ch_wktrv_cv11	Mode(s) of transport for journey to work - Other	Normal
+ch_indresp_w ch_wktrv_cv10	Mode(s) of transport for journey to work - Walk	Normal
+ch_indresp_w ch_wktrv_cv9	Mode(s) of transport for journey to work - Cycle	Normal
+ch_indresp_w ch_wktrv_cv8	Mode(s) of transport for journey to work - Underground/Metro/Tram/Light railway	Normal
+ch_indresp_w ch_wktrv_cv7	Mode(s) of transport for journey to work - Train	Normal
+ch_indresp_w ch_wktrv_cv6	Mode(s) of transport for journey to work - Bus/coach	Normal
+ch_indresp_w ch_wktrv_cv5	Mode(s) of transport for journey to work - Taxi/minicab	Normal
+ch_indresp_w ch_wktrv_cv4	Mode(s) of transport for journey to work - Motorcycle/moped/scooter	Normal
+ch_indresp_w ch_wktrv_cv3	Mode(s) of transport for journey to work - Got a lift from outside the household	Normal
+ch_indresp_w ch_wktrv_cv2	Mode(s) of transport for journey to work - Got a lift from household	Normal
+ch_indresp_w ch_wktrv_cv1	Mode(s) of transport for journey to work - Drove myself by car or van	Normal
+ch_indresp_w ch_wah	Working at home	Normal
+ch_indresp_w ch_keyworksector	Key work sector	Normal
+ch_indresp_w ch_ghhincome_bracket	Gross current household income brackets	Normal
+ch_indresp_w ch_ghhincome_period	Gross current household income period	Normal
+ch_indresp_w ch_ghhincome_amount	Gross current household income amount	Normal
+ch_indresp_w ch_hhincome_bracket	Current household income brackets	Normal
+ch_indresp_w ch_hhincome_period	Current household income period	Normal
+ch_indresp_w ch_hhincome_amount	Current household income amount	Normal
+ch_indresp_w ch_hhearn_period	Current household earnings period	Normal
+ch_indresp_w ch_hhearn_amount	Current household earnings amount	Normal
+ch_indresp_w ch_hhearners	Current household earners	Normal
+ch_indresp_w ch_grosspay_period	Current gross earnings period	Normal
+ch_indresp_w ch_grosspay_amount	Current gross earnings amount	Normal
+ch_indresp_w ch_netpay_period	Current earnings period	Normal
+ch_indresp_w ch_netpay_amount	Current earnings amount	Normal
+ch_indresp_w ch_sempgovt3b	Government support for self-employed, round 3	Normal
+ch_indresp_w ch_sempgovt3a	Government support for self-employed, round 2	Normal
+ch_indresp_w ch_supprob8b	Probability of wage support, 8 months	Normal
+ch_indresp_w ch_newfurlough	Currently Furloughed under the Coronavirus Job Retention Scheme	Normal
+ch_indresp_w ch_hrschangeup113	Increased hours - Other reasons	Normal
+ch_indresp_w ch_hrschangeup112	Increased hours - self-employed and returning from self-isolation or illness	Normal
+ch_indresp_w ch_hrschangeup111	Increased hours - self-employed and availability of supplies has increased	Normal
+ch_indresp_w ch_hrschangeup110	Increased hours - I am self-employed and demand for my business has increased	Normal
+ch_indresp_w ch_hrschangeup19	Increased hours - self-employed and government restrictions relaxed	Normal
+ch_indresp_w ch_hrschangeup18	Increased hours - Started self-employment business	Normal
+ch_indresp_w ch_hrschangeup17	Increased hours - Changed employer or started new job	Normal
+ch_indresp_w ch_hrschangeup16	Increased hours - Employer increased hours/tasks or changed role	Normal
+ch_indresp_w ch_hrschangeup15	Increased hours - Reduction in caring duties for children or others	Normal
+ch_indresp_w ch_hrschangeup14	Increased hours - Returned to same employer from leave	Normal
+ch_indresp_w ch_hrschangeup13	Increased hours - Returned to same employer from self-isolation or sick leave	Normal
+ch_indresp_w ch_hrschangeup12	Increased hours - Returned to the same employer from furlough	Normal
+ch_indresp_w ch_hrschangeup11	Increased hours - Normal or expected variation	Normal
+ch_indresp_w ch_hrschange314	Hours, employed &amp; self-employed - Other reasons	Normal
+ch_indresp_w ch_hrschange318	Hours, employed &amp; self-employed - Bereavement	Normal
+ch_indresp_w ch_hrschange313	Hours, employed &amp; self-employed - Caring/Parental Leave	Normal
+ch_indresp_w ch_hrschange317	Hours, employed &amp; self-employed - Avoiding risk of becoming sick	Normal
+ch_indresp_w ch_hrschange312	Hours, employed &amp; self-employed - Self-isolating/sick without sick pay	Normal
+ch_indresp_w ch_hrschange311	Hours, employed &amp; self-employed - Self-isolating/sick w statutory sick pay	Normal
+ch_indresp_w ch_hrschange310	Hours, employed &amp; self-employed - Self-isolating/sick with company sick pay	Normal
+ch_indresp_w ch_hrschange39	Hours, employed &amp; self-employed - Business is affected by reduced demand	Normal
+ch_indresp_w ch_hrschange38	Hours, employed &amp; self-employed - Business is affected by a shortage of supplies	Normal
+ch_indresp_w ch_hrschange37	Hours, employed &amp; self-employed - Business is affected by regulations	Normal
+ch_indresp_w ch_hrschange316	Hours, employed &amp; self-employed - Quit job/changed employer or job	Normal
+ch_indresp_w ch_hrschange36	Hours, employed &amp; self-employed - Using annual leave	Normal
+ch_indresp_w ch_hrschange319	Hours, employed &amp; self-employed - On Job Support Scheme	Normal
+ch_indresp_w ch_hrschange35	Hours, employed &amp; self-employed - Have been put on furlough or paid leave	Normal
+ch_indresp_w ch_hrschange34	Hours, employed &amp; self-employed - Employer cut hour	Normal
+ch_indresp_w ch_hrschange33	Hours, employed &amp; self-employed -  Permanently laid off/employer ceased trading	Normal
+ch_indresp_w ch_hrschange32	Hours, employed &amp; self-employed - Laid off by employer with prospect of recall	Normal
+ch_indresp_w ch_hrschange31	Hours, employed &amp; self-employed - Laid off by employer with certain recall date	Normal
+ch_indresp_w ch_hrschange315	Hours, employed &amp; self-employed - Normal or expected variation	Normal
+ch_indresp_w ch_hrschange27	Hours, self-employed - Other reasons	Normal
+ch_indresp_w ch_hrschange210	Hours, self-employed - Bereavement	Normal
+ch_indresp_w ch_hrschange26	Hours, self-employed - Caring for children or other	Normal
+ch_indresp_w ch_hrschange29	Hours, self-employed - Avoiding risk of becoming sick	Normal
+ch_indresp_w ch_hrschange25	Hours, self-employed - Self-isolating	Normal
+ch_indresp_w ch_hrschange24	Hours, self-employed - Illness	Normal
+ch_indresp_w ch_hrschange23	Hours, self-employed -My business is directly affected by reduced demand	Normal
+ch_indresp_w ch_hrschange22	Hours, self-employed - My business is directly affected by shortage of supplies	Normal
+ch_indresp_w ch_hrschange21	Hours, self-employed - My business is directly affected by regulations	Normal
+ch_indresp_w ch_hrschange28	Hours, self-employed - Normal or expected variation	Normal
+ch_indresp_w ch_hrschange111	Hours, employees - Other reasons	Normal
+ch_indresp_w ch_hrschange115	Hours, employees - Bereavement	Normal
+ch_indresp_w ch_hrschange110	Hours, employees - Caring for children or others/Parental Leave	Normal
+ch_indresp_w ch_hrschange114	Hours, employees - Avoiding risk of becoming sick	Normal
+ch_indresp_w ch_hrschange19	Hours, employees - Self-isolating or sick leave without sick pay	Normal
+ch_indresp_w ch_hrschange18	Hours, employees - Self-isolating or sick leave with statutory sick pay	Normal
+ch_indresp_w ch_hrschange17	Hours, employees - Self-isolating or sick leave with company sick pay	Normal
+ch_indresp_w ch_hrschange113	Hours, employees - Quit job/changed employer or job	Normal
+ch_indresp_w ch_hrschange16	Hours, employees - Using annual leave	Normal
+ch_indresp_w ch_hrschange116	Hours, employees - On Job Support Scheme	Normal
+ch_indresp_w ch_hrschange15	Hours, employees - Have been put on furlough or paid leave	Normal
+ch_indresp_w ch_hrschange14	Hours, employees - Employer cut hours	Normal
+ch_indresp_w ch_hrschange13	Hours, employees - Permanently laid off by employer/employer ceased trading	Normal
+ch_indresp_w ch_hrschange12	Hours, employees - Laid off/made redundant by employer with prospect of recall	Normal
+ch_indresp_w ch_hrschange11	Hours, employees - Laid off by employer with certain recall date	Normal
+ch_indresp_w ch_hrschange112	Hours, employees - Normal or expected variation	Normal
+ch_indresp_w ch_hours	Hours worked	Normal
+ch_indresp_w ch_jbsize	No employed at current workplace	Normal
+ch_indresp_w ch_jbmngr	Managerial duties: current job	Normal
+ch_indresp_w ch_occtenyrdk	Occupation tenure year not known	Normal
+ch_indresp_w ch_occtenmnth	Occupation tenure month	Normal
+ch_indresp_w ch_occtenyr	Occupation tenure year	Normal
+ch_indresp_w ch_occhk	Still same occupation	Normal
+ch_indresp_w ch_indtenyrdk	Industry tenure year not known	Normal
+ch_indresp_w ch_indtenmnth	Industry tenure month	Normal
+ch_indresp_w ch_indtenyr	Industry tenure year	Normal
+ch_indresp_w ch_jbindustry	Industry main activity	Normal
+ch_indresp_w ch_indchk	Still working in same industry	Normal
+ch_indresp_w ch_jobtenyrdk	Job tenure year not known	Normal
+ch_indresp_w ch_jobtenmnth	Job tenure month	Normal
+ch_indresp_w ch_jobtenyr	Job tenure year	Normal
+ch_indresp_w ch_empchk_cv	Still working for same employer	Normal
+ch_indresp_w ch_sempderived	Employee or self-employed, derived	Normal
+ch_indresp_w ch_semp	Employee or self-employed	Normal
+ch_indresp_w ch_sempchk	Still employee or self-employed	Normal
+ch_indresp_w ch_ff_sempgovt3b	Government support for self-employed, round 3	Normal
+ch_indresp_w ch_ff_blwork	Baseline: worked in Jan Feb 2020	Normal
+ch_indresp_w ch_ff_hours	Hours worked	Normal
+ch_indresp_w ch_ff_sempderived	Employee or self-employed	Normal
+ch_indresp_w ch_ff_intwave7	Completed full survey at Wave 7, January 2021	Normal
+ch_indresp_w ch_whyexpmove13	Why expect moved - Other reason	Normal
+ch_indresp_w ch_whyexpmove12	Why expect moved - For better schools	Normal
+ch_indresp_w ch_whyexpmove11	Why expect moved - To reduce commuting	Normal
+ch_indresp_w ch_whyexpmove10	Why expect moved - For work, or the work of another member of your household	Normal
+ch_indresp_w ch_whyexpmove9	Why expect moved - To take advantage of the stamp duty holiday	Normal
+ch_indresp_w ch_whyexpmove8	Why expect moved - Eviction	Normal
+ch_indresp_w ch_whyexpmove7	Why expect moved - End of tenancy	Normal
+ch_indresp_w ch_whyexpmove6	Why expect moved - To live with another person or household	Normal
+ch_indresp_w ch_whyexpmove5	Why expect moved - To reduce housing costs	Normal
+ch_indresp_w ch_whyexpmove4	Why expect moved - For a smaller home	Normal
+ch_indresp_w ch_whyexpmove3	Why expect moved - For a nicer area	Normal
+ch_indresp_w ch_whyexpmove2	Why expect moved - For more garden or outdoor space	Normal
+ch_indresp_w ch_whyexpmove1	Why expect moved - For a larger home	Normal
+ch_indresp_w ch_expmove	Expected Move	Normal
+ch_indresp_w ch_pcnet	Has access to the internet from home	Normal
+ch_indresp_w ch_deskspace	Desk space for all	Normal
+ch_indresp_w ch_garden6	House outdoor space - No	Normal
+ch_indresp_w ch_garden5	House outdoor space - Other outdoor space	Normal
+ch_indresp_w ch_garden4	House outdoor space - Rooftop garden or terrace	Normal
+ch_indresp_w ch_garden3	House outdoor space - Balcony	Normal
+ch_indresp_w ch_garden2	House outdoor space - Shared garden	Normal
+ch_indresp_w ch_garden1	House outdoor space - Private garden	Normal
+ch_indresp_w ch_hsownd_cv	House owned or rented	Normal
+ch_indresp_w ch_whymove13	Why moved - Other reason	Normal
+ch_indresp_w ch_whymove12	Why moved - For better schools	Normal
+ch_indresp_w ch_whymove11	Why moved - To reduce commuting	Normal
+ch_indresp_w ch_whymove10	Why moved - For work, or the work of another member of your household	Normal
+ch_indresp_w ch_whymove9	Why moved - To take advantage of the stamp duty holiday	Normal
+ch_indresp_w ch_whymove8	Why moved - Eviction	Normal
+ch_indresp_w ch_whymove7	Why moved - End of tenancy	Normal
+ch_indresp_w ch_whymove6	Why moved - To live with another person or household	Normal
+ch_indresp_w ch_whymove5	Why moved - To reduce housing costs	Normal
+ch_indresp_w ch_whymove4	Why moved - For a smaller home	Normal
+ch_indresp_w ch_whymove3	Why moved - For a nicer area	Normal
+ch_indresp_w ch_whymove2	Why moved - For more garden or outdoor space	Normal
+ch_indresp_w ch_whymove1	Why moved - For a larger home	Normal
+ch_indresp_w ch_sclonely_cv	How often feels lonely	Normal
+ch_indresp_w ch_helpwho8	Who helping from outside household - Someone else	Normal
+ch_indresp_w ch_helpwho7	Who helping from outside household - Neighbours	Normal
+ch_indresp_w ch_helpwho6	Who helping from outside household - Friends	Normal
+ch_indresp_w ch_helpwho5	Who helping from outside household - Former spouse or partner	Normal
+ch_indresp_w ch_helpwho4	Who helping from outside household - Spouse or partner	Normal
+ch_indresp_w ch_helpwho3	Who helping from outside household - Siblings	Normal
+ch_indresp_w ch_helpwho2	Who helping from outside household - Parents and grandparents, including in-laws	Normal
+ch_indresp_w ch_helpwho1	Who helping from outside household - Adult children, including in-laws	Normal
+ch_indresp_w ch_helpwhat10	Help receiving - Something else	Normal
+ch_indresp_w ch_helpwhat9	Help receiving - Looking after children	Normal
+ch_indresp_w ch_helpwhat8	Help receiving - Decorating, gardening or house repairs	Normal
+ch_indresp_w ch_helpwhat7	Help receiving - Assisting with online or internet access	Normal
+ch_indresp_w ch_helpwhat6	Help receiving - Dealing with personal affairs	Normal
+ch_indresp_w ch_helpwhat5	Help receiving - Washing, ironing or cleaning	Normal
+ch_indresp_w ch_helpwhat4	Help receiving - Helping with basic personal needs	Normal
+ch_indresp_w ch_helpwhat3	Help receiving - Providing or cooking meals	Normal
+ch_indresp_w ch_helpwhat2	Help receiving - Shopping for you	Normal
+ch_indresp_w ch_helpwhat1	Help receiving - Giving you lifts in their car	Normal
+ch_indresp_w ch_help	Receiving care from outside the household	Normal
+ch_indresp_w ch_carewho8	Who caring for outside household - Someone else	Normal
+ch_indresp_w ch_carewho7	Who caring for outside household - Neighbours	Normal
+ch_indresp_w ch_carewho6	Who caring for outside household - Friends	Normal
+ch_indresp_w ch_carewho5	Who caring for outside household - Former spouse or partner	Normal
+ch_indresp_w ch_carewho4	Who caring for outside household - Spouse or partner	Normal
+ch_indresp_w ch_carewho3	Who caring for outside household - Siblings	Normal
+ch_indresp_w ch_carewho2	Who caring for outside household - Parents or grandparents, including in-laws	Normal
+ch_indresp_w ch_carewho1	Who caring for outside household - Adult children, including in-laws	Normal
+ch_indresp_w ch_carehow10	Caring for others - Something else	Normal
+ch_indresp_w ch_carehow9	Caring for others - Looking after children	Normal
+ch_indresp_w ch_carehow8	Caring for others - Decorating, gardening or house repairs	Normal
+ch_indresp_w ch_carehow7	Caring for others - Assisting with online or internet access	Normal
+ch_indresp_w ch_carehow6	Caring for others - Dealing with personal affairs	Normal
+ch_indresp_w ch_carehow5	Caring for others - Washing, ironing or cleaning	Normal
+ch_indresp_w ch_carehow4	Caring for others - Helping with basic personal needs	Normal
+ch_indresp_w ch_carehow3	Caring for others - Providing or cooking meals	Normal
+ch_indresp_w ch_carehow2	Caring for others - Shopping for them	Normal
+ch_indresp_w ch_carehow1	Caring for others - Giving them lifts in your car (if you have one)	Normal
+ch_indresp_w ch_caring	Caring for others outside the household	Normal
+ch_indresp_w ch_respitenow	Hours per week of respite care now	Normal
+ch_indresp_w ch_aidhrs_cv	Hours per week spent caring	Normal
+ch_indresp_w ch_carehhsh	Share caring responsibilities inside the household	Normal
+ch_indresp_w ch_carehhwho8	Who caring for inside the household - Someone else	Normal
+ch_indresp_w ch_carehhwho7	Who caring for inside the household - Other relatives	Normal
+ch_indresp_w ch_carehhwho6	Who caring for inside the household - Friends	Normal
+ch_indresp_w ch_carehhwho5	Who caring for inside the household - Spouse or partner	Normal
+ch_indresp_w ch_carehhwho4	Who caring for inside the household - Siblings	Normal
+ch_indresp_w ch_carehhwho3	Who caring for inside the household - Parents or Grandparents, including in-laws	Normal
+ch_indresp_w ch_carehhwho2	Who caring for inside the household - Adult children	Normal
+ch_indresp_w ch_carehhwho1	Who caring for inside the household - Children (under 18)	Normal
+ch_indresp_w ch_carehhc6	Cares for sick/disabled/elderly in household - Other	Normal
+ch_indresp_w ch_carehhc5	Cares for sick/disabled/elderly in household - Other problems related to old age	Normal
+ch_indresp_w ch_carehhc4	Cares for sick/disabled/elderly in household - A physical disability	Normal
+ch_indresp_w ch_carehhc3	Cares for sick/disabled/elderly in household - learning disability or disorder	Normal
+ch_indresp_w ch_carehhc2	Cares for sick/disabled/elderly in household - long-term mental health condition	Normal
+ch_indresp_w ch_carehhc1	Cares for sick/disabled/elderly in household - long-term health condition	Normal
+ch_indresp_w ch_aidnum	Number cared for in household	Normal
+ch_indresp_w ch_aidhh	Cares for handicapped/other in household	Normal
+ch_indresp_w ch_pregantenatal	Ongoing care of pregnant women - antenatal	Normal
+ch_indresp_w ch_pregmidwife	Ongoing care of pregnant women - midwife	Normal
+ch_indresp_w ch_pregscan	Ongoing care of pregnant women - scans	Normal
+ch_indresp_w ch_stillpreg	Whether still pregnant	Normal
+ch_indresp_w ch_pregnow	Whether pregnant	Normal
+ch_indresp_w ch_chscnowpsy2	Use of CH&amp;SC now for condition - Psychotherapist	Normal
+ch_indresp_w ch_chscnowcarer2	Use of CH&amp;SC now for condition - formal carer	Normal
+ch_indresp_w ch_chscnowotcm2	Use of CH&amp;SC now for condition - otc meds	Normal
+ch_indresp_w ch_chscnowpharm2	Use of CH&amp;SC now for condition - pharmacists	Normal
+ch_indresp_w ch_nhsnow1112	Use of NHS now for condition - NHS111	Normal
+ch_indresp_w ch_nhsnowip2	Use of NHS for condition - inpatients	Normal
+ch_indresp_w ch_nhsnowop2	Use of NHS for condition - outpatients	Normal
+ch_indresp_w ch_nhsnowpm2	Use of NHS for condition - prescription meds	Normal
+ch_indresp_w ch_nhsnowgp2	Use of NHS now for condition - GP	Normal
+ch_indresp_w ch_canceltreat	Health condition treatment cancelled	Normal
+ch_indresp_w ch_treatment5	Treatment planned - No	Normal
+ch_indresp_w ch_treatment4	Treatment planned - Yes, other treatment planned	Normal
+ch_indresp_w ch_treatment3	Treatment planned - Yes, targeted therapy, chemotherapy or radiotherapy	Normal
+ch_indresp_w ch_treatment2	Treatment planned - Yes, operation or procedure planned	Normal
+ch_indresp_w ch_treatment1	Treatment planned - Yes, tests/consultations planned or in progress	Normal
+ch_indresp_w ch_hcond_treat6	Baseline: existing treatments - None of these	Normal
+ch_indresp_w ch_hcond_treat5	Baseline: existing treatments - Other treatment or medication	Normal
+ch_indresp_w ch_hcond_treat4	Baseline: existing treatments - Radiotherapy for cancer treatment	Normal
+ch_indresp_w ch_hcond_treat3	Baseline: existing treatments - Targeted/chemotherapy for cancer treatment	Normal
+ch_indresp_w ch_hcond_treat2	Baseline: existing treatments - Medicines that weaken the immune system	Normal
+ch_indresp_w ch_hcond_treat1	Baseline: existing treatments - Medication following an organ transplant	Normal
+ch_indresp_w ch_mhealthtypn_cv20	New: mental health - Don&#39;t know	Normal
+ch_indresp_w ch_mhealthtypn_cv19	New: mental health - Other mental, emotional or neurological problem	Normal
+ch_indresp_w ch_mhealthtypn_cv18	New: mental health - Any other anxiety disorder	Normal
+ch_indresp_w ch_mhealthtypn_cv17	New: mental health - Alcohol or drug dependence	Normal
+ch_indresp_w ch_mhealthtypn_cv16	New: mental health - Seasonal affective disorder	Normal
+ch_indresp_w ch_mhealthtypn_cv15	New: mental health - Obsessive compulsive disorder (OCD)	Normal
+ch_indresp_w ch_mhealthtypn_cv14	New: mental health - A personality disorder	Normal
+ch_indresp_w ch_mhealthtypn_cv13	New: mental health - Nervous breakdown	Normal
+ch_indresp_w ch_mhealthtypn_cv12	New: mental health - Dementia (including Alzheimer&#39;s)	Normal
+ch_indresp_w ch_mhealthtypn_cv11	New: mental health - Post-natal depression	Normal
+ch_indresp_w ch_mhealthtypn_cv10	New: mental health - Attention deficit hyperactivity disorder (ADHD or ADD)	Normal
+ch_indresp_w ch_mhealthtypn_cv9	New: mental health - Panic attacks	Normal
+ch_indresp_w ch_mhealthtypn_cv8	New: mental health - A phobia	Normal
+ch_indresp_w ch_mhealthtypn_cv6	New: mental health - Post-traumatic stress disorder	Normal
+ch_indresp_w ch_mhealthtypn_cv5	New: mental health - An eating disorder	Normal
+ch_indresp_w ch_mhealthtypn_cv4	New: mental health - Bipolar disorder (or &#39;manic depression&#39;)	Normal
+ch_indresp_w ch_mhealthtypn_cv3	New: mental health - Psychosis or schizophrenia	Normal
+ch_indresp_w ch_mhealthtypn_cv2	New: mental health - Depression	Normal
+ch_indresp_w ch_cancertypn_cv7	New: if has cancer - Other	Normal
+ch_indresp_w ch_cancertypn_cv8	New: if has cancer - Blood or bone marrow cancer, such as leukaemia	Normal
+ch_indresp_w ch_cancertypn_cv6	New: if has cancer - Skin cancer or melanoma	Normal
+ch_indresp_w ch_cancertypn_cv5	New: if has cancer - Liver	Normal
+ch_indresp_w ch_cancertypn_cv4	New: if has cancer - Prostate	Normal
+ch_indresp_w ch_cancertypn_cv3	New: if has cancer - Breast	Normal
+ch_indresp_w ch_cancertypn_cv2	New: if has cancer - Lung	Normal
+ch_indresp_w ch_cancertypn_cv1	New: if has cancer - Bowel/colorectal	Normal
+ch_indresp_w ch_arthtypn	New: if has arthritis	Normal
+ch_indresp_w ch_hcondnew_cv96	New health conditions diagnosed - None of these	Normal
+ch_indresp_w ch_hcondnew_cv18	New health conditions diagnosed - Other long standing/chronic condition	Normal
+ch_indresp_w ch_hcondnew_cv27	New health conditions diagnosed - Are very overweight	Normal
+ch_indresp_w ch_hcondnew_cv24	New health conditions diagnosed - Conditions affecting the brain and nerves	Normal
+ch_indresp_w ch_hcondnew_cv23	New health conditions diagnosed - Chronic kidney disease	Normal
+ch_indresp_w ch_hcondnew_cv19	New health conditions diagnosed - Multiple Sclerosis	Normal
+ch_indresp_w ch_hcondnew_cv22	New health conditions diagnosed - An emotional, nervous or psychiatric problem	Normal
+ch_indresp_w ch_hcondnew_cv16	New health conditions diagnosed - High blood pressure/hypertension	Normal
+ch_indresp_w ch_hcondnew_cv15	New health conditions diagnosed - Epilepsy	Normal
+ch_indresp_w ch_hcondnew_cv14	New health conditions diagnosed - Diabetes	Normal
+ch_indresp_w ch_hcondnew_cv13	New health conditions diagnosed - Cancer or malignancy	Normal
+ch_indresp_w ch_hcondnew_cv12	New health conditions diagnosed - Any kind of liver condition	Normal
+ch_indresp_w ch_hcondnew_cv10	New health conditions diagnosed - Hypothyroidism or an under-active thyroid	Normal
+ch_indresp_w ch_hcondnew_cv21	New health conditions diagnosed - COPD (Chronic Obstructive Pulmonary Disease)	Normal
+ch_indresp_w ch_hcondnew_cv11	New health conditions diagnosed - Chronic bronchitis	Normal
+ch_indresp_w ch_hcondnew_cv8	New health conditions diagnosed - Emphysema	Normal
+ch_indresp_w ch_hcondnew_cv7	New health conditions diagnosed - Stroke	Normal
+ch_indresp_w ch_hcondnew_cv6	New health conditions diagnosed - Heart attack or myocardial infarction	Normal
+ch_indresp_w ch_hcondnew_cv5	New health conditions diagnosed - Angina	Normal
+ch_indresp_w ch_hcondnew_cv4	New health conditions diagnosed - Coronary heart disease	Normal
+ch_indresp_w ch_hcondnew_cv3	New health conditions diagnosed - Congestive heart failure	Normal
+ch_indresp_w ch_hcondnew_cv2	New health conditions diagnosed - Arthritis	Normal
+ch_indresp_w ch_hcondnew_cv1	New health conditions diagnosed - Asthma	Normal
+ch_indresp_w ch_ff_stillpreg	Whether still pregnant	Normal
+ch_indresp_w ch_ff_pregnow	Whether pregnant	Normal
+ch_indresp_w ch_ff_hcondhas	Has long term health condition	Normal
+ch_indresp_w ch_ff_hcond27	Long term health condition: Are very overweight (having a BMI of 40 or above)	Normal
+ch_indresp_w ch_ff_hcond24	Long term health condition: Conditions affecting the brain and nerves	Normal
+ch_indresp_w ch_ff_hcond23	Long term health condition: Chronic kidney disease	Normal
+ch_indresp_w ch_ff_hcond22	Long term health condition: An emotional, nervous or psychiatric problem	Normal
+ch_indresp_w ch_ff_hcond21	Long term health condition: COPD (Chronic Obstructive Pulmonary Disease)	Normal
+ch_indresp_w ch_ff_hcond19	Long term health condition: Multiple Sclerosis	Normal
+ch_indresp_w ch_ff_hcond18	Long term health condition: Other long standing/chronic condition	Normal
+ch_indresp_w ch_ff_hcond16	Long term health condition: High blood pressure/hypertension	Normal
+ch_indresp_w ch_ff_hcond15	Long term health condition: Epilepsy	Normal
+ch_indresp_w ch_ff_hcond14	Long term health condition: Diabetes	Normal
+ch_indresp_w ch_ff_hcond13	Long term health condition: Cancer or malignancy	Normal
+ch_indresp_w ch_ff_hcond12	Long term health condition: Any kind of liver condition	Normal
+ch_indresp_w ch_ff_hcond11	Long term health condition: Chronic bronchitis	Normal
+ch_indresp_w ch_ff_hcond10	Long term health condition: Hypothyroidism or an under-active thyroid	Normal
+ch_indresp_w ch_ff_hcond8	Long term health condition: Emphysema	Normal
+ch_indresp_w ch_ff_hcond7	Long term health condition: Stroke	Normal
+ch_indresp_w ch_ff_hcond6	Long term health condition: Heart attack or myocardial infarction	Normal
+ch_indresp_w ch_ff_hcond5	Long term health condition: Angina	Normal
+ch_indresp_w ch_ff_hcond4	Long term health condition: Coronary heart disease	Normal
+ch_indresp_w ch_ff_hcond3	Long term health condition: Congestive heart failure	Normal
+ch_indresp_w ch_ff_hcond2	Long term health condition: Arthritis	Normal
+ch_indresp_w ch_ff_hcond1	Long term health condition: Asthma	Normal
+ch_indresp_w ch_vaxwhy	Why would take vaccine	Normal
+ch_indresp_w ch_vaxno	Why not take vaccine	Normal
+ch_indresp_w ch_vaxxer2	Likelihood of taking up a coronavirus vaccination	Normal
+ch_indresp_w ch_hadcvvac	Had covid-19 vaccine	Normal
+ch_indresp_w ch_cvinvite	Invited for covid-19 vaccine	Normal
+ch_indresp_w ch_cv2dose	Had second dose of coronavirus vaccine	Normal
+ch_indresp_w ch_ff_hadcvvac	Had covid-19 vaccine	Normal
+ch_indresp_w ch_nhsshield3	New NHS shielded patient	Normal
+ch_indresp_w ch_riskcv19	Risk of getting covid19	Normal
+ch_indresp_w ch_contactcv19t4	Contact with covid19 case including tracing - No, not to my knowledge	Normal
+ch_indresp_w ch_contactcv19t6	Contact with covid19 case including tracing - No, someone in my household has	Normal
+ch_indresp_w ch_contactcv19t3	Contact with covid19 case including tracing - Yes, contact with a suspected case	Normal
+ch_indresp_w ch_contactcv19t2	Contact with covid19 case including tracing - Yes, but not notified by NHS	Normal
+ch_indresp_w ch_contactcv19t5	Contact with covid19 case including tracing - Yes, and I was notified by the app	Normal
+ch_indresp_w ch_contactcv19t1	Contact with covid19 case including tracing - Yes, and NHS	Normal
+ch_indresp_w ch_traced	Traced by test&amp;trace	Normal
+ch_indresp_w ch_traceinfo2	Information provided to test&amp;trace	Normal
+ch_indresp_w ch_testtrace	Contacted by test&amp;trace	Normal
+ch_indresp_w ch_hadcovid	Likelihood of having had coronavirus	Normal
+ch_indresp_w ch_testwhen3_test9_y	When had coronavirus test - Test 9 - Year	Normal
+ch_indresp_w ch_testwhen3_test9_m	When had coronavirus test - Test 9 - Month	Normal
+ch_indresp_w ch_testwhen3_test9_d	When had coronavirus test - Test 9 - Day	Normal
+ch_indresp_w ch_testwhen3_test8_y	When had coronavirus test - Test 8 - Year	Normal
+ch_indresp_w ch_testwhen3_test8_m	When had coronavirus test - Test 8 - Month	Normal
+ch_indresp_w ch_testwhen3_test8_d	When had coronavirus test - Test 8 - Day	Normal
+ch_indresp_w ch_testwhen3_test7_y	When had coronavirus test - Test 7 - Year	Normal
+ch_indresp_w ch_testwhen3_test7_m	When had coronavirus test - Test 7 - Month	Normal
+ch_indresp_w ch_testwhen3_test7_d	When had coronavirus test - Test 7 - Day	Normal
+ch_indresp_w ch_testwhen3_test6_y	When had coronavirus test - Test 6 - Year	Normal
+ch_indresp_w ch_testwhen3_test6_m	When had coronavirus test - Test 6 - Month	Normal
+ch_indresp_w ch_testwhen3_test6_d	When had coronavirus test - Test 6 - Day	Normal
+ch_indresp_w ch_testwhen3_test5_y	When had coronavirus test - Test 5 - Year	Normal
+ch_indresp_w ch_testwhen3_test5_m	When had coronavirus test - Test 5 - Month	Normal
+ch_indresp_w ch_testwhen3_test5_d	When had coronavirus test - Test 5 - Day	Normal
+ch_indresp_w ch_testwhen3_test4_y	When had coronavirus test - Test 4 - Year	Normal
+ch_indresp_w ch_testwhen3_test4_m	When had coronavirus test - Test 4 - Month	Normal
+ch_indresp_w ch_testwhen3_test4_d	When had coronavirus test - Test 4 - Day	Normal
+ch_indresp_w ch_testwhen3_test3_y	When had coronavirus test - Test 3 - Year	Normal
+ch_indresp_w ch_testwhen3_test3_m	When had coronavirus test - Test 3 - Month	Normal
+ch_indresp_w ch_testwhen3_test3_d	When had coronavirus test - Test 3 - Day	Normal
+ch_indresp_w ch_testwhen3_test2_y	When had coronavirus test - Test 2 - Year	Normal
+ch_indresp_w ch_testwhen3_test2_m	When had coronavirus test - Test 2 - Month	Normal
+ch_indresp_w ch_testwhen3_test2_d	When had coronavirus test - Test 2 - Day	Normal
+ch_indresp_w ch_testwhen3_test1_y	When had coronavirus test - Test 1 - Year	Normal
+ch_indresp_w ch_testwhen3_test1_m	When had coronavirus test - Test 1 - Month	Normal
+ch_indresp_w ch_testwhen3_test1_d	When had coronavirus test - Test 1 - Day	Normal
+ch_indresp_w ch_ntestpos_dv	Number of positive coronavirus tests, derived	Normal
+ch_indresp_w ch_ntestpos	Number of positive coronavirus tests	Normal
+ch_indresp_w ch_testpos	Whether tested positive for coronavirus	Normal
+ch_indresp_w ch_ntests	Number of coronavirus tests	Normal
+ch_indresp_w ch_tested	Tested for coronavirus	Normal
+ch_indresp_w ch_cvtime	How long had covid	Normal
+ch_indresp_w ch_lgcvsymp_oth	Long covid symptoms - other coded	Normal
+ch_indresp_w ch_lgcvsymp26	Long covid symptoms - Other	Normal
+ch_indresp_w ch_lgcvsymp22	Long covid symptoms - Feeling of heaviness in arms or legs	Normal
+ch_indresp_w ch_lgcvsymp21	Long covid symptoms - Numbness or tingling somewhere in the body	Normal
+ch_indresp_w ch_lgcvsymp20	Long covid symptoms - Difficulty sleeping	Normal
+ch_indresp_w ch_lgcvsymp19	Long covid symptoms - Chills (feeling too cold)	Normal
+ch_indresp_w ch_lgcvsymp18	Long covid symptoms - Chest pain	Normal
+ch_indresp_w ch_lgcvsymp17	Long covid symptoms - Tightness in the chest	Normal
+ch_indresp_w ch_lgcvsymp16	Long covid symptoms - Dizziness	Normal
+ch_indresp_w ch_lgcvsymp15	Long covid symptoms - Hoarse voice	Normal
+ch_indresp_w ch_lgcvsymp14	Long covid symptoms - Sore eyes	Normal
+ch_indresp_w ch_lgcvsymp13	Long covid symptoms - Sneezing	Normal
+ch_indresp_w ch_lgcvsymp12	Long covid symptoms - Decrease in appetite	Normal
+ch_indresp_w ch_lgcvsymp10	Long covid symptoms - Loss of sense of smell or taste	Normal
+ch_indresp_w ch_lgcvsymp9	Long covid symptoms - Diarrhoea/Digestive issues/Upset stomach	Normal
+ch_indresp_w ch_lgcvsymp8	Long covid symptoms - Fatigue	Normal
+ch_indresp_w ch_lgcvsymp7	Long covid symptoms - Sore throat	Normal
+ch_indresp_w ch_lgcvsymp6	Long covid symptoms - Headaches	Normal
+ch_indresp_w ch_lgcvsymp5	Long covid symptoms - Muscle or body aches	Normal
+ch_indresp_w ch_lgcvsymp4	Long covid symptoms - Runny or stuffy nose	Normal
+ch_indresp_w ch_lgcvsymp3	Long covid symptoms - Shortness of breath or trouble breathing	Normal
+ch_indresp_w ch_lgcvsymp25	Long covid symptoms - Difficulty remembering things	Normal
+ch_indresp_w ch_lgcvsymp24	Long covid symptoms - Loss of concentration	Normal
+ch_indresp_w ch_lgcvsymp23	Long covid symptoms - Persistent coughing	Normal
+ch_indresp_w ch_lgcvsymp1	Long covid symptoms - High temperature	Normal
+ch_indresp_w ch_longcovid	Has long covid	Normal
+ch_indresp_w ch_cv19trwhat11	What medical help for covid19 symptoms - Other	Normal
+ch_indresp_w ch_cv19trwhat10	What medical help for covid19 symptoms - Employer&#39;s occupational health	Normal
+ch_indresp_w ch_cv19trwhat9	What medical help for covid19 symptoms - Inpatient hospital stay	Normal
+ch_indresp_w ch_cv19trwhat8	What medical help for covid19 symptoms - Accident and Emergency	Normal
+ch_indresp_w ch_cv19trwhat7	What medical help for covid19 symptoms - Walk-in centre	Normal
+ch_indresp_w ch_cv19trwhat6	What medical help for covid19 symptoms - Received a &#39;fit note&#39; from GP	Normal
+ch_indresp_w ch_cv19trwhat5	What medical help for covid19 symptoms - Consulted GP/practice nurse facetoface	Normal
+ch_indresp_w ch_cv19trwhat4	What medical help for covid19 symptoms - GP/practice nurse - phone or online	Normal
+ch_indresp_w ch_cv19trwhat3	What medical help for covid19 symptoms - Visited pharmacist	Normal
+ch_indresp_w ch_cv19trwhat2	What medical help for covid19 symptoms - Received an NHS 111 isolation note	Normal
+ch_indresp_w ch_cv19trwhat1	What medical help for covid19 symptoms - Contacted NHS 111	Normal
+ch_indresp_w ch_cv19treat	Medical help for covid19 symptoms	Normal
+ch_indresp_w ch_symptoms11	Symptoms - None of these	Normal
+ch_indresp_w ch_symptoms22	Symptoms - Heaviness in arms or legs	Normal
+ch_indresp_w ch_symptoms21	Symptoms - Numbness or tingling	Normal
+ch_indresp_w ch_symptoms20	Symptoms - Difficulty sleeping	Normal
+ch_indresp_w ch_symptoms19	Symptoms - Chills (feeling too cold)	Normal
+ch_indresp_w ch_symptoms18	Symptoms - Chest pain	Normal
+ch_indresp_w ch_symptoms17	Symptoms - Tightness in the chest	Normal
+ch_indresp_w ch_symptoms16	Symptoms - Dizziness	Normal
+ch_indresp_w ch_symptoms15	Symptoms - Hoarse voice	Normal
+ch_indresp_w ch_symptoms14	Symptoms - Sore eyes	Normal
+ch_indresp_w ch_symptoms13	Symptoms - Sneezing	Normal
+ch_indresp_w ch_symptoms12	Symptoms - Decrease in appetite	Normal
+ch_indresp_w ch_symptoms10	Symptoms - Loss of sense of smell or taste	Normal
+ch_indresp_w ch_symptoms9	Symptoms - Diarrhoea/Digestive issues/Upset stomach	Normal
+ch_indresp_w ch_symptoms8	Symptoms - Fatigue	Normal
+ch_indresp_w ch_symptoms7	Symptoms - Sore throat	Normal
+ch_indresp_w ch_symptoms6	Symptoms  - Headaches	Normal
+ch_indresp_w ch_symptoms5	Symptoms - Muscle or body aches	Normal
+ch_indresp_w ch_symptoms4	Symptoms - Runny or stuffy nose	Normal
+ch_indresp_w ch_symptoms3	Symptoms - Shortness of breath or trouble breathing	Normal
+ch_indresp_w ch_symptoms25	Symptoms - Difficulty remembering things	Normal
+ch_indresp_w ch_symptoms24	Symptoms - Loss of concentration	Normal
+ch_indresp_w ch_symptoms23	Symptoms - Persistent coughing	Normal
+ch_indresp_w ch_symptoms2	Symptoms - A new continuous cough	Normal
+ch_indresp_w ch_symptoms1	Symptoms - High temperature	Normal
+ch_indresp_w ch_hassymp	Has symptoms that could be coronavirus	Normal
+ch_indresp_w ch_hadsymp	Has had symptoms that could be coronavirus	Normal
+ch_indresp_w ch_clinvuln_dv	At risk of serious illness from COVID-19	Normal
+ch_indresp_w ch_ff_hadsymp	Previously reported COVID symptoms	Normal
+ch_indresp_w ch_scsf1	General health	Normal
+ch_indresp_w ch_parent418	Parent of children aged 4-18 in household	Normal
+ch_indresp_w ch_parent1217	Parent of children aged 12-17 in household	Normal
+ch_indresp_w ch_parent511	Parent of children aged 5-11 in household	Normal
+ch_indresp_w ch_parent1619	Parent of children aged 16-19 in household	Normal
+ch_indresp_w ch_parent015	Parent of children aged 0-15 in household	Normal
+ch_indresp_w ch_parent5plus	Parent of children aged 5+ in household	Normal
+ch_indresp_w ch_parent0plus	Parent of children aged 0-4 in household	Normal
+ch_indresp_w ch_hhcompe	Number of household members aged 70 or older, excluding respondent	Normal
+ch_indresp_w ch_hhcompd	Number of household members aged 19-69, excluding respondent	Normal
+ch_indresp_w ch_hhcompc	Number of household members aged 16-18, excluding respondent	Normal
+ch_indresp_w ch_hhcompb	Number of household members aged 5-15, excluding respondent	Normal
+ch_indresp_w ch_hhcompa	Number of household members aged 0-4, excluding respondent	Normal
+ch_indresp_w ch_couple	Living with a partner	Normal
+ch_indresp_w ch_relationk	Household members - relationship - personk	Normal
+ch_indresp_w ch_relationj	Household members - relationship - personj	Normal
+ch_indresp_w ch_relationi	Household members - relationship - personi	Normal
+ch_indresp_w ch_relationh	Household members - relationship - personh	Normal
+ch_indresp_w ch_relationg	Household members - relationship - persong	Normal
+ch_indresp_w ch_relationf	Household members - relationship - personf	Normal
+ch_indresp_w ch_relatione	Household members - relationship - persone	Normal
+ch_indresp_w ch_relationd	Household members - relationship - persond	Normal
+ch_indresp_w ch_relationc	Household members - relationship - personc	Normal
+ch_indresp_w ch_relationb	Household members - relationship - personb	Normal
+ch_indresp_w ch_relationa	Household members - relationship - persona	Normal
+ch_indresp_w ch_personagek	Household members - age - personk	Normal
+ch_indresp_w ch_personagej	Household members - age - personj	Normal
+ch_indresp_w ch_personagei	Household members - age - personi	Normal
+ch_indresp_w ch_personageh	Household members - age - personh	Normal
+ch_indresp_w ch_personageg	Household members - age - persong	Normal
+ch_indresp_w ch_personagef	Household members - age - personf	Normal
+ch_indresp_w ch_personagee	Household members - age - persone	Normal
+ch_indresp_w ch_personaged	Household members - age - persond	Normal
+ch_indresp_w ch_personagec	Household members - age - personc	Normal
+ch_indresp_w ch_personageb	Household members - age - personb	Normal
+ch_indresp_w ch_personagea	Household members - age - persona	Normal
+ch_indresp_w ch_personsexk	Household members - sex - personk	Normal
+ch_indresp_w ch_personsexj	Household members - sex - personj	Normal
+ch_indresp_w ch_personsexi	Household members - sex - personi	Normal
+ch_indresp_w ch_personsexh	Household members - sex - personh	Normal
+ch_indresp_w ch_personsexg	Household members - sex - persong	Normal
+ch_indresp_w ch_personsexf	Household members - sex - personf	Normal
+ch_indresp_w ch_personsexe	Household members - sex - persone	Normal
+ch_indresp_w ch_personsexd	Household members - sex - persond	Normal
+ch_indresp_w ch_personsexc	Household members - sex - personc	Normal
+ch_indresp_w ch_personsexb	Household members - sex - personb	Normal
+ch_indresp_w ch_personsexa	Household members - sex - persona	Normal
+ch_indresp_w ch_hhnum	Household size	Normal
+ch_indresp_w ch_couplewsh	Living with a partner	Normal
+ch_indresp_w ch_addrchk	Address check	Normal
+ch_indresp_w ch_sex_cv	Respondent sex	Normal
+ch_indresp_w ch_age	Age - derived	Normal
+ch_indresp_w ch_dobchk	Check respondent date of birth	Normal
+ch_indresp_w ch_welsh	Welsh language	Normal
+ch_indresp_w k_ioutcome	Individual outcome	Normal
+ch_indresp_w j_ioutcome	Individual outcome	Normal
+ch_indresp_w i_ioutcome	Individual outcome	Normal
+ch_indresp_w k_hidp	Household Identifier (Public Release)	Normal
+ch_indresp_w j_hidp	Household Identifier (Public Release)	Normal
+ch_indresp_w i_hidp	Household Identifier (Public Release)	Normal
+ch_indresp_w bornuk_dv	Born in UK (derived)	Normal
+ch_indresp_w racel_dv	Ethnic group incorp. all waves, codings, modes and bhps	Normal
+ch_indresp_w birthy	Year of birth	Normal
+ch_indresp_w strata	Strata	Normal
+ch_indresp_w psu	Primary sampling unit	Normal
+ch_indresp_w pidp	Cross-wave Person Identifier (Public Release)	Normal
