@@ -1,0 +1,369 @@
+us8_h_child h_psnenui_xw	UKHLS+BHPS+IEMB cross-sectional enumerated person weight	Normal
+us8_h_child h_psnenub_xw	UKHLS+BHPS cross-sectional enumerated person weight	Normal
+us8_h_child h_psnenui_lw	combined BHPS+UKHLS+IEMB longitudinal enumerated person weight	Normal
+us8_h_child h_psnenub_lw	combined BHPS+UKHLS longitudinal enumerated person weight	Normal
+us8_h_child h_psnen01_lw	BHPS 2001 longitudinal enumerated person weight	Normal
+us8_h_child h_psnen91_lw	BHPS 1991 longitudinal enumerated person weight	Normal
+us8_h_child h_psnenus_lw	longitudinal enumerated person weight	Normal
+us8_h_child h_grmpno	Grandfather: PNO	Normal
+us8_h_child h_grfpno	Grandfather: PNO	Normal
+us8_h_child h_mnspno	Nat/step/adopt mother: PNO	Normal
+us8_h_child h_mnspid	Nat/step/adopt mother: PIDP	Normal
+us8_h_child h_mnpno	Natural mother: PNO	Normal
+us8_h_child h_fnspno	Nat/step/adopt father: PNO	Normal
+us8_h_child h_fnspid	Nat/step/adopt father: PIDP	Normal
+us8_h_child h_fnpno	Natural father: PNO	Normal
+us8_h_child h_hrpno	Household reference person: PNO	Normal
+us8_h_child h_hrpid	Household reference person: PIDP	Normal
+us8_h_child h_adresp15_dv	PNO of person responsible for child under 16	Normal
+us8_h_child h_depchl_dv	Whether dependent child - official definition	Normal
+us8_h_child h_buno_dv	benefit unit number	Normal
+us8_h_child h_agegr13_dv	Age group (age_dv): 13 categories	Normal
+us8_h_child h_agegr10_dv	Age group (age_dv): 10 year intervals	Normal
+us8_h_child h_agegr5_dv	Age group (age_dv): 5 year intervals	Normal
+us8_h_child h_hhresp_dv	Household response status	Normal
+us8_h_child h_urban_dv	Urban or rural area, derived	Normal
+us8_h_child h_gor_dv	Government Office Region	Normal
+us8_h_child h_country	Country of residence	Normal
+us8_h_child h_psdqc2_dv	PSDQ: Permissive parenting scale, parent 2	Normal
+us8_h_child h_psdqb2_dv	PSDQ: Authoritarian parenting scale, parent 2	Normal
+us8_h_child h_psdqa2_dv	PSDQ: Authorative parenting scale, parent 2	Normal
+us8_h_child h_psdqc1_dv	PSDQ: Permissive parenting scale, parent 1	Normal
+us8_h_child h_psdqb1_dv	PSDQ: Authoritarian parenting scale, parent 1	Normal
+us8_h_child h_psdqa1_dv	PSDQ: Authorative parenting scale, parent 1	Normal
+us8_h_child h_chsdqtd_dv	SDQ Total Difficulties Score	Normal
+us8_h_child h_chsdqps_dv	SDQ Subscale: Prosocial	Normal
+us8_h_child h_chsdqpp_dv	SDQ Subscale: Peer Relationship Problems	Normal
+us8_h_child h_chsdqha_dv	SDQ Subscale: Hyperactivity/Inattention	Normal
+us8_h_child h_chsdqcp_dv	SDQ Subscale: Conduct Problems	Normal
+us8_h_child h_chsdqes_dv	SDQ Subscale: Emotional Symptoms	Normal
+us8_h_child h_nnssib_dv	Number of R&#39;s nat/step/adopt siblings in hh	Normal
+us8_h_child h_nnsib_dv	Number of R&#39;s natural siblings in hh	Normal
+us8_h_child h_ngrp_dv	Number of R&#39;s grandparents in hh	Normal
+us8_h_child h_npns_dv	Number of R&#39;s nat/step/adopt parents in hh	Normal
+us8_h_child h_npn_dv	Number of R&#39;s natural parents in hh	Normal
+us8_h_child h_doby_dv	DOB: Year, derived	Normal
+us8_h_child h_dobm_dv	DOB: Month, derived	Normal
+us8_h_child h_intdaty_dv	Interview date: Year, derived	Normal
+us8_h_child h_intdatm_dv	Interview date: Month, derived	Normal
+us8_h_child h_intdatd_dv	Interview date: Day, derived	Normal
+us8_h_child h_multiples_dv	confirmed enumeration as twin, triplet, etc. in hh	Normal
+us8_h_child h_age_dv	Age, derived from dob_dv and intdat_dv	Normal
+us8_h_child h_sex_dv	Sex, derived	Normal
+us8_h_child h_psdq2pno	PSDQ: PNO of responsible adult 2	Normal
+us8_h_child h_psdq1pno	PSDQ: PNO of responsible adult 1	Normal
+us8_h_child h_grmpid	Grandmother: PIDP	Normal
+us8_h_child h_grfpid	Grandfather: PIDP	Normal
+us8_h_child h_pns2sex	Nat/step/adopt parent 2: Sex	Normal
+us8_h_child h_pns2pno	Nat/step/adopt parent 2: PNO	Normal
+us8_h_child h_pns2pid	Nat/step/adopt parent 2: PIDP	Normal
+us8_h_child h_pns1sex	Nat/step/adopt parent 1: Sex	Normal
+us8_h_child h_pns1pno	Nat/step/adopt parent 1: PNO	Normal
+us8_h_child h_pns1pid	Nat/step/adopt parent 1: PIDP	Normal
+us8_h_child h_pn2sex	Natural parent 2: Sex	Normal
+us8_h_child h_pn2pno	Natural parent 2: PNO	Normal
+us8_h_child h_pn2pid	Natural parent 2: PIDP	Normal
+us8_h_child h_pn1sex	Natural parent 1: Sex	Normal
+us8_h_child h_pn1pno	Natural parent 1: PNO	Normal
+us8_h_child h_pn1pid	Natural parent 1: PIDP	Normal
+us8_h_child h_mnpid	Natural mother: PIDP	Normal
+us8_h_child h_fnpid	Natural father: PIDP	Normal
+us8_h_child h_age_if	Imputation flag for age_dv	Normal
+us8_h_child h_doby_if	DOB Year imputation flag	Normal
+us8_h_child h_intdaty_if	Interview date: Year, imputation flag	Normal
+us8_h_child h_intdatm_if	Interview date: Month, imputation flag	Normal
+us8_h_child h_intdatd_if	Interview date: Day, imputation flag	Normal
+us8_h_child h_zygosity22	multiple birth sibling no. 2: number in hhgrid of first potential twin	Normal
+us8_h_child h_zygosity21	multiple birth sibling no. 1: number in hhgrid of first potential twin	Normal
+us8_h_child h_twinzyg	Zygotic twins in hh	Normal
+us8_h_child h_twinconf	Twins in hh	Normal
+us8_h_child h_twinno	Twin Number	Normal
+us8_h_child h_rapno7	pno of parent for twin questions	Normal
+us8_h_child h_brfdlwe2	Age stopped breastfeeding since last wave: unit	Normal
+us8_h_child h_brfdlwe	Age stopped breastfeeding since last wave	Normal
+us8_h_child h_brfedstill	Still breastfed	Normal
+us8_h_child h_rapno8	pno of parent for breast feeding questions	Normal
+us8_h_child h_chdelay	Parental assessment of delayed gratification	Normal
+us8_h_child h_chpat	Parental assessment of child patience	Normal
+us8_h_child h_chrisk	Parental assessment of child risk aversion	Normal
+us8_h_child h_cdphscy7	No, no problems at school	Normal
+us8_h_child h_cdphscy6	Other sorts of problems	Normal
+us8_h_child h_cdphscy5	Is just not interested in school	Normal
+us8_h_child h_cdphscy4	Bullies other students	Normal
+us8_h_child h_cdphscy3	Is bullied by other students	Normal
+us8_h_child h_cdphscy2	Problems getting along with teacher(s)	Normal
+us8_h_child h_cdphscy1	Finds schoolwork difficult or challenging	Normal
+us8_h_child h_cdphsc	Child happy in school	Normal
+us8_h_child h_cdconstm	Total hours spent on games console	Normal
+us8_h_child h_cdconsol	Household has games console	Normal
+us8_h_child h_cdpchrs	Total hours spent using computer	Normal
+us8_h_child h_cdcomp	Child uses computer at home	Normal
+us8_h_child h_cdtvvidhrw	Hours spent watching tv: weekend day	Normal
+us8_h_child h_cdtvvidhrs	Hours spent watching tv: schoolday	Normal
+us8_h_child h_bedreg	Child goes to bed at regular time	Normal
+us8_h_child h_mealsreg	Child has meals at regular times	Normal
+us8_h_child h_cderead	Frequency: Others read to child	Normal
+us8_h_child h_cdwread5	A non-relative living here	Normal
+us8_h_child h_cdwread4	Another relative living here	Normal
+us8_h_child h_cdwread3	A brother or sister (or step-brother/step-sister)	Normal
+us8_h_child h_cdwread2	CHILD NAME&#39;s dad or step-dad	Normal
+us8_h_child h_cdwread1	CHILD NAME&#39;s mum or step-mum	Normal
+us8_h_child h_cdoread	Others read to child	Normal
+us8_h_child h_cdcread	Parent reads to child	Normal
+us8_h_child h_chsdqy	behaviour:completes tasks	Normal
+us8_h_child h_chsdqx	behaviour:fears	Normal
+us8_h_child h_chsdqw	behaviour:gets on better	Normal
+us8_h_child h_chsdqv	behaviour:steals	Normal
+us8_h_child h_chsdqu	behaviour:thinks	Normal
+us8_h_child h_chsdqt	behaviour:volunteers	Normal
+us8_h_child h_chsdqs	behaviour:bullied	Normal
+us8_h_child h_chsdqr	behaviour:often lies	Normal
+us8_h_child h_chsdqq	behaviour:kind	Normal
+us8_h_child h_chsdqp	behaviour:nervous	Normal
+us8_h_child h_chsdqo	behaviour:distracted	Normal
+us8_h_child h_chsdqn	behaviour:liked	Normal
+us8_h_child h_chsdqm	behaviour:unhappy	Normal
+us8_h_child h_chsdql	behaviour:fights	Normal
+us8_h_child h_chsdqk	behaviour:good friend	Normal
+us8_h_child h_chsdqj	behaviour:fidgeting	Normal
+us8_h_child h_chsdqi	behaviour:helpful	Normal
+us8_h_child h_chsdqh	behaviour:many worries	Normal
+us8_h_child h_chsdqg	behaviour:obedient	Normal
+us8_h_child h_chsdqf	behaviour:solitary	Normal
+us8_h_child h_chsdqe	behaviour:temper tantrums	Normal
+us8_h_child h_chsdqd	behaviour:shares readily	Normal
+us8_h_child h_chsdqc	behaviour:headaches	Normal
+us8_h_child h_chsdqb	behaviour: restless	Normal
+us8_h_child h_chsdqa	behaviour:considerate	Normal
+us8_h_child h_cdvlt	Learn: knows feelings	Normal
+us8_h_child h_cdvls	Learn: particular friends	Normal
+us8_h_child h_cdvlr	Learn: playing pretend	Normal
+us8_h_child h_cdvlq	Learn: participates in games	Normal
+us8_h_child h_cdvlp	Learn: names	Normal
+us8_h_child h_cdvlo	Learn: create shapes	Normal
+us8_h_child h_cdvln	Learn: scissors	Normal
+us8_h_child h_cdvlm	Learn: climbing	Normal
+us8_h_child h_cdvll	Learn: door handle	Normal
+us8_h_child h_cdvlk	Learn: stairs	Normal
+us8_h_child h_cdvlj	Learn: brushes teeth	Normal
+us8_h_child h_cdvli	Learn: pants	Normal
+us8_h_child h_cdvlh	Learn: uses toilet	Normal
+us8_h_child h_cdvlg	Learn: blows nose	Normal
+us8_h_child h_cdvlf	Learn: uses a spoon	Normal
+us8_h_child h_cdvle	Learn: passes messages	Normal
+us8_h_child h_cdvld	Learn: listens attentively	Normal
+us8_h_child h_cdvlc	Learn: full sentences	Normal
+us8_h_child h_cdvlb	Learn: two word sentences	Normal
+us8_h_child h_cdvla	Learn: get shoes	Normal
+us8_h_child h_cd3perg	Agree: worried about health	Normal
+us8_h_child h_cd3perf	Agree: shows empathy	Normal
+us8_h_child h_cd3pere	Agree: communicative	Normal
+us8_h_child h_cd3perd	Agree: curious and active	Normal
+us8_h_child h_cd3perc	Agree: difficult to comfort	Normal
+us8_h_child h_cd3perb	Agree: irritated and cries	Normal
+us8_h_child h_cd3pera	Agree: happy and content	Normal
+us8_h_child h_cdlmt	Child health condition is limiting	Normal
+us8_h_child h_cddis	Child has long-standing health condition	Normal
+us8_h_child h_cdcond	Child health conditions	Normal
+us8_h_child h_rapno4	PNO	Normal
+us8_h_child h_wrkch817	Hours in other childcare provider during school holidays	Normal
+us8_h_child h_wrkch816	Hours in other nursery Ed provider during school holidays	Normal
+us8_h_child h_wrkch815	Hours in a friend or neighbour during school holidays	Normal
+us8_h_child h_wrkch814	Hours in another relative during school holidays	Normal
+us8_h_child h_wrkch813	Hours in child&#39;s older bro/sis during school holidays	Normal
+us8_h_child h_wrkch812	Hours in child&#39;s grandparent(s) during school holidays	Normal
+us8_h_child h_wrkch811	Hours in ex/non-res parent during school holidays	Normal
+us8_h_child h_wrkch810	Hours in holiday club/scheme during school holidays	Normal
+us8_h_child h_wrkch89	Hours in b&#39;fast/after sch club o/s school/nursery during school holidays	Normal
+us8_h_child h_wrkch88	Hours in b&#39;fast/after sch club at school/nursery during school holidays	Normal
+us8_h_child h_wrkch87	Hours in baby-sitter in home during school holidays	Normal
+us8_h_child h_wrkch86	Hours in nanny/carer in home during school holidays	Normal
+us8_h_child h_wrkch85	Hours in childminder during school holidays	Normal
+us8_h_child h_wrkch84	Hours in playgroup or pre-school during school holidays	Normal
+us8_h_child h_wrkch83	Hours in day nursery or creche during school holidays	Normal
+us8_h_child h_wrkch82	Hours in SE school during school holidays	Normal
+us8_h_child h_wrkch81	Hours in nursery school or class during school holidays	Normal
+us8_h_child h_mostuse17	Other childcare provider	Normal
+us8_h_child h_mostuse16	Other nursery education provider	Normal
+us8_h_child h_mostuse15	A friend or neighbour	Normal
+us8_h_child h_mostuse14	Another relative	Normal
+us8_h_child h_mostuse13	The child&#39;s older brother/sister	Normal
+us8_h_child h_mostuse12	The child&#39;s grandparent(s)	Normal
+us8_h_child h_mostuse11	My ex-husband/wife/partner/the child&#39;s non resident parent	Normal
+us8_h_child h_mostuse10	Holiday club/scheme	Normal
+us8_h_child h_mostuse9	Breakfast club or After school club, not on school/nursery site	Normal
+us8_h_child h_mostuse8	Breakfast club or After school club, on school/nursery site	Normal
+us8_h_child h_mostuse7	Baby-sitter who comes to your home	Normal
+us8_h_child h_mostuse6	Nanny or au pair or childcarer in the home	Normal
+us8_h_child h_mostuse5	Childminder	Normal
+us8_h_child h_mostuse4	Playgroup or pre-school (including Welsh medium)	Normal
+us8_h_child h_mostuse3	which three used the most: day nursery or creche	Normal
+us8_h_child h_mostuse2	Special day school, nursery or unit for children with SE needs	Normal
+us8_h_child h_mostuse1	Nursery school or nursery class	Normal
+us8_h_child h_wrkch717	Other childcare provider	Normal
+us8_h_child h_wrkch716	Other nursery Ed provider	Normal
+us8_h_child h_wrkch715	A friend or neighbour	Normal
+us8_h_child h_wrkch714	Another relative	Normal
+us8_h_child h_wrkch713	Child&#39;s older bro/sis	Normal
+us8_h_child h_wrkch712	Child&#39;s grandparent(s)	Normal
+us8_h_child h_wrkch711	Ex/non-res parent	Normal
+us8_h_child h_wrkch710	Holiday club/scheme	Normal
+us8_h_child h_wrkch79	B&#39;fast/after sch club o/s school/nursery	Normal
+us8_h_child h_wrkch78	B&#39;fast/after sch club at school/nursery	Normal
+us8_h_child h_wrkch77	Baby-sitter in home	Normal
+us8_h_child h_wrkch76	Nanny/carer in home	Normal
+us8_h_child h_wrkch75	Childminder	Normal
+us8_h_child h_wrkch74	Playgroup or pre-school	Normal
+us8_h_child h_wrkch73	usual arrangements during holidays: day nursery or creche	Normal
+us8_h_child h_wrkch72	SE needs Sch/nursery	Normal
+us8_h_child h_wrkch71	Nursery school or class	Normal
+us8_h_child h_wrkch70	No childcare/nursery use	Normal
+us8_h_child h_wrkch317	Hours spent in other childcare provider	Normal
+us8_h_child h_wrkch316	Hours spent in other nursery Ed provider	Normal
+us8_h_child h_wrkch315	Hours spent in a friend or neighbour	Normal
+us8_h_child h_wrkch314	Hours spent in another relative	Normal
+us8_h_child h_wrkch313	Hours spent in child&#39;s older bro/sis	Normal
+us8_h_child h_wrkch312	Hours spent in child&#39;s grandparent(s)	Normal
+us8_h_child h_wrkch311	Hours spent in ex/non-res parent	Normal
+us8_h_child h_wrkch310	Hours spent in holiday club/scheme	Normal
+us8_h_child h_wrkch39	Hours spent in b&#39;fast/after sch club o/s school/nursery	Normal
+us8_h_child h_wrkch38	Hours spent in b&#39;fast/after sch club at school/nursery	Normal
+us8_h_child h_wrkch37	Hours spent in baby-sitter in home	Normal
+us8_h_child h_wrkch36	Hours spent in nanny/carer in home	Normal
+us8_h_child h_wrkch35	Hours spent in childminder	Normal
+us8_h_child h_wrkch34	Hours spent in playgroup or pre-school	Normal
+us8_h_child h_wrkch33	Hours spent in day nursery or creche	Normal
+us8_h_child h_wrkch32	Hours spent in  SE needs Sch/nursery	Normal
+us8_h_child h_wrkch31	Hours spent in nursery school or class	Normal
+us8_h_child h_wrkch217	Other childcare provider	Normal
+us8_h_child h_wrkch216	Other nursery education provider	Normal
+us8_h_child h_wrkch215	A friend or neighbour	Normal
+us8_h_child h_wrkch214	Another relative	Normal
+us8_h_child h_wrkch213	The child&#39;s older brother/sister	Normal
+us8_h_child h_wrkch212	The child&#39;s grandparent(s)	Normal
+us8_h_child h_wrkch211	My ex-husband/wife/partner/the child&#39;s non resident parent	Normal
+us8_h_child h_wrkch210	Holiday club/scheme	Normal
+us8_h_child h_wrkch29	Breakfast club or After school club, not on school/nursery site	Normal
+us8_h_child h_wrkch28	Breakfast club or After school club, on school/nursery site	Normal
+us8_h_child h_wrkch27	Baby-sitter who comes to your home	Normal
+us8_h_child h_wrkch26	Nanny or au pair or childcarer in the home	Normal
+us8_h_child h_wrkch25	Childminder	Normal
+us8_h_child h_wrkch24	Playgroup or pre-school (including Welsh medium)	Normal
+us8_h_child h_wrkch23	three most important childcare arrangements: day nursery or creche	Normal
+us8_h_child h_wrkch22	Special day school, nursery or unit for children with SE needs	Normal
+us8_h_child h_wrkch21	Nursery school or nursery class	Normal
+us8_h_child h_wrkch2a17	Other childcare provider	Normal
+us8_h_child h_wrkch2a16	Other nursery Ed provider	Normal
+us8_h_child h_wrkch2a15	A friend or neighbour	Normal
+us8_h_child h_wrkch2a14	Another relative	Normal
+us8_h_child h_wrkch2a13	Child&#39;s older bro/sis	Normal
+us8_h_child h_wrkch2a12	Child&#39;s grandparent(s)	Normal
+us8_h_child h_wrkch2a11	Ex/non-res parent	Normal
+us8_h_child h_wrkch2a10	Holiday club/scheme	Normal
+us8_h_child h_wrkch2a9	B&#39;fast/after sch club o/s school/nursery	Normal
+us8_h_child h_wrkch2a8	B&#39;fast/after sch club at school/nursery	Normal
+us8_h_child h_wrkch2a7	Baby-sitter in home	Normal
+us8_h_child h_wrkch2a6	Nanny/carer in home	Normal
+us8_h_child h_wrkch2a5	Childminder	Normal
+us8_h_child h_wrkch2a4	Playgroup or pre-school	Normal
+us8_h_child h_wrkch2a3	childcare used: day nursery or creche	Normal
+us8_h_child h_wrkch2a2	SE needs Sch/nursery	Normal
+us8_h_child h_wrkch2a1	Nursery school or class	Normal
+us8_h_child h_wrkch2a0	No childcare/nursery use	Normal
+us8_h_child h_wrkch1c	Hours of childcare same in term and holiday	Normal
+us8_h_child h_wrkch1a	Use same childcare in term and holiday	Normal
+us8_h_child h_rapno1	PNO	Normal
+us8_h_child h_schokst	State school details correct	Normal
+us8_h_child h_schsta	School state or public	Normal
+us8_h_child h_stillstate	Still at same state school	Normal
+us8_h_child h_stillpriv	Still at same private school	Normal
+us8_h_child h_rapno2	pno of parent for school questions	Normal
+us8_h_child h_ringfence	CAPI ringfenced household	Normal
+us8_h_child h_newentrant	Whether or not a new survey participant (0/1)	Normal
+us8_h_child h_region	Region computed	Normal
+us8_h_child h_hhlang	Anyone in HH need translated interview	Normal
+us8_h_child h_hglitrans	Translated language	Normal
+us8_h_child h_hglieng	Interview conducted in English	Normal
+us8_h_child h_lingua	Language translation needed in	Normal
+us8_h_child h_reasref97	Other reason	Normal
+us8_h_child h_reasref96	No reason given	Normal
+us8_h_child h_reasref32	Other hhold member refuses on behalf of respondent	Normal
+us8_h_child h_reasref31	Someone has convinced respondent to refuse	Normal
+us8_h_child h_reasref30	Other family member opposes respondent participating	Normal
+us8_h_child h_reasref26	Previous bad experience with surveys	Normal
+us8_h_child h_reasref25	Survey is waste of time	Normal
+us8_h_child h_reasref24	Survey is too long	Normal
+us8_h_child h_reasref23	Nothing ever changes	Normal
+us8_h_child h_reasref22	Respondent does not want to be bothered	Normal
+us8_h_child h_reasref21	Questions too personal	Normal
+us8_h_child h_reasref20	Unhappy about confidentiality	Normal
+us8_h_child h_reasref15	Too busy (not elsewhere specified)	Normal
+us8_h_child h_reasref14	Stressful family situation	Normal
+us8_h_child h_reasref13	Respondent is temporarily absent	Normal
+us8_h_child h_reasref12	Respondent almost never home	Normal
+us8_h_child h_reasref11	Looking after child(ren)	Normal
+us8_h_child h_reasref10	Looking after ill/elderly	Normal
+us8_h_child h_newdad	Biological father of a new entrant baby	Normal
+us8_h_child h_newmum	Biological mother of a new entrant baby	Normal
+us8_h_child h_hgadoptf	PNO of adoptive father	Normal
+us8_h_child h_hgadoptm	PNO of adoptive mother	Normal
+us8_h_child h_hgbioad2	PNO of second biological or adoptive parent	Normal
+us8_h_child h_hgbioad1	PNO of primary biological or adoptive parent	Normal
+us8_h_child h_hgbiof	PNO of biological father	Normal
+us8_h_child h_hgbiom	PNO of biological mother	Normal
+us8_h_child h_livpar	Living at home with parent(s)	Normal
+us8_h_child h_pensioner	Respondent is of pensionable age	Normal
+us8_h_child h_rjrflag	Rejoiner to household	Normal
+us8_h_child h_bedsits	Bedsit in a building with fewer than 10 dwellings	Normal
+us8_h_child h_purposeblt	Fewer than 10 dwellings in building	Normal
+us8_h_child h_housebun	Type of house/bungalow	Normal
+us8_h_child h_dwltype	Type of accommodation	Normal
+us8_h_child h_hhelig	Household Questionnaire Respondent	Normal
+us8_h_child h_respemail	Respondent email request	Normal
+us8_h_child h_respemailconf	Respondent email address check	Normal
+us8_h_child h_hhemail	Household grid email request	Normal
+us8_h_child h_ctitle	Correct title	Normal
+us8_h_child h_newper	New Person Status flag	Normal
+us8_h_child h_curstat	Current Residential Status flag	Normal
+us8_h_child h_movctry	Leavers - new country	Normal
+us8_h_child h_moveyr	Year left Household	Normal
+us8_h_child h_movemth	Move left Household	Normal
+us8_h_child h_lvwhy	Leavers...Why left	Normal
+us8_h_child h_mothr	Moved with other HH member	Normal
+us8_h_child h_stillres	Still resident at issued address	Normal
+us8_h_child h_includ	Absence check	Normal
+us8_h_child h_dieprisyr	Year to prison or died	Normal
+us8_h_child h_dieprismth	Month to prison or died	Normal
+us8_h_child h_more	More household members	Normal
+us8_h_child h_ageif	Age last birthday	Normal
+us8_h_child h_nebirthy	New entrant DOB year	Normal
+us8_h_child h_nebirthm	New entrant DOB month	Normal
+us8_h_child h_nesex	New entrant sex	Normal
+us8_h_child h_jnyear	Year joined the household	Normal
+us8_h_child h_jnmnth	Month joined the household	Normal
+us8_h_child h_rejoinero	Joiner indicator	Normal
+us8_h_child h_rejoiner	whether or not a rejoiner (0/1)	Normal
+us8_h_child h_joiner	Unlisted joiner	Normal
+us8_h_child h_ynew	New joiner reason	Normal
+us8_h_child h_prishome	Confirm main residence	Normal
+us8_h_child h_abspris	Still in prison	Normal
+us8_h_child h_unihome	Confirm main residence	Normal
+us8_h_child h_absun	Confirm absent at university	Normal
+us8_h_child h_birthy	DOB year	Normal
+us8_h_child h_birthm	dob month	Normal
+us8_h_child h_dvage	Age	Normal
+us8_h_child h_sex	sex	Normal
+us8_h_child h_ivfho	Household level outcome	Normal
+us8_h_child h_ivfio	Individual level outcome	Normal
+us8_h_child h_quarter	sample quarter	Normal
+us8_h_child h_month	sample month	Normal
+us8_h_child h_sampst	sample status	Normal
+us8_h_child h_strata	Strata	Normal
+us8_h_child h_psu	Primary sampling unit	Normal
+us8_h_child h_memorig	Sample origin, individual	Normal
+us8_h_child h_hhorig	Sample origin, household	Normal
+us8_h_child h_childpno	pno of child	Normal
+us8_h_child h_pno	person number	Normal
+us8_h_child h_hidp	household identifier (public release)	Normal
+us8_h_child pid	personal identifier (BHPS cohort)	Normal
+us8_h_child pidp	Cross-wave Person Identifier (Public Release)	Normal

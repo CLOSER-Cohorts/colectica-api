@@ -20,7 +20,7 @@ def references_are_equal(reference1, reference2):
     return sorted(ref_1_elems) == sorted(ref_2_elems)
 
 def find_all_references(xml_tree, agency, identifier):
-    """Find all references to an item in an XML tree/element (e.g. a 'VariableGroup' element)"""
+    """Find all references to another item in an XML tree/element"""
     matching_references = []
     for elem in xml_tree.findall(".//"):
         if (len(elem)>0):
@@ -74,9 +74,6 @@ def convert_xml_element_to_json(xml_element):
         start_of_tag_name = elem.tag.index("}")+1
         json_object[elem.tag[start_of_tag_name:]] = elem.text
     return json_object
-
-def get_urn_from_item(item):
-   return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
 
 def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, version=None):
     """We may be performing multiple updates to the topic groups, so instead of 
@@ -158,10 +155,10 @@ def get_topic_for_item(agency_id, identifier, version, item_type, C):
     return topics_assigned_to_item
 
 def get_url_from_item(item, hostname):
-   return f"http://{hostname}/item/" + item['AgencyId'] + "/" + item['Identifier'] + "/" + str(item['Version'])
+   return f"http://{hostname}/item/{item['AgencyId']}/{item['Identifier']}/{str(item['Version'])}"
 
 def get_urn_from_item(item):
-   return "urn:ddi:" + item['AgencyId'] + ":" + item['Identifier'] + ":" + str(item['Version'])
+   return f"urn:ddi:{item['AgencyId']}:{item['Identifier']}:{str(item['Version'])}"
 
 def map_between_questions_and_variables(items, C):
     """Method for mapping between lists of questions and variables. The 'items' input parameter
@@ -204,6 +201,22 @@ def update_repository(updated_items, transaction_message, C):
                                    item['ItemType'], transaction_id)
     commit_response = C.commit_transaction(transaction_id, transaction_message, 3)
     return commit_response
+
+def getTriple(tripleElem):
+    triple = {}
+    for elem in tripleElem.findall(".//"):
+        startOfTagName = elem.tag.index("}")+1
+        triple[elem.tag[startOfTagName:]] = elem.text
+    return(triple)
+
+def get_element_by_name(xmlTree, elementName):
+    retElem=None
+    for elem in xmlTree.findall(".//"):
+        startOfTagName = elem.tag.index("}")+1
+        tagName = elem.tag[startOfTagName:]
+        if tagName == elementName:
+            retElem = getTriple(elem)
+    return retElem
 
 def get_elements_of_type(xmlTree, elementName):
     retElem=None

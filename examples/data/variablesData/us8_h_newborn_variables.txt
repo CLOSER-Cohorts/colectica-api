@@ -1,0 +1,37 @@
+us8_h_newborn h_brfedend2	Age breastfeeding stopped: unit	Normal
+us8_h_newborn h_brfedend	Age breastfeeding stopped	Normal
+us8_h_newborn h_brfed	Breastfeed	Normal
+us8_h_newborn h_nbnoapp	No appetite statement	Normal
+us8_h_newborn h_nbrefeat	Refuses to eat statement	Normal
+us8_h_newborn h_nbwakes	Number of times child wakes at night	Normal
+us8_h_newborn h_nbsleep	Time for child to settle into sleep	Normal
+us8_h_newborn h_nbfuss	Amount of fussing or crying	Normal
+us8_h_newborn h_nbclmprb	Problems calming child	Normal
+us8_h_newborn h_bwtg5	Birthweight: more than 5.5lbs (2.5kg)	Normal
+us8_h_newborn h_bwtk	Birthweight kilograms	Normal
+us8_h_newborn h_bwtoz	Birthweight in ounces	Normal
+us8_h_newborn h_bwtlb	Birthweight in pounds	Normal
+us8_h_newborn h_bwt	Birthweight	Normal
+us8_h_newborn h_bwtwk	Weeks early or late	Normal
+us8_h_newborn h_bwtel	Child born early or late	Normal
+us8_h_newborn h_bwtxp	Child born when expected	Normal
+us8_h_newborn h_lchbycor	Newborn child&#39;s DOB year	Normal
+us8_h_newborn h_lchbmcor	Newborn child&#39;s DOB month	Normal
+us8_h_newborn h_lchsxcor	Newborn child&#39;s sex	Normal
+us8_h_newborn h_lchchk	Check child&#39;s name, sex and DOB	Normal
+us8_h_newborn h_lchno	PNO of child	Normal
+us8_h_newborn h_lchal	Child age when last lived with parent	Normal
+us8_h_newborn h_lchby4	Child&#39;s birth year	Normal
+us8_h_newborn h_lchbm	Child&#39;s birth month	Normal
+us8_h_newborn h_lchsx	Child&#39;s sex	Normal
+us8_h_newborn h_lchyd4	Year child died	Normal
+us8_h_newborn h_lchlv	Child still lives with parent	Normal
+us8_h_newborn h_sampst	sample status	Normal
+us8_h_newborn h_strata	Strata	Normal
+us8_h_newborn h_psu	Primary sampling unit	Normal
+us8_h_newborn h_memorig	Sample origin, individual	Normal
+us8_h_newborn h_hhorig	Sample origin, household	Normal
+us8_h_newborn h_newchno	sequence number of newborn child	Normal
+us8_h_newborn h_pno	person number	Normal
+us8_h_newborn h_hidp	household identifier (public release)	Normal
+us8_h_newborn pidp	Cross-wave Person Identifier (Public Release)	Normal
