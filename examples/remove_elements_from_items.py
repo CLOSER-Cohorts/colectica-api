@@ -107,14 +107,14 @@ def count_elements_in_items(items, elementTagname):
        elementCount += len(get_elements_of_type(item, elementTagname))
     return elementCount
 
-validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
-validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
-validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
-validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
-
 def validate_removal_of_references(itemsBefore, itemsAfter, referenceTagName):
     referencesBefore = count_elements_in_items(itemsBefore, referenceTagName)
     itemTypes = set([C.item_code_inv(x['ItemType']) for x in itemsAfter])
     print(f"Number of {referenceTagName} elements in {itemTypes} items before removal: {referencesBefore}")
     referencesAfter = count_elements_in_items([x['Item'] for x in itemsAfter], "VariableReference")
     print(f"Number of {referenceTagName} elements in {itemTypes} items after removal: {referencesAfter}")
+
+validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
+validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
+validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
+validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
