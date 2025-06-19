@@ -114,7 +114,10 @@ def validate_removal_of_references(itemsBefore, itemsAfter, referenceTagName):
     referencesAfter = count_elements_in_items([x['Item'] for x in itemsAfter], "VariableReference")
     print(f"Number of {referenceTagName} elements in {itemTypes} items after removal: {referencesAfter}")
 
-validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
-validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
-validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
-validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
+# If you import the validate_removal_of_references method, you need to specify that it is in the
+# examples package when you execute it...
+
+examples.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
+examples.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
+examples.validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
+examples.validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
