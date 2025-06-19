@@ -32,15 +32,11 @@ C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 # use the most up to date version of the study/series!
 search_sets = [{"agencyId": "uk.cls.mcs", 
                 "identifier": "0d8a7220-c61b-4542-967d-a40cb5aca430", 
-                "version": "60"}]
+                "version": "58"}]
                 
-allItemsInOneQuery = C.search_items([], SearchSets=search_sets)['Results']
+studies=C.search_items([C.item_code('Study')], SearchSets=search_sets)['Results']
 
-studies = [x for x in allItemsInOneQuery if x['ItemType']
-           == C.item_code('Study')]
-
-dataCollections = [x for x in allItemsInOneQuery if x['ItemType']
-                   == C.item_code('Data Collection')]
+dataCollections=C.search_items([C.item_code('Data Collection')], SearchSets=search_sets)['Results']
 
 dataCollectionItems = []
 updatedDataCollections = []
@@ -96,10 +92,12 @@ update_repository(updatedStudies,
 #
 # Execute this code by making sure you have defined the 'validate_removal_of_references' and
 # 'count_elements_in_items' methods in your Python interpreter environment (e.g. by copying 
-# and pasting the methods code below into your Python interpreter) and typing:
+# and pasting the methods code below into your Python interpreter) and typing commands such as
+# the one below, which checks that the 'InstrumentReference' elements that were present in the
+# objects in the dataCollectionItems array are not present in the objects in the 
+# updatedDataCollections array:
 #
-# validate_removal_of_references(dataCollectionItems, updatedDataCollections, studyItems, 
-#    updatedStudies)
+# validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
 
 def count_elements_in_items(items, elementTagname):
     """Given a list of items and the tag name of an element, this function counts
@@ -109,21 +107,14 @@ def count_elements_in_items(items, elementTagname):
        elementCount += len(get_elements_of_type(item, elementTagname))
     return elementCount
 
-def validate_removal_of_references(dataCollectionItems, 
-    updatedDataCollections, studyItems, updatedStudies):
-    instrumentRefsBefore = count_elements_in_items(dataCollectionItems, "InstrumentReference")
-    print(f"Number of instrument references in data collections before removal: {instrumentRefsBefore}")
-    instrumentRefsAfter = count_elements_in_items([x['Item'] for x in updatedDataCollections], "InstrumentReference")
-    print(f"Number of instrument references in data collections after removal: {instrumentRefsAfter}")
-    questionSchemeRefsBefore = count_elements_in_items(dataCollectionItems, "QuestionSchemeReference")
-    print(f"Number of question scheme references in data collections before removal: {questionSchemeRefsBefore}")
-    questionSchemeRefsAfter = count_elements_in_items([x['Item'] for x in updatedDataCollections], "QuestionSchemeReference")
-    print(f"Number of question scheme references in data collections after removal: {questionSchemeRefsAfter}")
-    physicalInstanceRefsBefore = count_elements_in_items(studyItems, "PhysicalInstanceReference")
-    print(f"Number of physical instance references in studies before removal: {physicalInstanceRefsBefore}")
-    physicalInstanceRefsAfter = count_elements_in_items([x['Item'] for x in updatedStudies], "PhysicalInstanceReference")
-    print(f"Number of physical instance references in studies after removal: {physicalInstanceRefsAfter}")
-    requiredResourcePackagesBefore = count_elements_in_items(studyItems, "RequiredResourcePackages")
-    print(f"Number of required resource packages in studies before removal: {requiredResourcePackagesBefore}")
-    requiredResourcePackagesAfter = count_elements_in_items([x['Item'] for x in updatedStudies], "RequiredResourcePackages")
-    print(f"Number of required resource packages in studies after removal: {requiredResourcePackagesAfter}")
+validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
+validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
+validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
+validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
+
+def validate_removal_of_references(itemsBefore, itemsAfter, referenceTagName):
+    referencesBefore = count_elements_in_items(itemsBefore, referenceTagName)
+    itemTypes = set([C.item_code_inv(x['ItemType']) for x in itemsAfter])
+    print(f"Number of {referenceTagName} elements in {itemTypes} items before removal: {referencesBefore}")
+    referencesAfter = count_elements_in_items([x['Item'] for x in itemsAfter], "VariableReference")
+    print(f"Number of {referenceTagName} elements in {itemTypes} items after removal: {referencesAfter}")
