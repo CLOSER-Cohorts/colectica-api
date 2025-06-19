@@ -12,7 +12,7 @@ successful. In this case we are:
 6. Verifying that the removal of the references has been successful.
 """
 
-from lib.utility import (
+from examples.lib.utility import (
     update_repository,
     get_elements_of_type,
     remove_elements_from_item
@@ -115,9 +115,9 @@ def validate_removal_of_references(itemsBefore, itemsAfter, referenceTagName):
     print(f"Number of {referenceTagName} elements in {itemTypes} items after removal: {referencesAfter}")
 
 # If you import the validate_removal_of_references method, you need to specify that it is in the
-# examples package when you execute it...
+# remove_elements_from_items package when you execute it...
 
-examples.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
-examples.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
-examples.validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
-examples.validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
+remove_elements_from_items.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
+remove_elements_from_items.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
+remove_elements_from_items.validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
+remove_elements_from_items.validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
