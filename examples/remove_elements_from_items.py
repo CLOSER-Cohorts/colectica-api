@@ -92,12 +92,15 @@ update_repository(updatedStudies,
 #
 # Execute this code by making sure you have defined the 'validate_removal_of_references' and
 # 'count_elements_in_items' methods in your Python interpreter environment (e.g. by copying 
-# and pasting the methods code below into your Python interpreter) and typing commands such as
-# the one below, which checks that the 'InstrumentReference' elements that were present in the
-# objects in the dataCollectionItems array are not present in the objects in the 
+# and pasting the methods below into your Python interpreter) and typing commands such as
+# the ones below, which check that, for example, the 'InstrumentReference' elements that were 
+# present in the objects in the dataCollectionItems array are not present in the objects in the 
 # updatedDataCollections array:
 #
 # validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
+# validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
+# validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
+# validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
 
 def count_elements_in_items(items, elementTagname):
     """Given a list of items and the tag name of an element, this function counts
@@ -113,11 +116,3 @@ def validate_removal_of_references(itemsBefore, itemsAfter, referenceTagName):
     print(f"Number of {referenceTagName} elements in {itemTypes} items before removal: {referencesBefore}")
     referencesAfter = count_elements_in_items([x['Item'] for x in itemsAfter], "VariableReference")
     print(f"Number of {referenceTagName} elements in {itemTypes} items after removal: {referencesAfter}")
-
-# If you import the validate_removal_of_references method, you need to specify that it is in the
-# remove_elements_from_items package when you execute it...
-
-remove_elements_from_items.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "InstrumentReference")
-remove_elements_from_items.validate_removal_of_references(dataCollectionItems, updatedDataCollections, "QuestionSchemeReference")
-remove_elements_from_items.validate_removal_of_references(studyItems, updatedStudies, "PhysicalInstanceReference")
-remove_elements_from_items.validate_removal_of_references(studyItems, updatedStudies, "RequiredResourcePackages")
