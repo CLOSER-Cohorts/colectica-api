@@ -112,33 +112,25 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             "Item": updated_group
         })
  
-def get_item_from_topic_name(topic_name, topic_type, containing_item_name, containing_item_type, C):
+def get_item_from_topic_name(topic_name, topic_type, containing_item, C):
     """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
-    type (e.g. Question Group, Variable Group), and the name and type of the item within which that 
-    topic is contained (e.g. the name and type of a Physical Instance/Data File or a Data Collection 
-    object).
+    type (e.g. Question Group, Variable Group), and the item within which that topic is contained 
+    (e.g. a Physical Instance/Data File or a Data Collection object).
 
     Note that the item type input arguments must be provided as UUIDs (as specified at
     https://docs.colectica.com/repository/technical/item-type-identifiers/). Item types can be 
     mapped to their identifiers using the C.item_code function, e.g. C.item_code("Question Group"),
     C.item_code("Data Collection").
     """
-    containing_item = C.search_items(
-            [containing_item_type],
-            SearchTerms=containing_item_name,
-            SearchLatestVersion=True)['Results']
-    if len(containing_item) == 1:
-            # We create a JSON object representing the containing item.
-            search_sets = [{
+    # We create a JSON object representing the containing item.
+    search_sets = [{
                 "agencyId": containing_item[0]['AgencyId'],
                 "identifier": containing_item[0]['Identifier'],
                 "version": containing_item[0]['Version']
             }]
-            topic_group_identifiers = C.search_items(topic_type,
+    topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=search_sets,
                      SearchTerms=[str(topic_name)])['Results']
-    else:
-            topic_group_identifiers = []
     return topic_group_identifiers
 
 def get_topic_for_item(agency_id, identifier, version, item_type, C):
@@ -235,3 +227,134 @@ def remove_elements_from_item(item, element_name, C):
     for y in elementRefs:
         item[0].remove(y)
     return item
+
+#topic_reassignment_details.iloc[0]
+#import pandas as pd
+
+#create_input_file('update-usoc-topics.xlsx', C)
+ 
+def get_url_for_item(input_file_name, C):
+    """When given a question/variable name and the name of the dataset/questionnaire object
+    containing it, this function returns the URL where that item can be accessed on the 
+    discovery portal."""
+    data = pd.read_excel(input_file_name)
+    for topic_reassignment_details in data.iloc:
+        print("Performing the following topic reassignment...")
+        # Search for the physical instance/dataset item which contains the variable in the current
+        # input file row....
+        #print(topic_reassignment_details)
+        physical_instance_containing_variable = C.search_items(
+            'a51e85bb-6259-4488-8df2-f08cb43485f8',
+            SearchTerms=str(topic_reassignment_details.iloc[0]).strip(),
+            SearchLatestVersion=True)['Results']
+        #print(topic_reassignment_details.iloc[0])
+        print(len(physical_instance_containing_variable))
+        if len(physical_instance_containing_variable) == 1:
+            # We need to search within the physical instance/dataset for the variable named in the
+            # current row. We create a JSON object representing the physical instance/dataset.
+            search_sets = [{
+                "agencyId": physical_instance_containing_variable[0]['AgencyId'],
+                "identifier": physical_instance_containing_variable[0]['Identifier'],
+                "version": physical_instance_containing_variable[0]['Version']
+            }]
+            # For this search, the 'SearchTerms' keyword argument represents the name of the
+            # variable we are reassigning to a new topic. The 'SearchSets' keyword argument
+            # represents the physical instance/dataset we are searching for that variable in.
+            variables_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets,
+               SearchTerms=[str(topic_reassignment_details.iloc[2]).strip()])['Results']
+            if len(variables_metadata) == 1:
+                variable_agency_id = variables_metadata[0]['AgencyId']
+                variable_identifier = variables_metadata[0]['Identifier']
+                variable_version = variables_metadata[0]['Version']
+                print(f"https://discovery.closer.ac.uk/item/{variable_agency_id}/{variable_identifier}/{variable_version}")
+
+def create_input_file(input_file_name, C):
+    """When given a question/variable name and the name of the dataset/questionnaire object
+    containing it, this function returns the URL where that item can be accessed on the 
+    discovery portal."""
+    data = pd.read_excel(input_file_name).drop_duplicates()
+    new_input_df = pd.DataFrame(columns=["Container", "ItemName", "URL", "Label", "CurrentTopic", "NewTopic"])
+    newRow={}
+    count=1
+    for topic_reassignment_details in data.iloc:
+        print(f"Count: {count}")
+        count=count+1
+        url=(get_url_for_item(C.item_code('Data File'), topic_reassignment_details.iloc[0], topic_reassignment_details.iloc[2], C))
+        newRow={"Container": topic_reassignment_details.iloc[0],
+                "ItemName": topic_reassignment_details.iloc[2],
+                "URL": url,
+                "Label": topic_reassignment_details.iloc[3],
+                "CurrentTopic": topic_reassignment_details.iloc[4],
+                "NewTopic": topic_reassignment_details.iloc[6]}
+        print("New row")
+        print(newRow)        
+        new_input_df.loc[len(new_input_df)] = newRow
+    new_input_df.to_excel('test.xlsx', index=False)
+        # Search for the physical instance/dataset item which contains the variable in the current
+        # input file row....
+        #print(topic_reassignment_details)
+
+
+def get_url_for_item(container_type, container_name, item_name, C):
+        """When given a question/variable name and the name of the dataset/questionnaire object
+        containing it, this function returns the URL where that item can be accessed on the 
+        discovery portal."""
+        #print("Performing the following topic reassignment...")
+        # Search for the physical instance/dataset item which contains the variable in the current
+        # input file row....
+        #print(topic_reassignment_details)
+        physical_instance_containing_variable = C.search_items(
+            container_type,
+            SearchTerms=str(container_name).strip(),
+            SearchLatestVersion=True)['Results']
+        #print(topic_reassignment_details.iloc[0])
+        if len(physical_instance_containing_variable) == 1:
+            # We need to search within the physical instance/dataset for the variable named in the
+            # current row. We create a JSON object representing the physical instance/dataset.
+            search_sets = [{
+                "agencyId": physical_instance_containing_variable[0]['AgencyId'],
+                "identifier": physical_instance_containing_variable[0]['Identifier'],
+                "version": physical_instance_containing_variable[0]['Version']
+            }]
+            # For this search, the 'SearchTerms' keyword argument represents the name of the
+            # variable we are reassigning to a new topic. The 'SearchSets' keyword argument
+            # represents the physical instance/dataset we are searching for that variable in.
+            variables_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets,
+               SearchTerms=[str(item_name).strip()])['Results']
+            if len(variables_metadata) == 1:
+                variable_agency_id = variables_metadata[0]['AgencyId']
+                variable_identifier = variables_metadata[0]['Identifier']
+                variable_version = variables_metadata[0]['Version']
+                return(f"https://discovery.closer.ac.uk/item/{variable_agency_id}/{variable_identifier}/{variable_version}")
+
+def create_group(group_name, group_label):
+   item_id=str(uuid.uuid4()) 
+   fragmentString=f"""<Fragment xmlns:r="ddi:reusable:3_3" xmlns="ddi:instance:3_3">
+      <VariableGroup xmlns="ddi:logicalproduct:3_3" isUniversallyUnique="true" versionDate="2020-11-04T10:22:01.0748816Z">
+      <r:URN>urn:ddi:uk.closer:{item_id}:1</r:URN>
+      <r:Agency>uk.closer</r:Agency>
+      <r:ID>{item_id}</r:ID>
+      <r:Version>1</r:Version>
+      <VariableGroupName>
+      <r:String xml:lang="en-GB">{group_name}</r:String>
+      </VariableGroupName>
+      <r:Label>
+      <r:Content xml:lang="en-GB">{group_label}</r:Content>
+      </r:Label>
+      <r:ConceptReference>
+      <r:Agency>uk.closer</r:Agency>
+      <r:ID>1e5b6ee7-1920-47c1-8345-b6de0c92402d</r:ID>
+      <r:Version>1</r:Version>
+      <r:TypeOfObject>Concept</r:TypeOfObject>
+      </r:ConceptReference>
+      </VariableGroup>
+      </Fragment>"""
+   print(fragmentString)
+   transactionResponse = C.create_transaction()
+   print(transactionResponse)
+   transactionId = transactionResponse['TransactionId']
+   print("TRANSACTION ID: ")
+   print(transactionId)
+   #addItemToTransaction('uk.closer', item_id, 1, transactionId, fragmentString, C.item_code('Variable Group'))
+   C.add_items_to_transaction('uk.closer', item_id, 1,fragmentString, C.item_code('Variable Group'), transactionId)
+   C.commit_transaction(transactionId, "Create beliefs topic", 3)

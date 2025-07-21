@@ -15,7 +15,7 @@ import examples.change_item_topics
 updated_groups = examples.change_item_topics.update_topics('examples/topic_reassignments.xlsx', C)
 examples.lib.utility.update_repository(updated_groups, 'Repository commit message - update topics', C)
 """
-from .lib.utility import (
+from examples.lib.utility import (
     get_namespace,
     find_all_references,
     create_variable_reference,
@@ -29,6 +29,14 @@ import defusedxml
 #pip install openpyxl #might need to install openpyxl, a dependency for read-excel
 import pandas as pd
 
+def getGroupDetails(groupToCreate, topic_name, topic_type):
+    a=C.search_items(topic_type, 
+                                 SearchTerms=[topic_name], 
+                                 SearchTargets=["Name"])
+    label=Counter([x['Label']['en-GB'] for x in a['Results']]).most_common(1)[0][0]
+    groupToCreate=(topic_reassignment_details.iloc[5], label, topic_type, containing_item_name, containing_item_type)
+    return groupToCreate
+    
 def generate_urn_dataframe(input_file_name, C):
     """Method for generating input for code that updates topics. The code iterates through 
     a spreadsheet containing details of new item topic assignments and generates a dataframe
@@ -41,9 +49,13 @@ def generate_urn_dataframe(input_file_name, C):
         "sourceTopicGroups": [],
         "destinationTopicGroups": []
     }
+    count=1
+    groupsToCreate=[]
     # Iterate through the rows in the spreadsheet. Each row contains details of a topic
     # reassignment for an item...
     for topic_reassignment_details in data.iloc:
+        print(count)
+        count=count+1
         containing_item_name = topic_reassignment_details.iloc[0]
         url = topic_reassignment_details.iloc[2]
         agency_id = url.split("/")[4]
@@ -63,13 +75,40 @@ def generate_urn_dataframe(input_file_name, C):
             topic_type=C.item_code('Variable Group')
             containing_item_type=C.item_code('Data File')
         item_urn = get_urn_from_item(item)
-        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, containing_item_name, containing_item_type, C)
-        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, containing_item_name, containing_item_type, C)
+        physical_instance_containing_variable = C.search_items(
+                    containing_item_type,
+                    SearchTerms=str(containing_item_name).strip(),
+                    SearchLatestVersion=True)['Results']
+        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], 
+           topic_type, physical_instance_containing_variable, C)
+        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], 
+           topic_type, physical_instance_containing_variable, C)
+        if len(destination_topic)==0:
+                #you'll have to rewrite create group it needs to actually create the group
+                groupToCreate=getGroupDetails(topic_reassignment_details.iloc[5], C.item_code('Variable Group'))
+                if groupToCreate not in groupsToCreate:
+                    groupsToCreate.append(groupToCreate)            
+                create_group(group_to_create['groupName'], group_to_create['groupLabel'])
+                b=C.search_items(C.item_code('Variable Group'), 
+                                   SearchTerms=[topic_reassignment_details.iloc[5][0:3]], 
+                                   SearchTargets=["Name"],
+                                   SearchSets=physical_instance_containing_variable)
+
+                if len(b)==0:
+                    updateGroupsList(groupsToCreate, 
+                         topic_reassignment_details.iloc[5][0:3], 
+                         C.item_code('Variable Group'),
+                         ReferenceToAdd=create_variable_reference(agency_id, item_id, version, item_type, namespace))
+                     
+                         # I NEED TO ADD A REFERENCE TO THE MOST SPECIFIC GROUP TO THE PARENT GROUP
         urn_data_frame['itemUrns'].append(item_urn)
         if len(source_topic)>0:
             urn_data_frame['sourceTopicGroups'].append(get_urn_from_item(source_topic[0]))
         if len(destination_topic)>0:
             urn_data_frame['destinationTopicGroups'].append(get_urn_from_item(destination_topic[0])) 
+    print(groupsToCreate)
+    for group in groupsToCreate:
+        createGroup(group[0], group[1])
     return pd.DataFrame(urn_data_frame)
 
 def update_topics(input_file_name, C):
