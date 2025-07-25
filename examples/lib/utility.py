@@ -34,7 +34,7 @@ def find_all_references(xml_tree, agency, identifier):
             matching_references.append(elem)
     return matching_references
 
-def create_variable_reference(agency_id, item_id, version, item_type, namespace):
+def create_variable_reference(agency_id, item_id, version, namespace):
     """Create an XML element representing a VariableReference"""
     new_element = ET.Element(f"{{{namespace}}}VariableReference")
     agency_element = ET.Element(f"{{{namespace}}}Agency")
@@ -44,14 +44,14 @@ def create_variable_reference(agency_id, item_id, version, item_type, namespace)
     id_element.text = item_id
     agency_element.text = agency_id
     version_element.text = str(version)
-    type_of_object_element.text = item_type
+    type_of_object_element.text = "Variable"
     new_element.append(agency_element)
     new_element.append(id_element)
     new_element.append(version_element)
     new_element.append(type_of_object_element)
     return new_element
 
-def create_question_reference(agency_id, item_id, version, item_type, namespace, namespace2):
+def create_question_reference(agency_id, item_id, version, namespace, namespace2):
     new_element = ET.Element(f"{{{namespace2}}}QuestionItemReference")
     agency_element=ET.Element(f"{{{namespace}}}Agency")
     id_element=ET.Element(f"{{{namespace}}}ID")
@@ -60,12 +60,33 @@ def create_question_reference(agency_id, item_id, version, item_type, namespace,
     id_element.text=item_id
     agency_element.text=agency_id
     version_element.text=str(version)
-    type_of_object_element.text=item_type
+    type_of_object_element.text="QuestionItem"
     new_element.append(agency_element)
     new_element.append(id_element)
     new_element.append(version_element)
     new_element.append(type_of_object_element)
     return new_element
+
+def create_group_reference(agency_id, item_id, version, namespace_version, topic_type, C):
+    """Create an XML element representing a Variable/QuestionGroup"""
+    type_of_object_element = ET.Element(f"{{ddi:reusable:{namespace_version}}}TypeOfObject")
+    if topic_type==C.item_code('Variable Group'):
+        new_element = ET.Element(f"{{ddi:datacollection:{namespace_version}}}VariableGroupReference")
+        type_of_object_element.text = "VariableGroup"
+    elif topic_type==C.item_code('Question Group'):
+        new_element = ET.Element(f"{{ddi:datacollection:{namespace_version}}}QuestionGroupReference")
+        type_of_object_element.text = "QuestionGroup"
+    agency_element = ET.Element(f"{{ddi:reusable:{namespace_version}}}Agency")
+    id_element = ET.Element(f"{{ddi:reusable:{namespace_version}}}ID")
+    version_element = ET.Element(f"{{ddi:reusable:{namespace_version}}}Version")
+    id_element.text = item_id
+    agency_element.text = agency_id
+    version_element.text = str(version)
+    new_element.append(agency_element)
+    new_element.append(id_element)
+    new_element.append(version_element)
+    new_element.append(type_of_object_element)
+    return new_element    
 
 def convert_xml_element_to_json(xml_element):
     """Convert an XML element to a JSON representation."""
@@ -227,11 +248,6 @@ def remove_elements_from_item(item, element_name, C):
     for y in elementRefs:
         item[0].remove(y)
     return item
-
-#topic_reassignment_details.iloc[0]
-#import pandas as pd
-
-#create_input_file('update-usoc-topics.xlsx', C)
  
 def get_url_for_item(input_file_name, C):
     """When given a question/variable name and the name of the dataset/questionnaire object
@@ -280,29 +296,24 @@ def create_input_file(input_file_name, C):
         print(f"Count: {count}")
         count=count+1
         url=(get_url_for_item(C.item_code('Data File'), topic_reassignment_details.iloc[0], topic_reassignment_details.iloc[2], C))
-        newRow={"Container": topic_reassignment_details.iloc[0],
+        new_row={"Container": topic_reassignment_details.iloc[0],
                 "ItemName": topic_reassignment_details.iloc[2],
                 "URL": url,
                 "Label": topic_reassignment_details.iloc[3],
                 "CurrentTopic": topic_reassignment_details.iloc[4],
                 "NewTopic": topic_reassignment_details.iloc[6]}
-        print("New row")
-        print(newRow)        
-        new_input_df.loc[len(new_input_df)] = newRow
+        if str(topic_reassignment_details.iloc[6])!='nan':        
+            new_input_df.loc[len(new_input_df)] = new_row
     new_input_df.to_excel('test.xlsx', index=False)
-        # Search for the physical instance/dataset item which contains the variable in the current
-        # input file row....
-        #print(topic_reassignment_details)
-
 
 def get_url_for_item(container_type, container_name, item_name, C):
         """When given a question/variable name and the name of the dataset/questionnaire object
         containing it, this function returns the URL where that item can be accessed on the 
         discovery portal."""
-        #print("Performing the following topic reassignment...")
+        print("Performing the following topic reassignment...")
         # Search for the physical instance/dataset item which contains the variable in the current
         # input file row....
-        #print(topic_reassignment_details)
+        print(topic_reassignment_details)
         physical_instance_containing_variable = C.search_items(
             container_type,
             SearchTerms=str(container_name).strip(),
@@ -327,10 +338,9 @@ def get_url_for_item(container_type, container_name, item_name, C):
                 variable_version = variables_metadata[0]['Version']
                 return(f"https://discovery.closer.ac.uk/item/{variable_agency_id}/{variable_identifier}/{variable_version}")
 
-def create_group(group_name, group_label):
-   item_id=str(uuid.uuid4()) 
-   fragmentString=f"""<Fragment xmlns:r="ddi:reusable:3_3" xmlns="ddi:instance:3_3">
-      <VariableGroup xmlns="ddi:logicalproduct:3_3" isUniversallyUnique="true" versionDate="2020-11-04T10:22:01.0748816Z">
+def create_group(group_name, group_label, item_id, namespace):
+   fragmentString = f"""<Fragment xmlns:r="ddi:reusable:{namespace}" xmlns="ddi:instance:{namespace}">
+      <VariableGroup xmlns="ddi:logicalproduct:{namespace}" isUniversallyUnique="true" versionDate="2020-11-04T10:22:01.0748816Z">
       <r:URN>urn:ddi:uk.closer:{item_id}:1</r:URN>
       <r:Agency>uk.closer</r:Agency>
       <r:ID>{item_id}</r:ID>
@@ -349,12 +359,14 @@ def create_group(group_name, group_label):
       </r:ConceptReference>
       </VariableGroup>
       </Fragment>"""
-   print(fragmentString)
-   transactionResponse = C.create_transaction()
-   print(transactionResponse)
-   transactionId = transactionResponse['TransactionId']
-   print("TRANSACTION ID: ")
-   print(transactionId)
+   return defusedxml.ElementTree.fromstring(fragmentString) 
+
+ #  print(fragmentString)
+ #  transactionResponse = C.create_transaction()
+ #  print(transactionResponse)
+ #  transactionId = transactionResponse['TransactionId']
+ #  print("TRANSACTION ID: ")
+ #  print(transactionId)
    #addItemToTransaction('uk.closer', item_id, 1, transactionId, fragmentString, C.item_code('Variable Group'))
-   C.add_items_to_transaction('uk.closer', item_id, 1,fragmentString, C.item_code('Variable Group'), transactionId)
-   C.commit_transaction(transactionId, "Create beliefs topic", 3)
+ #  C.add_items_to_transaction('uk.closer', item_id, 1,fragmentString, C.item_code('Variable Group'), transactionId)
+ #  C.commit_transaction(transactionId, "Create beliefs topic", 3)

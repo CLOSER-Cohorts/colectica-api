@@ -23,19 +23,49 @@ from examples.lib.utility import (
     get_current_state_of_topic_group,
     update_list_of_topic_groups,
     get_urn_from_item,
-    get_item_from_topic_name
+    get_item_from_topic_name,
+    create_group,
+    create_group_reference
 )
 import defusedxml
 #pip install openpyxl #might need to install openpyxl, a dependency for read-excel
 import pandas as pd
+import uuid
+from collections import Counter
 
-def getGroupDetails(groupToCreate, topic_name, topic_type):
+language = "en-GB"
+
+def get_group_label(topic_name, topic_type, C):
+    print(topic_name)
+    print(topic_type)
     a=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
                                  SearchTargets=["Name"])
-    label=Counter([x['Label']['en-GB'] for x in a['Results']]).most_common(1)[0][0]
-    groupToCreate=(topic_reassignment_details.iloc[5], label, topic_type, containing_item_name, containing_item_type)
-    return groupToCreate
+    group_label=Counter([x['Label'][language] for x in a['Results']]).most_common(1)[0][0]
+    return group_label
+
+def get_level_zero_group(group, item_type, C):
+    print("FUNC")
+    print(group)
+    print(item_type)
+    if group['ItemName']!={}:
+        if language in group['ItemName'].keys():
+            topic_name = group['ItemName'][language]
+        if isinstance(group['ItemName'], str):
+            topic_name = group['ItemName']
+        parent_group = C.search_relationship_byobject(group['AgencyId'], 
+           group['Identifier'], Version=group['Version'], item_types=[item_type])[0]  
+        print(parent_group)     
+        if len(topic_name)==3:
+            level_zero_group = parent_group
+        elif len(topic_name)==5:
+            level_zero_group = C.search_relationship_byobject(parent_group['Item1']['Item3'], 
+               parent_group['Item1']['Item1'], Version=parent_group['Item1']['Item2'], 
+               item_types=[item_type])[0]
+        item=C.get_item_xml(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],
+           version=level_zero_group['Item1']['Item2'])
+        item_element = defusedxml.ElementTree.fromstring(item['Item'])    
+    return item_element
     
 def generate_urn_dataframe(input_file_name, C):
     """Method for generating input for code that updates topics. The code iterates through 
@@ -62,12 +92,13 @@ def generate_urn_dataframe(input_file_name, C):
         identifier = url.split("/")[5]
         if len(url.split("/")) == 7:
             version = url.split("/")[6]
-            item = C.get_item_json(agency_id, identifier, version=version)
+            item = C.get_item_xml(agency_id, identifier, version=version)
         else:
-            item = C.get_item_json(agency_id, identifier)
+            item = C.get_item_xml(agency_id, identifier)
         version = item['Version']
         item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
         item_type = item['ItemType']
+        item_agency_id = item['AgencyId']
         if item_type==C.item_code('Question'):
             topic_type=C.item_code('Question Group')
             containing_item_type=C.item_code('Data Collection')
@@ -79,28 +110,48 @@ def generate_urn_dataframe(input_file_name, C):
                     containing_item_type,
                     SearchTerms=str(containing_item_name).strip(),
                     SearchLatestVersion=True)['Results']
-        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], 
-           topic_type, physical_instance_containing_variable, C)
-        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], 
-           topic_type, physical_instance_containing_variable, C)
+        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, physical_instance_containing_variable, C)
+        print(source_topic)
+        level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
+        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
         if len(destination_topic)==0:
                 #you'll have to rewrite create group it needs to actually create the group
-                groupToCreate=getGroupDetails(topic_reassignment_details.iloc[5], C.item_code('Variable Group'))
-                if groupToCreate not in groupsToCreate:
-                    groupsToCreate.append(groupToCreate)            
-                create_group(group_to_create['groupName'], group_to_create['groupLabel'])
-                b=C.search_items(C.item_code('Variable Group'), 
-                                   SearchTerms=[topic_reassignment_details.iloc[5][0:3]], 
+                # NEED TO GET NAMESPACE
+                level_two_group_name = str(topic_reassignment_details.iloc[5])[0:3]
+                if len(str(topic_reassignment_details.iloc[5]))==5:
+                    level_three_group_name = str(topic_reassignment_details.iloc[5])
+                else:
+                    level_three_group_name = ""
+                item_element = defusedxml.ElementTree.fromstring(item['Item'])
+                namespace_version = get_namespace(item_element.tag).split(':')[2]
+                levelTwoGroups=C.search_items(topic_type, 
+                                   SearchTerms=[level_two_group_name], 
                                    SearchTargets=["Name"],
-                                   SearchSets=physical_instance_containing_variable)
-
-                if len(b)==0:
-                    updateGroupsList(groupsToCreate, 
-                         topic_reassignment_details.iloc[5][0:3], 
-                         C.item_code('Variable Group'),
-                         ReferenceToAdd=create_variable_reference(agency_id, item_id, version, item_type, namespace))
-                     
-                         # I NEED TO ADD A REFERENCE TO THE MOST SPECIFIC GROUP TO THE PARENT GROUP
+                                   SearchSets=physical_instance_containing_variable)['Results']
+                if len(levelTwoGroups)==0:
+                    level_two_group_uuid=str(uuid.uuid4())
+                    level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
+                    level_two_group_object=create_group(level_two_group_name, 
+                         level_two_group_label, level_two_group_uuid, namespace_version)  
+                    # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
+                    # TO THE LEVEL TWO GROUP
+                    level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
+                    print(level_zero_group)
+                    level_zero_group.append(level_two_group_reference)   
+                else:
+                    for group in levelTwoGroups:
+                        fragment_xml = C.get_item_xml(group['Item1']['Item3'], 
+                              group['Item1']['Item1'], version=group['Item1']['Item2'])['Item']
+                        level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
+                if level_three_group_name!="":
+                   level_three_group_uuid=str(uuid.uuid4())
+                   level_three_group_label=get_group_label(level_three_group_name, 
+                      topic_type, C)
+                   level_three_group_fragment=create_group(level_three_group_name, 
+                        level_three_group_label, level_three_group_uuid, namespace_version)
+                   reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
+                   print(level_two_group_object)
+                   level_two_group_object[0].append(reference_to_level_three_group)                
         urn_data_frame['itemUrns'].append(item_urn)
         if len(source_topic)>0:
             urn_data_frame['sourceTopicGroups'].append(get_urn_from_item(source_topic[0]))
@@ -198,14 +249,12 @@ def update_topics(input_file_name, C):
                                     new_reference = create_variable_reference(item_agency_id,
                                                                    item_identifier,
                                                                    item_version,
-                                                                   "Variable",
                                                                    destination_ddi_version_reusable
                                                                    )
                                 else:
                                     new_reference = create_question_reference(item_agency_id,
                                                                    item_identifier,
                                                                    item_version,
-                                                                   "QuestionItem",
                                                                    destination_ddi_version_reusable,
                                                                    destination_ddi_version_datacollection
                                                                    )

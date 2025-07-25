@@ -177,7 +177,6 @@ def update_topics(input_file_name):
                             new_reference = create_variable_reference(variable_agency_id,
                                                                    variable_identifier,
                                                                    variable_version,
-                                                                   'Variable',
                                                                    destination_ddi_version
                                                                    )
                         else:
