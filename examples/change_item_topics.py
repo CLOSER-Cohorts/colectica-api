@@ -112,7 +112,10 @@ def generate_urn_dataframe(input_file_name, C):
                     SearchLatestVersion=True)['Results']
         source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, physical_instance_containing_variable, C)
         print(source_topic)
-        level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
+        if len(source_topic)>0:
+           level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
+        else:
+           level_zero_group=None 
         destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
         if len(destination_topic)==0:
                 #you'll have to rewrite create group it needs to actually create the group
@@ -137,7 +140,8 @@ def generate_urn_dataframe(input_file_name, C):
                     # TO THE LEVEL TWO GROUP
                     level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
                     print(level_zero_group)
-                    level_zero_group.append(level_two_group_reference)   
+                    if level_zero_group is not None:
+                       level_zero_group.append(level_two_group_reference)   
                 else:
                     for group in levelTwoGroups:
                         fragment_xml = C.get_item_xml(group['Item1']['Item3'], 
