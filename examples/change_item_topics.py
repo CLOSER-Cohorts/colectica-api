@@ -144,8 +144,8 @@ def generate_urn_dataframe(input_file_name, C):
                        level_zero_group.append(level_two_group_reference)   
                 else:
                     for group in levelTwoGroups:
-                        fragment_xml = C.get_item_xml(group['Item1']['Item3'], 
-                              group['Item1']['Item1'], version=group['Item1']['Item2'])['Item']
+                        fragment_xml = C.get_item_xml(group['AgencyId'], 
+                              group['Identifier'], version=group['Version'])['Item']
                         level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
                 if level_three_group_name!="":
                    level_three_group_uuid=str(uuid.uuid4())
