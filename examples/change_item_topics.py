@@ -41,6 +41,7 @@ def get_group_label(topic_name, topic_type, C):
     a=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
                                  SearchTargets=["Name"])
+    print(a)
     group_label=Counter([x['Label'][language] for x in a['Results']]).most_common(1)[0][0]
     return group_label
 
@@ -157,13 +158,12 @@ def generate_urn_dataframe(input_file_name, C):
                    print(level_two_group_object)
                    level_two_group_object[0].append(reference_to_level_three_group)                
         urn_data_frame['itemUrns'].append(item_urn)
-        if len(source_topic)>0:
-            urn_data_frame['sourceTopicGroups'].append(get_urn_from_item(source_topic[0]))
-        if len(destination_topic)>0:
-            urn_data_frame['destinationTopicGroups'].append(get_urn_from_item(destination_topic[0])) 
+        urn_data_frame['sourceTopicGroups'].append(get_urn_from_item(source_topic[0]))
+        urn_data_frame['destinationTopicGroups'].append(get_urn_from_item(destination_topic[0])) 
     print(groupsToCreate)
     for group in groupsToCreate:
-        createGroup(group[0], group[1])
+        create_group(group[0], group[1])
+    print(urn_data_frame)
     return pd.DataFrame(urn_data_frame)
 
 def update_topics(input_file_name, C):
