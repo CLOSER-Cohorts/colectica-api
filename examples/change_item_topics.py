@@ -163,6 +163,8 @@ def generate_urn_dataframe(input_file_name, C):
                     destination_group_urn = get_urn_from_item(level_three_group_fragment)
                 else:
                     destination_group_urn = get_urn_from_item(level_two_group_fragment)
+        else:
+            destination_group_urn = get_urn_from_item(destination_topic[0])
         urn_data_frame['itemUrns'].append(item_urn)
         urn_data_frame['sourceTopicGroups'].append(source_topic_urn)
         urn_data_frame['destinationTopicGroups'].append(destination_group_urn)
