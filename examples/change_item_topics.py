@@ -160,6 +160,7 @@ def generate_urn_dataframe(input_file_name, C):
                    print(level_two_group_object)
                    level_two_group_object[0].append(reference_to_level_three_group)
                 if len(str(topic_reassignment_details.iloc[5]))==5:
+                    print(level_three_group_fragment)
                     destination_group_urn = get_urn_from_item(level_three_group_fragment[0])
                 else:
                     destination_group_urn = get_urn_from_item(level_two_group_fragment[0])
