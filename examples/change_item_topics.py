@@ -115,8 +115,10 @@ def generate_urn_dataframe(input_file_name, C):
         print(source_topic)
         if len(source_topic)>0:
            level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
+           source_topic_urn=get_urn_from_item(source_topic[0])
         else:
-           level_zero_group=None 
+           level_zero_group=None
+           source_topic_urn="" 
         destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
         if len(destination_topic)==0:
                 #you'll have to rewrite create group it needs to actually create the group
@@ -138,7 +140,7 @@ def generate_urn_dataframe(input_file_name, C):
                     level_two_group_object=create_group(level_two_group_name, 
                          level_two_group_label, level_two_group_uuid, namespace_version)  
                     # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
-                    # TO THE LEVEL TWO GROUP
+                    # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
                     level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
                     print(level_zero_group)
                     if level_zero_group is not None:
@@ -156,10 +158,14 @@ def generate_urn_dataframe(input_file_name, C):
                         level_three_group_label, level_three_group_uuid, namespace_version)
                    reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
                    print(level_two_group_object)
-                   level_two_group_object[0].append(reference_to_level_three_group)                
+                   level_two_group_object[0].append(reference_to_level_three_group)
+                if len(str(topic_reassignment_details.iloc[5]))==5:
+                    destination_group_urn = get_urn_from_item(level_three_group_fragment)
+                else:
+                    destination_group_urn = get_urn_from_item(level_two_group_fragment)
         urn_data_frame['itemUrns'].append(item_urn)
-        urn_data_frame['sourceTopicGroups'].append(get_urn_from_item(source_topic[0]))
-        urn_data_frame['destinationTopicGroups'].append(get_urn_from_item(destination_topic[0])) 
+        urn_data_frame['sourceTopicGroups'].append(source_topic_urn)
+        urn_data_frame['destinationTopicGroups'].append(destination_group_urn)
     print(groupsToCreate)
     for group in groupsToCreate:
         create_group(group[0], group[1])
