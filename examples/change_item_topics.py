@@ -161,9 +161,9 @@ def generate_urn_dataframe(input_file_name, C):
                    level_two_group_object[0].append(reference_to_level_three_group)
                 if len(str(topic_reassignment_details.iloc[5]))==5:
                     print(level_three_group_fragment)
-                    destination_group_urn = f"http://{hostname}/item/uk.closer/{level_three_group_uuid}/1"
+                    destination_group_urn = f"urn:ddi:uk.closer:{level_three_group_uuid}:1"
                 else:
-                    destination_group_urn = f"http://{hostname}/item/uk.closer/{level_two_group_uuid}/1"
+                    destination_group_urn = f"urn:ddi:uk.closer:{level_two_group_uuid}:1"
         else:
             destination_group_urn = get_urn_from_item(destination_topic[0])
         urn_data_frame['itemUrns'].append(item_urn)
