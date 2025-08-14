@@ -144,13 +144,8 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C):
     C.item_code("Data Collection").
     """
     # We create a JSON object representing the containing item.
-    search_sets = [{
-                "agencyId": containing_item[0]['AgencyId'],
-                "identifier": containing_item[0]['Identifier'],
-                "version": containing_item[0]['Version']
-            }]
     topic_group_identifiers = C.search_items(topic_type,
-                     SearchSets=search_sets,
+                     SearchSets=containing_item,
                      SearchTerms=[str(topic_name)])['Results']
     return topic_group_identifiers
 
