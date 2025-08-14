@@ -36,13 +36,10 @@ from collections import Counter
 language = "en-GB"
 
 def get_group_label(topic_name, topic_type, C):
-    print(topic_name)
-    print(topic_type)
-    a=C.search_items(topic_type, 
+    groups_with_topic=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
                                  SearchTargets=["Name"])
-    print(a)
-    group_label=Counter([x['Label'][language] for x in a['Results']]).most_common(1)[0][0]
+    group_label=Counter([x['Label'][language] for x in groups_with_topic['Results']]).most_common(1)[0][0]
     return group_label
 
 def get_level_zero_group(group, item_type, C):
@@ -74,7 +71,6 @@ def create_topics(input_file_name, C):
     count=0
     groupsToCreate=[]
     for topic_reassignment_details in data.iloc:
-      if count<5:
         print(count)
         count=count+1
         containing_item_name = topic_reassignment_details.iloc[0]
@@ -103,13 +99,6 @@ def create_topics(input_file_name, C):
                     SearchTerms=str(containing_item_name).strip(),
                     SearchLatestVersion=True)['Results']
         source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, physical_instance_containing_variable, C)
-        if len(source_topic)>0:
-           level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
-           source_topic_urn=get_urn_from_item(source_topic[0])
-        else:
-           level_zero_group=None
-           source_topic_urn="" 
-        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
         if len(source_topic)>0:
            level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
            source_topic_urn=get_urn_from_item(source_topic[0])
