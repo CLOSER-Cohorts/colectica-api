@@ -46,9 +46,6 @@ def get_group_label(topic_name, topic_type, C):
     return group_label
 
 def get_level_zero_group(group, item_type, C):
-    print("FUNC")
-    print(group)
-    print(item_type)
     if group['ItemName']!={}:
         if language in group['ItemName'].keys():
             topic_name = group['ItemName'][language]
@@ -56,7 +53,6 @@ def get_level_zero_group(group, item_type, C):
             topic_name = group['ItemName']
         parent_group = C.search_relationship_byobject(group['AgencyId'], 
            group['Identifier'], Version=group['Version'], item_types=[item_type])[0]  
-        print(parent_group)     
         if len(topic_name)==3:
             level_zero_group = parent_group
         elif len(topic_name)==5:
@@ -78,6 +74,7 @@ def create_topics(input_file_name, C):
     count=0
     groupsToCreate=[]
     for topic_reassignment_details in data.iloc:
+      if count<5:
         print(count)
         count=count+1
         containing_item_name = topic_reassignment_details.iloc[0]
