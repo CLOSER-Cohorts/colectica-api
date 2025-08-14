@@ -81,6 +81,26 @@ def create_topics(input_file_name, C):
         print(count)
         count=count+1
         containing_item_name = topic_reassignment_details.iloc[0]
+        url = topic_reassignment_details.iloc[2]
+        agency_id = url.split("/")[4]
+        identifier = url.split("/")[5]
+        if len(url.split("/")) == 7:
+            version = url.split("/")[6]
+            item = C.get_item_xml(agency_id, identifier, version=version)
+        else:
+            item = C.get_item_xml(agency_id, identifier)
+        version = item['Version']
+        item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
+        item_type = item['ItemType']
+        item_agency_id = item['AgencyId']
+        if item_type==C.item_code('Question'):
+            topic_type=C.item_code('Question Group')
+            containing_item_type=C.item_code('Data Collection')
+        elif item_type==C.item_code('Variable'):
+            topic_type=C.item_code('Variable Group')
+            containing_item_type=C.item_code('Data File')
+        containing_item_name = topic_reassignment_details.iloc[0]
+        item_urn = get_urn_from_item(item)
         physical_instance_containing_variable = C.search_items(
                     containing_item_type,
                     SearchTerms=str(containing_item_name).strip(),
