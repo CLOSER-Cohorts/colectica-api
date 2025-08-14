@@ -97,15 +97,22 @@ def create_topics(input_file_name, C):
         physical_instance_containing_variable = C.search_items(
                     containing_item_type,
                     SearchTerms=str(containing_item_name).strip(),
-                    SearchLatestVersion=True)['Results']
-        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, physical_instance_containing_variable, C)
+                    SearchLatestVersion=True)['Results'][0]
+        physical_instance_search_set = [{
+                "agencyId": physical_instance_containing_variable[0]['AgencyId'],
+                "identifier": physical_instance_containing_variable[0]['Identifier'],
+                "version": physical_instance_containing_variable[0]['Version']
+            }]            
+        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], 
+           topic_type, physical_instance_search_set, C)
         if len(source_topic)>0:
            level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
            source_topic_urn=get_urn_from_item(source_topic[0])
         else:
            level_zero_group=None
            source_topic_urn="" 
-        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
+        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], 
+            topic_type, physical_instance_search_set, C)
         if len(destination_topic)==0:
                 #you'll have to rewrite create group it needs to actually create the group
                 # NEED TO GET NAMESPACE
@@ -119,7 +126,7 @@ def create_topics(input_file_name, C):
                 levelTwoGroups=C.search_items(topic_type, 
                                    SearchTerms=[level_two_group_name], 
                                    SearchTargets=["Name"],
-                                   SearchSets=physical_instance_containing_variable)['Results']
+                                   SearchSets=physical_instance_search_set)['Results']
                 if len(levelTwoGroups)==0:
                     level_two_group_uuid=str(uuid.uuid4())
                     level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
