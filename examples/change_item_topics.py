@@ -75,11 +75,7 @@ def create_topics(input_file_name, C):
     """
     print(f"Reading topic reassignments from {input_file_name}")
     data = pd.read_excel(input_file_name)
-    urn_data_frame={
-        "itemUrns": [],
-        "sourceTopicGroups": [],
-        "destinationTopicGroups": []
-    }
+    count=0
     groupsToCreate=[]
     for topic_reassignment_details in data.iloc:
         print(count)
