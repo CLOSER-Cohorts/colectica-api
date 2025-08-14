@@ -106,7 +106,6 @@ def create_topics(input_file_name, C):
                     SearchTerms=str(containing_item_name).strip(),
                     SearchLatestVersion=True)['Results']
         source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, physical_instance_containing_variable, C)
-        print(source_topic)
         if len(source_topic)>0:
            level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
            source_topic_urn=get_urn_from_item(source_topic[0])
@@ -143,7 +142,6 @@ def create_topics(input_file_name, C):
                     # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
                     # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
                     level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
-                    print(level_zero_group)
                     if level_zero_group is not None:
                        level_zero_group.append(level_two_group_reference)   
                 else:
@@ -159,7 +157,6 @@ def create_topics(input_file_name, C):
                    level_three_group_fragment=create_group(level_three_group_name, 
                         level_three_group_label, level_three_group_uuid, namespace_version)
                    reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
-                   print(level_two_group_object)
                    level_two_group_object[0].append(reference_to_level_three_group)
                    groupsToCreate.append(level_three_group_object)
     return groupsToCreate 
