@@ -154,7 +154,7 @@ def create_topics(input_file_name, C):
                    level_three_group_uuid=str(uuid.uuid4())
                    level_three_group_label=get_group_label(level_three_group_name, 
                       topic_type, C)
-                   level_three_group_fragment=create_group(level_three_group_name, 
+                   level_three_group_object=create_group(level_three_group_name, 
                         level_three_group_label, level_three_group_uuid, namespace_version)
                    reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
                    level_two_group_object[0].append(reference_to_level_three_group)
