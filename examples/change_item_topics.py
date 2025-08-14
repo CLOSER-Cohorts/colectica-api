@@ -99,9 +99,9 @@ def create_topics(input_file_name, C):
                     SearchTerms=str(containing_item_name).strip(),
                     SearchLatestVersion=True)['Results'][0]
         physical_instance_search_set = [{
-                "agencyId": physical_instance_containing_variable[0]['AgencyId'],
-                "identifier": physical_instance_containing_variable[0]['Identifier'],
-                "version": physical_instance_containing_variable[0]['Version']
+                "agencyId": physical_instance_containing_variable['AgencyId'],
+                "identifier": physical_instance_containing_variable['Identifier'],
+                "version": physical_instance_containing_variable['Version']
             }]            
         source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], 
            topic_type, physical_instance_search_set, C)
