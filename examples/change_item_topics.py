@@ -67,7 +67,88 @@ def get_level_zero_group(group, item_type, C):
            version=level_zero_group['Item1']['Item2'])
         item_element = defusedxml.ElementTree.fromstring(item['Item'])    
     return item_element
-    
+
+def create_topics(input_file_name, C):
+    """Method for generating input for code that updates topics. The code iterates through 
+    a spreadsheet containing details of new item topic assignments and generates a dataframe
+    of URNs that can be used as input to a method that reassigns items to new topics. 
+    """
+    print(f"Reading topic reassignments from {input_file_name}")
+    data = pd.read_excel(input_file_name)
+    urn_data_frame={
+        "itemUrns": [],
+        "sourceTopicGroups": [],
+        "destinationTopicGroups": []
+    }
+    groupsToCreate=[]
+    for topic_reassignment_details in data.iloc:
+        print(count)
+        count=count+1
+        containing_item_name = topic_reassignment_details.iloc[0]
+        physical_instance_containing_variable = C.search_items(
+                    containing_item_type,
+                    SearchTerms=str(containing_item_name).strip(),
+                    SearchLatestVersion=True)['Results']
+        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, physical_instance_containing_variable, C)
+        print(source_topic)
+        if len(source_topic)>0:
+           level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
+           source_topic_urn=get_urn_from_item(source_topic[0])
+        else:
+           level_zero_group=None
+           source_topic_urn="" 
+        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
+        if len(source_topic)>0:
+           level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
+           source_topic_urn=get_urn_from_item(source_topic[0])
+        else:
+           level_zero_group=None
+           source_topic_urn="" 
+        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
+        if len(destination_topic)==0:
+                #you'll have to rewrite create group it needs to actually create the group
+                # NEED TO GET NAMESPACE
+                level_two_group_name = str(topic_reassignment_details.iloc[5])[0:3]
+                if len(str(topic_reassignment_details.iloc[5]))==5:
+                    level_three_group_name = str(topic_reassignment_details.iloc[5])
+                else:
+                    level_three_group_name = ""
+                item_element = defusedxml.ElementTree.fromstring(item['Item'])
+                namespace_version = get_namespace(item_element.tag).split(':')[2]
+                levelTwoGroups=C.search_items(topic_type, 
+                                   SearchTerms=[level_two_group_name], 
+                                   SearchTargets=["Name"],
+                                   SearchSets=physical_instance_containing_variable)['Results']
+                if len(levelTwoGroups)==0:
+                    level_two_group_uuid=str(uuid.uuid4())
+                    level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
+                    level_two_group_object=create_group(level_two_group_name, 
+                         level_two_group_label, level_two_group_uuid, namespace_version)  
+                    # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
+                    # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
+                    level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
+                    print(level_zero_group)
+                    if level_zero_group is not None:
+                       level_zero_group.append(level_two_group_reference)   
+                else:
+                    for group in levelTwoGroups:
+                        fragment_xml = C.get_item_xml(group['AgencyId'], 
+                              group['Identifier'], version=group['Version'])['Item']
+                        level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
+                groupsToCreate.append(level_two_group_object)
+                if level_three_group_name!="":
+                   level_three_group_uuid=str(uuid.uuid4())
+                   level_three_group_label=get_group_label(level_three_group_name, 
+                      topic_type, C)
+                   level_three_group_fragment=create_group(level_three_group_name, 
+                        level_three_group_label, level_three_group_uuid, namespace_version)
+                   reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
+                   print(level_two_group_object)
+                   level_two_group_object[0].append(reference_to_level_three_group)
+                   groupsToCreate.append(level_three_group_object)
+    return groupsToCreate 
+
+
 def generate_urn_dataframe(input_file_name, C):
     """Method for generating input for code that updates topics. The code iterates through 
     a spreadsheet containing details of new item topic assignments and generates a dataframe
