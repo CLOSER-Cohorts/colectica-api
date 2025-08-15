@@ -148,14 +148,14 @@ def create_topics(input_file_name, C):
                         fragment_xml = C.get_item_xml(group['AgencyId'], 
                               group['Identifier'], version=group['Version'])['Item']
                         level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
-                update_list_of_topic_groups(level_two_group_object,
+                        update_list_of_topic_groups(level_two_group_object,
                                group['AgencyId'],
                                group['Identifier'],
                                group['Version'],
                                group['ItemType'],
                                updated_topic_groups)
-                groupsToCreate.append(level_two_group_object)
-                destination_item = get_current_state_of_topic_group(
+                        groupsToCreate.append(level_two_group_object)
+                        destination_item = get_current_state_of_topic_group(
                                                             group[0]['AgencyId'],
                                                             group[0]['Identifier'],
                                                             updated_topic_groups,
