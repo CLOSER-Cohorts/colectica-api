@@ -137,7 +137,10 @@ def create_topics(input_file_name, C):
                     level_two_group_uuid=str(uuid.uuid4())
                     level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
                     level_two_group_object=create_group(level_two_group_name, 
-                         level_two_group_label, level_two_group_uuid, namespace_version)  
+                         level_two_group_label, level_two_group_uuid, namespace_version)
+                    groupsToCreate.append((topic_reassignment_details.iloc[0],
+                           level_two_group_label,
+                           level_two_group_object))       
                     # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
                     # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
                     level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
@@ -154,9 +157,6 @@ def create_topics(input_file_name, C):
                                group['Version'],
                                group['ItemType'],
                                updated_topic_groups)
-                        groupsToCreate.append((topic_reassignment_details.iloc[0],
-                           level_two_group_label,
-                           level_two_group_object))
                         destination_item = get_current_state_of_topic_group(
                                                             group['AgencyId'],
                                                             group['Identifier'],
