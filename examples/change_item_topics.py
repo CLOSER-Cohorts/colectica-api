@@ -110,7 +110,7 @@ def create_topics(input_file_name, C):
                                                        source_topic[0]['Identifier'],
                                                        updated_topic_groups,
                                                        C,
-                                                       version=source_group[0]['Version']
+                                                       version=source_topic[0]['Version']
                                                        ) 
            level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
            source_topic_urn=get_urn_from_item(source_topic[0])
@@ -122,13 +122,6 @@ def create_topics(input_file_name, C):
         if len(destination_topic)==0:
                 #you'll have to rewrite create group it needs to actually create the group
                 # NEED TO GET NAMESPACE
-                destination_item = get_current_state_of_topic_group(
-                                                            destination_group[0]['AgencyId'],
-                                                            destination_group[0]['Identifier'],
-                                                            updated_topic_groups,
-                                                            C,
-                                                            version=destination_group[0]['Version']
-                                                            )
                 level_two_group_name = str(topic_reassignment_details.iloc[5])[0:3]
                 if len(str(topic_reassignment_details.iloc[5]))==5:
                     level_three_group_name = str(topic_reassignment_details.iloc[5])
@@ -160,8 +153,15 @@ def create_topics(input_file_name, C):
                                group['Identifier'],
                                group['Version'],
                                group['ItemType'],
-                               updated_topic_groups)        
+                               updated_topic_groups)
                 groupsToCreate.append(level_two_group_object)
+                destination_item = get_current_state_of_topic_group(
+                                                            group[0]['AgencyId'],
+                                                            group[0]['Identifier'],
+                                                            updated_topic_groups,
+                                                            C,
+                                                            version=group[0]['Version']
+                                                            )
                 if level_three_group_name!="":
                    level_three_group_uuid=str(uuid.uuid4())
                    level_three_group_label=get_group_label(level_three_group_name, 
