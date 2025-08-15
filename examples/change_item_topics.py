@@ -156,11 +156,11 @@ def create_topics(input_file_name, C):
                                updated_topic_groups)
                         groupsToCreate.append(level_two_group_object)
                         destination_item = get_current_state_of_topic_group(
-                                                            group[0]['AgencyId'],
-                                                            group[0]['Identifier'],
+                                                            group['AgencyId'],
+                                                            group['Identifier'],
                                                             updated_topic_groups,
                                                             C,
-                                                            version=group[0]['Version']
+                                                            version=group['Version']
                                                             )
                 if level_three_group_name!="":
                    level_three_group_uuid=str(uuid.uuid4())
