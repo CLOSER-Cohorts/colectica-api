@@ -70,10 +70,10 @@ def create_topics(input_file_name, C):
     data = pd.read_excel(input_file_name)
     count=0
     groupsToCreate=[]
+    updated_topic_groups = []
     for topic_reassignment_details in data.iloc:
         print(count)
         count=count+1
-        containing_item_name = topic_reassignment_details.iloc[0]
         url = topic_reassignment_details.iloc[2]
         agency_id = url.split("/")[4]
         identifier = url.split("/")[5]
@@ -83,7 +83,6 @@ def create_topics(input_file_name, C):
         else:
             item = C.get_item_xml(agency_id, identifier)
         version = item['Version']
-        item_urn = "urn:ddi:" + agency_id + ":" + identifier + ":" + str(version)
         item_type = item['ItemType']
         item_agency_id = item['AgencyId']
         if item_type==C.item_code('Question'):
@@ -106,6 +105,13 @@ def create_topics(input_file_name, C):
         source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], 
            topic_type, physical_instance_search_set, C)
         if len(source_topic)>0:
+           source_item = get_current_state_of_topic_group(
+                                                       source_topic['AgencyId'],
+                                                       source_topic['Identifier'],
+                                                       updated_topic_groups,
+                                                       C,
+                                                       version=source_group['Version']
+                                                       ) 
            level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
            source_topic_urn=get_urn_from_item(source_topic[0])
         else:
@@ -116,6 +122,13 @@ def create_topics(input_file_name, C):
         if len(destination_topic)==0:
                 #you'll have to rewrite create group it needs to actually create the group
                 # NEED TO GET NAMESPACE
+                destination_item = get_current_state_of_topic_group(
+                                                            destination_group['AgencyId'],
+                                                            destination_group['Identifier'],
+                                                            updated_topic_groups,
+                                                            C,
+                                                            version=destination_group['Version']
+                                                            )
                 level_two_group_name = str(topic_reassignment_details.iloc[5])[0:3]
                 if len(str(topic_reassignment_details.iloc[5]))==5:
                     level_three_group_name = str(topic_reassignment_details.iloc[5])
@@ -142,6 +155,12 @@ def create_topics(input_file_name, C):
                         fragment_xml = C.get_item_xml(group['AgencyId'], 
                               group['Identifier'], version=group['Version'])['Item']
                         level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
+                update_list_of_topic_groups(level_two_group_object,
+                               group['AgencyId'],
+                               group['Identifier'],
+                               group['Version'],
+                               group['ItemType'],
+                               updated_topic_groups)        
                 groupsToCreate.append(level_two_group_object)
                 if level_three_group_name!="":
                    level_three_group_uuid=str(uuid.uuid4())
