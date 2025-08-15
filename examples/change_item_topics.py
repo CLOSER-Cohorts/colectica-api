@@ -106,11 +106,11 @@ def create_topics(input_file_name, C):
            topic_type, physical_instance_search_set, C)
         if len(source_topic)>0:
            source_item = get_current_state_of_topic_group(
-                                                       source_topic['AgencyId'],
-                                                       source_topic['Identifier'],
+                                                       source_topic[0]['AgencyId'],
+                                                       source_topic[0]['Identifier'],
                                                        updated_topic_groups,
                                                        C,
-                                                       version=source_group['Version']
+                                                       version=source_group[0]['Version']
                                                        ) 
            level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
            source_topic_urn=get_urn_from_item(source_topic[0])
@@ -123,11 +123,11 @@ def create_topics(input_file_name, C):
                 #you'll have to rewrite create group it needs to actually create the group
                 # NEED TO GET NAMESPACE
                 destination_item = get_current_state_of_topic_group(
-                                                            destination_group['AgencyId'],
-                                                            destination_group['Identifier'],
+                                                            destination_group[0]['AgencyId'],
+                                                            destination_group[0]['Identifier'],
                                                             updated_topic_groups,
                                                             C,
-                                                            version=destination_group['Version']
+                                                            version=destination_group[0]['Version']
                                                             )
                 level_two_group_name = str(topic_reassignment_details.iloc[5])[0:3]
                 if len(str(topic_reassignment_details.iloc[5]))==5:
