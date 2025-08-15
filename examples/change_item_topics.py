@@ -61,6 +61,9 @@ def get_level_zero_group(group, item_type, C):
         item_element = defusedxml.ElementTree.fromstring(item['Item'])    
     return item_element
 
+
+a=set([(x[0], x[1]) for x in topics_to_create])
+
 def create_topics(input_file_name, C):
     """Method for generating input for code that updates topics. The code iterates through 
     a spreadsheet containing details of new item topic assignments and generates a dataframe
@@ -69,7 +72,8 @@ def create_topics(input_file_name, C):
     print(f"Reading topic reassignments from {input_file_name}")
     data = pd.read_excel(input_file_name)
     count=0
-    groupsToCreate=[]
+    levelOneGroupsToCreate=[]
+    levelTwoGroupsToCreate=[]
     updated_topic_groups = []
     for topic_reassignment_details in data.iloc:
         print(count)
@@ -138,7 +142,7 @@ def create_topics(input_file_name, C):
                     level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
                     level_two_group_object=create_group(level_two_group_name, 
                          level_two_group_label, level_two_group_uuid, namespace_version)
-                    groupsToCreate.append((topic_reassignment_details.iloc[0],
+                    levelOneGroupsToCreate.append((topic_reassignment_details.iloc[0],
                            level_two_group_name,
                            level_two_group_object))       
                     # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
@@ -172,7 +176,7 @@ def create_topics(input_file_name, C):
                         level_three_group_label, level_three_group_uuid, namespace_version)
                    reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
                    level_two_group_object[0].append(reference_to_level_three_group)
-                   groupsToCreate.append((topic_reassignment_details.iloc[0],
+                   levelTwoGroupsToCreate.append((topic_reassignment_details.iloc[0],
                            topic_reassignment_details.iloc[5], level_three_group_object))
     return groupsToCreate 
 
