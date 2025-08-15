@@ -154,7 +154,9 @@ def create_topics(input_file_name, C):
                                group['Version'],
                                group['ItemType'],
                                updated_topic_groups)
-                        groupsToCreate.append(level_two_group_object)
+                        groupsToCreate.append((topic_reassignment_details.iloc[0],
+                           level_two_group_label,
+                           level_two_group_object))
                         destination_item = get_current_state_of_topic_group(
                                                             group['AgencyId'],
                                                             group['Identifier'],
@@ -170,7 +172,8 @@ def create_topics(input_file_name, C):
                         level_three_group_label, level_three_group_uuid, namespace_version)
                    reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
                    level_two_group_object[0].append(reference_to_level_three_group)
-                   groupsToCreate.append(level_three_group_object)
+                   groupsToCreate.append((topic_reassignment_details.iloc[0],
+                           topic_reassignment_details.iloc[5], level_three_group_object))
     return groupsToCreate 
 
 
