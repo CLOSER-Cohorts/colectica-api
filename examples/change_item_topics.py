@@ -139,7 +139,7 @@ def create_topics(input_file_name, C):
                     level_two_group_object=create_group(level_two_group_name, 
                          level_two_group_label, level_two_group_uuid, namespace_version)
                     groupsToCreate.append((topic_reassignment_details.iloc[0],
-                           level_two_group_label,
+                           level_two_group_name,
                            level_two_group_object))       
                     # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
                     # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
