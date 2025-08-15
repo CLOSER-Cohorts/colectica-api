@@ -62,7 +62,10 @@ def get_level_zero_group(group, item_type, C):
     return item_element
 
 
-a=set([(x[0], x[1]) for x in topics_to_create])
+#GET A FUNCTION THAT GETS THE UNIQUE LEVEL ONE AND LEVEL TWO GROUPS WE NEED TO CREATE
+#ITERATE THRU THE L1s. CREATE EACH L1 (MIGHT HAVE TO DO LEVEL ZERO STUFF). FIND EACH L2 WHICH IS IN 
+#THE SAME DATASET, CREATE IT, THEN ADD A REFERENCE TO THE L1 FOR THAT L2
+
 
 def create_topics(input_file_name, C):
     """Method for generating input for code that updates topics. The code iterates through 
@@ -138,47 +141,33 @@ def create_topics(input_file_name, C):
                                    SearchTargets=["Name"],
                                    SearchSets=physical_instance_search_set)['Results']
                 if len(levelTwoGroups)==0:
-                    level_two_group_uuid=str(uuid.uuid4())
-                    level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
-                    level_two_group_object=create_group(level_two_group_name, 
-                         level_two_group_label, level_two_group_uuid, namespace_version)
+                    #level_two_group_uuid=str(uuid.uuid4())
+                    #level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
+                    #level_two_group_object=create_group(level_two_group_name, 
+                    #     level_two_group_label, level_two_group_uuid, namespace_version)
                     levelOneGroupsToCreate.append((topic_reassignment_details.iloc[0],
-                           level_two_group_name,
-                           level_two_group_object))       
+                           level_two_group_name))       
                     # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
                     # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
-                    level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
-                    if level_zero_group is not None:
-                       level_zero_group.append(level_two_group_reference)   
-                else:
-                    for group in levelTwoGroups:
-                        fragment_xml = C.get_item_xml(group['AgencyId'], 
-                              group['Identifier'], version=group['Version'])['Item']
-                        level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
-                        update_list_of_topic_groups(level_two_group_object,
-                               group['AgencyId'],
-                               group['Identifier'],
-                               group['Version'],
-                               group['ItemType'],
-                               updated_topic_groups)
-                        destination_item = get_current_state_of_topic_group(
-                                                            group['AgencyId'],
-                                                            group['Identifier'],
-                                                            updated_topic_groups,
-                                                            C,
-                                                            version=group['Version']
-                                                            )
+                    #level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
+                    #if level_zero_group is not None:
+                    #   level_zero_group.append(level_two_group_reference)   
+                #else:
+                #    for group in levelTwoGroups:
+                #        fragment_xml = C.get_item_xml(group['AgencyId'], 
+                #              group['Identifier'], version=group['Version'])['Item']
+                #        level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
                 if level_three_group_name!="":
-                   level_three_group_uuid=str(uuid.uuid4())
-                   level_three_group_label=get_group_label(level_three_group_name, 
-                      topic_type, C)
-                   level_three_group_object=create_group(level_three_group_name, 
-                        level_three_group_label, level_three_group_uuid, namespace_version)
-                   reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
-                   level_two_group_object[0].append(reference_to_level_three_group)
+                   #level_three_group_uuid=str(uuid.uuid4())
+                   #level_three_group_label=get_group_label(level_three_group_name, 
+                   #   topic_type, C)
+                   #level_three_group_object=create_group(level_three_group_name, 
+                   #     level_three_group_label, level_three_group_uuid, namespace_version)
+                   #reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
+                   #level_two_group_object[0].append(reference_to_level_three_group)
                    levelTwoGroupsToCreate.append((topic_reassignment_details.iloc[0],
-                           topic_reassignment_details.iloc[5], level_three_group_object))
-    return groupsToCreate 
+                           str(topic_reassignment_details.iloc[5])))
+    return (levelOneGroupsToCreate, levelTwoGroupsToCreate) 
 
 
 def generate_urn_dataframe(input_file_name, C):
