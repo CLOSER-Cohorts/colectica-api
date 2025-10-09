@@ -61,11 +61,13 @@ def get_level_zero_group(group, item_type, C):
         item_element = defusedxml.ElementTree.fromstring(item['Item'])    
     return item_element
 
-def get_level_zero_group_2(agencyId, Identifier, version, item_type, C):
-    level_zero_group = C.search_relationship_bysubject(agencyId, identifier, Version=version, 
-               item_types=[item_type])[0]
-    item_element = defusedxml.ElementTree.fromstring(level_zero_group['Item'])
-    return (agencyId, Identifier, item_element)
+def get_level_zero_group_2(agencyId, identifier, version, item_type, C):
+    level_zero_group = C.search_relationship_byobject(agencyId, identifier, Version=version, 
+               item_types=[item_type])[0] 
+    level_zero_group_item=C.get_item_xml(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],
+           version=level_zero_group['Item1']['Item2'])           
+    item_element = defusedxml.ElementTree.fromstring(level_zero_group_item['Item'])
+    return item_element
 
 
     if group['ItemName']!={}:
@@ -91,6 +93,125 @@ def get_level_zero_group_2(agencyId, Identifier, version, item_type, C):
 #ITERATE THRU THE L1s. CREATE EACH L1 (MIGHT HAVE TO DO LEVEL ZERO STUFF). FIND EACH L2 WHICH IS IN 
 #THE SAME DATASET, CREATE IT, THEN ADD A REFERENCE TO THE L1 FOR THAT L2
 
+allLevelOneGroups=C.search_items(topic_type, 
+                                   SearchTerms=['101'], 
+                                   SearchTargets=["Name"],
+                                   SearchSets=physical_instance_search_set)['Results']
+
+
+# THIS IS THE CODE THAT GETS ALL DATASETS AND THE GROUPS IN THEM
+allLevelZeroes=C.search_relationship_bysubject(
+              'uk.closer', 
+              '5c669cb3-a633-4324-93fb-ed2695b44072', 
+              item_types=[C.item_code('Variable Group')])       
+groupsWithoutDatasets=[]
+groupsWithDatasets=[]
+groupsWithoutDatasetsVarsInMultiple=[]
+groupsWithoutDatasetsVarsInNone=[]
+count=0
+investigateThese=[]
+for x in allLevelZeroes:
+    print(count)
+    count=count+1
+    dataset=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
+    varGroups=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable Group')])
+    if len(dataset)==0:
+        datasetVars=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable')])
+        c=[]
+        for y in datasetVars:
+            b=C.query_set(y['Item1']['Item3'], y['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
+            for z in b:
+               c.append(z['Item1']['Item3'] + ":" + z['Item1']['Item1'] + ":" + str(z['Item1']['Item2']))
+        if len(set(c))==1:
+               #groupsWithoutDatasets.append(c[0])
+               print("STEP1")
+               dataset_item=C.get_item_json(z['Item1']['Item3'], z['Item1']['Item1'], version=z['Item1']['Item2'])
+               print("STEP2")
+               for varGroup in varGroups[1:]:
+                   var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+                   groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
+                        var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version']), x))
+        else:
+            investigateThese.append(x) 
+    else:
+        dataset_item=C.get_item_json(dataset[0]['Item1']['Item3'], dataset[0]['Item1']['Item1'], version=dataset[0]['Item1']['Item2'])
+        for varGroup in varGroups[1:]:
+             var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+             groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
+                    var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
+
+groupsInDatasets=groupsWithDatasets+groupsWithoutDatasets
+
+
+
+count=0
+a=[]
+for x in allLevelZeroes:
+    print(count)
+    count=count+1
+    dataset=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
+    if len(dataset)==0:
+        datasetVars=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable')])
+        if len(datasetVars)==0:
+            a.append(x)
+
+c=[]
+count=0
+for y in dataset:
+            print(count)
+            count=count+1
+            b=C.query_set(y['Item1']['Item3'], y['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
+            c.append(b)
+
+
+C.query_set('uk.closer', 'a80e26e1-ef76-455f-9be7-69501e8e0f8b',item_types=[C.item_code('Data File')], reverseTraversal=True)
+dids=[]
+for x in list(dsets):
+   a=C.search_items(C.item_code('Data File'), SearchTerms=str(x).strip(), SearchLatestVersion=True)
+   if len(a['Results'])==1:
+        dids.append(a['Results'][0]['ItemName']['en-GB'])
+   else:
+        print("ERROR")
+
+dids2=[]
+for x in allLevelZeroes:
+    a=C.get_item_json(x['Item1']['Item3'], x['Item1']['Item1'], version=x['Item1']['Item2'])
+    dids2.append(a['DisplayLabel'])
+
+def get_groups_in_datasets(input_file_name, C):
+    containing_item_type=C.item_code('Data File')
+    data = pd.read_excel(input_file_name)
+    datasetsProcessed=[]
+    count = 0
+    count2 = 0
+    identifiers=[]
+    for topic_reassignment_details in data.iloc:
+        containing_item_name = topic_reassignment_details.iloc[0]
+        if containing_item_name not in datasetsProcessed:
+           print(containing_item_name) 
+           datasetsProcessed.append(containing_item_name)
+           containing_item = C.search_items(
+                    containing_item_type,
+                    SearchTerms=str(containing_item_name).strip(),
+                    SearchLatestVersion=True)['Results'][0]
+           physical_instance_search_set = [{
+                "agencyId": containing_item['AgencyId'],
+                "identifier": containing_item['Identifier'],
+                "version": containing_item['Version']
+            }]
+           allItems=C.search_items(C.item_code('Variable'), SearchSets=physical_instance_search_set)['Results']
+           count=0
+           for z in allItems:
+              #print(count)
+              count = count+1
+              varGroup = C.search_relationship_byobject(z['AgencyId'], z['Identifier'], Version=z['Version'], item_types=[C.item_code('Variable Group')])
+              if len(varGroup)==1 and (containing_item_name, varGroup[0]['Item1']['Item3'], varGroup[0]['Item1']['Item1']) not in identifiers:
+                  identifiers.append((containing_item_name, varGroup[0]['Item1']['Item3'], varGroup[0]['Item1']['Item1']))
+           count2 = count2+1
+        print(count2)
+    return(identifiers)    
+        
+    
 
 def create_topics(input_file_name, C):
     """Method for generating input for code that updates topics. The code iterates through 
@@ -105,9 +226,12 @@ def create_topics(input_file_name, C):
     levelTwoGroupsToCreate=[]
     updated_topic_groups = []
     level_zero_groups=[]
+    datasetToZeroGroupMappings={}
+    all_variable_groups=C.search_items(C.item_code('Variable Group'), SearchLatestVersion=True)['Results']
     for topic_reassignment_details in data.iloc:
         print(count)
-        count=count+1
+        count=count+1  
+        print(topic_reassignment_details)
         url = topic_reassignment_details.iloc[2]
         agency_id = url.split("/")[4]
         identifier = url.split("/")[5]
@@ -136,27 +260,43 @@ def create_topics(input_file_name, C):
                 "identifier": physical_instance_containing_variable['Identifier'],
                 "version": physical_instance_containing_variable['Version']
             }]
+        print("STEP 1")
         source_topic = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[topic_type])
         if len(source_topic)>0:
            source_topic_item=C.get_item_json(source_topic[0]['Item1']['Item3'], source_topic[0]['Item1']['Item1'],
            version=source_topic[0]['Item1']['Item2'])
-           print(source_topic_item['ItemName'][language])
-           print(str(topic_reassignment_details.iloc[4]))           
            if source_topic_item['ItemName'][language]==str(topic_reassignment_details.iloc[4]):
               level_zero_group=get_level_zero_group(source_topic_item, topic_type, C)
               source_topic_urn=get_urn_from_item(source_topic_item)
         else:
-           level_zero_group_details=C.search_relationship_bysubject(physical_instance_containing_variable['AgencyId'], 
+           level_zero_group_details=C.search_relationship_byobject(
+              physical_instance_containing_variable['AgencyId'], 
               physical_instance_containing_variable['Identifier'], 
               Version=physical_instance_containing_variable['Version'], 
               item_types=[C.item_code('Variable Group')])
-           level_zero_group_item=C.get_item_xml(level_zero_group_details[0]['Item1']['Item3'],
-                level_zero_group_details[0]['Item1']['Item1'],
-                version=level_zero_group_details[0]['Item1']['Item2'])['Item']
+           if len(level_zero_group_details)==0:
+               level_zero_group_details=[x for x in all_variable_groups if x['Label']['en-GB']==
+                   physical_instance_containing_variable['Label']['en-GB']]
+               if len(level_zero_group_details)==1:
+                   level_zero_group_item=C.get_item_xml(level_zero_group_details[0]['AgencyId'],
+                     level_zero_group_details[0]['Identifier'],
+                     version=level_zero_group_details[0]['Version'])['Item']     
+               else:
+                   print("CANNOT FIND LEVEL ZERO GROUP")
+                   break      
+           else:
+               level_zero_group_item=C.get_item_xml(level_zero_group_details[0]['Item1']['Item3'],
+                 level_zero_group_details[0]['Item1']['Item1'],
+                 version=level_zero_group_details[0]['Item1']['Item2'])['Item']
            level_zero_group=defusedxml.ElementTree.fromstring(level_zero_group_item)     
            source_topic_urn="" 
+        print("STEP 2")
+        #YOU NEED TO FIGURE OUT WHY THE BELOW CODE IS RETURNING AN EMPTY SET EVEN WHEN
+        #A TOPIC EXISTS IN A DATASET. ITS DUE TO THE DATASETS WHICH DON'T HAVE LEVEL ZERO TOPICS
+        #PERHAPS YOUCOULD UPDTAE THE CODE THAT GETS THE VARGROUPS IN DATASETS TO GET THE NAME AND LABEL FOR TOPICS AS WELL
+        #AND USE THAT HERE
         destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], 
-            topic_type, physical_instance_search_set, C)
+            topic_type, physical_instance_search_set, C, datasetToZeroGroupMappings)
         if len(destination_topic)==0:
                 #you'll have to rewrite create group it needs to actually create the group
                 # NEED TO GET NAMESPACE
@@ -167,81 +307,49 @@ def create_topics(input_file_name, C):
                     level_two_group_name = ""
                 item_element = defusedxml.ElementTree.fromstring(item['Item'])
                 namespace_version = get_namespace(item_element.tag).split(':')[2]
+                print("STEP 2.5")
                 print(topic_type)
                 print(level_one_group_name)
                 print(physical_instance_search_set)
-                levelOneGroups=C.search_items(topic_type, 
-                                   SearchTerms=[level_one_group_name], 
-                                   SearchTargets=["Name"],
-                                   SearchSets=physical_instance_search_set)['Results']
+                #levelOneGroups=C.search_items(topic_type, 
+                #                   SearchTerms=[level_one_group_name], 
+                #                   SearchTargets=["Name"],
+                #                   SearchSets=physical_instance_search_set)['Results']
+                levelOneGroups=[x for x in groupsInDatasets if (x[0], x[1])==(str(containing_item_name), level_one_group_name)]
+                print("STEP 3")
+                if level_two_group_name!="" and (topic_reassignment_details.iloc[0], 
+                        level_two_group_name) not in [(x[0], x[1]) for x in levelTwoGroupsToCreate]:
+                       levelTwoGroupsToCreate.append((topic_reassignment_details.iloc[0],
+                           str(topic_reassignment_details.iloc[5]), namespace_version))                   
                 if len(levelOneGroups)==0:
-                    #level_two_group_uuid=str(uuid.uuid4())
-                    #level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
-                    #level_two_group_object=create_group(level_two_group_name, 
-                    #     level_two_group_label, level_two_group_uuid, namespace_version)
                     if (topic_reassignment_details.iloc[0], 
                         level_one_group_name) not in [(x[0], x[1]) for x in levelOneGroupsToCreate]:
                        levelOneGroupsToCreate.append((topic_reassignment_details.iloc[0],
-                           level_one_group_name, level_zero_group_item, namespace_version))       
-                    # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
-                    # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
-                    #level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 
-                    # 1, namespace_version, topic_type, C)
-                    #if level_zero_group is not None:
-                    #   level_zero_group.append(level_two_group_reference)
-                    if level_two_group_name!="" and (topic_reassignment_details.iloc[0], 
-                        level_two_group_name) not in [(x[0], x[1]) for x in levelTwoGroupsToCreate]:
-                   #level_three_group_uuid=str(uuid.uuid4())
-                   #level_three_group_label=get_group_label(level_three_group_name, 
-                   #   topic_type, C)
-                   #level_three_group_object=create_group(level_three_group_name, 
-                   #     level_three_group_label, level_three_group_uuid, namespace_version)
-                   #reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
-                   #level_two_group_object[0].append(reference_to_level_three_group)
-                       levelTwoGroupsToCreate.append((topic_reassignment_details.iloc[0],
-                           str(topic_reassignment_details.iloc[5]), namespace_version))
+                           level_one_group_name, level_zero_group, namespace_version))       
                 else:
-                    for group in levelOneGroups:
-                        levelOneGroupsToModify.append((level_one_group_name, 
+                    if (level_one_group_name, topic_reassignment_details.iloc[0]) not in [(x[0], x[5]) for x in levelOneGroupsToModify]:
+                        for group in levelOneGroups:
+                           levelOneGroupsToModify.append((level_one_group_name, 
                                               level_two_group_name, 
                                               topic_type,
                                               group,
-                                              namespace_version))
-                        # 1, namespace_version, topic_type, C)
-                     #   fragment_xml = C.get_item_xml(group['AgencyId'], 
-                     #         group['Identifier'], version=group['Version'])['Item']
-                      #  level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
-    #return (list(set(levelOneGroupsToCreate)), list(set(levelTwoGroupsToCreate)), levelOneGroupsToModify) 
+                                              namespace_version,
+                                              topic_reassignment_details.iloc[0])) 
     return (levelOneGroupsToCreate, levelTwoGroupsToCreate, levelOneGroupsToModify) 
-
-for topic in topics_to_create[0]:
-   print("WER: " + str(topic))
-   print([x for x in topics_to_create[1] if x[0]==topic[0] and x[1][0:3]==topic[1]])
-
 
 level_one_topics_to_create=list(set(topics_to_create[0]))
 level_two_topics_to_create=list(set(topics_to_create[1]))
-
-count=0
-for x in topics_to_create[0]:
-   if x is None:
-         print(count)
-   else: 
-         print(x)
-   count=count+1 
-
-LEVEL ZERO OBJECTS SHOULDN'T BE IN TOPICS TO CREATE. YOU NEED TO USE THE 
-GET CURRENT STATE OF TOPICS LIST/UPDATE TOPICS LIST FUNCTIONS (OR SOMETHING
-SIMILAR)
+ 
 
 THIS CODE CREATES THE NEW TOPIC GROUPS AND UPDATES THE LEVEL ZERO TOPIC GROUPS
+THERE IS AN ISSUE WITH EG https://discovery.closer.ac.uk/item/uk.closer/84383692-5097-4510-8463-985664c08c18
+WE NEED TO CREATE TOPIC 116 AND 11607 
 
 ddiObjectsLevelZero=[]
 ddiObjectsLevelOne=[]
 ddiObjectsLevelTwo=[]
 tempArray=[]
 for topic in topics_to_create[0]:
-   print(topic[1])
    level_one_group_uuid=str(uuid.uuid4())
    level_one_group_name=topic[1]
    topic_type=C.item_code('Variable Group')
@@ -252,8 +360,13 @@ for topic in topics_to_create[0]:
    zero_group_agency_id = level_zero_group_urn.split(":")[2]
    zero_group_identifier = level_zero_group_urn.split(":")[3]
    zero_group_version = level_zero_group_urn.split(":")[4]
+   # THERES SOMETHING WRONG WITH THE CODE THAT EITHER GETS THE LEVEL ZERO OBJECT OR UPDATES
+   # THE LEVEL ZERO OBJECT. NEWER ITEMS
+   # ARE OVERWRITING OLDER ONES EG  for topic in topics_to_create[0][9:10], NO PROB BUT 9:11, PROB
+   # DOES NOT HAPPEN IF YOU COPY AND PASTE FROM UTILITY INTO TERMINAL, BUT IF YOU IMPORT, IT DOES
+   # MIGHT NEED TO RESTART TERMINAL
    level_zero_group_object = get_current_state_of_topic_group(zero_group_agency_id, 
-       zero_group_identifier, ddiObjectsLevelZero, C, version=zero_group_version)     
+       zero_group_identifier, ddiObjectsLevelZero, C, version=zero_group_version)   
    namespace_version=topic[3]   
    level_one_group_label=get_group_label(level_one_group_name, topic_type, C)
    level_one_group_object=create_group(level_one_group_name, 
@@ -265,12 +378,10 @@ for topic in topics_to_create[0]:
                                zero_group_identifier,
                                zero_group_version,
                                topic_type,
-                               ddiObjectsLevelZero)
-   #if level_zero_group is not None:
-   #     level_zero_group.append(level_one_group_reference)
-   #     ddiObjectsLevelZero.append(level_zero_group) 
+                               ddiObjectsLevelZero)                           
    level_two_groups=[x for x in topics_to_create[1] if x[0]==topic[0] and x[1][0:3]==topic[1]]
-   #tempArray=tempArray+level_two_groups 
+   #if len(level_two_groups)==0:
+   #   print(topic)
    for level_two_group in level_two_groups:
        level_two_group_uuid=str(uuid.uuid4())
        level_two_group_name=level_two_group[1]
@@ -281,8 +392,25 @@ for topic in topics_to_create[0]:
        reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
            namespace_version, topic_type, C)
        level_one_group_object[0].append(reference_to_level_two_group)
-       ddiObjectsLevelTwo.append(level_two_group_object)
+       ddiObjectsLevelTwo.append((level_two_group_object, level_two_group[0]))
    ddiObjectsLevelOne.append((level_one_group_object, topic[0], topic[2]))
+NOT THE BELOW, IT'S OUTDATED
+for topic in topics_to_create[2]:
+    level_two_groups=[x for x in topics_to_create[1] if x[0]==topic[5] and x[1][0:3]==topic[0]]
+    for level_two_group in level_two_groups:
+       print(level_two_group) 
+       level_two_group_uuid=str(uuid.uuid4())
+       level_two_group_name=level_two_group[1]
+       level_two_group_label=get_group_label(level_two_group_name, 
+          topic_type, C)
+       level_two_group_object=create_group(level_two_group_name, 
+          level_two_group_label, level_two_group_uuid, namespace_version)
+       reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
+           namespace_version, topic_type, C)
+       level_one_group_object[0].append(reference_to_level_two_group)
+       ddiObjectsLevelTwo.append((level_two_group_object, level_two_group[0]))
+   
+
 
 
 YOU WANT TO VERIFY:
@@ -294,49 +422,174 @@ LEVEL ZERO TOPIC
 
 THE BELOW CODE IMPLEMENTS CHECK 1
 
-levelTwoIdentifiers=[x[0][2].text for x in ddiObjectsLevelTwo]
-levelOneIdentifiers=[x[0][2].text for x in ddiObjectsLevelOne]
-referencesValidatedIdentifiers=[x[0][2].text for x in referencesValidated]
+levelTwoIdentifiers=[x[0][0][2].text for x in ddiObjectsLevelTwo]
+levelOneIdentifiers=[x[0][0][2].text for x in ddiObjectsLevelOne]
+ddiObjectsLevelZero
+referencesValidatedIdentifiers=[x[0][2].text for x in referencesValidat
+
+validateLevelTwoTopics(levelTwoTopics, levelOneTopics, levelZeroTopics)
+
+
+a1=validateLevelTwoTopics(ddiObjectsLevelTwo, ddiObjectsLevelOne, ddiObjectsLevelZero)
+
+
+>>> len(set(list(a)+list(b)+list(c)))
+60
+WHY ARE LEVELONE REFERENCES NOT FOUND IN LEVELZERO OBJECTS?
+We need to verify that all level two topics are referenced by a level one topic,
+which in turn is referenced by a level zero topic. We need to verify that the level
+one topic is the first three digits of the level two topic. We need to verify that
+the label of the level zero topic is the same as the label of the dataset within
+which the level two topic is found, and that the level zero topic is referenced
+by this dataset. We need to verify that this dataset has the same name as the 
+dataset name contained in the ddiObjectsLevelTwo tuple.
+a1=validateLevelTwoTopics(new_l2_topics, finalLevelOnes, levelZeroesForModifiedL1s)
+
+def validateLevelTwoTopics(levelTwoTopics, levelOneTopics, levelZeroTopics):
+   referencesValidated=[]
+   levelTwoNotInOne=[]
+   count=0
+   for x in levelTwoTopics:
+       print(count)
+       count=count+1
+       levelTwoTopicName=(x[0][0][4][0].text)
+       dataset=C.search_items(
+                          C.item_code('Data File'), 
+                          SearchTerms=str(x[1]).strip(),
+                          SearchLatestVersion=True)['Results']
+       if len(dataset)==1:
+           levelTwoDatasetLabel=dataset[0]['Label']['en-GB']                   
+       #print(x[0][0][2].text)
+       found = False
+       identifier = x[0][0][2].text
+       #identifier=x
+       for y in levelOneTopics:
+           #levelOneTopicName=(y[0][0][4][0].text)
+           levelOneTopicName=get_elements_of_type(y[0], "VariableGroupName")[0][0].text
+           level_one_refs=find_all_references(y[0], 'uk.closer', identifier)
+           if len(level_one_refs)==1:
+               print("LEVEL TWO REFERENCE FOUND IN LEVEL ONE")
+               if y[1]==x[1]:
+                   print("DATASET NAMES ARE THE SAME FOR LEVELS ONE AND TWO")
+               dataset=C.search_items(
+                          C.item_code('Data File'), 
+                          SearchTerms=str(y[1]).strip(),
+                          SearchLatestVersion=True)['Results']
+               if len(dataset)==1:
+                  levelOneDatasetLabel=dataset[0]['Label']['en-GB']                   
+               if levelTwoTopicName[0:3]==levelOneTopicName:
+                    print("FIRST THREE DIGITS OF LEVEL TWO TOPIC NAME MATCHES LEVEL ONE TOPIC NAME")
+               level_one_identifier=y[0][0][2].text
+               for z in [z1 for z1 in levelZeroTopics]:
+                   level_zero_refs=find_all_references(z['Item'], 'uk.closer', level_one_identifier)
+                   if len(level_zero_refs)==1:
+                       print("LEVEL ONE REFERENCE FOUND IN LEVEL ZERO")
+                       found=True
+                       level_zero_label=get_element_by_name(z['Item'], 'Label')['Content']
+                       if level_zero_label==levelTwoDatasetLabel and level_zero_label==levelOneDatasetLabel:
+                           print("DATASET LABELS FOR LEVEL ONE AND TWO, AND THE LEVEL ZERO LABEL MATCH")
+                       #physical_instance = C.search_items(
+                       #   C.item_code('Data File'), 
+                       #   SearchTerms=str(y[1]).strip(),
+                       #   SearchLatestVersion=True)['Results']
+                       referencesValidated.append(x)
+                       #print(a)
+                       #print(b)
+                       #if a==b:
+                       #   referencesValidated.append(y)
+                       #else:
+                       #   print("WRONG DATASET")
+       if not found:
+           levelTwoNotInOne.append(x)
+       #print("LEVEL TWO REFERENCE NOT FOUND IN LEVEL ONE")               
+   return (referencesValidated, levelTwoNotInOne)
+
 referencesValidated=[]
 levelTwoNotInOne=[]
 for x in ddiObjectsLevelTwo:
-    identifier = x[0][2].text
+    identifier = x[0][0][2].text
     print("LEVEL TWO: " + identifier)
     for y in ddiObjectsLevelOne:
         level_one_refs=find_all_references(y[0], 'uk.closer', identifier)
         if len(level_one_refs)==1:
             print("LEVEL TWO REFERENCE FOUND IN LEVEL ONE")
             level_one_identifier=y[0][0][2].text
-            for z in [z1['Item'] for z1 in ddiObjectsLevelZero]:
-                level_zero_refs=find_all_references(z, 'uk.closer', level_one_identifier)
-                if len(level_zero_refs)>0:
+            for z in [z1 for z1 in ddiObjectsLevelZero]:
+                level_zero_refs=find_all_references(z['Item'], 'uk.closer', level_one_identifier)
+                if len(level_zero_refs)==1:
                     print("LEVEL ONE REFERENCE FOUND IN LEVEL ZERO")
+                    physical_instance = C.search_items(
+                       C.item_code('Data File'), 
+                       SearchTerms=str(y[1]).strip(),
+                       SearchLatestVersion=True)['Results']
+                    a=(physical_instance[0]['ItemName']['en-GB'])
+                    b=(get_element_by_name(z['Item'], 'Label')['Content'])
                     referencesValidated.append(y)
+                    #print(a)
+                    #print(b)
+                    #if a==b:
+                    #   referencesValidated.append(y)
+                    #else:
+                    #   print("WRONG DATASET") 
             
+C.search_items(C.item_code('Data File'),SearchTerms=str('us5_e_newborn').strip(),SearchLatestVersion=True)
 
 THE BELOW CODE IMPLEMENTS CHECK 2
-
-forChecking2=[]
-for x in topics_to_create[0]:
-    physicalInstanceLabel=C.search_items(
-                    C.item_code('Data File'),
-                    SearchTerms=str(x[0]).strip(),
-                    SearchLatestVersion=True)['Results'][0]['Label']['en-GB']
-    forChecking2.append((x[1], x[0], physicalInstanceLabel))
+according to len(set([x[0] for x in topics_to_create[0]])), there are 51 distinct datasets,
+so we should have 51 entries in referencesValidated
 
 
-forChecking=[]
-referencesValidated3=[]
-for y in ddiObjectsLevelOne:
+b1=validateLevelOneTopics(ddiObjectsLevelOne)
+def validateLevelOneTopics(levelOneTopics, ddiObjectsLevelZero):
+   forChecking=[]
+   referencesValidated3=[]
+   for y in levelOneTopics:
             level_one_identifier=y[0][0][2].text
             for z in [z1 for z1 in ddiObjectsLevelZero]:
                 level_zero_refs=find_all_references(z['Item'], 'uk.closer', level_one_identifier)
                 if len(level_zero_refs)==1:
-                    print("LEVEL ONE REFERENCE FOUND IN LEVEL  ZERO")
+                    print("LEVEL ONE REFERENCE FOUND IN LEVEL ZERO")
                     forChecking.append((get_element_by_name(y[0], 'VariableGroupName')['String'],
                     y[1],
                     get_element_by_name(z['Item'], 'Label')['Content']))
-                    referencesValidated3.append(y)
+                    physical_instance = C.search_items(
+                       C.item_code('Data File'),
+                       SearchTerms=str(y[1]).strip(),
+                       SearchLatestVersion=True)['Results']
+                    if len(physical_instance)==1:
+                        levelOneDatasetLabel=physical_instance[0]['Label']['en-GB']                   
+                    b=(get_element_by_name(z['Item'], 'Label')['Content'])
+                    if levelOneDatasetLabel==b:
+                       referencesValidated3.append(y)
+                       print("DATASET LABELS FOR LEVEL ONE AND THE LEVEL ZERO LABEL MATCH")
+                    else:
+                       print(levelOneDatasetLabel)
+                       print(b) 
+                       print("WRONG DATASET")
+   return referencesValidated3 
+
+forChecking2=[]
+for x in topics_to_create[0]:
+    if x[0]=='us4_d_newborn' and x[1][0:3]=='103':
+        print("HERE!")  
+    physical_instance_containing_variable=C.search_items(
+                    C.item_code('Data File'),
+                    SearchTerms=str(x[0]).strip(),
+                    SearchLatestVersion=True)['Results'][0]
+    physical_instance_search_set = [{
+                "agencyId": physical_instance_containing_variable['AgencyId'],
+                "identifier": physical_instance_containing_variable['Identifier'],
+                "version": physical_instance_containing_variable['Version']
+            }]
+    #print((x[0], x[1][0:3]))   
+    if x[0]=='us4_d_newborn' and x[1][0:3]=='103':
+        print("HERE!")     
+    levelOneGroups=C.search_items(C.item_code('Variable Group'), 
+                                   SearchTerms=[x[1][0:3]], 
+                                   SearchTargets=["Name"],
+                                   SearchSets=physical_instance_search_set)['Results']
+    print(len(levelOneGroups))
+                
 
 datasets=C.search_relationship_byobject(z['AgencyId'], z['Identifier'], Version=z['Version'], item_types=[C.item_code('Data File')])
                     for d in datasets:
@@ -345,7 +598,14 @@ datasets=C.search_relationship_byobject(z['AgencyId'], z['Identifier'], Version=
                             datasetName=item['ItemName'][language]
                             print("DATASET NAME: " + datasetName)
                     
-                    
+for x in topics_to_create[1]:
+    physicalInstanceLabel=C.search_items(
+                    C.item_code('Data File'),
+                    SearchTerms=str(x[0]).strip(),
+                    SearchLatestVersion=True)['Results'][0]
+    
+
+
 
 refsValidatedIds=[]
 for x in referencesValidated:
@@ -378,17 +638,28 @@ len(list(
     set([(x[1], x[2], x[3]['AgencyId'], x[3]['Identifier'], x[3]['Version']) for x in topics_to_create[2]])))
 
 
-uniqueL1GroupsToModify=list(
-    set([(x[1], x[2], x[3]['AgencyId'], x[3]['Identifier'], x[3]['Version']) for x in topics_to_create[2]]))
 
+
+THIS IS THE CORRECT CODE FOR DEALING WITH TOPICS_TO_CREAET[2]
+#uniqueL1GroupsToModify=list(
+#    set([(x[1], x[2], x[3]['AgencyId'], x[3]['Identifier'], x[3]['Version']) for x in topics_to_create[2]]))
+
+
+
+uniqueL1GroupsToModify=list([(x[0], x[1], x[2], x[3][2], x[4], x[3][0]) for x in topics_to_create[2]])
 new_l2_topics=[]
 modified_l1_topics=[]
 for x in uniqueL1GroupsToModify:
-    level_one_group_object = get_current_state_of_topic_group(x[2], 
-       x[3], modified_l1_topics, C, version=x[4])
+    print(x[3])
+    level_one_group_agency_id=x[3].split(":")[1]
+    level_one_group_identifier=x[3].split(":")[0]
+    level_one_group_version=x[3].split(":")[2]
+    level_one_group_object = get_current_state_of_topic_group(level_one_group_agency_id, 
+       level_one_group_identifier, modified_l1_topics, C, version=level_one_group_version)
     level_two_group_uuid=str(uuid.uuid4())
-    level_two_group_name=x[0]
-    topic_type=x[1]
+    level_two_group_name=x[1]
+    topic_type=x[2]
+    namespace_version=x[4]
     level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
     level_two_group_object=create_group(level_two_group_name, 
           level_two_group_label, level_two_group_uuid, namespace_version)
@@ -396,21 +667,116 @@ for x in uniqueL1GroupsToModify:
         namespace_version, topic_type, C)
     level_one_group_object[0].append(reference_to_level_two_group)
     update_list_of_topic_groups(level_one_group_object,
-                               x[2],
-                               x[3],
-                               x[4],
+                               level_one_group_agency_id,
+                               level_one_group_identifier,
+                               level_one_group_version,
                                topic_type,
-                               modified_l1_topics)
-    new_l2_topics.append(level_two_group_object)
-       
+                               modified_l1_topics,
+                               dataset=x[5])
+    new_l2_topics.append((level_two_group_object, x[5]))
+
+finalLevelOnes=[]
+levelZeroesForModifiedL1s=[]
+for x in modified_l1_topics:
+    level_zero_group=get_level_zero_group_2(x['AgencyId'], x['Identifier'], x['Version'], x['ItemType'], C)
+    if len([x for x in levelZeroesForModifiedL1s if x['Item'][0][2].text==level_zero_group[0][2].text])==0:
+       levelZeroesForModifiedL1s.append({"Identifier": x['Identifier'],
+           "AgencyId": x['AgencyId'],
+           "Version": x['Version'],
+           "ItemType": x['ItemType'],
+           "Item": level_zero_group})
+    finalLevelOnes.append((x['Item'], x['Dataset'], level_zero_group))
+
+#a1=validateLevelTwoTopics(ddiObjectsLevelTwo, ddiObjectsLevelOne, ddiObjectsLevelZero)
+#b1=validateLevelOneTopics(ddiObjectsLevelOne)
+
+a1=validateLevelTwoTopics(new_l2_topics, finalLevelOnes, levelZeroesForModifiedL1s)
+b1=validateLevelOneTopics(finalLevelOnes, levelZeroesForModifiedL1s)
+
 To test: 
 
 ddiObjectsLevelOne=[]
 ddiObjectsLevelTwo=[]
 
-we need to verify that the set of groups in ddiObjectsLevelOne is the same as in
-topics_to_create[0], and that the set of groups in ddiObjectsLevelTwo is the same as in
-topics_to_create[1]. We need to verify that the level zero group for the dataset
+1. We need to verify that all the groups in topics_to_create[0 and 1] do not currently exist.
+for y in topics_to_create[0]:
+    if len([(x[0], x[1]) for x in groupsInDatasets if x[0]==y[0] and x[1]==y[1]])!=0:
+        print("ERROR - LEVEL ONE TOPIC ALREADY EXISTS")
+for y in topics_to_create[1]:
+    if len([(x[0], x[1]) for x in groupsInDatasets if x[0]==y[0] and x[1]==y[1]])!=0:
+        print(y)
+        print("ERROR - LEVEL TWO TOPIC ALREADY EXISTS") 
+We also need to check that the level one topics in topics_to_create[2] do exist, and 
+that the level two topics they refer to do not exist.
+for y in topics_to_create[2]:
+    if len([(x[0], x[1]) for x in groupsInDatasets if x[1]==y[0] and x[0]==y[5]])==0:
+        print(y)
+        print("ERROR - LEVEL ONE TOPIC TO MODIFY DOES NOT EXIST")
+    if len([(x[1], x[1]) for x in groupsInDatasets if x[1]==y[1] and x[0]==y[5]])!=0:
+        print(y)
+        print("ERROR - LEVEL TWO TOPIC TO CREATE ALREADY EXISTS")
+
+       
+2. We need to verify that the set of groups in ddiObjectsLevelOne is the same as in
+topics_to_create[0]
+a=sorted(list(set([(x[0], x[1]) for x in topics_to_create[0]])))
+b=sorted(list(set([(x[1], get_element_by_name(x[0], 'VariableGroupName')['String']) for x in ddiObjectsLevelOne])))
+a==b
+
+3. We need to verify that the set of groups in ddiObjectsLevelTwo is the same as in
+topics_to_create[1]
+a=sorted(list(set([(x[0], x[1]) for x in topics_to_create[1]])))
+b=sorted(list(set([(x[1], get_element_by_name(x[0], 'VariableGroupName')['String']) for x in ddiObjectsLevelTwo])))
+set([(x[0], x[1][0:3]) for x in topics_to_create[1] if (x[0], x[1]) not in b])
+a==b
+4. We need to verify that all level two topics are referenced by a level one topic,
+which in turn is referenced by a level zero topic. We need to verify that the level
+one topic is the first three digits of the level two topic. We need to verify that
+the label of the level zero topic is the same as the label of the dataset within
+which the level two topic is found, and that the level zero topic is referenced
+by this dataset. We need to verify that this dataset has the same name as the 
+dataset name contained in the ddiObjectsLevelTwo tuple.
+
+DONE in validateLevelTwoTopics
+
+5. We need to verify that all level one topics are referenced by a level zero topic.
+We need to verify that the label of the level zero topic is the same as the label of 
+the dataset within which the level one topic is found, and that the level zero topic 
+is referenced by this dataset.
+
+DONE in validateLevelOneTopics
+
+1. If we're creating a topic, it doesn't already exist. If we're modifying a topic,
+it does already exist.
+2+3. We're creating all the topics we need to; we're not missing anything
+4 + 5. The newly created/modified topics are referenced by the appropriate ancestor items; where
+necessary we have created ancestor items.
+
+
+5. The newly created topics are in the correct datasets. IT IS IMPOSSIBLE TO DETERMINE
+THIS FOR ALL TOPICS, AS THERE IS NO WAY TO TELL WHAT DATASET SOME TOPICS BELONG TO, BECAUSE
+THERE IS NO PATH FROM A DATASET TO THE TOPIC VIA A LEVEL ZERO TOPIC. HOWEVER WE CAN
+SAY THAT THE DATASET DEFINED FOR AN ITEM IN THE INPUT FILE FOR CREATE_TOPICS HAS THE
+SAME LABEL AS THE LEVEL ZERO TOPIC WHICH REFERENCES THE NEW/MODIFIED LEVEL ONE/TWO TOPICS 
+
+5. We're only modifying the groups that need to be modified
+6. We're only adding references to the modified groups that need to be added
+
+
+FOR THE MODIFIED GROUPS:
+
+1. We need to verify that the set of modified groups is equal to the number of l1 groups
+that already exist for l2 groups.
+
+2. We need to verify that every modified group contains a reference to an object in
+the L2 to create.
+
+3. We need to verify that only the references in 2 have been added. We haven't added
+any other references, i.e. we get the difference between the modified l1 group and the
+original l1 group, and verify that the only references that have been added are
+references to newly created l2 groups.
+
+We need to verify that the level zero group for the dataset
 associated with the level one group contains a reference to the new level one group.
 We need to verify for the level two groups that their corresponding level one group
 contains a reference to them.
@@ -430,12 +796,22 @@ level_two_group_uuid=str(uuid.uuid4())
    reference_to_level_two_group=create_group_reference('uk.closer', group['Identifier'], group['Version'],
                            topic_type, C)
                         level_one_groups_to_modify.append(group, reference_to_level_one_group)
-                                         
+
+
+tempArray=[]
+for x in topics_to_create[2]:
+    datasets=C.query_set(x[3]['AgencyId'], x[3]['Identifier'],item_types=[C.item_code('Data File')], reverseTraversal=True)          
+    dataset_item=C.get_item_json(datasets[0]['Item1']['Item3'], datasets[0]['Item1']['Item1'], version=datasets[0]['Item1']['Item2']) 
+    tempArray.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], x[0]))
+
+[x for x in topics_to_create[1] if x[0]=='us5_e_indresp' and x[1]=='10702']
 
 missing=[]
-tempArray2=[(x[0], x[1]) for x in tempArray]        
+#tempArray2=[(x[0], x[1]) for x in topics_to_create[2]]
+#tempArray2=[(x[0], x[1]) for x in tempArray]        
 for topic in topics_to_create[1]:
-    if (topic[0], topic[1]) not in tempArray2:
+    #print((topic[0], topic[1][0:3]))
+    if (topic[0], topic[1][0:3]) in tempArray:
         print(topic)
         missing.append(topic)            
    print([x for x in level_two_topics_to_create if x[0]==topic[0] and x[1][0:3]==topic[1]])
