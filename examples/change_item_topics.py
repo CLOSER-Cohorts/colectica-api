@@ -20,6 +20,7 @@ from examples.lib.utility import (
     find_all_references,
     create_variable_reference,
     create_question_reference,
+    create_concept_reference,
     get_current_state_of_topic_group,
     update_list_of_topic_groups,
     get_urn_from_item,
@@ -108,6 +109,7 @@ groupsWithoutDatasets=[]
 groupsWithDatasets=[]
 groupsWithoutDatasetsVarsInMultiple=[]
 groupsWithoutDatasetsVarsInNone=[]
+groupsInDatasets=[]
 count=0
 investigateThese=[]
 for x in allLevelZeroes:
@@ -229,9 +231,7 @@ def create_topics(input_file_name, C):
     datasetToZeroGroupMappings={}
     all_variable_groups=C.search_items(C.item_code('Variable Group'), SearchLatestVersion=True)['Results']
     for topic_reassignment_details in data.iloc:
-        print(count)
         count=count+1  
-        print(topic_reassignment_details)
         url = topic_reassignment_details.iloc[2]
         agency_id = url.split("/")[4]
         identifier = url.split("/")[5]
@@ -260,7 +260,6 @@ def create_topics(input_file_name, C):
                 "identifier": physical_instance_containing_variable['Identifier'],
                 "version": physical_instance_containing_variable['Version']
             }]
-        print("STEP 1")
         source_topic = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[topic_type])
         if len(source_topic)>0:
            source_topic_item=C.get_item_json(source_topic[0]['Item1']['Item3'], source_topic[0]['Item1']['Item1'],
@@ -290,16 +289,9 @@ def create_topics(input_file_name, C):
                  version=level_zero_group_details[0]['Item1']['Item2'])['Item']
            level_zero_group=defusedxml.ElementTree.fromstring(level_zero_group_item)     
            source_topic_urn="" 
-        print("STEP 2")
-        #YOU NEED TO FIGURE OUT WHY THE BELOW CODE IS RETURNING AN EMPTY SET EVEN WHEN
-        #A TOPIC EXISTS IN A DATASET. ITS DUE TO THE DATASETS WHICH DON'T HAVE LEVEL ZERO TOPICS
-        #PERHAPS YOUCOULD UPDTAE THE CODE THAT GETS THE VARGROUPS IN DATASETS TO GET THE NAME AND LABEL FOR TOPICS AS WELL
-        #AND USE THAT HERE
         destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], 
             topic_type, physical_instance_search_set, C, datasetToZeroGroupMappings)
         if len(destination_topic)==0:
-                #you'll have to rewrite create group it needs to actually create the group
-                # NEED TO GET NAMESPACE
                 level_one_group_name = str(topic_reassignment_details.iloc[5])[0:3]
                 if len(str(topic_reassignment_details.iloc[5]))==5:
                     level_two_group_name = str(topic_reassignment_details.iloc[5])
@@ -307,16 +299,7 @@ def create_topics(input_file_name, C):
                     level_two_group_name = ""
                 item_element = defusedxml.ElementTree.fromstring(item['Item'])
                 namespace_version = get_namespace(item_element.tag).split(':')[2]
-                print("STEP 2.5")
-                print(topic_type)
-                print(level_one_group_name)
-                print(physical_instance_search_set)
-                #levelOneGroups=C.search_items(topic_type, 
-                #                   SearchTerms=[level_one_group_name], 
-                #                   SearchTargets=["Name"],
-                #                   SearchSets=physical_instance_search_set)['Results']
                 levelOneGroups=[x for x in groupsInDatasets if (x[0], x[1])==(str(containing_item_name), level_one_group_name)]
-                print("STEP 3")
                 if level_two_group_name!="" and (topic_reassignment_details.iloc[0], 
                         level_two_group_name) not in [(x[0], x[1]) for x in levelTwoGroupsToCreate]:
                        levelTwoGroupsToCreate.append((topic_reassignment_details.iloc[0],
@@ -345,6 +328,12 @@ THIS CODE CREATES THE NEW TOPIC GROUPS AND UPDATES THE LEVEL ZERO TOPIC GROUPS
 THERE IS AN ISSUE WITH EG https://discovery.closer.ac.uk/item/uk.closer/84383692-5097-4510-8463-985664c08c18
 WE NEED TO CREATE TOPIC 116 AND 11607 
 
+
+allConcepts=C.search_items(C.item_code('Concept'))['Results']
+# get rid of whitehall2 concept that doesn't properly define an itemname
+concepts=[x for x in allConcepts if list(x['ItemName'].keys())==['en-GB']]
+
+
 ddiObjectsLevelZero=[]
 ddiObjectsLevelOne=[]
 ddiObjectsLevelTwo=[]
@@ -369,8 +358,14 @@ for topic in topics_to_create[0]:
        zero_group_identifier, ddiObjectsLevelZero, C, version=zero_group_version)   
    namespace_version=topic[3]   
    level_one_group_label=get_group_label(level_one_group_name, topic_type, C)
+   concept=[x for x in concepts if x['ItemName']['en-GB']==level_one_group_name][0]
    level_one_group_object=create_group(level_one_group_name, 
-       level_one_group_label, level_one_group_uuid, namespace_version)
+       level_one_group_label, 
+       level_one_group_uuid, 
+       namespace_version,
+       concept['AgencyId'], 
+       concept['Identifier'], 
+       concept['Version'])
    level_one_group_reference=create_group_reference('uk.closer', level_one_group_uuid, 1, namespace_version, topic_type, C)
    level_zero_group_object.append(level_one_group_reference)
    update_list_of_topic_groups(level_zero_group_object,
@@ -759,11 +754,21 @@ THERE IS NO PATH FROM A DATASET TO THE TOPIC VIA A LEVEL ZERO TOPIC. HOWEVER WE 
 SAY THAT THE DATASET DEFINED FOR AN ITEM IN THE INPUT FILE FOR CREATE_TOPICS HAS THE
 SAME LABEL AS THE LEVEL ZERO TOPIC WHICH REFERENCES THE NEW/MODIFIED LEVEL ONE/TWO TOPICS 
 
-5. We're only modifying the groups that need to be modified
-6. We're only adding references to the modified groups that need to be added
 
 
-FOR THE MODIFIED GROUPS:
+FOR THE MODIFIED GROUPS:  YOU NEED TO DO THIS ON MONDAY MORNING. THEN YOU NEED TO SIMPLIFY
+THE CODE THAT CREATES THE TOPICS, AS MUCH AS POSSIBLE, SO YOU CAN EASILY REUSE IT, AND
+STEP THROUGH IT TO UNDERSTAND WHAT IT'S DOING, 
+
+THEN YOU'LL HAVE TO PERFORM THE SAME OPERATIONS FOR QUESTIONS! SO YOU NEED TO MAKE SURE 
+THAT THIS CODE CAN BE PARAMETERISED TO WORK FOR QUESTIONS AS WELL AS VARIABLES.
+
+THEN YOU CAN FINALLY RUNNING THE CODE TO CREATE THE TOPICS, FOR BOTH QUESTIONS AND VARIABLES.
+
+THEN YOU CAN RUN THE UPDATE_TOPICS FUNCTION TWICE (FOR BOTH QUESTIONS AND): ONCE TO MOVE ITEMS TO NEW TOPICS, AND
+THEN AGAIN TO VERIFY THAT THE OPERATION HAS WORKED.
+
+
 
 1. We need to verify that the set of modified groups is equal to the number of l1 groups
 that already exist for l2 groups.
@@ -776,10 +781,6 @@ any other references, i.e. we get the difference between the modified l1 group a
 original l1 group, and verify that the only references that have been added are
 references to newly created l2 groups.
 
-We need to verify that the level zero group for the dataset
-associated with the level one group contains a reference to the new level one group.
-We need to verify for the level two groups that their corresponding level one group
-contains a reference to them.
 
 for x in topics_to_create[0]:
     level_zero_group=
