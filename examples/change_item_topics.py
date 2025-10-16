@@ -101,30 +101,31 @@ allLevelOneGroups=C.search_items(topic_type,
 
 
 # THIS IS THE CODE THAT GETS ALL DATASETS AND THE GROUPS IN THEM
-allLevelZeroes=C.search_relationship_bysubject(
+def create_group_lookup_dict(C):
+    allLevelZeroes=C.search_relationship_bysubject(
               'uk.closer', 
               '5c669cb3-a633-4324-93fb-ed2695b44072', 
               item_types=[C.item_code('Variable Group')])       
-groupsWithoutDatasets=[]
-groupsWithDatasets=[]
-groupsWithoutDatasetsVarsInMultiple=[]
-groupsWithoutDatasetsVarsInNone=[]
-groupsInDatasets=[]
-count=0
-investigateThese=[]
-for x in allLevelZeroes:
-    print(count)
-    count=count+1
-    dataset=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
-    varGroups=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable Group')])
-    if len(dataset)==0:
-        datasetVars=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable')])
-        c=[]
-        for y in datasetVars:
-            b=C.query_set(y['Item1']['Item3'], y['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
-            for z in b:
-               c.append(z['Item1']['Item3'] + ":" + z['Item1']['Item1'] + ":" + str(z['Item1']['Item2']))
-        if len(set(c))==1:
+    groupsWithoutDatasets=[]
+    groupsWithDatasets=[]
+    groupsWithoutDatasetsVarsInMultiple=[]
+    groupsWithoutDatasetsVarsInNone=[]
+    groupsInDatasets=[]
+    count=0
+    investigateThese=[]
+    for x in allLevelZeroes:
+        print(count)
+        count=count+1
+        dataset=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
+        varGroups=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable Group')])
+        if len(dataset)==0:
+            datasetVars=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable')])
+            c=[]
+            for y in datasetVars:
+                b=C.query_set(y['Item1']['Item3'], y['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
+                for z in b:
+                    c.append(z['Item1']['Item3'] + ":" + z['Item1']['Item1'] + ":" + str(z['Item1']['Item2']))
+            if len(set(c))==1:
                #groupsWithoutDatasets.append(c[0])
                print("STEP1")
                dataset_item=C.get_item_json(z['Item1']['Item3'], z['Item1']['Item1'], version=z['Item1']['Item2'])
@@ -133,13 +134,13 @@ for x in allLevelZeroes:
                    var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
                    groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
                         var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version']), x))
+            else:
+                investigateThese.append(x) 
         else:
-            investigateThese.append(x) 
-    else:
-        dataset_item=C.get_item_json(dataset[0]['Item1']['Item3'], dataset[0]['Item1']['Item1'], version=dataset[0]['Item1']['Item2'])
-        for varGroup in varGroups[1:]:
-             var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-             groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
+            dataset_item=C.get_item_json(dataset[0]['Item1']['Item3'], dataset[0]['Item1']['Item1'], version=dataset[0]['Item1']['Item2'])
+            for varGroup in varGroups[1:]:
+                 var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+                 groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
                     var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
 
 groupsInDatasets=groupsWithDatasets+groupsWithoutDatasets
@@ -213,7 +214,276 @@ def get_groups_in_datasets(input_file_name, C):
         print(count2)
     return(identifiers)    
         
+def create_question_topics(input_file_name, C):
+    data = pd.read_excel(input_file_name)
+    for topic_reassignment_details in data.iloc:
+        count=count+1  
+        mismatches=[]
+        variable_topic= topic_reassignment_details.iloc[4]
+        url = topic_reassignment_details.iloc[2]
+        agency_id = url.split("/")[4]
+        identifier = url.split("/")[5]
+        if len(url.split("/")) == 7:
+            version = url.split("/")[6]
+            item = C.get_item_xml(agency_id, identifier, version=version)
+        else:
+            item = C.get_item_xml(agency_id, identifier)
+        allRelatedQuestions= C.search_relationship_bysubject(agency_id, identifier, version, 
+            C.item_code("Question"), Descriptions=True).json()
+        for relatedQuestion in allRelatedQuestions:
+            relatedQuestionGroups = C.search_relationship_byobject(relatedQuestion['AgencyId'], 
+            relatedQuestion['Identifier'], Version=relatedQuestion['Version'], 
+            item_types=C.item_code("Question Group"), Descriptions=True)
+            for relatedQuestionGroup in relatedQuestionGroups:
+                if relatedQuestionGroup['ItemName']['en-GB']!=variable_topic:
+                    print("Mismatched var/question topic:")
+                    print topic_reassignment_details
+                    mismatches.append(topic_reassignment_details)
+  
+generate_urn_dataframe_for_questions_from_variables('../test.xlsx', C)
+
+
+WEDNESDAY MORNING:
+SEE IF I CAN USE A ONE-LINER TO GET QUESTION GROUPS FROM AN INSTRUMENT USING QUERYSET, SEARCH_ITEMS, ETC
+IS IT NECESSARY? MAYBE I JUST GATHER ALL FUNCTIONS TO WORK WITH INPUT DATA I HAVE
+REMEMBER YOU ONLY HAVE A LIST OF VARIABLES, YOU DON'T HAVE QUESTIONS SO WHY BOTHER PREMATURE OPTIMISING
+
+MAYBE HAVE ONE FUNCTION THAT PRESUMES WE'RE GOING THRU A LIST OF VARS, AND AT A POINT GETS
+RELATED QUESTIOMS, CONTAINIG ITEM, AND THEN USES THAT AS INPUT TO CODE THAT IS SAME FOR VARS?
+
+LOOK AT A YOUTUBE VIDEO FOR ADAM OPTIMISATION
+REMIND YOURSELF WHAT BATCH NORMALISATION IS
+TRY AND UNDERSTAND HOW INPUT CHANNELS IN CNNS WORK
+
+THURSDAY MORNING, GATHER TOGETHER THE CODE THAT CREATES THE MISSING TOPICS FOR VARIABLES
+AND GENERATES THE URN DATAFRAME FOR VARIABLES AND QUESTIONS
+IF YOU RUN THE CODE THAT MOVES TOPICS TWICE, YOU SHOULD GET A MESSAGE SAYING THAT ALL
+ITEMS ARE IN THE TARGET TOPICS, BUT THIS IS DONE IN MEMORY
+
+ARE QUESTIONS BEING ADDED CORRECTLY?
+
+def generate_urn_dataframe_for_questions_from_variables(input_file_name, C):
+    readInFile  
+    createUrnFrame
+    iterateThroughFIle
+       read line from file
+       get variable
+       get question(s) related to variable
+       get urn from item
+       get containing item
+       search for source+target groups in containing_item 
+       update urn frame with source+target group urns
+
+
+urns={
+        "itemUrns": [],
+        "sourceTopicGroups": [],
+        "destinationTopicGroups": []
+    }
+def update(obj):
+    obj['itemUrns'].append(1)
+
+
+def update_urns_list(urns, item, containing_item, topic_type, target_topic):
+    containing_item_details = [{"agencyId": containing_item['AgencyId'],
+                      "identifier": containing_item['Identifier'],
+                      "version": containing_item['Version'],
+                }]
+    item_urn = get_urn_from_item(item)
+    source_groups = C.search_relationship_byobject(item['AgencyId'], 
+                   item['Identifier'], Version=item['Version'], 
+                   item_types=topic_type, Descriptions=True)
+    for source_group in source_groups:
+        source_topic_urn = get_urn_from_item(source_group)
+    if len(source_groups)==0:
+        source_topic_urn = ""
+    destination_group=get_item_from_topic_name(str(target_topic), 
+            topic_type, containing_item_details, C) 
+    if len(destination_group)==1:
+            destination_topic_urn = get_urn_from_item(destination_group[0])
+            urns['itemUrns'].append(item_urn)
+            urns['sourceTopicGroups'].append(source_topic_urn)
+            urns['destinationTopicGroups'].append(destination_topic_urn)  
+    else:
+            print(('Error getting destination group item: expected to find 1 item, but instead ' 
+                  f'found {len(destination_group)}'))        
+
+def generate_urn_dataframe_for_questions_and_variables(input_file_name, C):  
+    print(f"Reading topic reassignments from {input_file_name}")
+    data = pd.read_excel(input_file_name)
+    urns={
+        "itemUrns": [],
+        "sourceTopicGroups": [],
+        "destinationTopicGroups": []
+    }
+    count=1
+    datasetToZeroGroupMappings={}
+    # Iterate through the rows in the spreadsheet. Each row contains details of a topic
+    # reassignment for an item...
+    for topic_reassignment_details in data.iloc:
+        print(count)
+        count=count+1
+        print(topic_reassignment_details)
+        dataset_name = topic_reassignment_details.iloc[0]
+        variable_topic= topic_reassignment_details.iloc[4]
+        target_topic= topic_reassignment_details.iloc[5]
+        url = topic_reassignment_details.iloc[2]
+        agency_id = url.split("/")[4]
+        identifier = url.split("/")[5]
+        item = C.get_item_xml(agency_id, identifier)
+        version = item['Version']
+        physical_instance_containing_variable = C.search_items(
+                    C.item_code('Data File'),
+                    SearchTerms=str(dataset_name).strip(),
+                    SearchLatestVersion=True)['Results']
+        if len(physical_instance_containing_variable)==1:
+            update_urns_list(urns, item, physical_instance_containing_variable[0], 
+               C.item_code('Variable Group'), target_topic)
+        allRelatedQuestions= C.search_relationship_bysubject(agency_id, identifier, Version=version, 
+            item_types=C.item_code("Question"), Descriptions=True)
+        for relatedQuestion in allRelatedQuestions:
+            question_sets=C.query_set(relatedQuestion['AgencyId'], 
+               relatedQuestion['Identifier'], 
+               version=relatedQuestion['Version'], 
+               reverseTraversal=True, 
+               item_types=[C.item_code('Data Collection')])
+            if len(set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in question_sets] ))==1:
+                latest_version_of_question_set = max([x['Item1']['Item2'] for x in question_sets])
+                containing_item=C.get_item_xml(question_sets[0]['Item1']['Item3'], 
+                    question_sets[0]['Item1']['Item1'],
+                    version=latest_version_of_question_set)
+                update_urns_list(urns, relatedQuestion, containing_item, 
+                    C.item_code('Question Group'), target_topic) 
+    return (pd.DataFrame(urns))
+
+
+
+
+def generate_urn_dataframe_for_questions_from_variables(input_file_name, C):  
+   count=0
+   data = pd.read_excel('../test.xlsx')
+   mismatches=[]
+   alreadyInTarget=[]
+   destinationTopicDoesNotExist=[]
+   urn_data_frame={
+        "itemUrns": [],
+        "sourceTopicGroups": [],
+        "destinationTopicGroups": []
+        }
+   for topic_reassignment_details in data.iloc:
+        count=count+1
+        print(count)
+        variable_topic= topic_reassignment_details.iloc[4]
+        target_variable_topic= topic_reassignment_details.iloc[5]
+        containing_item_name = topic_reassignment_details.iloc[0]
+        url = topic_reassignment_details.iloc[2]
+        agency_id = url.split("/")[4]
+        identifier = url.split("/")[5]
+        item = C.get_item_xml(agency_id, identifier)
+        version = item['Version']
+        physical_instance_containing_variable = C.search_items(
+                    C.item_code('Data File'),
+                    SearchTerms=str(containing_item_name).strip(),
+                    SearchLatestVersion=True)['Results']
+        allRelatedQuestions= C.search_relationship_bysubject(agency_id, identifier, Version=version, 
+            item_types=C.item_code("Question"), Descriptions=True)
+        for relatedQuestion in allRelatedQuestions:
+            question_sets=C.query_set(relatedQuestionGroups[0]['AgencyId'], 
+               relatedQuestionGroups[0]['Identifier'], 
+               version=relatedQuestionGroups[0]['Version'], 
+               reverseTraversal=True, 
+               item_types=[C.item_code('Data Collection')])
+            if len(question_sets)==1:   
+                containing_item=C.get_item_xml(question_sets[0]['Item1']['Item3'], 
+                    question_set[0]['Item1']['Item1'],
+                    question_set[0]['Item1']['Item2'])
+                
+                urns=get_urns(item, containing_item, C.item_code('Question Group'), target_variable_topic) 
+   return (pd.DataFrame(urn_data_frame), mismatches, alreadyInTarget)
+            
+            item_urn = get_urn_from_item(relatedQuestion)# "urn:ddi:" + relatedQuestion['AgencyId'] + ":" + relatedQuestion['Identifier'] + ":" + str(relatedQuestion['Version'])
+                source_question_groups = C.search_relationship_byobject(relatedQuestion['AgencyId'], 
+                   relatedQuestion['Identifier'], Version=relatedQuestion['Version'], 
+                   item_types=C.item_code("Question Group"), Descriptions=True)   
+                for source_question_group in source_question_groups:
+                    if str(variable_topic).strip()=="no_topic":
+                        source_topic_urn=""
+                    else:
+                        source_topic_urn = get_urn_from_item(source_question_group)# "urn:ddi:" + relatedQuestionGroup['AgencyId'] + ":" + relatedQuestionGroup['Identifier'] + ":" + str(relatedQuestionGroup['Version'])
+                    if source_question_group['ItemName']['en-GB']!=str(variable_topic) and source_question_group['ItemName']['en-GB']!=str(target_variable_topic):
+                        mismatches.append(topic_reassignment_details)
+                    if source_question_group['ItemName']['en-GB']==target_variable_topic:
+                        alreadyInTarget.append(topic_reassignment_details)
+                    destination_question_group=get_item_from_topic_name(str(target_variable_topic), C.item_code('Question Group'), containing_item, C)
+                    if len(destination_question_group)==0:
+                        destinationTopicDoesNotExist.append(topic_reassignment_details)
+                    elif len(destination_question_group)==1:
+                        destination_topic_urn = get_urn_from_item(destination_question_group[0])#"urn:ddi:" + destination_question_group[0]['AgencyId'] + ":" + destination_question_group[0]['Identifier'] + ":" + str(destination_question_group[0]['Version'])
+                        urn_data_frame['itemUrns'].append(item_urn)
+                        urn_data_frame['sourceTopicGroups'].append(source_topic_urn)
+                        urn_data_frame['destinationTopicGroups'].append(destination_topic_urn)                
+   return (pd.DataFrame(urn_data_frame), mismatches, alreadyInTarget)
+        
     
+YOU CAN ASSUME: 
+APART FROM ONE MISMATCH, QUESTIONS HAVE THE SAME TOPIC AS VARS
+NOW YOU WRITE A FUNCTION THAT GOES THROUGH THE LIST, AND ENSURES
+THAT THE NEW TOPICS FOR ALL THE QUESTIONS EXIST. TO DO THIS, GO TO THE LEVEL ZERO
+TOPIC FOR A QUESTION, THEN DO A SEARCH WITHIN IT USING SEARCHSET FOR A TOPIC WITH
+THE APPROPRIATE NAME?
+
+REPURPOSE THE ABOVE CODE SO IT IS REPLICATING CREATE DATA FRAME FOR VARIABLES
+NOW SEE IF YOU 
+
+allRelatedQuestions = C.search_relationship_bysubject(
+              'uk.iser.ukhls', 
+              '6a9dccb8-f2da-491c-8428-2fcc8796f22d', 
+              item_types=[C.item_code('Question')],
+              Descriptions=True) 
+
+for relatedQuestion in allRelatedQuestions:
+    relatedQuestionGroups = C.search_relationship_byobject(relatedQuestion['AgencyId'], 
+        relatedQuestion['Identifier'], Version=relatedQuestion['Version'], 
+        item_types=C.item_code("Question Group"), Descriptions=True)
+           
+    
+allQuestions=C.search_items(C.item_code('Question'))['Results']
+count=0
+allAncestorSets=[]
+questionsNoTopics=[]
+for question in allQuestions:
+   print(f"{count} of {len(allQuestions)}")
+   count=count+1
+   topics=C.search_relationship_byobject(question['AgencyId'], 
+      question['Identifier'], 
+      Version=question['Version'], 
+      item_types=[C.item_code('Question Group')],
+      Descriptions=True)
+   if len(topics)==0:
+       questionsNoTopics.append(question)
+   for topic in topics:
+       ancestors=C.query_set(topic['AgencyId'], topic['Identifier'], version=topic['Version'], reverseTraversal=True)    
+       ancestorTypes=set([C.item_code_inv(x['Item2']) for x in ancestors])
+       allAncestorSets.append(ancestorTypes)
+
+GO THROUGH ALL VARS IN LIST. GET THE EQUIVALENT QUESTIONS. CHECK TO SEE IF THEY ARE IN
+THE SAME TOPICS AS VARS. IF NOT, CHECK TO SEE IF THE TARGET TOPIC EXISTS FOR THAT QUESTION
+
+
+set([str(x) for x in allAncestorSets])
+C.query_set(topic['AgencyId'], topic['Identifier'], version=topic['Version'], reverseTraversal=True)
+
+question_sets=C.query_set('uk.closer', '25fa93c8-2ebc-47a9-8d9c-f21c21f81810', version=1, reverseTraversal=True, 
+   item_types=[C.item_code('Question Set')])
+if len(question_sets)==1:   
+    containing_item=[{
+                "agencyId": question_sets[0]['Item1']['Item3'],
+                "identifier": question_set[0]['Item1']['Item1'],
+                "version": question_set[0]['Item1']['Item2']
+            }]
+    get_item_from_topic_name('111', C.item_code('Question Group'), containing_item, C)
+
+C.query_set('uk.iser.ukhls', '726c812d-87ed-467d-aa8c-668670a9713b', version=1, reverseTraversal=False, item_types=[C.item_code('Question')])
 
 def create_topics(input_file_name, C):
     """Method for generating input for code that updates topics. The code iterates through 
@@ -229,7 +499,6 @@ def create_topics(input_file_name, C):
     updated_topic_groups = []
     level_zero_groups=[]
     datasetToZeroGroupMappings={}
-    all_variable_groups=C.search_items(C.item_code('Variable Group'), SearchLatestVersion=True)['Results']
     for topic_reassignment_details in data.iloc:
         count=count+1  
         url = topic_reassignment_details.iloc[2]
@@ -329,66 +598,69 @@ THERE IS AN ISSUE WITH EG https://discovery.closer.ac.uk/item/uk.closer/84383692
 WE NEED TO CREATE TOPIC 116 AND 11607 
 
 
-allConcepts=C.search_items(C.item_code('Concept'))['Results']
-# get rid of whitehall2 concept that doesn't properly define an itemname
-concepts=[x for x in allConcepts if list(x['ItemName'].keys())==['en-GB']]
-
-
-ddiObjectsLevelZero=[]
-ddiObjectsLevelOne=[]
-ddiObjectsLevelTwo=[]
-tempArray=[]
-for topic in topics_to_create[0]:
-   level_one_group_uuid=str(uuid.uuid4())
-   level_one_group_name=topic[1]
-   topic_type=C.item_code('Variable Group')
-   if type(topic[2]) is list:
-        level_zero_group_urn=f"urn:ddi:{topic[2][0]['Item1']['Item3']}:{topic[2][0]['Item1']['Item1']}:{str(topic[2][0]['Item1']['Item3'])}"
-   else:       
-        level_zero_group_urn=topic[2][0][0].text
-   zero_group_agency_id = level_zero_group_urn.split(":")[2]
-   zero_group_identifier = level_zero_group_urn.split(":")[3]
-   zero_group_version = level_zero_group_urn.split(":")[4]
-   # THERES SOMETHING WRONG WITH THE CODE THAT EITHER GETS THE LEVEL ZERO OBJECT OR UPDATES
-   # THE LEVEL ZERO OBJECT. NEWER ITEMS
-   # ARE OVERWRITING OLDER ONES EG  for topic in topics_to_create[0][9:10], NO PROB BUT 9:11, PROB
-   # DOES NOT HAPPEN IF YOU COPY AND PASTE FROM UTILITY INTO TERMINAL, BUT IF YOU IMPORT, IT DOES
-   # MIGHT NEED TO RESTART TERMINAL
-   level_zero_group_object = get_current_state_of_topic_group(zero_group_agency_id, 
-       zero_group_identifier, ddiObjectsLevelZero, C, version=zero_group_version)   
-   namespace_version=topic[3]   
-   level_one_group_label=get_group_label(level_one_group_name, topic_type, C)
-   concept=[x for x in concepts if x['ItemName']['en-GB']==level_one_group_name][0]
-   level_one_group_object=create_group(level_one_group_name, 
-       level_one_group_label, 
-       level_one_group_uuid, 
-       namespace_version,
-       concept['AgencyId'], 
-       concept['Identifier'], 
-       concept['Version'])
-   level_one_group_reference=create_group_reference('uk.closer', level_one_group_uuid, 1, namespace_version, topic_type, C)
-   level_zero_group_object.append(level_one_group_reference)
-   update_list_of_topic_groups(level_zero_group_object,
+def create_ddi_objects_with_new_level_one_topics(topics_to_create, C):
+   allConcepts=C.search_items(C.item_code('Concept'))['Results']
+   # get rid of whitehall2 concept that doesn't properly define an itemname
+   concepts=[x for x in allConcepts if list(x['ItemName'].keys())==['en-GB']]
+   ddiObjectsLevelZero=[]
+   ddiObjectsLevelOne=[]
+   ddiObjectsLevelTwo=[]
+   tempArray=[]
+   for topic in topics_to_create[0]:
+      level_one_group_uuid=str(uuid.uuid4())
+      level_one_group_name=topic[1]
+      topic_type=C.item_code('Variable Group')
+      if type(topic[2]) is list:
+          level_zero_group_urn=f"urn:ddi:{topic[2][0]['Item1']['Item3']}:{topic[2][0]['Item1']['Item1']}:{str(topic[2][0]['Item1']['Item3'])}"
+      else:       
+          level_zero_group_urn=topic[2][0][0].text
+      zero_group_agency_id = level_zero_group_urn.split(":")[2]
+      zero_group_identifier = level_zero_group_urn.split(":")[3]
+      zero_group_version = level_zero_group_urn.split(":")[4]
+      # THERES SOMETHING WRONG WITH THE CODE THAT EITHER GETS THE LEVEL ZERO OBJECT OR UPDATES
+      # THE LEVEL ZERO OBJECT. NEWER ITEMS
+      # ARE OVERWRITING OLDER ONES EG  for topic in topics_to_create[0][9:10], NO PROB BUT 9:11, PROB
+      # DOES NOT HAPPEN IF YOU COPY AND PASTE FROM UTILITY INTO TERMINAL, BUT IF YOU IMPORT, IT DOES
+      # MIGHT NEED TO RESTART TERMINAL
+      level_zero_group_object = get_current_state_of_topic_group(zero_group_agency_id, 
+          zero_group_identifier, ddiObjectsLevelZero, C, version=zero_group_version)   
+      namespace_version=topic[3]   
+      level_one_group_label=get_group_label(level_one_group_name, topic_type, C)
+      concept=[x for x in concepts if x['ItemName']['en-GB']==level_one_group_name][0]
+      level_one_group_object=create_group(level_one_group_name, 
+          level_one_group_label, 
+          level_one_group_uuid, 
+          namespace_version,
+          concept['AgencyId'], 
+          concept['Identifier'], 
+          concept['Version'])
+      level_one_group_reference=create_group_reference('uk.closer', level_one_group_uuid, 1, namespace_version, topic_type, C)
+      level_zero_group_object.append(level_one_group_reference)
+      update_list_of_topic_groups(level_zero_group_object,
                                zero_group_agency_id,
                                zero_group_identifier,
                                zero_group_version,
                                topic_type,
                                ddiObjectsLevelZero)                           
-   level_two_groups=[x for x in topics_to_create[1] if x[0]==topic[0] and x[1][0:3]==topic[1]]
-   #if len(level_two_groups)==0:
-   #   print(topic)
-   for level_two_group in level_two_groups:
-       level_two_group_uuid=str(uuid.uuid4())
-       level_two_group_name=level_two_group[1]
-       level_two_group_label=get_group_label(level_two_group_name, 
-          topic_type, C)
-       level_two_group_object=create_group(level_two_group_name, 
-          level_two_group_label, level_two_group_uuid, namespace_version)
-       reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
-           namespace_version, topic_type, C)
-       level_one_group_object[0].append(reference_to_level_two_group)
-       ddiObjectsLevelTwo.append((level_two_group_object, level_two_group[0]))
-   ddiObjectsLevelOne.append((level_one_group_object, topic[0], topic[2]))
+      level_two_groups=[x for x in topics_to_create[1] if x[0]==topic[0] and x[1][0:3]==topic[1]]
+      #if len(level_two_groups)==0:
+      #   print(topic)
+      for level_two_group in level_two_groups:
+          level_two_group_uuid=str(uuid.uuid4())
+          level_two_group_name=level_two_group[1]
+          level_two_group_label=get_group_label(level_two_group_name, 
+             topic_type, C)
+          level_two_group_object=create_group(level_two_group_name, 
+             level_two_group_label, level_two_group_uuid, namespace_version)
+          reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
+             namespace_version, topic_type, C)
+          level_one_group_object[0].append(reference_to_level_two_group)
+          ddiObjectsLevelTwo.append((level_two_group_object, level_two_group[0]))
+      ddiObjectsLevelOne.append((level_one_group_object, topic[0], topic[2]))
+    return(ddiObjectsLevelZero, ddiObjectsLevelOne, ddiObjectsLevelTwo)
+
+
+
 NOT THE BELOW, IT'S OUTDATED
 for topic in topics_to_create[2]:
     level_two_groups=[x for x in topics_to_create[1] if x[0]==topic[5] and x[1][0:3]==topic[0]]
@@ -440,7 +712,7 @@ by this dataset. We need to verify that this dataset has the same name as the
 dataset name contained in the ddiObjectsLevelTwo tuple.
 a1=validateLevelTwoTopics(new_l2_topics, finalLevelOnes, levelZeroesForModifiedL1s)
 
-def validateLevelTwoTopics(levelTwoTopics, levelOneTopics, levelZeroTopics):
+def validateLevelTwoTopics(levelZeroTopics, levelOneTopics, levelTwoTopics):
    referencesValidated=[]
    levelTwoNotInOne=[]
    count=0
@@ -535,7 +807,7 @@ so we should have 51 entries in referencesValidated
 
 
 b1=validateLevelOneTopics(ddiObjectsLevelOne)
-def validateLevelOneTopics(levelOneTopics, ddiObjectsLevelZero):
+def validateLevelOneTopics(ddiObjectsLevelZero, levelOneTopics):
    forChecking=[]
    referencesValidated3=[]
    for y in levelOneTopics:
@@ -640,35 +912,44 @@ THIS IS THE CORRECT CODE FOR DEALING WITH TOPICS_TO_CREAET[2]
 #    set([(x[1], x[2], x[3]['AgencyId'], x[3]['Identifier'], x[3]['Version']) for x in topics_to_create[2]]))
 
 
-
-uniqueL1GroupsToModify=list([(x[0], x[1], x[2], x[3][2], x[4], x[3][0]) for x in topics_to_create[2]])
-new_l2_topics=[]
-modified_l1_topics=[]
-for x in uniqueL1GroupsToModify:
-    print(x[3])
-    level_one_group_agency_id=x[3].split(":")[1]
-    level_one_group_identifier=x[3].split(":")[0]
-    level_one_group_version=x[3].split(":")[2]
-    level_one_group_object = get_current_state_of_topic_group(level_one_group_agency_id, 
-       level_one_group_identifier, modified_l1_topics, C, version=level_one_group_version)
-    level_two_group_uuid=str(uuid.uuid4())
-    level_two_group_name=x[1]
-    topic_type=x[2]
-    namespace_version=x[4]
-    level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
-    level_two_group_object=create_group(level_two_group_name, 
+def create_ddi_objects_with_modified_level_one_topics(topics_to_create, C):
+   uniqueL1GroupsToModify=list([(x[0], x[1], x[2], x[3][2], x[4], x[3][0]) for x in topics_to_create[2]])
+   new_l2_topics=[]
+   modified_l1_topics=[]
+   levelZeroesForModifiedL1s=[]
+   for x in uniqueL1GroupsToModify:
+       print(x[3])
+       level_one_group_agency_id=x[3].split(":")[1]
+       level_one_group_identifier=x[3].split(":")[0]
+       level_one_group_version=x[3].split(":")[2]
+       level_one_group_object = get_current_state_of_topic_group(level_one_group_agency_id, 
+          level_one_group_identifier, modified_l1_topics, C, version=level_one_group_version)
+       level_two_group_uuid=str(uuid.uuid4())
+       level_two_group_name=x[1]
+       topic_type=x[2]
+       namespace_version=x[4]
+       level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
+       level_two_group_object=create_group(level_two_group_name, 
           level_two_group_label, level_two_group_uuid, namespace_version)
-    reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
-        namespace_version, topic_type, C)
-    level_one_group_object[0].append(reference_to_level_two_group)
-    update_list_of_topic_groups(level_one_group_object,
+       reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
+          namespace_version, topic_type, C)
+       level_zero_group=get_level_zero_group_2(x['AgencyId'], x['Identifier'], x['Version'], x['ItemType'], C)
+       if len([x for x in levelZeroesForModifiedL1s if x['Item'][0][2].text==level_zero_group[0][2].text])==0:
+          levelZeroesForModifiedL1s.append({"Identifier": x['Identifier'],
+              "AgencyId": x['AgencyId'],
+              "Version": x['Version'],
+              "ItemType": x['ItemType'],
+              "Item": level_zero_group}) 
+       level_one_group_object[0].append(reference_to_level_two_group)
+       update_list_of_topic_groups(level_one_group_object,
                                level_one_group_agency_id,
                                level_one_group_identifier,
                                level_one_group_version,
                                topic_type,
                                modified_l1_topics,
                                dataset=x[5])
-    new_l2_topics.append((level_two_group_object, x[5]))
+       new_l2_topics.append((level_two_group_object, x[5]))
+    return(levelZeroesForModifiedL1s, modified_l1_topics, new_l2_topics)
 
 finalLevelOnes=[]
 levelZeroesForModifiedL1s=[]
@@ -836,6 +1117,7 @@ def generate_urn_dataframe(input_file_name, C):
     }
     count=1
     groupsToCreate=[]
+    datasetToZeroGroupMappings={}
     # Iterate through the rows in the spreadsheet. Each row contains details of a topic
     # reassignment for an item...
     for topic_reassignment_details in data.iloc:
@@ -865,68 +1147,22 @@ def generate_urn_dataframe(input_file_name, C):
                     containing_item_type,
                     SearchTerms=str(containing_item_name).strip(),
                     SearchLatestVersion=True)['Results']
-        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], topic_type, physical_instance_containing_variable, C)
+        source_topic = get_item_from_topic_name(topic_reassignment_details.iloc[4], 
+           topic_type, physical_instance_containing_variable, C, datasetToZeroGroupMappings)
         print(source_topic)
         if len(source_topic)>0:
-           level_zero_group=get_level_zero_group(source_topic[0], topic_type, C)
            source_topic_urn=get_urn_from_item(source_topic[0])
         else:
-           level_zero_group=None
            source_topic_urn="" 
-        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5], topic_type, physical_instance_containing_variable, C)
-        if len(destination_topic)==0:
-                #you'll have to rewrite create group it needs to actually create the group
-                # NEED TO GET NAMESPACE
-                level_two_group_name = str(topic_reassignment_details.iloc[5])[0:3]
-                if len(str(topic_reassignment_details.iloc[5]))==5:
-                    level_three_group_name = str(topic_reassignment_details.iloc[5])
-                else:
-                    level_three_group_name = ""
-                item_element = defusedxml.ElementTree.fromstring(item['Item'])
-                namespace_version = get_namespace(item_element.tag).split(':')[2]
-                levelTwoGroups=C.search_items(topic_type, 
-                                   SearchTerms=[level_two_group_name], 
-                                   SearchTargets=["Name"],
-                                   SearchSets=physical_instance_containing_variable)['Results']
-                if len(levelTwoGroups)==0:
-                    level_two_group_uuid=str(uuid.uuid4())
-                    level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
-                    level_two_group_object=create_group(level_two_group_name, 
-                         level_two_group_label, level_two_group_uuid, namespace_version)  
-                    # YOU NOW NEED TO GET THE LEVEL ONE GROUP AND ADD A REFERENCE TO IT,
-                    # TO THE LEVEL TWO GROUP. WHAT IF LEVEL ONE DOES NOT EXIST?
-                    level_two_group_reference=create_group_reference('uk.closer', level_two_group_uuid, 1, namespace_version, topic_type, C)
-                    print(level_zero_group)
-                    if level_zero_group is not None:
-                       level_zero_group.append(level_two_group_reference)   
-                else:
-                    for group in levelTwoGroups:
-                        fragment_xml = C.get_item_xml(group['AgencyId'], 
-                              group['Identifier'], version=group['Version'])['Item']
-                        level_two_group_object = defusedxml.ElementTree.fromstring(fragment_xml)
-                if level_three_group_name!="":
-                   level_three_group_uuid=str(uuid.uuid4())
-                   level_three_group_label=get_group_label(level_three_group_name, 
-                      topic_type, C)
-                   level_three_group_fragment=create_group(level_three_group_name, 
-                        level_three_group_label, level_three_group_uuid, namespace_version)
-                   reference_to_level_three_group=create_group_reference('uk.closer', level_three_group_uuid, 1, namespace_version, topic_type, C)
-                   print(level_two_group_object)
-                   level_two_group_object[0].append(reference_to_level_three_group)
-                if len(str(topic_reassignment_details.iloc[5]))==5:
-                    print(level_three_group_fragment)
-                    destination_group_urn = f"urn:ddi:uk.closer:{level_three_group_uuid}:1"
-                else:
-                    destination_group_urn = f"urn:ddi:uk.closer:{level_two_group_uuid}:1"
-        else:
+        destination_topic = get_item_from_topic_name(topic_reassignment_details.iloc[5],
+            topic_type, physical_instance_containing_variable, C, datasetToZeroGroupMappings)
+        if len(destination_topic)>0:
             destination_group_urn = get_urn_from_item(destination_topic[0])
+        else:
+            destination_group_urn=""
         urn_data_frame['itemUrns'].append(item_urn)
         urn_data_frame['sourceTopicGroups'].append(source_topic_urn)
         urn_data_frame['destinationTopicGroups'].append(destination_group_urn)
-    print(groupsToCreate)
-    for group in groupsToCreate:
-        create_group(group[0], group[1])
-    print(urn_data_frame)
     return pd.DataFrame(urn_data_frame)
 
 def update_topics(input_file_name, C):
