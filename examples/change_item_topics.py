@@ -200,6 +200,7 @@ def create_topics(input_file_name, C):
     updated_topic_groups = []
     level_zero_groups=[]
     datasetToZeroGroupMappings={}
+    all_variable_groups=C.search_items(C.item_code('Variable Group'), SearchLatestVersion=True)['Results']
     for topic_reassignment_details in data.iloc:
         count=count+1  
         url = topic_reassignment_details.iloc[2]
