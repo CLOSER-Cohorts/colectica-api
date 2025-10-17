@@ -416,14 +416,14 @@ concept_version):
       </Fragment>""".replace("\n", "").replace("      ", "")
    return defusedxml.ElementTree.fromstring(fragmentString) 
 
-def get_group_label(topic_name, topic_type, C):
+def get_group_label(topic_name, topic_type, C, language="en-GB"):
     groups_with_topic=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
                                  SearchTargets=["Name"])
     group_label=Counter([x['Label'][language] for x in groups_with_topic['Results']]).most_common(1)[0][0]
     return group_label
 
-def get_level_zero_group(group, item_type, C):
+def get_level_zero_group(group, item_type, C, language="en-GB"):
     if group['ItemName']!={}:
         if language in group['ItemName'].keys():
             topic_name = group['ItemName'][language]
