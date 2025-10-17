@@ -34,6 +34,23 @@ def find_all_references(xml_tree, agency, identifier):
             matching_references.append(elem)
     return matching_references
 
+def create_concept_reference(agency_id, item_id, version, namespace):
+    """Create an XML element representing a ConceptReference"""
+    new_element = ET.Element(f"{{{namespace}}}ConceptReference")
+    agency_element = ET.Element(f"{{{namespace}}}Agency")
+    id_element = ET.Element(f"{{{namespace}}}ID")
+    version_element = ET.Element(f"{{{namespace}}}Version")
+    type_of_object_element = ET.Element(f"{{{namespace}}}TypeOfObject")
+    id_element.text = item_id
+    agency_element.text = agency_id
+    version_element.text = str(version)
+    type_of_object_element.text = "Concept"
+    new_element.append(agency_element)
+    new_element.append(id_element)
+    new_element.append(version_element)
+    new_element.append(type_of_object_element)
+    return new_element
+
 def create_variable_reference(agency_id, item_id, version, namespace):
     """Create an XML element representing a VariableReference"""
     new_element = ET.Element(f"{{{namespace}}}VariableReference")
@@ -102,7 +119,12 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
     a group, we will retrieve the most recent version of it from the Colectica repository
     using the Colectica REST API for the first update, and on subsequent updates we will modify the
     in-memory version which is stored in the updated_groups array."""
-    updated_referencing_item = [x for x in updated_groups if x['AgencyId'] == identifier]
+    #print("IN FUNC")
+    #print(agency_id)
+    #print(identifier)
+    updated_referencing_item = [x for x in updated_groups if x['AgencyId'] == agency_id 
+       and x['Identifier']==identifier]
+    #print(updated_groups)   
     if len(updated_referencing_item) > 0:
         referencing_item = updated_referencing_item[0]['Item']
     else:
@@ -112,7 +134,7 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
     return referencing_item
 
 def update_list_of_topic_groups(updated_group, agency, identifier, version,
-                                      item_type, updated_groups_list):
+                                      item_type, updated_groups_list, dataset=None):
     """Update the in-memory list of groups representing topics. If the topic group we have
     updated is not in already in the list, we append it to the list."""
     if ([x['Identifier'] for x in updated_groups_list].count(identifier) > 0):
@@ -122,7 +144,8 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             "AgencyId": agency,
             "Version": version,
             "ItemType": item_type,
-            "Item": updated_group
+            "Item": updated_group,
+            "Dataset": dataset
         }
     else:
         updated_groups_list.append({
@@ -130,10 +153,11 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             "AgencyId": agency,
             "Version": version,
             "ItemType": item_type,
-            "Item": updated_group
+            "Item": updated_group,
+            "Dataset": dataset
         })
  
-def get_item_from_topic_name(topic_name, topic_type, containing_item, C):
+def get_item_from_topic_name(topic_name, topic_type, containing_item, C, datasetToZeroGroupMappings={}):
     """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
     type (e.g. Question Group, Variable Group), and the item within which that topic is contained 
     (e.g. a Physical Instance/Data File or a Data Collection object).
@@ -147,6 +171,36 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C):
     topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_item,
                      SearchTerms=[str(topic_name)])['Results']
+    if len(topic_group_identifiers)==0:
+        print(containing_item)
+        if not containing_item[0]['identifier'] in datasetToZeroGroupMappings.keys():
+            datasetVars=C.query_set(containing_item[0]['agencyId'], containing_item[0]['identifier'],item_types=[C.item_code('Variable')])
+            c=[]
+            count=0
+            for y in datasetVars:
+                varGroups=C.search_relationship_byobject(y['Item1']['Item3'], y['Item1']['Item1'], 
+                   Version=y['Item1']['Item2'], item_types=[topic_type]) 
+                for varGroup in varGroups:
+                    print(f"{count} of {len(datasetVars)}")
+                    count=count+1
+                    var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+                    level_zero_group=get_level_zero_group(var_group_item, topic_type, C)
+                    c.append(level_zero_group)
+            if len(set([x[0][2].text for x in c]))==1:
+                containing_level_zero_group = [{
+                "agencyId": level_zero_group[0][1].text,
+                "identifier": level_zero_group[0][2].text,
+                "version": level_zero_group[0][3].text,
+                }]
+                datasetToZeroGroupMappings[containing_item[0]['identifier']]=containing_level_zero_group
+            topic_group_identifiers = C.search_items(topic_type,
+                     SearchSets=containing_level_zero_group,
+                     SearchTerms=[str(topic_name)])['Results']
+        else:
+            containing_level_zero_group=datasetToZeroGroupMappings[containing_item[0]['identifier']]
+            topic_group_identifiers = C.search_items(topic_type,
+                     SearchSets=containing_level_zero_group,
+                     SearchTerms=[str(topic_name)])['Results']            
     return topic_group_identifiers
 
 def get_topic_for_item(agency_id, identifier, version, item_type, C):
@@ -333,7 +387,13 @@ def get_url_for_item(container_type, container_name, item_name, C):
                 variable_version = variables_metadata[0]['Version']
                 return(f"https://discovery.closer.ac.uk/item/{variable_agency_id}/{variable_identifier}/{variable_version}")
 
-def create_group(group_name, group_label, item_id, namespace):
+def create_group(group_name, 
+group_label, 
+item_id, 
+namespace, 
+concept_agency_id, 
+concept_identifier, 
+concept_version):
    fragmentString = f"""<Fragment xmlns:r="ddi:reusable:{namespace}" xmlns="ddi:instance:{namespace}">
       <VariableGroup xmlns="ddi:logicalproduct:{namespace}" isUniversallyUnique="true" versionDate="2020-11-04T10:22:01.0748816Z">
       <r:URN>urn:ddi:uk.closer:{item_id}:1</r:URN>
@@ -347,21 +407,22 @@ def create_group(group_name, group_label, item_id, namespace):
       <r:Content xml:lang="en-GB">{group_label}</r:Content>
       </r:Label>
       <r:ConceptReference>
-      <r:Agency>uk.closer</r:Agency>
-      <r:ID>1e5b6ee7-1920-47c1-8345-b6de0c92402d</r:ID>
-      <r:Version>1</r:Version>
+      <r:Agency>{concept_agency_id}</r:Agency>
+      <r:ID>{concept_identifier}</r:ID>
+      <r:Version>{concept_version}</r:Version>
       <r:TypeOfObject>Concept</r:TypeOfObject>
       </r:ConceptReference>
       </VariableGroup>
-      </Fragment>"""
+      </Fragment>""".replace("\n", "").replace("      ", "")
    return defusedxml.ElementTree.fromstring(fragmentString) 
 
  #  print(fragmentString)
  #  transactionResponse = C.create_transaction()
  #  print(transactionResponse)
- #  transactionId = transactionResponse['TransactionId']
+ #  transactionId w= transactionResponse['TransactionId']
  #  print("TRANSACTION ID: ")
  #  print(transactionId)
    #addItemToTransaction('uk.closer', item_id, 1, transactionId, fragmentString, C.item_code('Variable Group'))
  #  C.add_items_to_transaction('uk.closer', item_id, 1,fragmentString, C.item_code('Variable Group'), transactionId)
  #  C.commit_transaction(transactionId, "Create beliefs topic", 3)
+ 
