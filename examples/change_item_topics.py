@@ -20,13 +20,19 @@ from examples.lib.utility import (
     find_all_references,
     create_variable_reference,
     create_question_reference,
-   # create_concept_reference,
+    create_concept_reference,
     get_current_state_of_topic_group,
     update_list_of_topic_groups,
     get_urn_from_item,
     get_item_from_topic_name,
     create_group,
-    create_group_reference
+    create_group_reference,
+    create_group_lookup_dict,
+    update_list_of_topic_groups,
+    get_current_state_of_topic_group,
+    get_level_zero_group_2,
+    get_level_zero_group,
+    get_group_label    
 )
 import defusedxml
 #pip install openpyxl #might need to install openpyxl, a dependency for read-excel
@@ -36,83 +42,6 @@ from collections import Counter
 
 language = "en-GB"
 
-def get_group_label(topic_name, topic_type, C):
-    groups_with_topic=C.search_items(topic_type, 
-                                 SearchTerms=[topic_name], 
-                                 SearchTargets=["Name"])
-    group_label=Counter([x['Label'][language] for x in groups_with_topic['Results']]).most_common(1)[0][0]
-    return group_label
-
-def get_level_zero_group(group, item_type, C):
-    if group['ItemName']!={}:
-        if language in group['ItemName'].keys():
-            topic_name = group['ItemName'][language]
-        if isinstance(group['ItemName'], str):
-            topic_name = group['ItemName']
-        parent_group = C.search_relationship_byobject(group['AgencyId'], 
-           group['Identifier'], Version=group['Version'], item_types=[item_type])[0]  
-        if len(topic_name)==3:
-            level_zero_group = parent_group
-        elif len(topic_name)==5:
-            level_zero_group = C.search_relationship_byobject(parent_group['Item1']['Item3'], 
-               parent_group['Item1']['Item1'], Version=parent_group['Item1']['Item2'], 
-               item_types=[item_type])[0]
-        item=C.get_item_xml(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],
-           version=level_zero_group['Item1']['Item2'])
-        item_element = defusedxml.ElementTree.fromstring(item['Item'])    
-    return item_element
-
-def get_level_zero_group_2(agencyId, identifier, version, item_type, C):
-    level_zero_group = C.search_relationship_byobject(agencyId, identifier, Version=version, 
-               item_types=[item_type])[0] 
-    level_zero_group_item=C.get_item_xml(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],
-           version=level_zero_group['Item1']['Item2'])           
-    item_element = defusedxml.ElementTree.fromstring(level_zero_group_item['Item'])
-    return item_element
-
-
-def create_group_lookup_dict(C):
-    allLevelZeroes=C.search_relationship_bysubject(
-              'uk.closer', 
-              '5c669cb3-a633-4324-93fb-ed2695b44072', 
-              item_types=[C.item_code('Variable Group')])       
-    groupsWithoutDatasets=[]
-    groupsWithDatasets=[]
-    groupsWithoutDatasetsVarsInMultiple=[]
-    groupsWithoutDatasetsVarsInNone=[]
-    groupsInDatasets=[]
-    count=0
-    investigateThese=[]
-    for x in allLevelZeroes:
-        print(count)
-        count=count+1
-        dataset=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
-        varGroups=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable Group')])
-        if len(dataset)==0:
-            datasetVars=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable')])
-            c=[]
-            for y in datasetVars:
-                b=C.query_set(y['Item1']['Item3'], y['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
-                for z in b:
-                    c.append(z['Item1']['Item3'] + ":" + z['Item1']['Item1'] + ":" + str(z['Item1']['Item2']))
-            if len(set(c))==1:
-               #groupsWithoutDatasets.append(c[0])
-               print("STEP1")
-               dataset_item=C.get_item_json(z['Item1']['Item3'], z['Item1']['Item1'], version=z['Item1']['Item2'])
-               print("STEP2")
-               for varGroup in varGroups[1:]:
-                   var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-                   groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
-                        var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version']), x))
-            else:
-                investigateThese.append(x) 
-        else:
-            dataset_item=C.get_item_json(dataset[0]['Item1']['Item3'], dataset[0]['Item1']['Item1'], version=dataset[0]['Item1']['Item2'])
-            for varGroup in varGroups[1:]:
-                 var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-                 groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
-                    var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
-        return groupsInDatasets
 
 def update_urns_list(urns, item, containing_item, topic_type, target_topic):
     containing_item_details = [{"agencyId": containing_item['AgencyId'],
