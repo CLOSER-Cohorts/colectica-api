@@ -216,7 +216,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
            containing_level_zero_group_item=C.get_item_json(containing_level_zero_group[0]['AgencyId'],
               containing_level_zero_group[0]['Identifier'], version=containing_level_zero_group[0]['Version'])
            if containing_level_zero_group_item['Concept']==None:
-               datasetToZeroGroupMappings[get_urn_from_item(containing_item)]=[{
+               datasetToZeroGroupMappings[get_urn_from_item(containing_item[0])]=[{
                     "agencyId": containing_level_zero_group[0]['AgencyId'],
                     "identifier": containing_level_zero_group[0]['Identifier'],
                     "version": containing_level_zero_group[0]['Version'],

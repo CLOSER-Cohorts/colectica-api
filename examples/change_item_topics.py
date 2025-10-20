@@ -227,8 +227,8 @@ def create_topics(input_file_name, C, language="en-GB", datasetToZeroGroupMappin
                                               topic_reassignment_details.iloc[0])) 
     return (levelOneGroupsToCreate, levelTwoGroupsToCreate, levelOneGroupsToModify) 
 
-THERE IS AN ISSUE WITH EG https://discovery.closer.ac.uk/item/uk.closer/84383692-5097-4510-8463-985664c08c18
-what was this issue?
+#THERE IS AN ISSUE WITH EG https://discovery.closer.ac.uk/item/uk.closer/84383692-5097-4510-8463-985664c08c18
+#what was this issue?
 
 def create_ddi_objects_with_new_level_one_topics(topics_to_create, C):
    allConcepts=C.search_items(C.item_code('Concept'))['Results']
@@ -451,6 +451,7 @@ for x in modified_l1_topics:
            "Item": level_zero_group})
     finalLevelOnes.append((x['Item'], x['Dataset'], level_zero_group))
 """
+
 
 To test: 
 
