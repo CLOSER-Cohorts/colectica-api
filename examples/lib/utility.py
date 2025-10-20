@@ -524,11 +524,11 @@ for dataset in datasets:
                     
              
 
-allVariableGroups=C.search_items( C.item_code('Variable Group'))
-for variableGroup in allVariableGroups['Results']:
+#allVariableGroups=C.search_items( C.item_code('Variable Group'))
+#for variableGroup in allVariableGroups['Results']:
     
  #   level_zero_group=get_level_zero_group(variableGroup, C.item_code('Variable Group'), C)
- #   datasetVars=C.query_set(variableGroup['AgencyId'], variable
+#   datasetVars=C.query_set(variableGroup['AgencyId'], variable
 
 def create_group_lookup_dict(datasetToZeroGroupMappings, C):
     #allLevelZeroes=C.search_relationship_bysubject(
