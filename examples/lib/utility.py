@@ -221,7 +221,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
                     "identifier": containing_level_zero_group[0]['Identifier'],
                     "version": containing_level_zero_group[0]['Version'],
                     }]                
-    return [x for x in topic_group_identifiers['Results'] if x['ItemName']['en-GB']==topic_name]
+    return [x for x in topic_group_identifiers if x['ItemName']['en-GB']==topic_name]
 
 def get_topic_for_item(agency_id, identifier, version, item_type, C):
     """This function gets the topic item(s) for an item (i.e. question/variable), given the
