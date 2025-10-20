@@ -472,6 +472,7 @@ def get_level_zero_group_2(agencyId, identifier, version, item_type, C):
     return item_element
 
 # This does not get all the level zeroes groups, but it gets a lot of them
+"""
 level_zero_groups=C.search_relationship_bysubject(
               'uk.closer', 
               '5c669cb3-a633-4324-93fb-ed2695b44072', 
@@ -522,7 +523,7 @@ for dataset in datasets:
                 }]
                 datasetToZeroGroupMappings[get_urn_from_item(dataset)]=containing_level_zero_group          
                     
-             
+"""             
 
 #allVariableGroups=C.search_items( C.item_code('Variable Group'))
 #for variableGroup in allVariableGroups['Results']:
