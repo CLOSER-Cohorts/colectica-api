@@ -172,7 +172,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
     topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_item,
                      SearchTerms=[str(topic_name)],
-                     UsePrefixSearch=False, 
+                     UsePrefixSearch=True, 
                      SearchTargets="Name")['Results']
     if len(topic_group_identifiers)==0:
         #print(containing_item)
@@ -200,14 +200,14 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
             topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
                      SearchTerms=[str(topic_name)],
-                     UsePrefixSearch=False, 
+                     UsePrefixSearch=True, 
                      SearchTargets="Name" )['Results']
         else:
             containing_level_zero_group=datasetToZeroGroupMappings[get_urn_from_item(containing_item[0])]
             topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
                      SearchTerms=[str(topic_name)],
-                     UsePrefixSearch=False, 
+                     UsePrefixSearch=True, 
                      SearchTargets="Name" )['Results']
     else:
         containing_level_zero_group=C.search_relationship_bysubject(containing_item[0]['AgencyId'],
@@ -221,7 +221,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
                     "identifier": containing_level_zero_group[0]['Identifier'],
                     "version": containing_level_zero_group[0]['Version'],
                     }]                
-    return topic_group_identifiers
+    return [x for x in topic_group_identifiers if x['ItemName']['en-GB']==topic_name]
 
 def get_topic_for_item(agency_id, identifier, version, item_type, C):
     """This function gets the topic item(s) for an item (i.e. question/variable), given the
