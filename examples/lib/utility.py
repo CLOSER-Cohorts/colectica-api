@@ -3,6 +3,7 @@ import re
 from xml.etree import ElementTree as ET
 from colectica_api import ColecticaObject
 import defusedxml
+from collections import Counter
 
 def get_namespace(tag):
     """Get the namespace for an XML element."""
@@ -170,18 +171,21 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
     # We create a JSON object representing the containing item.
     topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_item,
-                     SearchTerms=[str(topic_name)])['Results']
+                     SearchTerms=[str(topic_name)],
+                     UsePrefixSearch=False, 
+                     SearchTargets="Name")['Results']
     if len(topic_group_identifiers)==0:
-        print(containing_item)
-        if not containing_item[0]['identifier'] in datasetToZeroGroupMappings.keys():
-            datasetVars=C.query_set(containing_item[0]['agencyId'], containing_item[0]['identifier'],item_types=[C.item_code('Variable')])
+        #print(containing_item)
+        if not get_urn_from_item(containing_item[0]) in datasetToZeroGroupMappings.keys():
+            print(f"Need to determine level zero group for dataset {get_urn_from_item(containing_item[0])} by inspecting variables...")
+            datasetVars=C.query_set(containing_item[0]['AgencyId'], containing_item[0]['Identifier'],item_types=[C.item_code('Variable')])
             c=[]
             count=0
             for y in datasetVars:
                 varGroups=C.search_relationship_byobject(y['Item1']['Item3'], y['Item1']['Item1'], 
                    Version=y['Item1']['Item2'], item_types=[topic_type]) 
                 for varGroup in varGroups:
-                    print(f"{count} of {len(datasetVars)}")
+                    print(f"{count} of {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item[0])}...")
                     count=count+1
                     var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
                     level_zero_group=get_level_zero_group(var_group_item, topic_type, C)
@@ -192,15 +196,31 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
                 "identifier": level_zero_group[0][2].text,
                 "version": level_zero_group[0][3].text,
                 }]
-                datasetToZeroGroupMappings[containing_item[0]['identifier']]=containing_level_zero_group
+                datasetToZeroGroupMappings[get_urn_from_item(containing_item[0])]=containing_level_zero_group
             topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
-                     SearchTerms=[str(topic_name)])['Results']
+                     SearchTerms=[str(topic_name)],
+                     UsePrefixSearch=False, 
+                     SearchTargets="Name" )['Results']
         else:
-            containing_level_zero_group=datasetToZeroGroupMappings[containing_item[0]['identifier']]
+            containing_level_zero_group=datasetToZeroGroupMappings[get_urn_from_item(containing_item[0])]
             topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
-                     SearchTerms=[str(topic_name)])['Results']            
+                     SearchTerms=[str(topic_name)],
+                     UsePrefixSearch=False, 
+                     SearchTargets="Name" )['Results']
+    else:
+        containing_level_zero_group=C.search_relationship_bysubject(containing_item[0]['AgencyId'],
+            containing_item[0]['Identifier'], item_types=C.item_code('Variable Group'), Version=containing_item[0]['Version'], Descriptions=True)
+        if len(containing_level_zero_group)==1:
+           containing_level_zero_group_item=C.get_item_json(containing_level_zero_group[0]['AgencyId'],
+              containing_level_zero_group[0]['Identifier'], version=containing_level_zero_group[0]['Version'])
+           if containing_level_zero_group_item['Concept']==None:
+               datasetToZeroGroupMappings[get_urn_from_item(containing_item)]=[{
+                    "agencyId": containing_level_zero_group[0]['AgencyId'],
+                    "identifier": containing_level_zero_group[0]['Identifier'],
+                    "version": containing_level_zero_group[0]['Version'],
+                    }]                
     return topic_group_identifiers
 
 def get_topic_for_item(agency_id, identifier, version, item_type, C):
@@ -417,6 +437,7 @@ concept_version):
    return defusedxml.ElementTree.fromstring(fragmentString) 
 
 def get_group_label(topic_name, topic_type, C, language="en-GB"):
+    from collections import Counter
     groups_with_topic=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
                                  SearchTargets=["Name"])
@@ -450,12 +471,71 @@ def get_level_zero_group_2(agencyId, identifier, version, item_type, C):
     item_element = defusedxml.ElementTree.fromstring(level_zero_group_item['Item'])
     return item_element
 
-
-def create_group_lookup_dict(C):
-    allLevelZeroes=C.search_relationship_bysubject(
+# This does not get all the level zeroes groups, but it gets a lot of them
+level_zero_groups=C.search_relationship_bysubject(
               'uk.closer', 
               '5c669cb3-a633-4324-93fb-ed2695b44072', 
-              item_types=[C.item_code('Variable Group')])       
+              item_types=[C.item_code('Variable Group')])
+datasetToZeroGroupMappings={}       
+count=0
+for level_zero_group in level_zero_groups:
+        print(count)
+        count=count+1
+        dataset=C.query_set(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
+        if len(set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in dataset] ))==1:
+                latest_version_of_dataset = max([x['Item1']['Item2'] for x in dataset])
+                dataset_item=C.get_item_xml(dataset[0]['Item1']['Item3'], 
+                    dataset[0]['Item1']['Item1'],
+                    version=latest_version_of_dataset)
+                containing_level_zero_group = [{
+                "agencyId": level_zero_group['Item1']['Item3'],
+                "identifier": level_zero_group['Item1']['Item1'],
+                "version": level_zero_group['Item1']['Item2'],
+                }]    
+                datasetToZeroGroupMappings[get_urn_from_item(dataset_item)]=containing_level_zero_group
+datasets=C.search_items(
+                          C.item_code('Data File'),
+                          SearchLatestVersion=True)['Results']
+count2=0
+for dataset in datasets:
+    print(count2)
+    count2=count2+1
+    if not get_urn_from_item(dataset) in datasetToZeroGroupMappings.keys():
+            print(f"Need to determine level zero group for dataset {get_urn_from_item(dataset)} by inspecting variables...")
+            datasetVars=C.query_set(dataset['AgencyId'], dataset['Identifier'], version=dataset['Version'], item_types=[C.item_code('Variable')])
+            c=[]
+            count=0
+            for y in datasetVars:
+                varGroups=C.search_relationship_byobject(y['Item1']['Item3'], y['Item1']['Item1'], 
+                   Version=y['Item1']['Item2'], item_types=[C.item_code('Variable Group')]) 
+                for varGroup in varGroups:
+                    print(f"{count} of {len(datasetVars)} variables in dataset {get_urn_from_item(dataset)}...")
+                    count=count+1
+                    var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+                    level_zero_group=get_level_zero_group(var_group_item, C.item_code('Variable Group'), C)
+                    c.append(level_zero_group)
+            if len(set([x[0][2].text for x in c]))==1:
+                containing_level_zero_group = [{
+                "agencyId": level_zero_group[0][1].text,
+                "identifier": level_zero_group[0][2].text,
+                "version": level_zero_group[0][3].text,
+                }]
+                datasetToZeroGroupMappings[get_urn_from_item(dataset)]=containing_level_zero_group          
+                    
+             
+
+allVariableGroups=C.search_items( C.item_code('Variable Group'))
+for variableGroup in allVariableGroups['Results']:
+    
+ #   level_zero_group=get_level_zero_group(variableGroup, C.item_code('Variable Group'), C)
+ #   datasetVars=C.query_set(variableGroup['AgencyId'], variable
+
+def create_group_lookup_dict(datasetToZeroGroupMappings, C):
+    #allLevelZeroes=C.search_relationship_bysubject(
+    #          'uk.closer', 
+    #          '5c669cb3-a633-4324-93fb-ed2695b44072', 
+    #          item_types=[C.item_code('Variable Group')])
+    allLevelZeroes=datasetToZeroGroupMappings.values()    
     groupsWithoutDatasets=[]
     groupsWithDatasets=[]
     groupsWithoutDatasetsVarsInMultiple=[]
@@ -466,10 +546,10 @@ def create_group_lookup_dict(C):
     for x in allLevelZeroes:
         print(count)
         count=count+1
-        dataset=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
-        varGroups=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable Group')])
+        dataset=C.query_set(x['AgencyId'], x['Identifier'], item_types=[C.item_code('Data File')], reverseTraversal=True)
+        varGroups=C.query_set(x['AgencyId'], x['Identifier'], item_types=[C.item_code('Variable Group')])
         if len(dataset)==0:
-            datasetVars=C.query_set(x['Item1']['Item3'], x['Item1']['Item1'],item_types=[C.item_code('Variable')])
+            datasetVars=C.query_set(x['AgencyId'], x['Identifier'],item_types=[C.item_code('Variable')])
             c=[]
             for y in datasetVars:
                 b=C.query_set(y['Item1']['Item3'], y['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)

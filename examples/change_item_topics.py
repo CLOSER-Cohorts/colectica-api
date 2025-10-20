@@ -32,7 +32,9 @@ from examples.lib.utility import (
     get_current_state_of_topic_group,
     get_level_zero_group_2,
     get_level_zero_group,
-    get_group_label    
+    get_group_label,
+    get_elements_of_type,
+    get_element_by_name   
 )
 import defusedxml
 #pip install openpyxl #might need to install openpyxl, a dependency for read-excel
@@ -57,7 +59,7 @@ def update_urns_list(urns, item, containing_item, topic_type, target_topic):
     if len(source_groups)==0:
         source_topic_urn = ""
     destination_group=get_item_from_topic_name(str(target_topic), 
-            topic_type, containing_item_details, C) 
+            topic_type, containing_item_details, C) #MAYBE NEED TO ADD LEVEL ZERO MAPPINGS HERE?
     if len(destination_group)==1:
             destination_topic_urn = get_urn_from_item(destination_group[0])
             urns['itemUrns'].append(item_urn)
@@ -115,7 +117,7 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name, C):
                     C.item_code('Question Group'), target_topic) 
     return (pd.DataFrame(urns))
 
-def create_topics(input_file_name, C):
+def create_topics(input_file_name, C, language="en-GB", datasetToZeroGroupMappings={}):
     """Method for generating input for code that updates topics. The code iterates through 
     a spreadsheet containing details of new item topic assignments and generates a dataframe
     of URNs that can be used as input to a method that reassigns items to new topics. 
@@ -128,10 +130,11 @@ def create_topics(input_file_name, C):
     levelTwoGroupsToCreate=[]
     updated_topic_groups = []
     level_zero_groups=[]
-    datasetToZeroGroupMappings={}
+    #datasetToZeroGroupMappings={}
     all_variable_groups=C.search_items(C.item_code('Variable Group'), SearchLatestVersion=True)['Results']
     for topic_reassignment_details in data.iloc:
-        count=count+1  
+        print(count)
+        count=count+1    
         url = topic_reassignment_details.iloc[2]
         agency_id = url.split("/")[4]
         identifier = url.split("/")[5]
@@ -154,11 +157,12 @@ def create_topics(input_file_name, C):
         physical_instance_containing_variable = C.search_items(
                     containing_item_type,
                     SearchTerms=str(containing_item_name).strip(),
-                    SearchLatestVersion=True)['Results'][0]
+                    SearchLatestVersion=True,
+                    UsePrefixSearch=True )['Results'][0]
         physical_instance_search_set = [{
-                "agencyId": physical_instance_containing_variable['AgencyId'],
-                "identifier": physical_instance_containing_variable['Identifier'],
-                "version": physical_instance_containing_variable['Version']
+                "AgencyId": physical_instance_containing_variable['AgencyId'],
+                "Identifier": physical_instance_containing_variable['Identifier'],
+                "Version": physical_instance_containing_variable['Version']
             }]
         source_topic = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[topic_type])
         if len(source_topic)>0:
@@ -199,7 +203,10 @@ def create_topics(input_file_name, C):
                     level_two_group_name = ""
                 item_element = defusedxml.ElementTree.fromstring(item['Item'])
                 namespace_version = get_namespace(item_element.tag).split(':')[2]
-                levelOneGroups=[x for x in groupsInDatasets if (x[0], x[1])==(str(containing_item_name), level_one_group_name)]
+                #levelOneGroups=[x for x in groupsInDatasets if (x[0], x[1])==(str(containing_item_name), level_one_group_name)]
+                #THIS IS SOMETIMES GETTING LEVEL TWO ITEMS? EG WHEN '10704', 'us4_d_youth'
+                levelOneGroups=get_item_from_topic_name(level_one_group_name, 
+                    topic_type, physical_instance_search_set, C, datasetToZeroGroupMappings)
                 if level_two_group_name!="" and (topic_reassignment_details.iloc[0], 
                         level_two_group_name) not in [(x[0], x[1]) for x in levelTwoGroupsToCreate]:
                        levelTwoGroupsToCreate.append((topic_reassignment_details.iloc[0],
@@ -275,12 +282,17 @@ def create_ddi_objects_with_new_level_one_topics(topics_to_create, C):
           level_two_group_name=level_two_group[1]
           level_two_group_label=get_group_label(level_two_group_name, 
              topic_type, C)
+          concept=[x for x in concepts if x['ItemName']['en-GB']==level_two_group_name][0]   
           level_two_group_object=create_group(level_two_group_name, 
-             level_two_group_label, level_two_group_uuid, namespace_version)
+             level_two_group_label, level_two_group_uuid, namespace_version,
+          concept['AgencyId'], 
+          concept['Identifier'], 
+          concept['Version'])
           reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
              namespace_version, topic_type, C)
           level_one_group_object[0].append(reference_to_level_two_group)
           ddiObjectsLevelTwo.append((level_two_group_object, level_two_group[0]))
+      # in the l1 objects below, do we need to include topic[2], ie the level zero group?    
       ddiObjectsLevelOne.append((level_one_group_object, topic[0], topic[2]))
    return(ddiObjectsLevelZero, ddiObjectsLevelOne, ddiObjectsLevelTwo)
    
@@ -344,7 +356,7 @@ def validateLevelTwoTopics(levelZeroTopics, levelOneTopics, levelTwoTopics):
    return (referencesValidated, levelTwoNotInOne)
 
 def validateLevelOneTopics(ddiObjectsLevelZero, levelOneTopics):
-   forChecking=[]
+   #forChecking=[]
    referencesValidated3=[]
    for y in levelOneTopics:
             level_one_identifier=y[0][0][2].text
@@ -352,9 +364,9 @@ def validateLevelOneTopics(ddiObjectsLevelZero, levelOneTopics):
                 level_zero_refs=find_all_references(z['Item'], 'uk.closer', level_one_identifier)
                 if len(level_zero_refs)==1:
                     print("LEVEL ONE REFERENCE FOUND IN LEVEL ZERO")
-                    forChecking.append((get_element_by_name(y[0], 'VariableGroupName')['String'],
-                    y[1],
-                    get_element_by_name(z['Item'], 'Label')['Content']))
+                    #forChecking.append((get_element_by_name(y['Item'], 'VariableGroupName')['String'],
+                    #y[1],
+                    #get_element_by_name(z['Item'], 'Label')['Content']))
                     physical_instance = C.search_items(
                        C.item_code('Data File'),
                        SearchTerms=str(y[1]).strip(),
@@ -362,6 +374,8 @@ def validateLevelOneTopics(ddiObjectsLevelZero, levelOneTopics):
                     if len(physical_instance)==1:
                         levelOneDatasetLabel=physical_instance[0]['Label']['en-GB']                   
                     b=(get_element_by_name(z['Item'], 'Label')['Content'])
+                    print(levelOneDatasetLabel)
+                    print(b)
                     if levelOneDatasetLabel==b:
                        referencesValidated3.append(y)
                        print("DATASET LABELS FOR LEVEL ONE AND THE LEVEL ZERO LABEL MATCH")
@@ -371,17 +385,20 @@ def validateLevelOneTopics(ddiObjectsLevelZero, levelOneTopics):
                        print("WRONG DATASET")
    return referencesValidated3 
 
-                    
+                 
 def create_ddi_objects_with_modified_level_one_topics(topics_to_create, C):
-   uniqueL1GroupsToModify=list([(x[0], x[1], x[2], x[3][2], x[4], x[3][0]) for x in topics_to_create[2]])
+   #uniqueL1GroupsToModify=list([(x[0], x[1], x[2], x[3][2], x[4], x[3][0]) for x in topics_to_create[2]])
+   allConcepts=C.search_items(C.item_code('Concept'))['Results']
+   # get rid of whitehall2 concept that doesn't properly define an itemname
+   concepts=[x for x in allConcepts if list(x['ItemName'].keys())==['en-GB']]
+   uniqueL1GroupsToModify=list([(x[0], x[1], x[2], x[3], x[4], x[5]) for x in topics_to_create2[2]])
    new_l2_topics=[]
    modified_l1_topics=[]
    levelZeroesForModifiedL1s=[]
    for x in uniqueL1GroupsToModify:
-       print(x[3])
-       level_one_group_agency_id=x[3].split(":")[1]
-       level_one_group_identifier=x[3].split(":")[0]
-       level_one_group_version=x[3].split(":")[2]
+       level_one_group_agency_id=x[3]['AgencyId']
+       level_one_group_identifier=x[3]['Identifier']
+       level_one_group_version=x[3]['Version']
        level_one_group_object = get_current_state_of_topic_group(level_one_group_agency_id, 
           level_one_group_identifier, modified_l1_topics, C, version=level_one_group_version)
        level_two_group_uuid=str(uuid.uuid4())
@@ -389,16 +406,25 @@ def create_ddi_objects_with_modified_level_one_topics(topics_to_create, C):
        topic_type=x[2]
        namespace_version=x[4]
        level_two_group_label=get_group_label(level_two_group_name, topic_type, C)
+       concept=[x for x in concepts if x['ItemName']['en-GB']==level_two_group_name][0]
+       print(concept)
        level_two_group_object=create_group(level_two_group_name, 
-          level_two_group_label, level_two_group_uuid, namespace_version)
+          level_two_group_label, level_two_group_uuid, namespace_version,
+          concept['AgencyId'], 
+          concept['Identifier'], 
+          concept['Version'])
+       print("NOW")
        reference_to_level_two_group=create_group_reference('uk.closer', level_two_group_uuid, 1, 
           namespace_version, topic_type, C)
-       level_zero_group=get_level_zero_group_2(x['AgencyId'], x['Identifier'], x['Version'], x['ItemType'], C)
+       print("NOW2")
+       level_zero_group=get_level_zero_group_2(x[3]['AgencyId'], x[3]['Identifier'], x[3]['Version'], x[3]['ItemType'], C)
+       print(levelZeroesForModifiedL1s)
+       print("HE")
        if len([x for x in levelZeroesForModifiedL1s if x['Item'][0][2].text==level_zero_group[0][2].text])==0:
-          levelZeroesForModifiedL1s.append({"Identifier": x['Identifier'],
-              "AgencyId": x['AgencyId'],
-              "Version": x['Version'],
-              "ItemType": x['ItemType'],
+          levelZeroesForModifiedL1s.append({"Identifier": x[3]['Identifier'],
+              "AgencyId": x[3]['AgencyId'],
+              "Version": x[3]['Version'],
+              "ItemType": x[3]['ItemType'],
               "Item": level_zero_group}) 
        level_one_group_object[0].append(reference_to_level_two_group)
        update_list_of_topic_groups(level_one_group_object,
@@ -408,8 +434,8 @@ def create_ddi_objects_with_modified_level_one_topics(topics_to_create, C):
                                topic_type,
                                modified_l1_topics,
                                dataset=x[5])
-       new_l2_topics.append((level_two_group_object, x[5]))
-   return(levelZeroesForModifiedL1s, modified_l1_topics, new_l2_topics)
+       new_l2_topics.append((level_two_group_object, x[5]))   
+   return(levelZeroesForModifiedL1s, [(x['Item'], x['Dataset']) for x in modified_l1_topics], new_l2_topics)
 
 """ MIGHT NEED TO KEEP THIS, OR FIT IT IN SOMEHOW; IT ADDS THE LEVEL ZERO TOPICS TO MODIFIED
 L1 TOPICS THAT DON'T HAVE THEM   
