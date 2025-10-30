@@ -89,7 +89,7 @@ def create_group_reference(agency_id, item_id, version, namespace_version, topic
     """Create an XML element representing a Variable/QuestionGroup"""
     type_of_object_element = ET.Element(f"{{ddi:reusable:{namespace_version}}}TypeOfObject")
     if topic_type==C.item_code('Variable Group'):
-        new_element = ET.Element(f"{{ddi:datacollection:{namespace_version}}}VariableGroupReference")
+        new_element = ET.Element(f"{{ddi:logicalproduct:{namespace_version}}}VariableGroupReference")
         type_of_object_element.text = "VariableGroup"
     elif topic_type==C.item_code('Question Group'):
         new_element = ET.Element(f"{{ddi:datacollection:{namespace_version}}}QuestionGroupReference")
@@ -135,18 +135,33 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
     return referencing_item
 
 def update_list_of_topic_groups(updated_group, agency, identifier, version,
-                                      item_type, updated_groups_list, dataset=None):
+                                      item_type, updated_groups_list, dataset=None, 
+                                      reference_to_remove=None,
+                                      reference_to_add=None):
     """Update the in-memory list of groups representing topics. If the topic group we have
     updated is not in already in the list, we append it to the list."""
     if ([x['Identifier'] for x in updated_groups_list].count(identifier) > 0):
         index_of_updated_ref = [x['Identifier'] for x in updated_groups_list].index(identifier)
+        valueForReferencesToRemove=updated_groups_list[index_of_updated_ref]['ReferencesToRemove']
+        valueForReferencesToAdd=updated_groups_list[index_of_updated_ref]['ReferencesToAdd']
+        if valueForReferencesToRemove is None:
+            valueForReferencesToRemove = []
+        if valueForReferencesToAdd is None: 
+            valueForReferencesToAdd = []
+        if reference_to_remove is not None:
+            valueForReferencesToRemove.append(reference_to_remove)
+        if reference_to_add is not None:
+            valueForReferencesToAdd.append(reference_to_add)
+        print(updated_groups_list[index_of_updated_ref])
         updated_groups_list[index_of_updated_ref] = {
             "Identifier": identifier,
             "AgencyId": agency,
             "Version": version,
             "ItemType": item_type,
             "Item": updated_group,
-            "Dataset": dataset
+            "Dataset": dataset,
+            "ReferencesToRemove": valueForReferencesToRemove,
+            "ReferencesToAdd":  valueForReferencesToAdd
         }
     else:
         updated_groups_list.append({
@@ -155,7 +170,9 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             "Version": version,
             "ItemType": item_type,
             "Item": updated_group,
-            "Dataset": dataset
+            "Dataset": dataset,
+            "ReferencesToRemove": [] if reference_to_remove is None else [].append(reference_to_remove),
+            "ReferencesToAdd": [] if reference_to_add is None else [].append(reference_to_add)
         })
  
 def get_item_from_topic_name(topic_name, topic_type, containing_item, C, datasetToZeroGroupMappings={}):
@@ -169,13 +186,21 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
     C.item_code("Data Collection").
     """
     # We create a JSON object representing the containing item.
+    print("STEP 1")
+    print(containing_item)
+    print(topic_name)
+    # DO WE NEED TO DO THIS SEARHC HERE, IT GETS REPEATED FURHTER BELOW
     topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_item,
                      SearchTerms=[str(topic_name)],
-                     UsePrefixSearch=True, 
+                     UsePrefixSearch=True,
                      SearchTargets="Name")['Results']
+    print("STEP 1 and a bit")
     if len(topic_group_identifiers)==0:
         #print(containing_item)
+        print(get_urn_from_item(containing_item[0]))
+        print(get_urn_from_item(containing_item[0]) in datasetToZeroGroupMappings.keys())
+        print(len(datasetToZeroGroupMappings))
         if not get_urn_from_item(containing_item[0]) in datasetToZeroGroupMappings.keys():
             print(f"Need to determine level zero group for dataset {get_urn_from_item(containing_item[0])} by inspecting variables...")
             datasetVars=C.query_set(containing_item[0]['AgencyId'], containing_item[0]['Identifier'],item_types=[C.item_code('Variable')])
@@ -192,23 +217,34 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
                     c.append(level_zero_group)
             if len(set([x[0][2].text for x in c]))==1:
                 containing_level_zero_group = [{
-                "agencyId": level_zero_group[0][1].text,
-                "identifier": level_zero_group[0][2].text,
-                "version": level_zero_group[0][3].text,
+                "AgencyId": level_zero_group[0][1].text,
+                "Identifier": level_zero_group[0][2].text,
+                "Version": level_zero_group[0][3].text,
                 }]
                 datasetToZeroGroupMappings[get_urn_from_item(containing_item[0])]=containing_level_zero_group
-            topic_group_identifiers = C.search_items(topic_type,
+            print("STEP 2")
+            # Do a search for the first three numbers of the topic group, and then filter
+            # the results in a list comprehension to find the exact match, because it's
+            # quicker than just searching for the exact match directly.
+            topic_group_identifiers = [x for x in C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
-                     SearchTerms=[str(topic_name)],
-                     UsePrefixSearch=True, 
-                     SearchTargets="Name" )['Results']
+                     SearchTerms=[str(topic_name)[0:3]],
+                     UsePrefixSearch=True,
+                     SearchTargets="Name")['Results'] if x['ItemName']['en-GB']==str(topic_name)]
         else:
             containing_level_zero_group=datasetToZeroGroupMappings[get_urn_from_item(containing_item[0])]
-            topic_group_identifiers = C.search_items(topic_type,
+            print("STEP 3")
+            print(containing_level_zero_group)
+            print(topic_name)
+            # Do a search for the first three numbers of the topic group, and then filter
+            # the results in a list comprehension to find the exact match, because it's
+            # quicker than just searching for the exact match directly.
+            topic_group_identifiers = [x for x in C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
-                     SearchTerms=[str(topic_name)],
-                     UsePrefixSearch=True, 
-                     SearchTargets="Name" )['Results']
+                     SearchTerms=[str(topic_name)[0:3]],
+                     UsePrefixSearch=True,
+                     SearchTargets="Name")['Results'] if x['ItemName']['en-GB']==str(topic_name)]
+            print("STEP 4")
     else:
         containing_level_zero_group=C.search_relationship_bysubject(containing_item[0]['AgencyId'],
             containing_item[0]['Identifier'], item_types=C.item_code('Variable Group'), Version=containing_item[0]['Version'], Descriptions=True)
@@ -221,7 +257,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
                     "identifier": containing_level_zero_group[0]['Identifier'],
                     "version": containing_level_zero_group[0]['Version'],
                     }]                
-    return [x for x in topic_group_identifiers if x['ItemName']['en-GB']==topic_name]
+    return [x for x in topic_group_identifiers if x['ItemName']['en-GB']==str(topic_name)]
 
 def get_topic_for_item(agency_id, identifier, version, item_type, C):
     """This function gets the topic item(s) for an item (i.e. question/variable), given the
@@ -241,6 +277,13 @@ def get_url_from_item(item, hostname):
 
 def get_urn_from_item(item):
    return f"urn:ddi:{item['AgencyId']}:{item['Identifier']}:{str(item['Version'])}"
+
+def get_urn_from_fragment(fragment_xml):
+   urnElement=get_elements_of_type(fragment_xml, "URN")
+   if len(urnElement)==1:
+      return urnElement[0].text
+   else:
+      return None
 
 def map_between_questions_and_variables(items, C):
     """Method for mapping between lists of questions and variables. The 'items' input parameter
@@ -290,6 +333,15 @@ def getTriple(tripleElem):
         startOfTagName = elem.tag.index("}")+1
         triple[elem.tag[startOfTagName:]] = elem.text
     return(triple)
+
+def get_element_fragment_by_name(xmlTree, elementName):
+    retElem=None
+    for elem in xmlTree.findall(".//"):
+        startOfTagName = elem.tag.index("}")+1
+        tagName = elem.tag[startOfTagName:]
+        if tagName == elementName:
+            retElem = elem
+    return retElem
 
 def get_element_by_name(xmlTree, elementName):
     retElem=None
@@ -536,7 +588,7 @@ def create_group_lookup_dict(datasetToZeroGroupMappings, C):
     #          'uk.closer', 
     #          '5c669cb3-a633-4324-93fb-ed2695b44072', 
     #          item_types=[C.item_code('Variable Group')])
-    allLevelZeroes=datasetToZeroGroupMappings.values()    
+    allLevelZeroes=datasetToZeroGroupMappings.keys()    
     groupsWithoutDatasets=[]
     groupsWithDatasets=[]
     groupsWithoutDatasetsVarsInMultiple=[]
@@ -547,10 +599,25 @@ def create_group_lookup_dict(datasetToZeroGroupMappings, C):
     for x in allLevelZeroes:
         print(count)
         count=count+1
-        dataset=C.query_set(x['AgencyId'], x['Identifier'], item_types=[C.item_code('Data File')], reverseTraversal=True)
-        varGroups=C.query_set(x['AgencyId'], x['Identifier'], item_types=[C.item_code('Variable Group')])
+        print(x)
+        level_zero_group=datasetToZeroGroupMappings[x]
+        #dataset=C.query_set(x[0]['agencyId'], x[0]['identifier'], item_types=[C.item_code('Data File')], reverseTraversal=True)
+        dataset_agency=x.split(":")[2]
+        dataset_identifier=x.split(":")[3]
+        varGroups=C.query_set(level_zero_group[0]['agencyId'], level_zero_group[0]['identifier'], item_types=[C.item_code('Variable Group')])
+        if False:
+            print("J")
+        else:   
+            dataset_item=C.get_item_json(dataset_agency, dataset_identifier)
+            for varGroup in varGroups[1:]:
+                 var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+                 groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
+                    var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
+    return groupsInDatasets
+
+        """
         if len(dataset)==0:
-            datasetVars=C.query_set(x['AgencyId'], x['Identifier'],item_types=[C.item_code('Variable')])
+            datasetVars=C.query_set(x['agencyId'], x['identifier'],item_types=[C.item_code('Variable')])
             c=[]
             for y in datasetVars:
                 b=C.query_set(y['Item1']['Item3'], y['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
@@ -566,14 +633,8 @@ def create_group_lookup_dict(datasetToZeroGroupMappings, C):
                    groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
                         var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version']), x))
             else:
-                investigateThese.append(x) 
-        else:
-            dataset_item=C.get_item_json(dataset[0]['Item1']['Item3'], dataset[0]['Item1']['Item1'], version=dataset[0]['Item1']['Item2'])
-            for varGroup in varGroups[1:]:
-                 var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-                 groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
-                    var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
-        return groupsInDatasets
+                investigateThese.append(x)
+        """  
 
 
 
