@@ -28,7 +28,6 @@ from examples.lib.utility import (
     create_group,
     create_group_reference,
     create_group_lookup_dict,
-    update_list_of_topic_groups,
     get_current_state_of_topic_group,
     get_level_zero_group_2,
     get_level_zero_group,
@@ -66,8 +65,8 @@ def update_urns_list(urns, item, containing_item, topic_type, variable_topic,
             destination_topic_urn = get_urn_from_item(destination_group[0])
     elif topic_type==C.item_code('Variable Group'):
             # the topic groups all exist for questions which is why we only do the below for variable groups 
-            destination_group_details=[x for x in updated_topic_groups if x['Dataset']=='us5_e_newborn' 
-                and get_elements_of_type(x['Item'], "VariableGroupName")[0][0].text==str(10702)]
+            destination_group_details=[x for x in updated_topic_groups if x['Dataset']==dataset_name 
+                and get_elements_of_type(x['Item'], "VariableGroupName")[0][0].text==str(target_topic)]
             if len(destination_group_details)==1:
                 destination_topic_urn=get_urn_from_fragment(destination_group_details[0]['Item'])
             #destination_topic_urn = get_urn_from_fragment([x[0] for x in updated_topic_groups if x['Dataset']==dataset_name 
@@ -76,7 +75,8 @@ def update_urns_list(urns, item, containing_item, topic_type, variable_topic,
     if item_urn not in urns['itemUrns'] and destination_topic_urn != "":
             urns['itemUrns'].append(item_urn)
             urns['sourceTopicGroups'].append(source_topic_urn)
-            urns['destinationTopicGroups'].append(destination_topic_urn)  
+            urns['destinationTopicGroups'].append(destination_topic_urn)
+            urns['datasets'].append(dataset_name)  
     #else:
     #        print(('Error getting destination group item: expected to find 1 item, but instead ' 
     #              f'found {len(destination_group)}'))        
@@ -87,7 +87,8 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name, C, datas
     urns={
         "itemUrns": [],
         "sourceTopicGroups": [],
-        "destinationTopicGroups": []
+        "destinationTopicGroups": [],
+        "datasets": []
     }
     count=1
     # Iterate through the rows in the spreadsheet. Each row contains details of a topic
@@ -128,10 +129,10 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name, C, datas
                     version=latest_version_of_question_set)
                 update_urns_list(urns, relatedQuestion, containing_item, 
                     C.item_code('Question Group'), variable_topic, target_topic, 
-                    datasetToZeroGroupMappings=datasetToZeroGroupMappings) 
+                    datasetToZeroGroupMappings=datasetToZeroGroupMappings)           
     return (pd.DataFrame(urns))
 
-def create_topics(input_file_name, C, language="en-GB", datasetToZeroGroupMappings={}):
+def find_topics_to_create(input_file_name, C, language="en-GB", datasetToZeroGroupMappings={}):
     """Method for generating input for code that updates topics. The code iterates through 
     a spreadsheet containing details of new item topic assignments and generates a dataframe
     of URNs that can be used as input to a method that reassigns items to new topics. 
@@ -180,12 +181,15 @@ def create_topics(input_file_name, C, language="en-GB", datasetToZeroGroupMappin
             }]
         source_topic = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[topic_type])
         if len(source_topic)>0:
+           # PERHAPS ALL THE BELOW CODE UNTIL LINE 212 COULD GO INTO SEPARATE FUNCTION
            source_topic_item=C.get_item_json(source_topic[0]['Item1']['Item3'], source_topic[0]['Item1']['Item1'],
            version=source_topic[0]['Item1']['Item2'])
            if source_topic_item['ItemName'][language]==str(topic_reassignment_details.iloc[4]):
               level_zero_group=get_level_zero_group(source_topic_item, topic_type, C)
               source_topic_urn=get_urn_from_item(source_topic_item)
         else:
+           level_zero_group=get_level_zero_group_from_dataset()
+           
            level_zero_group_details=C.search_relationship_byobject(
               physical_instance_containing_variable['AgencyId'], 
               physical_instance_containing_variable['Identifier'], 
@@ -290,7 +294,8 @@ def create_ddi_objects_with_new_level_one_topics(topics_to_create, C):
                                zero_group_identifier,
                                zero_group_version,
                                topic_type,
-                               ddiObjectsLevelZero)                           
+                               ddiObjectsLevelZero,
+                               dataset=topic[0])                           
       level_two_groups=[x for x in topics_to_create[1] if x[0]==topic[0] and x[1][0:3]==topic[1]]
       #if len(level_two_groups)==0:
       #   print(topic)
@@ -535,7 +540,7 @@ it does already exist.
 6 + 7. The newly created/modified topics are referenced by the appropriate ancestor items; where
 necessary we have created ancestor items.
 
-
+SOURCE NEEDS TO SPECIFY DATASET SEE TERMINAL
 def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
     """Method for reassigning items to new topics. The code iterates through a data frame
     containing details of new item topic assignments and performs the reassignments. 
@@ -550,10 +555,14 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
     # Iterate through the rows in the data frame. Each row contains details of a topic
     # reassignment for a item...
     for topic_reassignment_details in topic_reassignments_data_frame.iloc:
-        print("Performing the following topic reassignment...")
-        print(f"Item {topic_reassignment_details.iloc[0]} to {topic_reassignment_details.iloc[2]}")
+      #print("Performing the following topic reassignment...")
+      #print(f"Item {topic_reassignment_details.iloc[0]} to {topic_reassignment_details.iloc[2]}")
+      #print(topic_reassignment_details.iloc[3])
         print(count)
         count=count+1
+        #if count==174:
+        print(f"Item {topic_reassignment_details.iloc[0]} to {topic_reassignment_details.iloc[2]}")
+        #   print(topic_reassignment_details.iloc[3])    
         topic_reassignment_details.iloc[0]
         item_agency_id = topic_reassignment_details.iloc[0].split(":")[2]
         item_identifier = topic_reassignment_details.iloc[0].split(":")[3]
@@ -564,6 +573,8 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
             topic_type=C.item_code('Variable Group')
         elif item['ItemType'] == C.item_code('Question'):
             topic_type=C.item_code('Question Group')
+        reference_to_move=None
+        reference_from_source_ddi_version = None
         if topic_reassignment_details.iloc[1] !='':      
             source_group_item_agency_id = topic_reassignment_details.iloc[1].split(":")[2]
             source_group_item_identifier = topic_reassignment_details.iloc[1].split(":")[3]
@@ -582,13 +593,13 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                                        version=source_group['Version']
                                                        )
             # Find and remove the reference to the item in the source group/topic.
-            reference_to_move=None
             references_to_move = find_all_references(
                         source_item, item['AgencyId'], item['Identifier'])
             if len(references_to_move) > 0:
                 for reference_to_move in references_to_move:
                         source_item[0].remove(reference_to_move)
-                        reference_from_source_ddi_version = reference_to_move.tag
+                        reference_from_source_ddi_version = ("ddi:reusable:"
+                                f"{get_namespace(reference_to_move.tag).split(':')[2]}")
             # Finally we update the array containing the most current versions of the
             # group/topics with the updated source topic...              
             update_list_of_topic_groups(source_item,
@@ -597,7 +608,8 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                source_group['Version'],
                                source_group['ItemType'],
                                updated_topic_groups,
-                               reference_to_remove=reference_to_move)     
+                               #reference_to_remove=reference_to_move,
+                               dataset=topic_reassignment_details.iloc[3])     
         destination_group_item_agency_id = topic_reassignment_details.iloc[2].split(":")[2]
         destination_group_item_identifier = topic_reassignment_details.iloc[2].split(":")[3]
         destination_group_item_version = topic_reassignment_details.iloc[2].split(":")[4]        
@@ -612,9 +624,9 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                                             destination_group_item_identifier,
                                                             updated_topic_groups,
                                                             C,
-                                                            version=destination_group_item_version
+                                                            version=destination_group_item_version,
                                                             )
-        print(destination_item)
+        #print(destination_item)
         # We check to see if a reference to the item is already present in the
         # destination group/topic. This information can be used to determine if the
         # topic reassignments described in the input file have already been
@@ -641,14 +653,16 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                         # the group/topic that we want to add the reference to, we need
                         # to create a new version of the reference which has the same namespace as
                         # the group/topic we will be adding it to.
-                        if reference_from_source_ddi_version != destination_ddi_version_reusable:
-                            if topic_type == C.item_code('Variable Group'):
+                        print(reference_from_source_ddi_version)
+                        print(destination_ddi_version_reusable)
+                        if reference_from_source_ddi_version != destination_ddi_version_reusable or reference_to_move is None:
+                             if topic_type == C.item_code('Variable Group'):
                                     new_reference = create_variable_reference(item_agency_id,
                                                                    item_identifier,
                                                                    item_version,
                                                                    destination_ddi_version_reusable
                                                                    )
-                            else:
+                             else:
                                     new_reference = create_question_reference(item_agency_id,
                                                                    item_identifier,
                                                                    item_version,
@@ -661,6 +675,11 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                         # reference to, we add the reference to the group representing the topic it is being 
                         # reassigned to...
                         print(reference_to_move==None or len(find_all_references(destination_item, reference_to_move[0].text, reference_to_move[1].text))==0)
+                        print(reference_to_move)
+                        print(destination_item)
+                        if reference_to_move is not None:
+                           print(reference_to_move[0].text)
+                           print(reference_to_move[1].text)
                         if reference_to_move==None or len(find_all_references(destination_item, reference_to_move[0].text, reference_to_move[1].text))==0:
                                 destination_item[0].append(new_reference)
                                 # ...and we update the entry for the destination topic in our array.
@@ -670,7 +689,8 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                    destination_group_item_version,
                                    topic_type,
                                    updated_topic_groups,
-                                   reference_to_add=new_reference
+                                   #reference_to_add=new_reference,
+                                   dataset=topic_reassignment_details.iloc[3]
                              )
         else:
                 if len(references_to_move)==0:
