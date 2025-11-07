@@ -348,76 +348,17 @@ def remove_elements_from_item(item, element_name, C):
         item[0].remove(y)
     return item
  
-def get_url_for_item(input_file_name, C):
-    """When given a question/variable name and the name of the dataset/questionnaire object
-    containing it, this function returns the URL where that item can be accessed on the 
-    discovery portal."""
-    data = pd.read_excel(input_file_name)
-    for topic_reassignment_details in data.iloc:
-        print("Performing the following topic reassignment...")
-        # Search for the physical instance/dataset item which contains the variable in the current
-        # input file row....
-        #print(topic_reassignment_details)
-        physical_instance_containing_variable = C.search_items(
-            'a51e85bb-6259-4488-8df2-f08cb43485f8',
-            SearchTerms=str(topic_reassignment_details.iloc[0]).strip(),
-            SearchLatestVersion=True)['Results']
-        #print(topic_reassignment_details.iloc[0])
-        print(len(physical_instance_containing_variable))
-        if len(physical_instance_containing_variable) == 1:
-            # We need to search within the physical instance/dataset for the variable named in the
-            # current row. We create a JSON object representing the physical instance/dataset.
-            search_sets = [{
-                "agencyId": physical_instance_containing_variable[0]['AgencyId'],
-                "identifier": physical_instance_containing_variable[0]['Identifier'],
-                "version": physical_instance_containing_variable[0]['Version']
-            }]
-            # For this search, the 'SearchTerms' keyword argument represents the name of the
-            # variable we are reassigning to a new topic. The 'SearchSets' keyword argument
-            # represents the physical instance/dataset we are searching for that variable in.
-            variables_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets,
-               SearchTerms=[str(topic_reassignment_details.iloc[2]).strip()])['Results']
-            if len(variables_metadata) == 1:
-                variable_agency_id = variables_metadata[0]['AgencyId']
-                variable_identifier = variables_metadata[0]['Identifier']
-                variable_version = variables_metadata[0]['Version']
-                print(f"https://discovery.closer.ac.uk/item/{variable_agency_id}/{variable_identifier}/{variable_version}")
-
 def create_input_file(input_file_name, C):
-    """When given a question/variable name and the name of the dataset/questionnaire object
-    containing it, this function returns the URL where that item can be accessed on the 
-    discovery portal."""
+    """Create an input file for the scripts that reassign items to new topics, by extracting information from
+    an existing file."""
     data = pd.read_excel(input_file_name).drop_duplicates()
     new_input_df = pd.DataFrame(columns=["Container", "ItemName", "URL", "Label", "CurrentTopic", "NewTopic"])
     newRow={}
-    count=1
     for topic_reassignment_details in data.iloc:
-        print(f"Count: {count}")
-        count=count+1
-        url=(get_url_for_item(C.item_code('Data File'), topic_reassignment_details.iloc[0], topic_reassignment_details.iloc[2], C))
-        new_row={"Container": topic_reassignment_details.iloc[0],
-                "ItemName": topic_reassignment_details.iloc[2],
-                "URL": url,
-                "Label": topic_reassignment_details.iloc[3],
-                "CurrentTopic": topic_reassignment_details.iloc[4],
-                "NewTopic": topic_reassignment_details.iloc[6]}
-        if str(topic_reassignment_details.iloc[6])!='nan':        
-            new_input_df.loc[len(new_input_df)] = new_row
-    new_input_df.to_excel('test.xlsx', index=False)
-
-def get_url_for_item(container_type, container_name, item_name, C):
-        """When given a question/variable name and the name of the dataset/questionnaire object
-        containing it, this function returns the URL where that item can be accessed on the 
-        discovery portal."""
-        print("Performing the following topic reassignment...")
-        # Search for the physical instance/dataset item which contains the variable in the current
-        # input file row....
-        print(topic_reassignment_details)
         physical_instance_containing_variable = C.search_items(
-            container_type,
-            SearchTerms=str(container_name).strip(),
+            C.item_code('Data File'),
+            SearchTerms=str(topic_reassignment_details.iloc[0]).strip(),
             SearchLatestVersion=True)['Results']
-        #print(topic_reassignment_details.iloc[0])
         if len(physical_instance_containing_variable) == 1:
             # We need to search within the physical instance/dataset for the variable named in the
             # current row. We create a JSON object representing the physical instance/dataset.
@@ -429,13 +370,19 @@ def get_url_for_item(container_type, container_name, item_name, C):
             # For this search, the 'SearchTerms' keyword argument represents the name of the
             # variable we are reassigning to a new topic. The 'SearchSets' keyword argument
             # represents the physical instance/dataset we are searching for that variable in.
-            variables_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets,
-               SearchTerms=[str(item_name).strip()])['Results']
-            if len(variables_metadata) == 1:
-                variable_agency_id = variables_metadata[0]['AgencyId']
-                variable_identifier = variables_metadata[0]['Identifier']
-                variable_version = variables_metadata[0]['Version']
-                return(f"https://discovery.closer.ac.uk/item/{variable_agency_id}/{variable_identifier}/{variable_version}")
+            variable_metadata = C.search_items(C.item_code('Variable'), SearchSets=search_sets,
+               SearchTerms=[str(topic_reassignment_details.iloc[2]).strip()])['Results']
+            if len(variable_metadata) == 1:
+                url=get_url_from_item(variable_metadata[0], 'discovery.closer.ac.uk')
+                new_row={"Container": topic_reassignment_details.iloc[0],
+                    "ItemName": topic_reassignment_details.iloc[2],
+                    "URL": url,
+                    "Label": topic_reassignment_details.iloc[3],
+                    "CurrentTopic": topic_reassignment_details.iloc[4],
+                    "NewTopic": topic_reassignment_details.iloc[6]}
+                if str(topic_reassignment_details.iloc[6])!='nan':        
+                    new_input_df.loc[len(new_input_df)] = new_row
+    new_input_df.to_excel('newFile.xlsx', index=False)
 
 def create_group(group_name, 
 group_label, 
@@ -493,92 +440,19 @@ def get_level_zero_group(group, item_type, C, language="en-GB"):
         item_element = defusedxml.ElementTree.fromstring(item['Item'])    
     return item_element
 
-def get_level_zero_group_2(agencyId, identifier, version, item_type, C):
-    level_zero_group = C.search_relationship_byobject(agencyId, identifier, Version=version, 
-               item_types=[item_type])[0] 
-    level_zero_group_item=C.get_item_xml(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],
-           version=level_zero_group['Item1']['Item2'])           
-    item_element = defusedxml.ElementTree.fromstring(level_zero_group_item['Item'])
-    return item_element
-
-# This does not get all the level zeroes groups, but it gets a lot of them
-"""
-level_zero_groups=C.search_relationship_bysubject(
-              'uk.closer', 
-              '5c669cb3-a633-4324-93fb-ed2695b44072', 
-              item_types=[C.item_code('Variable Group')])
-datasetToZeroGroupMappings={}       
-count=0
-for level_zero_group in level_zero_groups:
-        print(count)
-        count=count+1
-        dataset=C.query_set(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],item_types=[C.item_code('Data File')], reverseTraversal=True)
-        if len(set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in dataset] ))==1:
-                latest_version_of_dataset = max([x['Item1']['Item2'] for x in dataset])
-                dataset_item=C.get_item_xml(dataset[0]['Item1']['Item3'], 
-                    dataset[0]['Item1']['Item1'],
-                    version=latest_version_of_dataset)
-                containing_level_zero_group = [{
-                "agencyId": level_zero_group['Item1']['Item3'],
-                "identifier": level_zero_group['Item1']['Item1'],
-                "version": level_zero_group['Item1']['Item2'],
-                }]    
-                datasetToZeroGroupMappings[get_urn_from_item(dataset_item)]=containing_level_zero_group
-datasets=C.search_items(
-                          C.item_code('Data File'),
-                          SearchLatestVersion=True)['Results']
-count2=0
-for dataset in datasets:
-    print(count2)
-    count2=count2+1
-    if not get_urn_from_item(dataset) in datasetToZeroGroupMappings.keys():
-            print(f"Need to determine level zero group for dataset {get_urn_from_item(dataset)} by inspecting variables...")
-            datasetVars=C.query_set(dataset['AgencyId'], dataset['Identifier'], version=dataset['Version'], item_types=[C.item_code('Variable')])
-            c=[]
-            count=0
-            for y in datasetVars:
-                varGroups=C.search_relationship_byobject(y['Item1']['Item3'], y['Item1']['Item1'], 
-                   Version=y['Item1']['Item2'], item_types=[C.item_code('Variable Group')]) 
-                for varGroup in varGroups:
-                    print(f"{count} of {len(datasetVars)} variables in dataset {get_urn_from_item(dataset)}...")
-                    count=count+1
-                    var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-                    level_zero_group=get_level_zero_group(var_group_item, C.item_code('Variable Group'), C)
-                    c.append(level_zero_group)
-            if len(set([x[0][2].text for x in c]))==1:
-                containing_level_zero_group = [{
-                "agencyId": level_zero_group[0][1].text,
-                "identifier": level_zero_group[0][2].text,
-                "version": level_zero_group[0][3].text,
-                }]
-                datasetToZeroGroupMappings[get_urn_from_item(dataset)]=containing_level_zero_group          
-                    
-"""             
-
-#allVariableGroups=C.search_items( C.item_code('Variable Group'))
-#for variableGroup in allVariableGroups['Results']:
-    
- #   level_zero_group=get_level_zero_group(variableGroup, C.item_code('Variable Group'), C)
-#   datasetVars=C.query_set(variableGroup['AgencyId'], variable
-
 def create_group_lookup_dict(datasetToZeroGroupMappings, C):
-    allLevelZeroes=datasetToZeroGroupMappings.keys()    
-    groupsWithoutDatasets=groupsWithDatasets=groupsWithoutDatasetsVarsInMultiple=groupsWithoutDatasetsVarsInNone=[]
     groupsInDatasets=[]
-    count=0
-    investigateThese=[]
-    for x in allLevelZeroes:
+    for x in datasetToZeroGroupMappings.keys():
         level_zero_group=datasetToZeroGroupMappings[x]
         dataset_agency=x.split(":")[2]
         dataset_identifier=x.split(":")[3]
-        varGroups=C.query_set(level_zero_group[0]['agencyId'], level_zero_group[0]['identifier'], item_types=[C.item_code('Variable Group')])
-        if False:
-            print("J")
-        else:   
-            dataset_item=C.get_item_json(dataset_agency, dataset_identifier)
-            for varGroup in varGroups[1:]:
-                 var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-                 groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], var_group_item['ItemName']['en-GB'], 
-                    var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
+        varGroups=C.query_set(level_zero_group[0]['agencyId'], level_zero_group[0]['identifier'], 
+            item_types=[C.item_code('Variable Group')])
+        dataset_item=C.get_item_json(dataset_agency, dataset_identifier)
+        for varGroup in varGroups[1:]:
+            var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+            groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], 
+                var_group_item['ItemName']['en-GB'], 
+                var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
     return groupsInDatasets
 
