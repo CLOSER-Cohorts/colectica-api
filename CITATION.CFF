@@ -1,14 +1,15 @@
 # YAML 1.2
 ---
+cff-version: 1.2.0
 authors: 
-  -
-    family-names: Li
+  - family-names: Li
     given-names: Jenny
-cff-version: "1.1.0"
-date-released: 2021-10-01
+  - family-names: Lyttleton
+    given-names: Oliver
+cff-version: "1.2.0"
+date-released: 2025-12-01
 license: MIT
 message: "If you use this software, please cite it using these metadata."
 repository-code: "https://github.com/CLOSER-Cohorts/colectica_api"
 title: "Python interface to the Colectica API"
 version: "1.0"
-...
