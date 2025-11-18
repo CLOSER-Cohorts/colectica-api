@@ -12,6 +12,7 @@ def get_namespace(tag):
         return m.group(1)
 
 def references_are_equal(reference1, reference2):
+    """Determine if two references are equal by comparing their elements."""
     ref_1_elems=[]
     ref_2_elems=[]
     for elem in reference1.findall(".//"):
@@ -70,6 +71,7 @@ def create_variable_reference(agency_id, item_id, version, namespace):
     return new_element
 
 def create_question_reference(agency_id, item_id, version, namespace, namespace2):
+    """Create an XML element representing a QuestionItemReference"""
     new_element = ET.Element(f"{{{namespace2}}}QuestionItemReference")
     agency_element=ET.Element(f"{{{namespace}}}Agency")
     id_element=ET.Element(f"{{{namespace}}}ID")
@@ -86,7 +88,21 @@ def create_question_reference(agency_id, item_id, version, namespace, namespace2
     return new_element
 
 def create_group_reference(agency_id, item_id, version, namespace_version, topic_type, C):
-    """Create an XML element representing a Variable/QuestionGroup"""
+    """Create an XML element representing a Variable/QuestionGroup.
+    
+    Arguments:
+        agency_id (str): Agency to which the item that we are creating a reference for belongs. 
+            For example, ``"uk.cls.nextsteps"``.
+        item_id (str): Identifier for the item that we are creating a reference for.
+            For example, ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+        version (str): The number indicating the version of the item we are creating/
+        namespace_version (str): the version of the namespaces to which various elements belong in the
+            reference we are creating.
+        topic_type (uuid): the type of topic/variable we are creating a reference to.
+        C (ColecticaObject): an authenticated ColecticaObject instance.
+    Returns:
+        ElementTree.Element: An ElementTree.Element representing the group reference.
+    """
     type_of_object_element = ET.Element(f"{{ddi:reusable:{namespace_version}}}TypeOfObject")
     if topic_type==C.item_code('Variable Group'):
         new_element = ET.Element(f"{{ddi:logicalproduct:{namespace_version}}}VariableGroupReference")
@@ -119,13 +135,25 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
     retrieving/updating/writing data using the Colectica REST API every time we need to update 
     a group, we will retrieve the most recent version of it from the Colectica repository
     using the Colectica REST API for the first update, and on subsequent updates we will modify the
-    in-memory version which is stored in the updated_groups array."""
-    #print("IN FUNC")
-    #print(agency_id)
-    #print(identifier)
+    in-memory version which is stored in the updated_groups array.
+    
+    Arguments:
+        agency_id (str): Agency to which the group that we are getting the current state for belongs. 
+            For example, ``"uk.cls.nextsteps"``.
+        item_id (str): Identifier for the group that we are getting the current state for.
+            For example, ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+        updated_groups: list of groups within which we search for the group specified by the
+            agency_id and identifier and arguments, and the version keyword argument (if specified).
+        C (ColecticaObject): an authenticated ColecticaObject instance.
+        
+    Keyword arguments:
+        version (int): The number indicating the version of the group we are searching for.
+
+    Returns:
+        ElementTree.Element: An ElementTree.Element representing the topic group.     
+    """
     updated_referencing_item = [x for x in updated_groups if x['AgencyId'] == agency_id 
        and x['Identifier']==identifier]
-    #print(updated_groups)   
     if len(updated_referencing_item) > 0:
         referencing_item = updated_referencing_item[0]['Item']
     else:
@@ -137,7 +165,28 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
 def update_list_of_topic_groups(updated_group, agency, identifier, version,
                                       item_type, updated_groups_list, dataset=None):
     """Update the in-memory list of groups representing topics. If the topic group we have
-    updated is not in already in the list, we append it to the list."""
+    updated is not in already in the list, we append it to the list.
+    
+    Arguments:
+        updated_group: the value for a group which we are either inserting into updated_groups_list (if
+            an earlier version of the group is not there), or we are updating (if an earlier version is
+            in updated_groups_list)
+        agency_id (str): Agency to which the group that we are updating belongs. 
+            For example, ``"uk.cls.nextsteps"``.
+        identifier (str): Identifier for the group that we are updating.
+            For example, ``"a6f96245-5c00-4ad3-89e9-79afaefa0c28"``.
+        version (int): the number indicating the version of the group we are updating.
+        item_type(uuid): the type of the group we are updating (e.g. C.item_code('Variable Group'))
+        updated_groups_list: list of groups within which we search for the group specified by the
+            agency_id, identifier and version arguments.
+    
+    Keyword arguments:
+        dataset (str): the name of the dataset to which the item belongs, if applicable (i.e. if the
+           item_type is 'Variable Group')
+
+    Returns:
+        None: The function updates updated_groups_list in place.
+    """
     if ([x['Identifier'] for x in updated_groups_list].count(identifier) > 0):
         index_of_updated_ref = [x['Identifier'] for x in updated_groups_list].index(identifier)
         updated_groups_list[index_of_updated_ref] = {
@@ -156,9 +205,6 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             "ItemType": item_type,
             "Item": updated_group,
             "Dataset": dataset
-            #,
-            #"ReferencesToRemove": [] if reference_to_remove is None else [].append(reference_to_remove),
-            #"ReferencesToAdd": [] if reference_to_add is None else [].append(reference_to_add)
         })
  
 def get_item_from_topic_name(topic_name, topic_type, containing_item, C, datasetToZeroGroupMappings={}):
@@ -170,6 +216,18 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
     https://docs.colectica.com/repository/technical/item-type-identifiers/). Item types can be 
     mapped to their identifiers using the C.item_code function, e.g. C.item_code("Question Group"),
     C.item_code("Data Collection").
+
+    Arguments:
+        topic_name (str): the name of the topic we are searching for (e.g. '11609').
+        topic_type (str): the type of the topic we are searching for.
+        containing_item (dict): A dictionary containing details of the item containing the item being reassigned.
+        C (ColecticaObject): an authenticated ColecticaObject instance.
+
+    Keyword arguments:
+        datasetToZeroGroupMappings (dict): A dictionary mapping dataset names to level zero topic groups. 
+
+    Returns:
+        list: A list containing Variable Groups/Question Groups items that represent topics.
     """
     topic_group_identifiers = C.search_items(topic_type,
                      SearchSets=containing_item,
@@ -177,7 +235,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
                      UsePrefixSearch=True,
                      SearchTargets="Name")['Results']
     if len(topic_group_identifiers)==0:
-        if not get_urn_from_item(containing_item[0]) in datasetToZeroGroupMappings.keys():
+        if not get_urn_from_item(containing_item) in datasetToZeroGroupMappings.keys():
             # If we cannot determine the level zero group for the dataset (i.e. topic_group_identifiers is
             # empty) we must try to determine the level zero group by inspecting the variables in the dataset...
             print((f"Cannot determine level zero group for dataset {get_urn_from_item(containing_item)}, " 
@@ -188,13 +246,13 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
             count=0
             for var in datasetVars:
                 varGroups=C.search_relationship_byobject(var['Item1']['Item3'], var['Item1']['Item1'], 
-                   Version=y['Item1']['Item2'], item_types=[topic_type]) 
+                   Version=var['Item1']['Item2'], item_types=[topic_type]) 
                 for varGroup in varGroups:
                     print(f"{count} of {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
                     count=count+1
                     var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], 
                         version=varGroup['Item1']['Item2'])
-                    level_zero_group=get_level_zero_group(var_group_item, topic_type, C)
+                    level_zero_group=get_level_zero_group_for_topic(var_group_item, topic_type, C)
                     level_zero_groups.append(level_zero_group)
             if len(set([x[0][2].text for x in level_zero_groups]))==1:
                 containing_level_zero_group = [{
@@ -226,7 +284,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
             containing_item['Identifier'], item_types=C.item_code('Variable Group'), 
             Version=containing_item['Version'], Descriptions=True)
         if len(containing_level_zero_group)==1:
-           containing_level_zero_group_item=C.get_item_json(containing_level_zero_group['AgencyId'],
+           containing_level_zero_group_item=C.get_item_json(containing_level_zero_group[0]['AgencyId'],
               containing_level_zero_group[0]['Identifier'], version=containing_level_zero_group[0]['Version'])
            if containing_level_zero_group_item['Concept']==None:
                datasetToZeroGroupMappings[get_urn_from_item(containing_item)]=[{
@@ -237,9 +295,16 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, dataset
     return [x for x in topic_group_identifiers if x['ItemName']['en-GB']==str(topic_name)]
 
 def get_topic_for_item(agency_id, identifier, version, item_type, C):
-    """This function gets the topic item(s) for an item (i.e. question/variable), given the
-    question/variable's agency id, identifier, version, and the UUID code representing the topic's
-    type (e.g. C.item_code("Variable Group")).
+    """This function gets the topic item(s) for an item (i.e. question/variable).
+
+    Arguments:
+        agency_id(str): the agency for the question/variable we are trying to get the topic for.
+        identifier(str): the identifier for the question/variable we are trying to get the topic for.
+        version(str): the version for the question/variable we are trying to get the topic for.
+        item_type(uuid): the UUID code representing the topic's type (e.g. C.item_code("Variable Group")).
+
+    Returns:
+        list: a list of variable/question groups representing topics.
     """
     topics_assigned_to_item=[]
     related_groups = C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[item_type])
@@ -348,9 +413,18 @@ def remove_elements_from_item(item, element_name, C):
         item[0].remove(y)
     return item
  
-def create_input_file(input_file_name, C):
-    """Create an input file for the scripts that reassign items to new topics, by extracting information from
-    an existing file."""
+def create_input_file(input_file_name, output_file_name, C):
+    """This is a utility function that creates an input file for the find_topics_to_create method by 
+        extracting information from an existing file that is not in the required format.
+    
+    Arguments:
+        input_file_name (str): the name for a file that we want to extract information from.
+        output_file_name (str): the name for the output file to create.
+
+    Returns:
+        None: the output file that is in the format required by the find_topics_to_create method is created
+            in the current working directory. 
+    """
     data = pd.read_excel(input_file_name).drop_duplicates()
     new_input_df = pd.DataFrame(columns=["Container", "ItemName", "URL", "Label", "CurrentTopic", "NewTopic"])
     newRow={}
@@ -384,15 +458,29 @@ def create_input_file(input_file_name, C):
                     new_input_df.loc[len(new_input_df)] = new_row
     new_input_df.to_excel('newFile.xlsx', index=False)
 
-def create_group(group_name, 
-group_label, 
-item_id, 
-namespace, 
-concept_agency_id, 
-concept_identifier, 
-concept_version):
-   fragmentString = f"""<Fragment xmlns:r="ddi:reusable:{namespace}" xmlns="ddi:instance:{namespace}">
-      <VariableGroup xmlns="ddi:logicalproduct:{namespace}" isUniversallyUnique="true" versionDate="2020-11-04T10:22:01.0748816Z">
+def create_variable_group(group_name, 
+    group_label, 
+    item_id, 
+    namespace_version, 
+    concept_agency_id, 
+    concept_identifier, 
+    concept_version):
+    """Create a variable group representing a topic.
+
+    Arguments:
+        group_name: the name of the topic/variable group.
+        group_label: the label for the topic/variable group.
+        item_id: the identifier for the topic/variable group.
+        namespace_version: the version for the namespaces for various elements.
+        concept_agency_id: the agency for the concept which this topic/variable group represents.
+        concept_identifier: the identifier for the concept which this topic/variable group represents.   
+        concept_version: the version for the concept which this topic/variable group represents.
+
+    Returns:
+        ElementTree.Element: An ElementTree.Element representing the variable group.
+    """
+    fragmentString = f"""<Fragment xmlns:r="ddi:reusable:{namespace_version}" xmlns="ddi:instance:{namespace_version}">
+      <VariableGroup xmlns="ddi:logicalproduct:{namespace_version}" isUniversallyUnique="true" versionDate="2020-11-04T10:22:01.0748816Z">
       <r:URN>urn:ddi:uk.closer:{item_id}:1</r:URN>
       <r:Agency>uk.closer</r:Agency>
       <r:ID>{item_id}</r:ID>
@@ -411,9 +499,24 @@ concept_version):
       </r:ConceptReference>
       </VariableGroup>
       </Fragment>""".replace("\n", "").replace("      ", "")
-   return defusedxml.ElementTree.fromstring(fragmentString) 
+    return defusedxml.ElementTree.fromstring(fragmentString)
 
 def get_group_label(topic_name, topic_type, C, language="en-GB"):
+    """Retrieves the label for a topic/group by retrieving all instances of items with the topic name and
+    choosing the label that is the most common for all those items (in case not all the items have the
+    same labels).
+
+    Arguments:
+        topic_name (str): the name of the topic/group we want a label for.
+        topic_type (uuid): the type of the topic/group (e.g. C.item_code('Variable Group')).
+        C (ColecticaObject): an authenticated ColecticaObject instance.
+
+    Keyword arguments:
+        language (str): the language the label is in.
+
+    Returns:
+        str: the label for the specified topic/group.
+    """
     from collections import Counter
     groups_with_topic=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
@@ -421,11 +524,24 @@ def get_group_label(topic_name, topic_type, C, language="en-GB"):
     group_label=Counter([x['Label'][language] for x in groups_with_topic['Results']]).most_common(1)[0][0]
     return group_label
 
-def get_level_zero_group(group, item_type, C, language="en-GB"):
+def get_level_zero_group_for_topic(group, item_type, C, language="en-GB"):
+    """Get the level zero group for a specified group.
+
+    Arguments:
+        group (dict): A dictionary representing the group for which we want to get the level zero group.
+        item_type (uuid): the type of the topic/group (e.g. C.item_code('Variable Group')).
+        C (ColecticaObject): an authenticated ColecticaObject instance.
+    
+    Keyword arguments:
+        language (str): the language the topic name is in.
+    
+    Returns:
+        ElementTree.Element: An ElementTree.Element representing the level zero group.
+    """
     if group['ItemName']!={}:
         if language in group['ItemName'].keys():
             topic_name = group['ItemName'][language]
-        if isinstance(group['ItemName'], str):
+        elif isinstance(group['ItemName'], str):
             topic_name = group['ItemName']
         parent_group = C.search_relationship_byobject(group['AgencyId'], 
            group['Identifier'], Version=group['Version'], item_types=[item_type])[0]  
@@ -441,6 +557,16 @@ def get_level_zero_group(group, item_type, C, language="en-GB"):
     return item_element
 
 def create_group_lookup_dict(datasetToZeroGroupMappings, C):
+    """Create a tuple thats used to map the datasets specified in datasetsToZeroGroupMappings to the 
+    topic groups they contain.
+
+    Arguments:
+        datasetToZeroGroupMappings (dict): A dictionary mapping dataset names to level zero topic groups. 
+        C (ColecticaObject): an authenticated ColecticaObject instance.
+
+    Returns:
+        list: A list of tuples representing groups in datasets.
+    """
     groupsInDatasets=[]
     for x in datasetToZeroGroupMappings.keys():
         level_zero_group=datasetToZeroGroupMappings[x]
@@ -451,8 +577,7 @@ def create_group_lookup_dict(datasetToZeroGroupMappings, C):
         dataset_item=C.get_item_json(dataset_agency, dataset_identifier)
         for varGroup in varGroups[1:]:
             var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-            groupsInDatasets.append((dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'], 
-                var_group_item['ItemName']['en-GB'], 
-                var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])))
+            groupsInDatasets.append({"DatasetName": dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'],
+                "VariableGroupName": var_group_item['ItemName']['en-GB'],
+                "VariableGroupId": var_group_item['Identifier']+ ":" + var_group_item['AgencyId'] + ":" + str(var_group_item['Version'])})
     return groupsInDatasets
-
