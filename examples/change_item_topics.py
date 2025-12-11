@@ -440,7 +440,8 @@ def find_topics_to_create(input_file_name, C, datasetToZeroGroupMappings={}, gro
                 all_variable_groups, C)
         destination_topic = get_item_from_topic_name(topic_dict['destination_topic_name'], 
             topic_type, 
-            topic_dict['physical_instance_search_set'], C, 
+            topic_dict['physical_instance_search_set'], 
+            C, 
             groupsInDatasets=groupsInDatasets,
             dataset_name=topic_dict['dataset_name'], datasetToZeroGroupMappings=datasetToZeroGroupMappings)
         if len(destination_topic)==0:

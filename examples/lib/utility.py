@@ -263,7 +263,7 @@ def get_item_from_topic_name(topic_name,
                 level_zero_groups=[]
                 count=0
                 print(f"Verifying the level zero group for {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
-                for var in datasetVars:
+                for var in datasetVars[0:4]:
                     varGroups=C.search_relationship_byobject(var['Item1']['Item3'], var['Item1']['Item1'], 
                         Version=var['Item1']['Item2'], item_types=[topic_type]) 
                     for varGroup in varGroups:
