@@ -581,7 +581,7 @@ def get_level_zero_group_for_topic(group, C, language="en-GB"):
             elif len(topic_name)==5:
                 level_zero_group = C.search_relationship_byobject(parent_group[0]['AgencyId'], 
                     parent_group[0]['Identifier'], Version=parent_group[0]['Version'], 
-                    item_types=[C.item_code('Variable Group', Descriptions=True)])
+                    item_types=[C.item_code('Variable Group')], Descriptions=True)
                 if len(level_zero_group)==1:    
                     item=C.get_item_xml(level_zero_group[0]['AgencyId'], level_zero_group[0]['Identifier'],
                     version=level_zero_group[0]['Version'])
