@@ -13,7 +13,7 @@ HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
 
-validationResults=examples.change_item_topics.move_topics(C)
+validationResults=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
 
 
 datasetToZeroGroupMappings={}
