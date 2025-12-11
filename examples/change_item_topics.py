@@ -179,7 +179,9 @@ def move_topics(input_file, C):
     # Now that we have verified that the topics to create/modify are correct, we can proceed to
     # creating the urn dataframe which specifies which items should be moved to which topics
     topic_reassignments_data_frame=generate_urn_dataframe_for_questions_and_variables('../test.xlsx', 
-      C, updated_topic_groups, 0, datasetToZeroGroupMappings=datasetToZeroGroupMappings, 
+      updated_topic_groups, 
+      C,
+      datasetToZeroGroupMappings=datasetToZeroGroupMappings, 
       groupsInDatasets=groupsInDatasets)
     # Run the update_topics method that creates DDI objects that reassigns items to topics. Note that it uses
     # the updated_topic_groups array as an input argument, this array contains the DDI items representing topics
@@ -256,8 +258,8 @@ def update_urns_list(urns,
 def generate_urn_dataframe_for_questions_and_variables(input_file_name, 
     topic_groups,
     C, 
-    groupsInDatasets=[],
-    datasetToZeroGroupMappings={}):  
+    datasetToZeroGroupMappings={},
+    groupsInDatasets=[]):  
     """Generates a dataframe containing URNs used for topic reassignment.
 
     Arguments:
