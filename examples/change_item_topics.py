@@ -804,10 +804,10 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
     # reassignment for a item...
     for topic_reassignment_details in topic_reassignments_data_frame.iloc:
         print("Performing the following topic reassignment...")
-        print(f"Item {topic_reassignment_details.iloc['itemUrns']} to {topic_reassignment_details.iloc['destinationTopicGroups']}")
-        item_agency_id = topic_reassignment_details.iloc['itemUrns'].split(":")[2]
-        item_identifier = topic_reassignment_details.iloc['itemUrns'].split(":")[3]
-        item_version = topic_reassignment_details.iloc['itemUrns'].split(":")[4]
+        print(f"Item {topic_reassignment_details['itemUrns']} to {topic_reassignment_details['destinationTopicGroups']}")
+        item_agency_id = topic_reassignment_details['itemUrns'].split(":")[2]
+        item_identifier = topic_reassignment_details['itemUrns'].split(":")[3]
+        item_version = topic_reassignment_details['itemUrns'].split(":")[4]
         item = C.get_item_json(item_agency_id, item_identifier, version = item_version)
         topic_type=""
         if item['ItemType'] == C.item_code('Variable'):
@@ -817,8 +817,8 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
         reference_to_move=None
         reference_from_source_ddi_version = None
         if topic_reassignment_details.iloc['sourceTopicGroups'] !='':      
-            source_group_item_agency_id = topic_reassignment_details.iloc['sourceTopicGroups'].split(":")[2]
-            source_group_item_identifier = topic_reassignment_details.iloc['sourceTopicGroups'].split(":")[3]
+            source_group_item_agency_id = topic_reassignment_details['sourceTopicGroups'].split(":")[2]
+            source_group_item_identifier = topic_reassignment_details['sourceTopicGroups'].split(":")[3]
             source_group = C.get_item_json(source_group_item_agency_id,
                 source_group_item_identifier)
             # We get the current state of the group containing a reference to the item.
@@ -850,10 +850,10 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                source_group['Version'],
                                source_group['ItemType'],
                                updated_topic_groups,
-                               dataset=topic_reassignment_details.iloc['dataset'])     
-        destination_group_item_agency_id = topic_reassignment_details.iloc['destinationTopicGroups'].split(":")[2]
-        destination_group_item_identifier = topic_reassignment_details.iloc['destinationTopicGroups'].split(":")[3]
-        destination_group_item_version = topic_reassignment_details.iloc['destinationTopicGroups'].split(":")[4]        
+                               dataset=topic_reassignment_details['dataset'])     
+        destination_group_item_agency_id = topic_reassignment_details['destinationTopicGroups'].split(":")[2]
+        destination_group_item_identifier = topic_reassignment_details['destinationTopicGroups'].split(":")[3]
+        destination_group_item_version = topic_reassignment_details['destinationTopicGroups'].split(":")[4]        
         # We get the current state of the group that we will be adding a
         # reference to the item to. This group represents the topic the
         # item will be reassigned to.
@@ -917,21 +917,21 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                    destination_group_item_version,
                                    topic_type,
                                    updated_topic_groups,
-                                   dataset=topic_reassignment_details.iloc['datasets']
+                                   dataset=topic_reassignment_details['datasets']
                              )
         else:
                 if len(references_to_move)==0:
-                    print((f"Item {topic_reassignment_details.iloc['itemUrns']} "
+                    print((f"Item {topic_reassignment_details['itemUrns']} "
                             f" is not in topic "
-                            f"{topic_reassignment_details.iloc['sourceTopicGroups']}"))
+                            f"{topic_reassignment_details['sourceTopicGroups']}"))
                     items_not_present_in_source_topic.append(
-                            (topic_reassignment_details.iloc['itemUrns'], topic_reassignment_details.iloc['sourceTopicGroups']))
+                            (topic_reassignment_details['itemUrns'], topic_reassignment_details['sourceTopicGroups']))
                 if reference_in_destination_topic is not None:
-                    print((f"Item {topic_reassignment_details.iloc['itemUrns']} "
+                    print((f"Item {topic_reassignment_details['itemUrns']} "
                             f" is already in topic "
-                            f"{topic_reassignment_details.iloc['destinationTopicGroups']}"))
+                            f"{topic_reassignment_details['destinationTopicGroups']}"))
                     items_present_in_destination_topic.append(
-                            (topic_reassignment_details.iloc['itemUrns'], topic_reassignment_details.iloc['destinationTopicGroups']))
+                            (topic_reassignment_details['itemUrns'], topic_reassignment_details['destinationTopicGroups']))
     number_of_topic_reassignments_already_performed = len([x for x in items_not_present_in_source_topic
                                            if x in items_present_in_destination_topic])
     number_of_topic_reassignments_to_be_performed = len(topic_reassignments_data_frame) - number_of_topic_reassignments_already_performed
