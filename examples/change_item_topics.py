@@ -746,7 +746,7 @@ def validateLevelOneTopics(ddi_objects_level_zero, level_one_topics, C):
    for level_one_topic in level_one_topics:
             level_one_identifier=level_one_topic['Item'][0][2].text
             for level_zero_object in ddi_objects_level_zero:
-                if level_zero_object is not None:
+                if level_zero_object['Item'] is not None:
                     level_zero_refs=find_all_references(level_zero_object['Item'], 
                         'uk.closer', 
                         level_one_identifier)
