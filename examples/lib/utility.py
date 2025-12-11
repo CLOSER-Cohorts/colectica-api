@@ -498,7 +498,7 @@ def create_input_file(input_file_name, output_file_name, C):
                     "NewTopic": topic_reassignment_details.iloc[6]}
                 if str(topic_reassignment_details.iloc[6])!='nan':        
                     new_input_df.loc[len(new_input_df)] = new_row
-    new_input_df.to_excel('newFile.xlsx', index=False)
+    new_input_df.to_excel(output_file_name, index=False)
 
 def create_variable_group(group_name, 
     group_label, 
@@ -571,7 +571,6 @@ def get_level_zero_group_for_topic(group, C, language="en-GB"):
 
     Arguments:
         group (dict): A dictionary representing the group for which we want to get the level zero group.
-        item_type (uuid): the type of the topic/group (e.g. C.item_code('Variable Group')).
         C (ColecticaObject): an authenticated ColecticaObject instance.
     
     Keyword arguments:
@@ -581,23 +580,25 @@ def get_level_zero_group_for_topic(group, C, language="en-GB"):
         ElementTree.Element: An ElementTree.Element representing the level zero group.
     """
     item_element=None
+    topic_name=""
     if group['ItemName']!={}:
         if language in group['ItemName'].keys():
             topic_name = group['ItemName'][language]
         elif isinstance(group['ItemName'], str):
             topic_name = group['ItemName']   
         parent_group = C.search_relationship_byobject(group['AgencyId'], 
-           group['Identifier'], Version=group['Version'], item_types=[group['ItemType']])
+           group['Identifier'], Version=group['Version'], item_types=[group['ItemType']], Descriptions=True)
         if len(parent_group)==1:
             if len(topic_name)==3:
                 level_zero_group = parent_group[0]
             elif len(topic_name)==5:
-                level_zero_group = C.search_relationship_byobject(parent_group[0]['Item1']['Item3'], 
-                    parent_group[0]['Item1']['Item1'], Version=parent_group[0]['Item1']['Item2'], 
-                    item_types=[C.item_code('Variable Group')])[0]
-            item=C.get_item_xml(level_zero_group['Item1']['Item3'], level_zero_group['Item1']['Item1'],
-                version=level_zero_group['Item1']['Item2'])
-            item_element = defusedxml.ElementTree.fromstring(item['Item'])    
+                level_zero_group = C.search_relationship_byobject(parent_group[0]['AgencyId'], 
+                    parent_group[0]['Identifier'], Version=parent_group[0]['Version'], 
+                    item_types=[C.item_code('Variable Group', Descriptions=True)])
+                if len(level_zero_group)==1:    
+                    item=C.get_item_xml(level_zero_group[0]['AgencyId'], level_zero_group[0]['Identifier'],
+                    version=level_zero_group[0]['Version'])
+                    item_element = defusedxml.ElementTree.fromstring(item['Item'])        
     return item_element
 
 def create_group_lookup_dict(datasetToZeroGroupMappings, C):
@@ -613,20 +614,22 @@ def create_group_lookup_dict(datasetToZeroGroupMappings, C):
     """
     groupsInDatasets=[]
     count=0
-    for x in datasetToZeroGroupMappings.keys():
+    for dataset in datasetToZeroGroupMappings.keys():
         count=count+1
         print(f"Processing dataset {count} of {len(datasetToZeroGroupMappings.keys())}...")
-        level_zero_group=datasetToZeroGroupMappings[x]
-        dataset_agency=x.split(":")[2]
-        dataset_identifier=x.split(":")[3]
-        varGroups=C.query_set(level_zero_group[0]['AgencyId'], level_zero_group[0]['Identifier'], 
-            item_types=[C.item_code('Variable Group')])
-        dataset_item=C.get_item_json(dataset_agency, dataset_identifier)
-        for varGroup in varGroups[1:]:
-            var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
-            groupsInDatasets.append({"DatasetName": dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'],
-                "VariableGroupName": var_group_item['ItemName']['en-GB'],
-                "VariableGroupUrn": "urn:ddi:" + var_group_item['AgencyId'] + ":" + var_group_item['Identifier'] + ":" + str(var_group_item['Version']),
-                "TopicType": C.item_code('Variable Group')
+        level_zero_group=datasetToZeroGroupMappings[dataset]
+        dataset_agency=dataset.split(":")[2]
+        dataset_identifier=dataset.split(":")[3]
+        if len(level_zero_group)==1:
+            varGroups=C.query_set(level_zero_group[0]['AgencyId'], level_zero_group[0]['Identifier'], 
+                item_types=[C.item_code('Variable Group')])
+            dataset_item=C.get_item_json(dataset_agency, dataset_identifier)
+            # We iterate through varGroups, but exclude the level zero group...
+            for varGroup in [group for group in varGroups if group['Item1']['Item1']!=level_zero_group[0]['Identifier']]:
+                var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], version=varGroup['Item1']['Item2'])
+                groupsInDatasets.append({"DatasetName": dataset_item['DublinCoreMetadata']['AlternateTitle']['en-GB'],
+                    "VariableGroupName": var_group_item['ItemName']['en-GB'],
+                    "VariableGroupUrn": "urn:ddi:" + var_group_item['AgencyId'] + ":" + var_group_item['Identifier'] + ":" + str(var_group_item['Version']),
+                    "TopicType": C.item_code('Variable Group')
                 })
     return groupsInDatasets
