@@ -256,10 +256,10 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
                     containing_item['Identifier'],item_types=[C.item_code('Variable')])
                 level_zero_groups=[]
                 count=0
+                print(f"Verifying the level zero group for {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
                 for var in datasetVars:
                     varGroups=C.search_relationship_byobject(var['Item1']['Item3'], var['Item1']['Item1'], 
                         Version=var['Item1']['Item2'], item_types=[topic_type]) 
-                    print(f"Verifying the level zero group for {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
                     for varGroup in varGroups:
                         count=count+1
                         var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], 
