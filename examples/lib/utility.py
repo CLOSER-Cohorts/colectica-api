@@ -252,8 +252,6 @@ def get_item_from_topic_name(topic_name,
                      SearchTerms=[str(topic_name)],
                      SearchTargets="Name",
                      UsePrefixSearch=False)['Results']
-        print(datasetToZeroGroupMappings)
-        print(containing_item)
         if len(topic_group_identifiers)==0:
             if not get_urn_from_item(containing_item) in datasetToZeroGroupMappings.keys():
                 # If we cannot determine the level zero group for the dataset (i.e. topic_group_identifiers is
