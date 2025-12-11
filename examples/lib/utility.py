@@ -229,16 +229,8 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
     Returns:
         list: A list containing Variable Groups/Question Groups items that represent topics.
     """
-    print("STAP1")
-    print(containing_item)
-    print(dataset_name)
-    print(topic_name)
     item=[x for x in groupsInDatasets if x['DatasetName']==dataset_name 
         and x['VariableGroupName']==str(topic_name) and x['TopicType']==topic_type]
-    print(item)
-    #print(item[0]['VariableGroupUrn'].split(":")[2])
-    #print(item[0]['VariableGroupUrn'].split(":")[3])
-    #print(item[0]['VariableGroupUrn'].split(":")[4])
     if len(item)==1:
         if item[0]['VariableGroupUrn']=="NA":
             topic_group_identifiers=[]
@@ -264,7 +256,6 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
                     containing_item['Identifier'],item_types=[C.item_code('Variable')])
                 level_zero_groups=[]
                 count=0
-                print("STAP2")
                 for var in datasetVars:
                     varGroups=C.search_relationship_byobject(var['Item1']['Item3'], var['Item1']['Item1'], 
                         Version=var['Item1']['Item2'], item_types=[topic_type]) 
@@ -315,10 +306,6 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
                         "Identifier": containing_level_zero_group[0]['Identifier'],
                         "Version": containing_level_zero_group[0]['Version'],
                         }]
-    print("HI")
-    print(topic_name)
-    print(topic_group_identifiers)
-    print(len(item))
     for topic_group_identifier in topic_group_identifiers:
         if topic_group_identifier['ItemName']['en-GB']==str(topic_name) and len(item)==0:
                 groupsInDatasets.append({
