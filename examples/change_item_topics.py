@@ -443,7 +443,8 @@ def find_topics_to_create(input_file_name, C, datasetToZeroGroupMappings={}, gro
             topic_dict['physical_instance_search_set'], 
             C, 
             groupsInDatasets=groupsInDatasets,
-            dataset_name=topic_dict['dataset_name'], datasetToZeroGroupMappings=datasetToZeroGroupMappings)
+            dataset_name=topic_dict['dataset_name'], 
+            datasetToZeroGroupMappings=datasetToZeroGroupMappings)
         if len(destination_topic)==0:
                 level_one_group_name = str(topic_dict['destination_topic_name'])[0:3]
                 if len(topic_dict['destination_topic_name'])==5:

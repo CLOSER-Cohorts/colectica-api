@@ -275,15 +275,16 @@ def get_item_from_topic_name(topic_name,
                         level_zero_group=get_level_zero_group_for_topic(var_group_item, C)
                         if level_zero_group is not None:
                             level_zero_groups.append(level_zero_group)            
+                containing_level_zero_group = []
                 if len(set([x[0][2].text for x in level_zero_groups]))==1:
                     containing_level_zero_group = [{
                     "AgencyId": level_zero_groups[0][0][1].text,
                     "Identifier": level_zero_groups[0][0][2].text,
                     "Version": level_zero_groups[0][0][3].text,
                     }]
+                    datasetToZeroGroupMappings[get_urn_from_item(containing_item)]=containing_level_zero_group
                 else:
                     containing_level_zero_group = []
-                    datasetToZeroGroupMappings[get_urn_from_item(containing_item)]=containing_level_zero_group
                 # Do a search for the first three numbers of the topic group, and then filter
                 # the results in a list comprehension to find the exact match, because it's
                 # quicker than just searching for the exact match directly.
