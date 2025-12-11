@@ -27,7 +27,7 @@ b1=validateLevelOneTopics(items_with_modified_level_one_topics[0], items_with_mo
 updated_groups = examples.change_item_topics.update_topics('examples/topic_reassignments.xlsx', C)
 examples.lib.utility.update_repository(updated_groups, 'Repository commit message - update topics', C)
 """
-from lib.utility import (
+from examples.lib.utility import (
     get_namespace,
     find_all_references,
     create_variable_reference,
@@ -53,7 +53,6 @@ import uuid
 from collections import Counter
 
 language = "en-GB"
-
 
 def move_topics(C):
     datasetToZeroGroupMappings={}
@@ -88,30 +87,26 @@ def move_topics(C):
     validationResultsModifiedLevelOneTopics=validateLevelOneTopics(items_with_modified_level_one_topics["LevelZero"], 
         items_with_modified_level_one_topics["LevelOne"],
         C)
-    
     """
     In summary, the below tests verify the following:
     1. If we're creating a topic, it doesn't already exist. If we're modifying a topic,
     it does already exist.
     2+3. We're creating/modifying all the topics we need to; we're not missing anything
-    4 + 5. The newly created/modified topics are referenced by the appropriate ancestor items; where
-    necessary we have created ancestor items.
-    """
-    
+    """    
     # 1. We need to verify that all the groups in topics_to_create[0 and 1] do not currently exist.
     for topic_to_create in topics_to_create["levelOneGroupsToCreate"]:
         if len([(existing_group['DatasetName'], existing_group['VariableGroupName']) 
             for existing_group in groupsInDatasets 
             if existing_group['DatasetName']==topic_to_create['DatasetName'] 
             and existing_group['VariableGroupName']==topic_to_create['LevelOneGroupName']])!=0:
-                print("ERROR - LEVEL ONE TOPIC ALREADY EXISTS")
+                print("ERROR - LEVEL ONE TOPIC LISTED FOR CREATION ALREADY EXISTS")
     for topic_to_create in topics_to_create["levelTwoGroupsToCreate"]:
         if len([(existing_group['DatasetName'], existing_group['VariableGroupName']) 
             for existing_group in groupsInDatasets 
             if existing_group['DatasetName']==topic_to_create['DatasetName'] 
             and existing_group['VariableGroupName']==topic_to_create['LevelTwoGroupName']])!=0:
                 print(topic_to_create)
-                print("ERROR - LEVEL TWO TOPIC ALREADY EXISTS") 
+                print("ERROR - LEVEL TWO TOPIC LISTED FOR CREATION ALREADY EXISTS") 
     # We also need to check that the level one topics in topics_to_create[2] do exist, and 
     # that the level two topics they refer to do not exist.
     for topic_to_create in topics_to_create["levelOneGroupsToModify"]:
@@ -120,63 +115,50 @@ def move_topics(C):
             if existing_group['VariableGroupName']==topic_to_create['LevelTwoGroupName'][0:3] 
             and existing_group['DatasetName']==topic_to_create['DatasetName']])==0:
                 print(topic_to_create)
-                print("ERROR - LEVEL ONE TOPIC TO MODIFY DOES NOT EXIST")
+                print("ERROR - LEVEL ONE TOPIC LISTED FOR MODIFICATION DOES NOT EXIST")
         if len([(existing_group['VariableGroupName'], existing_group['VariableGroupName']) 
             for existing_group in groupsInDatasets 
             if existing_group['VariableGroupName']==topic_to_create['LevelTwoGroupName'] 
             and existing_group['DatasetName']==topic_to_create['DatasetName']])!=0:
                 print(topic_to_create)
-                print("ERROR - LEVEL TWO TOPIC TO CREATE ALREADY EXISTS")
+                print("ERROR - LEVEL TWO TOPIC LISTED FOR CREATION ALREADY EXISTS")
     # 2. We need to verify that the set of groups in items_with_new_level_one_topics is the same as in
     # topics_to_create["LevelOneGroupsToCreate"].
-    a=sorted(list(set([(topic_to_create['DatasetName'], topic_to_create['LevelOneGroupName']) 
+    sortedLevelOneGroupsInTopicsToCreate=sorted(list(set([(topic_to_create['DatasetName'], topic_to_create['LevelOneGroupName']) 
         for topic_to_create in topics_to_create["levelOneGroupsToCreate"]])))
-    b=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
+    sortedDdiItemsForNewLevelOneTopics=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
         get_element_by_name(data_for_creating_new_topic['Item'], 'VariableGroupName')['String']) 
         for data_for_creating_new_topic in items_with_new_level_one_topics["LevelOne"]])))
-    a==b
-
+    if sortedLevelOneGroupsInTopicsToCreate==sortedDdiItemsForNewLevelOneTopics:
+        print("We have successfully created all necessary DDI items for the new level one topics.")
+    else:
+        print("Error: we have not created all necessary DDI items for the new level one topics.")
     # 3. We need to verify that the total set of groups in items_with_new_level_one_topics['LevelTwo'] and 
     # items_with_modified_level_one_topics['LevelTwo'] is the same as in topics_to_create['LevelTwoGroupsToCreate'].
-    a=sorted(list(set([(topic_to_create['DatasetName'], topic_to_create['LevelTwoGroupName']) 
+    sortedLevelTwoGroupsInTopicsToCreate==sorted(list(set([(topic_to_create['DatasetName'], topic_to_create['LevelTwoGroupName']) 
         for topic_to_create in topics_to_create["levelTwoGroupsToCreate"]])))
-    b=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
+    sortedDdiItemsForNewLevelTwoTopics=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
         get_element_by_name(data_for_creating_new_topic['Item'], 'VariableGroupName')['String']) 
         for data_for_creating_new_topic in items_with_new_level_one_topics["LevelTwo"]])))
-    c=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
+    sortedDdiItemsForNewLevelTwoTopicsWithExistingLevelOneTopics=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
         get_element_by_name(data_for_creating_new_topic['Item'], 'VariableGroupName')['String']) 
         for data_for_creating_new_topic in items_with_modified_level_one_topics["LevelTwo"]])))
-    a==sorted(b+c)
-
+    if sortedLevelTwoGroupsInTopicsToCreate==sorted(sortedDdiItemsForNewLevelTwoTopicsWithoutExistingLevelOneTopics+
+        sortedDdiItemsForNewLevelTwoTopicsWithExistingLevelOneTopics):
+        print("We have successfully created all necessary DDI items for the new level two topics.")
+    else:
+        print("Error: we have not created all necessary DDI items for the new level two topics.")
     # We need to verify that the set of level one groups in items_with_modified_level_one_topics is the same
     # as in topics_to_create['levelOneGroupsToModify']
-    a=sorted(list(set([(x['DatasetName'], x['Item']['ItemName']['en-GB']) 
+    sortedLevelOneGroupsInTopicsToModify=sorted(list(set([(x['DatasetName'], x['Item']['ItemName']['en-GB']) 
         for x in topics_to_create['levelOneGroupsToModify']])))
-    b=sorted(list(set([(x['DatasetName'], get_element_by_name(x['Item'], 'VariableGroupName')['String'])
+    sortedDdiItemsForModifiedLevelOneTopics=sorted(list(set([(x['DatasetName'], get_element_by_name(x['Item'], 'VariableGroupName')['String'])
         for x in items_with_modified_level_one_topics["LevelOne"]])))
-    a==b
-
-    """4. We need to verify that all level two topics are referenced by a level one topic,
-    which in turn is referenced by a level zero topic. We need to verify that the level
-    one topic is the first three digits of the level two topic. We need to verify that
-    the label of the level zero topic is the same as the label of the dataset within
-    which the level two topic is found, and that the level zero topic is referenced
-    by this dataset. We need to verify that this dataset has the same name as the 
-    dataset name contained in the ddiObjectsLevelTwo tuple.
-
-    DONE in validateLevelTwoTopics"""
-
-    """5. We need to verify that all level one topics are referenced by a level zero topic.
-    We need to verify that the label of the level zero topic is the same as the label of 
-    the dataset within which the level one topic is found, and that the level zero topic 
-    is referenced by this dataset.
-
-    DONE in validateLevelOneTopics
-    """
-
-    
+    if sortedLevelOneGroupsInTopicsToModify==sortedDdiItemsForModifiedLevelOneTopics:
+        print("We have successfully created all necessary DDI items for the modified level one topics.")
+    else:
+        print("Error: we have not created all necessary DDI items for the modified level one topics.")
     # Create an array which contains the new/modified topic groups...
-
     updated_topic_groups=[]
     for x in items_with_new_level_one_topics["LevelZero"] + items_with_new_level_one_topics["LevelOne"] + \
         items_with_new_level_one_topics["LevelTwo"] + items_with_modified_level_one_topics["LevelZero"] + \
@@ -191,21 +173,16 @@ def move_topics(C):
             C.item_code('Variable Group'),
             updated_topic_groups,
             dataset=x['DatasetName'])
-
     # Now that we have verified that the topics to create/modify are correct, we can proceed to
     # creating the urn dataframe which specifies which items should be moved to which topics
-    
     topic_reassignments_data_frame=generate_urn_dataframe_for_questions_and_variables('../test.xlsx', 
-      C, updated_topic_groups, 0, datasetToZeroGroupMappings=datasetToZeroGroupMappings, groupsInDatasets=groupsInDatasets)
-
-    # RUN THE UPDATE_TOPICS CODE THAT REASSISGNS ITEMS TO TOPICS. NOTE THAT IT USES THE updated_topic_groups ARRAY
-
-#topic_reassignments_data_frame=generate_urn_dataframe_for_questions_and_variables('../test.xlsx', C, updated_topic_groups, 4, datasetToZeroGroupMappings=datasetToZeroGroupMappings)
-
+      C, updated_topic_groups, 0, datasetToZeroGroupMappings=datasetToZeroGroupMappings, 
+      groupsInDatasets=groupsInDatasets)
+    # Run the update_topics method that creates DDI objects that reassigns items to topics. Note that it uses
+    # the updated_topic_groups array as an input argument, this array contains the DDI items representing topics
     updated_topics=update_topics(topic_reassignments_data_frame, C, updated_topic_groups=updated_topic_groups)
-
-    a=validate_ddi_implementing_topic_reassignments('../test.xlsx', updated_topic_groups, C)
-
+    final_validation_results=validate_ddi_implementing_topic_reassignments('../test.xlsx', updated_topic_groups, C)
+    return final_validation_results
 
 def update_urns_list(urns, 
     item, 
@@ -996,7 +973,7 @@ def validate_ddi_implementing_topic_reassignments(input_file_name,
     which should have a length equal to the number of rows in the input file, if the topic reassignments have been
     successfully implemented in the DDI items representing topic groups in updated_topic_groups.
     """
-    print(f"Reading topic reassignments from {input_file_name}")
+    print(f"Reading and validating topic reassignments from {input_file_name}...")
     data = pd.read_excel(input_file_name)
     source_topic_not_found=[]
     destination_topic_not_found=[]
@@ -1008,7 +985,6 @@ def validate_ddi_implementing_topic_reassignments(input_file_name,
         identifier = url.split("/")[5]
         version = url.split("/")[6]
         item_urn = f"urn:ddi:{agency_id}:{identifier}:{str(version)}"
-        print(topic_reassignment_details)
         updated_source_topic=[topic_group for topic_group in updated_topic_groups 
             if topic_group['DatasetName']==topic_reassignment_details.iloc[0]
             and get_elements_of_type(topic_group['Item'], "VariableGroupName")!=[]
@@ -1042,4 +1018,7 @@ def validate_ddi_implementing_topic_reassignments(input_file_name,
     else:
             print("There were issues with the creation of DDI items that implement all the topic reassignments."
                     " Please see the details of missing source or destination topics, or missing references")
-    return (source_topic_not_found, destination_topic_not_found, items_found_in_source_topics, items_found_in_destination_topics)
+    return ({"SourceTopicsNotFound": source_topic_not_found, 
+            "DestinationTopicsNotFound": destination_topic_not_found, 
+            "ItemsFoundInSourceTopics": items_found_in_source_topics, 
+            "ItemsFoundInDestinationTopics": items_found_in_destination_topics})
