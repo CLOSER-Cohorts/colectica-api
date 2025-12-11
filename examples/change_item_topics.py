@@ -13,6 +13,8 @@ HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
 
+validationResults=examples.change_item_topics.move_topics(C)
+
 
 datasetToZeroGroupMappings={}
 topics_to_create=examples.change_item_topics.find_topics_to_create('../test.xlsx', C, datasetToZeroGroupMappings=datasetToZeroGroupMappings)
@@ -54,10 +56,10 @@ from collections import Counter
 
 language = "en-GB"
 
-def move_topics(C):
+def move_topics(input_file, C):
     datasetToZeroGroupMappings={}
     groupsInDatasets=create_group_lookup_dict(datasetToZeroGroupMappings, C)
-    topics_to_create=find_topics_to_create('../test.xlsx', 
+    topics_to_create=find_topics_to_create(input_file, 
         C, 
         datasetToZeroGroupMappings=datasetToZeroGroupMappings,
         groupsInDatasets=groupsInDatasets)
