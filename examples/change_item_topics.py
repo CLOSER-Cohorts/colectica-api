@@ -692,10 +692,12 @@ def validateLevelTwoTopics(levelZeroTopics, levelOneTopics, levelTwoTopics, C):
                     if levelTwoTopicName[0:3]==levelOneTopicName:
                         # First three digits of level two topic name matches level one topic name...
                         level_one_identifier=levelOneTopic['Item'][0][2].text
+                        level_zero_refs=[]
                         for levelZeroTopic in levelZeroTopics:
-                            level_zero_refs=find_all_references(levelZeroTopic['Item'], 
-                                'uk.closer', 
-                                level_one_identifier)
+                            if levelZeroTopic['Item'] is not None:
+                                level_zero_refs=find_all_references(levelZeroTopic['Item'], 
+                                    'uk.closer', 
+                                    level_one_identifier)
                             if len(level_zero_refs)==1:
                                 # Level one reference found in level zero, now check labels match...
                                 level_zero_label = get_element_by_name(
