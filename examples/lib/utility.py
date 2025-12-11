@@ -207,7 +207,13 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             "DatasetName": dataset
         })
  
-def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsInDatasets=[], dataset_name="", datasetToZeroGroupMappings={}):
+def get_item_from_topic_name(topic_name, 
+    topic_type, 
+    containing_item, 
+    C, 
+    groupsInDatasets=[], 
+    dataset_name="", 
+    datasetToZeroGroupMappings={}):
     """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
     type (e.g. Question Group, Variable Group), and the item within which that topic is contained 
     (e.g. a Physical Instance/Data File or a Data Collection object).
@@ -273,6 +279,8 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
                     "Identifier": level_zero_groups[0][0][2].text,
                     "Version": level_zero_groups[0][0][3].text,
                     }]
+                else:
+                    containing_level_zero_group = []
                     datasetToZeroGroupMappings[get_urn_from_item(containing_item)]=containing_level_zero_group
                 # Do a search for the first three numbers of the topic group, and then filter
                 # the results in a list comprehension to find the exact match, because it's
