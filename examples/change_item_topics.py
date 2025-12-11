@@ -145,7 +145,7 @@ def move_topics(input_file, C):
     sortedDdiItemsForNewLevelTwoTopicsWithExistingLevelOneTopics=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
         get_element_by_name(data_for_creating_new_topic['Item'], 'VariableGroupName')['String']) 
         for data_for_creating_new_topic in items_with_modified_level_one_topics["LevelTwo"]])))
-    if sortedLevelTwoGroupsInTopicsToCreate==sorted(sortedDdiItemsForNewLevelTwoTopicsWithoutExistingLevelOneTopics+
+    if sortedLevelTwoGroupsInTopicsToCreate==sorted(sortedDdiItemsForNewLevelTwoTopics +
         sortedDdiItemsForNewLevelTwoTopicsWithExistingLevelOneTopics):
         print("We have successfully created all necessary DDI items for the new level two topics.")
     else:
