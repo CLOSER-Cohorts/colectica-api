@@ -267,6 +267,7 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
                         level_zero_group=get_level_zero_group_for_topic(var_group_item, C)
                         if level_zero_group is not None:
                             level_zero_groups.append(level_zero_group)
+                print(level_zero_groups)            
                 if len(set([x[0][2].text for x in level_zero_groups]))==1:
                     containing_level_zero_group = [{
                     "AgencyId": level_zero_group[0][1].text,
