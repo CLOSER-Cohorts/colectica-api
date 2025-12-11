@@ -287,8 +287,6 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
                 # Do a search for the first three numbers of the topic group, and then filter
                 # the results in a list comprehension to find the exact match, because it's
                 # quicker than just searching for the exact match directly.
-                print("STAP3")
-                print(containing_level_zero_group)
                 topic_group_identifiers = [x for x in C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
                      SearchTerms=[str(topic_name)[0:3]],

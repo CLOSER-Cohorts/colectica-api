@@ -622,7 +622,8 @@ def create_ddi_objects_for_modified_level_one_topics(level_one_objects_to_modify
                 C)
             level_zero_group_for_level_one_topic=get_level_zero_group_for_topic(level_one_group['Item'], C)
             if len([level_zero_object for level_zero_object in ddiObjectsLevelZero 
-                if level_zero_object['Item'][0][2].text==level_zero_group_for_level_one_topic[0][2].text])==0:
+                if level_zero_object['Item'] is not None and 
+                    level_zero_object['Item'][0][2].text==level_zero_group_for_level_one_topic[0][2].text])==0:
                     ddiObjectsLevelZero.append({"Identifier": level_one_group['Item']['Identifier'],
                         "AgencyId": level_one_group['Item']['AgencyId'],
                         "Version": level_one_group['Item']['Version'],
