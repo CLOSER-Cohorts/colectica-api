@@ -746,23 +746,24 @@ def validateLevelOneTopics(ddi_objects_level_zero, level_one_topics, C):
    for level_one_topic in level_one_topics:
             level_one_identifier=level_one_topic['Item'][0][2].text
             for level_zero_object in ddi_objects_level_zero:
-                level_zero_refs=find_all_references(level_zero_object['Item'], 
-                    'uk.closer', 
-                    level_one_identifier)
-                if len(level_zero_refs)==1:
-                    # Level one reference found in level zero, now check dataset labels match...
-                    physical_instance = C.search_items(
-                        C.item_code('Data File'),
-                        SearchTerms=str(level_one_topic['DatasetName']).strip(),
-                        SearchLatestVersion=True)['Results']
-                    if len(physical_instance)==1:
-                        levelOneDatasetLabel=physical_instance[0]['Label']['en-GB']                   
-                        levelZeroGroupLabel=(get_element_by_name(
-                            level_zero_object['Item'], 'Label')['Content'])
-                        if levelOneDatasetLabel==levelZeroGroupLabel:
-                            # Dataset labels for level one and the level zero label match
-                            validatedLevelOneTopics.append(level_one_topic)
-                            found = True
+                if level_zero_object is not None:
+                    level_zero_refs=find_all_references(level_zero_object['Item'], 
+                        'uk.closer', 
+                        level_one_identifier)
+                    if len(level_zero_refs)==1:
+                        # Level one reference found in level zero, now check dataset labels match...
+                        physical_instance = C.search_items(
+                            C.item_code('Data File'),
+                            SearchTerms=str(level_one_topic['DatasetName']).strip(),
+                            SearchLatestVersion=True)['Results']
+                        if len(physical_instance)==1:
+                            levelOneDatasetLabel=physical_instance[0]['Label']['en-GB']                   
+                            levelZeroGroupLabel=(get_element_by_name(
+                                level_zero_object['Item'], 'Label')['Content'])
+                            if levelOneDatasetLabel==levelZeroGroupLabel:
+                                # Dataset labels for level one and the level zero label match
+                                validatedLevelOneTopics.append(level_one_topic)
+                                found = True
             if not found:
                 invalidLevelOneTopics.append(level_one_topic)
    if len(validatedLevelOneTopics) == len(level_one_topics):
