@@ -137,7 +137,7 @@ def move_topics(input_file, C):
         print("Error: we have not created all necessary DDI items for the new level one topics.")
     # 3. We need to verify that the total set of groups in items_with_new_level_one_topics['LevelTwo'] and 
     # items_with_modified_level_one_topics['LevelTwo'] is the same as in topics_to_create['LevelTwoGroupsToCreate'].
-    sortedLevelTwoGroupsInTopicsToCreate==sorted(list(set([(topic_to_create['DatasetName'], topic_to_create['LevelTwoGroupName']) 
+    sortedLevelTwoGroupsInTopicsToCreate=sorted(list(set([(topic_to_create['DatasetName'], topic_to_create['LevelTwoGroupName']) 
         for topic_to_create in topics_to_create["levelTwoGroupsToCreate"]])))
     sortedDdiItemsForNewLevelTwoTopics=sorted(list(set([(data_for_creating_new_topic['DatasetName'], 
         get_element_by_name(data_for_creating_new_topic['Item'], 'VariableGroupName')['String']) 
