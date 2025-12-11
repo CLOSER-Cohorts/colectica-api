@@ -433,7 +433,6 @@ def find_topics_to_create(input_file_name, C, datasetToZeroGroupMappings={}, gro
     for topic_reassignment_details in data.iloc:
         topic_dict = create_topic_reassignment_dict(topic_reassignment_details, C)
         topic_type=C.item_code('Variable Group')
-        print(topic_dict['physical_instance_containing_variable'])
         level_zero_group=get_level_zero_group_from_dataset(topic_dict['physical_instance_containing_variable'],
                 all_variable_groups, C)
         destination_topic = get_item_from_topic_name(topic_dict['destination_topic_name'], 

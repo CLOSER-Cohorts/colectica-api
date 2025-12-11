@@ -259,13 +259,14 @@ def get_item_from_topic_name(topic_name, topic_type, containing_item, C, groupsI
                 for var in datasetVars:
                     varGroups=C.search_relationship_byobject(var['Item1']['Item3'], var['Item1']['Item1'], 
                         Version=var['Item1']['Item2'], item_types=[topic_type]) 
+                    print(f"Verifying the level zero group for {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
                     for varGroup in varGroups:
-                        print(f"{count} of {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
                         count=count+1
                         var_group_item=C.get_item_json(varGroup['Item1']['Item3'], varGroup['Item1']['Item1'], 
                             version=varGroup['Item1']['Item2'])
                         level_zero_group=get_level_zero_group_for_topic(var_group_item, C)
-                        level_zero_groups.append(level_zero_group)
+                        if level_zero_group is not None:
+                            level_zero_groups.append(level_zero_group)
                 if len(set([x[0][2].text for x in level_zero_groups]))==1:
                     containing_level_zero_group = [{
                     "AgencyId": level_zero_group[0][1].text,
