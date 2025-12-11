@@ -850,7 +850,7 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                source_group['Version'],
                                source_group['ItemType'],
                                updated_topic_groups,
-                               dataset=topic_reassignment_details['dataset'])     
+                               dataset=topic_reassignment_details['datasets'])     
         destination_group_item_agency_id = topic_reassignment_details['destinationTopicGroups'].split(":")[2]
         destination_group_item_identifier = topic_reassignment_details['destinationTopicGroups'].split(":")[3]
         destination_group_item_version = topic_reassignment_details['destinationTopicGroups'].split(":")[4]        
