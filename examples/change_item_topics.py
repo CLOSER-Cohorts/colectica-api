@@ -165,16 +165,17 @@ def move_topics(input_file, C):
     for x in items_with_new_level_one_topics["LevelZero"] + items_with_new_level_one_topics["LevelOne"] + \
         items_with_new_level_one_topics["LevelTwo"] + items_with_modified_level_one_topics["LevelZero"] + \
         items_with_modified_level_one_topics["LevelOne"] + items_with_modified_level_one_topics["LevelTwo"]:
-        item_agency_id = x['Item'][0][0].text.split(":")[2]
-        item_identifier = x['Item'][0][0].text.split(":")[3]
-        item_version = x['Item'][0][0].text.split(":")[4]            
-        update_list_of_topic_groups(x['Item'],
-            item_agency_id,
-            item_identifier,
-            item_version,            
-            C.item_code('Variable Group'),
-            updated_topic_groups,
-            dataset=x['DatasetName'])
+        if x['Item'] is not None:
+            item_agency_id = x['Item'][0][0].text.split(":")[2]
+            item_identifier = x['Item'][0][0].text.split(":")[3]
+            item_version = x['Item'][0][0].text.split(":")[4]            
+            update_list_of_topic_groups(x['Item'],
+                item_agency_id,
+                item_identifier,
+                item_version,            
+                C.item_code('Variable Group'),
+                updated_topic_groups,
+                dataset=x['DatasetName'])
     # Now that we have verified that the topics to create/modify are correct, we can proceed to
     # creating the urn dataframe which specifies which items should be moved to which topics
     topic_reassignments_data_frame=generate_urn_dataframe_for_questions_and_variables('../test.xlsx', 
