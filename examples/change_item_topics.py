@@ -15,17 +15,6 @@ import examples.change_item_topics
 
 validationResults=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
 
-
-datasetToZeroGroupMappings={}
-topics_to_create=examples.change_item_topics.find_topics_to_create('../test.xlsx', C, datasetToZeroGroupMappings=datasetToZeroGroupMappings)
-items_with_new_level_one_topics=examples.change_item_topics.create_ddi_objects_for_new_level_one_topics(topics_to_create, C)
-items_with_modified_level_one_topics=examples.change_item_topics.create_ddi_objects_for_modified_level_one_topics(topics_to_create[2], C)
-a1=examples.change_item_topics.validateLevelTwoTopics(items_with_new_level_one_topics[0], items_with_new_level_one_topics[1], items_with_new_level_one_topics[2])
-b1=examples.change_item_topics.validateLevelOneTopics(items_with_new_level_one_topics[0], items_with_new_level_one_topics[1])
-a1=examples.change_item_topics.validateLevelTwoTopics(items_with_modified_level_one_topics[0], items_with_modified_level_one_topics[1], items_with_modified_level_one_topics[2])
-b1=validateLevelOneTopics(items_with_modified_level_one_topics[0], items_with_modified_level_one_topics[1])
-
-
 updated_groups = examples.change_item_topics.update_topics('examples/topic_reassignments.xlsx', C)
 examples.lib.utility.update_repository(updated_groups, 'Repository commit message - update topics', C)
 """
@@ -54,15 +43,12 @@ import pandas as pd
 import uuid
 from collections import Counter
 
-language = "en-GB"
-
 def move_topics(input_file, C):
     datasetToZeroGroupMappings={}
-    groupsInDatasets=create_group_lookup_dict(datasetToZeroGroupMappings, C)
     topics_to_create=find_topics_to_create(input_file, 
         C, 
-        datasetToZeroGroupMappings=datasetToZeroGroupMappings,
-        groupsInDatasets=groupsInDatasets)
+        datasetToZeroGroupMappings=datasetToZeroGroupMappings)
+    groupsInDatasets=create_group_lookup_dict(datasetToZeroGroupMappings, C)
     items_with_new_level_one_topics=create_ddi_objects_for_new_level_one_topics(
         topics_to_create['levelOneGroupsToCreate'], topics_to_create['levelTwoGroupsToCreate'], C)
     items_with_modified_level_one_topics=create_ddi_objects_for_modified_level_one_topics(
@@ -189,71 +175,71 @@ def move_topics(input_file, C):
     final_validation_results=validate_ddi_implementing_topic_reassignments(input_file, updated_topic_groups, C)
     return final_validation_results
 
-def update_urns_list(urns, 
-    item, 
-    containing_item,
-    topic_type,
-    target_topic, 
-    topic_groups,
-    C, 
-    groupsInDatasets=[], 
-    datasetToZeroGroupMappings={}, 
-    dataset_name=""):
-    """Updates a dictionary containing lists of URNs used for topic reassignment.
+    def update_urns_list(urns, 
+        item, 
+        containing_item,
+        topic_type,
+        target_topic, 
+        topic_groups,
+        C, 
+        groupsInDatasets=[], 
+        datasetToZeroGroupMappings={}, 
+        dataset_name=""):
+        """Updates a dictionary containing lists of URNs used for topic reassignment.
 
-    Arguments: urns (dict): A dictionary containing lists of URNs used for topic reassignment.
-        item (dict): A dictionary containing details of the item being reassigned to a new topic.
-        containing_item (dict): A dictionary containing details of the item containing the item being 
-            reassigned.
-        topic_type (str): The item type code for the topic groups (e.g. variable group or question group).
-        target_topic (str): The name of the destination topic group.
-        topic_groups (str): A list of DDI items that are the groups representing topics that we
-            are updating (e.g. by adding/removing references to variables/questions, in order to reassign
-            these items to new topics).
-        C (ColecticaObject): an authenticated ColecticaObject instance.
+        Arguments: urns (dict): A dictionary containing lists of URNs used for topic reassignment.
+            item (dict): A dictionary containing details of the item being reassigned to a new topic.
+            containing_item (dict): A dictionary containing details of the item containing the item being 
+                reassigned.
+            topic_type (str): The item type code for the topic groups (e.g. variable group or question group).
+            target_topic (str): The name of the destination topic group.
+            topic_groups (str): A list of DDI items that are the groups representing topics that we
+                are updating (e.g. by adding/removing references to variables/questions, in order to reassign
+                these items to new topics).
+            C (ColecticaObject): an authenticated ColecticaObject instance.
 
-    Keyword arguments:
-        groupsInDatasets: A list of dict objects that map the datasets to topic groups they contain.
-        datasetToZeroGroupMappings (dict): A dictionary mapping dataset names to level zero topic groups.
-        dataset_name (str): The name of the dataset containing the item being reassigned.
+        Keyword arguments:
+            groupsInDatasets: A list of dict objects that map the datasets to topic groups they contain.
+            datasetToZeroGroupMappings (dict): A dictionary mapping dataset names to level zero topic groups.
+            dataset_name (str): The name of the dataset containing the item being reassigned.
 
-    Returns:
-        None: The function updates the urns dictionary in place.
-    """
-    destination_topic_urn=""
-    containing_item_details = {"AgencyId": containing_item['AgencyId'],
-                      "Identifier": containing_item['Identifier'],
-                      "Version": containing_item['Version'],
-                }
-    item_urn = get_urn_from_item(item)
-    source_groups = C.search_relationship_byobject(item['AgencyId'], 
-                   item['Identifier'], Version=item['Version'], 
-                   item_types=topic_type, Descriptions=True)
-    for source_group in source_groups:
-        source_topic_urn = get_urn_from_item(source_group)
-    if len(source_groups)==0:
-        source_topic_urn = ""
-    destination_group=get_item_from_topic_name(str(target_topic), 
-            topic_type, 
-            containing_item_details, 
-            C,
-            dataset_name=dataset_name,
-            groupsInDatasets=groupsInDatasets,
-            datasetToZeroGroupMappings=datasetToZeroGroupMappings)
-    if len(destination_group)==1:
-            destination_topic_urn = get_urn_from_item(destination_group[0])
-    elif topic_type==C.item_code('Variable Group'):
-            # the topic groups all exist for questions which is why we only do the below for variable groups
-            destination_group_details=[x for x in topic_groups if x['DatasetName']==dataset_name 
-                and get_elements_of_type(x['Item'], "VariableGroupName")!=[]
-                and get_elements_of_type(x['Item'], "VariableGroupName")[0][0].text==str(target_topic)]
-            if len(destination_group_details)==1:
-                destination_topic_urn=get_urn_from_fragment(destination_group_details[0]['Item'])   
-    if item_urn not in urns['itemUrns'] and destination_topic_urn != "" and source_topic_urn != destination_topic_urn:
-            urns['itemUrns'].append(item_urn)
-            urns['sourceTopicGroups'].append(source_topic_urn)
-            urns['destinationTopicGroups'].append(destination_topic_urn)
-            urns['datasets'].append(dataset_name)  
+        Returns:
+            None: The function updates the urns dictionary in place.
+        """
+        destination_topic_urn=""
+        containing_item_details = {"AgencyId": containing_item['AgencyId'],
+                        "Identifier": containing_item['Identifier'],
+                        "Version": containing_item['Version'],
+                    }
+        item_urn = get_urn_from_item(item)
+        source_groups = C.search_relationship_byobject(item['AgencyId'], 
+                    item['Identifier'], Version=item['Version'], 
+                    item_types=topic_type, Descriptions=True)
+        for source_group in source_groups:
+            source_topic_urn = get_urn_from_item(source_group)
+        if len(source_groups)==0:
+            source_topic_urn = ""
+        destination_group=get_item_from_topic_name(str(target_topic), 
+                topic_type, 
+                containing_item_details, 
+                C,
+                dataset_name=dataset_name,
+                groupsInDatasets=groupsInDatasets,
+                datasetToZeroGroupMappings=datasetToZeroGroupMappings)
+        if len(destination_group)==1:
+                destination_topic_urn = get_urn_from_item(destination_group[0])
+        elif topic_type==C.item_code('Variable Group'):
+                # the topic groups all exist for questions which is why we only do the below for variable groups
+                destination_group_details=[x for x in topic_groups if x['DatasetName']==dataset_name 
+                    and get_elements_of_type(x['Item'], "VariableGroupName")!=[]
+                    and get_elements_of_type(x['Item'], "VariableGroupName")[0][0].text==str(target_topic)]            
+                if len(destination_group_details)==1:
+                    destination_topic_urn=get_urn_from_fragment(destination_group_details[0]['Item'])   
+        if item_urn not in urns['itemUrns'] and destination_topic_urn != "" and source_topic_urn != destination_topic_urn:
+                urns['itemUrns'].append(item_urn)
+                urns['sourceTopicGroups'].append(source_topic_urn)
+                urns['destinationTopicGroups'].append(destination_topic_urn)
+                urns['datasets'].append(dataset_name)  
 
 def generate_urn_dataframe_for_questions_and_variables(input_file_name, 
     topic_groups,
@@ -439,9 +425,9 @@ def find_topics_to_create(input_file_name, C, datasetToZeroGroupMappings={}, gro
         level_zero_group=get_level_zero_group_from_dataset(topic_dict['physical_instance_containing_variable'],
                 all_variable_groups, C)
         destination_topic = get_item_from_topic_name(topic_dict['destination_topic_name'], 
-            topic_type, 
-            topic_dict['physical_instance_search_set'], 
-            C, 
+            topic_type,
+            topic_dict['physical_instance_search_set'],
+            C,
             groupsInDatasets=groupsInDatasets,
             dataset_name=topic_dict['dataset_name'], 
             datasetToZeroGroupMappings=datasetToZeroGroupMappings)
@@ -462,7 +448,6 @@ def find_topics_to_create(input_file_name, C, datasetToZeroGroupMappings={}, gro
                     groupsInDatasets=groupsInDatasets, 
                     datasetToZeroGroupMappings=datasetToZeroGroupMappings)
                 if len(levelOneGroups)==0:
-                    print(levelOneGroupsToCreate)
                     if ((topic_dict['dataset_name'], level_one_group_name) not in 
                         [(x['DatasetName'], x['LevelOneGroupName']) for x in levelOneGroupsToCreate]):
                           levelOneGroupsToCreate.append({'DatasetName': topic_dict['dataset_name'], 
@@ -564,7 +549,7 @@ def create_ddi_objects_for_new_level_one_topics(level_one_groups_to_create, leve
                     'DatasetName': level_one_group_to_create['DatasetName']})
    return({"LevelZero": ddiObjectsLevelZero, "LevelOne": ddiObjectsLevelOne, "LevelTwo": ddiObjectsLevelTwo})
 
-def create_ddi_objects_for_modified_level_one_topics(level_one_objects_to_modify, C):
+def create_ddi_objects_for_modified_level_one_topics(level_one_objects_to_modify, C, language = "en-GB"):
    """Creates ddi objects that represent variable groups which are modified level one topics that
    already exist in the repository.
 
@@ -723,7 +708,10 @@ def validateLevelTwoTopics(levelZeroTopics, levelOneTopics, levelTwoTopics, C):
         3. The first three digits of the level two topic name match the level one topic name.
         4. The level one topic is referenced from a level zero topic group.
         5. The dataset label for the dataset containing the level two topic matches the label
-          of the level zero topic group.""")                        
+          of the level zero topic group.""")    
+   else:
+        print("The following level two topics are invalid: ")
+        print(invalidLevelTwoTopics)                
    return { 
             "ValidatedLevelTwoTopics": validatedLevelTwoTopics, 
             "InvalidLevelTwoTopics": invalidLevelTwoTopics
@@ -778,6 +766,9 @@ def validateLevelOneTopics(ddi_objects_level_zero, level_one_topics, C):
         1. The level one topic is referenced from a level zero topic group.
         2. The dataset label for the dataset containing the level one topic matches the label
           of the level zero topic group.""")
+   else:
+        print("The following level one topics are invalid: ")
+        print(invalidLevelOneTopics)
    return {
            "ValidatedLevelOneTopics": validatedLevelOneTopics, 
            "InvalidLevelOneTopics": invalidLevelOneTopics
