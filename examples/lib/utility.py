@@ -289,7 +289,7 @@ def get_item_from_topic_name(topic_name,
                 topic_group_identifiers = [x for x in C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
                      SearchTerms=[str(topic_name)[0:3]],
-                     UsePrefixSearch=False,
+                     UsePrefixSearch=True, # returns results if they begin with the value in SearchTerms
                      SearchTargets="Name")['Results'] if x['ItemName']['en-GB']==str(topic_name)]
             else:
                 containing_level_zero_group=datasetToZeroGroupMappings[get_urn_from_item(containing_item)]
@@ -299,7 +299,7 @@ def get_item_from_topic_name(topic_name,
                 topic_group_identifiers = [x for x in C.search_items(topic_type,
                      SearchSets=containing_level_zero_group,
                      SearchTerms=[str(topic_name)[0:3]],
-                     UsePrefixSearch=True,
+                     UsePrefixSearch=True,  # returns results if they begin with the value in SearchTerms
                      SearchTargets="Name")['Results'] if x['ItemName']['en-GB']==str(topic_name)]
         else:
             containing_level_zero_group=C.search_relationship_bysubject(containing_item['AgencyId'],
@@ -585,15 +585,15 @@ def get_level_zero_group_for_topic(group, C, language="en-GB"):
            group['Identifier'], Version=group['Version'], item_types=[group['ItemType']], Descriptions=True)
         if len(parent_group)==1:
             if len(topic_name)==3:
-                level_zero_group = parent_group[0]
+                level_zero_group = parent_group
             elif len(topic_name)==5:
                 level_zero_group = C.search_relationship_byobject(parent_group[0]['AgencyId'], 
                     parent_group[0]['Identifier'], Version=parent_group[0]['Version'], 
                     item_types=[C.item_code('Variable Group')], Descriptions=True)
-                if len(level_zero_group)==1:    
-                    item=C.get_item_xml(level_zero_group[0]['AgencyId'], level_zero_group[0]['Identifier'],
+            if len(level_zero_group)==1:    
+                item=C.get_item_xml(level_zero_group[0]['AgencyId'], level_zero_group[0]['Identifier'],
                     version=level_zero_group[0]['Version'])
-                    item_element = defusedxml.ElementTree.fromstring(item['Item'])        
+                item_element = defusedxml.ElementTree.fromstring(item['Item'])        
     return item_element
 
 def create_group_lookup_dict(datasetToZeroGroupMappings, C):
