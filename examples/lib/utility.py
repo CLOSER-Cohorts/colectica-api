@@ -4,6 +4,7 @@ from xml.etree import ElementTree as ET
 from colectica_api import ColecticaObject
 import defusedxml
 from collections import Counter
+import pandas as pd
 
 def get_namespace(tag):
     """Get the namespace for an XML element."""
@@ -104,6 +105,7 @@ def create_group_reference(agency_id, item_id, version, namespace_version, topic
         ElementTree.Element: An ElementTree.Element representing the group reference.
     """
     type_of_object_element = ET.Element(f"{{ddi:reusable:{namespace_version}}}TypeOfObject")
+    new_element=None
     if topic_type==C.item_code('Variable Group'):
         new_element = ET.Element(f"{{ddi:logicalproduct:{namespace_version}}}VariableGroupReference")
         type_of_object_element.text = "VariableGroup"
@@ -116,10 +118,11 @@ def create_group_reference(agency_id, item_id, version, namespace_version, topic
     id_element.text = item_id
     agency_element.text = agency_id
     version_element.text = str(version)
-    new_element.append(agency_element)
-    new_element.append(id_element)
-    new_element.append(version_element)
-    new_element.append(type_of_object_element)
+    if new_element is not None:
+        new_element.append(agency_element)
+        new_element.append(id_element)
+        new_element.append(version_element)
+        new_element.append(type_of_object_element)
     return new_element    
 
 def convert_xml_element_to_json(xml_element):
@@ -162,8 +165,13 @@ def get_current_state_of_topic_group(agency_id, identifier, updated_groups, C, v
         referencing_item = defusedxml.ElementTree.fromstring(fragment_xml)
     return referencing_item
 
-def update_list_of_topic_groups(updated_group, agency, identifier, version,
-                                      item_type, updated_groups_list, dataset=None):
+def update_list_of_topic_groups(updated_group,
+    agency,
+    identifier,
+    version,
+    item_type,
+    updated_groups_list,
+    dataset=None):
     """Update the in-memory list of groups representing topics. If the topic group we have
     updated is not in already in the list, we append it to the list.
     
@@ -206,14 +214,14 @@ def update_list_of_topic_groups(updated_group, agency, identifier, version,
             "Item": updated_group,
             "DatasetName": dataset
         })
- 
-def get_item_from_topic_name(topic_name, 
-    topic_type, 
-    containing_item, 
-    C, 
-    groupsInDatasets=[], 
-    dataset_name="", 
-    datasetToZeroGroupMappings={}):
+
+def get_item_from_topic_name(topic_name,
+    topic_type,
+    containing_item,
+    C,
+    dataset_name="",
+    groupsInDatasets=None,
+    datasetToZeroGroupMappings=None):
     """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
     type (e.g. Question Group, Variable Group), and the item within which that topic is contained 
     (e.g. a Physical Instance/Data File or a Data Collection object).
@@ -235,6 +243,10 @@ def get_item_from_topic_name(topic_name,
     Returns:
         list: A list containing Variable Groups/Question Groups items that represent topics.
     """
+    if groupsInDatasets is None:
+            groupsInDatasets=[]
+    if datasetToZeroGroupMappings is None:
+            datasetToZeroGroupMappings={}
     item=[x for x in groupsInDatasets if x['DatasetName']==dataset_name 
         and x['VariableGroupName']==str(topic_name) and x['TopicType']==topic_type]
     if len(item)==1:
@@ -253,7 +265,7 @@ def get_item_from_topic_name(topic_name,
                      SearchTargets="Name",
                      UsePrefixSearch=False)['Results']
         if len(topic_group_identifiers)==0:
-            if not get_urn_from_item(containing_item) in datasetToZeroGroupMappings.keys():
+            if get_urn_from_item(containing_item) not in datasetToZeroGroupMappings.keys():
                 # If we cannot determine the level zero group for the dataset (i.e. topic_group_identifiers is
                 # empty) we must try to determine the level zero group by inspecting the variables in the dataset...
                 print((f"Cannot determine level zero group for dataset {get_urn_from_item(containing_item)}, " 
@@ -379,10 +391,13 @@ def map_between_questions_and_variables(items, C):
         version = item.split(":")[4]
         item_json = C.get_item_json(agency_id, identifier, version=version)
         item_type = C.item_code_inv(item_json['ItemType'])
+        all_related_items=[]
         if item_type == 'Variable':
-            all_related_items= C.search_relationship_bysubject(agency_id, identifier, Version=version, item_types=[C.item_code("Question")])
+            all_related_items= C.search_relationship_bysubject(agency_id, identifier, Version=version, 
+                item_types=[C.item_code("Question")])
         elif item_type == 'Question':
-            all_related_items= C.search_relationship_byobject(agency_id, identifier, Version=version, item_types=[C.item_code("Variable")])
+            all_related_items= C.search_relationship_byobject(agency_id, identifier, Version=version,
+                item_types=[C.item_code("Variable")])
         for related_item in all_related_items:
             related_item_json=C.get_item_json(related_item['Item1']['Item3'], related_item['Item1']['Item1'], version=related_item['Item1']['Item2'])
             agency_id = related_item_json['AgencyId']
@@ -433,7 +448,6 @@ def get_element_by_name(xmlTree, elementName):
     return retElem
 
 def get_elements_of_type(xmlTree, elementName):
-    retElem=None
     elems=[]
     for elem in xmlTree.findall(".//"):
         startOfTagName = elem.tag.index("}")+1
@@ -464,7 +478,6 @@ def create_input_file(input_file_name, output_file_name, C):
     """
     data = pd.read_excel(input_file_name).drop_duplicates()
     new_input_df = pd.DataFrame(columns=["Container", "ItemName", "URL", "Label", "CurrentTopic", "NewTopic"])
-    newRow={}
     for topic_reassignment_details in data.iloc:
         physical_instance_containing_variable = C.search_items(
             C.item_code('Data File'),
@@ -496,11 +509,11 @@ def create_input_file(input_file_name, output_file_name, C):
     new_input_df.to_excel(output_file_name, index=False)
 
 def create_variable_group(group_name, 
-    group_label, 
-    item_id, 
-    namespace_version, 
-    concept_agency_id, 
-    concept_identifier, 
+    group_label,
+    item_id,
+    namespace_version,
+    concept_agency_id,
+    concept_identifier,
     concept_version):
     """Create a variable group representing a topic.
 
@@ -554,7 +567,6 @@ def get_group_label(topic_name, topic_type, C, language="en-GB"):
     Returns:
         str: the label for the specified topic/group.
     """
-    from collections import Counter
     groups_with_topic=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
                                  SearchTargets=["Name"])

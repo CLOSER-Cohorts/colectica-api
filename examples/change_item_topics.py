@@ -13,10 +13,10 @@ HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
 
-validationResults=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
+topic_reassignments=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
 
 updated_groups = examples.change_item_topics.update_topics('examples/topic_reassignments.xlsx', C)
-examples.lib.utility.update_repository(updated_groups, 'Repository commit message - update topics', C)
+examples.lib.utility.update_repository(topic_reassignments['UpdatedGroups'], 'Repository commit message - update topics', C)
 """
 from examples.lib.utility import (
     get_namespace,
@@ -173,17 +173,20 @@ def move_topics(input_file, C):
     # the updated_topic_groups array as an input argument, this array contains the DDI items representing topics
     updated_topics=update_topics(topic_reassignments_data_frame, C, updated_topic_groups=updated_topic_groups)
     final_validation_results=validate_ddi_implementing_topic_reassignments(input_file, updated_topic_groups, C)
-    return final_validation_results
+    return { 
+        "UpdatedTopics": updated_topics,
+        "ValidationResults": final_validation_results
+        }
 
-    def update_urns_list(urns, 
-        item, 
+    def update_urns_list(urns,
+        item,
         containing_item,
         topic_type,
-        target_topic, 
+        target_topic,
         topic_groups,
-        C, 
-        groupsInDatasets=[], 
-        datasetToZeroGroupMappings={}, 
+        C,
+        groupsInDatasets=None,
+        datasetToZeroGroupMappings=None,
         dataset_name=""):
         """Updates a dictionary containing lists of URNs used for topic reassignment.
 
@@ -206,6 +209,10 @@ def move_topics(input_file, C):
         Returns:
             None: The function updates the urns dictionary in place.
         """
+        if groupsInDatasets is None:
+            groupsInDatasets=[]
+        if datasetToZeroGroupMappings is None:
+            datasetToZeroGroupMappings={}
         destination_topic_urn=""
         containing_item_details = {"AgencyId": containing_item['AgencyId'],
                         "Identifier": containing_item['Identifier'],
@@ -412,13 +419,12 @@ def find_topics_to_create(input_file_name, C, datasetToZeroGroupMappings={}, gro
                a level two group in a dataset representing the 10320 topic, and the 103 topic already 
                exists in that dataset).
     """
-    print(f"Reading topic reassignments from {input_file_name}")
+    print(f"Reading topic reassignments from {input_file_name}, finding topics that need to be created...")
     data = pd.read_excel(input_file_name)
     levelOneGroupsToCreate=[]
     levelOneGroupsToModify=[]
     levelTwoGroupsToCreate=[]
     all_variable_groups=C.search_items(C.item_code('Variable Group'), SearchLatestVersion=True)['Results']
-    count=0
     for topic_reassignment_details in data.iloc:
         topic_dict = create_topic_reassignment_dict(topic_reassignment_details, C)
         topic_type=C.item_code('Variable Group')
@@ -774,7 +780,7 @@ def validateLevelOneTopics(ddi_objects_level_zero, level_one_topics, C):
            "InvalidLevelOneTopics": invalidLevelOneTopics
           }
 
-def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
+def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=None):
     """Method for reassigning items to new topics. The code iterates through a data frame
     containing details of new item topic assignments and performs the reassignments, storing
     DDI objects representing the updated topics. 
@@ -788,6 +794,8 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
 
     """
     # Initialise lists...
+    if updated_topic_groups is None:
+        updated_topic_groups = []
     items_not_present_in_source_topic = []
     items_present_in_destination_topic = []
     reference_from_source_ddi_version = None
@@ -899,7 +907,7 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=[]):
                                 new_reference = reference_to_move
                         # If the reference isn't already in the destination topic/group DDI, we add the 
                         # reference to it...
-                        if reference_to_move==None or len(find_all_references(destination_item, reference_to_move[0].text, reference_to_move[1].text))==0:
+                        if reference_to_move is None or len(find_all_references(destination_item, reference_to_move[0].text, reference_to_move[1].text))==0:
                                 destination_item[0].append(new_reference)
                                 # ...and we update the entry for the destination topic in our array of topic groups.
                                 update_list_of_topic_groups(destination_item, 
