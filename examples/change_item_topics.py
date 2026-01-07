@@ -202,6 +202,9 @@ def move_topics(input_file, C):
             C (ColecticaObject): an authenticated ColecticaObject instance.
 
         Keyword arguments:
+            Note that these are mutable arguments, we want them to be updated in place
+            so it can be reused later in the process (see the method move_topics for how it is used).
+        
             groupsInDatasets: A list of dict objects that map the datasets to topic groups they contain.
             datasetToZeroGroupMappings (dict): A dictionary mapping dataset names to level zero topic groups.
             dataset_name (str): The name of the dataset containing the item being reassigned.
@@ -260,6 +263,9 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name,
         C (ColecticaObject): an authenticated ColecticaObject instance.
 
     Keyword arguments:
+        Note that these are mutable arguments, we want them to be updated in place
+        so it can be reused later in the process (see the method move_topics for how it is used).
+        
         groupsInDatasets: Create a list of dict objects that map the datasets to topic groups they contain.
         datasetToZeroGroupMappings (dict): a dictionary mapping dataset names to level zero topic groups.
 
@@ -406,8 +412,11 @@ def find_topics_to_create(input_file_name, C, groupsInDatasets=[], datasetToZero
         C (ColecticaObject): an authenticated ColecticaObject instance.
 
     Keyword arguments:
+        Note that these are mutable arguments, we want them to be updated in place
+        so it can be reused later in the process (see the method move_topics for how it is used).
+        
         datasetToZeroGroupMappings (dict): a dictionary mapping dataset names to level zero 
-        topic groups.
+        topic groups. 
         groupsInDatasets: A list of dict objects that map the datasets to topic groups they contain.
         
     Returns:
