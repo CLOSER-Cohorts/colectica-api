@@ -297,7 +297,10 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name,
                C.item_code('Variable Group'), topic_dict['destination_topic_name'],
                topic_groups, C, datasetToZeroGroupMappings=datasetToZeroGroupMappings,
                groupsInDatasets=groupsInDatasets,
-               dataset_name=topic_dict['dataset_name'])       
+               dataset_name=topic_dict['dataset_name'])   
+        else:
+            raise ValueError(f"Cannot find unique physical instance with name {topic_dict['dataset_name']}, "
+                f"found {len(physical_instance_containing_variable)} instances")
         allRelatedQuestions= C.search_relationship_bysubject(topic_dict['item']['AgencyId'], 
             topic_dict['item']['Identifier'], 
             Version=topic_dict['item']['Version'], item_types=C.item_code("Question"), Descriptions=True)
