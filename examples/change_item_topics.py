@@ -761,6 +761,9 @@ def validateLevelOneTopics(ddi_objects_level_zero, level_one_topics, C):
                                 # Dataset labels for level one and the level zero label match
                                 validatedLevelOneTopics.append(level_one_topic)
                                 found = True
+                        else:
+                            raise ValueError(f"Cannot find unique physical instance with name {level_one_topic['DatasetName']}, "
+                                f"found {len(physical_instance)} instances")
             if not found:
                 invalidLevelOneTopics.append(level_one_topic)
    if len(validatedLevelOneTopics) == len(level_one_topics):
