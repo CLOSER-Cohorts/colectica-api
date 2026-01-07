@@ -343,7 +343,10 @@ def get_level_zero_group_from_dataset(physical_instance_containing_variable, all
                      level_zero_group_details[0]['Identifier'],
                      version=level_zero_group_details[0]['Version'])['Item']     
                else:
-                   raise ValueError("CANNOT FIND LEVEL ZERO GROUP")      
+                   raise ValueError(f"Cannot find level zero group for dataset: "
+                        f"Agency: {physical_instance_containing_variable['AgencyId']}, "
+                        f"Identifier: {physical_instance_containing_variable['Identifier']}, "
+                        f"Version: {physical_instance_containing_variable['Version']}")        
     else:
                level_zero_group_item=C.get_item_xml(level_zero_group_details[0]['Item1']['Item3'],
                  level_zero_group_details[0]['Item1']['Item1'],
