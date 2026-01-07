@@ -185,8 +185,8 @@ def move_topics(input_file, C):
         target_topic,
         topic_groups,
         C,
-        groupsInDatasets=None,
-        datasetToZeroGroupMappings=None,
+        groupsInDatasets=[],
+        datasetToZeroGroupMappings={},
         dataset_name=""):
         """Updates a dictionary containing lists of URNs used for topic reassignment.
 
@@ -209,10 +209,6 @@ def move_topics(input_file, C):
         Returns:
             None: The function updates the urns dictionary in place.
         """
-        if groupsInDatasets is None:
-            groupsInDatasets=[]
-        if datasetToZeroGroupMappings is None:
-            datasetToZeroGroupMappings={}
         destination_topic_urn=""
         containing_item_details = {"AgencyId": containing_item['AgencyId'],
                         "Identifier": containing_item['Identifier'],
@@ -251,8 +247,8 @@ def move_topics(input_file, C):
 def generate_urn_dataframe_for_questions_and_variables(input_file_name, 
     topic_groups,
     C, 
-    groupsInDatasets=None,
-    datasetToZeroGroupMappings=None,
+    groupsInDatasets=[],
+    datasetToZeroGroupMappings={},
     ):
     """Generates a dataframe containing URNs used for topic reassignment.
 
@@ -270,10 +266,6 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name,
     Returns:
         pd.DataFrame: A dataframe containing URNs used for topic reassignment.
     """
-    if groupsInDatasets is None:
-            groupsInDatasets=[]
-    if datasetToZeroGroupMappings is None:
-            datasetToZeroGroupMappings={}    
     print(f"Reading topic reassignments from {input_file_name}")
     data = pd.read_excel(input_file_name)
     urns={
@@ -400,7 +392,7 @@ def create_topic_reassignment_dict(topic_reassignment_details, C):
         raise ValueError(f"Cannot find physical instance with name {dataset_name}")
     return topic_reassignment_dict    
                    
-def find_topics_to_create(input_file_name, C, groupsInDatasets=None, datasetToZeroGroupMappings=None):
+def find_topics_to_create(input_file_name, C, groupsInDatasets=[], datasetToZeroGroupMappings={}):
     """This code iterates through an Excel input file containing details of new item topic 
     assignments, and finds variable groups representing topics that don't already exist and 
     will need to be created in order to perform the topic reassignments.
@@ -426,10 +418,6 @@ def find_topics_to_create(input_file_name, C, groupsInDatasets=None, datasetToZe
                a level two group in a dataset representing the 10320 topic, and the 103 topic already 
                exists in that dataset).
     """
-    if groupsInDatasets is None:
-            groupsInDatasets=[]
-    if datasetToZeroGroupMappings is None:
-            datasetToZeroGroupMappings={}
     print(f"Reading topic reassignments from {input_file_name}, finding topics that need to be created...")
     data = pd.read_excel(input_file_name)
     levelOneGroupsToCreate=[]
