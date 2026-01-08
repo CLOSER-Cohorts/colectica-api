@@ -220,8 +220,8 @@ def get_item_from_topic_name(topic_name,
     containing_item,
     C,
     dataset_name="",
-    groupsInDatasets=None,
-    datasetToZeroGroupMappings=None):
+    groupsInDatasets=[],
+    datasetToZeroGroupMappings={}):
     """Method for getting a topic item given the topic's name as a string (e.g. '11609'), the topic 
     type (e.g. Question Group, Variable Group), and the item within which that topic is contained 
     (e.g. a Physical Instance/Data File or a Data Collection object).
@@ -243,10 +243,6 @@ def get_item_from_topic_name(topic_name,
     Returns:
         list: A list containing Variable Groups/Question Groups items that represent topics.
     """
-    if groupsInDatasets is None:
-            groupsInDatasets=[]
-    if datasetToZeroGroupMappings is None:
-            datasetToZeroGroupMappings={}
     item=[x for x in groupsInDatasets if x['DatasetName']==dataset_name 
         and x['VariableGroupName']==str(topic_name) and x['TopicType']==topic_type]
     if len(item)==1:
