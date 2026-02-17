@@ -15,7 +15,7 @@ HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
 topic_reassignments=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
-examples.lib.utility.update_repository(topic_reassignments['UpdatedGroups'], 'Repository commit message - update topics', C)
+examples.lib.utility.update_repository(topic_reassignments['ValidationResults']['ItemsFoundInDestinationTopics'], 'Repository commit message - update topics', C)
 """
 from examples.lib.utility import (
     get_namespace,
@@ -820,9 +820,10 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=None):
         updated_topic_groups (list): List of dict-like entries representing topic groups.
 
     Returns:
-        dict: A dictionary object containing two lists: 
-            1. Items that have been moved from a source topic.
-            2. Items that have been moved to a destination topic.
+        dict: A dictionary object containing three lists: 
+            1. Items that have already been moved from a source topic.
+            2. Items that have already been moved to a destination topic.
+            3. The list of DDI objects representing the updated topics.
 
     """
     # Initialise lists...
@@ -980,7 +981,8 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=None):
              "successfully executed.")
     return ({ 
              "ItemsMovedFromSourceTopic": items_not_present_in_source_topic, 
-             "ItemsMovedToDestinationTopic": items_present_in_destination_topic
+             "ItemsMovedToDestinationTopic": items_present_in_destination_topic,
+             "UpdatedTopicGroups": updated_topic_groups
              })
 
 def validate_ddi_implementing_topic_reassignments(input_file_name, 
