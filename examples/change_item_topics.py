@@ -2,8 +2,10 @@
 A set of functions that reassign items to new topics. The item topic reassignments
 are defined in an Excel spreadsheet, the name of which is passed as an input argument to a
 function. An example of this spreadsheet ('topic_reassignments.xlsx') is provided in the
-'examples' directory of this repository. The set of commands that need to be executed from
-within a Python shell for changing item topics is:
+'examples' directory of this repository. Before running the below commands to change item topics,
+you may need to run 'pip install -r requirements.txt' in order to install all required packages.
+The set of commands that need to be executed from within a Python shell for changing item 
+topics is:
 
 from colectica_api import ColecticaObject
 from examples.lib.utility import update_repository
@@ -12,10 +14,7 @@ PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
-
 topic_reassignments=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
-
-updated_groups = examples.change_item_topics.update_topics('examples/topic_reassignments.xlsx', C)
 examples.lib.utility.update_repository(topic_reassignments['UpdatedGroups'], 'Repository commit message - update topics', C)
 """
 from examples.lib.utility import (
@@ -45,8 +44,8 @@ from collections import Counter
 
 def move_topics(input_file, C):
     datasetToZeroGroupMappings={}
-    topics_to_create=find_topics_to_create(input_file, 
-        C, 
+    topics_to_create=find_topics_to_create(input_file,
+        C,
         datasetToZeroGroupMappings=datasetToZeroGroupMappings)
     groupsInDatasets=create_group_lookup_dict(datasetToZeroGroupMappings, C)
     items_with_new_level_one_topics=create_ddi_objects_with_new_level_one_topics(
@@ -81,7 +80,8 @@ def move_topics(input_file, C):
     it does already exist.
     2+3. We're creating/modifying all the topics we need to; we're not missing anything
     """    
-    # 1. We need to verify that all the groups in topics_to_create[0 and 1] do not currently exist.
+    # 1. We need to verify that all the groups in topics_to_create["levelOneGroupsToCreate"] and 
+    # topics_to_create["levelTwoGroupsToCreate"] do not currently exist.
     for topic_to_create in topics_to_create["levelOneGroupsToCreate"]:
         if len([(existing_group['DatasetName'], existing_group['VariableGroupName']) 
             for existing_group in groupsInDatasets 
@@ -95,7 +95,7 @@ def move_topics(input_file, C):
             and existing_group['VariableGroupName']==topic_to_create['LevelTwoGroupName']])!=0:
                 print(topic_to_create)
                 print("ERROR - LEVEL TWO TOPIC LISTED FOR CREATION ALREADY EXISTS") 
-    # We also need to check that the level one topics in topics_to_create[2] do exist, and 
+    # We also need to check that the level one topics in topics_to_create["levelOneGroupsToModify"] do exist, and 
     # that the level two topics they refer to do not exist.
     for topic_to_create in topics_to_create["levelOneGroupsToModify"]:
         if len([(existing_group['DatasetName'], existing_group['VariableGroupName']) 
@@ -476,7 +476,7 @@ def find_topics_to_create(input_file_name, C, groupsInDatasets=[], datasetToZero
                 else:
                     if len( [x for x in levelOneGroupsToModify 
                                 if x['DatasetName']==topic_dict['dataset_name'] 
-                                and x['LevelOneGroupName']==level_two_group_name])==0:
+                                and x['LevelTwoGroupName']==level_two_group_name])==0:
                               for group in levelOneGroups:
                                  levelOneGroupsToModify.append({
                                               'DatasetName': topic_dict['dataset_name'],

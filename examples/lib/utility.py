@@ -423,8 +423,12 @@ def update_repository(updated_items, transaction_message, C):
     transaction_id = transaction_response['TransactionId']
     for item in updated_items:
         fragment_string = defusedxml.ElementTree.tostring(item['Item'], encoding='unicode')
-        C.add_items_to_transaction(item['AgencyId'], item['Identifier'], item['Version'], fragment_string, 
-                                   item['ItemType'], transaction_id)
+        C.add_items_to_transaction(item['AgencyId'],
+            item['Identifier'],
+            item['Version'],
+            fragment_string,
+            item['ItemType'],
+            transaction_id)
     commit_response = C.commit_transaction(transaction_id, transaction_message, 3)
     return commit_response
 
@@ -515,7 +519,7 @@ def create_input_file(input_file_name, output_file_name, C):
                     new_input_df.loc[len(new_input_df)] = new_row
     new_input_df.to_excel(output_file_name, index=False)
 
-def create_variable_group(group_name, 
+def create_variable_group(group_name,
     group_label,
     item_id,
     namespace_version,
