@@ -15,7 +15,10 @@ HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
 topic_reassignments=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
-examples.lib.utility.update_repository(topic_reassignments['ValidationResults']['ItemsFoundInDestinationTopics'], 'Repository commit message - update topics', C)
+
+
+final_validation_results2=examples.change_item_topics.update_topics('../smallTest.xlsx', C, [])
+examples.lib.utility.update_repository(topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], 'Repository commit message - update topics', C)
 """
 from examples.lib.utility import (
     get_namespace,
@@ -175,7 +178,8 @@ def move_topics(input_file, C):
     final_validation_results=validate_ddi_implementing_topic_reassignments(input_file, updated_topic_groups, C)
     return { 
         "UpdatedTopics": updated_topics,
-        "ValidationResults": final_validation_results
+        "ValidationResults": final_validation_results,
+        "topicReassignments": topic_reassignments_data_frame
         }
 
 def update_urns_list(urns,
