@@ -15,10 +15,21 @@ HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
 topic_reassignments=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
+examples.lib.utility.update_repository(topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], 'Repository commit message - topic updates', C)
 
+After you have ran the above 'update_repository' command, the items in the repository should have
+the topic reassignements described in 'smallTest.xlsx' applied to them. You can verify that the
+topic reassignments have been successful by runing the following command:
 
-final_validation_results2=examples.change_item_topics.update_topics('../smallTest.xlsx', C, [])
-examples.lib.utility.update_repository(topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], 'Repository commit message - update topics', C)
+update_results=update_topics(topic_reassignments['TopicReassignmentsDataFrame'], 
+    C, updated_topic_groups=updated_topic_groups)
+
+You should see text similar to this if all the topic reassignments have all been successfully executed
+on the repository:
+
+    49 of 49 topic reassignments in the input file have already been performed,
+    0 pair(s) of DDI Fragments implementing topic reassignments specified in the input file have been created.
+    The item topic reassignments in the input data file have already all been successfully executed.
 """
 from examples.lib.utility import (
     get_namespace,
@@ -179,13 +190,14 @@ def move_topics(input_file, C):
     return { 
         "UpdatedTopics": updated_topics,
         "ValidationResults": final_validation_results,
-        "topicReassignments": topic_reassignments_data_frame
+        "TopicReassignmentsDataFrame": topic_reassignments_data_frame
         }
 
 def update_urns_list(urns,
     item,
     containing_item,
     topic_type,
+    source_topic,
     target_topic,
     topic_groups,
     C,
@@ -223,9 +235,17 @@ def update_urns_list(urns,
                         "Version": containing_item['Version'],
                     }
     item_urn = get_urn_from_item(item)
-    source_groups = C.search_relationship_byobject(item['AgencyId'], 
+    """source_groups = C.search_relationship_byobject(item['AgencyId'], 
                     item['Identifier'], Version=item['Version'], 
                     item_types=topic_type, Descriptions=True)
+    """                
+    source_groups=get_item_from_topic_name(str(source_topic), 
+            topic_type, 
+            containing_item_details, 
+            C,
+            dataset_name=dataset_name,
+            groupsInDatasets=groupsInDatasets,
+            datasetToZeroGroupMappings=datasetToZeroGroupMappings)
     for source_group in source_groups:
             source_topic_urn = get_urn_from_item(source_group)
     if len(source_groups)==0:
@@ -295,9 +315,12 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name,
                     C.item_code('Data File'),
                     SearchTerms=str(topic_dict['dataset_name']).strip(),
                     SearchLatestVersion=True)['Results']
+        print(len(physical_instance_containing_variable))
         if len(physical_instance_containing_variable)==1:
             update_urns_list(urns, topic_dict['item'], physical_instance_containing_variable[0],
-               C.item_code('Variable Group'), topic_dict['destination_topic_name'],
+               C.item_code('Variable Group'),
+               topic_dict['source_topic_name'],
+               topic_dict['destination_topic_name'],
                topic_groups, C, datasetToZeroGroupMappings=datasetToZeroGroupMappings,
                groupsInDatasets=groupsInDatasets,
                dataset_name=topic_dict['dataset_name'])   
@@ -313,14 +336,16 @@ def generate_urn_dataframe_for_questions_and_variables(input_file_name,
                version=relatedQuestion['Version'], 
                reverseTraversal=True, 
                item_types=[C.item_code('Data Collection')])
+            print(len(question_sets)>0 and len(set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in question_sets] ))==1)
             if len(question_sets)>0 and len(set([(x['Item1']['Item3'], x['Item1']['Item1']) for x in question_sets] ))==1:
                 latest_version_of_question_set = max([x['Item1']['Item2'] for x in question_sets])
                 containing_item=C.get_item_xml(question_sets[0]['Item1']['Item3'], 
                     question_sets[0]['Item1']['Item1'],
                     version=latest_version_of_question_set)
                 update_urns_list(urns, relatedQuestion, containing_item, 
-                    C.item_code('Question Group'), 
-                    topic_dict['destination_topic_name'], 
+                    C.item_code('Question Group'),
+                    topic_dict['source_topic_name'],
+                    topic_dict['destination_topic_name'],
                     topic_groups,
                     C,
                     groupsInDatasets=groupsInDatasets,
@@ -963,15 +988,14 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=None):
                             f" is not in topic "
                             f"{topic_reassignment_details['sourceTopicGroups']}"))
                     items_not_present_in_source_topic.append(
-                            (topic_reassignment_details['itemUrns'],
-                             topic_reassignment_details['sourceTopicGroups']))
+                            topic_reassignment_details['itemUrns']
+                            )
                 if reference_in_destination_topic is not None:
                     print((f"Item {topic_reassignment_details['itemUrns']} "
                             f" is already in topic "
                             f"{topic_reassignment_details['destinationTopicGroups']}"))
                     items_present_in_destination_topic.append(
-                            (topic_reassignment_details['itemUrns'],
-                             topic_reassignment_details['destinationTopicGroups']))
+                            topic_reassignment_details['itemUrns'])
     number_of_topic_reassignments_already_performed = len([x for x in items_not_present_in_source_topic
                                            if x in items_present_in_destination_topic])
     number_of_topic_reassignments_to_be_performed = len(topic_reassignments_data_frame) - number_of_topic_reassignments_already_performed
