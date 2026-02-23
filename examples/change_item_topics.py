@@ -21,9 +21,9 @@ After you have ran the above 'update_repository' command, the items in the repos
 the topic reassignements described in 'smallTest.xlsx' applied to them. You can verify that the
 topic reassignments have been successful by runing the following command:
 
-update_results=examples.change_item_topics.update_topics(topic_reassignments['TopicReassignmentsDataFrame'], 
-    C, updated_topic_groups=updated_topic_groups)
-
+final_validation_results=validate_ddi_implementing_topic_reassignments('examples/smallTest.xlsx', 
+        topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], C)
+        
 You should see text similar to this if all the topic reassignments have all been successfully executed
 on the repository:
 
@@ -37,8 +37,7 @@ topic_reassignments_data_frame=examples.change_item_topics.generate_urn_datafram
       datasetToZeroGroupMappings=datasetToZeroGroupMappings, 
       groupsInDatasets=groupsInDatasets)
 updated_topics=update_topics(topic_reassignments_data_frame, C, updated_topic_groups=updated_topic_groups)
-final_validation_results=validate_ddi_implementing_topic_reassignments(input_file, 
-        updated_topics["UpdatedTopicGroups"], C)
+
 updated_topics.keys()
 
 
