@@ -24,8 +24,8 @@ topic reassignments have been successful by running the following command:
 updated_topics=examples.change_item_topics.update_topics(topic_reassignments["TopicReassignmentsDataFrame"], C, 
    updated_topic_groups=topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'])
 
-You should see text similar to this if all the topic reassignments have been successfully executed
-on the repository:
+In addition to logging information about the topic reassignments, you should see text similar to this if 
+all the topic reassignments have been successfully executed on the repository:
 
     49 of 49 topic reassignments in the input file have already been performed,
     0 pair(s) of DDI Fragments implementing topic reassignments specified in the input file have been created.
