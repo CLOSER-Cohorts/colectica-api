@@ -18,32 +18,18 @@ topic_reassignments=examples.change_item_topics.move_topics('examples/smallTest.
 update_repository(topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], 'Repository commit message - topic updates', C)
 
 After you have ran the above 'update_repository' command, the items in the repository should have
-the topic reassignements described in 'smallTest.xlsx' applied to them. You can verify that the
-topic reassignments have been successful by runing the following command:
+the topic reassignments described in 'smallTest.xlsx' applied to them. You can verify that the
+topic reassignments have been successful by running the following command:
 
-final_validation_results=validate_ddi_implementing_topic_reassignments('examples/smallTest.xlsx', 
-        topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], C)
-        
-You should see text similar to this if all the topic reassignments have all been successfully executed
+updated_topics=examples.change_item_topics.update_topics(topic_reassignments["TopicReassignmentsDataFrame"], C, 
+   updated_topic_groups=topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'])
+
+You should see text similar to this if all the topic reassignments have been successfully executed
 on the repository:
 
     49 of 49 topic reassignments in the input file have already been performed,
     0 pair(s) of DDI Fragments implementing topic reassignments specified in the input file have been created.
     The item topic reassignments in the input data file have already all been successfully executed.
-
-topic_reassignments_data_frame=examples.change_item_topics.generate_urn_dataframe_for_questions_and_variables(input_file, 
-      updated_topic_groups, 
-      C,
-      datasetToZeroGroupMappings=datasetToZeroGroupMappings, 
-      groupsInDatasets=groupsInDatasets)
-updated_topics=update_topics(topic_reassignments_data_frame, C, updated_topic_groups=updated_topic_groups)
-
-updated_topics.keys()
-
-
-a=get_current_state_of_topic_group('uk.closer', 'c17c5a2d-8c47-41ce-b667-454d791daf4e', updated_topic_groups, C, version=3,)
-[topic_group for topic_group in updated_topic_groups if get_elements_of_type(topic_group['Item'], "VariableGroupName")!=[] and get_elements_of_type(topic_group['Item'], "VariableGroupName")[0][0].text==str(10702)]
-get_current_state_of_topic_group('uk.closer', 'c17c5a2d-8c47-41ce-b667-454d791daf4e', updated_topic_groups, C, version=3,)
 """
 from examples.lib.utility import (
     get_namespace,
