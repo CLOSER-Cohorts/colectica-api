@@ -14,14 +14,14 @@ PASSWORD = "PASSWORD"
 HOSTNAME = "HOSTNAME"
 C = ColecticaObject(HOSTNAME, USERNAME, PASSWORD, verify_ssl=False)
 import examples.change_item_topics
-topic_reassignments=examples.change_item_topics.move_topics('../smallTest.xlsx', C)
-examples.lib.utility.update_repository(topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], 'Repository commit message - topic updates', C)
+topic_reassignments=examples.change_item_topics.move_topics('examples/smallTest.xlsx', C)
+update_repository(topic_reassignments['UpdatedTopics']['UpdatedTopicGroups'], 'Repository commit message - topic updates', C)
 
 After you have ran the above 'update_repository' command, the items in the repository should have
 the topic reassignements described in 'smallTest.xlsx' applied to them. You can verify that the
 topic reassignments have been successful by runing the following command:
 
-update_results=update_topics(topic_reassignments['TopicReassignmentsDataFrame'], 
+update_results=examples.change_item_topics.update_topics(topic_reassignments['TopicReassignmentsDataFrame'], 
     C, updated_topic_groups=updated_topic_groups)
 
 You should see text similar to this if all the topic reassignments have all been successfully executed
@@ -30,6 +30,21 @@ on the repository:
     49 of 49 topic reassignments in the input file have already been performed,
     0 pair(s) of DDI Fragments implementing topic reassignments specified in the input file have been created.
     The item topic reassignments in the input data file have already all been successfully executed.
+
+topic_reassignments_data_frame=examples.change_item_topics.generate_urn_dataframe_for_questions_and_variables(input_file, 
+      updated_topic_groups, 
+      C,
+      datasetToZeroGroupMappings=datasetToZeroGroupMappings, 
+      groupsInDatasets=groupsInDatasets)
+updated_topics=update_topics(topic_reassignments_data_frame, C, updated_topic_groups=updated_topic_groups)
+final_validation_results=validate_ddi_implementing_topic_reassignments(input_file, 
+        updated_topics["UpdatedTopicGroups"], C)
+updated_topics.keys()
+
+
+a=get_current_state_of_topic_group('uk.closer', 'c17c5a2d-8c47-41ce-b667-454d791daf4e', updated_topic_groups, C, version=3,)
+[topic_group for topic_group in updated_topic_groups if get_elements_of_type(topic_group['Item'], "VariableGroupName")!=[] and get_elements_of_type(topic_group['Item'], "VariableGroupName")[0][0].text==str(10702)]
+get_current_state_of_topic_group('uk.closer', 'c17c5a2d-8c47-41ce-b667-454d791daf4e', updated_topic_groups, C, version=3,)
 """
 from examples.lib.utility import (
     get_namespace,
@@ -186,7 +201,8 @@ def move_topics(input_file, C):
     # Run the update_topics method that creates DDI objects that reassigns items to topics. Note that it uses
     # the updated_topic_groups array as an input argument, this array contains the DDI items representing topics
     updated_topics=update_topics(topic_reassignments_data_frame, C, updated_topic_groups=updated_topic_groups)
-    final_validation_results=validate_ddi_implementing_topic_reassignments(input_file, updated_topic_groups, C)
+    final_validation_results=validate_ddi_implementing_topic_reassignments(input_file, 
+        updated_topics["UpdatedTopicGroups"], C)
     return { 
         "UpdatedTopics": updated_topics,
         "ValidationResults": final_validation_results,
@@ -919,6 +935,9 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=None):
         # We get the current state of the group that we will be adding a
         # reference to the item to. This group represents the topic the
         # item will be reassigned to.
+        print(destination_group_item_agency_id)
+        print(destination_group_item_identifier)
+        print(destination_group_item_version)
         destination_item = get_current_state_of_topic_group(
                                                             destination_group_item_agency_id,
                                                             destination_group_item_identifier,
@@ -926,6 +945,7 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=None):
                                                             C,
                                                             version=destination_group_item_version,
                                                             )
+        print(destination_item)
         # We check to see if a reference to the item is already present in the
         # destination group/topic. This can be used to determine if the
         # topic reassignments described in the input file have already been
@@ -996,6 +1016,14 @@ def update_topics(topic_reassignments_data_frame, C, updated_topic_groups=None):
                             f"{topic_reassignment_details['destinationTopicGroups']}"))
                     items_present_in_destination_topic.append(
                             topic_reassignment_details['itemUrns'])
+                update_list_of_topic_groups(destination_item, 
+                                   destination_group_item_agency_id,
+                                   destination_group_item_identifier,
+                                   destination_group_item_version,
+                                   topic_type,
+                                   updated_topic_groups,
+                                   dataset=topic_reassignment_details['datasets']
+                             )
     number_of_topic_reassignments_already_performed = len([x for x in items_not_present_in_source_topic
                                            if x in items_present_in_destination_topic])
     number_of_topic_reassignments_to_be_performed = len(topic_reassignments_data_frame) - number_of_topic_reassignments_already_performed
@@ -1079,6 +1107,8 @@ def validate_ddi_implementing_topic_reassignments(input_file_name,
         elif str(topic_reassignment_details.iloc[4]).strip()!='no_topic':
             source_topic_not_found.append(topic_reassignment_details)
         if len(updated_destination_topic)==1:
+            print("FOUND IN DESTINATION TOPIC")
+            print(topic_reassignment_details)
             references_in_destination_topic=find_all_references(updated_destination_topic[0]['Item'],
                 agency_id,
                 identifier)
@@ -1088,6 +1118,9 @@ def validate_ddi_implementing_topic_reassignments(input_file_name,
                 items_found_in_destination_topics.append(reference_in_destination_topic)
         else: 
             destination_topic_not_found.append(topic_reassignment_details)
+            print("NOT FOUND")
+            print(len(updated_destination_topic))
+            print(topic_reassignment_details)
     print(f"Number of items still in DDI representing source topic: {len(items_found_in_source_topics)}")
     print(f"Number of items found in DDI representing destination topic: {len(items_found_in_destination_topics)}")    
     print(f"Number of items not found in DDI representing destination topic: {len(data) - len(items_found_in_destination_topics)}")
