@@ -488,7 +488,10 @@ def create_input_file(input_file_name, output_file_name, C):
     """
     data = pd.read_excel(input_file_name).drop_duplicates()
     new_input_df = pd.DataFrame(columns=["Container", "ItemName", "URL", "Label", "CurrentTopic", "NewTopic"])
+    count=0
     for topic_reassignment_details in data.iloc:
+        print(f"{count} of {len(data)}")
+        count=count+1
         physical_instance_containing_variable = C.search_items(
             C.item_code('Data File'),
             SearchTerms=str(topic_reassignment_details.iloc[0]).strip(),
@@ -581,7 +584,10 @@ def get_group_label(topic_name, topic_type, C, language="en-GB"):
     groups_with_topic=C.search_items(topic_type, 
                                  SearchTerms=[topic_name], 
                                  SearchTargets=["Name"])
-    group_label=Counter([x['Label'][language] for x in groups_with_topic['Results']]).most_common(1)[0][0]
+    group_label=""
+    most_common_label=Counter([x['Label'][language] for x in groups_with_topic['Results']]).most_common(1)
+    if len(most_common_label)>0:
+        group_label=Counter([x['Label'][language] for x in groups_with_topic['Results']]).most_common(1)[0][0]
     return group_label
 
 def get_level_zero_group_for_topic(group, C, language="en-GB"):
