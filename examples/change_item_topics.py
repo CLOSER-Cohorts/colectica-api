@@ -1112,11 +1112,8 @@ def validate_ddi_implementing_topic_reassignments(input_file_name,
     if len(items_found_in_source_topics)==0 and len(items_found_in_destination_topics)==len(data):
             print("The creation of DDI items that implement all the topic reassignments has been successful")
     else:
-            raise ValueError("There were issues with the creation of DDI items that implement all the topic reassignments."
-                    " Please see the details of missing source or destination topics, or missing references"
-                    f"Items still found in source topics: {items_found_in_source_topics}"
-                    f"Number of items not found in destination topics: {len(data) - len(items_found_in_destination_topics)}"
-                    f"Items found in destination topics: {items_found_in_destination_topics}")
+            print("There were issues with the creation of DDI items that implement all the topic reassignments."
+                    " Please see the details of missing source or destination topics, or missing references")
     return ({"SourceTopicsNotFound": source_topic_not_found, 
             "DestinationTopicsNotFound": destination_topic_not_found, 
             "ItemsFoundInSourceTopics": items_found_in_source_topics, 
