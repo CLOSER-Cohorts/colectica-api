@@ -262,11 +262,21 @@ def get_item_from_topic_name(topic_name,
                      SearchTerms=[str(topic_name)],
                      SearchTargets="Name",
                      UsePrefixSearch=False)['Results']
-        containing_level_zero_group=C.search_relationship_bysubject(containing_item['AgencyId'],
+        containing_level_zero_group = C.search_relationship_bysubject(containing_item['AgencyId'],
                 containing_item['Identifier'],
                 item_types=C.item_code('Variable Group'),
                 Version=containing_item['Version'],
                 Descriptions=True)
+        if len(containing_level_zero_group)==1:
+                containing_level_zero_group_item=C.get_item_json(containing_level_zero_group[0]['AgencyId'],
+                containing_level_zero_group[0]['Identifier'],
+                version=containing_level_zero_group[0]['Version'])
+                if containing_level_zero_group_item['Concept'] == None:
+                    datasetToZeroGroupMappings[get_urn_from_item(containing_item)]=[{
+                        "AgencyId": containing_level_zero_group[0]['AgencyId'],
+                        "Identifier": containing_level_zero_group[0]['Identifier'],
+                        "Version": containing_level_zero_group[0]['Version'],
+                        }]
         if len(topic_groups)==0:
             if get_urn_from_item(containing_item) not in datasetToZeroGroupMappings.keys():
                 # If we cannot determine the level zero group for the dataset (i.e. topic_group is
@@ -280,7 +290,7 @@ def get_item_from_topic_name(topic_name,
                 count=0
                 print(f"Verifying the level zero group for {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
                 # First we try to find a group that is referenced by the containing item (e.g. a dataset).
-                level_zero_groups.extend(containing_level_zero_group)
+                #level_zero_groups.extend(containing_level_zero_group)
                 # If we find a group, that's the level zero group. Sometimes the reference to the level
                 # zero group is missing from the containing item, so we will have to determine the level
                 # zero group using the variables in the dataset.
@@ -327,6 +337,7 @@ def get_item_from_topic_name(topic_name,
                      SearchTerms=[str(topic_name)[0:3]],
                      UsePrefixSearch=True,  # returns results if they begin with the value in SearchTerms
                      SearchTargets="Name")['Results'] if x['ItemName']['en-GB']==str(topic_name)]
+        """
         else:
             if len(containing_level_zero_group)==1:
                 containing_level_zero_group_item=C.get_item_json(containing_level_zero_group[0]['AgencyId'],
@@ -338,6 +349,7 @@ def get_item_from_topic_name(topic_name,
                         "Identifier": containing_level_zero_group[0]['Identifier'],
                         "Version": containing_level_zero_group[0]['Version'],
                         }]
+        """
     for topic_group in topic_groups:
         if topic_group['ItemName']['en-GB']==str(topic_name) and len(item)==0:
                 groupsInDatasets.append({
