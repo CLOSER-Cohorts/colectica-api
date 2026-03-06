@@ -262,6 +262,11 @@ def get_item_from_topic_name(topic_name,
                      SearchTerms=[str(topic_name)],
                      SearchTargets="Name",
                      UsePrefixSearch=False)['Results']
+        containing_level_zero_group=C.search_relationship_bysubject(containing_item['AgencyId'],
+                containing_item['Identifier'],
+                item_types=C.item_code('Variable Group'),
+                Version=containing_item['Version'],
+                Descriptions=True)
         if len(topic_groups)==0:
             if get_urn_from_item(containing_item) not in datasetToZeroGroupMappings.keys():
                 # If we cannot determine the level zero group for the dataset (i.e. topic_group is
@@ -274,19 +279,25 @@ def get_item_from_topic_name(topic_name,
                 level_zero_groups=[]
                 count=0
                 print(f"Verifying the level zero group for {len(datasetVars)} variables in dataset {get_urn_from_item(containing_item)}...")
+                # First we try to find a group that is referenced by the containing item (e.g. a dataset).
+                level_zero_groups.extend(containing_level_zero_group)
+                # If we find a group, that's the level zero group. Sometimes the reference to the level
+                # zero group is missing from the containing item, so we will have to determine the level
+                # zero group using the variables in the dataset.
                 # We only determine the level zero group for a small sample of variables, for a faster runtime...
-                for var in datasetVars[0:4]:
-                    varGroups=C.search_relationship_byobject(var['Item1']['Item3'], var['Item1']['Item1'], 
-                        Version=var['Item1']['Item2'], item_types=[topic_type]) 
-                    for varGroup in varGroups:
-                        count=count+1
-                        var_group_item=C.get_item_json(varGroup['Item1']['Item3'],
-                            varGroup['Item1']['Item1'], 
-                            version=varGroup['Item1']['Item2'])
-                        level_zero_group=get_level_zero_group_for_topic(var_group_item, C)
-                        if level_zero_group is not None:
-                            level_zero_groups.append(level_zero_group)            
-                containing_level_zero_group = []
+                if len(level_zero_groups)==0:
+                    for var in datasetVars[0:4]:
+                        varGroups=C.search_relationship_byobject(var['Item1']['Item3'], var['Item1']['Item1'], 
+                            Version=var['Item1']['Item2'], item_types=[topic_type]) 
+                        for varGroup in varGroups:
+                            count=count+1
+                            var_group_item=C.get_item_json(varGroup['Item1']['Item3'],
+                                varGroup['Item1']['Item1'], 
+                                version=varGroup['Item1']['Item2'])
+                            level_zero_group=get_level_zero_group_for_topic(var_group_item, C)
+                            if level_zero_group is not None:
+                                level_zero_groups.append(level_zero_group)            
+                    containing_level_zero_group = []
                 # If all the level zero groups we have found are the same group, we can assume that this is 
                 # the level zero group for the dataset specified in the containing_item argument...
                 if len(set([x[0][2].text for x in level_zero_groups]))==1:
@@ -317,11 +328,6 @@ def get_item_from_topic_name(topic_name,
                      UsePrefixSearch=True,  # returns results if they begin with the value in SearchTerms
                      SearchTargets="Name")['Results'] if x['ItemName']['en-GB']==str(topic_name)]
         else:
-            containing_level_zero_group=C.search_relationship_bysubject(containing_item['AgencyId'],
-                containing_item['Identifier'],
-                item_types=C.item_code('Variable Group'),
-                Version=containing_item['Version'],
-                Descriptions=True)
             if len(containing_level_zero_group)==1:
                 containing_level_zero_group_item=C.get_item_json(containing_level_zero_group[0]['AgencyId'],
                 containing_level_zero_group[0]['Identifier'],
